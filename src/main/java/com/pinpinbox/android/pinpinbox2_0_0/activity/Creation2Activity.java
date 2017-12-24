@@ -43,8 +43,15 @@ import com.aviary.android.feather.sdk.internal.headless.utils.MegaPixels;
 import com.czt.mp3recorder.MP3Recorder;
 import com.pinpinbox.android.Activity.CreateAlbum.ChangeItemAdapter;
 import com.pinpinbox.android.Activity.CreateAlbum.SelectPreviewAdapter;
+import com.pinpinbox.android.DialogTool.CheckExecute;
+import com.pinpinbox.android.DialogTool.DialogCreationDescription;
+import com.pinpinbox.android.DialogTool.DialogCreationLocation;
+import com.pinpinbox.android.DialogTool.DialogHandselPoint;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
+import com.pinpinbox.android.PopupTool.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
+import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
@@ -63,25 +70,21 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.EditDragGridView;
 import com.pinpinbox.android.Views.PinchImageView;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.FlurryKey;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.PPBWidget;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.ProtocolKey;
+import com.pinpinbox.android.Widget.Recycle;
+import com.pinpinbox.android.Widget.SetMapByProtocol;
+import com.pinpinbox.android.Widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCreationDescription;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCreationLocation;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCooperation2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMyUpLoad2;
@@ -91,9 +94,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightEndedListe
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightStartedListener;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.util.CheckExternalStorage;
 import com.skyfishjy.library.RippleBackground;
 import com.squareup.picasso.Picasso;
@@ -3630,12 +3631,12 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             if (strJson != null && !strJson.equals("")) {
                 try {
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p57Result = JsonUtility.GetString(jsonObject, Key.result);
+                    p57Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
                     if (p57Result.equals("1")) {
 
                         getJsonArray_setBottomList(jsonObject);
 
-                        String jdata = JsonUtility.GetString(jsonObject, Key.data);
+                        String jdata = PPBWidget.GetStringByJsonObject(jsonObject, Key.data);
                         JSONObject jsonData = new JSONObject(jdata);
 
                         String album = JsonUtility.GetString(jsonData, ProtocolKey.album);
@@ -3840,12 +3841,12 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 try {
 
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p57Result = JsonUtility.GetString(jsonObject, Key.result);
+                    p57Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
                     if (p57Result.equals("1")) {
 
                         getJsonArray_setBottomList(jsonObject);
 
-                        String jdata = JsonUtility.GetString(jsonObject, Key.data);
+                        String jdata = PPBWidget.GetStringByJsonObject(jsonObject, Key.data);
                         JSONObject jsonData = new JSONObject(jdata);
 
                         String album = JsonUtility.GetString(jsonData, ProtocolKey.album);

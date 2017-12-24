@@ -16,8 +16,8 @@ import com.pinpinbox.android.Views.DraggerActivity.DraggerMargin.SwipeBackActivi
 import com.pinpinbox.android.Views.DraggerActivity.NoDragger.NoDraggerLayout;
 import com.pinpinbox.android.Views.DraggerActivity.SwipeBackActivityInterface;
 import com.pinpinbox.android.Views.DraggerActivity.SwipeBackLayout;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
+import com.pinpinbox.android.Widget.NoConnect;
+import com.pinpinbox.android.Widget.StatusControl;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public abstract class DraggerActivity extends FragmentActivity implements SwipeBackActivityInterface {

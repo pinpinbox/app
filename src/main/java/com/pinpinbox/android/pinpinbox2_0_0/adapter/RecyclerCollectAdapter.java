@@ -23,10 +23,10 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.OnDetailClickListener;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.OnDetailClickListener;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.squareup.picasso.Picasso;
 

@@ -18,9 +18,9 @@ import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MapKey;
+import com.pinpinbox.android.Widget.Value;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -32,15 +31,15 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
+import com.pinpinbox.android.DialogTool.CheckExecute;
+import com.pinpinbox.android.DialogTool.DialogHandselPoint;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
+import com.pinpinbox.android.PopupTool.PopBoard;
+import com.pinpinbox.android.PopupTool.PopPicker;
+import com.pinpinbox.android.PopupTool.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
@@ -60,18 +59,18 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.FlurryKey;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.LinkText;
+import com.pinpinbox.android.Widget.MapKey;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.ProtocolKey;
+import com.pinpinbox.android.Widget.Recycle;
+import com.pinpinbox.android.Widget.SetMapByProtocol;
+import com.pinpinbox.android.Widget.StringIntMethod;
+import com.pinpinbox.android.Widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
 import com.squareup.picasso.Callback;
@@ -182,11 +181,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             return;
         }
 
-        setScrollControl();
-
         setShareElementAnim();
 
-//        setScrollControl();
+        setScrollControl();
 
     }
 
@@ -399,8 +396,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
                 if (rDetail != null) {
-
-                    MyLog.Set("e", getClass(), "-------------------------------------------------**");
 
                     rDetail.setBackground(
                             ScrimUtil.makeCubicGradientScrimDrawable(
@@ -661,11 +656,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             final Dialog mDialog = new Dialog(mActivity, R.style.myDialog);
             mDialog.getWindow().setWindowAnimations(R.style.dialog_enter_exit);
             mDialog.getWindow().setContentView(R.layout.dialog_2_0_0_teach_scroll_side);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mDialog.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                mDialog.getWindow().setStatusBarColor(Color.parseColor(ColorClass.TRANSPARENT));
-            }
 
 
             TextView tv1 = (TextView) mDialog.findViewById(R.id.tv1);
@@ -1370,7 +1360,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         .start();
 
                 if (rDetail != null) {
-
                     ViewPropertyAnimator alphaTo1_b = rDetail.animate();
                     alphaTo1_b.setDuration(200)
                             .alpha(1)

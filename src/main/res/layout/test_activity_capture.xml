@@ -11,7 +11,7 @@
         android:screenOrientation="landscape"/>
 
 
-    <com.pinpinbox.android.pinpinbox2_0_0.libs.scan.view.ViewfinderView
+    <com.pinpinbox.android.Scan.view.ViewfinderView
         android:id="@+id/viewfinder_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

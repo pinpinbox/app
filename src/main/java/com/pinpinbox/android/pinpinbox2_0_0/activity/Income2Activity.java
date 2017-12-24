@@ -12,10 +12,10 @@ import com.pinpinbox.android.SelfMadeClass.ClickUtils;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.Recycle;
 
 /**
  * Created by vmage on 2017/10/25.

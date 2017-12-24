@@ -18,7 +18,7 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.Widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 
 import java.util.List;

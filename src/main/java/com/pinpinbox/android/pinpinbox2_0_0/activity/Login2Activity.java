@@ -42,14 +42,15 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.DialogTool.CheckExecute;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.Mode.TestMode;
 import com.pinpinbox.android.OldMainActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
+import com.pinpinbox.android.PopupTool.PopPicker;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.CreateDir;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
@@ -66,15 +67,15 @@ import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MapKey;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.NoConnect;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.ProtocolKey;
+import com.pinpinbox.android.Widget.Recycle;
+import com.pinpinbox.android.Widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch2;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95;
@@ -223,12 +224,9 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 //            return;
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if(BuildConfig.FLAVOR.equals("w3")){
             svHorizontal.setVisibility(View.VISIBLE);
-        }else if(BuildConfig.FLAVOR.equals("www_private")){
-            svHorizontal.setVisibility(View.INVISIBLE);
-            return;
-        }else if(BuildConfig.FLAVOR.equals("www_public")){
+        }else if(BuildConfig.FLAVOR.equals("www")){
             svHorizontal.setVisibility(View.INVISIBLE);
             return;
         }

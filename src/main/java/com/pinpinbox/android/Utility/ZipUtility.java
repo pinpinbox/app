@@ -1,6 +1,6 @@
 package com.pinpinbox.android.Utility;
 
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.Widget.MyLog;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

@@ -198,7 +198,7 @@ public class HttpUtility {
     }
 
 
-    public static okhttp3.RequestBody buildMultipartFormRequestByOkHttp3(File[] files,
+    private static okhttp3.RequestBody buildMultipartFormRequestByOkHttp3(File[] files,
                                                       String[] fileKeys, OkHttpClientManager.Param[] params){
 
         params = validateParam(params);

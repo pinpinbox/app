@@ -16,12 +16,12 @@ import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.IntentControl;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.Recycle;
 
 import java.io.File;
 

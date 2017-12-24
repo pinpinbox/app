@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.PinchImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.Widget.MyLog;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;

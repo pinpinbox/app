@@ -34,7 +34,7 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.Utility.FileUtility;
@@ -43,8 +43,8 @@ import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerRead.DraggerReadActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.MyLog;
 
 import org.json.JSONObject;
 

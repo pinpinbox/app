@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.PinchImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.Widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.squareup.picasso.Callback;

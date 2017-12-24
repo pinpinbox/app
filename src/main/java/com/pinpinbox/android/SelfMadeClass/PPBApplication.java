@@ -4,16 +4,18 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
+import android.view.View;
 
 import com.aviary.android.feather.sdk.IAviaryClientCredentials;
 import com.blankj.utilcode.util.Utils;
 import com.flurry.android.FlurryAgent;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.Mode.TestMode;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MyLog;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -147,16 +149,12 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
 //            FlurryAgent.init(this, "5PYSZ533JSG4GTYJ5SJZ");//w3 2.0.0
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if(BuildConfig.FLAVOR.equals("w3")){
             FlurryAgent.init(this, "5PYSZ533JSG4GTYJ5SJZ");//w3 2.0.0
-        }else if(BuildConfig.FLAVOR.equals("www_private")){
-            FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
-            return;
-        }else if(BuildConfig.FLAVOR.equals("www_public")){
+        }else if(BuildConfig.FLAVOR.equals("www")){
             FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
             return;
         }
-
 
 
 

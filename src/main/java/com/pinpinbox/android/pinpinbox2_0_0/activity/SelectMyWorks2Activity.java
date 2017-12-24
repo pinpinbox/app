@@ -13,26 +13,26 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pinpinbox.android.DialogTool.DialogCheckContribute;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.StringClass.TagClass;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.PPBWidget;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.SelectMyWorksAdpater;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCheckContribute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -271,10 +271,10 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
                             HashMap<String, Object> map = new HashMap<String, Object>();
 
-                            String album = JsonUtility.GetString(object, "album"); //get album_id, name, cover, zipped, act
-                            String template = JsonUtility.GetString(object, "template"); //get template_id
-                            String user = JsonUtility.GetString(object, "user"); //user
-                            String event = JsonUtility.GetString(object, "event"); //get can join event
+                            String album = PPBWidget.GetStringByJsonObject(object, "album"); //get album_id, name, cover, zipped, act
+                            String template = PPBWidget.GetStringByJsonObject(object, "template"); //get template_id
+                            String user = PPBWidget.GetStringByJsonObject(object, "user"); //user
+                            String event = PPBWidget.GetStringByJsonObject(object, "event"); //get can join event
 
                             JSONObject obj = new JSONObject(template);
                             String template_id = obj.getString("template_id");

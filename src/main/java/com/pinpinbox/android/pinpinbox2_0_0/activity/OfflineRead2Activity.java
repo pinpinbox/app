@@ -28,8 +28,8 @@ import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.MyGallery;
 import com.pinpinbox.android.Views.PinchImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.Key;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

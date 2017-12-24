@@ -25,8 +25,13 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.pinpinbox.android.Activity.ReadAlbum.ReadAlbumActivity;
+import com.pinpinbox.android.DialogTool.CheckExecute;
+import com.pinpinbox.android.DialogTool.DialogHandselPoint;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
+import com.pinpinbox.android.PopupTool.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
+import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
@@ -39,30 +44,25 @@ import com.pinpinbox.android.StringClass.UrlClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.FlurryKey;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MapKey;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.PPBWidget;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.SetMapByProtocol;
+import com.pinpinbox.android.Widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.OnDetailClickListener;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCollectAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.OnDetailClickListener;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.pinpinbox2_0_0.service.DownLoadService;
 import com.squareup.picasso.Picasso;
 
@@ -288,37 +288,37 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
                          /* 2016.04.14 添加template_id */
                             final HashMap<String, Object> map = new HashMap<String, Object>();
                             JSONObject obj = (JSONObject) p17JsonArray.get(i);
-                            String album = JsonUtility.GetString(obj, "album");
-                            String user = JsonUtility.GetString(obj, "user");
-                            String template = JsonUtility.GetString(obj, "template");
-                            String cooperation = JsonUtility.GetString(obj, "cooperation");
-                            String cooperationstatistics = JsonUtility.GetString(obj, "cooperationstatistics");
+                            String album = PPBWidget.GetStringByJsonObject(obj, "album");
+                            String user = PPBWidget.GetStringByJsonObject(obj, "user");
+                            String template = PPBWidget.GetStringByJsonObject(obj, "template");
+                            String cooperation = PPBWidget.GetStringByJsonObject(obj, "cooperation");
+                            String cooperationstatistics = PPBWidget.GetStringByJsonObject(obj, "cooperationstatistics");
 
                             JSONObject aj = new JSONObject(album);
-                            String description = JsonUtility.GetString(aj, "description");//2016.07.04修正換行處裡
-                            String p17_json_album_id = JsonUtility.GetString(aj, "album_id");
-                            String p17_json_albumname = JsonUtility.GetString(aj, "name");
-                            String p17_json_albumcover = JsonUtility.GetString(aj, "cover");
+                            String description = PPBWidget.GetStringByJsonObject(aj, "description");//2016.07.04修正換行處裡
+                            String p17_json_album_id = PPBWidget.GetStringByJsonObject(aj, "album_id");
+                            String p17_json_albumname = PPBWidget.GetStringByJsonObject(aj, "name");
+                            String p17_json_albumcover = PPBWidget.GetStringByJsonObject(aj, "cover");
 
 
-                            String p17_json_albumact = JsonUtility.GetString(aj, "act");
-                            String p17_json_albuminsertdate = JsonUtility.GetString(aj, "insertdate");
-                            String p17_json_albumzipped = JsonUtility.GetString(aj, "zipped");
+                            String p17_json_albumact = PPBWidget.GetStringByJsonObject(aj, "act");
+                            String p17_json_albuminsertdate = PPBWidget.GetStringByJsonObject(aj, "insertdate");
+                            String p17_json_albumzipped = PPBWidget.GetStringByJsonObject(aj, "zipped");
 
 
                             JSONObject uj = new JSONObject(user);
-                            String p17_json_user_id = JsonUtility.GetString(uj, "user_id");
-                            String p17_json_username = JsonUtility.GetString(uj, "name");
-                            String p17_json_picture = JsonUtility.GetString(uj, "picture");
+                            String p17_json_user_id = PPBWidget.GetStringByJsonObject(uj, "user_id");
+                            String p17_json_username = PPBWidget.GetStringByJsonObject(uj, "name");
+                            String p17_json_picture = PPBWidget.GetStringByJsonObject(uj, "picture");
 
                             JSONObject cj = new JSONObject(cooperation);
-                            String p17_json_identity = JsonUtility.GetString(cj, "identity");
+                            String p17_json_identity = PPBWidget.GetStringByJsonObject(cj, "identity");
 
                             JSONObject csj = new JSONObject(cooperationstatistics);
-                            String p17_json_cooperationstatistics = JsonUtility.GetString(csj, "count");
+                            String p17_json_cooperationstatistics = PPBWidget.GetStringByJsonObject(csj, "count");
 
                             JSONObject temj = new JSONObject(template);
-                            String p17_json_template_id = JsonUtility.GetString(temj, "template_id");
+                            String p17_json_template_id = PPBWidget.GetStringByJsonObject(temj, "template_id");
 
 
 
@@ -1234,9 +1234,9 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
             if (strJson != null && !strJson.equals("")) {
                 try {
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p68Result = JsonUtility.GetString(jsonObject, Key.result);
+                    p68Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
                     if (p68Result.equals("1")) {
-                        String data = JsonUtility.GetString(jsonObject, "data");
+                        String data = PPBWidget.GetStringByJsonObject(jsonObject, "data");
                         JSONObject object = new JSONObject(data);
                         lastmodifytime = object.getLong("modifytime");
                         downloadtime = getdata.getLong(album_id + "_modified_time", 0);
@@ -1244,7 +1244,7 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
                         MyLog.Set("d", getClass(), "lastmodifytime => " + lastmodifytime);
                         MyLog.Set("d", getClass(), "downloadtime => " + downloadtime);
                     } else if (p68Result.equals("0")) {
-                        p68Message = JsonUtility.GetString(jsonObject, Key.message);
+                        p68Message = PPBWidget.GetStringByJsonObject(jsonObject, Key.message);
                     } else {
                         p68Result = "";
                     }

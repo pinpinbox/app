@@ -41,8 +41,13 @@ import android.widget.TextView;
 import com.aviary.android.feather.sdk.AviaryIntent;
 import com.aviary.android.feather.sdk.internal.Constants;
 import com.aviary.android.feather.sdk.internal.headless.utils.MegaPixels;
+import com.pinpinbox.android.DialogTool.CheckExecute;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
+import com.pinpinbox.android.DialogTool.DismissExcute;
+import com.pinpinbox.android.PopupTool.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
+import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.CreateDir;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
@@ -62,27 +67,23 @@ import com.pinpinbox.android.Utility.OkHttpClientManager;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersGridView;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.NoConnect;
+import com.pinpinbox.android.Widget.PPBWidget;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.ProtocolKey;
+import com.pinpinbox.android.Widget.Recycle;
+import com.pinpinbox.android.Widget.SetMapByProtocol;
+import com.pinpinbox.android.Widget.YMDComparator;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationTemplate2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.LocalPhotoAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.YMDComparator;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DismissExcute;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightEndedListener;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightStartedListener;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.util.CheckExternalStorage;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
@@ -113,6 +114,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
     private Fragment fragment;
     private NoConnect noConnect;
     private LoadingAnimation loading;
+//    private UploadingWithKeyBack uploadingWithKeyBack;
     private DialogV2Custom dlgUploading;
     private LoaderManager loaderManager;
 
@@ -256,7 +258,23 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
         fragment = this;
 
         loading = new LoadingAnimation(getActivity());
+//        uploadingWithKeyBack = new UploadingWithKeyBack(getActivity());
 
+
+//        loading.getvCatchClose().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+//
+//                    checkStopUpload();
+//
+//                }
+//
+//
+//                return true;
+//            }
+//        });
 
         loading.dialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
@@ -1710,7 +1728,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                         JSONObject uj = new JSONObject(usergrade);
                         intMaxCount = uj.getInt("photo_limit_of_album");
 
-                        String photo = JsonUtility.GetString(j, "photo");
+                        String photo = PPBWidget.GetStringByJsonObject(j, "photo");
                         JSONArray jsonArray = new JSONArray(photo);
 
                         intAlbumCount = jsonArray.length();

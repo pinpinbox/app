@@ -14,7 +14,7 @@ import android.view.*;
 import android.view.animation.Interpolator;
 
 import com.pinpinbox.android.Utility.DensityUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.Widget.MyLog;
 
 import java.util.Arrays;
 

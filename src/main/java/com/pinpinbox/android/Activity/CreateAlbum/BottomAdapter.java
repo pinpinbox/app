@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.Widget.StringIntMethod;
 import com.pinpinbox.android.Utility.HttpUtility;
 
 import java.util.ArrayList;

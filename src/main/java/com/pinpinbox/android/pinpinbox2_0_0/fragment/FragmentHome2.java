@@ -25,10 +25,11 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.DialogTool.DialogV2Custom;
+import com.pinpinbox.android.Mode.TestMode;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
@@ -49,16 +50,16 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.Widget.ActivityAnim;
+import com.pinpinbox.android.Widget.FlurryKey;
+import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.Widget.NoConnect;
+import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.Widget.ProtocolKey;
+import com.pinpinbox.android.Widget.SetMapByProtocol;
+import com.pinpinbox.android.Widget.StaggeredHeight;
+import com.pinpinbox.android.Widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
@@ -264,7 +265,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 //
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if(BuildConfig.FLAVOR.equals("w3")){
             tvShowTime.setVisibility(View.VISIBLE);
             tvShowTime.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -283,9 +284,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                     }
                 }
             });
-        }else if(BuildConfig.FLAVOR.equals("www_private")){
-            tvShowTime.setVisibility(View.GONE);
-        }else if(BuildConfig.FLAVOR.equals("www_public")){
+        }else if(BuildConfig.FLAVOR.equals("www")){
             tvShowTime.setVisibility(View.GONE);
         }
 
