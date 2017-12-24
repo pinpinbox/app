@@ -14,7 +14,7 @@ public class TestMode {
 //    public static String testW3domain = "http://platformvmage5.cloudapp.net/pinpinbox";
 
     //true 為測試模式
-    public static boolean TESTMODE = true;
+    public static boolean TESTMODE = false;
 
     public static String domain(){
 
