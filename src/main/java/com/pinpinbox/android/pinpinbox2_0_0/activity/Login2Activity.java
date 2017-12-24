@@ -224,9 +224,12 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 //            return;
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3")){
+        if(BuildConfig.FLAVOR.equals("w3_private")){
             svHorizontal.setVisibility(View.VISIBLE);
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        }else if(BuildConfig.FLAVOR.equals("www_private")){
+            svHorizontal.setVisibility(View.INVISIBLE);
+            return;
+        }else if(BuildConfig.FLAVOR.equals("www_public")){
             svHorizontal.setVisibility(View.INVISIBLE);
             return;
         }

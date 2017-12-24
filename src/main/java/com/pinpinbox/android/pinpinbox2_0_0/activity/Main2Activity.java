@@ -261,9 +261,11 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 //
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3")){
+        if(BuildConfig.FLAVOR.equals("w3_private")){
             testbuttonImg.setVisibility(View.VISIBLE);
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        }else if(BuildConfig.FLAVOR.equals("www_private")){
+            testbuttonImg.setVisibility(View.GONE);
+        }else if(BuildConfig.FLAVOR.equals("www_public")){
             testbuttonImg.setVisibility(View.GONE);
         }
 

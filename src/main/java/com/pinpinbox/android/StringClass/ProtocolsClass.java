@@ -29,21 +29,14 @@ public class ProtocolsClass {
     public static String P01_Login() {
         String strDomain = "";
 
-//        if (TestMode.TESTMODE) {
-//            //test
-//            strDomain = domain + "/index/api/login" + "/1.2";
-//        } else {
-//            strDomain = https_domain + "/index/api/login" + "/1.2";
-//
-//        }
 
-
-        if(BuildConfig.FLAVOR.equals("w3")){
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/login" + "/1.2";
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
+            strDomain = https_domain + "/index/api/login" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
             strDomain = https_domain + "/index/api/login" + "/1.2";
         }
-
 
 
         return strDomain;
@@ -65,9 +58,12 @@ public class ProtocolsClass {
 //        }
 
 
-        if(BuildConfig.FLAVOR.equals("w3")){
+
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/registration" + "/1.2";
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
+            strDomain = https_domain + "/index/api/registration" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
             strDomain = https_domain + "/index/api/registration" + "/1.2";
         }
 
@@ -84,16 +80,12 @@ public class ProtocolsClass {
 
         String strDomain = "";
 
-//        if (TestMode.TESTMODE) {
-//            //test
-//            strDomain = domain + "/index/api/retrievepassword" + "/1.2";
-//        } else {
-//            strDomain = https_domain + "/index/api/retrievepassword" + "/1.2";
-//        }
 
-        if(BuildConfig.FLAVOR.equals("w3")){
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/retrievepassword" + "/1.2";
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
+            strDomain = https_domain + "/index/api/retrievepassword" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
             strDomain = https_domain + "/index/api/retrievepassword" + "/1.2";
         }
 
@@ -135,18 +127,15 @@ public class ProtocolsClass {
 
         String strDomain = "";
 
-//        if (TestMode.TESTMODE) {
-//            //test
-//            strDomain = domain + "/index/api/updatepwd" + "/1.2";
-//        } else {
-//            strDomain = https_domain + "/index/api/updatepwd" + "/1.2";
-//        }
 
-        if(BuildConfig.FLAVOR.equals("w3")){
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/updatepwd" + "/1.2";
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
+            strDomain = https_domain + "/index/api/updatepwd" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
             strDomain = https_domain + "/index/api/updatepwd" + "/1.2";
         }
+
 
         return strDomain;
 
@@ -281,7 +270,6 @@ public class ProtocolsClass {
     public static String P94_GetHobbyList = domain + "/index/api/gethobbylist" + "/1.3";
 
 
-    public static String testPPPPPP = domain + "/index/api/testsign" + version;
 
 
 }

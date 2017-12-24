@@ -265,7 +265,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 //
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3")){
+        if(BuildConfig.FLAVOR.equals("w3_private")){
             tvShowTime.setVisibility(View.VISIBLE);
             tvShowTime.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -284,7 +284,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                     }
                 }
             });
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        }else if(BuildConfig.FLAVOR.equals("www_private")){
+            tvShowTime.setVisibility(View.GONE);
+        }else if(BuildConfig.FLAVOR.equals("www_public")){
             tvShowTime.setVisibility(View.GONE);
         }
 

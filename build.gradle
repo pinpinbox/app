@@ -20,17 +20,27 @@ android {
 
     productFlavors {
 
-        w3 {
+        w3_private {
             applicationId "com.pinpinboxW3.android"
-            resValue "string", "pinpinbox_app_name", "pinpinbox_w3"
+            resValue "string", "pinpinbox_app_name", "w3"
             buildConfigField "String", "initAPI", "\"https://w3.pinpinbox.com\""
+
         }
 
-        www {
+        www_private {
+            applicationId "com.pinpinboxWWW.android"
+            resValue "string", "pinpinbox_app_name", "www"
+            buildConfigField "String", "initAPI", "\"https://www.pinpinbox.com\""
+
+
+        }
+
+        www_public {
             applicationId "com.pinpinbox.android"
             resValue "string", "pinpinbox_app_name", "pinpinbox"
             buildConfigField "String", "initAPI", "\"https://www.pinpinbox.com\""
         }
+
 
     }
 

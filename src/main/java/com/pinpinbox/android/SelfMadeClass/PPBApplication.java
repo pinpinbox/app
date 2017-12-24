@@ -149,12 +149,16 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
 //            FlurryAgent.init(this, "5PYSZ533JSG4GTYJ5SJZ");//w3 2.0.0
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3")){
+        if(BuildConfig.FLAVOR.equals("w3_private")){
             FlurryAgent.init(this, "5PYSZ533JSG4GTYJ5SJZ");//w3 2.0.0
-        }else if(BuildConfig.FLAVOR.equals("www")){
+        }else if(BuildConfig.FLAVOR.equals("www_private")){
+            FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
+            return;
+        }else if(BuildConfig.FLAVOR.equals("www_public")){
             FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
             return;
         }
+
 
 
 
