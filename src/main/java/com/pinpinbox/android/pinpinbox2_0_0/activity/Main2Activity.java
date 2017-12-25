@@ -243,7 +243,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 finish();
                 ActivityAnim.StartAnim(mActivity);
 
-
             }
         });
 
@@ -264,7 +263,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
         }, 600);
 
-
     }
 
 
@@ -277,20 +275,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         }
 
     }
-
-//    private void setStatus() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            setTranslucentStatus(true);
-//        }
-//        new Handler().post(new Runnable() {
-//            @Override
-//            public void run() {
-//                SystemBarTintManager sysBarManager = new SystemBarTintManager(Main2Activity.this);
-//                sysBarManager.setStatusBarTintEnabled(true);
-//                sysBarManager.setStatusBarTintColor(Color.parseColor(ColorClass.STATUSBAR));
-//            }
-//        });
-//    }
 
     private void checkMainExist() {
 
@@ -2046,12 +2030,10 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
-
 
     @Override
     public void onBackPressed() {
@@ -2096,7 +2078,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         super.onResume();
     }
-
 
     @Override
     public void onDestroy() {
