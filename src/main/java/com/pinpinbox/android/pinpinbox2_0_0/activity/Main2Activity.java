@@ -29,7 +29,6 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.DialogTool.DialogHandselPoint;
 import com.pinpinbox.android.DialogTool.DialogV2Custom;
-import com.pinpinbox.android.Mode.TestMode;
 import com.pinpinbox.android.OldMainActivity;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
@@ -248,18 +247,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
         });
 
-        //mode = false 正式環境
-//        if (!TestMode.TESTMODE) {
-//
-//            //正式
-//            testbuttonImg.setVisibility(View.GONE);
-//
-//        } else {
-//
-//            //測試
-//            testbuttonImg.setVisibility(View.VISIBLE);
-//
-//        }
 
         if(BuildConfig.FLAVOR.equals("w3_private")){
             testbuttonImg.setVisibility(View.VISIBLE);
