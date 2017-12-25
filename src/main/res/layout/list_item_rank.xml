@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/rRankItem">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout25"
+            >
+
+
+
+            <TextView
+                android:includeFontPadding="false"
+                android:id="@+id/category_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="類別"
+                android:textSize="@dimen/ppb200_title_second_size"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/pinpinbox_color_dark" />
+
+
+        </RelativeLayout>
+
+        <!--<com.pinpinbox.android.Views.HorListView-->
+            <!--android:id="@+id/horlistview"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="220dp"-->
+            <!--android:layout_below="@+id/relativeLayout25"-->
+            <!--android:layout_marginTop="4dp">-->
+
+            <!--</com.pinpinbox.android.Views.HorListView>-->
+
+
+    </RelativeLayout>
+
+</LinearLayout>

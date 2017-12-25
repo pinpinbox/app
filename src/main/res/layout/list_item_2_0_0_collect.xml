@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rBackground"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/click_2_0_0_list_item">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toEndOf="@+id/relativeLayout8"
+            android:layout_toRightOf="@+id/relativeLayout8"
+            android:padding="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/rCover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_background_2_0_0_notify_item_cover_corner9">
+
+                <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                    android:id="@+id/coverImg"
+                    android:layout_width="56dp"
+                    android:layout_height="84dp"
+                    android:alpha="0.9"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="8dp"
+                    app:riv_mutate_background="true" />
+
+                <RelativeLayout
+                    android:id="@+id/rWarn"
+                    android:layout_width="56dp"
+                    android:layout_height="84dp"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/image_background_2_0_0_warncover_corner7" />
+
+                    <ImageView
+                        android:id="@+id/warnImg"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_2_0_0_warn_pink500_144x144" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvAlbumName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="26dp"
+                android:layout_toRightOf="@+id/rCover"
+                android:ellipsize="end"
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_second" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="32dp"
+                android:gravity="center_vertical"
+                android:letterSpacing="0.1"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                android:id="@+id/userImg"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/rCover"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:siBorderColor="@color/pinpinbox_2_0_0_divider"
+                app:siBorderWidth="0.5dp"
+                app:siRadius="32dp" />
+
+
+            <LinearLayout
+                android:id="@+id/linCooperationCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/userImg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/ic200_cooperation_light" />
+
+                <TextView
+                    android:id="@+id/tvCooperationCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="4dp"
+                    android:gravity="center_vertical"
+                    android:letterSpacing="0.1"
+                    android:text=""
+                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                    android:textSize="@dimen/ppb200_common_text_third" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <!--權限-->
+        <ImageView
+            android:id="@+id/smallprivacyImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="-8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:padding="8dp"
+            android:src="@drawable/ic200_act_close_pink"
+            android:visibility="gone"
+            android:layout_alignParentTop="true"/>
+
+
+        <!--設置-->
+        <RelativeLayout
+            android:id="@+id/rDetail"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/pinpinbox2_0_0_black_alpha" />
+
+
+
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="32dp"
+                    android:paddingTop="8dp">
+
+                    <!--編輯-->
+                    <LinearLayout
+                        android:id="@+id/linEdit"
+                        android:layout_width="64dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/click_2_0_0_default_light"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/ppb200_common_icon_side"
+                            android:layout_height="@dimen/ppb200_common_icon_side"
+                            android:padding="9dp"
+                            android:src="@drawable/ic200_edit_white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_button_edit"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+                    <!--邀請-->
+                    <LinearLayout
+                        android:id="@+id/linCooperation"
+                        android:layout_width="64dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/click_2_0_0_default_light"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/ppb200_common_icon_side"
+                            android:layout_height="@dimen/ppb200_common_icon_side"
+                            android:padding="8dp"
+                            android:src="@drawable/ic200_cooperation_white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_button_invite"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+                    <!--分享-->
+                    <LinearLayout
+                        android:id="@+id/linShare"
+                        android:layout_width="64dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/click_2_0_0_default_light"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/ppb200_common_icon_side"
+                            android:layout_height="@dimen/ppb200_common_icon_side"
+                            android:padding="8dp"
+                            android:src="@drawable/ic200_share_white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_button_share"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+                    <!--刪除-->
+                    <LinearLayout
+                        android:id="@+id/linDelete"
+                        android:layout_width="64dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/click_2_0_0_default_light"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/ppb200_common_icon_side"
+                            android:layout_height="@dimen/ppb200_common_icon_side"
+                            android:padding="8dp"
+                            android:src="@drawable/ic200_delete_white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_button_delete"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+                    <!--下載-->
+                    <LinearLayout
+                        android:id="@+id/linDownload"
+                        android:layout_width="64dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/click_2_0_0_default_light"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="@dimen/ppb200_common_icon_side"
+                            android:layout_height="@dimen/ppb200_common_icon_side">
+
+                            <ImageView
+                                android:id="@+id/downloadImg"
+                                android:layout_width="@dimen/ppb200_common_icon_side"
+                                android:layout_height="@dimen/ppb200_common_icon_side"
+                                android:padding="8dp"
+                                android:src="@drawable/ic200_download_white" />
+
+                            <com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView
+                                android:id="@+id/avLoading"
+                                android:layout_width="@dimen/ppb200_common_icon_side"
+                                android:layout_height="@dimen/ppb200_common_icon_side"
+                                android:layout_centerInParent="true"
+                                app:indicatorColor="@color/white" />
+
+
+                        </RelativeLayout>
+
+
+                        <TextView
+                            android:id="@+id/tvLoadType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_button_download"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+
+        <ImageView
+
+            android:id="@+id/detailImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="0dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:paddingBottom="7dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="9dp"
+            android:src="@drawable/ic200_setting_light" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/pinpinbox_2_0_0_divider" />
+
+
+</LinearLayout>

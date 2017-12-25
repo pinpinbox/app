@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:background="@color/white">
+
+
+    <in.srain.cube.views.GridViewWithHeaderAndFooter
+        android:id="@+id/gvPoint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:columnWidth="98dp"
+        android:horizontalSpacing="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"/>
+    <!--android:stretchMode="columnWidth"-->
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

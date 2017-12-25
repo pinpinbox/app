@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rRegister"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="1">
+    <!--android:visibility="invisible"-->
+
+
+    <TextView
+        android:id="@+id/tvRegisterTitle"
+        style="@style/ppb200_title_first"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+        android:text="@string/pinpinbox_2_0_0_title_register" />
+
+    <LinearLayout
+        android:id="@+id/linRegisterBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvRegisterTitle"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="-4dp"
+        android:background="@drawable/click_2_0_0_default"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp">
+
+        <ImageView
+            android:id="@+id/backImg"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="8dp"
+            android:src="@drawable/ic200_arrow_left_light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:letterSpacing="0.2"
+            android:text="@string/pinpinbox_2_0_0_button_back_to_login"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="@dimen/ppb200_padding_margin_first"
+        android:paddingRight="@dimen/ppb200_padding_margin_first"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="116dp"
+            android:layout_height="30dp"
+            android:alpha="0.5"
+            android:src="@drawable/pinpin_logo" />
+
+
+        <!--enter nick name-->
+        <RelativeLayout
+            android:id="@+id/rRegNickname"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/border_2_0_0_grey_third_radius">
+
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:padding="12dp"
+                android:src="@drawable/ic200_user_hollow_dark" />
+
+
+            <EditText
+                style="@style/ppb200_EditText"
+                android:id="@+id/edRegNickname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/img2"
+                android:background="@null"
+                android:hint="@string/pinpinbox_2_0_0_input_hint_nickname"
+                android:maxLength="24"
+                android:singleLine="true"
+                android:paddingLeft="0dp"/>
+
+
+        </RelativeLayout>
+
+        <!--enter email-->
+        <RelativeLayout
+            android:id="@+id/rRegMail"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/border_2_0_0_grey_third_radius">
+
+            <ImageView
+                android:id="@+id/img3"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:padding="12dp"
+                android:src="@drawable/ic200_mail_dark" />
+
+            <TextView
+                android:id="@+id/tvRegCheckEmail"
+                android:layout_width="48dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                android:background="@drawable/click_2_0_0_main_button_radius"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:singleLine="true"
+                android:text="@string/pinpinbox_2_0_0_button_examination"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+            <EditText
+                style="@style/ppb200_EditText"
+                android:id="@+id/edRegMail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                android:layout_toLeftOf="@+id/tvRegCheckEmail"
+                android:layout_toRightOf="@+id/img3"
+                android:background="@null"
+                android:hint="@string/pinpinbox_2_0_0_input_hint_mail"
+                android:inputType="textEmailAddress"
+                android:maxLength="48"
+                android:singleLine="true"
+                android:paddingLeft="0dp"/>
+
+
+        </RelativeLayout>
+
+        <!--enter password-->
+        <RelativeLayout
+            android:id="@+id/rRegPassword"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/border_2_0_0_grey_third_radius">
+
+            <ImageView
+                android:id="@+id/img4"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:padding="12dp"
+                android:src="@drawable/ic200_password_normal_dark" />
+
+            <TextView
+                android:id="@+id/tvRegPassword"
+                android:layout_width="42dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                android:gravity="center"
+                android:letterSpacing="0.2"
+                android:singleLine="true"
+                android:text="OK"
+                android:textColor="@color/pinpinbox_2_0_0_first_main"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+
+            <EditText
+                style="@style/ppb200_EditText"
+                android:id="@+id/edRegPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/tvRegPassword"
+                android:layout_toRightOf="@+id/img4"
+                android:background="@null"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                android:hint="@string/pinpinbox_2_0_0_input_hint_password_eight_digits_at_least"
+                android:maxLength="24"
+                android:password="true"
+                android:singleLine="true"
+                android:paddingLeft="0dp"/>
+
+
+        </RelativeLayout>
+
+        <!--enter check password-->
+        <RelativeLayout
+            android:id="@+id/rRegPasswordCheck"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/border_2_0_0_grey_third_radius">
+
+            <ImageView
+                android:id="@+id/img5"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:padding="12dp"
+                android:src="@drawable/ic200_password_confirm_dark" />
+
+            <TextView
+                android:id="@+id/tvRegPasswordCheck"
+                android:layout_width="42dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                android:gravity="center"
+                android:letterSpacing="0.2"
+                android:singleLine="true"
+                android:text="OK"
+                android:textColor="@color/pinpinbox_2_0_0_first_main"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+
+            <EditText
+                style="@style/ppb200_EditText"
+                android:id="@+id/edRegPasswordCheck"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/tvRegPasswordCheck"
+                android:layout_toRightOf="@+id/img5"
+                android:background="@null"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                android:hint="@string/pinpinbox_2_0_0_input_hint_password_input_password_again"
+                android:maxLength="24"
+                android:password="true"
+                android:singleLine="true"
+                android:paddingLeft="0dp"/>
+
+
+        </RelativeLayout>
+
+        <!--next-->
+        <TextView
+            style="@style/ppb200_Button_main_common_radius"
+            android:id="@+id/tvRegisterNext"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:gravity="center"
+            android:text="@string/pinpinbox_2_0_0_button_next" />
+
+
+        <TextView
+            android:id="@+id/tvRegisterNorm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:gravity="right"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_other_text_agree_norm"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="16sp" />
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="24dp"-->
+        <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_first"-->
+        <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tvRegisterNorm"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:letterSpacing="0.1"-->
+        <!--android:text="@string/pinpinbox_2_0_0_other_text_agree_norm"-->
+        <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_marginRight="@dimen/ppb200_padding_margin_second"/>-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tvRegisterNorm"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/click_2_0_0_default"-->
+        <!--android:gravity="center"-->
+        <!--android:letterSpacing="0.1"-->
+        <!--android:paddingLeft="@dimen/ppb200_padding_margin_second"-->
+        <!--android:paddingRight="@dimen/ppb200_padding_margin_second"-->
+        <!--android:text="@string/pinpinbox_2_0_0_itemtype_platform_specification"-->
+        <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
+        <!--android:textSize="16sp" />-->
+
+
+        <!--</LinearLayout>-->
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

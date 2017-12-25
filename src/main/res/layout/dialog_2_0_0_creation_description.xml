@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.6"
+        android:background="@color/black" />
+
+
+    <RelativeLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/ppb200_padding_margin_big"
+        android:background="@drawable/border_2_0_0_white_radius_big">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/ppb200_padding_margin_first">
+
+
+            <TextView
+                style="@style/ppb200_title_second"
+                android:layout_gravity="left"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+                android:text="@string/pinpinbox_2_0_0_itemtype_album_description" />
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/border_2_0_0_grey_third_radius"
+                android:clipToPadding="false"
+                android:paddingTop="@dimen/ppb200_padding_margin_second"
+                android:paddingBottom="@dimen/ppb200_padding_margin_second">
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/pinpinbox_2_0_0_input_hint_add_description_to_this_page"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="0.1"
+                    android:lineSpacingExtra="0.2dp"
+                    android:text=""
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textColorHint="@color/pinpinbox_2_0_0_hint_grey"
+                    android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                    android:paddingRight="@dimen/ppb200_padding_margin_first"
+                    android:textSize="@dimen/ppb200_common_text_second" />
+
+
+            </ScrollView>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/cancelImg"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="36dp"
+                    android:background="@drawable/click_2_0_0_circle_pink_second"
+                    android:padding="16dp"
+                    android:src="@drawable/ic200_cancel_white" />
+
+
+                <ImageView
+                    android:id="@+id/confirmImg"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/click_2_0_0_circle_main_first"
+                    android:padding="14dp"
+                    android:src="@drawable/ic200_select_white" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

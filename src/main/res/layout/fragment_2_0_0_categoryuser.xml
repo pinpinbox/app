@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pinpinbox_2_0_0_action_bar_color"
+    android:orientation="vertical">
+
+    <!--創作人推薦-->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/ppb200_title_second"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_title_recommend_creator" />
+
+        <TextView
+            android:id="@+id/tvClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="@string/pinpinbox_2_0_0_dialog_close"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:background="@drawable/click_2_0_0_default"/>
+
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvUser"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="144dp" />
+
+
+</LinearLayout>

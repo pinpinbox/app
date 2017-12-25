@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="234dp"
+            android:background="@drawable/image_background_2_0_0_radius4">
+
+            <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                android:id="@+id/coverImg"
+                android:layout_width="match_parent"
+                android:layout_height="234dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                android:alpha="0.9"
+                app:riv_corner_radius="4dp"
+                app:riv_mutate_background="true" />
+
+            <RelativeLayout
+                android:id="@+id/rOwn"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="#ebffffff"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvOwn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="已取得"
+                    android:letterSpacing="0.2"
+                    android:textSize="16sp"
+                    android:textColor="@color/pinpinbox_2_0_0_first_main"
+                     />
+
+            </RelativeLayout>
+            
+
+
+        </RelativeLayout>
+
+
+        <!--版型名稱-->
+        <TextView
+            android:id="@+id/tvTemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="14sp"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="4dp"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+        <!--下載次數-->
+        <TextView
+            android:id="@+id/tvDownloadCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:letterSpacing="0.1"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:singleLine="true"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

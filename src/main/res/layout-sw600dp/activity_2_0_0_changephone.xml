@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/ppb200_title_first"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+        android:layout_marginTop="@dimen/ppb200_title_margin_second"
+        android:text="@string/pinpinbox_2_0_0_title_change_phone_number"
+         />
+
+    <TextView
+        android:id="@+id/tvCurrentNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_below="@+id/tvTitle"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="4dp"
+        android:letterSpacing="0.2"
+        android:text="@string/pinpinbox_2_0_0_other_text_current_phone_number"
+        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+        android:textSize="@dimen/ppb200_common_text_second"
+        android:layout_marginLeft="4dp"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv1"
+            style="@style/ppb200_title_second"
+            android:layout_gravity="left"
+            android:text="@string/pinpinbox_2_0_0_other_text_to_change_to"/>
+
+
+        <!--enter phone-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvCountry"
+                android:layout_width="@dimen/ppb200_common_button_width"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:background="@drawable/click_2_0_0_grey_third_radius"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:letterSpacing="0.2"
+                android:maxLines="2"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="4dp"
+                android:text="台灣+886"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="14sp" />
+
+
+            <EditText
+                style="@style/ppb200_EditText"
+                android:id="@+id/edPhone"
+                android:layout_width="352dp"
+                android:layout_height="48dp"
+                android:background="@drawable/border_2_0_0_grey_third_radius"
+                android:hint="@string/pinpinbox_2_0_0_input_hint_phone_number"
+                android:inputType="phone"
+                android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                android:singleLine="true" />
+
+
+        </LinearLayout>
+
+
+        <!--send phone number-->
+        <RelativeLayout
+            android:layout_width="480dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+
+            <TextView
+                android:id="@+id/tvSendPhone"
+                style="@style/ppb200_Button_main_common_radius"
+                android:layout_centerHorizontal="true"
+                android:text="@string/pinpinbox_2_0_0_button_send" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSendPhone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:letterSpacing="0.2"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_second_pink"
+                android:textSize="@dimen/ppb200_common_text_third"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+
+
+
+        <!--enter verification code-->
+        <RelativeLayout
+            android:id="@+id/rCode"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/border_2_0_0_grey_third_radius">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:padding="12dp"
+                android:src="@drawable/ic200_sms_dark" />
+
+
+            <EditText
+                style="@style/ppb200_EditText"
+                android:id="@+id/edCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/imageView12"
+                android:background="@null"
+                android:hint="@string/pinpinbox_2_0_0_input_hint_input_verification_code"
+                android:maxLength="12"
+                android:singleLine="true"
+                android:paddingLeft="0dp"/>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+            android:letterSpacing="0.2"
+            android:text="@string/pinpinbox_2_0_0_other_text_wait_verification_code_description"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+        <!--finish-->
+        <TextView
+            android:id="@+id/tvDone"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="@dimen/ppb200_padding_margin_first"
+            android:paddingRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_done" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

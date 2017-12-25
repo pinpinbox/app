@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/ppb200_title_first"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="@dimen/ppb200_title_margin_second"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/tvBelowTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+        android:letterSpacing="0.2"
+        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+        android:textSize="@dimen/ppb200_common_text_second"
+        android:visibility="gone"
+        android:text="123"
+        fontPath="fonts/OpenSans-Bold.ttf"/>
+
+
+</RelativeLayout>

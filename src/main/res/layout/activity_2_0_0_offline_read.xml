@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/black">
+
+
+
+
+    <com.pinpinbox.android.Views.ControllableViewPager
+        android:id="@+id/readViewPager"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_action_bar_height"
+        android:id="@+id/rActionBar"
+        android:background="@color/black"
+        android:alpha="0.8">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_white" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/pinpinbox_color_dark"
+            android:layout_alignParentBottom="true"
+            />
+
+
+
+        <TextView
+            android:id="@+id/readTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_action_bar_icon"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text=""
+            android:singleLine="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/backImg"
+            android:layout_toEndOf="@+id/backImg" />
+
+
+    </RelativeLayout>
+
+
+
+    <!--bottom-->
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/linDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:background="@color/black"
+            android:minHeight="72dp">
+
+            <!--1/3高度-->
+            <com.pinpinbox.android.Views.ControlSizeScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvPageDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginRight="48dp"
+                    android:gravity="left"
+                    android:lineSpacingExtra="2dp"
+                    android:padding="4dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </com.pinpinbox.android.Views.ControlSizeScrollView>
+
+
+        </LinearLayout>
+
+        <!--bottom gallery-->
+        <RelativeLayout
+            android:id="@+id/rPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@+id/linDescription">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:background="@color/black" />
+
+            <ImageView
+                android:id="@+id/aimg"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/pinpinbox_color_dark" />
+
+
+            <com.pinpinbox.android.Views.MyGallery
+                android:id="@+id/gallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:unselectedAlpha="0.7"
+                android:spacing="8dp"
+                android:layout_below="@+id/aimg"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

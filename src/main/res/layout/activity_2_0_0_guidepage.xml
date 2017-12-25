@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpGudie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        app:ci_drawable="@drawable/icon_2_0_0_indicator"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect"
+        app:ci_width="12dp"
+        app:ci_height="12dp"
+        app:ci_margin="12dp"/>
+
+    <LinearLayout
+        android:id="@+id/linGuideBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/click_2_0_0_default"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/ppb200_padding_margin_third"
+        android:paddingLeft="2dp"
+        android:paddingRight="@dimen/ppb200_padding_margin_second"
+        android:paddingTop="@dimen/ppb200_padding_margin_third"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_second">
+
+        <ImageView
+            android:id="@+id/backImg"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic200_arrow_left_light"
+            android:padding="@dimen/ppb200_padding_margin_second"/>
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/pinpinbox_2_0_0_button_back_to_login"
+            android:letterSpacing="0.2"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

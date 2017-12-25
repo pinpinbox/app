@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:clickable="true">
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:screenOrientation="landscape"/>
+
+
+    <com.pinpinbox.android.Scan.view.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_gravity="bottom"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color"
+        android:visibility="visible">
+
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_begin_logo"
+            android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
+
+</FrameLayout>

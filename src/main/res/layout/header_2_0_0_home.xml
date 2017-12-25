@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingTop="36dp">
+
+
+        <LinearLayout
+            android:id="@+id/linBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_marginTop="8dp"
+                app:ci_drawable="@drawable/icon_2_0_0_indicator"
+                app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingTop="@dimen/ppb200_padding_margin_big">
+            <!--16 => 8dp 移至 recyclerview-->
+
+            <TextView
+                android:id="@+id/tvExplore"
+                style="@style/ppb200_title_second"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:text="@string/pinpinbox_2_0_0_title_explore" />
+            <!--ppb200_padding_margin_second 8dp 移至 recyclerview-->
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCategory"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:scrollbars="none" />
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/pinpinbox_2_0_0_divider" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/tvNewsFeed"
+                style="@style/ppb200_title_second"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                android:text="@string/pinpinbox_2_0_0_title_news_feed"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_second"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvNewsFeed"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-6dp"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+
+                <LinearLayout
+                    android:id="@+id/linHobby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:padding="@dimen/ppb200_padding_margin_third">
+
+                    <View
+                        android:id="@+id/vHobby"
+                        android:layout_width="36dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/border_2_0_0_grey_third_radius" />
+
+                    <TextView
+                        android:id="@+id/tvNew"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_itemtype_new"
+                        android:textColor="@color/pinpinbox_2_0_0_first_text"
+                        android:textSize="@dimen/ppb200_common_text_first"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linFollow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:padding="@dimen/ppb200_padding_margin_third">
+
+                    <View
+                        android:id="@+id/vFollow"
+                        android:layout_width="36dp"
+                        android:layout_height="8dp"
+                        android:visibility="invisible"
+                        android:background="@drawable/border_2_0_0_grey_third_radius" />
+
+                    <TextView
+                        android:id="@+id/tvFollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_itemtype_follow"
+                        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                        android:textSize="@dimen/ppb200_common_text_first"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

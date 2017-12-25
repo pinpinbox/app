@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="7.2dp"
+    android:height="7.2dp"
+    android:viewportHeight="32.0"
+    android:viewportWidth="32.0">
+
+    <group
+        android:pivotX="16"
+        android:pivotY="6.25">
+
+        <path
+            android:name="top"
+            android:fillColor="@color/pinpinbox_2_0_0_second_grey"
+            android:pathData="M12,15c-3.9,-4.3 -1,-12 4.5,-12 3.6,0 6,2.9 6,7.2 0,6.2 -6.6,9.2 -10.5,4.8z" />
+
+        <path
+            android:name="bottom"
+            android:fillColor="@color/pinpinbox_2_0_0_second_grey"
+            android:pathData="M5.2,25c0,-5.6 1.5,-6.5 11,-6.5 9.5,0 11,0.9 11,6.5l0,4.5 -11,0 -11,0 0,-4.5z" />
+
+
+    </group>
+</vector>

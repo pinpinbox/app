@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.pinpinbox.android"
+    android:installLocation="auto">
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="23" />
+
+    <!-- android:minSdkVersion="9" -->
+    <!-- android:targetSdkVersion="23" -->
+
+
+    <!-- 支持多种分辨率 -->
+    <!-- <supports-screens -->
+    <!-- android:anyDensity="true" -->
+    <!-- android:largeScreens="true" -->
+    <!-- android:normalScreens="true" -->
+    <!-- android:resizeable="true" -->
+    <!-- android:smallScreens="true" -->
+    <!-- android:xlargeScreens="true" /> -->
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true" />
+
+    <!-- android:smallScreens="true" -->
+
+    <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
+    //AWSSNS
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.REGISTER" />
+    <uses-permission android:name="com.pinpinbox.android.permission.C2D_MESSAGE" />
+
+    <permission
+        android:name="com.pinpinbox.android.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    //googlemap
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:required="false" />
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:required="false" />
+    <uses-permission
+        android:name="com.android.vending.BILLING"
+        android:required="false" />
+    //獲取當前Activity
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    //網路
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    //SDcard
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:required="false" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        android:required="false" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        android:required="false" />
+
+    <!-- //通訊錄 -->
+    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
+
+    //相機
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    //閃光
+    <uses-permission
+        android:name="android.permission.FLASHLIGHT"
+        android:required="false" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    //接收簡訊
+    <uses-permission
+        android:name="android.permission.RECEIVE_SMS"
+        android:required="false" />
+
+    <uses-feature
+        android:name="android.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    //系統相關
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- //晃動 -->
+    <!-- <uses-permission android:name="android.hardware.sensor.accelerometer" /> -->
+
+    <application
+        android:name=".SelfMadeClass.PPBApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/pinpin_192"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.FirstInstallActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/whiteTransparent">
+
+            <!-- <intent-filter> -->
+
+
+            <!-- <data -->
+            <!-- android:host="w3.pinpinbox.com" -->
+            <!-- android:scheme="https" /> -->
+            <!-- <data -->
+            <!-- android:host="www.pinpinbox.com" -->
+            <!-- android:scheme="https" /> -->
+
+
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+
+
+            <!-- </intent-filter> -->
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".pinpinbox2_0_0.service.MessageReceivingService"
+            android:label="com.pinpinbox.android.AwsSns.MessageReceivingService">
+            <intent-filter>
+                <action android:name="com.pinoinbox.android.FirstInstallActivity" />
+                <action android:name="com.pinpinbox.android.AwsSns.ExternalReceiver" />
+
+                <category android:name="com.pinoinbox.android" />
+            </intent-filter>
+        </service>
+        <service android:name=".pinpinbox2_0_0.service.RegistraAWSService">
+            <intent-filter>
+                <category android:name="com.pinpinbox.android" />
+                <!-- <action android:name="com.pinpinbox.android.pinpinbox2_0_0.service.RegistraAWSService"/> -->
+            </intent-filter>
+        </service>
+        <service android:name=".pinpinbox2_0_0.service.DownLoadService">
+            <intent-filter>
+                <category android:name="com.pinpinbox.android" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".pinpinbox2_0_0.service.ExternalReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <action android:name="com.google.android.c2dm.intent.REGISTER" />
+
+                <category android:name="com.pinpinbox.android" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".SelfMadeClass.MyInstalledReceiver"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"
+            tools:ignore="ManifestResource" />
+        <!-- android:value="472973216191275" -->
+        <provider
+            android:name="com.aviary.android.feather.sdk.internal.cds.AviaryCdsProvider"
+            android:authorities="${applicationId}.AviaryCdsProvider"
+            android:exported="false"
+            android:process=":aviarycds" />
+        android:windowSoftInputMode="adjustPan|stateHidden"
+        <activity
+            android:name=".Activity.RecommendAuthor.RecommendByOtherActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger" />
+        <activity
+            android:name=".Activity.BuyPoint.PointActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.WebView2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="user"
+            android:theme="@style/dragger" />
+
+        <!-- 閱讀作品 -->
+        <activity
+            android:name=".Activity.ReadAlbum.ReadAlbumActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="user"
+            android:theme="@style/dragger" />
+        <!-- android:configChanges="keyboardHidden|orientation|screenSize" => 横竖屏切换的时候会直接调用onCreate方法中的onConfigurationChanged方法，而不会重新执行onCreate方法 -->
+
+        android:screenOrientation =
+        "unspecified"
+        - 默認值. 由系統選擇顯示方向. 在不同的設備可能會有所不同.
+
+        "landscape"
+        - 橫向
+
+        "portrait"
+        - 縱向
+
+        "user"
+        - 用戶當前的首選方向
+
+        "behind"
+        - 與在活動堆棧下的活動相同方向
+
+        "sensor"
+        - 根據物理方向傳感器確定方向. 取決於用戶手持的方向, 當用戶轉動設備, 它跟隨改變.
+
+        "nosensor"
+        - 不經物理方向傳感器確定方向. 該傳感器被忽略, 所以當用戶轉動設備, 顯示不會跟隨改變. 除了這個區別，系統選擇使用相同的政策取向對於“未指定”設置.
+        系統根據“未指定”("unspecified")設定選擇相同顯示方向.
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.BeginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/dragger"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".OldMainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+            <!-- <intent-filter > -->
+            <!-- <action android:name="android.intent.action.SEND" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- <data android:mimeType="*/*" /> -->
+            <!-- </intent-filter > -->
+
+        </activity>
+        <activity
+            android:name=".CaptureActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <!-- 設定false為模擬器適用 -->
+        <uses-library
+            android:name="com.google.android.maps"
+            android:required="true" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDsGHWEnVsCuq3KehPMxAyRAWtIlPDsIB0"
+            tools:ignore="ManifestResource" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".Activity.RecommendAuthor.RecommendActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.YouTubeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.VideoPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="user"
+            android:theme="@style/dragger" />
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.OfflineRead2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".Activity.CreateAlbum.CreateAlbumActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".Activity.TemplateInfo.TemplateInfoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.CreationTemplate2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.TemList2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.OffLine2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Event2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.SelectMyWorks2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.jmolsmobile.landscapevideocapture.VideoCaptureActivity"
+            android:screenOrientation="sensor" />
+
+        <!-- portrait -->
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Main2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Main2Activity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            <!--singleTask => 改為 single top 才能執行setResult()函式-->
+
+            <intent-filter>
+                首頁
+                <data
+                    android:host="index"
+                    android:pathPrefix="/index"
+                    android:scheme="pinpinbox" />
+                開啟作品
+                <data
+                    android:host="index"
+                    android:pathPrefix="/album/content"
+                    android:scheme="pinpinbox" />
+                開啟套版
+                <data
+                    android:host="index"
+                    android:pathPrefix="/template/content"
+                    android:scheme="pinpinbox" />
+                會員專區
+                <!--<data-->
+                    <!--android:host="index"-->
+                    <!--android:pathPrefix="/creative/content"-->
+                    <!--android:scheme="pinpinbox" />-->
+                我的專區
+                <data
+                    android:host="index"
+                    android:pathPrefix="/profile"
+                    android:scheme="pinpinbox" />
+                快速建立
+                <data
+                    android:host="index"
+                    android:pathPrefix="/create"
+                    android:scheme="pinpinbox" />
+                活動
+                <data
+                    android:host="index"
+                    android:pathPrefix="/event"
+                    android:scheme="pinpinbox" />
+                作品編輯
+                <data
+                    android:host="index"
+                    android:pathPrefix="/diy/content"
+                    android:scheme="pinpinbox" />
+                <data
+                    android:host="w3.pinpinbox.com"
+                    android:scheme="https" />
+                <data
+                    android:host="www.pinpinbox.com"
+                    android:scheme="https" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Login2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/dragger"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Author2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/sharedElementEnterTransition_by_above_v5"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+
+            <intent-filter>
+
+                會員專區
+                <data
+                    android:host="index"
+                    android:pathPrefix="/creative/content"
+                    android:scheme="pinpinbox" />
+
+                <data
+                    android:host="w3.pinpinbox.com"
+                    android:scheme="https" />
+                <data
+                    android:host="www.pinpinbox.com"
+                    android:scheme="https" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+
+            </activity>
+
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.MyFollow2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.MyCollect2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <!-- stateHidden -->
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.CreateAlbum2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.Search2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Reader2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="user"
+            android:theme="@style/dragger" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.EditProfile2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.ChangePassword2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.ChangePhone2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.BuyPoint2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Hobby2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Creation2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <!-- android:process=":creation" -->
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.TypeFacebookFriend2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".Test.Category2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity android:name=".Views.crop.CropImageActivity" />
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.AlbumGroup2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.AlbumSettings2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.RecentAlbum2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.GuidePage2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".pinpinbox2_0_0.activity.AppSettings2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".Test.TextTestActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".Test.TestStatusActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.FromSharePhoto2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/myTransparent"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".pinpinbox2_0_0.activity.FromService2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/myTransparent"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="com.soundcloud.android.crop.CropImageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <!-- <activity -->
+        <!-- android:name="com.jmolsmobile.landscapevideocapture.VideoCaptureActivity" -->
+        <!-- android:screenOrientation="sensor" > -->
+        <!-- </activity> -->
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Vote2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".Test.PieChartActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Income2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.Feature2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.AlbumInfo2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/sharedElementEnterTransition_by_above_v5"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.AdHighLight2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/myTransparent"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+        <activity
+            android:name=".pinpinbox2_0_0.activity.CurrentCategoryAll2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+
+
+    </application>
+
+</manifest>

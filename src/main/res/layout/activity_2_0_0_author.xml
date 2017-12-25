@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+
+    <RelativeLayout
+        android:id="@+id/rBackgroundParallax"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_below="@+id/rActionBar">
+
+        <ImageView
+            android:id="@+id/bannerImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+
+    </RelativeLayout>
+
+
+    <com.pinpinbox.android.Views.SuperSwipeRefreshLayout
+        android:id="@+id/pinPinBoxRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="208dp" />
+        <!--20 + 56 + 168 = 244 (-36)(傾斜高度) => 208-->
+
+        <!--android:paddingTop="@dimen/ppb200_title_margin_second"-->
+
+    </com.pinpinbox.android.Views.SuperSwipeRefreshLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:layout_toLeftOf="@+id/tvAttention"
+            android:layout_toStartOf="@+id/tvAttention"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/messageImg"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:background="@drawable/click_2_0_0_default"
+                android:padding="10dp"
+                android:src="@drawable/ic200_message_dark" />
+
+            <ImageView
+                android:id="@+id/aboutImg"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:background="@drawable/click_2_0_0_default"
+                android:padding="12dp"
+                android:src="@drawable/ic200_user_about_dark" />
+
+            <ImageView
+                android:id="@+id/shareImg"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:background="@drawable/click_2_0_0_default"
+                android:padding="12dp"
+                android:src="@drawable/ic200_share_dark" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvAttention"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="112dp"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+
+        <View
+            android:id="@+id/vRefreshAnim"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/gradient_progress_main"
+            android:scaleX="0"
+            android:visibility="gone" />
+
+        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+            android:id="@+id/pbRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignParentBottom="true"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:spb_colors="@array/loadmore"
+            app:spb_gradients="true"
+            app:spb_mirror_mode="true"
+            app:spb_progressiveStart_activated="true"
+            app:spb_progressiveStart_speed="3"
+            app:spb_progressiveStop_speed="6"
+            app:spb_reversed="true"
+            app:spb_sections_count="8"
+            app:spb_speed="3"
+            app:spb_stroke_separator_length="0dp"
+            app:spb_stroke_width="4dp" />
+
+
+    </RelativeLayout>
+
+
+    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/pbLoadMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-4dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:spb_colors="@array/loadmore"
+        app:spb_gradients="true"
+        app:spb_mirror_mode="true"
+        app:spb_progressiveStart_activated="true"
+        app:spb_progressiveStart_speed="3"
+        app:spb_progressiveStop_speed="6"
+        app:spb_reversed="true"
+        app:spb_sections_count="8"
+        app:spb_speed="3"
+        app:spb_stroke_separator_length="0dp"
+        app:spb_stroke_width="4dp" />
+
+
+</RelativeLayout>

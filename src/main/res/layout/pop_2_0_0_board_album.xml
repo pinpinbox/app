@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/ppb200_title_pop_second"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+        android:layout_marginTop="92dp"
+        android:text="@string/pinpinbox_2_0_0_pop_title_board" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+        android:background="@drawable/border_2_0_0_other_board"
+        android:clickable="true"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ppb200_padding_margin_first"
+            android:clickable="true">
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                android:id="@+id/userImg"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerCrop"
+                app:riv_border_color="@color/pinpinbox_2_0_0_divider"
+                app:riv_border_width="0.5dp"
+                app:riv_corner_radius="56dp"
+                app:riv_mutate_background="true"
+                app:riv_oval="true" />
+
+
+            <EditText
+                android:id="@+id/edText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                android:layout_toEndOf="@+id/userImg"
+                android:layout_toRightOf="@+id/userImg"
+                android:background="@drawable/border_2_0_0_grey_third_radius"
+                android:hint="@string/pinpinbox_2_0_0_input_hint_board_express"
+                android:letterSpacing="0.2"
+                android:lineSpacingExtra="2dp"
+                android:maxLength="128"
+                android:minHeight="36dp"
+                android:padding="8dp"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textColorHint="@color/pinpinbox_2_0_0_hint_alpha"
+                android:textCursorDrawable="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
+
+            <TextView
+                android:id="@+id/tvSend"
+                style="@style/ppb200_Button_main_small_radius"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/edText"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:text="@string/pinpinbox_2_0_0_button_send" />
+
+            <TextView
+                style="@style/ppb200_Button_grey_small_radius8"
+                android:id="@+id/tvClear"
+                android:layout_below="@+id/edText"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:layout_toLeftOf="@+id/tvSend"
+                android:layout_toStartOf="@+id/tvSend"
+                android:text="@string/pinpinbox_2_0_0_button_clear" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/pinpinbox_2_0_0_divider" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvBoard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:scrollbars="none" />
+
+            <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                android:id="@+id/pbLoadMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/rvBoard"
+                android:layout_marginBottom="-4dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:spb_colors="@array/loadmore"
+                app:spb_gradients="true"
+                app:spb_mirror_mode="true"
+                app:spb_progressiveStart_activated="true"
+                app:spb_progressiveStart_speed="3"
+                app:spb_progressiveStop_speed="6"
+                app:spb_reversed="true"
+                app:spb_sections_count="8"
+                app:spb_speed="3"
+                app:spb_stroke_separator_length="0dp"
+                app:spb_stroke_width="4dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

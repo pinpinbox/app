@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="GifTextureView">
+        <attr name="gifSource" format="reference|string"/>
+        <attr name="isOpaque" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="GifView">
+        <attr name="freezesAnimation" format="boolean"/>
+        <attr name="loopCount" format="integer"/>
+    </declare-styleable>
+
+
+    <attr name="siArrowPosition">
+        <enum name="left" value="0" />
+        <enum name="right" value="1" />
+    </attr>
+    <attr name="siBorderType">
+        <enum name="stroke" value="0" />
+        <enum name="fill" value="1" />
+    </attr>
+    <attr name="siStrokeCap">
+        <enum name="butt" value="0" />
+        <enum name="round" value="1" />
+        <enum name="square" value="2" />
+    </attr>
+    <attr name="siStrokeJoin">
+        <enum name="bevel" value="0" />
+        <enum name="miter" value="1" />
+        <enum name="round" value="2" />
+    </attr>
+
+    <declare-styleable name="ShaderImageView">
+        <attr name="siSquare" format="boolean" />
+        <attr name="siBorderColor" format="color" />
+        <attr name="siBorderWidth" format="dimension" />
+        <attr name="siBorderAlpha" format="float" />
+        <attr name="siForeground" format="integer|reference" />
+        <!-- Rounded Image View -->
+        <attr name="siRadius" format="dimension" />
+        <!--BubbleImageView-->
+        <attr name="siArrowPosition"/>
+        <attr name="siTriangleHeight" format="dimension"/>
+        <!--PorterImageView-->
+        <attr name="siShape" format="integer|reference" />
+        <!--ShaderImageView-->
+        <attr name="siBorderType"/>
+        <attr name="siStrokeCap"/>
+        <attr name="siStrokeJoin"/>
+        <attr name="siStrokeMiter" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="AVLoadingIndicatorView">
+        <attr name="minWidth" format="dimension" />
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="minHeight" format="dimension" />
+        <attr name="maxHeight" format="dimension"/>
+        <attr name="indicatorName" format="string"/>
+        <attr name="indicatorColor" format="color"/>
+    </declare-styleable>
+
+
+
+    <attr name="cropImageStyle" format="reference" />
+
+    <declare-styleable name="CropImageView">
+        <attr name="highlightColor" format="reference|color" />
+        <attr name="showThirds" format="boolean" />
+        <attr name="showCircle" format="boolean" />
+        <attr name="showHandles">
+            <enum name="changing" value="0" />
+            <enum name="always" value="1" />
+            <enum name="never" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="PanoramaImageView">
+        <attr name="piv_enablePanoramaMode" format="boolean" />
+        <attr name="piv_invertScrollDirection" format="boolean" />
+        <attr name="piv_show_scrollbar" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ParallaxScroll">
+        <attr name="parallax_factor" format="float" />
+        <attr name="alpha_factor" format="float" />
+        <attr name="inner_parallax_factor" format="float" />
+        <attr name="parallax_views_num" format="integer" />
+        <attr name="circular_parallax" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PinterestView">
+        <attr name="child_size" format="dimension|float"/>
+        <attr name="child_radius" format="dimension"/>
+        <attr name="child_max_scale" format="float"/>
+        <attr name="tips_color" format="color"/>
+        <attr name="tips_background" format="reference"/>
+        <attr name="tips_size" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="JazzyListView" >
+        <attr name="effect" format="enum" >
+            <enum name="standard" value="0" />
+            <enum name="grow" value="1" />
+            <enum name="cards" value="2" />
+            <enum name="curl" value="3" />
+            <enum name="wave" value="4" />
+            <enum name="flip" value="5" />
+            <enum name="fly" value="6" />
+            <enum name="reverse_fly" value="7" />
+            <enum name="helix" value="8" />
+            <enum name="fan" value="9" />
+            <enum name="tilt" value="10" />
+            <enum name="zipper" value="11" />
+            <enum name="fade" value="12" />
+            <enum name="twirl" value="13" />
+            <enum name="slide_in" value="14" />
+        </attr>
+
+        <attr name="only_animate_new_items" format="boolean" />
+        <attr name="only_animate_fling" format="boolean" />
+        <attr name="simulate_grid_with_list" format="boolean" />
+        <attr name="max_velocity" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="LinkBuilder">
+        <attr name="defaultLinkColor" format="color" />
+        <attr name="defaultTextColorOfHighlightedLink" format="color" />
+    </declare-styleable>
+
+    <attr name="linkBuilderStyle" format="reference" />
+
+    <declare-styleable name="ZDepthShadowLayout">
+        <attr name="z_depth" format="enum">
+            <enum name="z_depth0" value="0"/>
+            <enum name="z_depth1" value="1"/>
+            <enum name="z_depth2" value="2"/>
+            <enum name="z_depth3" value="3"/>
+            <enum name="z_depth4" value="4"/>
+            <enum name="z_depth5" value="5"/>
+        </attr>
+        <attr name="z_depth_shape" format="enum">
+            <enum name="rect" value="0"/>
+            <enum name="oval" value="1"/>
+        </attr>
+        <attr name="z_depth_padding" format="enum">
+            <enum name="z_depth0" value="0"/>
+            <enum name="z_depth1" value="1"/>
+            <enum name="z_depth2" value="2"/>
+            <enum name="z_depth3" value="3"/>
+            <enum name="z_depth4" value="4"/>
+            <enum name="z_depth5" value="5"/>
+        </attr>
+        <attr name="z_depth_paddingLeft" format="enum">
+            <enum name="z_depth0" value="0"/>
+            <enum name="z_depth1" value="1"/>
+            <enum name="z_depth2" value="2"/>
+            <enum name="z_depth3" value="3"/>
+            <enum name="z_depth4" value="4"/>
+            <enum name="z_depth5" value="5"/>
+        </attr>
+        <attr name="z_depth_paddingTop" format="enum">
+            <enum name="z_depth0" value="0"/>
+            <enum name="z_depth1" value="1"/>
+            <enum name="z_depth2" value="2"/>
+            <enum name="z_depth3" value="3"/>
+            <enum name="z_depth4" value="4"/>
+            <enum name="z_depth5" value="5"/>
+        </attr>
+        <attr name="z_depth_paddingRight" format="enum">
+            <enum name="z_depth0" value="0"/>
+            <enum name="z_depth1" value="1"/>
+            <enum name="z_depth2" value="2"/>
+            <enum name="z_depth3" value="3"/>
+            <enum name="z_depth4" value="4"/>
+            <enum name="z_depth5" value="5"/>
+        </attr>
+        <attr name="z_depth_paddingBottom" format="enum">
+            <enum name="z_depth0" value="0"/>
+            <enum name="z_depth1" value="1"/>
+            <enum name="z_depth2" value="2"/>
+            <enum name="z_depth3" value="3"/>
+            <enum name="z_depth4" value="4"/>
+            <enum name="z_depth5" value="5"/>
+        </attr>
+        <attr name="z_depth_animDuration" format="integer"/>
+        <attr name="z_depth_doAnim" format="boolean"/>
+    </declare-styleable>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <declare-styleable name="NiceSpinner">
+        <attr name="arrowTint" format="color" />
+        <attr name="hideArrow" format="boolean" />
+        <attr name="backgroundSelector" format="integer"/>
+        <attr name="textTint" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="AutofitTextView">
+
+    <!-- Minimum size of the text. -->
+
+
+    <attr name="minTextSize" format="dimension"/>
+
+    <!-- Amount of precision used to calculate the correct text size to fit within its bounds. Lower precision is more precise and takes more time. -->
+
+
+    <attr name="precision" format="float"/>
+
+    <!-- Defines whether to automatically resize text to fit to the view's bounds. -->
+
+
+    <attr name="sizeToFit" format="boolean"/>
+
+</declare-styleable>
+
+    <declare-styleable name="ScrollableLayout">
+        <attr name="scrollable_maxScroll"          format="dimension" />
+        <attr name="scrollable_scrollerFlywheel"   format="boolean" />
+        <attr name="scrollable_considerIdleMillis" format="integer" />
+        <attr name="scrollable_defaultCloseUp"     format="boolean" />
+        <attr name="scrollable_friction"           format="float" />
+
+        <attr name="scrollable_closeUpAnimationMillis" format="integer" />
+        <attr name="scrollable_closeUpAnimatorInterpolator" format="reference" />
+
+        <attr name="scrollable_autoMaxScroll"       format="boolean" />
+        <attr name="scrollable_autoMaxScrollViewId" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="PxBlurringView">
+        <attr name="blurRadius" format="integer"/>
+        <attr name="downsampleFactor" format="integer"/>
+        <attr name="overlayColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="edge_size" format="dimension"/>
+        <attr name="edge_flag">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="all" value="3"/>
+        </attr>
+        <attr name="shadow_left" format="reference"/>
+        <attr name="shadow_right" format="reference"/>
+        <attr name="shadow_bottom" format="reference"/>
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference"/>
+
+    <declare-styleable name="JazzyViewPager">
+        <attr name="style">
+            <enum name="standard" value="0" />
+            <enum name="tablet" value="1" />
+            <enum name="cubein" value="2" />
+            <enum name="cubeout" value="3" />
+            <enum name="flipvertical" value="4" />
+            <enum name="fliphorizontal" value="5" />
+            <enum name="stack" value="6" />
+            <enum name="zoomin" value="7" />
+            <enum name="zoomout" value="8" />
+            <enum name="rotateup" value="9" />
+            <enum name="rotatedown" value="10" />
+            <enum name="accordion" value="11" />
+        </attr>
+        <attr name="fadeEnabled" format="boolean" />
+        <attr name="outlineEnabled" format="boolean" />
+        <attr name="outlineColor" format="color|reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="PullToZoomView">
+        <attr name="headerView" format="reference" />
+        <attr name="contentView" format="reference" />
+        <attr name="zoomView" format="reference" />
+        <attr name="isHeaderParallax" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="Gallery">
+        <attr name="android:galleryItemBackground" />
+    </declare-styleable>
+
+
+
+
+    <declare-styleable name="RoundedImageView">
+        <attr name="riv_corner_radius" format="dimension" />
+        <attr name="riv_border_width" format="dimension" />
+        <attr name="riv_border_color" format="color" />
+        <attr name="riv_mutate_background" format="boolean" />
+        <attr name="riv_oval" format="boolean" />
+        <attr name="android:scaleType" />
+        <attr name="riv_tile_mode">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_x">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_y">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+        <declare-styleable name="StaggeredGridView">
+            <attr name="column_count" format="integer" />
+            <attr name="column_count_portrait" format="integer" />
+            <attr name="column_count_landscape" format="integer" />
+            <attr name="item_margin" format="dimension" />
+            <attr name="grid_paddingLeft" format="dimension" />
+            <attr name="grid_paddingRight" format="dimension" />
+            <attr name="grid_paddingTop" format="dimension" />
+            <attr name="grid_paddingBottom" format="dimension" />
+        </declare-styleable>
+
+
+
+
+</resources>

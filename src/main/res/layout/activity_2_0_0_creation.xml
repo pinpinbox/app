@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_action_bar_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="28dp">
+
+
+            <ImageView
+                android:id="@+id/backImg"
+                style="@style/ppb200_ic_action_back"
+                android:layout_centerVertical="true"
+                android:background="@drawable/click_2_0_0_default"
+                android:src="@drawable/ic200_arrow_left_dark" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/refreshImg"
+                    android:layout_width="@dimen/ppb200_common_icon_side"
+                    android:layout_height="@dimen/ppb200_common_icon_side"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:padding="12dp"
+                    android:src="@drawable/ic200_refresh_dark" />
+
+                <ImageView
+                    android:id="@+id/addUserImg"
+                    android:layout_width="@dimen/ppb200_common_icon_side"
+                    android:layout_height="@dimen/ppb200_common_icon_side"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:padding="10dp"
+                    android:src="@drawable/ic200_cooperation_dark" />
+
+
+                <ImageView
+                    android:id="@+id/albumSetImg"
+                    android:layout_width="@dimen/ppb200_common_icon_side"
+                    android:layout_height="@dimen/ppb200_common_icon_side"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:padding="10dp"
+                    android:src="@drawable/ic200_setting_dark" />
+
+
+                <TextView
+                    android:id="@+id/tvCheck"
+                    style="@style/ppb200_Button_main_small_radius"
+                    android:text="@string/pinpinbox_2_0_0_button_next" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rSecondBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relativeLayout29"
+        android:layout_below="@+id/rActionBar"
+        android:background="@color/pinpinbox_2_0_0_third_grey"
+        android:clipChildren="false">
+
+
+        <!--rControlArea-->
+        <RelativeLayout
+            android:id="@+id/rControlArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tvAddDescription"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:layout_toLeftOf="@+id/rPhotoSettingBar"
+            android:layout_toStartOf="@+id/rPhotoSettingBar"
+            android:background="@color/white">
+
+            <com.pinpinbox.android.Views.PinchImageView
+                android:id="@+id/photoImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside" />
+
+            <!--video play button-->
+            <ImageView
+                android:id="@+id/videoPlayImg"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/click_videoplay_310x310"
+                android:visibility="gone" />
+
+
+            <!--add description button-->
+            <!--description location-->
+            <LinearLayout
+                android:id="@+id/linDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:alpha="0.8"
+                android:background="@color/black"
+                android:orientation="vertical"
+                android:padding="@dimen/ppb200_padding_margin_second"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/linDetailLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_third"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:background="@drawable/border_2_0_0_main_first_for_button_radius"
+                        android:padding="2dp"
+                        android:src="@drawable/ic200_location_white" />
+
+                    <TextView
+                        android:id="@+id/tvLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
+                        android:ellipsize="end"
+                        android:letterSpacing="0.1"
+                        android:maxLines="2"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_small" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linDetailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:background="@drawable/border_2_0_0_main_first_for_button_radius"
+                        android:padding="3dp"
+                        android:src="@drawable/ic200_text_white" />
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
+                        android:ellipsize="end"
+                        android:letterSpacing="0.1"
+                        android:maxLines="2"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_small" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <!--loading-->
+            <ImageView
+                android:id="@+id/photoLoadingImg"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/loading"
+                android:visibility="gone" />
+
+
+
+
+        </RelativeLayout>
+
+        <!--<com.skyfishjy.library.RippleBackground-->
+            <!--android:id="@+id/rippleRecording"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="200dp"-->
+            <!--app:rb_color="#fd7bab"-->
+            <!--app:rb_duration="3000"-->
+            <!--app:rb_radius="24dp"-->
+            <!--app:rb_rippleAmount="6"-->
+            <!--app:rb_scale="4" />-->
+
+        <!--<com.skyfishjy.library.RippleBackground-->
+            <!--android:id="@+id/ripplePlay"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--app:rb_color="#00BDC0"-->
+            <!--app:rb_duration="3000"-->
+            <!--app:rb_radius="24dp"-->
+            <!--app:rb_rippleAmount="6"-->
+            <!--app:rb_scale="4" />-->
+
+
+        <!--photo set  bar-->
+        <RelativeLayout
+            android:id="@+id/rPhotoSettingBar"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:visibility="invisible"
+            android:layout_alignBottom="@+id/rControlArea"
+            android:clipChildren="false"
+            >
+
+            <LinearLayout
+                android:id="@+id/lin"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:id="@+id/aviaryImg"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/click_2_0_0_circle_grey_hint"
+                    android:padding="6dp"
+                    android:src="@drawable/ic200_aviary_white"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/lin"
+                android:layout_alignStart="@+id/lin"
+                android:layout_below="@+id/lin"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:orientation="vertical"
+                android:clipChildren="false">
+
+                <RelativeLayout
+                    android:id="@+id/rAudioRecording"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:clipChildren="false"
+                    android:visibility="gone">
+
+
+                    <com.skyfishjy.library.RippleBackground
+                        android:id="@+id/rippleRecording"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        app:rb_color="#fd7bab"
+                        app:rb_duration="3000"
+                        app:rb_radius="24dp"
+                        app:rb_rippleAmount="6"
+                        app:rb_scale="4" />
+
+                    <ImageView
+                        android:id="@+id/audioRecording"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/click_2_0_0_circle_grey_hint"
+                        android:padding="6dp"
+                        android:src="@drawable/ic200_micro_white" />
+
+
+
+                </RelativeLayout>
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/audioRecording"-->
+                    <!--android:layout_width="36dp"-->
+                    <!--android:layout_height="36dp"-->
+                    <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
+                    <!--android:padding="6dp"-->
+                    <!--android:src="@drawable/ic200_micro_white"-->
+                    <!--android:visibility="gone" />-->
+
+                <RelativeLayout
+                    android:id="@+id/rPlay_Delete"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:clipChildren="false">
+
+                    <View
+                        android:layout_width="36dp"
+                        android:layout_height="44dp"
+                        android:layout_marginLeft="4.2dp"
+                        android:layout_marginRight="4.2dp"
+                        android:layout_marginTop="16dp"
+                        android:alpha="0.5"
+                        android:background="@color/white" />
+
+                    <RelativeLayout
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:clipChildren="false">
+
+                        <com.skyfishjy.library.RippleBackground
+                            android:id="@+id/ripplePlay"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            app:rb_color="#00BDC0"
+                            app:rb_duration="3000"
+                            app:rb_radius="24dp"
+                            app:rb_rippleAmount="6"
+                            app:rb_scale="4" />
+
+                        <ImageView
+                            android:id="@+id/audioPlay"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/click_2_0_0_circle_grey_hint"
+                            android:padding="8dp"
+                            android:src="@drawable/ic200_audio_play_white" />
+
+
+                    </RelativeLayout>
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/audioPlay"-->
+                        <!--android:layout_width="36dp"-->
+                        <!--android:layout_height="36dp"-->
+                        <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
+                        <!--android:padding="8dp"-->
+                        <!--android:src="@drawable/ic200_audio_play_white" />-->
+
+                    <ImageView
+                        android:id="@+id/audioDeleteImg"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/click_2_0_0_default"
+                        android:padding="2dp"
+                        android:src="@drawable/button_delete_record" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout6"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rLocationDelete"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="36dp"
+                            android:layout_height="44dp"
+                            android:layout_marginLeft="4.2dp"
+                            android:layout_marginRight="4.2dp"
+                            android:layout_marginTop="16dp"
+                            android:alpha="0.5"
+                            android:background="@color/white" />
+
+
+                        <ImageView
+                            android:id="@+id/locationDeleteImg"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="40dp"
+                            android:background="@drawable/click_2_0_0_default"
+                            android:padding="2dp"
+                            android:src="@drawable/button_delete_record" />
+
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/locationImg"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/click_2_0_0_circle_grey_hint"
+                        android:letterSpacing="0.2"
+                        android:padding="8dp"
+                        android:src="@drawable/ic200_location_white"
+                        android:visibility="visible" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/deleteImg"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/click_2_0_0_circle_grey_hint"
+                android:padding="8dp"
+                android:src="@drawable/ic200_delete_white" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvAddDescription"
+            style="@style/ppb200_Button_grey_small_radius8"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_add_description"
+            android:visibility="visible"
+            android:background="@drawable/click_2_0_0_grey_hint_button_radius"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout29"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ppb200_creation_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:id="@+id/linAdd"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/addPicImg"
+                android:layout_width="52dp"
+                android:layout_height="78dp"
+                android:background="@drawable/click_2_0_0_main_button_radius"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic200_plus_white" />
+
+            <TextView
+                android:id="@+id/tvPicCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:singleLine="true"
+                android:text="0/0"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:layout_toEndOf="@+id/linAdd"
+            android:layout_toRightOf="@+id/linAdd" />
+
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</RelativeLayout>

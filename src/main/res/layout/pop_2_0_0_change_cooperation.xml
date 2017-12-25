@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fontPath="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linPopGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:alpha="0"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/pinpinbox_2_0_0_other_text_change_cooperation_0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+        <TextView
+            android:id="@+id/tvTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/pinpinbox_2_0_0_other_text_change_cooperation_1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+        <TextView
+            android:id="@+id/tvTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/pinpinbox_2_0_0_other_text_change_cooperation_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+        <TextView
+            android:id="@+id/tvTitle4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/pinpinbox_2_0_0_other_text_change_cooperation_3"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/ppb200_title_pop_second"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_pop_title_change_identify" />
+
+        <ImageView
+            android:id="@+id/guideImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:padding="@dimen/ppb200_padding_margin_second"
+            android:src="@drawable/icon_2_0_0_dialog_unknow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/ppb200_padding_margin_first"
+        android:paddingTop="@dimen/ppb200_padding_margin_first">
+
+        <TextView
+            android:id="@+id/tvApprover"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="98dp"
+            android:layout_height="@dimen/ppb200_common_button_height"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/click_2_0_0_first_grey_button_frame_white_radius"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:padding="@dimen/ppb200_padding_margin_third"
+            android:text="@string/pinpinbox_2_0_0_button_approver"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvEditor"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="98dp"
+            android:layout_height="@dimen/ppb200_common_button_height"
+            android:background="@drawable/click_2_0_0_first_grey_button_frame_white_radius"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:padding="@dimen/ppb200_padding_margin_third"
+            android:text="@string/pinpinbox_2_0_0_button_cooperation"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvViewer"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="98dp"
+            android:layout_height="@dimen/ppb200_common_button_height"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/click_2_0_0_first_grey_button_frame_white_radius"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:padding="@dimen/ppb200_padding_margin_third"
+            android:text="@string/pinpinbox_2_0_0_button_browser"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

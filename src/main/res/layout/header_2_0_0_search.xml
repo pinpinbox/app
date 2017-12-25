@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fontPath="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--創作人推薦-->
+    <TextView
+        android:id="@+id/tvSearchUserTitle"
+        style="@style/ppb200_title_second"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+        android:layout_marginTop="@dimen/ppb200_title_margin_second"
+        android:text="@string/pinpinbox_2_0_0_title_recommend_creator" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="144dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tvGuideNoUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_big"
+            android:background="@drawable/border_2_0_0_bg_guide"
+            android:letterSpacing="0.2"
+            android:lineSpacingExtra="4dp"
+            android:padding="@dimen/ppb200_padding_margin_big"
+            android:text="@string/pinpinbox_2_0_0_guide_no_match_keyword_creator"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ppb200_guide"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+        android:background="@color/pinpinbox_2_0_0_divider" />
+
+
+    <!--人氣精選-->
+    <TextView
+        android:id="@+id/tvSearchAlbumTitle"
+        style="@style/ppb200_title_second"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+        android:text="@string/pinpinbox_2_0_0_title_popular_album" />
+
+</LinearLayout>

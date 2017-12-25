@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rGoUpdateApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/ppb200_padding_margin_first"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_other_text_new_version_in_notification"
+                android:textColor="@color/pinpinbox_2_0_0_first_pink"
+                android:textSize="@dimen/ppb200_common_text_first" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/tv1"
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/ppb200_title_first"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_title_notify" />
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

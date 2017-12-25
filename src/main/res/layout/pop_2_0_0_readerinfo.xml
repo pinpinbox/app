@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+
+        <!--作品敘述-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/ppb200_padding_margin_first"
+            android:paddingTop="72dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAlbumName"
+                    style="@style/ppb200_detail_name"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first" />
+
+
+                <TextView
+                    android:id="@+id/tvAlbumDescription"
+                    style="@style/ppb200_detail_description"
+                    android:padding="@dimen/ppb200_padding_margin_first"
+                   />
+
+                <!--作者-->
+                <RelativeLayout
+                    android:id="@+id/rAuthor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="18dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="@dimen/ppb200_padding_margin_first">
+
+                    <ImageView
+                        android:id="@+id/imageView14"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic200_user_light" />
+
+                    <TextView
+                        android:id="@+id/tvAlbumUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_toEndOf="@+id/imageView14"
+                        android:layout_toRightOf="@+id/imageView14"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="0.2"
+                        android:lineSpacingExtra="2dp"
+                        android:maxLines="2"
+                        android:minHeight="24dp"
+                        android:text=""
+                        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                        android:textSize="@dimen/ppb200_common_text_first" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/rActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/pinpinbox_2_0_0_action_bar_color">
+
+
+            <ImageView
+                android:id="@+id/closeImg"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/click_2_0_0_default"
+                android:padding="@dimen/ppb200_padding_margin_first"
+                android:src="@drawable/ic200_cancel_dark" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rMap"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:visibility="visible">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

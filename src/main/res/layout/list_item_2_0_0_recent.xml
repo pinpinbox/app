@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <RelativeLayout
+            android:id="@+id/rBackground"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toEndOf="@+id/relativeLayout8"
+            android:layout_toRightOf="@+id/relativeLayout8"
+            android:background="@drawable/click_2_0_0_card_notify"
+            android:padding="8dp">
+
+
+            <RelativeLayout
+                android:id="@+id/rCover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_background_2_0_0_notify_item_cover_corner9">
+
+                <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                    android:id="@+id/coverImg"
+                    android:layout_width="56dp"
+                    android:layout_height="84dp"
+                    android:alpha="0.9"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="8dp"
+                    app:riv_mutate_background="true" />
+
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvAlbumName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/rCover"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:text=""
+                android:letterSpacing="0.1"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+
+
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                android:id="@+id/userImg"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/rCover"
+                android:scaleType="centerCrop"
+                android:src="@color/white"
+                app:riv_border_color="@color/pinpinbox_2_0_0_third_grey"
+                app:riv_border_width="0.5dp"
+                app:riv_corner_radius="32dp"
+                app:riv_mutate_background="true"
+                app:riv_oval="true"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/userImg"
+                android:layout_marginLeft="8dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic200_user_light"
+                    android:layout_gravity="bottom"
+                    />
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:text=""
+                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="4dp"
+                    android:letterSpacing="0.1"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+
+    <RelativeLayout
+        android:id="@+id/rClickArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/click_2_0_0_staggeredgrid_item"
+        android:layout_marginLeft="8dp">
+
+    <LinearLayout
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <!--shadow setting-->
+        <!--android:elevation="8dp"-->
+        <!--android:translationZ="12dp"-->
+        <RelativeLayout
+            android:id="@+id/rItemBg"
+            android:layout_width="128dp"
+            android:layout_height="160dp"
+            android:background="@drawable/image_background_2_0_0_home_item_cover_border"
+            >
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                android:id="@+id/coverImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                app:siBorderAlpha="0"
+                app:siRadius="8dp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:id="@+id/linType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:background="@drawable/border_2_0_0_other_bg_album_type"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/audioImg"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic200_audio_play_dark"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/videoImg"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic200_video_border_dark"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/slotImg"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic200_gift_dark"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!--作品名稱-->
+        <TextView
+            android:id="@+id/tvAlbumName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:letterSpacing="0.1"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_third" />
+
+
+
+
+        <!--作者-->
+        <LinearLayout
+            android:id="@+id/linUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                android:id="@+id/userImg"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerCrop"
+                app:siBorderColor="@color/pinpinbox_2_0_0_divider"
+                app:siBorderWidth="0.5dp"
+                app:siRadius="36dp" />
+
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:letterSpacing="0.1"
+                android:maxLines="2"
+                android:minHeight="36dp"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+</RelativeLayout>

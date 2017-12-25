@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+
+    <RelativeLayout
+        android:id="@+id/rSecondBar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rBottom"
+        android:layout_below="@+id/rActionBar"
+        android:background="@color/pinpinbox_2_0_0_third_grey"
+        android:gravity="center_horizontal">
+
+
+        <RelativeLayout
+            android:id="@+id/r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/border_createalbum_work_bg"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/rControl_area"
+                android:layout_width="276dp"
+                android:layout_height="414dp"
+                android:background="@color/white">
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <!--bottom-->
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ppb200_creation_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--<com.pinpinbox.android.common.view.HorizontalListView-->
+        <!--android:id="@+id/tem_add_pic_hlistview"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:divider="@color/transparent"-->
+        <!--android:listSelector="@color/transparent" />-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvTemplate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/tvGuide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="@string/pinpinbox_2_0_0_guide_change_photo_place"
+            android:letterSpacing="0.1"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_action_bar_height_with_status"
+        android:background="@color/pinpinbox_2_0_0_third_grey">
+
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+        <!--linChangePhoto-->
+
+
+        <ImageView
+            android:id="@+id/changeImg"
+            android:layout_width="@dimen/ppb200_common_icon_side"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:padding="8dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_template_photo_change_light" />
+
+
+        <TextView
+            android:id="@+id/tvDone"
+            style="@style/ppb200_Button_main_small_radius"
+            android:text="@string/pinpinbox_2_0_0_button_done"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"/>
+
+
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

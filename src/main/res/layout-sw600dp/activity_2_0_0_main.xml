@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false"
+    android:transitionName="login_to_bg">
+
+    <RelativeLayout
+        android:id="@+id/rAlpha"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:transitionName="login_to_tabbar"
+        android:id="@+id/rActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+
+
+        <!--<com.ogaclejapan.smarttablayout.SmartTabLayout-->
+        <!--android:id="@+id/viewPagerTab"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/action_bar_icon_width"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--app:stl_clickable="true"-->
+        <!--app:stl_indicatorColor="@color/pinpinbox_2_0_0_first_grey"-->
+        <!--app:stl_indicatorThickness="4dp"-->
+        <!--/>-->
+        <!--android:layout_width="144dp"-->
+
+
+        <LinearLayout
+            android:id="@+id/linTabbar"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="56dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginLeft="64dp">
+
+                <ImageView
+                    android:id="@+id/homeImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:padding="14dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/pinpin_192"
+                    android:visibility="gone"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/rHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:layout_weight="1">
+
+
+                    <com.richpath.RichPathView
+                        android:id="@+id/svgHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/click_2_0_0_default"
+                        app:vector="@drawable/svg_pinpinbox_logo"
+                        />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:layout_weight="1">
+
+
+                    <com.richpath.RichPathView
+                        android:id="@+id/svgSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/click_2_0_0_default"
+                        app:vector="@drawable/svg_search"
+                        />
+
+                </RelativeLayout>
+
+
+
+                <ImageView
+                    android:id="@+id/searchImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:padding="14dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic200_search_light"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="56dp"
+                android:layout_marginRight="64dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:layout_weight="1">
+
+
+                    <com.richpath.RichPathView
+                        android:id="@+id/svgUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/click_2_0_0_default"
+                        app:vector="@drawable/svg_user"
+                       />
+
+                </RelativeLayout>
+
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/userImg"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/click_2_0_0_default"-->
+                    <!--android:padding="14dp"-->
+                    <!--android:scaleType="centerInside"-->
+                    <!--android:src="@drawable/ic200_user_light"-->
+                    <!--android:visibility="gone"/>-->
+
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/notifyImg"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/click_2_0_0_default"-->
+                    <!--android:padding="14dp"-->
+                    <!--android:scaleType="centerInside"-->
+                    <!--android:src="@drawable/ic200_notify_light"-->
+                    <!--android:visibility="visible" />-->
+
+                <RelativeLayout
+                    android:id="@+id/rNotify"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:layout_weight="1">
+
+
+                    <com.richpath.RichPathView
+                        android:id="@+id/svgNotify"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/click_2_0_0_default"
+                        app:vector="@drawable/svg_notification"
+                        android:visibility="visible"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <!--建立作品-->
+    <ImageView
+        android:id="@+id/createImg"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/click_2_0_0_circle_create_plus" />
+
+    <!--新訊息icon-->
+    <ImageView
+        android:id="@+id/newImg"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="28dp"
+        android:layout_marginRight="96dp"
+        android:src="@drawable/icon_2_0_0_new_message"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/testbutton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="56dp"
+        android:visibility="gone"
+        android:background="@color/pinpinbox_2_0_0_mainbutton_normal"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rGudieCreate"
+        android:layout_width="180dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:alpha="0"
+        android:background="@drawable/bg_2_0_0_create">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:letterSpacing="0.2"
+            android:text="@string/pinpinbox_2_0_0_other_text_create_album_now"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ppb200_guide" />
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

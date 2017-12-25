@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="128dp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvGroup"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_alignParentBottom="true"
+        android:background="#F5FAFAFA"
+        />
+
+
+    <TextView
+        android:id="@+id/tvGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="192dp"
+        android:background="@drawable/border_2_0_0_bg_guide"
+        android:lineSpacingExtra="4dp"
+        android:paddingBottom="32dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingTop="32dp"
+        android:text="@string/pinpinbox_2_0_0_guide_cooperation"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ppb200_guide"
+        android:visibility="visible"
+        android:letterSpacing="0.2"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/backImg"
+                style="@style/ppb200_ic_action_back"
+                android:background="@drawable/click_2_0_0_default"
+                android:src="@drawable/ic200_arrow_left_dark" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="52dp"
+                android:layout_marginRight="52dp"
+                android:background="@drawable/border_2_0_0_grey_third_radius"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/searchImg"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentLeft="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic200_search_dark" />
+
+                <EditText
+                    style="@style/ppb200_EditText"
+                    android:id="@+id/edSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="36dp"
+                    android:background="@null"
+                    android:hint="@string/pinpinbox_2_0_0_input_hint_invite_creator"
+                    android:singleLine="true"
+                    android:text=""
+                    android:paddingLeft="0dp"/>
+
+                <ImageView
+                    android:id="@+id/clearImg"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:padding="10dp"
+                    android:src="@drawable/ic200_cancel_light"
+                    android:visibility="gone" />
+
+
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/scanImg"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/click_2_0_0_default"
+                android:padding="12dp"
+                android:layout_marginRight="4dp"
+                android:src="@drawable/ic200_scan_dark" />
+
+
+        </RelativeLayout>
+
+        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+            android:id="@+id/pbRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignParentBottom="true"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:spb_colors="@array/loadmore"
+            app:spb_gradients="true"
+            app:spb_mirror_mode="true"
+            app:spb_progressiveStart_activated="true"
+            app:spb_progressiveStart_speed="3"
+            app:spb_progressiveStop_speed="6"
+            app:spb_reversed="true"
+            app:spb_sections_count="8"
+            app:spb_speed="3"
+            app:spb_stroke_separator_length="0dp"
+            app:spb_stroke_width="4dp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

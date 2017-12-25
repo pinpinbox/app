@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+            android:id="@+id/userImg"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:scaleType="centerCrop"
+            app:siBorderColor="@color/pinpinbox_2_0_0_divider"
+            app:siBorderWidth="0.5dp"
+            app:siRadius="96dp" />
+
+
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:letterSpacing="0.1"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvFollow"
+            android:layout_width="112dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/click_2_0_0_second_grey_button_frame_white_radius"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_button_follow_cancel"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

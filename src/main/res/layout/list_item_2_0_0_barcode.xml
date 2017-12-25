@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_item_height"
+        android:layout_marginLeft="58dp"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+        android:background="@drawable/border_2_0_0_grey_third_radius">
+
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="@dimen/ppb200_common_icon_side"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:layout_marginLeft="48dp"
+            android:gravity="center"
+            android:text="●"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/deleteImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:background="@drawable/click_2_0_0_default"
+            android:padding="10dp"
+            android:src="@drawable/ic200_cancel_light" />
+
+        <TextView
+            android:id="@+id/tvBarCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/deleteImg"
+            android:layout_toRightOf="@+id/tvNumber"
+            android:gravity="center_vertical"
+            android:letterSpacing="0.1"
+            android:paddingRight="@dimen/ppb200_padding_margin_second"
+            android:paddingLeft="@dimen/ppb200_padding_margin_first"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:background="@drawable/click_2_0_0_default"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

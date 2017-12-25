@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linBackground"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/ppb200_title_pop_second"
+        android:text="@string/pinpinbox_2_0_0_pop_title_long_click_to_drag"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+        android:layout_marginTop="92dp"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/ppb200_padding_margin_first"
+        android:background="@color/white">
+
+
+        <TextView
+            style="@style/ppb200_Button_main_small_radius"
+            android:id="@+id/tvSortConfirm"
+            android:paddingLeft="@dimen/ppb200_padding_margin_first"
+            android:paddingRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_save"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            />
+
+        <com.pinpinbox.android.Views.EditDragGridView
+            android:id="@+id/gvSort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:cacheColorHint="@android:color/transparent"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/ppb200_padding_margin_second"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="@dimen/ppb200_padding_margin_second"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_second"/>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

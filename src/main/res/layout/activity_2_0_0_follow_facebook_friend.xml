@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <View
+        android:id="@+id/vGradient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-180dp" />
+
+    <ImageView
+        android:id="@+id/backgroundImg"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="-180dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/bg200_invite_fb_friend" />
+
+    <LinearLayout
+        android:id="@+id/linGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/ppb200_bottom_height"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvContents"
+            style="@style/ppb200_title_second"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_other_text_find_facebook_friend_description_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:letterSpacing="0.2"
+            android:text="@string/pinpinbox_2_0_0_other_text_find_facebook_friend_description_2"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="18sp" />
+
+        <TextView
+            style="@style/ppb200_Button_main_common_radius"
+            android:id="@+id/tvConfirm"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_ok"/>
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvFacebookFriends"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="96dp"
+        android:alpha="0"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="96dp"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_big"
+        android:alpha="0"
+        android:background="@drawable/border_2_0_0_bg_guide"
+        android:letterSpacing="0.2"
+        android:lineSpacingExtra="4dp"
+        android:paddingBottom="@dimen/ppb200_padding_margin_big"
+        android:paddingLeft="@dimen/ppb200_padding_margin_big"
+        android:paddingRight="@dimen/ppb200_padding_margin_big"
+        android:paddingTop="@dimen/ppb200_padding_margin_big"
+        android:text="@string/pinpinbox_2_0_0_guide_no_friend_use_pinpinbox"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ppb200_guide"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tvBottom"
+            android:layout_width="@dimen/ppb200_common_button_width"
+            android:layout_height="@dimen/ppb200_common_button_height"
+            android:layout_centerInParent="true"
+            android:background="@drawable/click_2_0_0_grey_third_radius_big"
+            android:gravity="center"
+            android:letterSpacing="0.2"
+            android:text="@string/pinpinbox_2_0_0_button_skip"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_buttontext_for_height48"
+            android:textStyle="bold"
+            fontPath="fonts/OpenSans-Bold.ttf"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

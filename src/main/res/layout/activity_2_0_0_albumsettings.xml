@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="1"
+        android:clipToPadding="false"
+        android:paddingBottom="112dp"
+        android:paddingTop="@dimen/ppb200_title_margin_second"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/ppb200_title_first"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+                android:text="@string/pinpinbox_2_0_0_title_work_info" />
+
+
+
+            <!--*******************************************************************************************************-->
+            <!--主要設定-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+
+                <!--*******************************************************************************************************-->
+                <!--名稱-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        style="@style/ppb200_title_second"
+                        android:text="@string/pinpinbox_2_0_0_title_title" />
+
+                    <TextView
+                        android:id="@+id/tvIndispensable1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginTop="2dp"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_other_text_necessary_fill_in"
+                        android:textColor="@color/pinpinbox_2_0_0_first_pink"
+                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edName"
+                    style="@style/ppb200_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                    android:maxLength="64"
+                    android:singleLine="false" />
+
+
+                <!--*******************************************************************************************************-->
+                <!--介紹-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        style="@style/ppb200_title_second"
+                        android:text="@string/pinpinbox_2_0_0_itemtype_album_description" />
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tvIndispensable2"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_second"-->
+                        <!--android:layout_marginTop="2dp"-->
+                        <!--android:letterSpacing="0.1"-->
+                        <!--android:text="@string/pinpinbox_2_0_0_other_text_necessary_fill_in"-->
+                        <!--android:textColor="@color/pinpinbox_2_0_0_first_pink"-->
+                        <!--android:textSize="@dimen/ppb200_common_text_second"-->
+                        <!--android:visibility="gone" />-->
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edDescription"
+                    style="@style/ppb200_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
+
+
+                <!--*******************************************************************************************************-->
+                <!--主類別-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        style="@style/ppb200_title_second"
+                        android:text="@string/pinpinbox_2_0_0_itemtype_first_pagin" />
+
+                    <TextView
+                        android:id="@+id/tvIndispensable3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginTop="2dp"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_other_text_necessary_select"
+                        android:textColor="@color/pinpinbox_2_0_0_first_pink"
+                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvCategoryFirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
+
+
+                <!--*******************************************************************************************************-->
+                <!--子類別-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv4"
+                        style="@style/ppb200_title_second"
+                        android:text="@string/pinpinbox_2_0_0_itemtype_second_pagin" />
+
+
+                    <TextView
+                        android:id="@+id/tvIndispensable4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginTop="2dp"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_other_text_necessary_select"
+                        android:textColor="@color/pinpinbox_2_0_0_first_pink"
+                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvSelectFirstPaging"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                    android:letterSpacing="0.1"
+                    android:text="@string/pinpinbox_2_0_0_other_text_select_first_pagin_first"
+                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                    android:textSize="@dimen/ppb200_common_text_second"
+                    android:visibility="gone" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvCategorySecond"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
+            <!--*******************************************************************************************************-->
+            <!--其他設定-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv5"
+                    style="@style/ppb200_title_second"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:text="@string/pinpinbox_2_0_0_title_other_setting" />
+
+
+                <!--*******************************************************************************************************-->
+                <!--地點-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                    android:letterSpacing="0.2"
+                    android:text="@string/pinpinbox_2_0_0_itemtype_album_location"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_first" />
+
+                <EditText
+                    android:id="@+id/edLocation"
+                    style="@style/ppb200_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                    android:text="" />
+
+
+                <!--*******************************************************************************************************-->
+                <!--天氣-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.2"
+                    android:text="@string/pinpinbox_2_0_0_itemtype_album_weather"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_first" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
+
+
+                <!--*******************************************************************************************************-->
+                <!--心情-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.2"
+                    android:text="@string/pinpinbox_2_0_0_itemtype_album_mood"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_first" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvMood"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
+            <!--*******************************************************************************************************-->
+            <!-- P 點設定-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvPoint"
+                        style="@style/ppb200_title_second"
+                        android:text="@string/pinpinbox_2_0_0_title_point_setting" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginTop="1dp"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_other_text_least_3p"
+                        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                        android:textSize="@dimen/ppb200_common_text_first" />
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/qPointImg"-->
+                    <!--android:layout_width="36dp"-->
+                    <!--android:layout_height="36dp"-->
+                    <!--android:background="@drawable/click_2_0_0_default"-->
+                    <!--android:padding="9dp"-->
+                    <!--android:src="@drawable/ic200_ask_light" />-->
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rPoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ppb200_edittext_min_height"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/border_2_0_0_grey_third_radius"
+                    android:gravity="center_vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                        android:gravity="center"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_other_text_collect_byrequired_point"
+                        android:textColor="@color/pinpinbox_2_0_0_hint_alpha"
+                        android:textSize="@dimen/ppb200_common_text_second" />
+
+                    <EditText
+                        android:id="@+id/edPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_toEndOf="@+id/textView3"
+                        android:layout_toRightOf="@+id/textView3"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:letterSpacing="0.1"
+                        android:maxLength="4"
+                        android:paddingBottom="@dimen/ppb200_padding_margin_second"
+                        android:paddingRight="@dimen/ppb200_padding_margin_first"
+                        android:paddingTop="@dimen/ppb200_padding_margin_second"
+                        android:text="0"
+                        android:textColor="@color/pinpinbox_2_0_0_first_text"
+                        android:textCursorDrawable="@color/pinpinbox_2_0_0_first_text"
+                        android:textSize="@dimen/ppb200_common_text_second" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
+            <!--*******************************************************************************************************-->
+            <!-- 進階設定-->
+
+            <LinearLayout
+                android:id="@+id/linScan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvAdvanced"
+                        style="@style/ppb200_title_second"
+                        android:text="@string/pinpinbox_2_0_0_title_advanced_setting" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginTop="1dp"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_other_text_member_level_profession"
+                        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                        android:textSize="@dimen/ppb200_common_text_first" />
+
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ppb200_edittext_min_height"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/scanImg"
+                        android:layout_width="@dimen/ppb200_action_bar_icon"
+                        android:layout_height="@dimen/ppb200_action_bar_icon"
+                        android:padding="8dp"
+                        android:src="@drawable/click_2_0_0_barcode_scan" />
+
+
+                    <EditText
+                        android:id="@+id/edScan"
+                        style="@style/ppb200_EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toEndOf="@+id/scanImg"
+                        android:layout_toRightOf="@+id/scanImg"
+                        android:hint="@string/pinpinbox_2_0_0_other_text_click_left_icon_or_input"
+                        android:inputType="number"
+                        android:paddingRight="56dp"
+                        android:singleLine="true"
+                        android:text="" />
+
+                    <ImageView
+                        android:id="@+id/addBarCodeImg"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                        android:background="@drawable/click_2_0_0_main_button_radius"
+                        android:padding="8dp"
+                        android:src="@drawable/ic200_plus_white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvBarCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none" />
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                    android:background="@color/pinpinbox_2_0_0_divider"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+
+        <TextView
+            android:id="@+id/tvAct"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_action_bar_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:layout_toLeftOf="@+id/actImg"
+            android:layout_toStartOf="@+id/actImg"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_main"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+
+        <ImageView
+            android:id="@+id/actImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/click_2_0_0_grey_third_radius"
+            android:padding="8dp" />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/tvToCreation"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:paddingLeft="@dimen/ppb200_padding_margin_second"
+            android:paddingRight="@dimen/ppb200_padding_margin_second"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_common_button_small_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:background="@drawable/click_2_0_0_default"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_button_edit_album"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_buttontext_for_height36"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+
+
+        <TextView
+            android:id="@+id/tvSaveToLeave"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_centerInParent="true"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_button_save_and_exit"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

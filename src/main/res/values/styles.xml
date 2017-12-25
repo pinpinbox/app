@@ -1,0 +1,294 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="ppb200_title_first" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.2</item>
+        <item name="android:textSize">@dimen/ppb200_title_first_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_title_second" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.2</item>
+        <item name="android:textSize">@dimen/ppb200_title_second_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_title_in_actionbar" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/ppb200_common_icon_side</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_title_third_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+
+    <style name="ppb200_detail_name" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_userarea_name</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_detail_description" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_first</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
+
+    </style>
+
+    <style name="ppb200_title_pop_second" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0.2</item>
+        <item name="android:textSize">@dimen/ppb200_title_second_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_pop_item" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_first</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_loading">
+        <item name="android:layout_width">@dimen/ppb200_loading_side</item>
+        <item name="android:layout_height">@dimen/ppb200_loading_side</item>
+        <!--<item name="indicatorName">BallRotateIndicator</item>-->
+        <item name="indicatorColor">@color/pinpinbox_2_0_0_first_main</item>
+    </style>
+
+    <style name="ppb200_ic_action_back">
+        <item name="android:layout_width">@dimen/ppb200_common_icon_side</item>
+        <item name="android:layout_height">@dimen/ppb200_common_icon_side</item>
+        <item name="android:padding">@dimen/ppb200_common_icon_padding</item>
+        <item name="android:background">@drawable/click_2_0_0_default</item>
+    </style>
+
+    <style name="ppb200_Button_main_common_radius" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">@dimen/ppb200_common_button_width</item>
+        <item name="android:layout_height">@dimen/ppb200_common_button_height</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_first</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/click_2_0_0_main_button_radius</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_Button_main_small_radius" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">@dimen/ppb200_common_button_small_width</item>
+        <item name="android:layout_height">@dimen/ppb200_common_button_small_height</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_second</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/click_2_0_0_main_button_radius</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_Button_grey_common_radius8" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">@dimen/ppb200_common_button_width</item>
+        <item name="android:layout_height">@dimen/ppb200_common_button_height</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_first</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/click_2_0_0_grey_third_radius</item>
+    </style>
+
+
+    <style name="ppb200_Button_grey_small_radius8" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">@dimen/ppb200_common_button_small_width</item>
+        <item name="android:layout_height">@dimen/ppb200_common_button_small_height</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_second</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/click_2_0_0_grey_third_radius</item>
+        <!--<item name="android:textStyle">bold</item>-->
+        <!--<item name="fontPath">fonts/OpenSans-Bold.ttf</item>-->
+    </style>
+
+
+    <style name="ppb200_EditText">
+        <item name="android:background">@drawable/border_2_0_0_grey_third_radius</item>
+        <item name="android:minHeight">@dimen/ppb200_edittext_min_height</item>
+        <item name="android:paddingTop">@dimen/ppb200_padding_margin_second</item>
+        <item name="android:paddingBottom">@dimen/ppb200_padding_margin_second</item>
+        <item name="android:paddingLeft">@dimen/ppb200_padding_margin_first</item>
+        <item name="android:paddingRight">@dimen/ppb200_padding_margin_first</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_second</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:textColorHint">@color/pinpinbox_2_0_0_hint_alpha</item>
+        <item name="android:textCursorDrawable">@drawable/bg200_cursor</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+
+    <style name="ppb200_action_bar_with_status">
+        <item name="android:background">@color/pinpinbox_2_0_0_action_bar_color</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/ppb200_action_bar_height_with_status</item>
+    </style>
+
+    <style name="ppb200_action_bar_icon">
+        <item name="android:background">@drawable/click_2_0_0_default</item>
+        <item name="android:layout_width">@dimen/ppb200_action_bar_icon</item>
+        <item name="android:layout_height">@dimen/ppb200_action_bar_icon</item>
+    </style>
+
+
+    <style name="TextAppearance.FontPath" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <item name="fontPath">fonts/NotoSans-Regular.ttf</item>
+    </style>
+
+
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="android:listDivider">@drawable/staggered_divider</item>-->
+    <!--</style>-->
+
+
+    <style name="pinpinbox_popupAnimation_bottom" parent="android:Animation">
+
+        <item name="android:windowEnterAnimation">@anim/bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_exit</item>
+
+
+    </style>
+
+
+    <style name="dialog_enter_exit" parent="android:Animation">
+
+        <item name="@android:windowEnterAnimation">@anim/view_to_alpha1</item>
+        <item name="@android:windowExitAnimation">@anim/view_to_alpha0</item>
+
+    </style>
+
+
+    <style name="loading_show_dismiss" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/loading_show</item>
+        <item name="@android:windowExitAnimation">@anim/loading_dismiss</item>
+    </style>
+
+
+    dialog style
+    android:Theme.Holo.Light.NoActionBar.TranslucentDecor
+
+    <style name="myDialog">
+
+        <item name="android:windowBackground">@color/transparent</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>  狀態條會無法沉浸-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowContentTransitions">true</item>
+
+    </style>
+
+
+    <style name="Main2Activity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds_login_to_main</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
+    </style>
+
+
+    當前activity需要透明背景時
+
+    <style name="myTransparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
+    </style>
+
+
+    只需要邊緣切畫效果的activity
+
+    <style name="dragger" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+
+    album info2 style
+
+    <style name="sharedElementEnterTransition_by_above_v5" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        //true => sharedelement動畫時背景會黑
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
+        <item name="android:fitsSystemWindows">false</item>
+
+        <!--A 跳转到 B时，使B中的View进入场景的transition-->
+        <!--<item name="android:windowSharedElementExitTransition">@transition/change_bounds</item>&lt;!&ndash;A 跳转到 B时，使A中的View退出场景的transition&ndash;&gt;-->
+        <!--<item name="android:windowReenterTransition">@transition/change_bounds</item>&lt;!&ndash;B 返回到 A时，使A中的View进入场景的transition&ndash;&gt;-->
+        <!--<item name="android:windowReturnTransition">@transition/change_bounds</item>&lt;!&ndash;B 返回到 A时，使B中的View退出场景的transition&ndash;&gt;-->
+    </style>
+
+
+    <!--first style-->
+    <style name="whiteTransparent">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+</resources>

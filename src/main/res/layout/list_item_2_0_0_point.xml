@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:letterSpacing="0.2"
+        android:id="@+id/tvPoint"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:background="@drawable/border_2_0_0_white_frame_grey_second_radius"
+        android:gravity="center"
+        android:textColor="@color/pinpinbox_2_0_0_first_text"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+
+</RelativeLayout>

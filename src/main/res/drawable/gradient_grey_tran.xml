@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <gradient
+
+        android:angle="270"
+
+        android:startColor="#dc5a5a5a"
+
+        android:endColor="@color/transparent" />
+
+
+    <!--angle=0时，渐变色是从左向右。 然后逆时针方向转，当angle=90时为从下往上-->
+
+
+
+</shape>

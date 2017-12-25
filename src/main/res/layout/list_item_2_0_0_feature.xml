@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/ppb200_title_second"
+        android:text="漫遊世界"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvFeatureContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <!--180+18-->
+
+
+</LinearLayout>

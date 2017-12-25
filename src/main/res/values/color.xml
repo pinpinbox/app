@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+
+    <array name="loadmore">
+        <item>#280f8399</item>
+        <item>#420f8399</item>
+        <item>#5c0f8399</item>
+        <item>#760f8399</item>
+        <item>#900f8399</item>
+        <item>#aa0f8399</item>
+        <item>#c60f8399</item>
+        <item>#eb0f8399</item>
+    </array>
+
+
+    <drawable name="background">#ffffff</drawable>
+
+
+    <color name="toast_pink">#e91e63</color><!--pink500-->
+    <color name="toast_teal">#00bfa5</color><!--tealaccent700-->
+
+    <color name="pinpinbox2_0_0_black_alpha">#c8000000</color>
+    <color name="pinpinbox_2_0_0_divider">@color/pinpinbox_2_0_0_third_grey</color>
+    <color name="timeout">@color/pinpinbox_2_0_0_dark_main</color>
+
+    <color name="pinpinbox_2_0_0_status_bar_color">@color/pinpinbox_2_0_0_third_main</color>
+    <color name="pinpinbox_2_0_0_action_bar_color">#f5ffffff</color>
+    <color name="pinpinbox_2_0_0_album_type_background_in_item">#d2ffffff</color>
+
+    <color name="pinpinbox_2_0_0_hint_alpha">@color/pinpinbox_2_0_0_hint_grey</color>
+
+    <color name="pinpinbox_2_0_0_first_text">@color/pinpinbox_2_0_0_first_grey</color>
+    <color name="pinpinbox_2_0_0_secondary_text">@color/pinpinbox_2_0_0_second_grey</color>
+
+    <color name="pinpinbox_2_0_0_mainbutton_normal">@color/pinpinbox_2_0_0_first_main</color>
+    <color name="pinpinbox_2_0_0_mainbutton_focuse">@color/pinpinbox_2_0_0_dark_main</color>
+
+    <color name="pinpinbox_2_0_0_background_edittext">@color/pinpinbox_2_0_0_third_grey</color>
+    <color name="pinpinbox_2_0_0_background_select">@color/pinpinbox_2_0_0_click_default</color>
+
+    <color name="pinpinbox_2_0_0_click_default_light">@color/pinpinbox_2_0_0_first_main</color>
+    <color name="pinpinbox_2_0_0_click_default">@color/pinpinbox_2_0_0_third_main</color>
+    <color name="pinpinbox_2_0_0_list_item_click">@color/pinpinbox_2_0_0_third_main</color>
+
+
+    <color name="pinpinbox_2_0_0_toast_normal">@color/pinpinbox_2_0_0_second_grey</color>
+    <color name="pinpinbox_2_0_0_toast_success">@color/pinpinbox_2_0_0_second_main</color>
+    <color name="pinpinbox_2_0_0_toast_error">@color/pinpinbox_2_0_0_third_pink</color>
+
+    <color name="pinpinbox_2_0_0_logo">#3b9ca8</color>
+
+    <color name="pinpinbox_2_0_0_first_teal">#eb009688</color>
+    <color name="pinpinbox_2_0_0_second_teal">#96009688</color>
+    <color name="pinpinbox_2_0_0_third_teal">#5a009688</color>
+
+
+    <color name="pinpinbox_2_0_0_gradient_dark_main">#0f8399</color>
+    <color name="pinpinbox_2_0_0_gradient_light_main">#5cb7c2</color>
+    <color name="pinpinbox_2_0_0_dark_main">#f00f8399</color>
+    <color name="pinpinbox_2_0_0_first_main">#f000acc1</color>
+    <color name="pinpinbox_2_0_0_second_main">#f069cedb</color>
+    <color name="pinpinbox_2_0_0_third_main">#f0cce1e4</color>
+
+    <color name="pinpinbox_2_0_0_gradient_dark_pink">#a61252</color>
+    <color name="pinpinbox_2_0_0_gradient_light_pink">#f15187</color>
+    <color name="pinpinbox_2_0_0_dark_pink">#f0ad1457</color>
+    <color name="pinpinbox_2_0_0_first_pink">#f0e91e63</color>
+    <color name="pinpinbox_2_0_0_second_pink">#f0f27ba3</color>
+    <color name="pinpinbox_2_0_0_third_pink">#f0f4adc5</color>
+
+
+    <color name="pinpinbox_2_0_0_gradient_first_dark_grey">#434343</color>
+    <color name="pinpinbox_2_0_0_gradient_first_light_grey">#606060</color>
+
+    <color name="pinpinbox_2_0_0_gradient_second_dark_grey">#8e8e8e</color>
+    <color name="pinpinbox_2_0_0_gradient_second_light_grey">#aeaeae</color>
+
+    <color name="pinpinbox_2_0_0_gradient_dark_grey">#c9c9c9</color>
+    <color name="pinpinbox_2_0_0_gradient_light_grey">#ededed</color>
+    <color name="pinpinbox_2_0_0_first_grey">#4d4d4d</color>
+    <color name="pinpinbox_2_0_0_second_grey">#d4d4d4</color>
+    <color name="pinpinbox_2_0_0_third_grey">#e8e8e8</color>
+    <color name="pinpinbox_2_0_0_hint_grey">#9e9e9e</color>
+
+
+    <color name="pinpinbox_2_0_0_gradient_dark_purple">#6a3ab2</color>
+    <color name="pinpinbox_2_0_0_gradient_light_purple">#a77ded</color>
+    <color name="pinpinbox_2_0_0_dark_purple">#6436a9</color>
+    <color name="pinpinbox_2_0_0_first_purple">#8e68cc</color>
+
+
+    <color name="pinpinbox_2_0_0_contentview_background">@color/white</color>
+
+    <color name="pinpinbox_pop_background">#FF424242</color>
+
+    <color name="pinpinbox_login_register_inputbox">#96000000</color>
+
+    <color name="pinpinbox_action_bar_color">#009688</color>
+    <color name="pinpinbox_action_bar_textcolor">#ffffff</color>
+
+    <color name="material_teal_accent_700">#00bfa5</color>
+    <color name="material_teal_500">#009688</color>
+    <color name="material_teal_800">#FF00695C</color>
+    <color name="material_grey_300">#e0e0e0</color>
+    <color name="material_grey_400">#bdbdbd</color>
+    <color name="material_grey_500">#9E9E9E</color>
+    <color name="material_grey_800">#FF424242</color>
+    <color name="material_pink_200">#f48fb1</color>
+    <color name="material_pink_300">#FFF06292</color>
+    <color name="material_pink_500">#e91e63</color>
+    <color name="material_pink_800">#ad1457</color>
+
+
+    <color name="blur_black">#82000000</color>
+
+    <color name="pinpinbox_color_transparent_white">#9bffffff</color>
+
+
+    <!--shadow 深 => 淺-->
+
+
+    <!-- pinpinbox color-->
+
+    <color name="pinpinbox_color_unclick_gray">#9e9e9e</color>
+
+    <color name="pinpinbox_color_bluegreen">#ff00bdc0</color>
+    <color name="pinpinbox_color_dark">#FF424242</color>
+    material_grey_800
+    <color name="pinpinbox_color_red">#ffcb4774</color>
+
+    <color name="pinpinbox_color_gray">#646464</color>
+
+
+    <color name="pinpinbox_color_dark_click">#292929</color>
+
+    <color name="pinpinbox_color_divider">#cccccc</color>
+
+
+
+
+    <color name="pinpinbox_color_black_alpha08">#e5000000</color>
+
+
+    <color name="pinpinbox_color_username">#009688</color>
+    teal500
+
+
+
+    <!--背景-->
+
+    <color name="item_photo_background">#FFC0C0C0</color>
+
+    <color name="background">#dcdcdc</color>
+
+    <!--select picture-->
+
+
+    <color name="title_dark">#FF8C8C8C</color>
+    <color name="text_focus">#ffffff</color>
+    <color name="text_unfocus">#b2b2b2</color>
+
+    //template list
+    <color name="template_item_count">#cc4774</color>
+    <color name="template_item_description">#6e6e6e</color>
+
+    //template info
+    <color name="template_info_description">#6e6e6e</color>
+    <color name="template_info_author">#FF00BDC0</color>
+
+    //attention item text
+    <color name="attention_item_text">#9e9e9e</color>
+
+    //dialog_check
+
+
+    <color name="red">#FF0000</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_view">#b0000000</color>
+
+    <color name="transparent">#00000000</color>//透明
+
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+
+
+    <color name="color_1">#FFffcdd2</color>
+    <color name="color_2">#FFf8bbd0</color>
+    <color name="color_3">#FFe1bee7</color>
+    <color name="color_4">#FFbbdefb</color>
+    <color name="color_5">#FFf0f4c3</color>
+    <color name="color_6">#FFffe0b2</color>
+    <color name="color_7">#FFd7ccc8</color>
+    <color name="color_8">#FFcfd8dc</color>
+    <array name="fragment_colors">
+        <item>@color/color_1</item>
+        <item>@color/color_2</item>
+        <item>@color/color_3</item>
+        <item>@color/color_4</item>
+        <item>@color/color_5</item>
+        <item>@color/color_6</item>
+        <item>@color/color_7</item>
+        <item>@color/color_8</item>
+    </array>
+
+    <color name="colorPrimary">#3F51B5</color>
+
+
+
+</resources>

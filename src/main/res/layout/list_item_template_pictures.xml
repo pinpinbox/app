@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginLeft="8dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="false">
+
+                <ImageView
+                    android:id="@+id/item_pic"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/item_photo_background"
+                    />
+
+
+
+            </android.support.v7.widget.CardView>
+
+           <!--<LinearLayout-->
+               <!--android:id="@+id/item_img_background"-->
+               <!--android:layout_width="120dp"-->
+               <!--android:layout_height="180dp"-->
+               <!--android:background="@drawable/border_imageview_template"-->
+               <!--android:gravity="center"-->
+               <!--&gt;-->
+               <!--<ImageView-->
+                   <!--android:id="@+id/item_pic"-->
+                   <!--android:layout_width="fill_parent"-->
+                   <!--android:layout_height="fill_parent"-->
+                   <!--android:layout_marginLeft="1dp"-->
+                   <!--android:layout_marginRight="1dp"-->
+                   <!--android:layout_marginBottom="1dp"-->
+                   <!--android:layout_marginTop="1dp"-->
+                   <!--/>-->
+
+               <!--</LinearLayout>-->
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:includeFontPadding="false"
+                android:id="@+id/item_name_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12sp"
+                android:textColor="@color/pinpinbox_color_username"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:singleLine="true"/>
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+</RelativeLayout>

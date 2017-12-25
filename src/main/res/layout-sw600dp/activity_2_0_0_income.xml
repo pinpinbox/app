@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+
+    <ImageView
+        android:id="@+id/bgImg"
+        android:layout_width="360dp"
+        android:layout_height="367dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-104dp"
+        android:layout_marginRight="-64dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/bg200_income" />
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/ppb200_title_first"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_big"
+        android:layout_marginTop="@dimen/ppb200_title_margin_second"
+        android:text="@string/pinpinbox_2_0_0_title_Income_statistic" />
+
+    <TextView
+        android:id="@+id/tvBelowTitleText"
+        fontPath="fonts/OpenSans-Bold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:letterSpacing="0.2"
+        android:text=""
+        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+        android:textSize="@dimen/ppb200_common_text_second"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvBelowTitleText"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+        android:clipChildren="false"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_big">
+
+            <View
+                android:id="@+id/vLineAccumulation"
+                android:layout_width="72dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:background="@drawable/border_2_0_0_grey_third_radius" />
+
+            <TextView
+                android:id="@+id/tvAccumulation"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toRightOf="@+id/vLineAccumulation"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_accumulation_income"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_first" />
+
+
+            <TextView
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvAccumulation"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
+                android:layout_toEndOf="@+id/tvAccumulation"
+                android:layout_toRightOf="@+id/tvAccumulation"
+                android:gravity="center_vertical"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_other_text_after_split"
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/tvCountAccumulation"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAccumulation"
+                android:layout_alignStart="@+id/tvAccumulation"
+                android:layout_below="@+id/tvAccumulation"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:letterSpacing="0.2"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_userarea_name" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+
+            <View
+                android:id="@+id/vLineUnsettlement"
+                android:layout_width="72dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:background="@drawable/border_2_0_0_grey_third_radius" />
+
+            <TextView
+                android:id="@+id/tvUnsettlement"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_marginStart="@dimen/ppb200_padding_margin_first"
+                android:layout_toEndOf="@+id/vLineUnsettlement"
+                android:layout_toRightOf="@+id/vLineUnsettlement"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_month_income"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_first" />
+
+
+            <TextView
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvUnsettlement"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                android:layout_toRightOf="@+id/tvUnsettlement"
+                android:gravity="center_vertical"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_other_text_monthly_settlement"
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
+
+
+            <TextView
+                android:id="@+id/tvCountUnsettlement"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvUnsettlement"
+                android:layout_alignStart="@+id/tvUnsettlement"
+                android:layout_below="@+id/tvUnsettlement"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:letterSpacing="0.2"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_userarea_name" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rWithdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/vLineWithdraw"
+                android:layout_width="72dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:background="@drawable/border_2_0_0_grey_third_radius" />
+
+            <TextView
+                android:id="@+id/tvWithdraw"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toRightOf="@+id/vLineWithdraw"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_redeem"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_first" />
+
+
+            <TextView
+                android:id="@+id/tvCountWithdraw"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvWithdraw"
+                android:layout_alignStart="@+id/tvWithdraw"
+                android:layout_below="@+id/tvWithdraw"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:letterSpacing="0.2"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_userarea_name" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

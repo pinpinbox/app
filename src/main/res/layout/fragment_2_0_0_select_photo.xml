@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersGridView
+        android:id="@+id/gvPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rActionBar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:clipToPadding="false"
+        android:columnWidth="78dp"
+        android:horizontalSpacing="4dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:paddingBottom="88dp"
+        android:scrollbars="none"
+        android:verticalSpacing="4dp" />
+    <!--android:paddingTop="76dp"-->
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+        <ImageView
+            android:id="@+id/cameraImg"
+            android:layout_width="@dimen/ppb200_common_icon_side"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:padding="10dp"
+            android:src="@drawable/ic200_camera_dark" />
+
+        <ImageView
+            android:id="@+id/sizeImg"
+            android:layout_width="@dimen/ppb200_common_icon_side"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:background="@drawable/click_2_0_0_default"
+            android:padding="12dp"
+            android:src="@drawable/ic200_photosize_light"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/cameraImg"
+            android:layout_toStartOf="@+id/cameraImg" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color"
+        android:gravity="center_vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAlbumCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_other_text_current_item_count_loading"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvSelectCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_other_text_current_select_item_0"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvStartUpLoad"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_width="152dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_start_upload" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+

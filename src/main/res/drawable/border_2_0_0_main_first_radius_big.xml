@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/pinpinbox_2_0_0_first_main" />
+    <corners android:radius="@dimen/ppb200_radius_big" />
+
+    <!--<gradient-->
+    <!--android:centerX="0.2"-->
+    <!--android:centerY="0.2"-->
+
+    <!--android:startColor="#6e00acc1"-->
+    <!--android:centerColor="#be00acc1"-->
+    <!--android:endColor="#f000acc1"-->
+    <!--android:gradientRadius="600"-->
+
+    <!--android:type="radial" />-->
+
+
+    <!--<gradient-->
+        <!--android:angle="270"-->
+        <!--android:endColor="#6a3ab2"-->
+        <!--android:startColor="#a276eb" />-->
+
+
+
+</shape>

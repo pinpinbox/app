@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rBackground"
+    android:background="@color/white">
+
+    <com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersGridView
+        android:id="@+id/gvVideo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rActionBar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:clipToPadding="false"
+        android:columnWidth="78dp"
+        android:horizontalSpacing="4dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:verticalSpacing="4dp"
+        android:paddingBottom="88dp"/>
+    <!--android:paddingTop="76dp"-->
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+        <TextView
+            android:letterSpacing="0.2"
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/pinpinbox_2_0_0_title_click_to_select_long_click_to_watch"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold"
+            fontPath="fonts/OpenSans-Bold.ttf"/>
+
+        <ImageView
+            android:id="@+id/cameraImg"
+            android:layout_width="@dimen/ppb200_common_icon_side"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:padding="12dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic200_videomake_dark" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rBottom"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color"
+        android:visibility="visible">
+
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_bar_video_upload"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:progress="0"
+            style="?android:attr/progressBarStyleHorizontal"
+            />
+
+        <TextView
+            android:id="@+id/tvStartUpLoad"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_width="152dp"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_centerVertical="true"
+            android:text="@string/pinpinbox_2_0_0_button_start_upload"
+            android:layout_alignParentRight="true"/>
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:letterSpacing="0.1"
+                android:id="@+id/tvAlbumCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/pinpinbox_2_0_0_other_text_current_item_count_loading"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:letterSpacing="0.1"
+                android:id="@+id/tvProgressrate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/pinpinbox_2_0_0_other_text_current_select_schedule_0"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="14sp"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+

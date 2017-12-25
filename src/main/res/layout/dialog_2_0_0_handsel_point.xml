@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blurview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:blurOverlayColor="@color/blur_black" />
+
+    <RelativeLayout
+        android:id="@+id/close"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/ppb200_padding_margin_big"
+        android:background="@drawable/border_2_0_0_white_radius_big"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:letterSpacing="0.1"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first" />
+
+        <TextView
+            android:id="@+id/tvRestriction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/ppb200_common_text_second"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+            android:letterSpacing="0.1"
+            android:visibility="gone"/>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="4dp"
+                android:padding="10dp"
+                android:src="@drawable/icon_present" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="2dp"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_second" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvLink"
+            android:layout_width="@dimen/ppb200_common_button_width"
+            android:layout_height="@dimen/ppb200_common_button_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/click_2_0_0_default"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_button_event_link"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_buttontext_for_height48" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

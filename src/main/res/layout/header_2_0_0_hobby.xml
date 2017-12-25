@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/ppb200_title_first"
+            android:text="@string/pinpinbox_2_0_0_title_select_hobby"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pinpinbox_2_0_0_other_text_hobby_select_count"
+            android:textSize="16sp"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+            android:letterSpacing="0.2"/>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

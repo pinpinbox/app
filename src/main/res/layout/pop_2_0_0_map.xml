@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvPageLocation"
+            style="@style/ppb200_title_pop_second"
+            android:maxLines="3"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_big"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_big"/>
+
+        <fragment
+            android:id="@+id/mapPageLocation"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="328dp"
+            android:layout_height="164dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first" />
+
+        <ImageView
+            android:id="@+id/closeMapImg"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+            android:background="@drawable/click_2_0_0_default"
+            android:padding="@dimen/ppb200_padding_margin_first"
+            android:src="@drawable/ic200_arrow_2_down_light" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

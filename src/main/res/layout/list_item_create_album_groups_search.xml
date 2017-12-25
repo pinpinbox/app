@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="84dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:layout_weight="1">
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:id="@+id/item_picfileImg"
+                android:layout_gravity="center_horizontal"
+                app:riv_corner_radius="72dp"
+                app:riv_border_width="1dip"
+                app:riv_border_color="@color/pinpinbox_color_divider"
+                app:riv_mutate_background="true"
+                app:riv_oval="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="centerCrop"
+                />
+
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_toRightOf="@+id/item_picfileImg"
+                android:layout_toEndOf="@+id/item_picfileImg"
+                android:layout_marginLeft="16dp">
+
+                <TextView
+                    android:id="@+id/item_authorname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kevinlin"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:gravity="left"
+                    android:textColor="@color/pinpinbox_color_username"
+                    />
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_weight="3">
+
+            <ImageView
+                android:id="@+id/item_invite"
+
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/click_2_0_0_default"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

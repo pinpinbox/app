@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="78dp"
+    android:layout_height="78dp">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:letterSpacing="0.1"
+        android:id="@+id/tvDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="00:00"
+        android:textColor="@color/pinpinbox_2_0_0_first_text"
+        android:textSize="14sp"
+        android:padding="2dp"
+        android:background="@color/pinpinbox_2_0_0_album_type_background_in_item"
+        android:gravity="center"/>
+
+    <View
+        android:id="@+id/vSelect"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/icon_unselect_teal500_120x120"
+        android:visibility="visible"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="pinpinbox_2_0_0_time_before_year_single">年前</string>
+    <string name="pinpinbox_2_0_0_time_before_month_single">個月前</string>
+    <string name="pinpinbox_2_0_0_time_before_day_single">天前</string>
+    <string name="pinpinbox_2_0_0_time_before_hour_single">小時前</string>
+    <string name="pinpinbox_2_0_0_time_before_minute_single">分鐘前</string>
+    <string name="pinpinbox_2_0_0_time_before_year">年前</string>
+    <string name="pinpinbox_2_0_0_time_before_month">個月前</string>
+    <string name="pinpinbox_2_0_0_time_before_day">天前</string>
+    <string name="pinpinbox_2_0_0_time_before_hour">小時前</string>
+    <string name="pinpinbox_2_0_0_time_before_minute">分鐘前</string>
+    <string name="pinpinbox_2_0_0_time_before_just_now">剛剛...</string>
+
+    <string name="pinpinbox_2_0_0_notify_type_album_notice">作品通知</string>
+    <string name="pinpinbox_2_0_0_notify_type_user_interactive_notice">創作人互動</string>
+    <string name="pinpinbox_2_0_0_notify_type_cooperation_notice">共用邀請</string>
+    <string name="pinpinbox_2_0_0_notify_type_system_notice">系統發佈</string>
+
+    <string name="pinpinbox_2_0_0_no_template">搜尋不到版型</string>
+    <string name="pinpinbox_2_0_0_no_template_own">還沒有版型可以用</string>
+
+    <string name="pinpinbox_2_0_0_button_read_album">觀看內容</string>
+    <string name="pinpinbox_2_0_0_button_start_upload">開始上傳</string>
+    <string name="pinpinbox_2_0_0_button_send">送出</string>
+    <string name="pinpinbox_2_0_0_button_done">完成</string>
+    <string name="pinpinbox_2_0_0_button_clear">清除</string>
+    <string name="pinpinbox_2_0_0_button_ok">好的</string>
+    <string name="pinpinbox_2_0_0_button_skip">略過</string>
+    <string name="pinpinbox_2_0_0_button_next">下一步</string>
+    <string name="pinpinbox_2_0_0_button_scan_search">使用掃描搜尋</string>
+    <string name="pinpinbox_2_0_0_button_actopen">當前隱私權為開啟</string>
+    <string name="pinpinbox_2_0_0_button_actclose">當前隱私權為關閉</string>
+    <string name="pinpinbox_2_0_0_button_follow">關注</string>
+    <string name="pinpinbox_2_0_0_button_follow_cancel">關注中</string>
+    <string name="pinpinbox_2_0_0_button_exit">離開</string>
+    <string name="pinpinbox_2_0_0_button_collect">收藏</string>
+    <string name="pinpinbox_2_0_0_button_sponsor">贊助</string>
+    <string name="pinpinbox_2_0_0_button_edit_album">作品編輯器</string>
+    <string name="pinpinbox_2_0_0_button_save_and_exit">保存並離開</string>
+    <string name="pinpinbox_2_0_0_button_sponsor_more">贊助更多</string>
+    <string name="pinpinbox_2_0_0_button_album_management">作品管理</string>
+    <string name="pinpinbox_2_0_0_button_back_to_login">返回登入</string>
+    <string name="pinpinbox_2_0_0_button_back_to_register">返回註冊</string>
+    <string name="pinpinbox_2_0_0_button_crop">剪裁</string>
+    <string name="pinpinbox_2_0_0_button_event_link">活動連結</string>
+    <string name="pinpinbox_2_0_0_button_new">最新</string>
+    <string name="pinpinbox_2_0_0_button_category">探索</string>
+    <string name="pinpinbox_2_0_0_button_profile_edit">資訊編輯</string>
+    <string name="pinpinbox_2_0_0_button_register_done">完成註冊</string>
+    <string name="pinpinbox_2_0_0_button_facebook_login">Facebook\n登入</string>
+    <string name="pinpinbox_2_0_0_button_create_account">建立帳號</string>
+    <string name="pinpinbox_2_0_0_button_login">登入</string>
+    <string name="pinpinbox_2_0_0_button_about">關於</string>
+    <string name="pinpinbox_2_0_0_button_about_us">關於我們</string>
+    <string name="pinpinbox_2_0_0_button_examination">檢查</string>
+    <string name="pinpinbox_2_0_0_button_privacy">隱私權</string>
+    <string name="pinpinbox_2_0_0_button_edit">編輯</string>
+    <string name="pinpinbox_2_0_0_button_invite">邀請</string>
+    <string name="pinpinbox_2_0_0_button_invited">已邀請</string>
+    <string name="pinpinbox_2_0_0_button_share">分享</string>
+    <string name="pinpinbox_2_0_0_button_delete">刪除</string>
+    <string name="pinpinbox_2_0_0_button_download">下載</string>
+    <string name="pinpinbox_2_0_0_button_admin">管理</string>
+    <string name="pinpinbox_2_0_0_button_approver">副管理</string>
+    <string name="pinpinbox_2_0_0_button_cooperation">共用</string>
+    <string name="pinpinbox_2_0_0_button_browser">瀏覽</string>
+    <string name="pinpinbox_2_0_0_button_save_to_close">保存關閉</string>
+    <string name="pinpinbox_2_0_0_button_uploaded">已上傳:</string>
+    <string name="pinpinbox_2_0_0_button_uploading">上傳中..請稍候</string>
+    <string name="pinpinbox_2_0_0_button_save">保存</string>
+    <string name="pinpinbox_2_0_0_button_buy">確定購買</string>
+    <string name="pinpinbox_2_0_0_button_preview">預覽</string>
+    <string name="pinpinbox_2_0_0_button_logout">登出</string>
+    <string name="pinpinbox_2_0_0_button_add_description">新增本頁描述</string>
+    <string name="pinpinbox_2_0_0_button_modify_description">修改描述</string>
+    <string name="pinpinbox_2_0_0_button_stop">停止</string>
+    <string name="pinpinbox_2_0_0_button_replace">撤下</string>
+    <string name="pinpinbox_2_0_0_button_re_select">重新選擇</string>
+    <string name="pinpinbox_2_0_0_button_submit">投稿</string>
+    <string name="pinpinbox_2_0_0_button_change">變更</string>
+    <string name="pinpinbox_2_0_0_button_all">全部</string>
+
+
+
+    <string name="pinpinbox_2_0_0_event_info">活動詳情</string>
+    <string name="pinpinbox_2_0_0_event_contributors">立即投稿</string>
+
+    <string name="pinpinbox_2_0_0_pop_check">確定</string>
+    <string name="pinpinbox_2_0_0_pop_save">保存</string>
+    <string name="pinpinbox_2_0_0_pop_go_to_google_play">前往GooglePlay</string>
+
+
+    <string name="pinpinbox_2_0_0_pop_title_birthday">你的生日是?</string>
+    <string name="pinpinbox_2_0_0_pop_title_do_what">你想做什麼?</string>
+    <string name="pinpinbox_2_0_0_pop_title_create_album_type">為作品新增 相片 / 影片</string>
+    <string name="pinpinbox_2_0_0_pop_title_select_album_preview">選擇作品預覽頁</string>
+    <string name="pinpinbox_2_0_0_pop_title_album_set">作品設定</string>
+    <string name="pinpinbox_2_0_0_pop_title_long_click_to_drag">相片長按可拖曳更換順序</string>
+    <string name="pinpinbox_2_0_0_pop_title_board">留言版</string>
+    <string name="pinpinbox_2_0_0_pop_title_send_contribute_way">請選擇投稿方式</string>
+    <string name="pinpinbox_2_0_0_pop_title_select_audio_type">選擇一種播放模式</string>
+    <string name="pinpinbox_2_0_0_pop_title_change_identify">變更權限</string>
+    <string name="pinpinbox_2_0_0_pop_title_where_to_go">要前往哪裡?</string>
+    <string name="pinpinbox_2_0_0_pop_title_choose_share_way">選擇分享方式</string>
+    <string name="pinpinbox_2_0_0_pop_title_what_to_report">要檢舉什麼項目?</string>
+    <string name="pinpinbox_2_0_0_pop_title_choose_country_number">選擇國碼</string>
+    <string name="pinpinbox_2_0_0_pop_title_choose_category">選擇分類</string>
+    <string name="pinpinbox_2_0_0_pop_title_choose_size">請選擇上傳尺寸</string>
+
+
+    <string name="pinpinbox_2_0_0_dialog_try_again">再試一次</string>
+    <string name="pinpinbox_2_0_0_dialog_offline_read">離線瀏覽\n作品</string>
+    <string name="pinpinbox_2_0_0_dialog_check">確定</string>
+    <string name="pinpinbox_2_0_0_dialog_close">關閉</string>
+    <string name="pinpinbox_2_0_0_dialog_close_view">關閉視窗</string>
+    <string name="pinpinbox_2_0_0_dialog_cancel">取消</string>
+    <string name="pinpinbox_2_0_0_dialog_ok">好的</string>
+    <string name="pinpinbox_2_0_0_dialog_setting">設定</string>
+    <string name="pinpinbox_2_0_0_dialog_go_buy_point">前往購點</string>
+    <string name="pinpinbox_2_0_0_dialog_be_later">稍後再說</string>
+    <string name="pinpinbox_2_0_0_dialog_close_pinpinbox">關閉pinpinbox</string>
+    <string name="pinpinbox_2_0_0_dialog_i_know">我知道了</string>
+    <string name="pinpinbox_2_0_0_dialog_confirm_to_change_audio_mode">確定切換</string>
+    <string name="pinpinbox_2_0_0_dialog_exit_last_schedule">退出\n先前進度</string>
+    <string name="pinpinbox_2_0_0_dialog_to_login">前往登入</string>
+    <string name="pinpinbox_2_0_0_dialog_continue_edit">繼續編輯</string>
+    <string name="pinpinbox_2_0_0_dialog_immediate_exit">直接離開</string>
+    <string name="pinpinbox_2_0_0_dialog_to_cooperation_manage">前往\n共用管理</string>
+    <string name="pinpinbox_2_0_0_dialog_yes">好</string>
+    <string name="pinpinbox_2_0_0_dialog_no_need">不需要</string>
+    <string name="pinpinbox_2_0_0_dialog_filters">特效</string>
+
+    <string name="pinpinbox_2_0_0_dialog_message_unknow">很抱歉，發生不明錯誤</string>
+    <string name="pinpinbox_2_0_0_dialog_message_send_error_message">此問題已發送至pinpinbox團隊，本團隊將盡力搶修</string>
+    <string name="pinpinbox_2_0_0_dialog_message_deficiency_identity_viewer">目前權限為"瀏覽者"，要前往我的收藏嗎?(想做內容編輯可以通知作者更改一下你的權限)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_cooperation_is_cancel">作品已經被移除或是已取消跟作品的共用關係</string>
+    <string name="pinpinbox_2_0_0_dialog_message_data_photo_change_to_refrest">裝置的媒體內容有變動，要幫你更新嗎 ? (選擇項目也會重置)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_new_version">有新版本囉，快去更新!</string>
+    <string name="pinpinbox_2_0_0_dialog_message_exit_album_edit">確定離開資訊編輯?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_audio_is_already">若是作品內已設定音樂(錄音或在網頁上傳影音檔)，這裡再次選擇背景音樂則會移除先前設定!</string>
+    <string name="pinpinbox_2_0_0_dialog_message_set_point_description">設定p點可以跟喜歡你的粉絲索取贊助，須完成專案註冊申請並信件認證後，即可開啟此功能(開通後APP要重新開啟)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_set_advanced_description">登入pinpinbox網頁版，於管理中心內可操作帳號升級，即可開啟此功能 (APP要重新開啟)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_albuminfo_change_to_save">資訊有變動，要先保存嗎?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_albuminfo_change_to_exit">資訊有變動，要直接離開嗎?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_release_cooperation">確定解除協作狀態?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_scroll_to_final_page_to_collect">內容預覽已到最末頁，點擊收藏才能瀏覽完整內容!</string>
+    <string name="pinpinbox_2_0_0_dialog_message_scroll_to_final_page_to_collect_by_point">內容預覽已到最末頁，點擊贊助才能瀏覽完整內容!</string>
+    <string name="pinpinbox_2_0_0_dialog_message_scroll_to_final_page_to_collect_by_send_point">喜歡作品就給個鼓勵吧！\n要贊助並收藏此作品嗎？</string>
+    <string name="pinpinbox_2_0_0_dialog_message_change_album_mode">切換播放模式之後會將先前音效設定移除，確定要進行切換嗎?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_change_album_mode_singular_to_plural">當前播放模式為作品單一的背景音樂，確定要切換成每頁的錄音嗎?\n(此動作會移除背景音樂)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_open_permission_camera">此功能需要開啟權限「相機」</string>
+    <string name="pinpinbox_2_0_0_dialog_message_open_permission_sdcard">此功能需要開啟權限「儲存裝置」</string>
+    <string name="pinpinbox_2_0_0_dialog_message_open_permission_record">此功能需要開啟權限「麥克風」</string>
+    <string name="pinpinbox_2_0_0_dialog_message_read_done">已完整閱讀</string>
+    <string name="pinpinbox_2_0_0_dialog_message_read_all_content">馬上收藏看全部內容</string>
+    <string name="pinpinbox_2_0_0_dialog_message_sponsor_by_like_album">喜歡作品就給個鼓勵吧!</string>
+    <string name="pinpinbox_2_0_0_dialog_message_sponsor_point_to_read_all_content">贊助P點 看全部內容</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_album_edit">有作品正在進行編輯，要先退出嗎?\n(退出後可在作品管理內找回)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_please_login">請先登入pinpinbox</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_album">確定要刪除作品?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_album_with_cache">確定要刪除作品?\n(下載的檔案會一併移除)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_go_to_creator_area">前往創作人專區?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_go_to_album_info">前往作品詳情?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_go_to_cooperation_manage">前往共用管理?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_update_error_restart_app">上傳檔案出現異常，建議重新啟動APP</string>
+    <string name="pinpinbox_2_0_0_dialog_message_grade_is_viewer_can_not_edit_content_and_go_to_cooperation_manage">你在當前作品的權限為瀏覽者無法編輯內容，要前往共用管理嗎?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point">點選「觀看內容」並前往最後一頁可進行贊助額度設定</string>
+    <string name="pinpinbox_2_0_0_dialog_message_remove_from_followlist">將會從關注清單內移除此創作人，確定不再關注?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_recording">確定刪除本頁錄音檔?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_description">確定刪除本頁敘述?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_location">確定刪除本頁地點資訊?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_close_creation">確定退出編輯器?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_item">"確定刪除此項目?"</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_is_contribute">投稿作品數量已達上限, 是否確認撤下該作品並建立新作品?(若確定，則原作品的投票數將會歸零)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_cancel_follow">不再關注</string>
+    <string name="pinpinbox_2_0_0_dialog_message_directions_works_contribute">確定投稿此作品?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_directions_works_contribute_by_read_album">確定投稿此作品?(點取消則退出作品瀏覽，如需再投稿此作品請至活動頁面操作)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_point_insufficient">你的P點不足，前往購點?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_reset_contribute">此作品已投稿，是否重新選擇?(若確定，則原作品的投票數將會歸零)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_exit_pinpinbox">要離開pinpinbox?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_scan_error">掃描出現異常，請確定產品和軟體關連的設定</string>
+    <string name="pinpinbox_2_0_0_dialog_message_scan_invalid">本次掃描無效</string>
+    <string name="pinpinbox_2_0_0_dialog_message_use_aviary">要使用特效編輯嗎?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_video_play_error_check_file">無法播放，建議去檢查檔案有沒有損毀</string>
+    <string name="pinpinbox_2_0_0_dialog_message_inspection_of_network">當前網路沒有連線，請檢查您的網路設備</string>
+    <string name="pinpinbox_2_0_0_dialog_message_connection_instability">目前網路不穩定, 請確認網路品質再繼續使用pinpinbox!</string>
+    <string name="pinpinbox_2_0_0_dialog_message_delete_photo">確定刪除此相片?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_warning_to_logout">注意!此動作將會登出，並開啟掃描功能</string>
+    <string name="pinpinbox_2_0_0_dialog_message_stop_to_upload">正在上傳圖片，要停止傳送嗎?</string>
+
+
+
+    <string name="pinpinbox_2_0_0_toast_message_audio_error">音效播放異常</string>
+    <string name="pinpinbox_2_0_0_toast_message_register_success">註冊成功</string>
+    <string name="pinpinbox_2_0_0_toast_message_send_report_success">檢舉完成</string>
+    <string name="pinpinbox_2_0_0_toast_message_scroll_max">沒有項目了</string>
+    <string name="pinpinbox_2_0_0_toast_message_albumwork_undone">作品尚未完成</string>
+    <string name="pinpinbox_2_0_0_toast_message_open_act_to_share">隱私必須開啟才能分享</string>
+    <string name="pinpinbox_2_0_0_toast_message_album_info_is_incomplete_can_not_make_public">作品資訊不完整不能公開</string>
+    <string name="pinpinbox_2_0_0_toast_message_inputbox_mail_type_is_error">信箱格式出了點問題</string>
+    <string name="pinpinbox_2_0_0_toast_message_inputbox_pwd_is_not_fill_in">還沒設定密碼</string>
+    <string name="pinpinbox_2_0_0_toast_message_inputbox_pwd_is_morethan_eight_words">密碼至少8個字元</string>
+    <string name="pinpinbox_2_0_0_toast_message_inputbox_pwd_twice_enter_is_not_match">兩次密碼輸入不符</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_name">請輸入名稱</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_nickname">請輸入暱稱</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_account">請輸入帳號</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_pwd">請輸入密碼</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_cellphone_number">請填手機號碼</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_location">請輸入地點</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_ver_code">記得輸入驗證碼</string>
+    <string name="pinpinbox_2_0_0_toast_message_ver_code_is_already_send">驗證碼已傳送到手機</string>
+    <string name="pinpinbox_2_0_0_toast_message_pwd_is_already_send">密碼已傳送到手機</string>
+    <string name="pinpinbox_2_0_0_toast_message_registered">正在註冊..請稍後</string>
+    <string name="pinpinbox_2_0_0_toast_message_edit_finish">修改完成</string>
+    <string name="pinpinbox_2_0_0_toast_message_hobby_count_max">最多三項</string>
+    <string name="pinpinbox_2_0_0_toast_message_no_select_photo">你還沒選擇照片!</string>
+    <string name="pinpinbox_2_0_0_toast_message_no_select_video">你還沒選擇影片!</string>
+    <string name="pinpinbox_2_0_0_toast_message_select_same_item_can_play_stop">點擊同項目可播放和停止</string>
+    <string name="pinpinbox_2_0_0_toast_message_added_to_collect">成功加入收藏</string>
+    <string name="pinpinbox_2_0_0_toast_message_play_audio_ready">準備播放影片</string>
+    <string name="pinpinbox_2_0_0_toast_message_send_text_success">留言已送出</string>
+    <string name="pinpinbox_2_0_0_toast_message_can_not_send_continuous">不可連續發送</string>
+    <string name="pinpinbox_2_0_0_toast_message_text_is_not_fill_in">不能發送空白訊息</string>
+    <string name="pinpinbox_2_0_0_toast_message_event_is_finish">活動已結束</string>
+    <string name="pinpinbox_2_0_0_toast_message_album_is_saving">作品保存中</string>
+    <string name="pinpinbox_2_0_0_toast_message_select_category_first">請先選擇分類</string>
+    <string name="pinpinbox_2_0_0_toast_message_thank_by_sponsor">感謝你的贊助</string>
+    <string name="pinpinbox_2_0_0_toast_message_album_mode_is_change">音效播放模式已切換</string>
+    <string name="pinpinbox_2_0_0_toast_message_open_permission_sdcard">請開啟權限「儲存裝置」</string>
+    <string name="pinpinbox_2_0_0_toast_message_open_permission_camera">請開啟權限「相機」</string>
+    <string name="pinpinbox_2_0_0_toast_message_buy_point_success_to_refresh">購買成功，P點已更新</string>
+    <string name="pinpinbox_2_0_0_toast_message_count_max">選取達上限</string>
+    <string name="pinpinbox_2_0_0_toast_message_upload_success">上傳成功</string>
+    <string name="pinpinbox_2_0_0_toast_message_upload_fail">上傳失敗</string>
+    <string name="pinpinbox_2_0_0_toast_message_server_refreshing">伺服器更新數據中</string>
+    <string name="pinpinbox_2_0_0_toast_message_clean_done">清除完畢</string>
+    <string name="pinpinbox_2_0_0_toast_message_never_donwload">還沒有下載過作品</string>
+    <string name="pinpinbox_2_0_0_toast_message_downloading">正在下載</string>
+    <string name="pinpinbox_2_0_0_toast_message_can_not_delete_approver">副管理者之間不能互相移除</string>
+    <string name="pinpinbox_2_0_0_toast_message_can_not_change_act_each_other_by_approver">副管理者之間不能互相變更權限</string>
+    <string name="pinpinbox_2_0_0_toast_message_token_error_to_login">用戶驗證異常，請重新登入</string>
+    <string name="pinpinbox_2_0_0_toast_message_first_number_can_not_set_zero">第一位數不能為0</string>
+    <string name="pinpinbox_2_0_0_toast_message_input_sponsor_count">請輸入贊助數量</string>
+    <string name="pinpinbox_2_0_0_toast_message_already_in_cooperation_list">已經在共用清單</string>
+    <string name="pinpinbox_2_0_0_toast_message_description_is_null">介紹要記得填寫</string>
+    <string name="pinpinbox_2_0_0_toast_message_first_paging_is_null">主類別還沒選</string>
+    <string name="pinpinbox_2_0_0_toast_message_first_second_is_null">子類別還沒選</string>
+    <string name="pinpinbox_2_0_0_toast_message_at_least_3p">至少3P點</string>
+    <string name="pinpinbox_2_0_0_toast_message_album_content_is_null">你的作品還沒有內容</string>
+    <string name="pinpinbox_2_0_0_toast_message_album_item_bigger_than_1_to_sort">作品項目多於1項才可編排順序</string>
+    <string name="pinpinbox_2_0_0_toast_message_audio_playing">播放中</string>
+    <string name="pinpinbox_2_0_0_toast_message_audio_recording">錄音中</string>
+    <string name="pinpinbox_2_0_0_toast_message_cover_can_not_remove">封面不能取消</string>
+    <string name="pinpinbox_2_0_0_toast_message_can_not_load_photo_try_again">讀取不到圖片，請再嘗試一次</string>
+    <string name="pinpinbox_2_0_0_toast_message_save_album_done">作品保存完畢</string>
+    <string name="pinpinbox_2_0_0_toast_message_saving_album">作品保存中..請稍候</string>
+    <string name="pinpinbox_2_0_0_toast_message_deficiency_identity">權限不足</string>
+    <string name="pinpinbox_2_0_0_toast_message_contribute_cancel">已取消投稿</string>
+    <string name="pinpinbox_2_0_0_toast_message_hobby_is_null">你還沒選擇興趣</string>
+    <string name="pinpinbox_2_0_0_toast_message_album_save_not_yet">作品尚未有儲存的動作</string>
+    <string name="pinpinbox_2_0_0_toast_message_contribute_success">投稿成功</string>
+    <string name="pinpinbox_2_0_0_toast_message_once_upload_count">一次最多上傳一部影像</string>
+    <string name="pinpinbox_2_0_0_toast_message_opening_video">正在開啟影片</string>
+    <string name="pinpinbox_2_0_0_toast_message_copied_this_link">已複製</string>
+    <string name="pinpinbox_2_0_0_toast_message_null_intent">無頁面跳轉</string>
+    <string name="pinpinbox_2_0_0_toast_message_enter_barcode">請輸入條碼或掃描添加</string>
+    <string name="pinpinbox_2_0_0_toast_message_is_max">已達上限</string>
+    <string name="pinpinbox_2_0_0_toast_message_only_barcode">只能設定條碼</string>
+    <string name="pinpinbox_2_0_0_toast_message_add_at_least_two_photos">至少添加兩張相片</string>
+    <string name="pinpinbox_2_0_0_toast_message_grid_empty">還有格子是空的</string>
+    <string name="pinpinbox_2_0_0_toast_message_there_are_no_contents_in_the_work">作品內沒有內容</string>
+    <string name="pinpinbox_2_0_0_toast_message_add_item_first_to_add_description">先添加項目才能新增描述</string>
+    <string name="pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items">只能操作你上傳的項目</string>
+    <string name="pinpinbox_2_0_0_toast_message_photo_does_not_exist">圖片不存在</string>
+    <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_canceled">已取消原始尺寸</string>
+    <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_selected">已選擇原始尺寸</string>
+    <string name="pinpinbox_2_0_0_toast_message_crop_error">剪裁失敗</string>
+
+
+
+
+
+
+    <string name="pinpinbox_2_0_0_size_general">一般尺寸</string>
+    <string name="pinpinbox_2_0_0_size_original">原始尺寸(上傳時間較長)</string>
+
+
+    <string name="pinpinbox_2_0_0_itemtype_photo">相片</string>
+    <string name="pinpinbox_2_0_0_itemtype_video">影片</string>
+    <string name="pinpinbox_2_0_0_itemtype_template">套用樣版</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect">收藏</string>
+    <string name="pinpinbox_2_0_0_itemtype_share">分享</string>
+    <string name="pinpinbox_2_0_0_itemtype_report">檢舉</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_info">作品資訊</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_sort">排序作品</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_select_preview">選擇預覽頁</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_set_audio">設定音樂</string>
+    <string name="pinpinbox_2_0_0_itemtype_no_audio">無音樂</string>
+    <string name="pinpinbox_2_0_0_itemtype_plural_audio">多首播放</string>
+    <string name="pinpinbox_2_0_0_itemtype_singular_audio">單首播放</string>
+    <string name="pinpinbox_2_0_0_itemtype_common_upload">一般上傳</string>
+    <string name="pinpinbox_2_0_0_itemtype_original_upload">原始尺寸上傳</string>
+    <string name="pinpinbox_2_0_0_itemtype_first_pagin">主類別</string>
+    <string name="pinpinbox_2_0_0_itemtype_second_pagin">子類別</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_name">名稱</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_description">介紹</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_location">地點</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_weather">天氣</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_mood">心情</string>
+    <string name="pinpinbox_2_0_0_itemtype_collected">已收藏</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_need_sponsor">收藏(需贊助</string>
+    <string name="pinpinbox_2_0_0_itemtype_clear_downloaded_albums">清除下載過的作品</string>
+    <string name="pinpinbox_2_0_0_itemtype_platform_specification">平台規範</string>
+    <string name="pinpinbox_2_0_0_itemtype_about_pinpinbox">關於pinpinbox</string>
+    <string name="pinpinbox_2_0_0_itemtype_edit_album">作品編輯</string>
+    <string name="pinpinbox_2_0_0_itemtype_edit_info">修改資訊</string>
+    <string name="pinpinbox_2_0_0_itemtype_edit_profile">資訊編輯</string>
+    <string name="pinpinbox_2_0_0_itemtype_create_new_album">建立新作品</string>
+    <string name="pinpinbox_2_0_0_itemtype_select_exist_album">選擇現有作品</string>
+    <string name="pinpinbox_2_0_0_itemtype_reward_share">獎勵分享(facebook)</string>
+    <string name="pinpinbox_2_0_0_itemtype_common_share">一般分享</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_my">我的作品</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_other">其他收藏</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">共用協作</string>
+    <string name="pinpinbox_2_0_0_itemtype_autoplay_audio">自動播放音效</string>
+    <string name="pinpinbox_2_0_0_itemtype_work_manager">作品管理</string>
+    <string name="pinpinbox_2_0_0_itemtype_logout">登出</string>
+    <string name="pinpinbox_2_0_0_itemtype_accumulation_income">累積總積分</string>
+    <string name="pinpinbox_2_0_0_itemtype_month_income">本月積分</string>
+    <string name="pinpinbox_2_0_0_itemtype_redeem">可兌換</string>
+    <string name="pinpinbox_2_0_0_itemtype_monday">星期一</string>
+    <string name="pinpinbox_2_0_0_itemtype_tuesday">星期二</string>
+    <string name="pinpinbox_2_0_0_itemtype_wednesday">星期三</string>
+    <string name="pinpinbox_2_0_0_itemtype_thursday">星期四</string>
+    <string name="pinpinbox_2_0_0_itemtype_friday">星期五</string>
+    <string name="pinpinbox_2_0_0_itemtype_saturday">星期六</string>
+    <string name="pinpinbox_2_0_0_itemtype_sunday">星期日</string>
+    <string name="pinpinbox_2_0_0_itemtype_edit">編輯</string>
+    <string name="pinpinbox_2_0_0_itemtype_hobby">興趣</string>
+    <string name="pinpinbox_2_0_0_itemtype_follow">關注</string>
+    <string name="pinpinbox_2_0_0_itemtype_new">最新</string>
+
+
+
+    <string name="pinpinbox_2_0_0_title_editprofile">編輯資訊</string>
+    <string name="pinpinbox_2_0_0_title_changepassword">變更密碼</string>
+    <string name="pinpinbox_2_0_0_title_change_phone_number">變更號碼</string>
+    <string name="pinpinbox_2_0_0_title_notify">通知</string>
+    <string name="pinpinbox_2_0_0_title_myfollow">關注清單</string>
+    <string name="pinpinbox_2_0_0_title_buypoint">購買P點</string>
+    <string name="pinpinbox_2_0_0_title_select_hobby">對哪種類型的資訊感興趣呢?</string>
+    <string name="pinpinbox_2_0_0_title_recent">最近瀏覽</string>
+    <string name="pinpinbox_2_0_0_title_create_new_album">建立新作品</string>
+    <string name="pinpinbox_2_0_0_title_app_settings">設定</string>
+    <string name="pinpinbox_2_0_0_title_offline_review">我下載的作品</string>
+    <string name="pinpinbox_2_0_0_title_explore_album">探索作品</string>
+    <string name="pinpinbox_2_0_0_title_other_setting">其他設定</string>
+    <string name="pinpinbox_2_0_0_title_point_setting">贊助條件</string>
+    <string name="pinpinbox_2_0_0_title_advanced_setting">進階設定</string>
+    <string name="pinpinbox_2_0_0_title_works_collection">作品集</string>
+    <string name="pinpinbox_2_0_0_title_nickname">暱稱</string>
+    <string name="pinpinbox_2_0_0_title_description">介紹</string>
+    <string name="pinpinbox_2_0_0_title_about_you">關於你</string>
+    <string name="pinpinbox_2_0_0_title_mail">信箱</string>
+    <string name="pinpinbox_2_0_0_title_password">密碼</string>
+    <string name="pinpinbox_2_0_0_title_cellphone">手機</string>
+    <string name="pinpinbox_2_0_0_title_gender">姓別</string>
+    <string name="pinpinbox_2_0_0_title_birthday">生日</string>
+    <string name="pinpinbox_2_0_0_title_hobby">興趣</string>
+    <string name="pinpinbox_2_0_0_title_click_to_select_long_click_to_watch">點擊選取，長按觀看</string>
+    <string name="pinpinbox_2_0_0_title_find_creator">找到的創作人</string>
+    <string name="pinpinbox_2_0_0_title_find_album">找到的作品</string>
+    <string name="pinpinbox_2_0_0_title_recommend_creator">創作人推薦</string>
+    <string name="pinpinbox_2_0_0_title_popular_album">人氣精選</string>
+    <string name="pinpinbox_2_0_0_title_useing_pinpinbox_friends">這些朋友正在使用pinpinbox</string>
+    <string name="pinpinbox_2_0_0_title_get_back_password">找回密碼</string>
+    <string name="pinpinbox_2_0_0_title_verification_sms">簡訊驗證</string>
+    <string name="pinpinbox_2_0_0_title_register">註冊</string>
+    <string name="pinpinbox_2_0_0_title_choose_template">選擇版型</string>
+    <string name="pinpinbox_2_0_0_title_creativearea">專區名稱</string>
+    <string name="pinpinbox_2_0_0_title_entries">參賽作品</string>
+    <string name="pinpinbox_2_0_0_title_Income_statistic">積分統計</string>
+    <string name="pinpinbox_2_0_0_title_social_networks">社群</string>
+    <string name="pinpinbox_2_0_0_title_work_info">作品資訊</string>
+    <string name="pinpinbox_2_0_0_title_title">標題</string>
+    <string name="pinpinbox_2_0_0_title_explore">探索</string>
+    <string name="pinpinbox_2_0_0_title_news_feed">動態</string>
+    <string name="pinpinbox_2_0_0_title_latest_event">最新活動</string>
+
+
+    <string name="pinpinbox_2_0_0_guide_cooperation">跟其他創作人合作也是一種樂趣</string>
+    <string name="pinpinbox_2_0_0_guide_no_notify">今天還沒收到訊息</string>
+    <string name="pinpinbox_2_0_0_guide_no_follow_user">目前沒有關注的人，可返回首頁利用搜尋功能</string>
+    <string name="pinpinbox_2_0_0_guide_no_friend_use_pinpinbox">目前還沒有朋友在使用或者正在使用的朋友你已經關注過了</string>
+    <string name="pinpinbox_2_0_0_guide_no_match_keyword_album">沒有符合關鍵字的作品</string>
+    <string name="pinpinbox_2_0_0_guide_no_match_keyword_creator">沒有符合關鍵字的創作人</string>
+    <string name="pinpinbox_2_0_0_guide_collect_my">內容除了相片更能自由搭配影像或聲音!</string>
+    <string name="pinpinbox_2_0_0_guide_collect_cooperation">如果有人共用作品給你都能在這裡找到</string>
+    <string name="pinpinbox_2_0_0_guide_collect_other">收藏過的作品都能在這找到</string>
+    <string name="pinpinbox_2_0_0_guide_no_notification">目前沒有收到任何通知</string>
+    <string name="pinpinbox_2_0_0_guide_page_0">多元的數位作品</string>
+    <string name="pinpinbox_2_0_0_guide_page_1">提供多媒體整合，上傳格式多元，讓你輕鬆打造影片集、音樂專輯、有聲圖書、雜誌型錄等數位作品</string>
+    <string name="pinpinbox_2_0_0_guide_page_2">友善的創作生態</string>
+    <string name="pinpinbox_2_0_0_guide_page_3">透過小額贊助支持創作人的原創作品，同樣也為瀏覽人匯集優質內容</string>
+    <string name="pinpinbox_2_0_0_guide_page_4">小額贊助機制</string>
+    <string name="pinpinbox_2_0_0_guide_page_5">創作人每發表一件作品，粉絲即可對作品本身支付小額贊助，使內容價值兌現</string>
+    <string name="pinpinbox_2_0_0_guide_change_photo_place">點選兩張相片可交換位置</string>
+
+
+    <string name="pinpinbox_2_0_0_input_hint_invite_creator">邀請的創作人</string>
+    <string name="pinpinbox_2_0_0_input_hint_password_eight_digits_at_least">密碼(最少八位英數字)</string>
+    <string name="pinpinbox_2_0_0_input_hint_password_input_password_again">再輸入一次密碼確認</string>
+    <string name="pinpinbox_2_0_0_input_hint_phone_number">行動裝置號碼</string>
+    <string name="pinpinbox_2_0_0_input_hint_input_verification_code">輸入驗證碼</string>
+    <string name="pinpinbox_2_0_0_input_hint_what_is_your_nickname">你的暱稱是?</string>
+    <string name="pinpinbox_2_0_0_input_hint_simply_introduce_myself">介紹一下自己吧!</string>
+    <string name="pinpinbox_2_0_0_input_hint_add_description_to_this_page">為這頁添加一些敘述\n(可設定超連結)</string>
+    <string name="pinpinbox_2_0_0_input_hint_add_location_to_this_page">為這頁添加地點資訊</string>
+    <string name="pinpinbox_2_0_0_input_hint_mail">信箱</string>
+    <string name="pinpinbox_2_0_0_input_hint_password">密碼</string>
+    <string name="pinpinbox_2_0_0_input_hint_nickname">暱稱</string>
+    <string name="pinpinbox_2_0_0_input_hint_board_express">有什麼想表達的嗎?</string>
+
+
+    <string name="pinpinbox_2_0_0_other_message_confirm_buy">確定購買</string>
+    <string name="pinpinbox_2_0_0_other_message_confirm_sponsor">確定贊助</string>
+    <string name="pinpinbox_2_0_0_other_message_photo_uploading">相片上傳中</string>
+    <string name="pinpinbox_2_0_0_other_text_current_point">現有P點:</string>
+    <string name="pinpinbox_2_0_0_other_text_people_browsing">瀏覽</string>
+    <string name="pinpinbox_2_0_0_other_text_people_follow">關注</string>
+    <string name="pinpinbox_2_0_0_other_text_people_sponsor">贊助</string>
+    <string name="pinpinbox_2_0_0_other_text_current_phone_number">當前號碼:</string>
+    <string name="pinpinbox_2_0_0_other_text_check_again">再確認一次</string>
+    <string name="pinpinbox_2_0_0_other_text_to_change_to">要變更為</string>
+    <string name="pinpinbox_2_0_0_other_text_current_password">當前密碼</string>
+    <string name="pinpinbox_2_0_0_other_text_download">下載</string>
+    <string name="pinpinbox_2_0_0_other_text_downloading">下載中</string>
+    <string name="pinpinbox_2_0_0_other_text_can_redownload">可重載</string>
+    <string name="pinpinbox_2_0_0_other_text_back_to_settings">返回設定</string>
+    <string name="pinpinbox_2_0_0_other_text_only_read_photo_description">僅能瀏覽相片和文字敘述</string>
+    <string name="pinpinbox_2_0_0_other_text_click_left_icon_or_input">點擊左方圖示或直接輸入</string>
+    <string name="pinpinbox_2_0_0_other_text_member_level_profession">(會員等級profession)</string>
+    <string name="pinpinbox_2_0_0_other_text_collect_byrequired_point">贊助所需P點:</string>
+    <string name="pinpinbox_2_0_0_other_text_least_3p">(最少設定3P)</string>
+    <string name="pinpinbox_2_0_0_other_text_necessary_select">(必選)</string>
+    <string name="pinpinbox_2_0_0_other_text_necessary_fill_in">(必填)</string>
+    <string name="pinpinbox_2_0_0_other_text_select_first_pagin_first">(先選擇主類別)</string>
+    <string name="pinpinbox_2_0_0_other_text_accepted_sponsor">已接受</string>
+    <string name="pinpinbox_2_0_0_other_text_sponsor_times">次贊助</string>
+    <string name="pinpinbox_2_0_0_other_text_lowest_point">最低額度</string>
+    <string name="pinpinbox_2_0_0_other_text_change">變更</string>
+    <string name="pinpinbox_2_0_0_other_text_boy">男孩</string>
+    <string name="pinpinbox_2_0_0_other_text_girl">女孩</string>
+    <string name="pinpinbox_2_0_0_other_text_private">不公開</string>
+    <string name="pinpinbox_2_0_0_other_text_wait_verification_code_description">請等候驗證碼寄送至您輸入的行動裝置，若時間過長，可回前步驟重新獲取驗證碼</string>
+    <string name="pinpinbox_2_0_0_other_text_find_facebook_friend_description_1">我們將幫你找到facebook上有使用pinpinbox的好友，要關注他們嗎?</string>
+    <string name="pinpinbox_2_0_0_other_text_find_facebook_friend_description_2">被關注的用戶作品會更容易出現在你的動態牆上</string>
+    <string name="pinpinbox_2_0_0_other_text_teach_scroll_exit_0">操作提示:</string>
+    <string name="pinpinbox_2_0_0_other_text_teach_scroll_exit_1">此詳情頁可向下拖曳關閉</string>
+    <string name="pinpinbox_2_0_0_other_text_teach_scroll_exit_2">多數的畫面都能從邊緣拖曳關閉</string>
+    <string name="pinpinbox_2_0_0_other_text_teach_select_original_size_photo">可上傳原始尺寸的圖片</string>
+    <string name="pinpinbox_2_0_0_other_text_count_uploading">0/讀取中</string>
+    <string name="pinpinbox_2_0_0_other_text_count_uploading_1">1/讀取中</string>
+    <string name="pinpinbox_2_0_0_other_text_select_done_start_use_pinpinbox">開始使用pinpinbox</string>
+    <string name="pinpinbox_2_0_0_other_text_other_contents">&#160;&#160;▪&#160;&#160;其他內容</string>
+    <string name="pinpinbox_2_0_0_other_text_album_is_taking_part">作品正在參加活動</string>
+    <string name="pinpinbox_2_0_0_other_text_create_album_now">立即建立作品</string>
+    <string name="pinpinbox_2_0_0_other_text_invited_user_default_as_viewer">被邀請的用戶預設為瀏覽者</string>
+    <string name="pinpinbox_2_0_0_other_text_sum">總結為</string>
+    <string name="pinpinbox_2_0_0_other_text_current_item_count">作品目前數量:</string>
+    <string name="pinpinbox_2_0_0_other_text_current_item_count_loading">作品目前數量:讀取中</string>
+    <string name="pinpinbox_2_0_0_other_text_current_select_item">當前選取:</string>
+    <string name="pinpinbox_2_0_0_other_text_current_select_item_0">當前選取:0項</string>
+    <string name="pinpinbox_2_0_0_other_text_current_select_schedule">當前進度:</string>
+    <string name="pinpinbox_2_0_0_other_text_current_select_schedule_0">當前進度:0%</string>
+    <string name="pinpinbox_2_0_0_other_text_hobby_select_count">至少一項，最多三項</string>
+    <string name="pinpinbox_2_0_0_other_text_new_version_in_notification">有新版本囉，立即前往Google Play!</string>
+    <string name="pinpinbox_2_0_0_other_text_choose_one">選擇一項</string>
+    <string name="pinpinbox_2_0_0_other_text_agree_norm">成功註冊表示同意pinpinbox平台規範</string>
+    <string name="pinpinbox_2_0_0_other_text_has_to_be_used_for_collect">本頁功能要先收藏或贊助才能使用</string>
+    <string name="pinpinbox_2_0_0_other_text_i_want_sponsor">我要贊助</string>
+    <string name="pinpinbox_2_0_0_other_text_only_open_albums">僅限公開的作品</string>
+    <string name="pinpinbox_2_0_0_other_text_change_cooperation_0">副管理:\n ▪ 變更共用者和瀏覽者的權限\n ▪ 在作品內添加項目\n ▪ 邀請其他創作人\n ▪ 下載作品</string>
+    <string name="pinpinbox_2_0_0_other_text_change_cooperation_1">共用:\n ▪ 在作品內添加項目\n ▪ 下載作品</string>
+    <string name="pinpinbox_2_0_0_other_text_change_cooperation_2">瀏覽 :\n ▪ 下載作品</string>
+    <string name="pinpinbox_2_0_0_other_text_change_cooperation_3">(除了管理者，以上三個權限皆不能在編輯器內操作移除項目、作品設定)</string>
+    <string name="pinpinbox_2_0_0_other_text_k_times_views">K次瀏覽</string>
+    <string name="pinpinbox_2_0_0_other_text_times_views_single">次瀏覽</string>
+    <string name="pinpinbox_2_0_0_other_text_times_views">次瀏覽</string>
+    <string name="pinpinbox_2_0_0_other_text_k_times_likes">K個讚</string>
+    <string name="pinpinbox_2_0_0_other_text_times_likes_single">個讚</string>
+    <string name="pinpinbox_2_0_0_other_text_times_likes">個讚</string>
+    <string name="pinpinbox_2_0_0_other_text_links">的連結</string>
+    <string name="pinpinbox_2_0_0_other_text_current_point0">還有</string>
+    <string name="pinpinbox_2_0_0_other_text_current_point1">P點可使用</string>
+    <string name="pinpinbox_2_0_0_other_text_time_left0">剩餘</string>
+    <string name="pinpinbox_2_0_0_other_text_time_left1">秒可再發送</string>
+    <string name="pinpinbox_2_0_0_other_text_first_create0">第一次編輯嗎?先從這裡開始吧</string>
+    <string name="pinpinbox_2_0_0_other_text_first_create1">您也可以邀請好朋友共同創作</string>
+    <string name="pinpinbox_2_0_0_other_text_first_create2">作品的排序和預覽頁設定可以在這裡操作</string>
+    <string name="pinpinbox_2_0_0_other_text_task_get_point">恭喜您獲得</string>
+    <string name="pinpinbox_2_0_0_other_text_creation_cover">封面</string>
+    <string name="pinpinbox_2_0_0_other_text_used_count_by_template">人使用過</string>
+    <string name="pinpinbox_2_0_0_other_text_item">項</string>
+    <string name="pinpinbox_2_0_0_other_text_privacy_direction">隱私權開啟時才能讓其他人看見你的作品</string>
+    <string name="pinpinbox_2_0_0_other_text_delete">移除</string>
+    <string name="pinpinbox_2_0_0_other_text_already_get">已取得</string>
+    <string name="pinpinbox_2_0_0_other_text_count">次數:</string>
+    <string name="pinpinbox_2_0_0_other_text_album_number">編號:</string>
+    <string name="pinpinbox_2_0_0_other_text_vote_count">票數:</string>
+    <string name="pinpinbox_2_0_0_other_text_voted">已投票</string>
+    <string name="pinpinbox_2_0_0_other_text_vote_for">投票給[</string>
+    <string name="pinpinbox_2_0_0_other_text_voting_now">去投票</string>
+    <string name="pinpinbox_2_0_0_other_text_remain_votes">今日剩餘票數:</string>
+    <string name="pinpinbox_2_0_0_other_text_remove_all_audio_setting">(移除所有音檔設定)</string>
+    <string name="pinpinbox_2_0_0_other_text_use_page_of_audio">(使用每頁的錄音或音效)</string>
+    <string name="pinpinbox_2_0_0_other_text_play_only_one_audio_in_works">(作品內唯一播放)</string>
+    <string name="pinpinbox_2_0_0_other_text_after_split">(分潤後)</string>
+    <string name="pinpinbox_2_0_0_other_text_monthly_settlement">(每月一日結算)</string>
+    <string name="pinpinbox_2_0_0_other_text_profit_percentage">作品分潤:</string>
+    <string name="pinpinbox_2_0_0_other_text_to_works_manager">前往作品管理</string>
+    <string name="pinpinbox_2_0_0_other_text_i_know">我知道了!</string>
+
+
+
+    <string name="crop__saving">相片儲存中</string>
+    <string name="crop__wait">請稍後</string>
+    <string name="crop__pick_error">找不到相片</string>
+
+
+    <string name="app_name">pinpinbox</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="facebook_app_id">472973216191275</string>
+    <!--525308027624460   w3test-->
+
+    <!-- debug -->
+    <!-- <string name="google_maps_key" templateMergeStrategy="preserve">AIzaSyCV2AvzBBWQAtV5lT4vd5WGIed6P-hRflI</string> -->
+
+
+    <!-- <string name="google_maps_key" templateMergeStrategy="preserve">AIzaSyCLKu6NeujJXaBxKm7PsHN6jfWIAepHl4w</string> -->
+
+
+    <!-- pinpinbox_vamge -->
+    <!--<string name="google_maps_key" templateMergeStrategy="preserve">AIzaSyDsGHWEnVsCuq3KehPMxAyRAWtIlPDsIB0</string>-->
+
+
+    <!--ReadAlbumActivity-->
+    <string name="exchange">兌 換</string>
+    <string name="exchanged">已兌換</string>
+    <string name="exchanged_end">已結束</string>
+
+
+    <!--AlbumInformation-->
+
+    <!--CreateAlbumActivity-->
+    <string name="create_hot">熱 門</string>
+    <string name="create_free">免 費</string>
+    <string name="create_pay">贊 助</string>
+    <string name="create_own">已取得</string>
+    <!--要使用特效編輯嗎-->
+
+    <string name="change_template">"更換版型樣式 ?"</string>
+    <string name="delete_picture">"確定刪除此相片?"</string>
+
+
+    <!--MessageReceiving-->
+    <string name="notification_number">1337</string>
+
+
+    ------------------------------------------ dialog ------------------------------------------
+
+    <string name="yes">確定</string>
+    <string name="no">取消</string>
+
+
+    <string name="countmax">內容預覽已到最末頁，點擊收藏才能瀏覽完整內容!</string>
+    <string name="countmax_point">內容預覽已到最末頁，點擊贊助才能瀏覽完整內容!</string>
+
+
+    <string name="open_act_for_contribute">隱私打開才能投稿作品!</string>
+
+
+    <string name="collect_">收藏並閱讀</string>
+    <string name="sponsor_">贊助</string>
+
+
+    <string name="connection_instability">目前網路不穩定, 請確認網路品質再繼續使用pinpinbox!</string>
+
+
+    <string name="works_no_null">作品沒有內容無法上傳!</string>
+
+
+    ------------------------------------------ other ------------------------------------------
+
+    <string name="know_user">你可能認識的用戶</string>
+
+
+    <string name="finish">完成</string>
+
+    <string name="next">下一步</string>
+
+    <string name="use_template">套用版型</string>
+
+
+    <string name="project_number">830709829391</string>
+    <string name="first_launch">First Launch</string>
+    <string name="num_of_missed_messages">MissedMessageCount</string>
+    <string name="lines_of_message_count">LinesOfMessageCount</string>
+    <string name="preferences">PreferencesFile</string>
+
+
+    <string-array name="jazzy_effects">
+        <item>Standard</item>
+        <item>Tablet</item>
+        <item>CubeIn</item>
+        <item>CubeOut</item>
+        <item>FlipVertical</item>
+        <item>FlipHorizontal</item>
+        <item>Stack</item>
+        <item>ZoomIn</item>
+        <item>ZoomOut</item>
+        <item>RotateUp</item>
+        <item>RotateDown</item>
+        <item>Accordion</item>
+    </string-array>
+    <string name="title_activity_vote2">Vote2Activity</string>
+
+    <!--般符號；，　、　。　．　？　！　～　＄　％　＠　＆ ＃　＊　‧-->
+    <!--　；　︰　…　‥　﹐　﹒　˙　· ﹔　﹕　‘　’　“　”　〝　〞-->
+
+    <!--　　　　‵　′　〃-->
+
+    <!--單框線段；├　─　┼　┴　┬　┤　┌　┐　╞　═　╪　╡　│　▕-->
+    <!--　└　┘　╭　╮　╰　╯-->
+
+    <!--雙框線段；╔ ╦ ╗　╠ ═ ╬ ╣　╓ ╥ ╖　╒ ╤ ╕　║ ╚ ╩ ╝ ╟╫-->
+    <!--╢　╙ ╨ ╜　╞ ╪ ╡　╘ ╧ ╛-->
+
+    <!--線段符號；﹣　﹦　≡　｜　∣　∥　–　︱　—　︳　╴ ¯　￣　﹉　-->
+    <!--﹊　﹍　﹎　﹋　﹌　﹏　︴　 ﹨　∕　╲　╱　＼　／　↑　↓-->
+
+    <!--　　　　　←　→　↖　↗　↙　↘-->
+
+    <!--括號符號；〔　〕　【　】　﹝　﹞ 〈　〉 ﹙　﹚　《　》　（　）　-->
+    <!--｛　｝　﹛　﹜ 『　』　「　」　＜　＞　≦　≧　﹤　﹥-->
+
+    <!--括號符號；︵　︶　︷　︸　︹　︺　︻　︼ ︽　︾　︿　﹀　∩　∪　-->
+    <!--﹁　﹂　﹃　﹄-->
+
+    <!--特殊符號；◎　⊕　⊙　○　●　△　▲　▽　▼　☆　★　◇　◆　□-->
+    <!--　■　☎　☏　◐　◑　♡　♥　♣　♧　☻　☺　♠　♤　▪　▫-->
+
+    <!--　　　　　∴　∵　☜　☞　♫　♬　◊　♦　►　◁　∈　∋　◘　◙　♀-->
+    <!--　♂　♩　♪　☼　￥　〒　￠　￡　※　↔　↕　♨　卍　◈　§　♭-->
+
+    <!--填色方塊；＿　ˍ　▁　▂　▃　▄　▅　▆　▇　█　▏　▎　▍　▌-->
+    <!--　▋　▊　▉　◢　◣　◥　◤　►　◄-->
+
+    <!--方形符號；▣　▤　▥　▦　▧　▨　▩　▒　░-->
+
+    <!--框字符號；㊣　㊟　㊕　㊗　㊡　㊝-->
+
+    <!--數字圓框；①　②　③　④　⑤　⑥　⑦　⑧　⑨　⑩　⑪　⑫　⑬　⑭-->
+    <!--　⑮　⑯　⑰　⑱　⑲　⑳-->
+
+
+    <!--數字括號；⑴　⑵　⑶　⑷　⑸ 　⑹　⑺　⑻　⑼　⑽-->
+
+    <!--　　　　　㈠　㈡　㈢　㈣　㈤　㈥　㈦　㈧　㈨　㈩-->
+
+    <!--數字符號；１　２　３　４　５　６　７　８　９　０　〡　〢　〣　〤-->
+    <!--　〥　〦　〧　〨　〩　十　卄　卅-->
+
+    <!--數字其他；Ⅰ　Ⅱ　Ⅲ　Ⅳ　Ⅴ　Ⅵ　Ⅶ　Ⅷ　Ⅸ　Ⅹ　Ⅺ　Ⅻ-->
+
+    <!--英文圓框；ⓐ　ⓑ　ⓒ　ⓓ　ⓔ　ⓕ　ⓖ　ⓗ　ⓘ　ⓙ　ⓚ　ⓛ　ⓜ　ⓝ-->
+    <!--　ⓞ　ⓟ　ⓠ　ⓡ　ⓢ　ⓣ　ⓤ　ⓥ　ⓦ　ⓧ　ⓨ　ⓩ-->
+
+    <!--英文括號；⒜　⒝　⒞　⒟　⒠　⒡　⒢　⒣　⒤　⒥　⒦　⒧　⒨　⒩-->
+    <!--　⒪　⒫　⒬　⒭　⒮　⒯　⒰　⒱　⒲　⒳　⒴　⒵-->
+
+    <!--希臘文字；Α　Β　Γ　Δ　Ε　Ζ　Η　Θ　Ι　Κ　Λ　Μ　Ν　Ξ　Ο　Π　Ρ-->
+    <!--　Σ　Τ　Υ　Φ　Χ　Ψ　Ω　α　 ν　ξ　ο　π　ρ　σ-->
+
+    <!--　　　　　τ　υ　φ　χ　ψ　ω-->
+
+    <!--"日"文符號；ク　ラ　ピ　カ　マ　 ニ　ア　チ　ェ　ッ　ク　あ　な　-->
+    <!--た　の　テ　ス　ト　≠ 　〃　て　た　こ　れ　ま-->
+
+    <!--　　　　　で　キ　ャ　ン　プ　シ　ー　ズ　に　か　け　る　か　が-->
+    <!--　き　い　レ　ャ　ズ　ン　を　え　た　 コ　ン-->
+
+    <!--　　　　　パ　や　す　う　な　ど　す　そ　ビ　ジ　ネ　ら　れ　て-->
+    <!--　い　ア　ウ　ド　ア　や　に　び　せ　だ　も-->
+
+    <!--　　　　　来　つ　リ　ビ　を　し　た　と　に　オ　は　わ　ゅ　う-->
+    <!--　ご　り　よ　ろ　し　く　そ　う　ま　ム　ペ-->
+
+    <!--韓國符號；ㄱ ㄲ ㄳ ㄴ ㄵ ㄶ ㄷ ㄸ ㄹ ㄺ ㄻ ㄼ ㄽ ㄾ ㄿ ㅀ ㅁ ㅂ ㅃ ㅄ ㅅ-->
+    <!--ㅆ ㅇ ㅈ ㅉ ㅊ ㅋ ㅌ ㅍ ㅎ ㅏ ㅐ ㅑ ㅒ ㅓ ㅔ ㅕ ㅖ ㅗ ㅘ-->
+
+    <!--　　　　　 ㅙ ㅚ ㅛ ㅜ ㅝ ㅞ ㅟ ㅠ ㅡ ㅢ ㅥ ㅦ ㅧ ㅨ ㅩ ㅪ ㅫ　ㅬㅭ ㅮ ㅯ-->
+    <!--ㅰ ㅱ ㅲ ㅳ ㅴ ㅵ ㅶ ㅷ ㅸ ㅹ ㅺ ㅻ ㅼ ㅽ ㅾ ㅿ ㆀ ㆁ ㆂ ㆃ-->
+
+    <!--　　　　　 ㆄ ㆅ ㆆ ㆇ ㆈ ㆉ ㆊ-->
+
+    <!--數學符號； ╳　＋　﹢　－　×　÷　＝　≠　≒　∞　ˇ　±　√　⊥　-->
+    <!--∠　∟　⊿　㏒　㏑　∫　∮　∵　∴-->
+
+    <!--注意符號；ㄅ　ㄆ　ㄇ　ㄈ　ㄉ　ㄊ　ㄋ　ㄌ　ㄍ　ㄎ　ㄏ　ㄐ　ㄑ　ㄒ-->
+    <!--　ㄓ　ㄔ　ㄕ　ㄖ　ㄗ　ㄘ　ㄙ　ㄚ　ㄛ　ㄜ　ㄝ　ㄞ-->
+
+    <!--　　　　　ㄟ　ㄠ　ㄡ　ㄢ　ㄣ　ㄤ　ㄥ　ㄦ　ㄧ　ㄨ　ㄩ　˙　ˊ　ˇ-->
+    <!--　ˋ-->
+
+    <!--特別英文；Ä　Ã　Ç　Ê　Ë　Î　Ï　Ð　Ñ　Õ　Ö　Û　Ü　ã　ä　ê　ë　î-->
+    <!--　ï　õ　ö　Ÿ　Ŵ　Ž　Ť　Ř　Ň　ĩ　ħ　ą　č　Ĥ-->
+
+    <!--表情符號；-->
+
+    <!--１。滿意　＞＞　<(￣︶￣)>　~(￣▽￣)~*　(￣﹏￣) 　(￣ˇ￣)　(￣︶-->
+    <!--￣)>　<(￣︶￣)/-->
+
+    <!--２。開心　＞＞　≧▽≦y　(/≧▽≦)　/(≧▽≦)y　(/≧▽≦)　(≧▽≦)　-->
+    <!--(≧3≦)/　(≧ω≦)/　o(≧ω≦)o　o(≧o≦)o　( ° ▽、° )-->
+
+    <!--　　　　　　　　o(≧v≦)o　(≧▽≦)/　≧□≦○-->
+
+    <!--３。驚訝　＞＞　︽⊙＿⊙︽　(⊙＿⊙)　(@口@)　Σ(@)(￣ー￣)+　Σ(⊙-->
+    <!--▽⊙"a　(@[]@!!)-->
+
+    <!--４。無奈　＞＞　(￣▽￣)~*　(￣▽￣)"　╮(╯▽╰)╭　╮(￣▽￣)╭　=-->
+    <!--￣ω￣=　(￣３￣)a　￣▽￣ 　╮(╯3╰)╭　╮(╯_╰)╭　(= 0 =)y-->
+
+    <!--　　　　　　　　o(︶︿︶)o　(￣.￣)　(￣< ￣)>　(～o￣▽￣)～o-->
+
+    <!--５。哭泣　＞＞　〒▽〒　m(_ _)m　(〒︿〒)-->
+
+    <!--６。生氣　＞＞　╭∩╮_(︶︿︶)_╭∩╮　（*－.－）　Σ( ￣□￣；) 　-->
+    <!--(/"≡ _ ≡)　（#－.－）-->
+
+    <!--７。暴力　＞＞　o(#￣▽￣)==O))￣▽￣")o 　(￣ε(#￣)☆╰╮o(￣▽￣///)-->
+    <!--　(￣ε(#￣)☆╰╮o(￣皿￣///) 　(￣ε(#￣)☆╰╮o(︶︿︶///)-->
+
+    <!--符號分隔；╭。☆║．．．．．．．．．．．．．．．．║☆。╮-->
+
+    <!--　　　　　＊－。－。－。－。－。－。－。－－。－。－。－。－＊-->
+
+    <!--　　　　　…。…。…。…。…。…。…。 …。…。…。…。…。-->
+
+    <!--　　　　　╠═╬═╬═╬═╬═╬═╬═╬═╬═╬═╣-->
+
+
+</resources>

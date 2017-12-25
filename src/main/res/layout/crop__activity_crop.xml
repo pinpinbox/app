@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/crop__texture">
+
+
+
+    <com.pinpinbox.android.Views.crop.CropImageView
+        android:id="@+id/crop_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/done_cancel_bar" />
+
+    <RelativeLayout
+        android:id="@+id/done_cancel_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvDone"-->
+            <!--android:layout_width="112dp"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:text="@string/pinpinbox_2_0_0_button_crop"-->
+            <!--android:letterSpacing="0.2"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/ppb200_buttontext_for_height48"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/click_2_0_0_main_button_radius16"-->
+            <!--android:layout_centerInParent="true"/>-->
+
+        <TextView
+            android:id="@+id/tvDone"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_centerInParent="true"
+            android:text="@string/pinpinbox_2_0_0_button_crop" />
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_common_button_small_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:background="@drawable/click_2_0_0_default"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_button_exit"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:paddingLeft="@dimen/ppb200_padding_margin_second"
+            android:paddingRight="@dimen/ppb200_padding_margin_second"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvBack"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="@dimen/ppb200_common_button_small_height"-->
+            <!--android:text="@string/pinpinbox_2_0_0_button_exit"-->
+            <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
+            <!--android:textSize="@dimen/ppb200_buttontext_for_height48"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
+            <!--android:background="@drawable/click_2_0_0_default"-->
+            <!--android:layout_centerVertical="true"/>-->
+
+
+    </RelativeLayout>
+
+    <!--<include-->
+        <!--android:id="@+id/done_cancel_bar"-->
+        <!--layout="@layout/crop__layout_done_cancel" />-->
+
+</RelativeLayout>

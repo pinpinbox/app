@@ -1,0 +1,26 @@
+package com.pinpinbox.android.pinpinbox2_0_0.protocol;
+
+/**
+ * Created by vmage on 2017/7/7.
+ */
+public class ResultType {
+
+    /**
+     * SYSTEM_ERROR: 系統級別錯誤
+     * SYSTEM_OK: 呼叫成功
+     * USER_ERROR: 用戶級別錯誤
+     * USER_REQUEST_USERLOGIN: 要求用戶登入
+     * TIMEOUT: 連線逾時 (client端自定)
+     * TOKEN_ERROR: Token 錯誤
+     */
+
+    public static final String SYSTEM_ERROR = "SYSTEM_ERROR";
+    public static final String SYSTEM_OK = "SYSTEM_OK";
+    public static final String USER_ERROR = "USER_ERROR";
+    public static final String USER_EXISTS = "USER_EXISTS";
+    public static final String USER_REQUEST_USERLOGIN = "USER_REQUEST_USERLOGIN";
+    public static final String TIMEOUT = "TIMEOUT";
+    public static final String TOKEN_ERROR = "TOKEN_ERROR";
+
+
+}

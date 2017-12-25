@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blurview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:blurOverlayColor="@color/blur_black" />
+
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/ppb200_padding_margin_big"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rTopBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="96dp">
+
+            <ImageView
+                android:id="@+id/bgImg"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-32dp"
+                android:layout_marginRight="-24dp"
+                android:layout_marginTop="-8dp"
+                android:alpha="0.4"
+                android:scaleType="centerCrop" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:padding="@dimen/ppb200_padding_margin_first">
+
+                <ImageView
+                    android:id="@+id/smallImg"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tvMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.1"
+                    android:lineSpacingExtra="2dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/ppb200_common_text_second" />
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_2_0_0_dialog_bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/ppb200_padding_margin_first">
+
+
+            <TextView
+                android:id="@+id/tvLeftOrTop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_dialog_close_pinpinbox"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_second" />
+            <!--button L-T-->
+            <TextView
+                android:id="@+id/tvCenter"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:text="button C"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvRightOrBottom"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:text="button R-B"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_second"
+                android:textStyle="bold"
+                fontPath="fonts/OpenSans-Bold.ttf"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

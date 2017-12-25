@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rBackground">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="-2.5dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:id="@+id/item_lock"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="invisible"
+                    android:padding="2dp"/>
+
+                <TextView
+                    android:id="@+id/tvLock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@+id/item_lock"
+                    android:layout_toRightOf="@+id/item_lock"
+                    android:gravity="top"
+
+                    android:textColor="#797979"
+                    android:textSize="16sp"
+                    android:visibility="invisible" />
+
+
+                <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                    android:id="@+id/item_coverImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    app:riv_corner_radius="6dp" />
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_alignTop="@+id/lin"
+                android:layout_marginTop="-1dp"
+                android:background="@color/material_grey_500" />
+
+            <LinearLayout
+                android:id="@+id/lin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/r"
+                android:layout_marginTop="-6dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linMyCollect"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/rUserName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/click_2_0_0_default">
+
+                    <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                        android:id="@+id/item_picfileImg"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="centerCrop"
+                        app:riv_corner_radius="30dp"
+                        app:riv_mutate_background="true"
+                        app:riv_oval="true" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toEndOf="@+id/item_picfileImg"
+                        android:layout_toRightOf="@+id/item_picfileImg">
+
+                        <TextView
+                            android:id="@+id/item_authorname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:gravity="left"
+                            android:textColor="@color/pinpinbox_color_username"
+                            android:textSize="14sp"
+                            android:text=""
+                            android:layout_centerVertical="true"/>
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/item_downloadtype"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:src="@drawable/icon_isdownload_grey300_45x45" />-->
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/gradient_divider" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rSwitch"
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="4dp">
+
+                    <!--<com.sevenheaven.iosswitch.ShSwitchView-->
+                        <!--android:id="@+id/switchView"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--app:tintColor="@color/material_teal_500"-->
+                        <!--app:shadowSpace="2dp"-->
+                        <!--android:visibility="visible"/>-->
+
+                    <RelativeLayout
+                        android:id="@+id/rRealClick"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"/>
+
+                </RelativeLayout>
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvAct"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="當前隱私權為關閉"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textColor="@color/material_pink_500"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:layout_marginRight="8dp"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_marginTop="4dp" />-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:id="@+id/item_album_description"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:ellipsize="end"
+                        android:lineSpacingExtra="2dp"
+                        android:maxLines="4"
+                        android:textColor="@color/pinpinbox_color_dark"
+                        android:textSize="12sp" />
+
+
+                    <!--android:ellipsize="end"-->
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/item_album_description"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/item_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/pinpinbox_color_unclick_gray"
+                            android:textSize="12sp" />
+
+                        <RelativeLayout
+                            android:id="@+id/item_rShareCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/item_time"
+                            android:layout_toRightOf="@+id/item_time">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignBottom="@+id/item_sharecount"
+                                android:layout_alignTop="@+id/item_sharecount"
+                                android:layout_toLeftOf="@+id/item_sharecount"
+                                android:layout_toStartOf="@+id/item_sharecount"
+                                 />
+
+
+                            <TextView
+                                android:id="@+id/item_sharecount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:singleLine="true"
+                                android:text=""
+                                android:textSize="12sp"
+                                android:textColor="@color/pinpinbox_color_unclick_gray"/>
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <!--<com.gc.materialdesign.views.ButtonFloat-->
+                <!--android:id="@+id/item_delete"-->
+                <!--android:layout_width="42dp"-->
+                <!--android:layout_height="42dp"-->
+                <!--android:layout_alignBottom="@+id/r"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="25dp"-->
+                <!--android:background="@color/material_teal_500"-->
+                <!--materialdesign:animate="true"-->
+                <!--/>-->
+
+            <!--<com.gc.materialdesign.views.ButtonFloat-->
+                <!--android:id="@+id/item_edit"-->
+                <!--android:layout_width="42dp"-->
+                <!--android:layout_height="42dp"-->
+                <!--android:layout_alignBottom="@+id/r"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="25dp"-->
+                <!--android:background="@color/material_teal_500"-->
+                <!--materialdesign:animate="true"-->
+                <!--/>-->
+
+            <!--<com.gc.materialdesign.views.ButtonFloat-->
+                <!--android:id="@+id/item_share"-->
+                <!--android:layout_width="42dp"-->
+                <!--android:layout_height="42dp"-->
+                <!--android:layout_alignBottom="@+id/r"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="25dp"-->
+                <!--android:background="@color/material_teal_500"-->
+                <!--materialdesign:animate="true"-->
+                 <!--/>-->
+
+            <!--<com.gc.materialdesign.views.ButtonFloat-->
+                <!--android:id="@+id/item_cooperation"-->
+                <!--android:layout_width="42dp"-->
+                <!--android:layout_height="42dp"-->
+                <!--android:layout_alignBottom="@+id/r"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="25dp"-->
+                <!--android:background="@color/material_teal_500"-->
+                <!--materialdesign:animate="true"-->
+                 <!--/>-->
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+
+</RelativeLayout>

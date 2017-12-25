@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <!--內部填充-->
+    <solid android:color="@color/pinpinbox_2_0_0_third_main" />
+    <corners android:radius="@dimen/ppb200_radius_big" />
+
+</shape>

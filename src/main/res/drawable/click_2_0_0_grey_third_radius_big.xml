@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/border_2_0_0_grey_second_radius_big" />
+    <item android:state_focused="true" android:drawable="@drawable/border_2_0_0_grey_second_radius_big" />
+    <item android:drawable="@drawable/border_2_0_0_grey_third_for_button_radius_big" />
+</selector>

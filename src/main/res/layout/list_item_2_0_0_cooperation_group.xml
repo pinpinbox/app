@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rBackground"
+        android:layout_width="80dp"
+        android:layout_height="112dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/click_2_0_0_default">
+
+        <com.pinpinbox.android.Views.CircleView.RoundedImageView
+            android:id="@+id/userImg"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            app:riv_border_color="@color/pinpinbox_2_0_0_divider"
+            app:riv_border_width="0.5dp"
+            app:riv_corner_radius="48dp"
+            app:riv_mutate_background="true"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userImg"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvIdentity"
+            android:layout_width="64dp"
+            android:layout_height="24dp"
+            android:layout_below="@+id/tvName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/click_2_0_0_second_grey_button_frame_white_radius"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/deleteImg"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:alpha="0.4"
+            android:background="@drawable/click_2_0_0_circle_pink_first"
+            android:padding="8dp"
+            android:src="@drawable/ic200_cancel_white" />
+
+
+        <!--android:src="@drawable/icon_cancel_pink500_120x120"-->
+
+    </RelativeLayout>
+
+</RelativeLayout>

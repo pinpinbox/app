@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/ppb200_title_pop_second"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:text="@string/pinpinbox_2_0_0_pop_title_select_audio_type" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvSave"
+            style="@style/ppb200_Button_main_small_radius"
+            android:layout_gravity="right"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_pop_save" />
+
+
+        <RelativeLayout
+            android:id="@+id/rSelectAudioNone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/selectAudioNoneImg"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+
+            <TextView
+                android:id="@+id/tvSelectAudioNone"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toRightOf="@+id/selectAudioNoneImg"
+                android:text="@string/pinpinbox_2_0_0_itemtype_no_audio" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toRightOf="@+id/selectAudioNoneImg"
+                android:layout_below="@+id/tvSelectAudioNone"
+                android:text="@string/pinpinbox_2_0_0_other_text_remove_all_audio_setting"
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:letterSpacing="0.1"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rSelectAudioPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+
+            <ImageView
+                android:id="@+id/selectAudioPageImg"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+
+            <TextView
+                android:id="@+id/tvSelectAudioPage"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toRightOf="@+id/selectAudioPageImg"
+                android:text="@string/pinpinbox_2_0_0_itemtype_plural_audio" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toRightOf="@+id/selectAudioPageImg"
+                android:layout_below="@+id/tvSelectAudioPage"
+                android:text="@string/pinpinbox_2_0_0_other_text_use_page_of_audio"
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:letterSpacing="0.1"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rSelectAudioBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+
+            <ImageView
+                android:id="@+id/selectAudioBackgroundImg"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+            <TextView
+                android:id="@+id/tvSelectAudioBackground"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:text="@string/pinpinbox_2_0_0_itemtype_singular_audio"
+                android:layout_toRightOf="@+id/selectAudioBackgroundImg"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toRightOf="@+id/selectAudioBackgroundImg"
+                android:layout_below="@+id/tvSelectAudioBackground"
+                android:text="@string/pinpinbox_2_0_0_other_text_play_only_one_audio_in_works"
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:letterSpacing="0.1"/>
+
+
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+            android:id="@+id/rvAudio"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

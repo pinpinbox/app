@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="pinpinbox_loading_color">
+        <item>#009688</item>
+        <item>#009688</item>
+        <item>#009688</item>
+    </array>
+
+</resources>

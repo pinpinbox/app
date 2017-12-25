@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="240dp"
+        android:gravity="center_horizontal">
+
+
+        <RelativeLayout
+            android:id="@+id/rImage"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:background="@color/pinpinbox_2_0_0_second_grey"
+            android:padding="1dp">
+
+            <ImageView
+                android:id="@+id/imageImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+
+
+            <TextView
+                android:id="@+id/tvIsOwn"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/border_2_0_0_pink_first_for_button_radius"
+                android:gravity="center"
+                android:paddingLeft="@dimen/ppb200_padding_margin_third"
+                android:paddingRight="@dimen/ppb200_padding_margin_third"
+                android:text="@string/pinpinbox_2_0_0_other_text_already_get"
+                android:textColor="@color/white"
+                android:textSize="@dimen/ppb200_common_text_small"
+                android:visibility="gone"
+                android:letterSpacing="0.1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_second" />
+
+        </RelativeLayout>
+
+        <!--套版名稱-->
+        <TextView
+            android:id="@+id/tvTemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="2dp"
+            android:maxLines="2"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_third"
+            android:layout_below="@+id/rImage"
+            android:layout_alignRight="@+id/rImage"
+            android:layout_alignEnd="@+id/rImage"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_third"/>
+
+
+
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="180dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_toEndOf="@+id/imageImg"-->
+            <!--android:layout_toRightOf="@+id/imageImg"-->
+            <!--android:orientation="vertical">-->
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvTemDescription"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/tvTemName"-->
+                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_third"-->
+                <!--android:ellipsize="end"-->
+                <!--android:letterSpacing="0.1"-->
+                <!--android:lineSpacingExtra="2dp"-->
+                <!--android:maxLines="3"-->
+                <!--android:text="這是一個套版說明這是一個套版說明這是一個套版說明這是一個套版說明"-->
+                <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+                <!--android:textSize="@dimen/ppb200_common_text_small" />-->
+
+
+            <!--套版作者-->
+            <!--<TextView-->
+            <!--android:layout_below="@+id/template_name"-->
+            <!--android:id="@+id/template_author"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/ppb200_padding_margin_third"-->
+            <!--android:ellipsize="end"-->
+            <!--android:includeFontPadding="false"-->
+            <!--android:maxLines="2"-->
+            <!--android:text="作者名稱作者名稱作者名稱作者名稱"-->
+            <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+            <!--android:textSize="@dimen/ppb200_common_text_third" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvTemPoint"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/template_author"-->
+            <!--android:layout_marginTop="@dimen/ppb200_padding_margin_third"-->
+            <!--android:includeFontPadding="false"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="500P"-->
+            <!--android:textColor="@color/template_item_count"-->
+            <!--android:textSize="14sp" />-->
+
+
+            <!--下載數量-->
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/temPoint"-->
+            <!--android:layout_marginTop="4dp">-->
+
+            <!--<ImageView-->
+            <!--android:id="@+id/imageView52"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/template_count"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignTop="@+id/template_count"-->
+            <!--android:paddingBottom="2dp"-->
+            <!--android:paddingLeft="-8dp"-->
+            <!--android:paddingRight="-8dp"-->
+            <!--android:paddingTop="2dp"-->
+            <!--android:src="@drawable/icon_templatelist_download_count" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/template_count"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="4dp"-->
+            <!--android:layout_toEndOf="@+id/imageView52"-->
+            <!--android:layout_toRightOf="@+id/imageView52"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="@color/template_item_count"-->
+            <!--android:textSize="12sp" />-->
+
+            <!--</RelativeLayout>-->
+
+
+        <!--</RelativeLayout>-->
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:paddingTop="84dp"
+        android:scrollbars="none"
+        android:columnWidth="114dp"
+         />
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_action_bar_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="28dp">
+
+            <ImageView
+                android:id="@+id/backImg"
+                style="@style/ppb200_ic_action_back"
+                android:layout_centerVertical="true"
+                android:background="@drawable/click_2_0_0_default"
+                android:src="@drawable/ic200_arrow_left_dark" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/pinpinbox_2_0_0_itemtype_select_exist_album"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_second"
+                    android:letterSpacing="0.1"
+                    fontPath="fonts/OpenSans-Bold.ttf"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:text="@string/pinpinbox_2_0_0_other_text_only_open_albums"
+                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.1"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

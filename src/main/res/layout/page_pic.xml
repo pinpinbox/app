@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/r"
+        android:gravity="center"
+        >
+
+        <com.pinpinbox.android.Views.PinchImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/pic"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+   
+
+        <RelativeLayout
+            android:id="@+id/r_page_type"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+        <ImageView
+            android:id="@+id/centerImg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" >
+
+            <ImageView
+                android:id="@+id/exchangeImg"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                />
+            <RelativeLayout
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvExchange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textSize="56sp"
+            android:textColor="@color/red"
+            android:visibility="invisible"/>
+        
+        
+        
+        <LinearLayout
+            android:id="@+id/linCollect"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="16dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="抽獎或兌換功能要先收藏才能使用唷"
+                android:textColor="@color/pinpinbox_color_dark"/>
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/btCollect"
+                android:layout_width="108dp"
+                android:layout_height="42dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/pinpinbox_color_red"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/tvCollect"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/relativeLayout2"
+                    android:layout_toStartOf="@+id/relativeLayout2"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+            </com.gc.materialdesign.views.ButtonRectangle>
+
+
+        </LinearLayout>
+        
+        
+        
+        
+        
+    </RelativeLayout>
+    
+
+</FrameLayout>

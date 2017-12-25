@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tvNoTemUse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="你還沒有版型可以用唷"
+        android:textColor="@color/pinpinbox_color_unclick_gray"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:visibility="gone"/>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ListView
+        android:id="@+id/template_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@color/transparent"
+        android:listSelector="@color/transparent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rCreate_album_sublistview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:visibility="visible">
+
+        <ListView
+            android:id="@+id/create_album_sublistview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@drawable/gradient_divider_left"
+            android:dividerHeight="1dp"
+            android:listSelector="@color/transparent"
+            android:paddingLeft="16dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

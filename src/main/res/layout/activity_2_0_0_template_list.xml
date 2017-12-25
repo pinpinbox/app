@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:background="@color/white">
+
+
+    <GridView
+        android:numColumns="auto_fit"
+        android:columnWidth="164dp"
+        android:listSelector="@color/transparent"
+        android:id="@+id/gvTemplate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/ppb200_action_bar_height_with_status"
+        android:dividerHeight="0.5dp"
+        android:scrollbars="none"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"/>
+
+    <RelativeLayout
+        android:id="@+id/rActionBar"
+        style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+        <TextView
+            android:id="@+id/tvActionBarTitle"
+            style="@style/ppb200_title_in_actionbar"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/pinpinbox_2_0_0_title_choose_template"
+            android:layout_marginLeft="@dimen/ppb200_common_icon_side"
+            android:layout_marginRight="@dimen/ppb200_common_icon_side"
+            android:singleLine="true"
+            android:ellipsize="end"
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</RelativeLayout>

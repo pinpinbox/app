@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1">
+
+
+        <TextView
+            android:gravity="center"
+            android:text="#f00f8399\nA240  R15  G131  B153"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_dark_main"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="#f000acc1\nA240  R0  G172  B193"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_first_main"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="#f069cedb\nA240  R105  G206  B219"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_second_main"/>
+
+
+        <TextView
+            android:gravity="center"
+            android:text="#f0cce1e4\nA240  R204  G225  B228"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_third_main"/>
+
+
+        <TextView
+            android:gravity="center"
+            android:text="#f0ad1457\nA240  R173  G20  B87"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/pinpinbox_2_0_0_dark_pink"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="#f0e91e63\nA240  R233  G30  B99"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_first_pink"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="#f0f27ba3\nA240  R242  G123  B163"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_second_pink"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="#f0f4adc5\nA240  R244  G173  B197"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_third_pink"/>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginLeft="16dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_first_grey"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_second_grey"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_third_grey"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pinpinbox_2_0_0_hint_grey"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="bar color\n#f5ffffff\nA245  R255  G255  B255"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="album_type_bg\n#d2ffffff\nA210  R255  G255  B255"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="notify_album_bg\n#78ad1457\nA120  R173  G20  B87"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="4dp"
+            android:background="#78ad1457"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="notify_cooperation_bg\n#78534f0e\nA120  R83  G79  B14"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="4dp"
+            android:background="#78534f0e"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="notify_userinterative_bg\n#783f51b5\nA120  R63  G81  B181"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="4dp"
+            android:background="#783f51b5"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

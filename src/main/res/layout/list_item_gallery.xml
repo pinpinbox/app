@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="35dp"
+        android:layout_height="56dp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="35dp"
+            android:layout_height="52dp"
+            android:layout_centerInParent="true"/>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/audioImg"-->
+            <!--android:layout_width="12dp"-->
+            <!--android:layout_height="12dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:src="@drawable/button_play_recording"-->
+            <!--android:visibility="gone"/>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/videoImg"-->
+            <!--android:layout_width="18dp"-->
+            <!--android:layout_height="18dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/icon_videoplay_white_310x310"-->
+            <!--android:visibility="gone"/>-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/exchangeImg"-->
+            <!--android:layout_width="12dp"-->
+            <!--android:layout_height="12dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:src="@drawable/icon_read_album_exchanged"-->
+            <!--android:visibility="gone"/>-->
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

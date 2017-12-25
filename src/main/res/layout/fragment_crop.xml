@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pinpinbox_color_dark">
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/icon_back_white_120x120" />
+
+
+
+
+    <ImageView
+        android:id="@+id/isCropImg"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@color/pinpinbox_color_dark_click"
+        android:scaleType="centerInside"
+        android:layout_alignTop="@+id/btCrop"
+        android:layout_toRightOf="@+id/btCrop"
+        android:layout_toEndOf="@+id/btCrop"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp" />
+
+    <Button
+        android:id="@+id/btCrop"
+        android:layout_width="128dp"
+        android:layout_height="64dp"
+        android:text="crop"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/imageView11"
+        android:layout_toEndOf="@+id/imageView11"
+        android:layout_marginBottom="82dp" />
+
+</RelativeLayout>

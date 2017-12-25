@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" -->
+        <!--android:scaleType="centerInside"/>-->
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout8"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp">
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                android:id="@+id/pointImg"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:scaleType="centerCrop"
+                android:src="@color/material_grey_800"
+                android:visibility="invisible"
+                app:riv_corner_radius="18dp"
+                app:riv_mutate_background="true"
+                app:riv_oval="true" />
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@+id/relativeLayout8"
+            android:gravity="bottom"
+            android:letterSpacing="0.1"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_first" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

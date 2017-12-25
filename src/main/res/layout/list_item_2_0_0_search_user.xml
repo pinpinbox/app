@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="144dp">
+
+        <LinearLayout
+            android:id="@+id/linBackground"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!--<com.pinpinbox.android.Views.CircleView.RoundedImageView-->
+                <!--android:id="@+id/userImg"-->
+                <!--android:layout_width="72dp"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--app:riv_border_color="@color/pinpinbox_2_0_0_divider"-->
+                <!--app:riv_border_width="0.5dp"-->
+                <!--app:riv_corner_radius="72dp"-->
+                <!--app:riv_mutate_background="true"-->
+                <!--app:riv_oval="true"-->
+                <!--android:layout_marginTop="16dp"/>-->
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                android:id="@+id/userImg"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:scaleType="centerCrop"
+                app:siBorderColor="@color/pinpinbox_2_0_0_divider"
+                app:siBorderWidth="0.5dp"
+                app:siRadius="72dp"
+                android:layout_marginTop="16dp"/>
+
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="92dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:maxLines="2"
+                android:text=""
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

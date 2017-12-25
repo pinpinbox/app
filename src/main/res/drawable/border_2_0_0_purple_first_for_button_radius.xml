@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:radius="@dimen/ppb200_radius_general" />
+    <gradient
+    android:angle="270"
+    android:endColor="@color/pinpinbox_2_0_0_gradient_dark_purple"
+    android:startColor="@color/pinpinbox_2_0_0_gradient_light_purple" />
+
+
+</shape>

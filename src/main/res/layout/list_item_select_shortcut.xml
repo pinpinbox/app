@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+    <TextView
+        android:includeFontPadding="false"
+        android:id="@+id/tvClassPath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/pinpinbox_color_dark"
+        android:gravity="left"
+        android:layout_centerVertical="true"
+        android:text="這裡是捷徑名稱"/>
+
+    <ImageView
+        android:id="@+id/checkImg"
+        android:layout_width="27dp"
+        android:layout_height="18dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

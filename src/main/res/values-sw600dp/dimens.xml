@@ -1,0 +1,74 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <!--<dimen name="ppb200_pad_title_first_size">72sp</dimen>-->
+    <!--<dimen name="ppb200_pad_common_button_width">192dp</dimen>-->
+
+    <dimen name="ppb200_divider_height">0.5dp</dimen>
+
+
+    <dimen name="ppb200_title_margin_first">108dp</dimen>
+    <dimen name="ppb200_title_margin_second">92dp</dimen>
+    <dimen name="ppb200_title_margin_nobar">52dp</dimen>
+
+    <dimen name="ppb200_title_first_size">64sp</dimen>
+    <dimen name="ppb200_title_second_size">24sp</dimen>
+    <dimen name="ppb200_title_third_size">18sp</dimen>
+
+    <dimen name="ppb200_userarea_name">32sp</dimen>
+
+    <dimen name="ppb200_guide">20sp</dimen>
+    <dimen name="ppb200_guide_bg_radius">16dp</dimen>
+
+    <dimen name="ppb200_worksname">28sp</dimen>
+
+    <dimen name="ppb200_buttontext_for_height48">18sp</dimen>
+    <dimen name="ppb200_buttontext_for_height36">16sp</dimen>
+
+    <dimen name="ppb200_bottom_height">64dp</dimen>
+
+    <dimen name="ppb200_edittext_min_height">48dp</dimen>
+
+    <dimen name="ppb200_padding_margin_big">32dp</dimen>
+    <dimen name="ppb200_padding_margin_first">16dp</dimen>
+    <dimen name="ppb200_padding_margin_second">8dp</dimen>
+    <dimen name="ppb200_padding_margin_third">4dp</dimen>
+
+    <dimen name="ppb200_lineSpacingExtra_first">4dp</dimen>
+    <dimen name="ppb200_lineSpacingExtra_second">2dp</dimen>
+
+    <dimen name="ppb200_common_text_first">18sp</dimen>
+    <dimen name="ppb200_common_text_second">16sp</dimen>
+    <dimen name="ppb200_common_text_third">14sp</dimen>
+    <dimen name="ppb200_common_text_small">12sp</dimen>
+
+    <dimen name="ppb200_common_list_item_height">48dp</dimen>
+
+    <dimen name="ppb200_common_button_width">168dp</dimen>
+    <dimen name="ppb200_common_button_height">48dp</dimen>
+    <dimen name="ppb200_common_button_small_width">88dp</dimen>
+    <dimen name="ppb200_common_button_small_height">36dp</dimen>
+    <dimen name="ppb200_common_button_radius">8dp</dimen>
+
+    <dimen name="ppb200_common_icon_side">48dp</dimen>
+
+    <dimen name="ppb200_common_icon_padding">14dp</dimen>
+
+
+    <dimen name="ppb200_loading_side">56dp</dimen>
+    <dimen name="ppb200_loading_margintop">32dp</dimen>
+    <dimen name="ppb200_loading_margintop_with_actionbar_status">88dp</dimen>
+
+    <dimen name="ppb200_item_height">48dp</dimen>
+    <dimen name="ppb200_creation_bottom_height">100dp</dimen>
+
+
+    <dimen name="ppb200_action_bar_height">56dp</dimen>
+    <dimen name="ppb200_action_bar_height_with_status">76dp</dimen>
+    <dimen name="ppb200_action_bar_icon">48dp</dimen>
+
+
+    <dimen name="ppb200_radius_big">16dp</dimen>
+    <dimen name="ppb200_radius_general">8dp</dimen>
+
+</resources>
