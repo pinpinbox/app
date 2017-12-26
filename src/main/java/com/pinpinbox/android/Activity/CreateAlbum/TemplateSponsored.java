@@ -16,24 +16,22 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.pinpinbox.android.Activity.TemplateInfo.TemplateInfoActivity;
-
-import com.pinpinbox.android.DialogTool.DialogSet;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HtmlUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.NoConnect;
-import com.pinpinbox.android.Widget.PPBWidget;
+import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.TemList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.TemTitleListAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -163,13 +161,13 @@ public class TemplateSponsored extends Fragment {
                     return;
                 }
 
-                Bundle bundle = new Bundle();
-                bundle.putString("template_id", (String) p36arraylist.get(position).get("template_id"));
-
-                Intent intent = new Intent(getActivity(), TemplateInfoActivity.class);
-                intent.putExtras(bundle);
-                getActivity().startActivity(intent);
-                ActivityAnim.StartAnim(getActivity());
+//                Bundle bundle = new Bundle();
+//                bundle.putString("template_id", (String) p36arraylist.get(position).get("template_id"));
+//
+//                Intent intent = new Intent(getActivity(), TemplateInfoActivity.class);
+//                intent.putExtras(bundle);
+//                getActivity().startActivity(intent);
+//                ActivityAnim.StartAnim(getActivity());
             }
         });
 
@@ -351,7 +349,7 @@ public class TemplateSponsored extends Fragment {
                 JSONObject jsonObject = new JSONObject(strJson);
                 p36Result = jsonObject.getString(Key.result);
                 if (p36Result.equals("1")) {
-                    String jsonData = PPBWidget.GetStringByJsonObject(jsonObject, Key.data);
+                    String jsonData = JsonUtility.GetString(jsonObject, Key.data);
 
                     if (jsonData != null && !jsonData.equals("")) {
 
@@ -360,24 +358,24 @@ public class TemplateSponsored extends Fragment {
                         for (int i = 0; i < loadCount; i++) {
                             JSONObject obj = (JSONObject) jsonArray.get(i);
 
-                            String template = PPBWidget.GetStringByJsonObject(obj, "template");
-                            String templatestatistics = PPBWidget.GetStringByJsonObject(obj, "templatestatistics");
-                            String user = PPBWidget.GetStringByJsonObject(obj, "user");
+                            String template = JsonUtility.GetString(obj, "template");
+                            String templatestatistics = JsonUtility.GetString(obj, "templatestatistics");
+                            String user = JsonUtility.GetString(obj, "user");
 
                             JSONObject obj_template = new JSONObject(template);
-                            String s = PPBWidget.GetStringByJsonObject(obj_template, "description");
+                            String s = JsonUtility.GetString(obj_template, "description");
                             p36Description = HtmlUtility.delHTMLTag(s);
-                            p36Image = PPBWidget.GetStringByJsonObject(obj_template, "image");
-                            p36name = PPBWidget.GetStringByJsonObject(obj_template, "name");
-                            p36Point = PPBWidget.GetStringByJsonObject(obj_template, "point");
-                            p36Template_id = PPBWidget.GetStringByJsonObject(obj_template, "template_id");
+                            p36Image = JsonUtility.GetString(obj_template, "image");
+                            p36name = JsonUtility.GetString(obj_template, "name");
+                            p36Point = JsonUtility.GetString(obj_template, "point");
+                            p36Template_id = JsonUtility.GetString(obj_template, "template_id");
                             p36Own = obj_template.getBoolean("own");
 
                             JSONObject obj_templatestatistics = new JSONObject(templatestatistics);
-                            p36Count = PPBWidget.GetStringByJsonObject(obj_templatestatistics, "count");
+                            p36Count = JsonUtility.GetString(obj_templatestatistics, "count");
 
                             JSONObject obj_user = new JSONObject(user);
-                            p36User = PPBWidget.GetStringByJsonObject(obj_user, "name");
+                            p36User = JsonUtility.GetString(obj_user, "name");
 
                             HashMap<String, Object> map = new HashMap<String, Object>();
                             map.put("description", p36Description);
@@ -502,25 +500,25 @@ public class TemplateSponsored extends Fragment {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject obj = (JSONObject) jsonArray.get(i);
 
-                            String template = PPBWidget.GetStringByJsonObject(obj, "template");
-                            String templatestatistics = PPBWidget.GetStringByJsonObject(obj, "templatestatistics");
-                            String user = PPBWidget.GetStringByJsonObject(obj, "user");
+                            String template = JsonUtility.GetString(obj, "template");
+                            String templatestatistics = JsonUtility.GetString(obj, "templatestatistics");
+                            String user = JsonUtility.GetString(obj, "user");
 
                             JSONObject obj_template = new JSONObject(template);
-                            String s = PPBWidget.GetStringByJsonObject(obj_template, "description");
+                            String s = JsonUtility.GetString(obj_template, "description");
                             p36Description = HtmlUtility.delHTMLTag(s);
-                            p36Image = PPBWidget.GetStringByJsonObject(obj_template, "image");
-                            p36name = PPBWidget.GetStringByJsonObject(obj_template, "name");
-                            p36Point = PPBWidget.GetStringByJsonObject(obj_template, "point");
-                            p36Template_id = PPBWidget.GetStringByJsonObject(obj_template, "template_id");
+                            p36Image = JsonUtility.GetString(obj_template, "image");
+                            p36name = JsonUtility.GetString(obj_template, "name");
+                            p36Point = JsonUtility.GetString(obj_template, "point");
+                            p36Template_id = JsonUtility.GetString(obj_template, "template_id");
                             p36Own = obj_template.getBoolean("own");
 
 
                             JSONObject obj_templatestatistics = new JSONObject(templatestatistics);
-                            p36Count = PPBWidget.GetStringByJsonObject(obj_templatestatistics, "count");
+                            p36Count = JsonUtility.GetString(obj_templatestatistics, "count");
 
                             JSONObject obj_user = new JSONObject(user);
-                            p36User = PPBWidget.GetStringByJsonObject(obj_user, "name");
+                            p36User = JsonUtility.GetString(obj_user, "name");
 
                             HashMap<String, Object> map = new HashMap<String, Object>();
                             map.put("description", p36Description);

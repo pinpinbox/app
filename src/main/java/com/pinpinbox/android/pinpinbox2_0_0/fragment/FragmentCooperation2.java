@@ -25,13 +25,8 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.pinpinbox.android.Activity.ReadAlbum.ReadAlbumActivity;
-import com.pinpinbox.android.DialogTool.CheckExecute;
-import com.pinpinbox.android.DialogTool.DialogHandselPoint;
-import com.pinpinbox.android.DialogTool.DialogV2Custom;
-import com.pinpinbox.android.PopupTool.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
@@ -50,22 +45,26 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.FlurryKey;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MapKey;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.PPBWidget;
-import com.pinpinbox.android.Widget.PinPinToast;
-import com.pinpinbox.android.Widget.SetMapByProtocol;
-import com.pinpinbox.android.Widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.OnDetailClickListener;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumGroup2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCollectAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.OnDetailClickListener;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.pinpinbox2_0_0.service.DownLoadService;
 import com.squareup.picasso.Picasso;
 
@@ -1218,9 +1217,9 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             if (strJson != null && !strJson.equals("")) {
                 try {
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p68Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
+                    p68Result = JsonUtility.GetString(jsonObject, Key.result);
                     if (p68Result.equals("1")) {
-                        String data = PPBWidget.GetStringByJsonObject(jsonObject, "data");
+                        String data = JsonUtility.GetString(jsonObject, "data");
                         JSONObject object = new JSONObject(data);
                         lastmodifytime = object.getLong("modifytime");
                         downloadtime = getdata.getLong(album_id + "_modified_time", 0);
@@ -1228,7 +1227,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                         MyLog.Set("d", getClass(), "lastmodifytime => " + lastmodifytime);
                         MyLog.Set("d", getClass(), "downloadtime => " + downloadtime);
                     }else if(p68Result.equals("0")){
-                        p68Message = PPBWidget.GetStringByJsonObject(jsonObject, Key.message);
+                        p68Message = JsonUtility.GetString(jsonObject, Key.message);
                     }else {
                         p68Result = "";
                     }

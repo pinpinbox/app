@@ -23,7 +23,7 @@ import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerBackHelp
 import com.pinpinbox.android.Views.DraggerActivity.NoDragger.NoDraggerLayout;
 import com.pinpinbox.android.Views.DraggerActivity.SwipeBackActivityInterface;
 import com.pinpinbox.android.Views.DraggerActivity.SwipeBackLayout;
-import com.pinpinbox.android.Widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public abstract class TestDraggerActivity extends FragmentActivity implements SwipeBackActivityInterface {

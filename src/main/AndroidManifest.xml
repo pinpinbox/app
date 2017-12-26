@@ -34,11 +34,17 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.google.android.c2dm.permission.REGISTER" />
-    <uses-permission android:name="com.pinpinbox.android.permission.C2D_MESSAGE" />
+    <!--<uses-permission android:name="com.pinpinbox.android.permission.C2D_MESSAGE" />-->
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+
+    <!--<permission-->
+        <!--android:name="com.pinpinbox.android.permission.C2D_MESSAGE"-->
+        <!--android:protectionLevel="signature" />-->
 
     <permission
-        android:name="com.pinpinbox.android.permission.C2D_MESSAGE"
+        android:name="${applicationId}.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     //googlemap
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -201,11 +207,6 @@
             android:process=":aviarycds" />
         android:windowSoftInputMode="adjustPan|stateHidden"
         <activity
-            android:name=".Activity.RecommendAuthor.RecommendByOtherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/dragger" />
-        <activity
             android:name=".Activity.BuyPoint.PointActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
@@ -295,11 +296,6 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".Activity.RecommendAuthor.RecommendActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/dragger" />
         <activity
             android:name=".pinpinbox2_0_0.activity.YouTubeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

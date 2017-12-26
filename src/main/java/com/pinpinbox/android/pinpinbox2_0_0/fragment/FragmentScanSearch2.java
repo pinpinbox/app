@@ -22,34 +22,34 @@ import android.view.ViewGroup;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.pinpinbox.android.DialogTool.DialogV2Custom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Scan.camera.CameraManager;
-import com.pinpinbox.android.Scan.decoding.CaptureActivityHandler;
-import com.pinpinbox.android.Scan.decoding.DecodeHandlerInterface;
-import com.pinpinbox.android.Scan.decoding.InactivityTimer;
-import com.pinpinbox.android.Scan.view.ViewfinderView;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MapKey;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.NoConnect;
-import com.pinpinbox.android.Widget.PPBWidget;
-import com.pinpinbox.android.Widget.PinPinToast;
-import com.pinpinbox.android.Widget.SetMapByProtocol;
-import com.pinpinbox.android.Widget.Value;
+import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumSettings2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.camera.CameraManager;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.CaptureActivityHandler;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.DecodeHandlerInterface;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.InactivityTimer;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.view.ViewfinderView;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -624,12 +624,12 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
             }
             try {
                 JSONObject jsonObject = new JSONObject(strJson);
-                p46Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
+                p46Result = JsonUtility.GetString(jsonObject, Key.result);
 
                 if (p46Result.equals("1")) {
 
                 } else if (p46Result.equals("0")) {
-                    p46Message = PPBWidget.GetStringByJsonObject(jsonObject, Key.message);
+                    p46Message = JsonUtility.GetString(jsonObject, Key.message);
                 } else {
                     p46Result = "";
                 }
@@ -660,12 +660,12 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 //            }
 //            try {
 //                JSONObject jsonObject = new JSONObject(strJson);
-//                p63Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
+//                p63Result = JsonUtility.GetString(jsonObject, Key.result);
 //
 //                if (p63Result.equals("1")) {
 //
 //                } else if (p63Result.equals("0")) {
-//                    p63Message = PPBWidget.GetStringByJsonObject(jsonObject, Key.message);
+//                    p63Message = JsonUtility.GetString(jsonObject, Key.message);
 //                } else {
 //                    p63Result = "";
 //                }
@@ -705,26 +705,26 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                             try {
                                 JSONObject obj = (JSONObject) p17JsonArray.get(i);
 
-                                String album = PPBWidget.GetStringByJsonObject(obj, Key.album);
-//                                String template = PPBWidget.GetStringByJsonObject(obj, Key.template);
-//                                String cooperation = PPBWidget.GetStringByJsonObject(obj, Key.cooperation);
+                                String album = JsonUtility.GetString(obj, Key.album);
+//                                String template = JsonUtility.GetString(obj, Key.template);
+//                                String cooperation = JsonUtility.GetString(obj, Key.cooperation);
 
                                 JSONObject aj = new JSONObject(album);
 
-                                String p17_json_album_id = PPBWidget.GetStringByJsonObject(aj, Key.album_id);
+                                String p17_json_album_id = JsonUtility.GetString(aj, Key.album_id);
 
                                 if (p17_json_album_id.equals(strCooperationAlbumId)) {
 
-                                    strZipped = PPBWidget.GetStringByJsonObject(aj, Key.zipped);
-//                                    strAlbumName = PPBWidget.GetStringByJsonObject(aj, Key.name);
-//                                    strCover = PPBWidget.GetStringByJsonObject(aj, Key.cover);
+                                    strZipped = JsonUtility.GetString(aj, Key.zipped);
+//                                    strAlbumName = JsonUtility.GetString(aj, Key.name);
+//                                    strCover = JsonUtility.GetString(aj, Key.cover);
 
 
 //                                    JSONObject temj = new JSONObject(template);
-//                                    strTemplate_id = PPBWidget.GetStringByJsonObject(temj, Key.template_id);
+//                                    strTemplate_id = JsonUtility.GetString(temj, Key.template_id);
 
 //                                    JSONObject cj = new JSONObject(cooperation);
-//                                    strIdentity = PPBWidget.GetStringByJsonObject(cj, Key.identity);
+//                                    strIdentity = JsonUtility.GetString(cj, Key.identity);
 
                                     break;
                                 }

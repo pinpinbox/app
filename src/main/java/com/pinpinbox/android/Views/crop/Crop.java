@@ -11,7 +11,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 
 /**
  * Builder for crop Intents and utils for handling result

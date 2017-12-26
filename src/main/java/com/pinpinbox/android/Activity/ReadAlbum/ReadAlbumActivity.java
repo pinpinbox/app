@@ -57,13 +57,10 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.DialogTool.DialogHandselPoint;
-import com.pinpinbox.android.DialogTool.DialogSet;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.AlbumDownLoad;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
@@ -73,26 +70,29 @@ import com.pinpinbox.android.StringClass.UrlClass;
 import com.pinpinbox.android.Utility.BitmapUtility;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.MapUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.MyGallery;
 import com.pinpinbox.android.Views.PinchImageView;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.LinkText;
-import com.pinpinbox.android.Widget.MapKey;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.NoConnect;
-import com.pinpinbox.android.Widget.PPBWidget;
-import com.pinpinbox.android.Widget.Recycle;
-import com.pinpinbox.android.Widget.SetMapByProtocol;
-import com.pinpinbox.android.Widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.YouTubeActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.GalleryAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -139,7 +139,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
     private NoConnect noConnect;
     private CloseReadTask closeReadTask;
     private Dialog dialogGift;
-    private DialogSet dialogCancelDownload;
     private CallbackManager callbackManager;
     private ShareDialog shareDialog;
 
@@ -689,15 +688,15 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
                 Logger.json(jsonObject.toString());
 
-                strAlbumTitle = PPBWidget.GetStringByJsonObject(jsonObject, "title");
-                strAlbumAuthor = PPBWidget.GetStringByJsonObject(jsonObject, "author");
-                strAlbumDescription = PPBWidget.GetStringByJsonObject(jsonObject, "description");
-                strAlbumInserttime = PPBWidget.GetStringByJsonObject(jsonObject, "inserttime");
-                strAlbumLocation = PPBWidget.GetStringByJsonObject(jsonObject, "location");
-                strAlbumAudio_mode = PPBWidget.GetStringByJsonObject(jsonObject, "audio_mode");
-                strAlbumAudio_loop = PPBWidget.GetStringByJsonObject(jsonObject, "audio_loop");
-                strAlbumAudio_refer = PPBWidget.GetStringByJsonObject(jsonObject, "audio_refer");
-                strAlbumAudio_target = PPBWidget.GetStringByJsonObject(jsonObject, "audio_target");
+                strAlbumTitle = JsonUtility.GetString(jsonObject, "title");
+                strAlbumAuthor = JsonUtility.GetString(jsonObject, "author");
+                strAlbumDescription = JsonUtility.GetString(jsonObject, "description");
+                strAlbumInserttime = JsonUtility.GetString(jsonObject, "inserttime");
+                strAlbumLocation = JsonUtility.GetString(jsonObject, "location");
+                strAlbumAudio_mode = JsonUtility.GetString(jsonObject, "audio_mode");
+                strAlbumAudio_loop = JsonUtility.GetString(jsonObject, "audio_loop");
+                strAlbumAudio_refer = JsonUtility.GetString(jsonObject, "audio_refer");
+                strAlbumAudio_target = JsonUtility.GetString(jsonObject, "audio_target");
 
                 if (LOG.isLogMode) {
                     Log.e(TAG, " strAlbumTitle => " + strAlbumTitle);
@@ -711,7 +710,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                     Log.e(TAG, " strAlbumAudio_target => " + strAlbumAudio_target);
                 }
 
-                String photo = PPBWidget.GetStringByJsonObject(jsonObject, "photo");
+                String photo = JsonUtility.GetString(jsonObject, "photo");
                 JSONArray jsonArray = new JSONArray(photo);
 
                 int array = jsonArray.length();

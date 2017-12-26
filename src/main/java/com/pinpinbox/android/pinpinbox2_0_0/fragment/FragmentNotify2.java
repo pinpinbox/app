@@ -20,16 +20,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.DialogTool.CheckExecute;
-import com.pinpinbox.android.DialogTool.DialogV2Custom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
@@ -37,22 +35,24 @@ import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MapKey;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.NoConnect;
-import com.pinpinbox.android.Widget.PPBWidget;
-import com.pinpinbox.android.Widget.PinPinToast;
-import com.pinpinbox.android.Widget.SetMapByProtocol;
-import com.pinpinbox.android.Widget.Value;
-import com.pinpinbox.android.Widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerNotifyAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -462,7 +462,7 @@ public class FragmentNotify2 extends Fragment {
                 JSONObject jsonObject = new JSONObject(strJson);
                 p87Result = jsonObject.getString(Key.result);
                 if (p87Result.equals("1")) {
-                    String jsonData = PPBWidget.GetStringByJsonObject(jsonObject, Key.data);
+                    String jsonData = JsonUtility.GetString(jsonObject, Key.data);
 
                     Logger.json(jsonData);
 
@@ -477,30 +477,30 @@ public class FragmentNotify2 extends Fragment {
                             JSONObject object = (JSONObject) jsonArray.get(i);
 
                             /*get template_id*/
-                            String template = PPBWidget.GetStringByJsonObject(object, Key.template);
+                            String template = JsonUtility.GetString(object, Key.template);
                             String template_id = "";
                             if (template != null && !template.equals("")) {
                                 JSONObject templateObj = new JSONObject(template);
-                                template_id = PPBWidget.GetStringByJsonObject(templateObj, Key.template_id);
+                                template_id = JsonUtility.GetString(templateObj, Key.template_id);
                             }
 
                             /*get identity*/
-                            String cooperation = PPBWidget.GetStringByJsonObject(object, Key.cooperation);
+                            String cooperation = JsonUtility.GetString(object, Key.cooperation);
                             String identity = "";
                             if (cooperation != null && !cooperation.equals("")) {
                                 JSONObject cooperationObj = new JSONObject(cooperation);
-                                identity = PPBWidget.GetStringByJsonObject(cooperationObj, Key.identity);
+                                identity = JsonUtility.GetString(cooperationObj, Key.identity);
                             }
 
 
                             /*get notify detail*/
-                            String pushqueue = PPBWidget.GetStringByJsonObject(object, Key.pushqueue);
+                            String pushqueue = JsonUtility.GetString(object, Key.pushqueue);
                             JSONObject pushqueueObj = new JSONObject(pushqueue);
-                            String message = PPBWidget.GetStringByJsonObject(pushqueueObj, MapKey.message);
-                            String target2type = PPBWidget.GetStringByJsonObject(pushqueueObj, MapKey.target2type);
-                            String target2type_id = PPBWidget.GetStringByJsonObject(pushqueueObj, MapKey.target2type_id);
-                            String image_url = PPBWidget.GetStringByJsonObject(pushqueueObj, MapKey.image_url);
-                            String inserttime = PPBWidget.GetStringByJsonObject(pushqueueObj, MapKey.inserttime);
+                            String message = JsonUtility.GetString(pushqueueObj, MapKey.message);
+                            String target2type = JsonUtility.GetString(pushqueueObj, MapKey.target2type);
+                            String target2type_id = JsonUtility.GetString(pushqueueObj, MapKey.target2type_id);
+                            String image_url = JsonUtility.GetString(pushqueueObj, MapKey.image_url);
+                            String inserttime = JsonUtility.GetString(pushqueueObj, MapKey.inserttime);
 
 
                             Date currentTime = df.parse(strCurrentTime);

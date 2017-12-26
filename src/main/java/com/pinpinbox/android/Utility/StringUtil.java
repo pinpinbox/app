@@ -3,8 +3,8 @@ package com.pinpinbox.android.Utility;
 import android.support.annotation.NonNull;
 import android.widget.TextView;
 
-import com.pinpinbox.android.Widget.StringIntMethod;
-import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;

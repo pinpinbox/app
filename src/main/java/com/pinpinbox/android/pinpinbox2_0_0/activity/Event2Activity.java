@@ -18,13 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.DialogTool.DialogCheckContribute;
-import com.pinpinbox.android.DialogTool.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
-import com.pinpinbox.android.PopupTool.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
@@ -35,14 +31,17 @@ import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.FlurryKey;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.PPBWidget;
-import com.pinpinbox.android.Widget.PinPinToast;
-import com.pinpinbox.android.Widget.ProtocolKey;
-import com.pinpinbox.android.Widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCheckContribute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -478,10 +477,10 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
                         HashMap<String, Object> map = new HashMap<String, Object>();
 
-                        String album = PPBWidget.GetStringByJsonObject(object, "album"); //get album_id, name, cover, zipped, act
-                        String template = PPBWidget.GetStringByJsonObject(object, "template"); //get template_id
-                        String user = PPBWidget.GetStringByJsonObject(object, "user"); //user
-                        String event = PPBWidget.GetStringByJsonObject(object, "event"); //get can join event
+                        String album = JsonUtility.GetString(object, "album"); //get album_id, name, cover, zipped, act
+                        String template = JsonUtility.GetString(object, "template"); //get template_id
+                        String user = JsonUtility.GetString(object, "user"); //user
+                        String event = JsonUtility.GetString(object, "event"); //get can join event
 
                         JSONObject obj = new JSONObject(template);
                         String template_id = obj.getString("template_id");
