@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1068418586957",
+    "firebase_url": "https://api-project-1068418586957.firebaseio.com",
+    "project_id": "api-project-1068418586957",
+    "storage_bucket": "api-project-1068418586957.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068418586957:android:d37bba1361cd88ad",
+        "android_client_info": {
+          "package_name": "com.pinpinbox.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068418586957-7nll2igduj8i2f41m2fol6btli3rmirn.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1068418586957-f87vsaf0097m35hk3sbo71df06k9436j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiG8DcOUkd-6yxUpPtLgsAekz0-Pmt6fQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
