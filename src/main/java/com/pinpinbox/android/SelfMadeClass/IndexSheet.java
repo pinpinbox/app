@@ -1,6 +1,6 @@
 package com.pinpinbox.android.SelfMadeClass;
 
-import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

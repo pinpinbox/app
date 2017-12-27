@@ -16,7 +16,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 
 import java.util.ArrayList;

@@ -24,16 +24,13 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.flurry.android.FlurryAgent;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.DialogTool.DialogHandselPoint;
-import com.pinpinbox.android.DialogTool.DialogV2Custom;
-import com.pinpinbox.android.Mode.TestMode;
 import com.pinpinbox.android.OldMainActivity;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
@@ -45,24 +42,26 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.FlurryKey;
-import com.pinpinbox.android.Widget.IntentControl;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.NoConnect;
-import com.pinpinbox.android.Widget.PPBWidget;
-import com.pinpinbox.android.Widget.PinPinToast;
-import com.pinpinbox.android.Widget.ProtocolKey;
-import com.pinpinbox.android.Widget.SetMapByProtocol;
-import com.pinpinbox.android.Widget.StringIntMethod;
-import com.pinpinbox.android.Widget.Value;
-import com.pinpinbox.android.Widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentHome2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentNotify2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSearch2;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.service.RegistraAWSService;
 import com.richpath.RichPath;
 import com.richpath.RichPathView;
@@ -244,28 +243,18 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 finish();
                 ActivityAnim.StartAnim(mActivity);
 
-
             }
         });
 
-        //mode = false 正式環境
-//        if (!TestMode.TESTMODE) {
-//
-//            //正式
-//            testbuttonImg.setVisibility(View.GONE);
-//
-//        } else {
-//
-//            //測試
-//            testbuttonImg.setVisibility(View.VISIBLE);
-//
-//        }
 
         if(BuildConfig.FLAVOR.equals("w3_private")){
             testbuttonImg.setVisibility(View.VISIBLE);
         }else if(BuildConfig.FLAVOR.equals("www_private")){
             testbuttonImg.setVisibility(View.GONE);
         }else if(BuildConfig.FLAVOR.equals("www_public")){
+
+            FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            mFirebaseAnalytics.setUserId(id + " , " + getdata.getString(Key.nickname, "---"));
             testbuttonImg.setVisibility(View.GONE);
         }
 
@@ -276,7 +265,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 ViewControl.AlphaTo1(findViewById(R.id.rAlpha));
             }
         }, 600);
-
 
     }
 
@@ -290,20 +278,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         }
 
     }
-
-//    private void setStatus() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            setTranslucentStatus(true);
-//        }
-//        new Handler().post(new Runnable() {
-//            @Override
-//            public void run() {
-//                SystemBarTintManager sysBarManager = new SystemBarTintManager(Main2Activity.this);
-//                sysBarManager.setStatusBarTintEnabled(true);
-//                sysBarManager.setStatusBarTintColor(Color.parseColor(ColorClass.STATUSBAR));
-//            }
-//        });
-//    }
 
     private void checkMainExist() {
 
@@ -1507,12 +1481,12 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
             try {
                 JSONObject jsonObject = new JSONObject(strJson);
-                p46Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
+                p46Result = JsonUtility.GetString(jsonObject, Key.result);
 
                 if (p46Result.equals("1")) {
 
                 } else if (p46Result.equals("0")) {
-                    p46Message = PPBWidget.GetStringByJsonObject(jsonObject, Key.message);
+                    p46Message = JsonUtility.GetString(jsonObject, Key.message);
                 } else {
                     p46Result = "";
                 }
@@ -1543,7 +1517,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
             try {
                 JSONObject jsonObject = new JSONObject(strJson);
-                p63Result = PPBWidget.GetStringByJsonObject(jsonObject, Key.result);
+                p63Result = JsonUtility.GetString(jsonObject, Key.result);
 
                 if (p63Result.equals("1")) {
 
@@ -2059,12 +2033,10 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
-
 
     @Override
     public void onBackPressed() {
@@ -2109,7 +2081,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         super.onResume();
     }
-
 
     @Override
     public void onDestroy() {

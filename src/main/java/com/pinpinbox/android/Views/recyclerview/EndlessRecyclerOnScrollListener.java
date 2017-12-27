@@ -7,7 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 /**
  * Created by cundong on 2015/10/9.

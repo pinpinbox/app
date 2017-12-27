@@ -39,20 +39,22 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.DialogTool.CheckExecute;
-import com.pinpinbox.android.DialogTool.DialogHandselPoint;
-import com.pinpinbox.android.DialogTool.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
-import com.pinpinbox.android.PopupTool.PopBoard;
-import com.pinpinbox.android.PopupTool.PopupCustom;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.SelfMadeClass.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
@@ -72,17 +74,17 @@ import com.pinpinbox.android.Views.ControlSizeScrollView;
 import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.PinchImageView;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.FlurryKey;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.LinkText;
-import com.pinpinbox.android.Widget.MapKey;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.PinPinToast;
-import com.pinpinbox.android.Widget.ProtocolKey;
-import com.pinpinbox.android.Widget.SetMapByProtocol;
-import com.pinpinbox.android.Widget.StatusControl;
-import com.pinpinbox.android.Widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.PhotoPageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerReaderAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -404,13 +406,17 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         tvAlbumUser = (TextView) v.findViewById(R.id.tvAlbumUser);
 
         try {
-            mapAlbum = (
-                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)
-            ).getMap();
-            mapAlbum.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            UiSettings setting = mapAlbum.getUiSettings();
-            setting.setTiltGesturesEnabled(true);
-            mapAlbum.setMyLocationEnabled(true);
+//            mapAlbum = (
+//                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)
+//            ).getMap();
+//            mapAlbum.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//            UiSettings setting = mapAlbum.getUiSettings();
+//            setting.setTiltGesturesEnabled(true);
+//            mapAlbum.setMyLocationEnabled(true);
+
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(new AlbumMapCallBack());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -422,6 +428,28 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         closeImg.setOnClickListener(this);
     }
 
+    private class AlbumMapCallBack implements OnMapReadyCallback {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mapAlbum = googleMap;
+            mapAlbum.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            UiSettings setting = mapAlbum.getUiSettings();
+            setting.setTiltGesturesEnabled(true);
+            mapAlbum.setMyLocationEnabled(true);
+        }
+    }
+
+    private class PageMapCallBack implements OnMapReadyCallback {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mapPhoto = googleMap;
+            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            UiSettings setting = mapPhoto.getUiSettings();
+            setting.setTiltGesturesEnabled(true);
+            mapPhoto.setMyLocationEnabled(true);
+        }
+    }
+
     private void initPageMap() {
 
         popPageMap = new PopupCustom(mActivity);
@@ -431,13 +459,17 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         closeMapImg = (ImageView) v.findViewById(R.id.closeMapImg);
 
         try {
-            mapPhoto = (
-                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapPageLocation)
-            ).getMap();
-            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            UiSettings setting = mapPhoto.getUiSettings();
-            setting.setTiltGesturesEnabled(true);
-            mapPhoto.setMyLocationEnabled(true);
+//            mapPhoto = (
+//                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapPageLocation)
+//            ).getMap();
+//            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//            UiSettings setting = mapPhoto.getUiSettings();
+//            setting.setTiltGesturesEnabled(true);
+//            mapPhoto.setMyLocationEnabled(true);
+
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.mapPageLocation);
+            mapFragment.getMapAsync(new PageMapCallBack());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1958,6 +1990,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         deleteLikeTask.execute();
     }
 
+
     private class GetAlbumInfoTask extends AsyncTask<Void, Void, Object> {
 
         private int p08Result = -1;
@@ -3283,6 +3316,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         }
 
     }
+
 
     @Override
     public void onLocationChanged(Location location) {

@@ -25,17 +25,17 @@ import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ResultCodeClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Widget.ActivityAnim;
-import com.pinpinbox.android.Widget.FlurryKey;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.RoundTransform;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.RoundTransform;
 
 import org.json.JSONArray;
 

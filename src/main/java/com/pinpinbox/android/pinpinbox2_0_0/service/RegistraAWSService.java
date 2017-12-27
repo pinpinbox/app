@@ -12,8 +12,8 @@ import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import org.json.JSONObject;
 

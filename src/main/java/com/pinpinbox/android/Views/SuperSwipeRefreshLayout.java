@@ -35,7 +35,7 @@ import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.pinpinbox.android.Widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 

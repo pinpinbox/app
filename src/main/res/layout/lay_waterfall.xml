@@ -11,13 +11,7 @@
         <!--android:layout_height="match_parent"-->
         <!--app:refreshType="material">-->
 
-        <com.pinpinbox.android.Views.JazzyView.JazzyWaterFallView
-            android:id="@+id/waterfallview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:column_count_landscape="2"
-            app:column_count_portrait="2"
-            app:item_margin="8dp"/>
+
 
   <!--</com.baoyz.widget.PullRefreshLayout>-->
 

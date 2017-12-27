@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
@@ -77,11 +78,11 @@ public class DialogCreationLocation {
         edLocation = (EditText) mDialog.findViewById(R.id.edLocation);
 
         try {
-            mapPhoto = ((SupportMapFragment) mActivity.getSupportFragmentManager().findFragmentById(R.id.mapSetLocation)).getMap();
-            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            UiSettings setting = mapPhoto.getUiSettings();
-            setting.setTiltGesturesEnabled(true);
-            mapPhoto.setMyLocationEnabled(true);
+
+            SupportMapFragment mapFragment = (SupportMapFragment) mActivity.getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(new PageMapCallBack());
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,6 +105,17 @@ public class DialogCreationLocation {
 
 //        dialog.findViewById(R.id.tvTitle)
 
+    }
+
+    private class PageMapCallBack implements OnMapReadyCallback {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mapPhoto = googleMap;
+            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            UiSettings setting = mapPhoto.getUiSettings();
+            setting.setTiltGesturesEnabled(true);
+            mapPhoto.setMyLocationEnabled(true);
+        }
     }
 
 

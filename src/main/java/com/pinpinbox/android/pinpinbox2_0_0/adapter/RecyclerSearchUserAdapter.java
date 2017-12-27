@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.Widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

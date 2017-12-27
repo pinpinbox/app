@@ -16,7 +16,7 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.GroupSetListener;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.GroupSetListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

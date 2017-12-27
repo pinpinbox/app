@@ -24,15 +24,15 @@ import android.widget.Toast;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
-import com.pinpinbox.android.Scan.camera.CameraManager;
-import com.pinpinbox.android.Scan.decoding.CaptureActivityHandler;
-import com.pinpinbox.android.Scan.decoding.InactivityTimer;
-import com.pinpinbox.android.Scan.view.ViewfinderView;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.camera.CameraManager;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.CaptureActivityHandler;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.InactivityTimer;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.view.ViewfinderView;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 
 import org.json.JSONObject;
 

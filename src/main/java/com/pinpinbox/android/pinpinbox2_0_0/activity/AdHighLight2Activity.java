@@ -12,9 +12,9 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Widget.Key;
-import com.pinpinbox.android.Widget.MyLog;
-import com.pinpinbox.android.Widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
