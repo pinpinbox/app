@@ -35,35 +35,7 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
     private String strBannerUrl;
 
-//    @TargetApi(19)
-//    private void setTranslucentStatus(boolean on) {
-//        Window win = getWindow();
-//        WindowManager.LayoutParams winParams = win.getAttributes();
-//        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-//
-//        if (on) {
-//            winParams.flags |= bits;
-//        } else {
-//            winParams.flags &= ~bits;
-//        }
-//        win.setAttributes(winParams);
-//    }
-//
-//    private void setStatus() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            setTranslucentStatus(true);
-//        }
-//
-//        new Handler().post(new Runnable() {
-//            @Override
-//            public void run() {
-//                SystemBarTintManager sysBarManager = new SystemBarTintManager(AdHighLight2Activity.this);
-//                sysBarManager.setStatusBarTintEnabled(true);
-//                sysBarManager.setStatusBarTintColor(Color.parseColor(ColorClass.STATUSBAR));
-//            }
-//        });
-//
-//    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
