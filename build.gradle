@@ -131,12 +131,18 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:cardview-v7:22.2.0'
-    compile 'com.google.android.gms:play-services-maps:7.5.0'
-    compile 'com.google.android.gms:play-services-gcm:7.5.0'
-    compile 'com.google.android.gms:play-services-location:7.5.0'
-    compile 'com.google.android.gms:play-services-drive:7.5.0'
-    compile 'com.google.android.gms:play-services-appstate:7.5.0'
-    compile 'com.google.android.gms:play-services-appindexing:7.5.0'
+//    compile 'com.google.android.gms:play-services-maps:7.5.0'
+//    compile 'com.google.android.gms:play-services-gcm:7.5.0'
+//    compile 'com.google.android.gms:play-services-location:7.5.0'
+//    compile 'com.google.android.gms:play-services-drive:7.5.0'
+//    compile 'com.google.android.gms:play-services-appstate:7.5.0'
+//    compile 'com.google.android.gms:play-services-appindexing:7.5.0'
+    compile 'com.google.android.gms:play-services-maps:9.0.0'
+    compile 'com.google.android.gms:play-services-gcm:9.0.0'
+    compile 'com.google.android.gms:play-services-location:9.0.0'
+    compile 'com.google.android.gms:play-services-drive:9.0.0'
+//    compile 'com.google.android.gms:play-services-appstate:9.0.0'
+    compile 'com.google.android.gms:play-services-appindexing:9.0.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
     compile 'com.adobe.creativesdk:image:4.0.0' //IInAppBillingService
@@ -175,16 +181,18 @@ dependencies {
     compile 'com.zzhoujay.richtext:richtext:2.5.4'
     compile 'jp.wasabeef:richeditor-android:1.2.2'
     compile 'com.dailymotion.dailymotion-sdk-android:sdk:0.1.12'
-//    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:24.2.1'
     apt 'com.zhy:mpermission-compiler:1.0.0'
     apt 'com.github.bumptech.glide:compiler:4.0.0'
     compile "me.leolin:ShortcutBadger:1.1.18@aar"
     compile 'com.blankj:utilcode:1.9.8'
     compile 'com.flyco.labelview:FlycoLabelView_Lib:1.0.2@aar'
+//    compile 'com.google.firebase:firebase-messaging:11.0.4'
 
-//    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    apply plugin: 'com.google.gms.google-services'
 }
+
+
 
 
 

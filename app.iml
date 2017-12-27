@@ -8,74 +8,75 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="w3_privateDebug" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleW3_privateDebug" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileW3_privateDebugSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="www_privateDebug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleWww_privateDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileWww_privateDebugSources" />
         <afterSyncTasks>
-          <task>generateW3_privateDebugSources</task>
+          <task>generateWww_privateDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/w3_private/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/www_private/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/w3_private/debug" />
-    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/w3_private/debug" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/www_private/debug" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/www_private/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/w3_private/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/w3_private/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/w3_private/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/w3_private/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/w3_private/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/w3_private/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/w3_private/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/w3_private/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/w3_private/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/w3_private/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/w3_private/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/w3_private/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/w3_private/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/w3_private/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_private/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_private/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_private/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_private/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_private/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_private/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/w3_private/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestW3_private/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestW3_private/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestW3_private/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestW3_private/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestW3_private/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestW3_private/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestW3_private/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_private/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_private/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_private/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_private/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_private/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_private/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_private/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/www_private/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/www_private/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/www_private/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/www_private/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/www_private/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/google-services/www_private/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/www_private/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/www_private/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_privateDebug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_privateDebug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_privateDebug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_privateDebug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_privateDebug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_privateDebug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_privateDebug/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/www_private/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/www_private/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/www_private/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/www_private/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/www_private/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/www_private/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/www_private/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_privateDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_privateDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_privateDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_privateDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_privateDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_privateDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_privateDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_private/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_private/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_private/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_private/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_private/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_private/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/www_private/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWww_private/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWww_private/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWww_private/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWww_private/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWww_private/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWww_private/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestWww_private/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_private/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_private/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_private/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_private/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_private/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_private/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testWww_private/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -125,24 +126,26 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 24 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="commons-io-2.4" level="project" />
     <orderEntry type="library" exported="" name="core-2.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="material-tap-target-prompt-1.3.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-appindexing-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="ultra-ptr-1.0.11" level="project" />
     <orderEntry type="library" exported="" name="circleindicator-1.1.8" level="project" />
     <orderEntry type="library" exported="" name="markdown-1.0.5" level="project" />
     <orderEntry type="library" exported="" name="disklrumulticache-1.0.5" level="project" />
     <orderEntry type="library" exported="" name="library-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-drive-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.2.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="multidex-instrumentation-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="httpmime-4.0.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-maps-9.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-tasks-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="annotations-12.0" level="project" />
     <orderEntry type="library" exported="" name="richpath-0.0.5" level="project" />
     <orderEntry type="library" exported="" name="facebook-android-sdk-4.5.0" level="project" />
@@ -154,7 +157,6 @@
     <orderEntry type="library" exported="" name="okhttp-3.5.0" level="project" />
     <orderEntry type="library" exported="" name="library-1.2" level="project" />
     <orderEntry type="library" exported="" name="okhttp-urlconnection-1.6.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-appstate-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="CircularProgress-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="sdk-0.1.12" level="project" />
     <orderEntry type="library" exported="" name="apache-mime4j-0.6" level="project" />
@@ -164,7 +166,6 @@
     <orderEntry type="library" exported="" name="support-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="palette-v7-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-drive-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="richeditor-android-1.2.2" level="project" />
@@ -174,10 +175,9 @@
     <orderEntry type="library" exported="" name="android-gif-drawable-1.2.8" level="project" />
     <orderEntry type="library" exported="" name="renderscript-v8" level="project" />
     <orderEntry type="library" exported="" name="library-1.6.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appindexing-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="ab-test-2.0.5" level="project" />
-    <orderEntry type="library" exported="" name="play-services-base-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="gifdecoder-4.0.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-gcm-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="eventbus-2.2.1" level="project" />
@@ -195,17 +195,24 @@
     <orderEntry type="library" exported="" name="android-integration-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="logger-1.15" level="project" />
     <orderEntry type="library" exported="" name="AndroidVimeoExtractor-1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="firebase-analytics-9.0.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-iid-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="glide-4.0.0" level="project" />
     <orderEntry type="library" exported="" name="squareprogressbar-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-iid-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="CircularReveal-1.0.4" level="project" />
     <orderEntry type="library" exported="" name="library-1.3.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-common-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="picassopalette-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="design-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-gcm-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="imagezoom-2.1.1" level="project" />
     <orderEntry type="library" exported="" name="YouTubeAndroidPlayerApi" level="project" />
     <orderEntry type="library" exported="" name="utilcode-1.9.8" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
+    <orderEntry type="library" exported="" name="play-services-location-9.0.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-analytics-impl-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="auth-0.5.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="grid-view-with-header-footer-1.0.12" level="project" />
@@ -217,20 +224,20 @@
     <orderEntry type="library" exported="" name="target-tooltip-library-1.2.4" level="project" />
     <orderEntry type="library" exported="" name="annotations-4.0.0" level="project" />
     <orderEntry type="library" exported="" name="coolswitch-1.0.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-location-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="mpermission-annotation-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="hlistviewanimations-library-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="systembartint-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.3" level="project" />
+    <orderEntry type="library" exported="" name="firebase-core-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="richtext-2.5.4" level="project" />
     <orderEntry type="library" exported="" name="FlycoLabelView_Lib-1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="play-services-basement-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="okio-1.11.0" level="project" />
     <orderEntry type="library" exported="" name="utils-v4-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="exomedia-3.1.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="view-reveal-animator-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="play-services-maps-7.5.0" level="project" />
   </component>
 </module>

@@ -8,7 +8,7 @@
 
 
 
-    <com.pinpinbox.android.Views.crop.CropImageView
+    <com.pinpinbox.android.pinpinbox2_0_0.libs.crop.CropImageView
         android:id="@+id/crop_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

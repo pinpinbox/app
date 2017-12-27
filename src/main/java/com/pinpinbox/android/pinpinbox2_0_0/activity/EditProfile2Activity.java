@@ -50,7 +50,7 @@ import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.PickerView;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
-import com.pinpinbox.android.Views.crop.Crop;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;

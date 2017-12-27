@@ -34,11 +34,11 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.google.android.c2dm.permission.REGISTER" />
-    <!--<uses-permission android:name="com.pinpinbox.android.permission.C2D_MESSAGE" />-->
+    <!--<uses-permission android:name="${project.rootDir}.permission.C2D_MESSAGE" />-->
     <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
 
     <!--<permission-->
-        <!--android:name="com.pinpinbox.android.permission.C2D_MESSAGE"-->
+        <!--android:name="${project.rootDir}.permission.C2D_MESSAGE"-->
         <!--android:protectionLevel="signature" />-->
 
     <permission
@@ -154,16 +154,16 @@
             android:name=".pinpinbox2_0_0.service.MessageReceivingService"
             android:label="com.pinpinbox.android.AwsSns.MessageReceivingService">
             <intent-filter>
-                <action android:name="com.pinoinbox.android.FirstInstallActivity" />
+                <action android:name="com.pinpinbox.android.FirstInstallActivity" />
                 <action android:name="com.pinpinbox.android.AwsSns.ExternalReceiver" />
 
-                <category android:name="com.pinoinbox.android" />
+                <category android:name="com.pinpinbox.android" />
             </intent-filter>
         </service>
         <service android:name=".pinpinbox2_0_0.service.RegistraAWSService">
             <intent-filter>
                 <category android:name="com.pinpinbox.android" />
-                <!-- <action android:name="com.pinpinbox.android.pinpinbox2_0_0.service.RegistraAWSService"/> -->
+                <!-- <action android:name="${project.rootDir}.pinpinbox2_0_0.service.RegistraAWSService"/> -->
             </intent-filter>
         </service>
         <service android:name=".pinpinbox2_0_0.service.DownLoadService">
@@ -552,7 +552,7 @@
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
-        <activity android:name=".Views.crop.CropImageActivity" />
+        <activity android:name=".pinpinbox2_0_0.libs.crop.CropImageActivity" />
 
         <activity
             android:name=".pinpinbox2_0_0.activity.AlbumGroup2Activity"

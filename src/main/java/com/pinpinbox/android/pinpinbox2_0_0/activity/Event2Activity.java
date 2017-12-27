@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -298,22 +297,22 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
     private void toEvent() {
 
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        Uri content_url = Uri.parse(url);
-        intent.setData(content_url);
-        startActivity(intent);
+//        Intent intent = new Intent();
+//        intent.setAction("android.intent.action.VIEW");
+//        Uri content_url = Uri.parse(url);
+//        intent.setData(content_url);
+//        startActivity(intent);
 
 
 
         //20171206
-//        Bundle bundle = new Bundle();
-//        bundle.putString("url", url);
-//
-//        Intent intent = new Intent(Event2Activity.this, WebView2Activity.class);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-//        ActivityAnim.StartAnim(mActivity);
+        Bundle bundle = new Bundle();
+        bundle.putString("url", url);
+
+        Intent intent = new Intent(Event2Activity.this, WebView2Activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        ActivityAnim.StartAnim(mActivity);
 
     }
 

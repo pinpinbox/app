@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Views.crop;
+package com.pinpinbox.android.pinpinbox2_0_0.libs.crop;
 
 class Log {
 

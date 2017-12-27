@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Views.crop;
+package com.pinpinbox.android.pinpinbox2_0_0.libs.crop;
 
 import android.content.Context;
 import android.graphics.Canvas;
