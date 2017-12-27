@@ -95,7 +95,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity;
-
+//
     private PopPicker popPicker;
     private PopBoard board;
     private ItemAlbum itemAlbum;
