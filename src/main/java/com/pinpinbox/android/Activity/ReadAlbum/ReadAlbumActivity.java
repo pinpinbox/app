@@ -1123,7 +1123,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
                     String photoChangeType = albumGiftChangeData.getString(photoIdList.get(page), "");
                     if (photoChangeType == null | photoChangeType.equals("")) {
-                        exchangeImg.setImageResource(R.drawable.click_read_album_exchange);
+//                        exchangeImg.setImageResource(R.drawable.click_read_album_exchange);
                         tvExchange.setText(R.string.exchange);
                         exchangeImg.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -1157,7 +1157,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
 
                             } else {
-                                exchangeImg.setImageResource(R.drawable.click_read_album_exchange);
+//                                exchangeImg.setImageResource(R.drawable.click_read_album_exchange);
                                 tvExchange.setText(R.string.exchange);
 
                                 exchangeImg.setOnClickListener(new View.OnClickListener() {
@@ -1215,7 +1215,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
 
                             } else {
-                                exchangeImg.setImageResource(R.drawable.click_read_album_exchange);
+//                                exchangeImg.setImageResource(R.drawable.click_read_album_exchange);
                                 tvExchange.setText(R.string.exchange);
                                 exchangeImg.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -1705,7 +1705,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
             rVoice.setVisibility(View.GONE);
 
-            voiceImg.setImageResource(R.drawable.button_voice);
+//            voiceImg.setImageResource(R.drawable.button_voice);
             albumMusicPlay = false;
         }
 
@@ -1751,10 +1751,10 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                 e.printStackTrace();
             }
             if (pageMediaPlayer.isPlaying()) {
-                voiceImg.setImageResource(R.drawable.button_voice_click);
+//                voiceImg.setImageResource(R.drawable.button_voice_click);
                 albumMusicPlay = true;
             } else {
-                voiceImg.setImageResource(R.drawable.button_voice);
+//                voiceImg.setImageResource(R.drawable.button_voice);
                 albumMusicPlay = false;
             }
 
@@ -1792,10 +1792,10 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                     e.printStackTrace();
                 }
                 if (pageMediaPlayer.isPlaying()) {
-                    voiceImg.setImageResource(R.drawable.button_voice_click);
+//                    voiceImg.setImageResource(R.drawable.button_voice_click);
                     albumMusicPlay = true;
                 } else {
-                    voiceImg.setImageResource(R.drawable.button_voice);
+//                    voiceImg.setImageResource(R.drawable.button_voice);
                     albumMusicPlay = false;
                 }
             }
@@ -1830,10 +1830,10 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
             if (mMediaPlayer != null) {
 
                 if (mMediaPlayer.isPlaying()) {
-                    voiceImg.setImageResource(R.drawable.button_voice_click);
+//                    voiceImg.setImageResource(R.drawable.button_voice_click);
                     albumMusicPlay = true;//下次進這相本要播放音樂
                 } else {
-                    voiceImg.setImageResource(R.drawable.button_voice);
+//                    voiceImg.setImageResource(R.drawable.button_voice);
                     albumMusicPlay = false;//下次進這相本要播放音樂
                 }
 
@@ -1891,7 +1891,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
             if (mMediaPlayer.isPlaying()) {
                 mMediaPlayer.pause();
-                voiceImg.setImageResource(R.drawable.button_voice);
+//                voiceImg.setImageResource(R.drawable.button_voice);
                 albumMusicPlay = false;////下次進這相本不播放音樂
 
                 if (LOG.isLogMode) {
@@ -1899,7 +1899,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                 }
             } else {
                 mMediaPlayer.start();
-                voiceImg.setImageResource(R.drawable.button_voice_click);
+//                voiceImg.setImageResource(R.drawable.button_voice_click);
                 albumMusicPlay = true;//下次進這相本要播放音樂
                 if (LOG.isLogMode) {
                     Log.d(TAG, "目前狀態 : 相本音樂播放");
@@ -1916,12 +1916,12 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
                 if (pageMediaPlayer.isPlaying()) {
                     pageMediaPlayer.pause();
-                    voiceImg.setImageResource(R.drawable.button_voice);
+//                    voiceImg.setImageResource(R.drawable.button_voice);
                     albumMusicPlay = false;////下次進這相本不播放音樂
                     MyLog.Set("d", getClass(), "目前狀態 : 單頁音樂暫停");
                 } else {
                     pageMediaPlayer.start();
-                    voiceImg.setImageResource(R.drawable.button_voice_click);
+//                    voiceImg.setImageResource(R.drawable.button_voice_click);
                     albumMusicPlay = true;//下次進這相本要播放音樂
                     MyLog.Set("d", getClass(), "目前狀態 : 單頁音樂播放");
                 }
@@ -2647,7 +2647,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
 
                 mCenterImg.setVisibility(View.INVISIBLE);//2016.02.17 GONE => INVISIBLE
-                mExchangeImg.setImageResource(R.drawable.click_read_album_exchange);
+//                mExchangeImg.setImageResource(R.drawable.click_read_album_exchange);
                 tvExchange.setTextColor(Color.parseColor("#ffffff"));
                 tvExchange.setText(R.string.exchange);
                 mExchangeImg.setOnClickListener(new View.OnClickListener() {
@@ -3343,10 +3343,10 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                         if (mMediaPlayer != null) {
 
                             if (mMediaPlayer.isPlaying()) {
-                                voiceImg.setImageResource(R.drawable.button_voice_click);
+//                                voiceImg.setImageResource(R.drawable.button_voice_click);
                                 albumMusicPlay = true;//下次進這相本要播放音樂
                             } else {
-                                voiceImg.setImageResource(R.drawable.button_voice);
+//                                voiceImg.setImageResource(R.drawable.button_voice);
                                 albumMusicPlay = false;//下次進這相本要播放音樂
                             }
                         }
@@ -3365,10 +3365,10 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                         MyLog.Set("d", getClass(), "相本音樂不存在 預設第一頁音樂");
 
                         if (albumMusicPlay) {
-                            voiceImg.setImageResource(R.drawable.button_voice_click);
+//                            voiceImg.setImageResource(R.drawable.button_voice_click);
                         } else {
                             MyLog.Set("d", getClass(), "上次保存為音樂關閉");
-                            voiceImg.setImageResource(R.drawable.button_voice);
+//                            voiceImg.setImageResource(R.drawable.button_voice);
                         }
 
                         if (!isAlbumAudioExist) {
