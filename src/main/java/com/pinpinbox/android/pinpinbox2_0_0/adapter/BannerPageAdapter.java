@@ -498,8 +498,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
     public List<HashMap<String, Object>> getGifList() {
 
-        return this.gifList;
-
+            return this.gifList;
     }
 
     public RequestOptions getOpts() {

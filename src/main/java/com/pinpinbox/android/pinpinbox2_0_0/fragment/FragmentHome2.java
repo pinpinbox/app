@@ -1956,7 +1956,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             autoPageScrollManager.removeRunnable();
         }
 
-        if (bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
+        if (bannerPageAdapter!=null && bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
 
 
             MyLog.Set("e", getClass(), "bannerPageAdapter.getGifListImg().size() => " + bannerPageAdapter.getGifList().size());
