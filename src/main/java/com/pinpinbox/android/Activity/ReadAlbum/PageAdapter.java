@@ -93,7 +93,7 @@ public class PageAdapter extends PagerAdapter {
                             .config(Bitmap.Config.RGB_565)
                             .resize(bmpw / 2, bmph / 2)
                             .centerInside()
-                            .error(R.drawable.no_image)
+                            .error(R.drawable.bg_2_0_0_no_image)
                             .tag(mActivity.getApplicationContext())
                             .into(picImg);
                 }else {
@@ -103,7 +103,7 @@ public class PageAdapter extends PagerAdapter {
                             .config(Bitmap.Config.RGB_565)
                             .resize(bmpw, bmph)
                             .centerInside()
-                            .error(R.drawable.no_image)
+                            .error(R.drawable.bg_2_0_0_no_image)
                             .tag(mActivity.getApplicationContext())
                             .into(picImg);
                 }

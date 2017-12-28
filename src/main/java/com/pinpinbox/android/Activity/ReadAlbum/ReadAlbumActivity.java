@@ -52,9 +52,6 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
@@ -78,7 +75,6 @@ import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.MyGallery;
 import com.pinpinbox.android.Views.PinchImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.YouTubeActivity;
@@ -3551,7 +3547,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                                 .load(imgUrl)
                                 .config(Bitmap.Config.RGB_565)
                                 .resize(bmpw / 3, bmph / 3)
-                                .error(R.drawable.no_image)
+                                .error(R.drawable.bg_2_0_0_no_image)
                                 .tag(mActivity.getApplicationContext())
                                 .into(picImg);
 
@@ -3562,7 +3558,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                                 .load(imgUrl)
                                 .config(Bitmap.Config.RGB_565)
                                 .resize(bmpw / 2, bmph / 2)
-                                .error(R.drawable.no_image)
+                                .error(R.drawable.bg_2_0_0_no_image)
                                 .tag(mActivity.getApplicationContext())
                                 .into(picImg);
                     } else {
@@ -3571,7 +3567,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                                 .load(imgUrl)
                                 .config(Bitmap.Config.RGB_565)
                                 .resize(bmpw, bmph)
-                                .error(R.drawable.no_image)
+                                .error(R.drawable.bg_2_0_0_no_image)
                                 .tag(mActivity.getApplicationContext())
                                 .into(picImg);
                     }

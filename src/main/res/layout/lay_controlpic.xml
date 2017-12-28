@@ -9,7 +9,7 @@
         android:id="@+id/plus"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/button_selectpicture_camera"
+
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 

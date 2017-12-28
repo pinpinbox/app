@@ -30,7 +30,6 @@
         <com.pinpinbox.android.Views.CircleView.RoundedImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/bg_mydialog"
             android:scaleType="centerCrop"
             app:riv_corner_radius="4dp"
             app:riv_mutate_background="true"
@@ -47,7 +46,7 @@
             <ImageView
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:src="@drawable/dialog_error_dark" />
+                />
 
 
             <TextView
