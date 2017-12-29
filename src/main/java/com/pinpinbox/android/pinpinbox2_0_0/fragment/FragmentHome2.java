@@ -1921,6 +1921,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
     }
 
+    public List<ItemAlbumCategory>getItemAlbumCategoryList(){
+        return this.itemAlbumCategoryList;
+    }
+
 
     /*進畫面 比Resume先執行*/
     @Override

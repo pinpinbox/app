@@ -1157,8 +1157,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                 int line = tvPageDescription.getLineCount();
 
-                MyLog.Set("e", mActivity.getClass(), "敘述總共 " + line + " 行");
-
                 if (line <= 1) {
                     tvPageDescription.setGravity(Gravity.CENTER);
                 } else {
@@ -2189,7 +2187,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         lastPosition = 0;
 
                     }
-                }, 300);
+                }, 500);
 
 
                 if (!isSaveToRecent) {

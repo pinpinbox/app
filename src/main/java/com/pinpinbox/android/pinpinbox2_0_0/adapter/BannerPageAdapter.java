@@ -3,6 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -25,17 +26,22 @@ import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ResultCodeClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.RoundTransform;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentHome2;
 
 import org.json.JSONArray;
 
@@ -165,17 +171,17 @@ public class BannerPageAdapter extends PagerAdapter {
 
 
                 boolean urlIsExist = false;
-                if(gifList!=null && gifList.size()>0){
+                if (gifList != null && gifList.size() > 0) {
                     for (int i = 0; i < gifList.size(); i++) {
-                        String url = (String)gifList.get(i).get(Key.url);
-                        if(url.equals(imageUrl)){
+                        String url = (String) gifList.get(i).get(Key.url);
+                        if (url.equals(imageUrl)) {
                             urlIsExist = true;
                             break;
                         }
                     }
                 }
 
-                if(!urlIsExist){
+                if (!urlIsExist) {
 
                     MyLog.Set("e", getClass(), "gif url 不存在並添加到gifList");
                     HashMap<String, Object> map = new HashMap<>();
@@ -183,13 +189,11 @@ public class BannerPageAdapter extends PagerAdapter {
                     map.put(Key.imageView, img);
                     gifList.add(map);
 
-                }else {
+                } else {
 
                     MyLog.Set("e", getClass(), "gif url 已存在");
 
                 }
-
-
 
 
 //                img.setVisibility(View.GONE);
@@ -380,16 +384,57 @@ public class BannerPageAdapter extends PagerAdapter {
 
 
                         } else {
-                            bundle.putString("url", url);
-                            intent.putExtras(bundle);
-                            intent.setClass(mActivity, WebView2Activity.class);
-                            mActivity.startActivity(intent);
-                            ActivityAnim.StartAnim(mActivity);
 
 
-//                            Uri uri = Uri.parse(url);
-//                            Intent it = new Intent(Intent.ACTION_VIEW, uri);
-//                            startActivity(it);
+                            Uri uri = Uri.parse(url);
+
+
+                            String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
+
+                            int categoryarea_id = 0;
+                            String title = "";
+
+                            if (categoryareaId != null && !categoryareaId.equals("")) {
+
+                                categoryarea_id = StringIntMethod.StringToInt(categoryareaId);
+
+                                FragmentHome2 fragmentHome2 = (FragmentHome2) ((Main2Activity) mActivity).getFragment(FragmentHome2.class.getSimpleName());
+
+                                if (fragmentHome2 != null) {
+                                    List<ItemAlbumCategory> itemAlbumCategoryList = fragmentHome2.getItemAlbumCategoryList();
+
+                                    for (int i = 0; i < itemAlbumCategoryList.size(); i++) {
+
+                                        int cId = itemAlbumCategoryList.get(i).getCategoryarea_id();
+
+                                        if (cId == categoryarea_id) {
+                                            title = itemAlbumCategoryList.get(i).getName();
+                                            break;
+                                        }
+
+                                    }
+
+                                }
+
+
+                                bundle.putInt(Key.categoryarea_id, categoryarea_id);
+
+                                bundle.putString(Key.title, title);
+
+                                mActivity.startActivity(new Intent(mActivity, Feature2Activity.class).putExtras(bundle));
+
+                                ActivityAnim.StartAnim(mActivity);
+
+
+                            } else {
+
+                                bundle.putString("url", url);
+                                intent.putExtras(bundle);
+                                intent.setClass(mActivity, WebView2Activity.class);
+                                mActivity.startActivity(intent);
+                                ActivityAnim.StartAnim(mActivity);
+
+                            }
 
 
                         }
@@ -498,7 +543,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
     public List<HashMap<String, Object>> getGifList() {
 
-            return this.gifList;
+        return this.gifList;
     }
 
     public RequestOptions getOpts() {

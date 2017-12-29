@@ -20,6 +20,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
 import com.dailymotion.android.player.sdk.PlayerWebView;
+import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.ui.widget.EMVideoView;
 import com.facebook.AccessToken;
@@ -34,7 +35,6 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.Utility.FileUtility;
@@ -42,9 +42,10 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Views.DraggerActivity.DraggerRead.DraggerReadActivity;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 
 import org.json.JSONObject;
 
@@ -59,7 +60,7 @@ import java.util.regex.Pattern;
 /**
  * Created by vmage on 2015/12/29.
  */
-public class VideoPlayActivity extends DraggerReadActivity {
+public class VideoPlayActivity extends DraggerActivity {
 
     private Activity mActivity;
     private LoadingAnimation loading;
@@ -84,8 +85,7 @@ public class VideoPlayActivity extends DraggerReadActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
         setContentView(R.layout.activity_2_0_0_video_play);
         SystemUtility.SysApplication.getInstance().addActivity(this);
 
@@ -484,6 +484,14 @@ public class VideoPlayActivity extends DraggerReadActivity {
                 videoView.start();
             }
         });
+        videoView.setOnCompletionListener(new OnCompletionListener() {
+            @Override
+            public void onCompletion() {
+
+                mActivity.finish();
+
+            }
+        });
 
 /************************************************************************************************/
 
@@ -712,7 +720,7 @@ public class VideoPlayActivity extends DraggerReadActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
 
         if (!HttpUtility.isConnect(this)) {
             DialogV2Custom.BuildNoConnect(mActivity);
@@ -745,7 +753,7 @@ public class VideoPlayActivity extends DraggerReadActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
 
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
 
