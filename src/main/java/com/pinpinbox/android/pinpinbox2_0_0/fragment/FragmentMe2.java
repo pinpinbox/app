@@ -67,6 +67,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyFollow2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.RecentAlbum2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.SponsorList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -139,7 +140,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
     private SmoothProgressBar pbLoadMore;
     private RoundCornerImageView userImg;
     private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, menuImg, messageImg, aboutImg, shareImg, incomeImg;
-    private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax;
+    private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax, rSponsorList;
     private LinearLayout linLink;
     private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvLink, tvSponsor, tvUploadBanner;
     private View viewHeader;
@@ -314,6 +315,10 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         twitterImg = (ImageView) viewHeader.findViewById(R.id.twitterImg);
         youtubeImg = (ImageView) viewHeader.findViewById(R.id.youtubeImg);
 
+
+        rSponsorList = (RelativeLayout) viewHeader.findViewById(R.id.rSponsorList);
+
+
         webImg.setOnClickListener(this);
         facebookImg.setOnClickListener(this);
         googleImg.setOnClickListener(this);
@@ -329,6 +334,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         shareImg.setOnClickListener(this);
         incomeImg.setOnClickListener(this);
         tvUploadBanner.setOnClickListener(this);
+
+        rSponsorList.setOnClickListener(this);
 
 
         return v;
@@ -725,14 +732,13 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
                             itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
 
-                            if(width>height){
+                            if (width > height) {
                                 itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                            }else if(height>width){
+                            } else if (height > width) {
                                 itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                            }else {
+                            } else {
                                 itemAlbum.setImage_orientation(0);
                             }
-
 
 
                         } catch (Exception e) {
@@ -877,6 +883,11 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
     private void toAppSetting() {
         startActivity(new Intent(getActivity(), AppSettings2Activity.class));
+        ActivityAnim.StartAnim(getActivity());
+    }
+
+    private void toSponsorList() {
+        startActivity(new Intent(getActivity(), SponsorList2Activity.class));
         ActivityAnim.StartAnim(getActivity());
     }
 
@@ -1536,6 +1547,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                 toAppSetting();
                 break;
 
+            case R.id.rSponsorList:
+
+                toSponsorList();
+
+                break;
+
 
         }
 
@@ -1669,7 +1686,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                                         .into(bannerImg);
                             }
 
-                            if(bitmap!=null && !bitmap.isRecycled()){
+                            if (bitmap != null && !bitmap.isRecycled()) {
                                 bitmap.recycle();
                             }
 

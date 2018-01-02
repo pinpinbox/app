@@ -2,18 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:fontPath="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:clipChildren="false"
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
@@ -83,46 +82,42 @@
                     android:id="@+id/rSponsorMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:background="@drawable/border_2_0_0_grey_third_radius"
-                    android:layout_marginBottom="16dp"
                     android:visibility="gone">
 
                     <TextView
+                        fontPath="fonts/OpenSans-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/pinpinbox_2_0_0_first_text"
-                        android:textSize="14sp"
-                        android:text="我正在參加贊助賽!請點進下方任一相本贊助我吧^^"
-                        android:padding="16sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:layout_toLeftOf="@+id/tvBuyP"
                         android:letterSpacing="0.1"
-                        android:textStyle="bold"
-                        fontPath ="fonts/OpenSans-Bold.ttf"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
+                        android:padding="16sp"
+                        android:text="我正在參加贊助賽!請點進下方任一相本贊助我吧^^"
+                        android:textColor="@color/pinpinbox_2_0_0_first_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                       style="@style/ppb200_Button_main_small_radius"
+                        android:id="@+id/tvBuyP"
+                        style="@style/ppb200_Button_main_small_radius"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="買P點"
                         android:layout_marginRight="16dp"
-                        android:id="@+id/tvBuyP" />
-
+                        android:text="買P點" />
 
 
                 </RelativeLayout>
-
-
 
 
                 <!--creative name-->
                 <TextView
                     android:id="@+id/tvCreativeName"
                     style="@style/ppb200_detail_name"
-                    android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:text="" />
@@ -132,19 +127,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp">
 
                         <View
                             android:layout_width="36dp"
                             android:layout_height="8dp"
-                            android:background="@drawable/border_2_0_0_grey_third_radius"
-                            />
+                            android:background="@drawable/border_2_0_0_grey_third_radius" />
 
                         <LinearLayout
                             android:layout_width="72dp"
@@ -153,16 +150,14 @@
                             android:orientation="vertical">
 
 
-
                             <TextView
                                 android:id="@+id/tvViewed"
+                                fontPath="fonts/OpenSans-Bold.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:letterSpacing="0.1"
                                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                                android:textSize="@dimen/ppb200_title_second_size"
-                                fontPath="fonts/OpenSans-Bold.ttf"
-                                />
+                                android:textSize="@dimen/ppb200_title_second_size" />
 
                             <TextView
                                 android:id="@+id/tvV"
@@ -183,7 +178,9 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/ppb200_padding_margin_big">
+                        android:layout_marginLeft="24dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp">
 
                         <View
                             android:layout_width="36dp"
@@ -198,13 +195,13 @@
 
                             <TextView
                                 android:id="@+id/tvFollow"
+                                fontPath="fonts/OpenSans-Bold.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:letterSpacing="0.1"
                                 android:text=""
                                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                                android:textSize="@dimen/ppb200_title_second_size"
-                                fontPath="fonts/OpenSans-Bold.ttf"/>
+                                android:textSize="@dimen/ppb200_title_second_size" />
 
                             <TextView
                                 android:id="@+id/tvF"
@@ -223,44 +220,48 @@
 
 
                     <RelativeLayout
+                        android:id="@+id/rSponsorList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/ppb200_padding_margin_big">
+                        android:layout_marginLeft="24dp"
+                        android:background="@drawable/click_2_0_0_default"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp">
 
-                    <View
-                        android:layout_width="36dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/border_2_0_0_grey_third_radius" />
+                        <View
+                            android:layout_width="36dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/border_2_0_0_grey_third_radius" />
 
-                    <LinearLayout
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
 
 
-                        <TextView
-                            android:id="@+id/tvSponsor"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text=""
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_title_second_size"
-                            fontPath="fonts/OpenSans-Bold.ttf"/>
+                            <TextView
+                                android:id="@+id/tvSponsor"
+                                fontPath="fonts/OpenSans-Bold.ttf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:letterSpacing="0.1"
+                                android:text=""
+                                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                                android:textSize="@dimen/ppb200_title_second_size" />
 
-                        <TextView
-                            android:id="@+id/tvS"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                            android:gravity="center"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_other_text_people_sponsor"
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_common_text_small" />
+                            <TextView
+                                android:id="@+id/tvS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                                android:gravity="center"
+                                android:letterSpacing="0.1"
+                                android:text="@string/pinpinbox_2_0_0_other_text_people_sponsor"
+                                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                                android:textSize="@dimen/ppb200_common_text_small" />
 
-                    </LinearLayout>
+                        </LinearLayout>
 
                     </RelativeLayout>
 

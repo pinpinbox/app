@@ -84,7 +84,7 @@ public class Protocol99 {
 
         round = 0;
 
-        count = 8;
+        count = 16;
 
     }
 

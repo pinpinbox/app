@@ -128,6 +128,7 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
 
         if (!HttpUtility.isConnect(this)) {
             setNoConnect();
+            return;
         }
 
         SystemUtility.SysApplication.getInstance().addActivity(this);

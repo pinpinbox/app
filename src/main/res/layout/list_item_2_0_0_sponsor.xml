@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rBackground"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+        android:background="@drawable/click_2_0_0_list_item">
+
+        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+            android:id="@+id/userImg"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:scaleType="centerCrop"
+            app:siBorderColor="@color/pinpinbox_2_0_0_divider"
+            app:siBorderWidth="0.5dp"
+            app:siRadius="68dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:layout_toEndOf="@+id/userImg"
+            android:layout_toLeftOf="@+id/tvMessage"
+            android:layout_toRightOf="@+id/userImg"
+            android:layout_toStartOf="@+id/tvMessage"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="王小明"
+                android:letterSpacing="0.1"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvPoint"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:layout_marginTop="4dp"
+                android:letterSpacing="0.1"
+                android:text="9999"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvName"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@+id/tvPoint"
+                android:layout_toRightOf="@+id/tvPoint"
+                android:text=" P"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="24sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+        <!--<TextView-->
+        <!--style="@style/ppb200_Button_grey_small_radius8"-->
+        <!--android:layout_width="64dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="@dimen/ppb200_padding_margin_second"-->
+        <!--android:layout_toLeftOf="@+id/tvFollow"-->
+        <!--android:layout_toStartOf="@+id/tvFollow"-->
+        <!--android:text="留言"-->
+        <!--android:textStyle="bold"-->
+        <!--android:id="@+id/tvMessage" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tvFollow"-->
+        <!--style="@style/ppb200_Button_main_small_radius"-->
+        <!--android:layout_width="64dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
+        <!--android:text="關注" />-->
+
+        <ImageView
+            android:id="@+id/messageImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/pinImg"
+            android:layout_toStartOf="@+id/pinImg"
+            android:padding="4dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_message_dark" />
+
+
+        <ImageView
+            android:id="@+id/pinImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:padding="4dp"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_pin_dark" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
