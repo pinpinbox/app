@@ -32,28 +32,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.StringClass.TagClass;
+import com.pinpinbox.android.Test.Category2Activity;
 import com.pinpinbox.android.Test.FragmentPhotoCrop;
 import com.pinpinbox.android.Test.TestStatusActivity;
 import com.pinpinbox.android.Test.TextTestActivity;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Rotate3d;
-import com.pinpinbox.android.Test.Category2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Hobby2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.OffLine2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.TypeFacebookFriend2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Rotate3d;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.service.DownLoadService;
 import com.squareup.picasso.Picasso;
 
@@ -246,7 +246,6 @@ public class OldMainActivity extends FragmentActivity {
         });
 
 
-
         Button btn5 = (Button) findViewById(R.id.button5);
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,21 +267,27 @@ public class OldMainActivity extends FragmentActivity {
                     startActivityForResult(intent, 1234);
                 } else {
                     // 若检测不到语音识别程序在本机安装，测将扭铵置灰
-                    Toast.makeText(mActivity,"沒有語音裝置", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, "沒有語音裝置", Toast.LENGTH_SHORT).show();
                 }
-
 
 
             }
         });
 
-        Button btn6 = (Button) findViewById(R.id.button6);
+        final Button btn6 = (Button) findViewById(R.id.button6);
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(OldMainActivity.this, Hobby2Activity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(OldMainActivity.this, Hobby2Activity.class);
+//                startActivity(intent);
+
+                PinPinToast.showSponsorToast(
+                        mActivity.getApplicationContext(),
+                        "KevinLin" + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
+                        "https://cdn.pinpinbox.com/storage/zh_TW/user/4056/picture$50fb.jpg"
+                );
+
 
             }
         });
@@ -596,8 +601,6 @@ public class OldMainActivity extends FragmentActivity {
 //                startActivity(new Intent(OldMainActivity.this, PieChartActivity.class));
 
 
-
-
             }
         });
 
@@ -625,7 +628,6 @@ public class OldMainActivity extends FragmentActivity {
         button21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
 
             }
@@ -689,9 +691,10 @@ public class OldMainActivity extends FragmentActivity {
     private void showEditText() {
 
         final RichEditor mEditor = (RichEditor) findViewById(R.id.editor);
-        final TextView tvPreview = (TextView)findViewById(R.id.tvPreview);
+        final TextView tvPreview = (TextView) findViewById(R.id.tvPreview);
         mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
-            @Override public void onTextChange(String text) {
+            @Override
+            public void onTextChange(String text) {
                 tvPreview.setText(text);
             }
         });
@@ -720,7 +723,7 @@ public class OldMainActivity extends FragmentActivity {
         mEditor.setHtml(text);
 
         mEditor.setEditorFontSize(18);
-        mEditor.setEditorFontColor(getResources().getColor(R.color.pinpinbox_2_0_0_first_grey,null));
+        mEditor.setEditorFontColor(getResources().getColor(R.color.pinpinbox_2_0_0_first_grey, null));
         mEditor.setPadding(16, 16, 16, 16);
         mEditor.setPlaceholder("Insert text here...");
 
@@ -1183,7 +1186,6 @@ public class OldMainActivity extends FragmentActivity {
         // 语音识别后的回调，将识别的字串以Toast显示
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
 }

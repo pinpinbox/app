@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.SelfMadeClass.ClickUtils;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
@@ -97,6 +98,11 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         mHolder.messageImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
                 if (onUserInterativeListener != null) {
                     onUserInterativeListener.doPostMessage(position);
                 }
@@ -106,6 +112,11 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         mHolder.pinImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
                 if (onUserInterativeListener != null) {
                     onUserInterativeListener.doFollow(position);
                 }
@@ -154,9 +165,6 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
 
-//            if (ClickUtils.ButtonContinuousClick()) {
-//                return;
-//            }
 
             if (null != onRecyclerViewListener) {
                 onRecyclerViewListener.onItemClick(position, v);

@@ -39,6 +39,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
@@ -209,6 +210,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
 //        getStatusControl().setStatusMode(StatusControl.DARK);
+
+        try{
+            MapsInitializer.initialize(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         setStatusDark();
         changeActivityStatusMode(StatusControl.DARK);
@@ -413,9 +420,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //            setting.setTiltGesturesEnabled(true);
 //            mapAlbum.setMyLocationEnabled(true);
 
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+            SupportMapFragment infoMap = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
-            mapFragment.getMapAsync(new AlbumMapCallBack());
+            infoMap.getMapAsync(new AlbumMapCallBack());
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -425,6 +434,36 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
         closeImg.setOnClickListener(this);
+    }
+
+    private void initPageMap() {
+
+        popPageMap = new PopupCustom(mActivity);
+        popPageMap.setPopup(R.layout.pop_2_0_0_map, R.style.pinpinbox_popupAnimation_bottom);
+        View v = popPageMap.getPopupView();
+        tvPageLocation = (TextView) v.findViewById(R.id.tvPageLocation);
+        closeMapImg = (ImageView) v.findViewById(R.id.closeMapImg);
+
+        try {
+//            mapPhoto = (
+//                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapPageLocation)
+//            ).getMap();
+//            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//            UiSettings setting = mapPhoto.getUiSettings();
+//            setting.setTiltGesturesEnabled(true);
+//            mapPhoto.setMyLocationEnabled(true);
+
+            SupportMapFragment pageMap = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.mapPageLocation);
+            pageMap.getMapAsync(new PageMapCallBack());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        closeMapImg.setOnClickListener(this);
+
+
     }
 
     private class AlbumMapCallBack implements OnMapReadyCallback {
@@ -446,38 +485,15 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             UiSettings setting = mapPhoto.getUiSettings();
             setting.setTiltGesturesEnabled(true);
 //            mapPhoto.setMyLocationEnabled(true);
+
+
+
+
+
+
         }
     }
 
-    private void initPageMap() {
-
-        popPageMap = new PopupCustom(mActivity);
-        popPageMap.setPopup(R.layout.pop_2_0_0_map, R.style.pinpinbox_popupAnimation_bottom);
-        View v = popPageMap.getPopupView();
-        tvPageLocation = (TextView) v.findViewById(R.id.tvPageLocation);
-        closeMapImg = (ImageView) v.findViewById(R.id.closeMapImg);
-
-        try {
-//            mapPhoto = (
-//                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapPageLocation)
-//            ).getMap();
-//            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-//            UiSettings setting = mapPhoto.getUiSettings();
-//            setting.setTiltGesturesEnabled(true);
-//            mapPhoto.setMyLocationEnabled(true);
-
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.mapPageLocation);
-            mapFragment.getMapAsync(new PageMapCallBack());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        closeMapImg.setOnClickListener(this);
-
-
-    }
 
     private void setClickable(boolean clickable) {
         autoplayImg.setClickable(clickable);
@@ -702,16 +718,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
-
-
-//                for (int i = 0; i < photoContentsList.size(); i++) {
-//                    String url = photoContentsList.get(i).getImage_url();
-//                    Picasso.with(mActivity).invalidate(url);
-//                }
-//
-//
-//               adapter.notifyDataSetChanged();
-//                MyLog.Set("d", PhotoPageAdapter.class, "notifyDataSetChanged");
 
 
                 final PinchImageView picImg = (PinchImageView) v.findViewById(R.id.photoImg);
@@ -1416,20 +1422,26 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         final LatLng latlng = new LatLng(locLat, locLng);
 
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 8), 2000, new GoogleMap.CancelableCallback() {
-                            @Override
-                            public void onFinish() {
-                                map.addMarker(new MarkerOptions()
-                                        .title(location)
-                                        .position(latlng))
-                                        .showInfoWindow();
-                            }
+                        try {
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 8), 2000, new GoogleMap.CancelableCallback() {
+                                @Override
+                                public void onFinish() {
+                                    map.addMarker(new MarkerOptions()
+                                            .title(location)
+                                            .position(latlng))
+                                            .showInfoWindow();
+                                }
 
-                            @Override
-                            public void onCancel() {
+                                @Override
+                                public void onCancel() {
 
-                            }
-                        });
+                                }
+                            });
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+
                     }
                 });
             }
@@ -1869,8 +1881,17 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         dissmissLoading();
 
                         if (itemAlbum.getPoint() > 0) {
-                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
+//                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
 
+
+                            PinPinToast.showSponsorToast(
+                                    mActivity.getApplicationContext(),
+                                    itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
+                                    itemAlbum.getUser_picture()
+                            );
+
+
+                            //需要在其他地方立即顯示
                             PPBApplication.getInstance().getData().edit().putString(Key.point, (userPoint - StringIntMethod.StringToInt(comfirmPoint)) + "").commit();
 
 
@@ -2055,6 +2076,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         JSONObject jsonUser = new JSONObject(JsonUtility.GetString(jsonData, ProtocolKey.user));
                         itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
                         itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.user_name));
+                        itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
 
 
                     /*photo detail*/

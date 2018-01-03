@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="王小明"
+                android:text=""
                 android:letterSpacing="0.1"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="18sp" />
@@ -53,7 +53,7 @@
                 android:layout_below="@+id/tvName"
                 android:layout_marginTop="4dp"
                 android:letterSpacing="0.1"
-                android:text="9999"
+                android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -98,11 +98,11 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="16dp"
             android:layout_toLeftOf="@+id/pinImg"
             android:layout_toStartOf="@+id/pinImg"
-            android:padding="4dp"
-            android:background="@drawable/click_2_0_0_default"
+            android:padding="6dp"
+            android:background="@drawable/click_2_0_0_grey_third_radius"
             android:src="@drawable/ic200_message_dark" />
 
 
@@ -112,9 +112,9 @@
             android:layout_height="36dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:padding="4dp"
-            android:background="@drawable/click_2_0_0_default"
+            android:layout_marginRight="16dp"
+            android:padding="6dp"
+            android:background="@drawable/click_2_0_0_grey_third_radius"
             android:src="@drawable/ic200_pin_dark" />
 
 

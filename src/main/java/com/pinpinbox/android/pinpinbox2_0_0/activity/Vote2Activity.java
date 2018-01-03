@@ -227,7 +227,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
                 DialogV2Custom d = new DialogV2Custom(mActivity);
                 d.setStyle(DialogStyleClass.CHECK);
-                d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_vote_for) +   itemAlbumList.get(position).getName()   +  "]?");
+                d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_vote_for) + itemAlbumList.get(position).getName() + "]?");
                 d.setCheckExecute(new CheckExecute() {
                     @Override
                     public void DoCheck() {
@@ -235,7 +235,6 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                     }
                 });
                 d.show();
-
 
 
             }
@@ -480,7 +479,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         ActivityAnim.FinishAnim(mActivity);
     }
 
-    private void cleanPicasso() {
+    private void cleanCache() {
 
 
         if (itemAlbumList != null) {
@@ -502,7 +501,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         @Override
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
-            if ( (Object)protocol99.isSizeMax() !=null && !protocol99.isSizeMax()) {
+            if ((Object) protocol99.isSizeMax() != null && !protocol99.isSizeMax()) {
                 MyLog.Set("e", mActivity.getClass(), "onLoad");
 
                 if (isDoingMore) {
@@ -553,22 +552,20 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
     @Override
     protected void onPause() {
         super.onPause();
-        cleanPicasso();
+        cleanCache();
     }
 
 
     @Override
     public void onDestroy() {
 
-        if (protocol99 != null && !protocol99.getTask().isCancelled()) {
-            protocol99.getTask().cancel(true);
-            protocol99 = null;
+        if (protocol99 != null) {
+            cancelTask(protocol99.getTask());
         }
 
-        if(protocol100!=null && !protocol100.isCancelled()){
-            protocol100.cancel(true);
+        if (protocol100 != null) {
+            cancelTask(protocol100.getTask());
         }
-        protocol100 = null;
 
 
         Recycle.IMG(backImg);
@@ -576,7 +573,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
 
-        cleanPicasso();
+        cleanCache();
 
         MyLog.Set("d", this.getClass(), "onDestroy");
         super.onDestroy();
