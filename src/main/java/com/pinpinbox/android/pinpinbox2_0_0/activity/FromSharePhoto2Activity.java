@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
@@ -449,8 +450,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         }
         upLoadHandler = new Handler() {
 
-            private int screenWidth = PPBApplication.getInstance().getScreenWidth();
-            private int screenHeight = PPBApplication.getInstance().getScreenHeight();
+            private int screenWidth = ScreenUtils.getScreenWidth();
+            private int screenHeight = ScreenUtils.getScreenHeight();
 
             private void upLoadFinish() {
 

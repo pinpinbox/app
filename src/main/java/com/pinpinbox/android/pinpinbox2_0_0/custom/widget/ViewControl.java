@@ -28,6 +28,7 @@ public class ViewControl {
         alphaTo0.setDuration(450)
                 .alpha(0)
                 .start();
+
     }
 
 

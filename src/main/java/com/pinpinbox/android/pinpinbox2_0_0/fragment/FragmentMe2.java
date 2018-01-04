@@ -239,6 +239,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         rFragmentBackground = (RelativeLayout) v.findViewById(R.id.rFragmentBackground);
         rBackgroundParallax = (RelativeLayout) v.findViewById(R.id.rBackgroundParallax);
 
+        mOnScrollListener.setFloatToolBar(v.findViewById(R.id.rrr), v.findViewById(R.id.vvv));
+
         menuImg = (ImageView) v.findViewById(R.id.menuImg);
         messageImg = (ImageView) v.findViewById(R.id.messageImg);
         aboutImg = (ImageView) v.findViewById(R.id.aboutImg);

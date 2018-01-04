@@ -42,13 +42,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/w3_privateDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/w3_private/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/w3_private/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/w3_private/debug" isTestSource="true" generated="true" />
@@ -56,6 +49,13 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/w3_private/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/w3_private/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/w3_private/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testW3_privateDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/w3_private/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/w3_private/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/w3_private/assets" type="java-resource" />

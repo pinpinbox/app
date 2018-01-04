@@ -24,7 +24,6 @@
             android:focusable="true"
             android:paddingBottom="72dp" />
 
-
     </com.pinpinbox.android.Views.SuperSwipeRefreshLayout>
 
 
@@ -84,16 +83,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="56dp"
+        android:background="@color/pinpinbox_2_0_0_first_main"
         android:gravity="center"
+        android:letterSpacing="0.1"
         android:padding="8dp"
         android:text="show time"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:background="@color/pinpinbox_2_0_0_first_main"
         android:textColor="@color/white"
-        android:letterSpacing="0.1"
-        android:visibility="gone"/>
-
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

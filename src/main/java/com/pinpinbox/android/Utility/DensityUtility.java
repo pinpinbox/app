@@ -2,8 +2,8 @@ package com.pinpinbox.android.Utility;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 
 /**
@@ -14,33 +14,31 @@ public class DensityUtility {
 
     public static void setScreen(Activity activity) {
 
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-
-        PPBApplication.getInstance().setScreenWidth(outMetrics.widthPixels);
-        PPBApplication.getInstance().setScreenHeight(outMetrics.heightPixels);
-
-
         if(SystemUtility.isTablet(activity.getApplicationContext())){
 
             //平版
             PPBApplication.getInstance().setStaggeredWidth(
-                    (outMetrics.widthPixels - DensityUtility.dip2px(activity.getApplicationContext(), 64)) / 3
+                    (ScreenUtils.getScreenWidth() - DensityUtility.dip2px(activity.getApplicationContext(), 64)) / 3
             );
 
         }else {
 
             //手機
             PPBApplication.getInstance().setStaggeredWidth(
-                    (outMetrics.widthPixels - DensityUtility.dip2px(activity.getApplicationContext(), 48)) / 2
+                    (ScreenUtils.getScreenHeight() - DensityUtility.dip2px(activity.getApplicationContext(), 48)) / 2
             );
 
         }
 
+        int statusBarHeight = -1;
+//获取status_bar_height资源的ID
+        int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            //根据资源ID获取响应的尺寸值
+            statusBarHeight = activity.getResources().getDimensionPixelSize(resourceId);
+        }
 
-//        PPBApplication.getInstance().setStaggeredWidth(
-//                (outMetrics.widthPixels - DensityUtility.dip2px(activity.getApplicationContext(), 48)) / 2
-//        );
+        PPBApplication.getInstance().setStatusBarHeight(statusBarHeight);
 
     }
 

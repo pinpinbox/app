@@ -191,6 +191,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         pbLoadMore.progressiveStop();
 
 
+
+
         viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_home, null);
         vpBanner = (ViewPager) viewHeader.findViewById(R.id.vpBanner);
         indicator = (CircleIndicator) viewHeader.findViewById(R.id.indicator);
@@ -264,7 +266,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 //
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             tvShowTime.setVisibility(View.VISIBLE);
             tvShowTime.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -283,14 +285,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                     }
                 }
             });
-        }else if(BuildConfig.FLAVOR.equals("www_private")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
             tvShowTime.setVisibility(View.GONE);
-        }else if(BuildConfig.FLAVOR.equals("www_public")){
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
             tvShowTime.setVisibility(View.GONE);
         }
-
-
-
 
 
         return v;
@@ -590,7 +589,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                             int height = jsonAlbum.getInt(ProtocolKey.cover_height);
 
 
-
                             int image_height = StaggeredHeight.setImageHeight(width, height);
 
                             if (image_height < minHeight) {
@@ -603,15 +601,13 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                             itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
 
 
-                            if(width>height){
+                            if (width > height) {
                                 itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                            }else if(height>width){
+                            } else if (height > width) {
                                 itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                            }else {
+                            } else {
                                 itemAlbum.setImage_orientation(0);
                             }
-
-
 
 
                         } catch (Exception e) {
@@ -979,26 +975,21 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 e.printStackTrace();
             }
 
-            if (isUrlExist) {
-                if (autoPageScrollManager != null) {
-
-                    MyLog.Set("e", getClass(), "-------- 1 --------");
-
-                    autoPageScrollManager.post();
-                }
-            }
-
+//            if (isUrlExist) {
+//                if (autoPageScrollManager != null) {
+//
+//                    autoPageScrollManager.post();
+//                }
+//            }
 
         } else {
 
 
             /*不為活動 直接自動播放*/
-            if (autoPageScrollManager != null) {
-
-                MyLog.Set("e", getClass(), "-------- 2 --------");
-
-                autoPageScrollManager.post();
-            }
+//            if (autoPageScrollManager != null) {
+//
+//                autoPageScrollManager.post();
+//            }
 
 
         }
@@ -1252,7 +1243,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     public void cleanPicasso() {
 
-        if(itemAlbumList!=null && itemAlbumList.size()>0) {
+        if (itemAlbumList != null && itemAlbumList.size() > 0) {
 
             for (int i = 0; i < itemAlbumList.size(); i++) {
 
@@ -1273,7 +1264,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
 
 
-        if(p75arraylist!=null && p75arraylist.size()>0) {
+        if (p75arraylist != null && p75arraylist.size() > 0) {
 
             for (int i = 0; i < p75arraylist.size(); i++) {
 
@@ -1441,7 +1432,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             try {
 
                 if (p09Result == 1) {
+
                     categoryNameAdapter.notifyDataSetChanged();
+
                 } else if (p09Result == 0) {
 
                     loading.dismiss();
@@ -1921,7 +1914,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
     }
 
-    public List<ItemAlbumCategory>getItemAlbumCategoryList(){
+    public List<ItemAlbumCategory> getItemAlbumCategoryList() {
         return this.itemAlbumCategoryList;
     }
 
@@ -1960,7 +1953,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             autoPageScrollManager.removeRunnable();
         }
 
-        if (bannerPageAdapter!=null && bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
+        if (bannerPageAdapter != null && bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
 
 
             MyLog.Set("e", getClass(), "bannerPageAdapter.getGifListImg().size() => " + bannerPageAdapter.getGifList().size());
