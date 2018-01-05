@@ -81,6 +81,7 @@
     <string name="pinpinbox_2_0_0_button_submit">Submit</string>
     <string name="pinpinbox_2_0_0_button_change">Change</string>
     <string name="pinpinbox_2_0_0_button_all">All</string>
+    <string name="pinpinbox_2_0_0_button_message">Message</string>
 
 
     <string name="pinpinbox_2_0_0_event_info">Details</string>
@@ -461,7 +462,7 @@
     <string name="pinpinbox_2_0_0_other_text_count_uploading">0/loading</string>
     <string name="pinpinbox_2_0_0_other_text_count_uploading_1">1/loading</string>
     <string name="pinpinbox_2_0_0_other_text_select_done_start_use_pinpinbox">Start using pinpinbox</string>
-    <string name="pinpinbox_2_0_0_other_text_other_contents">&#160;&#160;▪&#160;&#160;contents</string>
+    <string name="pinpinbox_2_0_0_other_text_other_contents">&#160;&#160;▪&#160;&#160;</string>
     <string name="pinpinbox_2_0_0_other_text_album_is_taking_part">The work is taking part in</string>
     <string name="pinpinbox_2_0_0_other_text_create_album_now">Create now</string>
     <string name="pinpinbox_2_0_0_other_text_invited_user_default_as_viewer">The invited user is defaulted as a Viewer.</string>
@@ -519,6 +520,7 @@
     <string name="pinpinbox_2_0_0_other_text_profit_percentage">Profit percentage:</string>
     <string name="pinpinbox_2_0_0_other_text_to_works_manager">To works manager</string>
     <string name="pinpinbox_2_0_0_other_text_i_know">I got it!</string>
+    <string name="pinpinbox_2_0_0_other_text_like_count">&#160;likes</string>
 
 
     <string name="crop__saving">相片儲存中</string>

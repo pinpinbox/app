@@ -32,12 +32,21 @@ public class ItemUser implements Serializable{
     private int sum = 0; //總收益
     private int sumofsettlement = 0; //可領取
     private int sumofunsettlement = 0; //未結算
-
-
-
+    private int point = 0;
 
     private boolean follow = false;
     private boolean invite = false;
+
+
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
 
     public String getCompany_identity() {
         return company_identity;

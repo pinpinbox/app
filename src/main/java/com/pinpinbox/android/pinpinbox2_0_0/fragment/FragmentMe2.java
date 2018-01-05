@@ -31,14 +31,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
@@ -58,23 +53,11 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
-import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettings2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.BuyPoint2Activity;
@@ -84,11 +67,28 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyFollow2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.RecentAlbum2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.SponsorList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol101;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
@@ -111,7 +111,6 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
  */
 public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
-    private NoConnect noConnect;
     private LoadingAnimation loading;
     private ExStaggeredGridLayoutManager manager;
 
@@ -141,7 +140,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
     private SmoothProgressBar pbLoadMore;
     private RoundCornerImageView userImg;
     private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, menuImg, messageImg, aboutImg, shareImg, incomeImg;
-    private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax;
+    private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax, rSponsorList;
     private LinearLayout linLink;
     private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvLink, tvSponsor, tvUploadBanner;
     private View viewHeader;
@@ -240,6 +239,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         rFragmentBackground = (RelativeLayout) v.findViewById(R.id.rFragmentBackground);
         rBackgroundParallax = (RelativeLayout) v.findViewById(R.id.rBackgroundParallax);
 
+        mOnScrollListener.setFloatToolBar(v.findViewById(R.id.rrr), v.findViewById(R.id.vvv));
+
         menuImg = (ImageView) v.findViewById(R.id.menuImg);
         messageImg = (ImageView) v.findViewById(R.id.messageImg);
         aboutImg = (ImageView) v.findViewById(R.id.aboutImg);
@@ -316,6 +317,10 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         twitterImg = (ImageView) viewHeader.findViewById(R.id.twitterImg);
         youtubeImg = (ImageView) viewHeader.findViewById(R.id.youtubeImg);
 
+
+        rSponsorList = (RelativeLayout) viewHeader.findViewById(R.id.rSponsorList);
+
+
         webImg.setOnClickListener(this);
         facebookImg.setOnClickListener(this);
         googleImg.setOnClickListener(this);
@@ -331,6 +336,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         shareImg.setOnClickListener(this);
         incomeImg.setOnClickListener(this);
         tvUploadBanner.setOnClickListener(this);
+
+        rSponsorList.setOnClickListener(this);
 
 
         return v;
@@ -727,14 +734,13 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
                             itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
 
-                            if(width>height){
+                            if (width > height) {
                                 itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                            }else if(height>width){
+                            } else if (height > width) {
                                 itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                            }else {
+                            } else {
                                 itemAlbum.setImage_orientation(0);
                             }
-
 
 
                         } catch (Exception e) {
@@ -879,6 +885,11 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
     private void toAppSetting() {
         startActivity(new Intent(getActivity(), AppSettings2Activity.class));
+        ActivityAnim.StartAnim(getActivity());
+    }
+
+    private void toSponsorList() {
+        startActivity(new Intent(getActivity(), SponsorList2Activity.class));
         ActivityAnim.StartAnim(getActivity());
     }
 
@@ -1538,6 +1549,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                 toAppSetting();
                 break;
 
+            case R.id.rSponsorList:
+
+                toSponsorList();
+
+                break;
+
 
         }
 
@@ -1671,7 +1688,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                                         .into(bannerImg);
                             }
 
-                            if(bitmap!=null && !bitmap.isRecycled()){
+                            if (bitmap != null && !bitmap.isRecycled()) {
                                 bitmap.recycle();
                             }
 

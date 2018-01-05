@@ -44,6 +44,19 @@
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
 
+
+    <style name="ppb200_work_name" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_worksname</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+
     <style name="ppb200_detail_description" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -223,7 +236,9 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds_login_to_main</item>
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_bounds_login_to_main
+        </item>
         <item name="android:fitsSystemWindows">false</item>
         <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
     </style>

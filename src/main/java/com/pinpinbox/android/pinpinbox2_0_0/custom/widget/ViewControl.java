@@ -18,7 +18,7 @@ public class ViewControl {
     public static void AlphaTo1(View view){
         ViewPropertyAnimator alphaTo1 = view.animate();
         alphaTo1.setDuration(450)
-                .alpha(1)
+                .alpha(1f)
                 .start();
     }
 
@@ -26,8 +26,9 @@ public class ViewControl {
 
         ViewPropertyAnimator alphaTo0 = view.animate();
         alphaTo0.setDuration(450)
-                .alpha(0)
+                .alpha(0f)
                 .start();
+
     }
 
 

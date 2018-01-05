@@ -11,61 +11,61 @@
         android:layout_marginTop="16dp">
 
 
-    <com.pinpinbox.android.Views.CircleView.RoundedImageView
-        android:id="@+id/userImg"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:scaleType="centerCrop"
-        app:riv_border_color="@color/pinpinbox_2_0_0_divider"
-        app:riv_border_width="0.5dp"
-        app:riv_corner_radius="56dp"
-        app:riv_mutate_background="true"
-        app:riv_oval="true" />
+        <com.pinpinbox.android.Views.CircleView.RoundedImageView
+            android:id="@+id/userImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:scaleType="centerCrop"
+            app:riv_border_color="@color/pinpinbox_2_0_0_divider"
+            app:riv_border_width="0.5dp"
+            app:riv_corner_radius="56dp"
+            app:riv_mutate_background="true"
+            app:riv_oval="true" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-        android:layout_toEndOf="@+id/userImg"
-        android:layout_toRightOf="@+id/userImg"
-        android:orientation="vertical">
-
-        <TextView
-            android:letterSpacing="0.1"
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text=""
-            android:textColor="@color/pinpinbox_2_0_0_first_main"
-            android:textSize="@dimen/ppb200_common_text_third" />
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:layout_toEndOf="@+id/userImg"
+            android:layout_toRightOf="@+id/userImg"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:letterSpacing="0.1"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_main"
+                android:textSize="@dimen/ppb200_common_text_third" />
 
 
-        <TextView
-            android:letterSpacing="0.1"
-            android:id="@+id/tvText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:lineSpacingExtra="2dp"
-            android:text=""
-            android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_third" />
+            <TextView
+                android:id="@+id/tvText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="2dp"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
 
-        <TextView
-            android:letterSpacing="0.1"
-            android:id="@+id/tvInsertTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="4dp"
-            android:text=""
-            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-            android:textSize="@dimen/ppb200_common_text_third" />
+            <TextView
+                android:id="@+id/tvInsertTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="4dp"
+                android:letterSpacing="0.1"
+                android:text="4556654"
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 

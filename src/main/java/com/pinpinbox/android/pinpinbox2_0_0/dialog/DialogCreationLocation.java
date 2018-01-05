@@ -80,7 +80,7 @@ public class DialogCreationLocation {
         try {
 
             SupportMapFragment mapFragment = (SupportMapFragment) mActivity.getSupportFragmentManager()
-                    .findFragmentById(R.id.map);
+                    .findFragmentById(R.id.mapSetLocation);
             mapFragment.getMapAsync(new PageMapCallBack());
 
 
@@ -114,7 +114,7 @@ public class DialogCreationLocation {
             mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             UiSettings setting = mapPhoto.getUiSettings();
             setting.setTiltGesturesEnabled(true);
-            mapPhoto.setMyLocationEnabled(true);
+//            mapPhoto.setMyLocationEnabled(true);
         }
     }
 

@@ -228,8 +228,8 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         }
 
         if (BgImageSetDone) {
-            floatBgScaleX = ((float) distance / 200) + (float) 0.4;
-            floatBgScaleY = ((float) distance / 200) + (float) 0.4;
+            floatBgScaleX = ((float) distance / 200) + (float) 0.8;
+            floatBgScaleY = ((float) distance / 200) + (float) 0.8;
 
             MyLog.Set("e", getClass(), "floatBgScaleX => " + floatBgScaleX);
 

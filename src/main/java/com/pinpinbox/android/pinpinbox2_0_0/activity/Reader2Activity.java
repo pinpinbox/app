@@ -39,22 +39,16 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
@@ -74,6 +68,11 @@ import com.pinpinbox.android.Views.ControlSizeScrollView;
 import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.PinchImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.PhotoPageAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerReaderAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -85,12 +84,13 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.PhotoPageAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerReaderAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -210,6 +210,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
 //        getStatusControl().setStatusMode(StatusControl.DARK);
+
+        try{
+            MapsInitializer.initialize(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         setStatusDark();
         changeActivityStatusMode(StatusControl.DARK);
@@ -414,9 +420,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //            setting.setTiltGesturesEnabled(true);
 //            mapAlbum.setMyLocationEnabled(true);
 
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+            SupportMapFragment infoMap = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
-            mapFragment.getMapAsync(new AlbumMapCallBack());
+            infoMap.getMapAsync(new AlbumMapCallBack());
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -426,28 +434,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
         closeImg.setOnClickListener(this);
-    }
-
-    private class AlbumMapCallBack implements OnMapReadyCallback {
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            mapAlbum = googleMap;
-            mapAlbum.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            UiSettings setting = mapAlbum.getUiSettings();
-            setting.setTiltGesturesEnabled(true);
-            mapAlbum.setMyLocationEnabled(true);
-        }
-    }
-
-    private class PageMapCallBack implements OnMapReadyCallback {
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            mapPhoto = googleMap;
-            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            UiSettings setting = mapPhoto.getUiSettings();
-            setting.setTiltGesturesEnabled(true);
-            mapPhoto.setMyLocationEnabled(true);
-        }
     }
 
     private void initPageMap() {
@@ -467,9 +453,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //            setting.setTiltGesturesEnabled(true);
 //            mapPhoto.setMyLocationEnabled(true);
 
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+            SupportMapFragment pageMap = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.mapPageLocation);
-            mapFragment.getMapAsync(new PageMapCallBack());
+            pageMap.getMapAsync(new PageMapCallBack());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -479,6 +465,35 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
     }
+
+    private class AlbumMapCallBack implements OnMapReadyCallback {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mapAlbum = googleMap;
+            mapAlbum.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            UiSettings setting = mapAlbum.getUiSettings();
+            setting.setTiltGesturesEnabled(true);
+//            mapAlbum.setMyLocationEnabled(true);
+        }
+    }
+
+    private class PageMapCallBack implements OnMapReadyCallback {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mapPhoto = googleMap;
+            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            UiSettings setting = mapPhoto.getUiSettings();
+            setting.setTiltGesturesEnabled(true);
+//            mapPhoto.setMyLocationEnabled(true);
+
+
+
+
+
+
+        }
+    }
+
 
     private void setClickable(boolean clickable) {
         autoplayImg.setClickable(clickable);
@@ -703,16 +718,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
-
-
-//                for (int i = 0; i < photoContentsList.size(); i++) {
-//                    String url = photoContentsList.get(i).getImage_url();
-//                    Picasso.with(mActivity).invalidate(url);
-//                }
-//
-//
-//               adapter.notifyDataSetChanged();
-//                MyLog.Set("d", PhotoPageAdapter.class, "notifyDataSetChanged");
 
 
                 final PinchImageView picImg = (PinchImageView) v.findViewById(R.id.photoImg);
@@ -1158,8 +1163,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                 int line = tvPageDescription.getLineCount();
 
-                MyLog.Set("e", mActivity.getClass(), "敘述總共 " + line + " 行");
-
                 if (line <= 1) {
                     tvPageDescription.setGravity(Gravity.CENTER);
                 } else {
@@ -1419,20 +1422,26 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         final LatLng latlng = new LatLng(locLat, locLng);
 
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 8), 2000, new GoogleMap.CancelableCallback() {
-                            @Override
-                            public void onFinish() {
-                                map.addMarker(new MarkerOptions()
-                                        .title(location)
-                                        .position(latlng))
-                                        .showInfoWindow();
-                            }
+                        try {
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 8), 2000, new GoogleMap.CancelableCallback() {
+                                @Override
+                                public void onFinish() {
+                                    map.addMarker(new MarkerOptions()
+                                            .title(location)
+                                            .position(latlng))
+                                            .showInfoWindow();
+                                }
 
-                            @Override
-                            public void onCancel() {
+                                @Override
+                                public void onCancel() {
 
-                            }
-                        });
+                                }
+                            });
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+
                     }
                 });
             }
@@ -1872,8 +1881,17 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         dissmissLoading();
 
                         if (itemAlbum.getPoint() > 0) {
-                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
+//                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
 
+
+                            PinPinToast.showSponsorToast(
+                                    mActivity.getApplicationContext(),
+                                    itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
+                                    itemAlbum.getUser_picture()
+                            );
+
+
+                            //需要在其他地方立即顯示
                             PPBApplication.getInstance().getData().edit().putString(Key.point, (userPoint - StringIntMethod.StringToInt(comfirmPoint)) + "").commit();
 
 
@@ -2058,6 +2076,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         JSONObject jsonUser = new JSONObject(JsonUtility.GetString(jsonData, ProtocolKey.user));
                         itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
                         itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.user_name));
+                        itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
 
 
                     /*photo detail*/
@@ -2190,7 +2209,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         lastPosition = 0;
 
                     }
-                }, 300);
+                }, 500);
 
 
                 if (!isSaveToRecent) {

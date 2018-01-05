@@ -88,7 +88,7 @@ public class TemplateInformationAdapter extends BaseAdapter {
                 Picasso.with(mActivity.getApplicationContext())
                         .load(url)
                         .config(Bitmap.Config.RGB_565)
-                        .error(R.drawable.no_image)
+                        .error(R.drawable.bg_2_0_0_no_image)
                         .tag(mActivity.getApplicationContext())
                         .into(holder.pictureImg);
 

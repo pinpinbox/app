@@ -95,7 +95,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity;
-//
+    //
     private PopPicker popPicker;
     private PopBoard board;
     private ItemAlbum itemAlbum;
@@ -186,7 +186,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         setShareElementAnim();
 
-//        setScrollControl();
 
     }
 
@@ -215,37 +214,36 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             LinearLayout.LayoutParams params = null;
             if (SystemUtility.isTablet(getApplicationContext())) {
                 params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(440));
-            }else {
+            } else {
                 params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(240));
             }
 
 
             rImageArea.setLayoutParams(params);
 
-        }else if(orientation == ItemAlbum.PORTRAIT){
+        } else if (orientation == ItemAlbum.PORTRAIT) {
 
             MyLog.Set("e", getClass(), "ItemAlbum.PORTRAIT");
             RelativeLayout rImageArea = (RelativeLayout) findViewById(R.id.rImageArea);
             LinearLayout.LayoutParams params = null;
             if (SystemUtility.isTablet(getApplicationContext())) {
                 params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(800));
-            }else {
+            } else {
                 params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(360));
             }
 
 
             rImageArea.setLayoutParams(params);
 
-        }else {
+        } else {
 
             if (SystemUtility.isTablet(getApplicationContext())) {
                 MyLog.Set("e", getClass(), "560");
-            }else {
+            } else {
                 MyLog.Set("e", getClass(), "300");
             }
 
         }
-
 
 
         if (SystemUtility.Above_Equal_V5()) {
@@ -845,13 +843,27 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     @Override
                     public void Success() {
                         itemAlbum.setOwn(true);
-                        PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
+
+
                         if (itemAlbum.getPoint() == 0) {
+
+                            PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
+
                             boolean bCollectFreeAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_free_album, false);
                             if (!bCollectFreeAlbum) {
                                 doCollectTask();
                             }
                         } else {
+
+//                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
+
+                            PinPinToast.showSponsorToast(
+                                    mActivity.getApplicationContext(),
+                                    itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
+                                    itemAlbum.getUser_picture()
+                            );
+
+
                             boolean bCollectPayAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_pay_album, false);
                             if (!bCollectPayAlbum) {
                                 doCollectTask();
@@ -870,8 +882,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     }
                 });
 
-//        collectAlbumTask = new CollectAlbumTask();
-//        collectAlbumTask.execute();
     }
 
     private void doCollectTask() {

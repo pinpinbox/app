@@ -200,7 +200,7 @@ public class MessageReceivingService extends Service {
             public void run() {
                 try {
                     token = gcm.register(getString(R.string.project_number));
-                    MyLog.Set("d", MessageReceivingService.class, "registrationId => " + token);
+//                    MyLog.Set("d", MessageReceivingService.class, "registrationId => " + token);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
                         deviceid = Build.SERIAL;
                     }

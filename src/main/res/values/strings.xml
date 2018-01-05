@@ -81,6 +81,7 @@
     <string name="pinpinbox_2_0_0_button_submit">投稿</string>
     <string name="pinpinbox_2_0_0_button_change">變更</string>
     <string name="pinpinbox_2_0_0_button_all">全部</string>
+    <string name="pinpinbox_2_0_0_button_message">留言</string>
 
 
 
@@ -464,7 +465,7 @@
     <string name="pinpinbox_2_0_0_other_text_count_uploading">0/讀取中</string>
     <string name="pinpinbox_2_0_0_other_text_count_uploading_1">1/讀取中</string>
     <string name="pinpinbox_2_0_0_other_text_select_done_start_use_pinpinbox">開始使用pinpinbox</string>
-    <string name="pinpinbox_2_0_0_other_text_other_contents">&#160;&#160;▪&#160;&#160;其他內容</string>
+    <string name="pinpinbox_2_0_0_other_text_other_contents">&#160;&#160;▪&#160;&#160;</string>
     <string name="pinpinbox_2_0_0_other_text_album_is_taking_part">作品正在參加活動</string>
     <string name="pinpinbox_2_0_0_other_text_create_album_now">立即建立作品</string>
     <string name="pinpinbox_2_0_0_other_text_invited_user_default_as_viewer">被邀請的用戶預設為瀏覽者</string>
@@ -522,6 +523,7 @@
     <string name="pinpinbox_2_0_0_other_text_profit_percentage">作品分潤:</string>
     <string name="pinpinbox_2_0_0_other_text_to_works_manager">前往作品管理</string>
     <string name="pinpinbox_2_0_0_other_text_i_know">我知道了!</string>
+    <string name="pinpinbox_2_0_0_other_text_like_count">&#160;次讚</string>
 
 
 

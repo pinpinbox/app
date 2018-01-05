@@ -91,7 +91,7 @@ public class PopBoard {
     private EditText edText;
     private SmoothProgressBar pbLoadMore;
     private RoundedImageView userImg;
-    private TextView tvTitle;
+    private TextView tvTitle, tvSecondTitle;
 
     private TextView tvCount;
 
@@ -158,6 +158,7 @@ public class PopBoard {
         edText = (EditText) v.findViewById(R.id.edText);
         userImg = (RoundedImageView) v.findViewById(R.id.userImg);
         tvTitle = (TextView) v.findViewById(R.id.tvTitle);
+        tvSecondTitle = (TextView)v.findViewById(R.id.tvSecondTitle);
 
 
         popupWindow = new PopupWindow(v, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -920,6 +921,11 @@ public class PopBoard {
         rBackground.addView(blurView);
 
 
+    }
+
+    public void setSecondTitle(String secTitle){
+        tvSecondTitle.setVisibility(View.VISIBLE);
+        tvSecondTitle.setText(secTitle);
     }
 
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {

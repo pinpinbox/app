@@ -619,6 +619,8 @@ public class AlbumGroup2Activity extends DraggerActivity implements View.OnClick
 
         @Override
         protected Object doInBackground(Void... params) {
+
+
             setProtocol44();
 
             if (p44Result == 1) {

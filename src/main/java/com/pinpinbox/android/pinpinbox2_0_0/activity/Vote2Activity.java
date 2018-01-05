@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,12 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
@@ -34,15 +30,17 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerVoteAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerVoteAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol99;
 import com.squareup.picasso.Picasso;
@@ -227,7 +225,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
                 DialogV2Custom d = new DialogV2Custom(mActivity);
                 d.setStyle(DialogStyleClass.CHECK);
-                d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_vote_for) +   itemAlbumList.get(position).getName()   +  "]?");
+                d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_vote_for) + itemAlbumList.get(position).getName() + "]?");
                 d.setCheckExecute(new CheckExecute() {
                     @Override
                     public void DoCheck() {
@@ -235,7 +233,6 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                     }
                 });
                 d.show();
-
 
 
             }
@@ -307,15 +304,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
                                 dissmissLoading();
 
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ViewPropertyAnimator alphaTo1 = pinPinBoxRefreshLayout.animate();
-                                        alphaTo1.setDuration(400)
-                                                .alpha(1)
-                                                .start();
-                                    }
-                                }, 200);
+                                ViewControl.AlphaTo1(pinPinBoxRefreshLayout);
 
                                 break;
 
@@ -480,7 +469,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         ActivityAnim.FinishAnim(mActivity);
     }
 
-    private void cleanPicasso() {
+    private void cleanCache() {
 
 
         if (itemAlbumList != null) {
@@ -502,7 +491,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         @Override
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
-            if ( (Object)protocol99.isSizeMax() !=null && !protocol99.isSizeMax()) {
+            if ((Object) protocol99.isSizeMax() != null && !protocol99.isSizeMax()) {
                 MyLog.Set("e", mActivity.getClass(), "onLoad");
 
                 if (isDoingMore) {
@@ -553,22 +542,20 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
     @Override
     protected void onPause() {
         super.onPause();
-        cleanPicasso();
+        cleanCache();
     }
 
 
     @Override
     public void onDestroy() {
 
-        if (protocol99 != null && !protocol99.getTask().isCancelled()) {
-            protocol99.getTask().cancel(true);
-            protocol99 = null;
+        if (protocol99 != null) {
+            cancelTask(protocol99.getTask());
         }
 
-        if(protocol100!=null && !protocol100.isCancelled()){
-            protocol100.cancel(true);
+        if (protocol100 != null) {
+            cancelTask(protocol100.getTask());
         }
-        protocol100 = null;
 
 
         Recycle.IMG(backImg);
@@ -576,7 +563,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
 
-        cleanPicasso();
+        cleanCache();
 
         MyLog.Set("d", this.getClass(), "onDestroy");
         super.onDestroy();

@@ -85,7 +85,7 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
             Picasso.with(mActivity.getApplicationContext())
                     .load(strCover)
                     .config(Bitmap.Config.RGB_565)
-                    .error(R.drawable.no_image)
+                    .error(R.drawable.bg_2_0_0_no_image)
                     .tag(mActivity.getApplicationContext())
                     .into(holder.coverImg);
 
@@ -109,7 +109,7 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
             Picasso.with(mActivity.getApplicationContext())
                     .load(strCover)
                     .config(Bitmap.Config.RGB_565)
-                    .error(R.drawable.no_image)
+                    .error(R.drawable.bg_2_0_0_no_image)
                     .tag(mActivity.getApplicationContext())
                     .into(holder.coverImg);
 

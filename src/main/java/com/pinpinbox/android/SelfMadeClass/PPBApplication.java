@@ -24,9 +24,9 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
     private static final String CREATIVE_SDK_SAMPLE_CLIENT_SECRET = "1dc7e6b7-ad87-4cd2-b81c-9c29c86435c0";
     private static final String CREATIVE_SDK_SAMPLE_CLIENT_ID = "ec6b76ad3d2246d38cb06dc39fdaa22e";
 
-    private static int screenWidth, screenHeight;
-
     private int staggeredWidth;
+
+    private int statusBarHeight = 0;
 
     private static PPBApplication instance;
 
@@ -192,22 +192,13 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
         this.staggeredWidth = staggeredWidth;
     }
 
-    public int getScreenWidth() {
-        return screenWidth;
+    public int getStatusBarHeight() {
+        return statusBarHeight;
     }
 
-    public int getScreenHeight() {
-        return screenHeight;
+    public void setStatusBarHeight(int statusBarHeight) {
+        this.statusBarHeight = statusBarHeight;
     }
-
-    public void setScreenWidth(int w) {
-        screenWidth = w;
-    }
-
-    public void setScreenHeight(int h) {
-        screenHeight = h;
-    }
-
 
     @Override
     public String getBillingKey() {

@@ -41,7 +41,7 @@
                 android:layout_alignRight="@+id/view"
                 android:layout_alignStart="@+id/view"
                 android:layout_centerVertical="true"
-                android:src="@drawable/button_main_bar_createalbum" />
+               />
 
             <TextView
                 android:id="@+id/view"
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/button_main_bar_home" />
+                      />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
                         android:id="@+id/search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/button_main_bar_search" />
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
