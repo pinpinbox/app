@@ -13,8 +13,8 @@
 
         <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
             android:id="@+id/userImg"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:scaleType="centerCrop"
@@ -39,9 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:letterSpacing="0.1"
                 android:maxLines="2"
                 android:text=""
-                android:letterSpacing="0.1"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="18sp" />
 
@@ -53,9 +53,9 @@
                 android:layout_below="@+id/tvName"
                 android:layout_marginTop="4dp"
                 android:letterSpacing="0.1"
-                android:text=""
+                android:text="0"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="visible" />
 
@@ -68,54 +68,65 @@
                 android:layout_toRightOf="@+id/tvPoint"
                 android:text=" P"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:visibility="visible" />
 
         </RelativeLayout>
 
-        <!--<TextView-->
-        <!--style="@style/ppb200_Button_grey_small_radius8"-->
-        <!--android:layout_width="64dp"-->
+        <TextView
+            android:id="@+id/tvMessage"
+            style="@style/ppb200_Button_grey_small_radius8"
+            android:layout_width="72dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:layout_toLeftOf="@+id/tvFollow"
+            android:layout_toStartOf="@+id/tvFollow"
+            android:text="@string/pinpinbox_2_0_0_button_message"
+            android:textSize="@dimen/ppb200_common_text_third"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFollow"
+            style="@style/ppb200_Button_main_small_radius"
+            android:layout_width="72dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_follow"
+            android:textSize="@dimen/ppb200_common_text_third" />
+
+        <!--<ImageView-->
+        <!--android:id="@+id/messageImg"-->
+        <!--android:layout_width="36dp"-->
+        <!--android:layout_height="36dp"-->
         <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="@dimen/ppb200_padding_margin_second"-->
+        <!--android:layout_marginRight="16dp"-->
         <!--android:layout_toLeftOf="@+id/tvFollow"-->
         <!--android:layout_toStartOf="@+id/tvFollow"-->
-        <!--android:text="留言"-->
-        <!--android:textStyle="bold"-->
-        <!--android:id="@+id/tvMessage" />-->
+        <!--android:background="@drawable/click_2_0_0_grey_third_radius"-->
+        <!--android:padding="6dp"-->
+        <!--android:src="@drawable/ic200_message_dark" />-->
+
 
         <!--<TextView-->
         <!--android:id="@+id/tvFollow"-->
         <!--style="@style/ppb200_Button_main_small_radius"-->
-        <!--android:layout_width="64dp"-->
+        <!--android:layout_width="72dp"-->
         <!--android:layout_alignParentRight="true"-->
         <!--android:layout_centerVertical="true"-->
         <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-        <!--android:text="關注" />-->
+        <!--android:text="@string/pinpinbox_2_0_0_button_follow" />-->
 
-        <ImageView
-            android:id="@+id/messageImg"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:layout_toLeftOf="@+id/pinImg"
-            android:layout_toStartOf="@+id/pinImg"
-            android:padding="6dp"
-            android:background="@drawable/click_2_0_0_grey_third_radius"
-            android:src="@drawable/ic200_message_dark" />
-
-
-        <ImageView
-            android:id="@+id/pinImg"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:padding="6dp"
-            android:background="@drawable/click_2_0_0_grey_third_radius"
-            android:src="@drawable/ic200_pin_dark" />
+        <!--<ImageView-->
+        <!--android:id="@+id/pinImg"-->
+        <!--android:layout_width="36dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:padding="6dp"-->
+        <!--android:background="@drawable/click_2_0_0_main_button_radius"-->
+        <!--android:src="@drawable/ic200_pin_white" />-->
 
 
     </RelativeLayout>

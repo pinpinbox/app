@@ -64,7 +64,7 @@ public class Protocol99 {
     private String reponse = "";
 
     private int minHeight;
-    private int round, count;
+    private int round, rangeCount;
     private int eventJoinCount;
     private int doingType;
 
@@ -84,7 +84,7 @@ public class Protocol99 {
 
         round = 0;
 
-        count = 16;
+        rangeCount = 16;
 
     }
 
@@ -270,7 +270,7 @@ public class Protocol99 {
 
                         callBack.Success(doingType);
 
-                        round = round + count;
+                        round = round + rangeCount;
                     }
 
 
@@ -327,7 +327,7 @@ public class Protocol99 {
 
         Map<String, String> map = new HashMap<>();
         map.put(Key.event_id, event_id);
-        map.put(Key.limit, round + "," + count);
+        map.put(Key.limit, round + "," + rangeCount);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
 
@@ -364,7 +364,7 @@ public class Protocol99 {
     }
 
     public int getRangeCount() {
-        return this.count;
+        return this.rangeCount;
     }
 
 }

@@ -18,6 +18,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.SocketTimeoutException;
@@ -57,7 +58,7 @@ public class Protocol104 {
     private String reponse = "";
 
     private int doingType;
-    private int round, count;
+    private int round, rangeCount;
     private int userCount = 0;
 
     private boolean sizeMax = false;
@@ -74,7 +75,7 @@ public class Protocol104 {
 
         round = 0;
 
-        count = 16;
+        rangeCount = 16;
 
     }
 
@@ -88,7 +89,6 @@ public class Protocol104 {
     public void Refresh() {
 
         doingType = DoingTypeClass.DoRefresh;
-
 
 
         callTask = new Call();
@@ -145,7 +145,29 @@ public class Protocol104 {
 
                         String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
 
-                        JSONObject jsonData = new JSONObject(data);
+                        JSONArray jsonArrayData = new JSONArray(data);
+
+                        userCount = jsonArrayData.length();
+
+                        for (int i = 0; i < userCount; i++) {
+
+                            JSONObject object = (JSONObject) jsonArrayData.get(i);
+
+                            String user = JsonUtility.GetString(object, ProtocolKey.user);
+
+                            JSONObject jsonUser = new JSONObject(user);
+
+                            ItemUser itemUser = new ItemUser();
+
+                            itemUser.setFollow(JsonUtility.GetBoolean(jsonUser, ProtocolKey.is_follow));
+                            itemUser.setName(JsonUtility.GetString(jsonUser, ProtocolKey.user_name));
+                            itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
+                            itemUser.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
+                            itemUser.setPoint(JsonUtility.GetInt(jsonUser, ProtocolKey.point));
+
+                            itemUserList.add(itemUser);
+
+                        }
 
 
                     }
@@ -168,6 +190,7 @@ public class Protocol104 {
         @Override
         public void onPostExecute(Object obj) {
             super.onPostExecute(obj);
+
             callBack.Post(doingType);
 
             switch (result) {
@@ -181,7 +204,7 @@ public class Protocol104 {
 
                         callBack.Success(doingType);
 
-                        round = round + count;
+                        round = round + rangeCount;
                     }
 
 
@@ -237,7 +260,7 @@ public class Protocol104 {
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.limit, round + "," + count);
+        map.put(Key.limit, round + "," + rangeCount);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
 
@@ -271,11 +294,8 @@ public class Protocol104 {
     }
 
     public int getRangeCount() {
-        return this.count;
+        return this.rangeCount;
     }
-
-
-
 
 
 }

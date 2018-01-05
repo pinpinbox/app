@@ -91,6 +91,9 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     }
 
 
+    /**
+     *
+     * */
     private View vFloatToolBar;
     private View vScaleView;
     private GradientDrawable gDrawable;
@@ -140,7 +143,6 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
 
     }
-
 
     private void floatToolBarControl(int distance) {
 

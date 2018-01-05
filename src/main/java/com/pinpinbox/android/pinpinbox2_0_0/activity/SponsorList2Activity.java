@@ -3,6 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -15,7 +16,12 @@ import android.widget.RelativeLayout;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
+import com.pinpinbox.android.SelfMadeClass.IndexSheet;
+import com.pinpinbox.android.SelfMadeClass.PPBApplication;
+import com.pinpinbox.android.StringClass.DoingTypeClass;
+import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
@@ -27,13 +33,22 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol104;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -48,6 +63,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
     private List<ItemUser> itemUserList;
     private RecyclerSponsorAdapter adapter;
 
+    private FollowTask followTask;
     private Protocol104 protocol104;
     private PopBoard board;
 
@@ -58,15 +74,13 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     private boolean isDoingMore = false;
 
+    private int doingType;
+    private int clickPosition = -1;
+
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
         @Override
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
-
-            if (protocol104 == null) {
-                return;
-            }
-
 
             if ((Object) protocol104.isSizeMax() != null && !protocol104.isSizeMax()) {
                 MyLog.Set("e", mActivity.getClass(), "onLoad");
@@ -91,6 +105,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                 MyLog.Set("e", mActivity.getClass(), "sizeMax");
 
             }
+
         }
 
     };
@@ -113,6 +128,8 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         setRecycler();
 
         setProtocol();
+
+        doGetSponsor();
 
     }
 
@@ -146,6 +163,8 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         adapter = new RecyclerSponsorAdapter(mActivity, itemUserList);
         rvSponsor.setAdapter(adapter);
 
+        adapter.notifyDataSetChanged();
+
         LinearLayoutManager manager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
         rvSponsor.setLayoutManager(manager);
 
@@ -156,6 +175,8 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                 if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
                     return;
                 }
+
+                clickPosition = position;
 
                 RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
 
@@ -254,143 +275,157 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         protocol104.LoadMore();
     }
 
+    private void doFollow() {
+        if (!HttpUtility.isConnect(mActivity)) {
+            setNoConnect();
+            return;
+        }
+
+        followTask = new FollowTask();
+        followTask.execute();
+
+    }
+
+    private void connectInstability() {
+
+        ConnectInstability connectInstability = new ConnectInstability() {
+            @Override
+            public void DoingAgain() {
+                switch (doingType) {
+
+                    case DoingTypeClass.DoChangeFollow:
+                        doFollow();
+                        break;
+                }
+            }
+        };
+        DialogV2Custom.BuildTimeOut(mActivity, connectInstability);
+    }
+
     private void setProtocol() {
 
+        protocol104 = new Protocol104(
+                mActivity,
+                PPBApplication.getInstance().getId(),
+                PPBApplication.getInstance().getToken(),
+                itemUserList,
+                new Protocol104.TaskCallBack() {
+                    @Override
+                    public void Prepare(int doingType) {
+                        switch (doingType) {
 
-        ItemUser itemUser = new ItemUser();
-        itemUser.setUser_id("140");
-        itemUser.setName("cailum_1");
-        itemUser.setPicture("https://ppb.sharemomo.com/storage/zh_TW/user/140/picture$80bc.jpg");
-        itemUser.setFollow(false);
-        itemUserList.add(itemUser);
+                            case DoingTypeClass.DoDefault:
+
+                                startLoading();
+
+                                break;
+
+                            case DoingTypeClass.DoRefresh:
+
+                                itemUserList.clear();
+                                adapter.notifyDataSetChanged();
 
 
-        ItemUser itemUser1 = new ItemUser();
-        itemUser1.setUser_id("311");
-        itemUser1.setName("妹紙1");
-        itemUser1.setPicture("https://ppb.sharemomo.com/storage/zh_TW/user/311/picture$0e8d.jpg");
-        itemUser1.setFollow(false);
-        itemUserList.add(itemUser1);
+                                break;
 
-        adapter.notifyDataSetChanged();
+                            case DoingTypeClass.DoMoreData:
+                                isDoingMore = true;
+                                pbLoadMore.setVisibility(View.VISIBLE);
+                                pbLoadMore.progressiveStart();
+
+                                break;
+
+                        }
+                    }
+
+                    @Override
+                    public void Post(int doingType) {
+
+                        switch (doingType) {
+
+                            case DoingTypeClass.DoDefault:
+
+                                dissmissLoading();
+
+                                ViewControl.AlphaTo1(pinPinBoxRefreshLayout);
 
 
-//        protocol104 = new Protocol104(
-//                mActivity,
-//                PPBApplication.getInstance().getId(),
-//                PPBApplication.getInstance().getToken(),
-//                itemUserList,
-//                new Protocol104.TaskCallBack() {
-//                    @Override
-//                    public void Prepare(int doingType) {
-//                        switch (doingType) {
-//
-//                            case DoingTypeClass.DoDefault:
-//
-//                                startLoading();
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoRefresh:
-//
-//                                itemUserList.clear();
-//                                adapter.notifyDataSetChanged();
-//
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoMoreData:
-//                                isDoingMore = true;
-//                                pbLoadMore.setVisibility(View.VISIBLE);
-//                                pbLoadMore.progressiveStart();
-//
-//                                break;
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void Post(int doingType) {
-//
-//                        switch (doingType) {
-//
-//                            case DoingTypeClass.DoDefault:
-//
-//                                dissmissLoading();
-//
-//                                ViewControl.AlphaTo1(pinPinBoxRefreshLayout);
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoRefresh:
-//
-//                                pinPinBoxRefreshLayout.setRefreshing(false);
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoMoreData:
-//                                isDoingMore = false;
-//                                pbLoadMore.setVisibility(View.GONE);
-//                                pbLoadMore.progressiveStop();
-//
-//                                break;
-//
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void Success(int doingType) {
-//                        switch (doingType) {
-//
-//                            case DoingTypeClass.DoDefault:
-//
-//                                adapter.notifyDataSetChanged();
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoRefresh:
-//
-//                                adapter.notifyDataSetChanged();
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoMoreData:
-//
-//                                adapter.notifyItemRangeInserted(protocol104.getItemUserList().size(), protocol104.getRangeCount());
-//
-//                                break;
-//
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void TimeOut(int doingType) {
-//                        switch (doingType) {
-//
-//                            case DoingTypeClass.DoDefault:
-//
-//                                doGetSponsor();
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoRefresh:
-//
-//                                doRefresh();
-//
-//                                break;
-//
-//                            case DoingTypeClass.DoMoreData:
-//
-//                                doMoreData();
-//
-//                                break;
-//
-//                        }
-//                    }
-//                }
-//        );
+
+
+                                MyLog.Set("e", mActivity.getClass(), "public void Post");
+
+
+                                break;
+
+                            case DoingTypeClass.DoRefresh:
+
+                                pinPinBoxRefreshLayout.setRefreshing(false);
+
+                                break;
+
+                            case DoingTypeClass.DoMoreData:
+                                isDoingMore = false;
+                                pbLoadMore.setVisibility(View.GONE);
+                                pbLoadMore.progressiveStop();
+
+                                break;
+
+                        }
+
+                    }
+
+                    @Override
+                    public void Success(int doingType) {
+                        switch (doingType) {
+
+                            case DoingTypeClass.DoDefault:
+
+                                adapter.notifyDataSetChanged();
+
+                                break;
+
+                            case DoingTypeClass.DoRefresh:
+
+                                adapter.notifyDataSetChanged();
+
+                                break;
+
+                            case DoingTypeClass.DoMoreData:
+
+                                adapter.notifyItemRangeInserted(protocol104.getItemUserList().size(), protocol104.getRangeCount());
+
+                                break;
+
+
+                        }
+                    }
+
+                    @Override
+                    public void TimeOut(int doingType) {
+                        switch (doingType) {
+
+                            case DoingTypeClass.DoDefault:
+
+                                doGetSponsor();
+
+                                break;
+
+                            case DoingTypeClass.DoRefresh:
+
+                                doRefresh();
+
+                                break;
+
+                            case DoingTypeClass.DoMoreData:
+
+                                doMoreData();
+
+                                break;
+
+                        }
+                    }
+                }
+        );
 
     }
 
@@ -418,6 +453,113 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     }
 
+    public void changeUserFollow(){
+
+        boolean isFollow = itemUserList.get(clickPosition).isFollow();
+
+
+        if(isFollow){
+            itemUserList.get(clickPosition).setFollow(false);
+        }else {
+            itemUserList.get(clickPosition).setFollow(true);
+        }
+
+        adapter.notifyItemChanged(clickPosition);
+
+
+    }
+
+
+    private class FollowTask extends AsyncTask<Void, Void, Object> {
+
+        private int p12Result = -1;
+        private String p12Message = "";
+
+        private int followstatus;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            doingType = DoingTypeClass.DoChangeFollow;
+            startLoading();
+        }
+
+        @Override
+        protected Object doInBackground(Void... params) {
+
+            Map<String, String> data = new HashMap<String, String>();
+            data.put(Key.id, PPBApplication.getInstance().getId());
+            data.put(Key.token, PPBApplication.getInstance().getToken());
+            data.put("authorid", itemUserList.get(clickPosition).getUser_id());
+            String sign = IndexSheet.encodePPB(data);
+
+            Map<String, String> sendData = new HashMap<String, String>();
+            sendData.put(Key.id, PPBApplication.getInstance().getId());
+            sendData.put(Key.token, PPBApplication.getInstance().getToken());
+            sendData.put("authorid", itemUserList.get(clickPosition).getUser_id());
+            sendData.put("sign", sign);
+
+            String strJson = "";
+
+            try {
+                strJson = HttpUtility.uploadSubmit(ProtocolsClass.P12_ChangeFollowStatus, sendData, null);//12
+                MyLog.Set("d", getClass(), "p12strJson => " + strJson);
+            } catch (SocketTimeoutException timeout) {
+                p12Result = Key.TIMEOUT;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (strJson != null && !strJson.equals("")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(strJson);
+                    p12Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                    if (p12Result == 1) {
+                        String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                        JSONObject jsonData = new JSONObject(strData);
+
+                        followstatus = JsonUtility.GetInt(jsonData, ProtocolKey.followstatus);
+
+                        if (followstatus == 0) {
+                            itemUserList.get(clickPosition).setFollow(false);
+                        } else if (followstatus == 1) {
+                            itemUserList.get(clickPosition).setFollow(true);
+                        }
+
+
+                    } else if (p12Result == 0) {
+                        p12Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+            dissmissLoading();
+            if (p12Result == 1) {
+
+
+                adapter.notifyItemChanged(clickPosition);
+
+
+
+            } else if (p12Result == 0) {
+                DialogV2Custom.BuildError(mActivity, p12Message);
+
+            } else if (p12Result == Key.TIMEOUT) {
+                connectInstability();
+            } else {
+                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+            }
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
 
@@ -443,6 +585,10 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
     public void doFollow(int position) {
 
         MyLog.Set("e", getClass(), "doFollow position =>" + position);
+
+        clickPosition = position;
+
+        doFollow();
 
     }
 
@@ -485,7 +631,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
     public void onDestroy() {
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
 
-        if(protocol104!=null) {
+        if (protocol104 != null) {
             cancelTask(protocol104.getTask());
         }
 

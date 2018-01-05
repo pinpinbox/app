@@ -106,6 +106,7 @@ public class ProtocolKey {
     public static String instagram = "instagram";
     public static String is_likes = "is_likes";
     public static String image_url = "image_url";
+    public static String is_follow = "is_follow";
 
     //j
 

@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,13 +23,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.SelfMadeClass.IndexSheet;
 import com.pinpinbox.android.SelfMadeClass.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
@@ -53,6 +48,9 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -62,9 +60,10 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -1075,13 +1074,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             return null;
         }
 
-        private void setAlphaViews(View view) {
-            ViewPropertyAnimator alphaTo1 = view.animate();
-            alphaTo1.setDuration(750)
-                    .alpha(1)
-                    .start();
-        }
-
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
@@ -1321,6 +1313,17 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         }
 
 
+                        for (int i = 0; i < activityList.size(); i++) {
+                            if (activityList.get(i).getClass().getSimpleName().equals(SponsorList2Activity.class.getSimpleName())) {
+                                ((SponsorList2Activity) activityList.get(i)).changeUserFollow();
+
+                                break;
+                            }
+                        }
+
+
+
+
                         break;
                     case 1://追蹤
                         attenionSuccess();
@@ -1332,6 +1335,14 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                             if (activityList.get(i).getClass().getSimpleName().equals(MyFollow2Activity.class.getSimpleName())) {
                                 ((MyFollow2Activity) activityList.get(i)).doRefresh();
                                 shareElement = false;
+                                break;
+                            }
+                        }
+
+                        for (int i = 0; i < activityList.size(); i++) {
+                            if (activityList.get(i).getClass().getSimpleName().equals(SponsorList2Activity.class.getSimpleName())) {
+                                ((SponsorList2Activity) activityList.get(i)).changeUserFollow();
+
                                 break;
                             }
                         }

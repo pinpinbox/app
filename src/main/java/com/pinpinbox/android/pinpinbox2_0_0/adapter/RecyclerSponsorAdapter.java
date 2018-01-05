@@ -2,6 +2,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
+import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
@@ -76,8 +78,11 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
 
         String strPicture = itemUserList.get(position).getPicture();
         String strName = itemUserList.get(position).getName();
+        int point = itemUserList.get(position).getPoint();
+        boolean is_follow = itemUserList.get(position).isFollow();
 
         mHolder.tvName.setText(strName);
+        mHolder.tvPoint.setText(point + "");
 
         if (SystemUtility.Above_Equal_V5()) {
             mHolder.userImg.setTransitionName(strPicture);
@@ -95,7 +100,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         }
 
 
-        mHolder.messageImg.setOnClickListener(new View.OnClickListener() {
+        mHolder.tvMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -109,7 +114,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
             }
         });
 
-        mHolder.pinImg.setOnClickListener(new View.OnClickListener() {
+        mHolder.tvFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -123,6 +128,20 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
 
             }
         });
+
+        if(is_follow){
+
+            mHolder.tvFollow.setBackgroundResource(R.drawable.click_2_0_0_second_grey_button_frame_white_radius);
+            mHolder.tvFollow.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+            mHolder.tvFollow.setText(R.string.pinpinbox_2_0_0_button_follow_cancel);
+
+        }else {
+
+            mHolder.tvFollow.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
+            mHolder.tvFollow.setTextColor(Color.parseColor(ColorClass.WHITE)); //pinpinbox_2_0_0_first_pink
+            mHolder.tvFollow.setText(R.string.pinpinbox_2_0_0_button_follow);
+
+        }
 
 
     }
@@ -141,6 +160,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         private RoundCornerImageView userImg;
         private TextView tvName, tvPoint;
         private ImageView messageImg, pinImg;
+        private TextView tvFollow, tvMessage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -150,12 +170,12 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPoint = (TextView) itemView.findViewById(R.id.tvPoint);
 
-            messageImg = (ImageView) itemView.findViewById(R.id.messageImg);
-            pinImg = (ImageView) itemView.findViewById(R.id.pinImg);
+//            messageImg = (ImageView) itemView.findViewById(R.id.messageImg);
+//            pinImg = (ImageView) itemView.findViewById(R.id.pinImg);
 
 
-//            tvMessage = (TextView)itemView.findViewById(R.id.tvMessage);
-//            tvFollow = (TextView)itemView.findViewById(R.id.tvFollow);
+            tvMessage = (TextView)itemView.findViewById(R.id.tvMessage);
+            tvFollow = (TextView)itemView.findViewById(R.id.tvFollow);
 
             rBackground.setOnClickListener(this);
 

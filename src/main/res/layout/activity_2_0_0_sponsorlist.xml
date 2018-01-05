@@ -11,7 +11,8 @@
     <com.pinpinbox.android.Views.SuperSwipeRefreshLayout
         android:id="@+id/pinPinBoxRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:alpha="0">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvSponsor"
