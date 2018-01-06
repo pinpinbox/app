@@ -1,4 +1,4 @@
-package com.pinpinbox.android.SelfMadeClass;
+package com.pinpinbox.android.pinpinbox2_0_0.custom;
 
 /**
  * Created by vmage on 2015/3/11

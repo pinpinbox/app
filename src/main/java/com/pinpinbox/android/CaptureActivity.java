@@ -28,7 +28,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.camera.CameraManager;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.CaptureActivityHandler;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.InactivityTimer;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.view.ViewfinderView;
-import com.pinpinbox.android.SelfMadeClass.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HttpUtility;

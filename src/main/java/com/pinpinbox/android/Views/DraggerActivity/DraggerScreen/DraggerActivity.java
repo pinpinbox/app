@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerMargin.SwipeBackActivityHelper;
 import com.pinpinbox.android.Views.DraggerActivity.NoDragger.NoDraggerLayout;

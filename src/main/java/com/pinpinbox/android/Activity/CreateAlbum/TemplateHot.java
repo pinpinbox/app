@@ -18,8 +18,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.SelfMadeClass.ClickUtils;
-import com.pinpinbox.android.SelfMadeClass.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HtmlUtility;

@@ -1,6 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.manager;
 
-import com.pinpinbox.android.SelfMadeClass.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 
 /**

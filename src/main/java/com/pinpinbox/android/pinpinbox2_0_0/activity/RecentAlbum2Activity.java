@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.SelfMadeClass.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.JsonUtility;

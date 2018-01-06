@@ -1,6 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
-import com.pinpinbox.android.SelfMadeClass.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 
 import java.util.HashMap;
 import java.util.Map;

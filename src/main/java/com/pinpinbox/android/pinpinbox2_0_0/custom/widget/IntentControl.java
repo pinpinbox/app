@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.SelfMadeClass.LoadingAnimation;
-import com.pinpinbox.android.SelfMadeClass.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95;

@@ -113,7 +113,7 @@
     <!-- <uses-permission android:name="android.hardware.sensor.accelerometer" /> -->
 
     <application
-        android:name=".SelfMadeClass.PPBApplication"
+        android:name=".pinpinbox2_0_0.custom.PPBApplication"
         android:allowBackup="true"
         android:icon="@drawable/pinpin_192"
         android:label="@string/app_name"
@@ -184,7 +184,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".SelfMadeClass.MyInstalledReceiver"
+            android:name=".pinpinbox2_0_0.custom.MyInstalledReceiver"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />

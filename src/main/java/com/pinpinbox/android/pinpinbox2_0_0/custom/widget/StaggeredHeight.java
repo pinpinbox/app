@@ -1,6 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
-import com.pinpinbox.android.SelfMadeClass.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 
 /**
  * Created by kevin9594 on 2017/3/11.
