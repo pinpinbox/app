@@ -152,7 +152,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
     private static final String IMAGE_UNSPECIFIED = "image/*";
 
     private int round; //listview添加前的初始值
-    private int count; //listview每次添加的數量
+    private int rangeCount; //listview每次添加的數量
     private int defaultCount;
     private int doingType;
     private int deviceType;
@@ -360,7 +360,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         albumList = new ArrayList<>();
 
         round = 0;
-        count = 16;
+        rangeCount = 16;
 
         if (deviceType == TABLE) {
 
@@ -1114,32 +1114,45 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
             if (p40Result.equals("1")) {
 
-                if (albumList.size() > 0) {
-                    ((Main2Activity) getActivity()).showGuideCreate(false);
-                } else {
-                    ((Main2Activity) getActivity()).showGuideCreate(true);
-                }
-
                 setdata();
 
                 LinearLayout linContents = (LinearLayout) viewHeader.findViewById(R.id.linContents);
 
                 ViewControl.AlphaTo1(linContents);
 
-                if (p40JsonArray.length() == 0) {
-                    sizeMax = true; // 已達最大值
-                    return;
-                }
-
-                round = round + defaultCount;
-
-                   /*header bg 動畫*/
-//                mOnScrollListener.setBackgroundImage(bannerImg);
                 mOnScrollListener.setBackgroundParallaxViews(rBackgroundParallax, tvUploadBanner);
 
-
-                //20171109
                 manager.setScrollEnabled(true);
+
+
+                if (albumList.size() > 0) {
+                    ((Main2Activity) getActivity()).showGuideCreate(false);
+                } else {
+                    ((Main2Activity) getActivity()).showGuideCreate(true);
+                }
+
+
+//                if (p40JsonArray.length() == 0) {
+//                    sizeMax = true; // 已達最大值
+//                    return;
+//                }
+//
+//                round = round + defaultCount;
+
+
+                if (p40JsonArray.length() == 0) {
+                    sizeMax = true; // 已達最大值
+                } else {
+
+                    if (p40JsonArray.length() < defaultCount) {
+                        MyLog.Set("d", FragmentMe2.class, "項目少於(defaultCount)" + defaultCount);
+                        sizeMax = true;
+                        return;
+                    }
+
+                    round = round + rangeCount;
+
+                }
 
 
             } else if (p40Result.equals("0")) {
@@ -1167,7 +1180,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
         @Override
         protected Object doInBackground(Void... params) {
-            callProtocol40(round + "," + count);
+            callProtocol40(round + "," + rangeCount);
             return null;
         }
 
@@ -1179,21 +1192,49 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
             pbLoadMore.progressiveStop();
             if (p40Result.equals("1")) {
 
+
+
+//                if (p40JsonArray.length() == 0) {
+//                    sizeMax = true;
+//                    if (!isNoDataToastAppeared) {
+//                        PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_scroll_max);
+//                        isNoDataToastAppeared = true;
+//                    }
+//                    return;
+//                }
+//                authorAdapter.notifyItemRangeInserted(albumList.size(), rangeCount);
+//                round = round + rangeCount;
+
+
+
                 if (p40JsonArray.length() == 0) {
                     sizeMax = true;
                     if (!isNoDataToastAppeared) {
                         PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_scroll_max);
                         isNoDataToastAppeared = true;
                     }
-                    return;
+                } else {
+
+                    authorAdapter.notifyItemRangeInserted(albumList.size(), rangeCount);
+
+                    if (p40JsonArray.length() < rangeCount) {
+                        MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
+                        sizeMax = true;
+                        return;
+                    }
+
+                    round = round + rangeCount;
+
                 }
-                authorAdapter.notifyItemRangeInserted(albumList.size(), count);
-                round = round + count;
+
+
 
                 if (!sendScrollMore) {
                     FlurryUtil.onEvent(FlurryKey.myprefecture_scroll_more);
                     sendScrollMore = true;
                 }
+
+
 
             } else if (p40Result.equals("0")) {
 
@@ -1242,16 +1283,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
 
             if (pinPinBoxRefreshLayout.getAlpha() == 0) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        ViewPropertyAnimator alphaTo1 = pinPinBoxRefreshLayout.animate();
-                        alphaTo1.setDuration(400)
-                                .alpha(1)
-                                .start();
-                    }
-                }, 200);
+                ViewControl.AlphaTo1(pinPinBoxRefreshLayout);
             }
 
             pinPinBoxRefreshLayout.setRefreshing(false);
@@ -1264,24 +1296,33 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
 
             if (p40Result.equals("1")) {
 
-
-                authorAdapter.notifyDataSetChanged();
-                round = round + defaultCount;
                 setdata();
 
+//                authorAdapter.notifyDataSetChanged();
+//                round = round + defaultCount;
+
                 if (albumList.size() > 0) {
-
                     ((Main2Activity) getActivity()).showGuideCreate(false);
+                } else {
+                    ((Main2Activity) getActivity()).showGuideCreate(true);
+                }
 
+
+                if (p40JsonArray.length() == 0) {
+                    sizeMax = true; // 已達最大值
                 } else {
 
-                    ((Main2Activity) getActivity()).showGuideCreate(true);
+                    if (p40JsonArray.length() < defaultCount) {
+                        MyLog.Set("d", FragmentMe2.class, "項目少於(defaultCount)" + defaultCount);
+                        sizeMax = true;
+                        return;
+                    }
+
+                    round = round + rangeCount;
 
                 }
 
 
-                //20171109
-                manager.setScrollEnabled(true);
 
 
             } else if (p40Result.equals("0")) {

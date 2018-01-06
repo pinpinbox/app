@@ -125,7 +125,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 
     private int round; //listview添加前的初始值
-    private int count; //listview每次添加的數量
+    private int rangeCount; //listview每次添加的數量
     private int intChangeFollowItem = 0;
     private int doingType;
     private int deviceType;
@@ -279,9 +279,9 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         albumList = new ArrayList<>();
 
         round = 0;
-        count = 16;
+        rangeCount = 16;
 
-        rBackgroundParallax = (RelativeLayout)findViewById(R.id.rBackgroundParallax);
+        rBackgroundParallax = (RelativeLayout) findViewById(R.id.rBackgroundParallax);
 
         backImg = (ImageView) findViewById(R.id.backImg);
         bannerImg = (ImageView) findViewById(R.id.bannerImg);
@@ -322,11 +322,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         /*2017.09.08 不讓圖片偏移*/
         tvName.setText(strName);
 
-
-        /*********************************************************************************************************/
-
-        round = 0;
-        count = 16;
 
         /*********************************************************************************************************/
 
@@ -497,67 +492,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         StringUtil.ThousandToK(tvFollow, intFollow);
         StringUtil.ThousandToK(tvViewed, intViewed);
         StringUtil.ThousandToK(tvSponsor, intSponsor);
-
-
-//            if (!itemUser.getDescription().equals("") && !itemUser.getDescription().equals("尚未編輯")) {
-//                LinkText.set(mActivity, tvDescription, LinkText.defaultColor, LinkText.defaultColorOfHighlightedLink, itemUser.getDescription());
-//            } else {
-//                tvDescription.setVisibility(View.GONE);
-//            }
-
-
-//        String text = "";
-//        Resources resources = this.getResources();
-//        InputStream is = null;
-//        try {
-//            is = resources.openRawResource(R.raw.htmltest);
-//            byte buffer[] = new byte[is.available()];
-//            is.read(buffer);
-//            text = new String(buffer);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (is != null) {
-//                try {
-//                    is.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//
-//        RichText.initCacheDir(getApplicationContext());
-//        RichText.fromHtml(text)
-////                .clickable(false)
-//                .imageClick(new OnImageClickListener() {
-//                    @Override
-//                    public void imageClicked(List<String> imageUrls, int position) {
-//
-//                        MyLog.Set("d", this.getClass(), imageUrls.get(position));
-//
-//                    }
-//                })
-//
-//                .autoPlay(true)
-//                .urlClick(new OnUrlClickListener() {
-//                    @Override
-//                    public boolean urlClicked(String url) {
-//                        return false;
-//                    }
-//                })
-//                .into(tvDescription);
-
-
-//        if (itemUser.getBesponsored() == 0) {
-//            tvBesponsored.setVisibility(View.GONE);
-//        } else {
-//            tvBesponsored.setVisibility(View.VISIBLE);
-//            tvBesponsored.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_accepted_sponsor) +
-//                    itemUser.getBesponsored() +
-//                    getResources().getString(R.string.pinpinbox_2_0_0_other_text_sponsor_times));
-//        }
 
         authorAdapter.notifyDataSetChanged();
 
@@ -903,11 +837,11 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                             itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
 
-                            if(width>height){
+                            if (width > height) {
                                 itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                            }else if(height>width){
+                            } else if (height > width) {
                                 itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                            }else {
+                            } else {
                                 itemAlbum.setImage_orientation(0);
                             }
 
@@ -1070,7 +1004,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
         @Override
         protected Object doInBackground(Void... params) {
-            callProtocol40(round + "," + count);
+            callProtocol40(round + "," + rangeCount);
             return null;
         }
 
@@ -1087,19 +1021,26 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                 ViewControl.AlphaTo1(linContents);
 
+                /*header bg 動畫*/
+                mOnScrollListener.setBackgroundParallaxViews(rBackgroundParallax);
+
+
+                manager.setScrollEnabled(true);
+
 
                 if (p40JsonArray.length() == 0) {
                     sizeMax = true; // 已達最大值
-                    return;
+                } else {
+
+                    if (p40JsonArray.length() < rangeCount) {
+                        MyLog.Set("d", mActivity.getClass(), "項目少於" + rangeCount);
+                        sizeMax = true;
+                        return;
+                    }
+
+                    round = round + rangeCount;
+
                 }
-
-                round = round + count;
-
-                   /*header bg 動畫*/
-                mOnScrollListener.setBackgroundParallaxViews(rBackgroundParallax);
-
-                //20171109
-                manager.setScrollEnabled(true);
 
 
             } else if (p40Result.equals("0")) {
@@ -1126,7 +1067,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
         @Override
         protected Object doInBackground(Void... params) {
-            callProtocol40(round + "," + count);
+            callProtocol40(round + "," + rangeCount);
             return null;
         }
 
@@ -1138,16 +1079,38 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             pbLoadMore.progressiveStop();
             if (p40Result.equals("1")) {
 
+//                if (p40JsonArray.length() == 0) {
+//                    sizeMax = true;
+//                    if (!isNoDataToastAppeared) {
+//                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_scroll_max);
+//                        isNoDataToastAppeared = true;
+//                    }
+//                    return;
+//                }
+//                authorAdapter.notifyItemRangeInserted(albumList.size(), rangeCount);
+//                round = round + rangeCount;
+
+
+
                 if (p40JsonArray.length() == 0) {
                     sizeMax = true;
                     if (!isNoDataToastAppeared) {
                         PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_scroll_max);
                         isNoDataToastAppeared = true;
                     }
-                    return;
+                } else {
+
+                    authorAdapter.notifyItemRangeInserted(albumList.size(), rangeCount);
+
+                    if (p40JsonArray.length() < rangeCount) {
+                        MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
+                        sizeMax = true;
+                        return;
+                    }
+
+                    round = round + rangeCount;
+
                 }
-                authorAdapter.notifyItemRangeInserted(albumList.size(), count);
-                round = round + count;
 
 
             } else if (p40Result.equals("0")) {
@@ -1177,7 +1140,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         @Override
         protected Object doInBackground(Void... params) {
 
-            callProtocol40(round + "," + count);
+            callProtocol40(round + "," + rangeCount);
 
             return null;
         }
@@ -1192,13 +1155,28 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
             pinPinBoxRefreshLayout.setRefreshing(false);
 
-
             if (p40Result.equals("1")) {
-                authorAdapter.notifyDataSetChanged();
-                round = round + count;
 
-                //20171109
-                manager.setScrollEnabled(true);
+
+                setdata();
+
+
+
+                if (p40JsonArray.length() == 0) {
+                    sizeMax = true; // 已達最大值
+                } else {
+
+                    authorAdapter.notifyDataSetChanged();
+
+                    if (p40JsonArray.length() < rangeCount) {
+                        MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
+                        sizeMax = true;
+                        return;
+                    }
+
+                    round = round + rangeCount;
+
+                }
 
 
             } else if (p40Result.equals("0")) {
@@ -1321,7 +1299,13 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                             }
                         }
 
+                        for (int i = 0; i < activityList.size(); i++) {
+                            if (activityList.get(i).getClass().getSimpleName().equals(LikeList2Activity.class.getSimpleName())) {
+                                ((LikeList2Activity) activityList.get(i)).changeUserFollow();
 
+                                break;
+                            }
+                        }
 
 
                         break;
@@ -1554,7 +1538,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             case R.id.tvAttention:
 
 
-                if(itemUser==null){
+                if (itemUser == null) {
                     DialogV2Custom.BuildUnKnow(mActivity, "itemUser == null");
                     return;
                 }
@@ -1631,7 +1615,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         backCheck();
 
     }
-
 
 
     @Override

@@ -34,7 +34,7 @@
             android:src="@drawable/ic200_arrow_left_dark" />
 
         <TextView
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="48dp"

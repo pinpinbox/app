@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/tvName"
         style="@style/ppb200_title_second"
-        android:text="漫遊世界"
+        android:text=""
         android:layout_marginTop="@dimen/ppb200_padding_margin_big"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"/>

@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SelfMadeClass.ClickUtils;
@@ -67,7 +68,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
     private Protocol104 protocol104;
     private PopBoard board;
 
-    private RecyclerView rvSponsor;
+    private RecyclerView rvUser;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private SmoothProgressBar pbLoadMore;
     private ImageView backImg;
@@ -114,7 +115,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2_0_0_sponsorlist);
+        setContentView(R.layout.activity_2_0_0_userlist);
 
         if (!HttpUtility.isConnect(this)) {
             setNoConnect();
@@ -139,7 +140,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
         itemUserList = new ArrayList<>();
 
-        rvSponsor = (RecyclerView) findViewById(R.id.rvSponsor);
+        rvUser = (RecyclerView) findViewById(R.id.rvUser);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
         backImg = (ImageView) findViewById(R.id.backImg);
 
@@ -151,22 +152,24 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         pbRefresh.progressiveStop();
         pinPinBoxRefreshLayout.setRefreshView(findViewById(R.id.vRefreshAnim), pbRefresh);
 
-        rvSponsor.setItemAnimator(new DefaultItemAnimator());
-        rvSponsor.addOnScrollListener(mOnScrollListener);
+        rvUser.setItemAnimator(new DefaultItemAnimator());
+        rvUser.addOnScrollListener(mOnScrollListener);
 
         backImg.setOnClickListener(this);
+
+        ((TextView)findViewById(R.id.tvActionBarTitle)).setText("贊助你的人");
 
     }
 
     private void setRecycler() {
 
         adapter = new RecyclerSponsorAdapter(mActivity, itemUserList);
-        rvSponsor.setAdapter(adapter);
+        rvUser.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
-        rvSponsor.setLayoutManager(manager);
+        rvUser.setLayoutManager(manager);
 
         adapter.setOnRecyclerViewListener(new RecyclerSponsorAdapter.OnRecyclerViewListener() {
             @Override

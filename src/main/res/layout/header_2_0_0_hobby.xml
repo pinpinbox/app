@@ -29,7 +29,7 @@
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-            android:letterSpacing="0.2"/>
+            android:letterSpacing="0.1"/>
 
 
 

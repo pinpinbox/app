@@ -101,7 +101,7 @@
         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
         android:layout_marginTop="192dp"
         android:background="@drawable/border_2_0_0_bg_guide"
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.1"
         android:lineSpacingExtra="4dp"
         android:padding="@dimen/ppb200_padding_margin_big"
         android:text="@string/pinpinbox_2_0_0_guide_no_follow_user"

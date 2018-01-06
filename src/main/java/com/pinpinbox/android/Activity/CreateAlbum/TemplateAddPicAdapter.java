@@ -54,7 +54,7 @@ public class TemplateAddPicAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_creation_template, null);
-            holder.picImg = (ImageView) convertView.findViewById(R.id.temImg);
+//            holder.picImg = (ImageView) convertView.findViewById(R.id.temImg);
             holder.picImg.setScaleType(ImageView.ScaleType.FIT_XY);
             holder.r = (RelativeLayout) convertView.findViewById(R.id.rBorder);
 

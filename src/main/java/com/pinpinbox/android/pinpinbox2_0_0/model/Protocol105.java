@@ -26,11 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by vmage on 2018/1/3.
- */
-
-public class Protocol104 {
+public class Protocol105 {
 
 
     public static abstract class TaskCallBack {
@@ -51,6 +47,7 @@ public class Protocol104 {
 
 
     private List<ItemUser> itemUserList;
+    private String album_id;
     private String user_id;
     private String token;
     private String result = "";
@@ -64,10 +61,10 @@ public class Protocol104 {
     private boolean sizeMax = false;
     private boolean noDataToastAppeared = false;
 
-
-    public Protocol104(Activity mActivity, String user_id, String token, List<ItemUser> itemUserList, Protocol104.TaskCallBack callBack) {
+    public Protocol105(Activity mActivity, String album_id, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
+        this.album_id = album_id;
         this.user_id = user_id;
         this.token = token;
 
@@ -78,7 +75,6 @@ public class Protocol104 {
         rangeCount = 16;
 
     }
-
 
     public void GetList() {
         doingType = DoingTypeClass.DoDefault;
@@ -100,6 +96,7 @@ public class Protocol104 {
         callTask = new Call();
         callTask.execute();
     }
+
 
     private class Call extends AsyncTask<Void, Void, Object> {
 
@@ -123,8 +120,8 @@ public class Protocol104 {
 
             try {
 
-                reponse = HttpUtility.uploadSubmit(true, Url.P104_GetSponsorList, putMap(), null);
-                MyLog.Set("d", getClass(), "p104reponse => " + reponse);
+                reponse = HttpUtility.uploadSubmit(true, Url.P105_GetLikesList, putMap(), null);
+                MyLog.Set("d", getClass(), "p105reponse => " + reponse);
 
             } catch (SocketTimeoutException t) {
                 result = ResultType.TIMEOUT;
@@ -163,7 +160,6 @@ public class Protocol104 {
                             itemUser.setName(JsonUtility.GetString(jsonUser, ProtocolKey.user_name));
                             itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
                             itemUser.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
-                            itemUser.setPoint(JsonUtility.GetInt(jsonUser, ProtocolKey.point));
 
                             itemUserList.add(itemUser);
 
@@ -204,8 +200,9 @@ public class Protocol104 {
 
                         callBack.Success(doingType);
 
+
                         if(userCount<rangeCount){
-                            MyLog.Set("d", Protocol104.class, "項目少於" + rangeCount);
+                            MyLog.Set("d", Protocol105.class, "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
                         }
@@ -263,9 +260,11 @@ public class Protocol104 {
 
     }
 
+
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
+        map.put(Key.album_id, album_id);
         map.put(Key.limit, round + "," + rangeCount);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
@@ -273,15 +272,14 @@ public class Protocol104 {
         return map;
     }
 
+
     public AsyncTask getTask() {
         return callTask;
     }
 
-
     public List<ItemUser> getItemUserList() {
         return this.itemUserList;
     }
-
 
     public int getDoingType() {
         return this.doingType;
@@ -302,6 +300,5 @@ public class Protocol104 {
     public int getRangeCount() {
         return this.rangeCount;
     }
-
 
 }

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pinpinbox_2_0_0_other_text_sum"
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.1"
         android:textSize="@dimen/ppb200_common_text_first"
         android:textColor="@color/pinpinbox_2_0_0_first_text"
         android:layout_marginTop="24dp"/>

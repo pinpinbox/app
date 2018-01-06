@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:text=""
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.1"
         android:textColor="@color/pinpinbox_2_0_0_first_text"
         android:textSize="18sp"
         android:gravity="center_vertical"

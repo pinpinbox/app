@@ -4,7 +4,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
-        <item name="android:letterSpacing">0.2</item>
+        <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_first_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
@@ -15,7 +15,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
-        <item name="android:letterSpacing">0.2</item>
+        <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_second_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
@@ -71,7 +71,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:letterSpacing">0.2</item>
+        <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_second_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>

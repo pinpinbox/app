@@ -50,7 +50,7 @@
 
 
             <TextView
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:id="@+id/ask_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -244,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                    android:letterSpacing="0.2"
+                    android:letterSpacing="0.1"
                     android:text="@string/pinpinbox_2_0_0_itemtype_album_location"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="@dimen/ppb200_common_text_first" />
@@ -268,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                    android:letterSpacing="0.2"
+                    android:letterSpacing="0.1"
                     android:text="@string/pinpinbox_2_0_0_itemtype_album_weather"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="@dimen/ppb200_common_text_first" />
@@ -288,7 +288,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                    android:letterSpacing="0.2"
+                    android:letterSpacing="0.1"
                     android:text="@string/pinpinbox_2_0_0_itemtype_album_mood"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="@dimen/ppb200_common_text_first" />

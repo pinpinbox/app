@@ -43,7 +43,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="已取得"
-                    android:letterSpacing="0.2"
+                    android:letterSpacing="0.1"
                     android:textSize="16sp"
                     android:textColor="@color/pinpinbox_2_0_0_first_main"
                      />

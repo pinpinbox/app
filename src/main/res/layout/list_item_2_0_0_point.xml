@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.1"
         android:id="@+id/tvPoint"
         android:layout_width="98dp"
         android:layout_height="48dp"

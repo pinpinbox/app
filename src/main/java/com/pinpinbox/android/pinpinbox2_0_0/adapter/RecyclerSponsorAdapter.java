@@ -82,7 +82,17 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         boolean is_follow = itemUserList.get(position).isFollow();
 
         mHolder.tvName.setText(strName);
-        mHolder.tvPoint.setText(point + "");
+
+        if(point>0){
+            mHolder.tvPoint.setVisibility(View.VISIBLE);
+            mHolder.tvPtext.setVisibility(View.VISIBLE);
+            mHolder.tvPoint.setText(point + "");
+        }else {
+            mHolder.tvPoint.setVisibility(View.GONE);
+            mHolder.tvPtext.setVisibility(View.GONE);
+        }
+
+
 
         if (SystemUtility.Above_Equal_V5()) {
             mHolder.userImg.setTransitionName(strPicture);
@@ -159,8 +169,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         RelativeLayout rBackground;
         private RoundCornerImageView userImg;
         private TextView tvName, tvPoint;
-        private ImageView messageImg, pinImg;
-        private TextView tvFollow, tvMessage;
+        private TextView tvFollow, tvMessage, tvPtext;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -169,9 +178,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
             userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPoint = (TextView) itemView.findViewById(R.id.tvPoint);
-
-//            messageImg = (ImageView) itemView.findViewById(R.id.messageImg);
-//            pinImg = (ImageView) itemView.findViewById(R.id.pinImg);
+            tvPtext = (TextView)itemView.findViewById(R.id.tvPtext);
 
 
             tvMessage = (TextView)itemView.findViewById(R.id.tvMessage);

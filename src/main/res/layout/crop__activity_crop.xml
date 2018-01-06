@@ -26,7 +26,7 @@
             <!--android:layout_width="112dp"-->
             <!--android:layout_height="48dp"-->
             <!--android:text="@string/pinpinbox_2_0_0_button_crop"-->
-            <!--android:letterSpacing="0.2"-->
+            <!--android:letterSpacing="0.1"-->
             <!--android:textColor="@color/white"-->
             <!--android:textSize="@dimen/ppb200_buttontext_for_height48"-->
             <!--android:gravity="center"-->

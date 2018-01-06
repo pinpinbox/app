@@ -75,7 +75,7 @@
                 android:layout_toRightOf="@+id/userImg"
                 android:background="@drawable/border_2_0_0_grey_third_radius"
                 android:hint="@string/pinpinbox_2_0_0_input_hint_board_express"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:lineSpacingExtra="2dp"
                 android:maxLength="128"
                 android:minHeight="36dp"

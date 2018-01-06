@@ -244,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="14dp"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_other_text_create_album_now"
                 android:textColor="@color/white"
                 android:textSize="@dimen/ppb200_guide" />

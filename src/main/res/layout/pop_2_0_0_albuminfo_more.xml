@@ -108,7 +108,7 @@
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:background="@drawable/click_2_0_0_main_button_radius"
                 android:gravity="center"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:paddingLeft="@dimen/ppb200_padding_margin_second"
                 android:paddingRight="@dimen/ppb200_padding_margin_second"
                 android:text="@string/pinpinbox_2_0_0_button_sponsor_more"

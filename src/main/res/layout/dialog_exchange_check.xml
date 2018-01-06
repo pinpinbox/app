@@ -47,10 +47,10 @@
                 android:textSize="16sp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:letterSpacing="0.2"/>
+                android:letterSpacing="0.1"/>
 
             <TextView
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:text="已兌換"
-                    android:letterSpacing="0.2"
+                    android:letterSpacing="0.1"
                     android:textColor="@color/pinpinbox_color_dark"
                     android:textSize="16sp"
                     android:background="@drawable/click_2_0_0_default"
@@ -87,7 +87,7 @@
 
 
                     <TextView
-                        android:letterSpacing="0.2"
+                        android:letterSpacing="0.1"
                         android:id="@+id/n"
                         android:layout_width="64dp"
                         android:layout_height="match_parent"
@@ -101,7 +101,7 @@
                         android:layout_toStartOf="@+id/y" />
 
                     <TextView
-                        android:letterSpacing="0.2"
+                        android:letterSpacing="0.1"
                         android:id="@+id/y"
                         android:layout_width="64dp"
                         android:layout_height="match_parent"

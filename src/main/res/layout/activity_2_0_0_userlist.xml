@@ -15,7 +15,7 @@
         android:alpha="0">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvSponsor"
+            android:id="@+id/rvUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -46,7 +46,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:singleLine="true"
-            android:text="贊助你的人" />
+            android:text="" />
 
         <View
             android:id="@+id/vRefreshAnim"

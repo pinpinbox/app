@@ -420,7 +420,6 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:background="@drawable/click_2_0_0_circle_grey_hint"
-                        android:letterSpacing="0.2"
                         android:padding="8dp"
                         android:src="@drawable/ic200_location_white"
                         android:visibility="visible" />

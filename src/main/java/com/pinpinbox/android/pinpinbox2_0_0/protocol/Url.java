@@ -35,4 +35,8 @@ public class Url {
 
     public static String P104_GetSponsorList = domain + "/index/api/getsponsorlist" + "/2.0";
 
+    public static String P105_GetLikesList = domain + "/index/api/getalbum2likeslist" + "/2.0";
+
+
+
 }

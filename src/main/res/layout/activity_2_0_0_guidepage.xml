@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/pinpinbox_2_0_0_button_back_to_login"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:textSize="@dimen/ppb200_common_text_second" />
 

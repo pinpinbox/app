@@ -149,7 +149,7 @@
                 android:layout_toEndOf="@+id/backImg"
                 android:layout_toRightOf="@+id/backImg"
                 android:gravity="center"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:singleLine="true"
                 android:text="@string/pinpinbox_2_0_0_other_text_count_uploading_1"
                 android:textColor="@color/white"

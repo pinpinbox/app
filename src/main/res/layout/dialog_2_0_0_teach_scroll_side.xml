@@ -16,7 +16,7 @@
     <!--android:textSize="@dimen/ppb200_title_second_size"-->
     <!--android:lineSpacingExtra="4dp"-->
     <!--android:textStyle="bold"-->
-    <!--android:letterSpacing="0.2"/>-->
+    <!--android:letterSpacing="0.1"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:gravity="left|bottom"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:lineSpacingExtra="4dp"
             android:text="@string/pinpinbox_2_0_0_other_text_teach_scroll_exit_0"
             android:textColor="@color/white"
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left|bottom"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:lineSpacingExtra="4dp"
                 android:text=" ▪ "
                 android:textColor="@color/white"
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left|bottom"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:lineSpacingExtra="4dp"
                 android:text=" ▪ "
                 android:textColor="@color/white"

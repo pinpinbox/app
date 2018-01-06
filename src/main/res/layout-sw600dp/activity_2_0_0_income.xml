@@ -36,7 +36,7 @@
         android:layout_below="@+id/tvTitle"
         android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.1"
         android:text=""
         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
         android:textSize="@dimen/ppb200_common_text_second"
@@ -104,7 +104,7 @@
                 android:layout_alignStart="@+id/tvAccumulation"
                 android:layout_below="@+id/tvAccumulation"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_userarea_name" />
@@ -165,7 +165,7 @@
                 android:layout_alignStart="@+id/tvUnsettlement"
                 android:layout_below="@+id/tvUnsettlement"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_userarea_name" />
@@ -210,7 +210,7 @@
                 android:layout_alignStart="@+id/tvWithdraw"
                 android:layout_below="@+id/tvWithdraw"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_userarea_name" />

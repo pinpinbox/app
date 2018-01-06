@@ -103,7 +103,7 @@
              android:layout_width="match_parent"
              android:layout_height="48dp"
              android:gravity="center"
-             android:letterSpacing="0.2"
+             android:letterSpacing="0.1"
              android:text="@string/pinpinbox_2_0_0_other_text_create_album_now"
              android:textSize="@dimen/ppb200_guide"
              android:textColor="@color/white"
@@ -115,7 +115,7 @@
             android:id="@+id/tvGuideMy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_guide_collect_my"
             android:textColor="@color/white"
             android:lineSpacingExtra="4dp"
@@ -150,7 +150,7 @@
             android:lineSpacingExtra="4dp"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/ppb200_guide"
-            android:letterSpacing="0.2"/>
+            android:letterSpacing="0.1"/>
 
 
     </RelativeLayout>
@@ -175,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pinpinbox_2_0_0_guide_collect_cooperation"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:textColor="@color/white"
             android:lineSpacingExtra="4dp"
             android:layout_centerHorizontal="true"

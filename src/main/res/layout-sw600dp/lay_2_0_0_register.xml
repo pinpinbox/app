@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/pinpinbox_2_0_0_button_back_to_login"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:textSize="16sp" />
 
@@ -168,7 +168,7 @@
                 android:src="@drawable/ic200_password_normal_dark" />
 
             <TextView
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:id="@+id/tvRegPassword"
                 android:layout_width="42dp"
                 android:layout_height="24dp"
@@ -218,7 +218,7 @@
                 android:src="@drawable/ic200_password_confirm_dark" />
 
             <TextView
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:id="@+id/tvRegPasswordCheck"
                 android:layout_width="42dp"
                 android:layout_height="24dp"

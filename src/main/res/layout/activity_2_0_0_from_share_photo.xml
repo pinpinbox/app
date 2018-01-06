@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_other_message_photo_uploading"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
             android:textSize="20sp" />
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_other_text_count_uploading"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
             android:textSize="20sp" />
@@ -92,7 +92,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:gravity="center_vertical"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_title_create_new_album"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_second" />
@@ -127,7 +127,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/click_2_0_0_list_item"
                 android:gravity="center"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_itemtype_common_upload"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_second" />
@@ -140,7 +140,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/click_2_0_0_list_item"
                 android:gravity="center"
-                android:letterSpacing="0.2"
+                android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_itemtype_original_upload"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_second" />

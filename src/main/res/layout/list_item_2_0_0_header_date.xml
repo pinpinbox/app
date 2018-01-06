@@ -14,7 +14,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.1"
         android:text=""
         android:textColor="@color/pinpinbox_2_0_0_first_text"
         android:textSize="@dimen/ppb200_title_second_size"

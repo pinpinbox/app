@@ -413,6 +413,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
 
 
+        (findViewById(R.id.linLikeCount)).setOnClickListener(this);
         backImg.setOnClickListener(this);
 
 
@@ -1306,31 +1307,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         linEvent.setVisibility(View.GONE);
 
                     }
-
-
-//                    List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-//                    for (int i = 0; i < activityList.size(); i++) {
-//
-//                        String mName = activityList.get(i).getClass().getSimpleName();
-//
-//                        if (mName.equals(Main2Activity.class.getSimpleName())) {
-//                            acMain = activityList.get(i);
-//                            mainIsExist = true;
-//                        }
-//
-//                        if (mName.equals(MyCollect2Activity.class.getSimpleName())) {
-//                            acMyCollect = activityList.get(i);
-//                            myCollectIsExist = true;
-//                        }
-//
-//
-//                        if (mName.equals(AlbumInfo2Activity.class.getSimpleName())) {
-//                            acInfo = activityList.get(i);
-//                            InfoIsExist = true;
-//                        }
-//
-//                    }
-
 
                 }
 
@@ -2364,7 +2340,15 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 break;
 
             case R.id.moreImg:
+
                 showMore();
+
+                break;
+
+            case R.id.linLikeCount:
+
+                toLikesList();
+
                 break;
 
 
@@ -2664,6 +2648,19 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         bundle.putBoolean(Key.audio, itemAlbum.isAudio());
 
         Intent intent = new Intent(mActivity, AlbumSettings2Activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        ActivityAnim.StartAnim(mActivity);
+
+    }
+
+    /*click*/
+    private void toLikesList(){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, album_id);
+
+        Intent intent = new Intent(mActivity, LikeList2Activity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         ActivityAnim.StartAnim(mActivity);

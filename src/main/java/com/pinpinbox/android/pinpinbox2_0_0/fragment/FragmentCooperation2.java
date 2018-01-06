@@ -113,7 +113,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
 
     private int clickPosition;
-    private int round = 0, count = 0;
+    private int round = 0, rangeCount = 0;
     private int loadCount = 0;
     private int doingType;
 
@@ -233,7 +233,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         p17arraylist = new ArrayList<>();
 
         round = 0;
-        count = 16;
+        rangeCount = 16;
     }
 
     private void protocol17(String limit) {
@@ -664,7 +664,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         @Override
         protected Void doInBackground(Void... params) {
 
-            protocol17(round + "," + count);
+            protocol17(round + "," + rangeCount);
 
             return null;
         }
@@ -680,10 +680,16 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
                     if(adapter!=null) {
                         adapter.notifyDataSetChanged();
-                        round = round + count;
+                        if(loadCount<rangeCount){
+                            MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
+                            sizeMax = true;
+                            return;
+                        }
+                        round = round + rangeCount;
                     }
                     rGuideCooperation.setVisibility(View.GONE);
                 }else {
+                    sizeMax = true;
                     rGuideCooperation.setVisibility(View.VISIBLE);
                 }
 
@@ -715,7 +721,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         @Override
         protected Void doInBackground(Void... params) {
 
-            protocol17(round + "," + count);
+            protocol17(round + "," + rangeCount);
 
             return null;
         }
@@ -733,12 +739,19 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                         PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_scroll_max);
                         isNoDataToastAppeared = true;
                     }
-                    return;
+
+                }else {
+
+
+                    adapter.notifyItemRangeInserted(p17arraylist.size(), rangeCount);
+                    if(loadCount<rangeCount){
+                        MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
+                        sizeMax = true;
+                        return;
+                    }
+                    round = round + rangeCount;
+
                 }
-
-                adapter.notifyItemRangeInserted(p17arraylist.size(), count);
-
-                round = round + count;
 
 
             } else if (p17Result.equals("0")) {
@@ -764,7 +777,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         @Override
         protected Void doInBackground(Void... params) {
 
-            protocol17(round + "," + count);
+            protocol17(round + "," + rangeCount);
 
             return null;
         }
@@ -785,10 +798,16 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
                     if(adapter!=null) {
                         adapter.notifyDataSetChanged();
-                        round = round + count;
+                        if(loadCount<rangeCount){
+                            MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
+                            sizeMax = true;
+                            return;
+                        }
+                        round = round + rangeCount;
                     }
                     rGuideCooperation.setVisibility(View.GONE);
                 }else {
+                    sizeMax = true;
                     rGuideCooperation.setVisibility(View.VISIBLE);
                 }
 
