@@ -1149,7 +1149,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                         return;
                     }
 
-                    round = round + rangeCount;
+                    round = round + defaultCount;
 
                 }
 
@@ -1317,7 +1317,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                         return;
                     }
 
-                    round = round + rangeCount;
+                    round = round + defaultCount;
 
                 }
 
