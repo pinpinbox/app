@@ -40,7 +40,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="4dp"
             android:letterSpacing="0.1"
-            android:text="123"
+            android:text=""
             android:textColor="@color/pinpinbox_color_dark"
             android:textSize="14sp" />
 

@@ -96,7 +96,7 @@
             android:maxLines="3"
             android:text=""
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_third" />
+            android:textSize="@dimen/ppb200_staggeredgrid_album_name" />
 
 
         <LinearLayout

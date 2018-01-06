@@ -58,7 +58,6 @@
         android:textSize="@dimen/ppb200_common_text_third" />
 
     <RelativeLayout
-        android:id="@+id/rActionBar"
         style="@style/ppb200_action_bar_with_status">
 
         <ImageView

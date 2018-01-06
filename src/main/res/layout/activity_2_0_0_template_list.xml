@@ -21,7 +21,6 @@
         android:layout_marginLeft="@dimen/ppb200_padding_margin_second"/>
 
     <RelativeLayout
-        android:id="@+id/rActionBar"
         style="@style/ppb200_action_bar_with_status">
 
         <ImageView

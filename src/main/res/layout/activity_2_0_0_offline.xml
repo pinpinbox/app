@@ -14,10 +14,7 @@
         android:clipToPadding="false" />
 
     <RelativeLayout
-        android:id="@+id/rActionBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_action_bar_height_with_status"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+        style="@style/ppb200_action_bar_with_status">
 
         <ImageView
             android:id="@+id/backImg"

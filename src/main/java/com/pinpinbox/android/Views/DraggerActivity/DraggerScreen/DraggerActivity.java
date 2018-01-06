@@ -5,6 +5,7 @@ package com.pinpinbox.android.Views.DraggerActivity.DraggerScreen;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +20,8 @@ import com.pinpinbox.android.Views.DraggerActivity.SwipeBackLayout;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public abstract class DraggerActivity extends FragmentActivity implements SwipeBackActivityInterface {
 
@@ -189,6 +192,11 @@ public abstract class DraggerActivity extends FragmentActivity implements SwipeB
     public void scrollToFinishActivity() {
         SwipeBackActivityHelper.convertActivityToTranslucent(this);
         getSwipeBackLayout().scrollToFinishActivity();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 

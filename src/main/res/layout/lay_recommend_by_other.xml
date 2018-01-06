@@ -9,7 +9,7 @@
         android:id="@+id/rActionBar"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/ppb200_action_bar_height_with_status"
-        android:background="@drawable/gradient_teal_down_to_up_2_level">
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"

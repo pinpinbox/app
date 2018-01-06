@@ -21,7 +21,6 @@
          />
 
     <RelativeLayout
-        android:id="@+id/rActionBar"
         style="@style/ppb200_action_bar_with_status">
 
         <RelativeLayout

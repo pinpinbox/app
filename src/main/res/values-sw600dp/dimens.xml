@@ -71,4 +71,6 @@
     <dimen name="ppb200_radius_big">16dp</dimen>
     <dimen name="ppb200_radius_general">8dp</dimen>
 
+    <dimen name="ppb200_staggeredgrid_album_name">@dimen/ppb200_common_text_third</dimen>
+
 </resources>

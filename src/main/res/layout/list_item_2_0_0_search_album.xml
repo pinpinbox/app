@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="14sp"
+            android:textSize="@dimen/ppb200_staggeredgrid_album_name"
             android:layout_marginTop="4dp"
             android:maxLines="3"
             android:ellipsize="end"/>

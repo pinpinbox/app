@@ -23,7 +23,6 @@
     <!--android:paddingTop="76dp"-->
 
     <RelativeLayout
-        android:id="@+id/rActionBar"
         style="@style/ppb200_action_bar_with_status">
 
         <ImageView

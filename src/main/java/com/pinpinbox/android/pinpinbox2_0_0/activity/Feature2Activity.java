@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -48,6 +49,8 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by vmage on 2017/11/17.
@@ -543,6 +546,11 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         back();
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 
