@@ -402,7 +402,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                     rDetail.setBackground(
                             ScrimUtil.makeCubicGradientScrimDrawable(
-                                    Color.parseColor("#8C000000"), //颜色
+                                    Color.parseColor(ColorClass.BLACK_ALPHA),
                                     8, //渐变层数
                                     Gravity.BOTTOM)); //起始方向
 
@@ -1339,7 +1339,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
                     if (!itemAlbum.isVideo() && !itemAlbum.isExchange() && !itemAlbum.isSlot() && !itemAlbum.isAudio()) {
-                        linType.setVisibility(View.GONE);
+                        linType.setVisibility(View.INVISIBLE);//要佔據畫面 不可用gone
                     } else {
                         linType.setVisibility(View.VISIBLE);
                     }

@@ -372,7 +372,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 //
 //        rvHome.setLayoutManager(manager);
 //
-//
 //        recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList);
 //        rvHome.setAdapter(recyclerHomeAdapter);
 //

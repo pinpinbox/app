@@ -149,76 +149,76 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rrr"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"
-        android:gravity="center">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/rrr"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="128dp"-->
+        <!--android:gravity="center">-->
 
-        <View
-            android:id="@+id/vvv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignEnd="@+id/linearLayout"
-            android:layout_alignLeft="@+id/linearLayout"
-            android:layout_alignRight="@+id/linearLayout"
-            android:layout_alignStart="@+id/linearLayout"
-            android:background="@drawable/border_2_0_0_main_first_radius" />
+        <!--<View-->
+            <!--android:id="@+id/vvv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_alignEnd="@+id/linearLayout"-->
+            <!--android:layout_alignLeft="@+id/linearLayout"-->
+            <!--android:layout_alignRight="@+id/linearLayout"-->
+            <!--android:layout_alignStart="@+id/linearLayout"-->
+            <!--android:background="@drawable/border_2_0_0_main_first_radius" />-->
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearLayout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:orientation="horizontal">-->
 
-            <ImageView
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:padding="15dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic200_menu_dark" />
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+                <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+                <!--android:padding="15dp"-->
+                <!--android:scaleType="centerInside"-->
+                <!--android:src="@drawable/ic200_menu_dark" />-->
 
-            <ImageView
-                android:id="@+id/messageImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="10dp"
-                android:src="@drawable/ic200_message_dark" />
+            <!--<ImageView-->
+                <!--android:id="@+id/messageImg"-->
+                <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+                <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+                <!--android:background="@drawable/click_2_0_0_default"-->
+                <!--android:padding="10dp"-->
+                <!--android:src="@drawable/ic200_message_dark" />-->
 
-            <ImageView
-                android:id="@+id/aboutImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="12dp"
-                android:src="@drawable/ic200_user_about_dark" />
-
-
-            <ImageView
-                android:id="@+id/incomeImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="12dp"
-                android:src="@drawable/ic200_chart_dark"
-                android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/shareImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="12dp"
-                android:src="@drawable/ic200_share_dark" />
+            <!--<ImageView-->
+                <!--android:id="@+id/aboutImg"-->
+                <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+                <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+                <!--android:background="@drawable/click_2_0_0_default"-->
+                <!--android:padding="12dp"-->
+                <!--android:src="@drawable/ic200_user_about_dark" />-->
 
 
-        </LinearLayout>
+            <!--<ImageView-->
+                <!--android:id="@+id/incomeImg"-->
+                <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+                <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+                <!--android:background="@drawable/click_2_0_0_default"-->
+                <!--android:padding="12dp"-->
+                <!--android:src="@drawable/ic200_chart_dark"-->
+                <!--android:visibility="visible" />-->
 
-    </RelativeLayout>
+            <!--<ImageView-->
+                <!--android:id="@+id/shareImg"-->
+                <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+                <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+                <!--android:background="@drawable/click_2_0_0_default"-->
+                <!--android:padding="12dp"-->
+                <!--android:src="@drawable/ic200_share_dark" />-->
+
+
+        <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
 
 
     <fr.castorflex.android.smoothprogressbar.SmoothProgressBar

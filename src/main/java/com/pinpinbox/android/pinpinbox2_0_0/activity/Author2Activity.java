@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
@@ -480,6 +481,14 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         if (itemUser.getCreative_name().equals("")) {
             tvCreativeName.setVisibility(View.GONE);
         } else {
+
+
+//            if( StringUtils.isTrimEmpty(itemUser.getCreative_name())){..
+//                MyLog.Set("e", getClass(), "isTrimEmpty");
+//            }
+
+
+
             tvCreativeName.setText(itemUser.getCreative_name());
             tvCreativeName.setVisibility(View.VISIBLE);
         }
@@ -685,7 +694,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         tvAttention.setText(R.string.pinpinbox_2_0_0_button_follow);
     }
 
-
     private void backCheck() {
         if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {
 
@@ -704,7 +712,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             ActivityAnim.FinishAnim(mActivity);
         }
     }
-
 
     private void systemShare() {
 
@@ -779,9 +786,22 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     itemUser.setDescription(JsonUtility.GetString(jsonUser, ProtocolKey.description));
                     itemUser.setName(JsonUtility.GetString(jsonUser, ProtocolKey.name));
                     itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
-                    itemUser.setCreative_name(JsonUtility.GetString(jsonUser, ProtocolKey.creative_name));
+//                    itemUser.setCreative_name(JsonUtility.GetString(jsonUser, ProtocolKey.creative_name));
                     itemUser.setViewed(JsonUtility.GetInt(jsonUser, ProtocolKey.viewed));
                     itemUser.setCover(JsonUtility.GetString(jsonUser, ProtocolKey.cover));
+
+                    String strCreativeName = JsonUtility.GetString(jsonUser, ProtocolKey.creative_name);
+
+                    if(StringUtils.isTrimEmpty(strCreativeName)){
+
+                        strCreativeName = "";
+
+                    }
+
+                    itemUser.setCreative_name(strCreativeName);
+
+
+
 
                     String userstatistics = JsonUtility.GetString(jsonData, ProtocolKey.userstatistics);
                     JSONObject jsonUserStatistics = new JSONObject(userstatistics);
