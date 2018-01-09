@@ -800,8 +800,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                     itemUser.setCreative_name(strCreativeName);
 
-
-
+                    itemUser.setDisscuss(JsonUtility.GetBoolean(jsonUser, ProtocolKey.discuss));
 
                     String userstatistics = JsonUtility.GetString(jsonData, ProtocolKey.userstatistics);
                     JSONObject jsonUserStatistics = new JSONObject(userstatistics);
@@ -1532,6 +1531,15 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                 break;
 
             case R.id.messageImg:
+
+                if(!itemUser.isDisscuss()){
+
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_board_is_close);
+
+                    return;
+                }
+
+
 
                 if (board == null) {
                     board = new PopBoard(mActivity, PopBoard.TypeUser, itemUser.getUser_id(), (RelativeLayout) findViewById(R.id.rBackground), true);

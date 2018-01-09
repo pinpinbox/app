@@ -278,6 +278,7 @@
     <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_canceled">已取消原始尺寸</string>
     <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_selected">已選擇原始尺寸</string>
     <string name="pinpinbox_2_0_0_toast_message_crop_error">剪裁失敗</string>
+    <string name="pinpinbox_2_0_0_toast_message_board_is_close">該創作人的留言板為關閉</string>
 
 
 
@@ -324,7 +325,7 @@
     <string name="pinpinbox_2_0_0_itemtype_common_share">一般分享</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_my">我的作品</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_other">其他收藏</string>
-    <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">共用協作</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">群組作品</string>
     <string name="pinpinbox_2_0_0_itemtype_autoplay_audio">自動播放音效</string>
     <string name="pinpinbox_2_0_0_itemtype_work_manager">作品管理</string>
     <string name="pinpinbox_2_0_0_itemtype_logout">登出</string>
@@ -389,6 +390,7 @@
     <string name="pinpinbox_2_0_0_title_explore">探索</string>
     <string name="pinpinbox_2_0_0_title_news_feed">動態</string>
     <string name="pinpinbox_2_0_0_title_latest_event">最新活動</string>
+    <string name="pinpinbox_2_0_0_title_for_you">推薦給你</string>
 
 
     <string name="pinpinbox_2_0_0_guide_cooperation">跟其他創作人合作也是一種樂趣</string>
@@ -524,7 +526,7 @@
     <string name="pinpinbox_2_0_0_other_text_to_works_manager">前往作品管理</string>
     <string name="pinpinbox_2_0_0_other_text_i_know">我知道了!</string>
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;次讚</string>
-
+    <string name="pinpinbox_2_0_0_other_text_popularity">人氣:</string>
 
 
     <string name="crop__saving">相片儲存中</string>

@@ -286,7 +286,27 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 }
             });
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
-            tvShowTime.setVisibility(View.GONE);
+
+            tvShowTime.setVisibility(View.VISIBLE);
+            tvShowTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (recyclerHomeAdapter != null) {
+
+                        if (!recyclerHomeAdapter.isShowTime()) {
+                            recyclerHomeAdapter.setShowTime(true);
+                        } else {
+                            recyclerHomeAdapter.setShowTime(false);
+                        }
+
+                        recyclerHomeAdapter.notifyDataSetChanged();
+
+                    }
+                }
+            });
+
+
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
             tvShowTime.setVisibility(View.GONE);
         }

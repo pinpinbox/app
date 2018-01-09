@@ -395,11 +395,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         try {
             if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
 
-
                 if (rDetail != null) {
-
-                    MyLog.Set("e", getClass(), "-------------------------------------------------**");
-
                     rDetail.setBackground(
                             ScrimUtil.makeCubicGradientScrimDrawable(
                                     Color.parseColor(ColorClass.BLACK_ALPHA),

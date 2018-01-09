@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
+        android:scrollbars="none"
         android:clipToPadding="false"
         android:paddingTop="24dp">
         <!--status bar height => 24-->
@@ -22,11 +23,51 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/eventImg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true" />
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/eventImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+
+                <RelativeLayout
+                    android:id="@+id/rDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="128dp"
+                    android:layout_alignParentBottom="true"
+                    android:alpha="1">
+
+
+                    <TextView
+                        android:id="@+id/tvPopularity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:letterSpacing="0.1"
+                        android:text=""
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                        android:layout_gravity="right"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_second" />
+
+
+
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+
 
             <TextView
                 android:id="@+id/tvName"

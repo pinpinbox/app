@@ -598,6 +598,11 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
 //        if (board == null) {
 
+        if(!itemUserList.get(position).isDisscuss()){
+            PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_board_is_close);
+            return;
+        }
+
         if (board != null) {
             board.dismiss();
             board = null;
