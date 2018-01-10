@@ -168,7 +168,7 @@
 
 
     <style name="ppb200_action_bar_with_status">
-        <item name="android:id">@+id/rActionBar</item>
+        <item name="android:id">@id/rActionBar</item>
         <item name="android:background">@color/pinpinbox_2_0_0_action_bar_color</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/ppb200_action_bar_height_with_status</item>
@@ -198,7 +198,6 @@
 
         <item name="android:windowEnterAnimation">@anim/bottom_enter</item>
         <item name="android:windowExitAnimation">@anim/bottom_exit</item>
-
 
     </style>
 

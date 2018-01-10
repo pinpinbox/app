@@ -383,6 +383,7 @@
                         android:background="@color/pinpinbox_2_0_0_divider"
                         android:layout_toRightOf="@+id/tvAlbumsTitle"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                         android:layout_toEndOf="@+id/tvAlbumsTitle" />
 
                 </RelativeLayout>

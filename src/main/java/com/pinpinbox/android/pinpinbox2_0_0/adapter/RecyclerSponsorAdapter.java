@@ -11,11 +11,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.TouchRange.TouchRange;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -73,6 +74,16 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
 
         ViewHolder mHolder = (ViewHolder) holder;
         mHolder.position = position;
+
+        TouchRange.let( mHolder.tvFollow,  mHolder.tvMessage)
+                // easy to use, like css padding
+                .bounds()//default value is 14dp
+//                .bounds(24.0f) //left,top,right,bottom=24dp
+//                .bounds(24.0f,30.0f) //left,right=24dp top,bottom=30dp
+//                .bounds(24.0f,30.0f,24.0f) //left=24dp,top=30dp,right=24dp,bottom=0dp
+//                .bounds(24.0f, 30.0f, 24.0f, 30.0f) //left=24dp,top=30dp,right=24dp,bottom=30dp
+                .change();
+
 
 
         String strPicture = itemUserList.get(position).getPicture();
