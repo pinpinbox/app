@@ -485,12 +485,9 @@
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_1">Sharers:\n ▪ Add item\n ▪ Download</string>
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_2">Viewers :\n ▪ Download</string>
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_3">(The above three identity can\'t operate delete item or setting in Editor except for the creator.)</string>
-    <string name="pinpinbox_2_0_0_other_text_k_times_views">K&#160;views</string>
-    <string name="pinpinbox_2_0_0_other_text_times_views_single">&#160;view</string>
     <string name="pinpinbox_2_0_0_other_text_times_views">&#160;views</string>
-    <string name="pinpinbox_2_0_0_other_text_k_times_likes">K&#160;likes</string>
-    <string name="pinpinbox_2_0_0_other_text_times_likes_single">&#160;like</string>
     <string name="pinpinbox_2_0_0_other_text_times_likes">&#160;likes</string>
+    <string name="pinpinbox_2_0_0_other_text_times_message">messages</string>
     <string name="pinpinbox_2_0_0_other_text_links">&#160;Websites</string>
     <string name="pinpinbox_2_0_0_other_text_current_point0">Your points:</string>
     <string name="pinpinbox_2_0_0_other_text_current_point1"> </string>

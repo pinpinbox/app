@@ -489,12 +489,9 @@
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_1">共用:\n ▪ 在作品內添加項目\n ▪ 下載作品</string>
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_2">瀏覽 :\n ▪ 下載作品</string>
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_3">(除了管理者，以上三個權限皆不能在編輯器內操作移除項目、作品設定)</string>
-    <string name="pinpinbox_2_0_0_other_text_k_times_views">K次瀏覽</string>
-    <string name="pinpinbox_2_0_0_other_text_times_views_single">次瀏覽</string>
     <string name="pinpinbox_2_0_0_other_text_times_views">次瀏覽</string>
-    <string name="pinpinbox_2_0_0_other_text_k_times_likes">K個讚</string>
-    <string name="pinpinbox_2_0_0_other_text_times_likes_single">個讚</string>
     <string name="pinpinbox_2_0_0_other_text_times_likes">個讚</string>
+    <string name="pinpinbox_2_0_0_other_text_times_message">則留言</string>
     <string name="pinpinbox_2_0_0_other_text_links">的連結</string>
     <string name="pinpinbox_2_0_0_other_text_current_point0">還有</string>
     <string name="pinpinbox_2_0_0_other_text_current_point1">P點可使用</string>

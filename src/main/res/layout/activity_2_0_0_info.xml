@@ -94,8 +94,6 @@
                     </LinearLayout>
 
 
-
-
                         <TextView
                             android:id="@+id/tvViewed"
                             android:layout_width="wrap_content"
@@ -110,6 +108,23 @@
                             android:layout_gravity="right"
                             android:textColor="@color/white"
                             android:textSize="@dimen/ppb200_common_text_second" />
+
+                    <TextView
+                        android:id="@+id/tvMessageCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:letterSpacing="0.1"
+                        android:text=""
+                        android:layout_gravity="right"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:layout_alignBaseline="@+id/tvViewed"
+                        android:layout_alignBottom="@+id/tvViewed"
+                        android:layout_toLeftOf="@+id/tvViewed"
+                        android:layout_toStartOf="@+id/tvViewed" />
+
 
 
 
@@ -371,17 +386,17 @@
                     android:padding="10dp"
                     android:src="@drawable/ic200_message_dark" />
 
-                <TextView
-                    android:id="@+id/tvMessageCount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/messageImg"
-                    android:layout_marginTop="-12dp"
-                    android:gravity="center"
-                    android:letterSpacing="0.1"
-                    android:text=""
-                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                    android:textSize="@dimen/ppb200_common_text_third" />
+                <!--<TextView-->
+                    <!--android:id="@+id/tvMessageCount"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/messageImg"-->
+                    <!--android:layout_marginTop="-12dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:letterSpacing="0.1"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+                    <!--android:textSize="@dimen/ppb200_common_text_third" />-->
 
             </RelativeLayout>
 

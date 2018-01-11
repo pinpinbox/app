@@ -9,12 +9,12 @@ import org.json.JSONObject;
 public class JsonUtility {
 
 
-    public static String GetString(JSONObject obj, String key){
+    public static String GetString(JSONObject obj, String key) {
         String strParam = "";
         try {
-            if(obj!=null){
+            if (obj != null) {
                 strParam = obj.getString(key);
-                if(strParam==null||strParam.equals("") || strParam.equals("null")){
+                if (strParam == null || strParam.equals("") || strParam.equals("null")) {
                     strParam = "";
                 }
             }
@@ -25,14 +25,14 @@ public class JsonUtility {
         return strParam;
     }
 
-    public static int GetInt(JSONObject obj, String key){
+    public static int GetInt(JSONObject obj, String key) {
 
         int intParam = -1;
         try {
-            if (obj != null && !obj.getString(key).equals("null")&&!obj.getString(key).equals("")) {
+            if (obj != null && !obj.getString(key).equals("null") && !obj.getString(key).equals("")) {
                 intParam = obj.getInt(key);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             intParam = -1;
             e.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class JsonUtility {
 
     }
 
-    public static boolean GetBoolean(JSONObject obj, String key){
+    public static boolean GetBoolean(JSONObject obj, String key) {
 
         boolean b = false;
 
@@ -48,7 +48,7 @@ public class JsonUtility {
             if (obj != null) {
                 b = obj.getBoolean(key);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return b;

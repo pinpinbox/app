@@ -491,17 +491,27 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private void taskShare() {
         if (ShareDialog.canShow(ShareLinkContent.class)) {
 
+
+            String shareUrl = "";
+
+            if (event.equals("") || event == null || event.equals("null")) {
+                shareUrl =UrlClass.shareAlbumUrl + album_id + "&autoplay=1";
+            }else {
+                shareUrl =UrlClass.shareAlbumUrl + album_id;
+            }
+
+
             if (coverUrl != null && !coverUrl.equals("") && !coverUrl.equals("null")) {
 
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + album_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .setImageUrl(Uri.parse(coverUrl))
                         .build();
                 shareDialog.show(content);
 
             } else {
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + album_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .build();
                 shareDialog.show(content);
             }
@@ -620,7 +630,15 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 //        }
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id + "&autoplay=1");//分享內容
+
+
+        if (event.equals("") || event == null || event.equals("null")) {
+            intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id + "&autoplay=1");
+        }else {
+            intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id);
+        }
+
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(Intent.createChooser(intent, mActivity.getTitle()));
 
@@ -1209,16 +1227,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                      /*瀏覽數*/
                     if (itemAlbum.getViewed() > 9999) {
                         String strViewed = StringUtil.ThousandToK(itemAlbum.getViewed());
-                        tvViewed.setText(strViewed + getResources().getString(R.string.pinpinbox_2_0_0_other_text_k_times_views) + " ");
+                        tvViewed.setText(strViewed + "K" + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
                     } else {
 
+                        tvViewed.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
 
-                        if (itemAlbum.getViewed() < 2) {
-                            tvViewed.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views_single));
-                        } else {
-                            tvViewed.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
-
-                        }
                     }
 
                         /*讚數*/
@@ -1232,9 +1245,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                      /*留言數*/
                     if (itemAlbum.getMessageboard() > 9999) {
                         String strMessageboard = StringUtil.ThousandToK(itemAlbum.getMessageboard());
-                        tvMessageCount.setText(strMessageboard + "K");
+                        tvMessageCount.setText(strMessageboard + "K" + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_message));
                     } else {
-                        tvMessageCount.setText(itemAlbum.getMessageboard() + "");
+                        tvMessageCount.setText(itemAlbum.getMessageboard() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_message));
                     }
 
 
@@ -2651,7 +2664,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     }
 
     /*click*/
-    private void toLikesList(){
+    private void toLikesList() {
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.album_id, album_id);

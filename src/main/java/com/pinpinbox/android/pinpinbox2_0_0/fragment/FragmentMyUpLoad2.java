@@ -294,22 +294,23 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                          /* 2016.04.14 添加template_id */
                             final HashMap<String, Object> map = new HashMap<String, Object>();
                             JSONObject obj = (JSONObject) p17JsonArray.get(i);
-                            String album = JsonUtility.GetString(obj, "album");
-                            String user = JsonUtility.GetString(obj, "user");
-                            String template = JsonUtility.GetString(obj, "template");
-                            String cooperation = JsonUtility.GetString(obj, "cooperation");
-                            String cooperationstatistics = JsonUtility.GetString(obj, "cooperationstatistics");
+                            String album = JsonUtility.GetString(obj, ProtocolKey.album);
+                            String user = JsonUtility.GetString(obj, ProtocolKey.user);
+                            String template = JsonUtility.GetString(obj, ProtocolKey.template);
+                            String cooperation = JsonUtility.GetString(obj, ProtocolKey.cooperation);
+                            String cooperationstatistics = JsonUtility.GetString(obj, ProtocolKey.cooperationstatistics);
+                            String event = JsonUtility.GetString(obj, ProtocolKey.event);
 
                             JSONObject aj = new JSONObject(album);
-                            String description = JsonUtility.GetString(aj, "description");//2016.07.04修正換行處裡
-                            String p17_json_album_id = JsonUtility.GetString(aj, "album_id");
-                            String p17_json_albumname = JsonUtility.GetString(aj, "name");
-                            String p17_json_albumcover = JsonUtility.GetString(aj, "cover");
+                            String description = JsonUtility.GetString(aj, ProtocolKey.description);//2016.07.04修正換行處裡
+                            String p17_json_album_id = JsonUtility.GetString(aj, ProtocolKey.album_id);
+                            String p17_json_albumname = JsonUtility.GetString(aj, ProtocolKey.album_name);
+                            String p17_json_albumcover = JsonUtility.GetString(aj, ProtocolKey.cover);
 
 
-                            String p17_json_albumact = JsonUtility.GetString(aj, "act");
-                            String p17_json_albuminsertdate = JsonUtility.GetString(aj, "insertdate");
-                            String p17_json_albumzipped = JsonUtility.GetString(aj, "zipped");
+                            String p17_json_albumact = JsonUtility.GetString(aj, ProtocolKey.act);
+                            String p17_json_albuminsertdate = JsonUtility.GetString(aj, ProtocolKey.insertdate);
+                            String p17_json_albumzipped = JsonUtility.GetString(aj, ProtocolKey.zipped);
 
 
                             boolean isAudio = false;
@@ -323,18 +324,19 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
 
                             JSONObject uj = new JSONObject(user);
-                            String p17_json_user_id = JsonUtility.GetString(uj, "user_id");
-                            String p17_json_username = JsonUtility.GetString(uj, "name");
-                            String p17_json_picture = JsonUtility.GetString(uj, "picture");
+                            String p17_json_user_id = JsonUtility.GetString(uj, ProtocolKey.user_id);
+                            String p17_json_username = JsonUtility.GetString(uj, ProtocolKey.user_name);
+                            String p17_json_picture = JsonUtility.GetString(uj, ProtocolKey.picture);
 
                             JSONObject cj = new JSONObject(cooperation);
-                            String p17_json_identity = JsonUtility.GetString(cj, "identity");
+                            String p17_json_identity = JsonUtility.GetString(cj, ProtocolKey.identity);
 
                             JSONObject csj = new JSONObject(cooperationstatistics);
-                            String p17_json_cooperationstatistics = JsonUtility.GetString(csj, "count");
+                            String p17_json_cooperationstatistics = JsonUtility.GetString(csj, ProtocolKey.count);
 
                             JSONObject temj = new JSONObject(template);
-                            String p17_json_template_id = JsonUtility.GetString(temj, "template_id");
+                            String p17_json_template_id = JsonUtility.GetString(temj, ProtocolKey.template_id);
+
 
                                 /*0 => 一般狀態
                                                            1 => 下載中
@@ -376,6 +378,12 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                             map.put("isAudio", isAudio);
 
                             map.put("detail_is_open", false);
+
+                            if(event==null || event.equals("") || event.equals("null")){
+                                map.put("in_event", false);
+                            }else {
+                                map.put("in_event", true);
+                            }
 
 
                             p17arraylist.add(map);
@@ -475,7 +483,13 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id") + "&autoplay=1");//分享內容
+
+        if((boolean)p17arraylist.get(clickPosition).get("in_event")){
+            intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id"));
+        }else {
+            intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id") + "&autoplay=1");
+        }
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(Intent.createChooser(intent, getActivity().getTitle()));
     }
@@ -553,17 +567,25 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             String strCover = (String) p17arraylist.get(clickPosition).get("albumcover");
             String strAlbum_id = (String) p17arraylist.get(clickPosition).get("album_id");
 
+
+            String shareUrl = "";
+            if((boolean)p17arraylist.get(clickPosition).get("in_event")){
+                shareUrl = UrlClass.shareAlbumUrl + strAlbum_id;
+            }else {
+                shareUrl = UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1";
+            }
+
             if (strCover != null && !strCover.equals("")) {
 
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .setImageUrl(Uri.parse(strCover))
                         .build();
                 shareDialog.show(content);
 
             } else {
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .build();
                 shareDialog.show(content);
             }
