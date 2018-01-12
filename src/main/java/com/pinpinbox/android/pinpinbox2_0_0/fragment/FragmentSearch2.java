@@ -513,7 +513,6 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
 
     }
 
-
     public void scrollToTop() {
 
         try {

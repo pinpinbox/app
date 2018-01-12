@@ -3,21 +3,21 @@ package com.pinpinbox.android.pinpinbox2_0_0.model;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -62,6 +62,7 @@ public class Protocol99 {
     private String result = "";
     private String message = "";
     private String reponse = "";
+    private String searchKey = "";
 
     private int minHeight;
     private int round, rangeCount;
@@ -72,12 +73,13 @@ public class Protocol99 {
     private boolean noDataToastAppeared = false;
 
 
-    public Protocol99(Activity mActivity, String user_id, String token, String event_id, List<ItemAlbum> itemAlbumList, TaskCallBack callBack) {
+    public Protocol99(Activity mActivity, String user_id, String token, String event_id, String searchKey, List<ItemAlbum> itemAlbumList, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
         this.event_id = event_id;
+        this.searchKey = searchKey;
         this.itemAlbumList = itemAlbumList;
 
         minHeight = DensityUtility.dip2px(mActivity.getApplicationContext(), 72);
@@ -113,7 +115,23 @@ public class Protocol99 {
         callTask.execute();
     }
 
+    public void setSearchKey(String searchKey){
+        this.searchKey = searchKey;
+    }
+
+//    public void Search(String searchKey){
+//        doingType = DoingTypeClass.DoSearch;
+//        MyLog.Set("e", getClass(), "Search()");
+//        this.searchKey = searchKey;
+//        callTask = new Call();
+//        callTask.execute();
+//
+//    }
+
     private class Call extends AsyncTask<Void, Void, Object> {
+
+
+        public Call(){}
 
 
         @Override
@@ -270,6 +288,12 @@ public class Protocol99 {
 
                         callBack.Success(doingType);
 
+                        if(eventJoinCount<rangeCount){
+                            MyLog.Set("d", Protocol99.class, "項目少於" + rangeCount);
+                            sizeMax = true;
+                            return;
+                        }
+
                         round = round + rangeCount;
                     }
 
@@ -330,6 +354,7 @@ public class Protocol99 {
         map.put(Key.limit, round + "," + rangeCount);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
+        map.put(Key.searchkey, searchKey);
 
         return map;
     }

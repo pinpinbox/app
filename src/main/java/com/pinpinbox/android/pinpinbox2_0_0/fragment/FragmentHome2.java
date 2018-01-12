@@ -485,11 +485,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 if (itemAlbumCategoryList.get(position).getCategoryarea_id() == JsonParamTypeClass.NULLCATEGORYID) {
 
-
                     bundle.putString(Key.albumexplore, albumexplore);
 
                 }
-
 
                 bundle.putInt(Key.categoryarea_id, itemAlbumCategoryList.get(position).getCategoryarea_id());
 
@@ -505,6 +503,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             public boolean onItemLongClick(int position, View v) {
                 return false;
             }
+
         });
 
 

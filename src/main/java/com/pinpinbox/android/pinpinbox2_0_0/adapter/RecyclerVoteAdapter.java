@@ -113,9 +113,15 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         checkVoteStatus(holder, position);
 
 
-        if(position + 1 < 61){
-            holder.lbRanking.setText(position + 1 + "");
-            holder.lbRanking.setVisibility(View.VISIBLE);
+        if(searchKey.equals("")) {
+
+            if (position + 1 < 61) {
+                holder.lbRanking.setText(position + 1 + "");
+                holder.lbRanking.setVisibility(View.VISIBLE);
+            } else {
+                holder.lbRanking.setVisibility(View.GONE);
+            }
+
         }else {
             holder.lbRanking.setVisibility(View.GONE);
         }
@@ -440,6 +446,13 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         itemAlbumList.remove(position);
         notifyItemRemoved(position);
     }
+
+    private String searchKey = "";
+    public void setSearchKeyCheck(String searchKey){
+        this.searchKey = searchKey;
+    }
+
+
 
 
 }
