@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
@@ -238,7 +239,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         rFragmentBackground = (RelativeLayout) v.findViewById(R.id.rFragmentBackground);
         rBackgroundParallax = (RelativeLayout) v.findViewById(R.id.rBackgroundParallax);
 
-        mOnScrollListener.setFloatToolBar(v.findViewById(R.id.rrr), v.findViewById(R.id.vvv));
+//        mOnScrollListener.setFloatToolBar(v.findViewById(R.id.rrr), v.findViewById(R.id.vvv));
 
         menuImg = (ImageView) v.findViewById(R.id.menuImg);
         messageImg = (ImageView) v.findViewById(R.id.messageImg);
@@ -676,9 +677,16 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                     itemUser.setDescription(JsonUtility.GetString(jsonUser, ProtocolKey.description));
                     itemUser.setName(JsonUtility.GetString(jsonUser, ProtocolKey.name));
                     itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
-                    itemUser.setCreative_name(JsonUtility.GetString(jsonUser, ProtocolKey.creative_name));
+//                    itemUser.setCreative_name(JsonUtility.GetString(jsonUser, ProtocolKey.creative_name));
                     itemUser.setViewed(JsonUtility.GetInt(jsonUser, ProtocolKey.viewed));
                     itemUser.setCover(JsonUtility.GetString(jsonUser, ProtocolKey.cover));
+
+                    String strCreativeName = JsonUtility.GetString(jsonUser, ProtocolKey.creative_name);
+
+                    if(StringUtils.isTrimEmpty(strCreativeName)){
+                        strCreativeName = "";
+                    }
+                    itemUser.setCreative_name(strCreativeName);
 
                     String userstatistics = JsonUtility.GetString(jsonData, ProtocolKey.userstatistics);
                     JSONObject jsonUserStatistics = new JSONObject(userstatistics);

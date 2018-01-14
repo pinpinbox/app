@@ -120,8 +120,9 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
     private View vHeader;
     private RecyclerView rvSearch;
     private EditText edSearch;
-    private ImageView clearImg;
-    private TextView tvGuideNoAlbum, tvScanSearch;
+    private ImageView clearImg, scanImg;
+    private TextView tvGuideNoAlbum;
+//            , tvScanSearch;
     private SmoothProgressBar pbRefresh;
 
     /*header*/
@@ -145,7 +146,8 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         edSearch = (EditText) v.findViewById(R.id.edSearch);
         clearImg = (ImageView) v.findViewById(R.id.clearImg);
         tvGuideNoAlbum = (TextView) v.findViewById(R.id.tvGuideNoAlbum);
-        tvScanSearch = (TextView) v.findViewById(R.id.tvScanSearch);
+//        tvScanSearch = (TextView) v.findViewById(R.id.tvScanSearch);
+        scanImg = (ImageView)v.findViewById(R.id.scanImg);
 
         pbRefresh = (SmoothProgressBar) v.findViewById(R.id.pbRefresh);
         pbRefresh.progressiveStop();
@@ -157,12 +159,13 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         tvSearchAlbumTitle = (TextView) vHeader.findViewById(R.id.tvSearchAlbumTitle);
         tvGuideNoUser = (TextView) vHeader.findViewById(R.id.tvGuideNoUser);
 
-        TextUtility.setBold(tvScanSearch, true);
+//        TextUtility.setBold(tvScanSearch, true);
         TextUtility.setBold(tvSearchUserTitle, true);
         TextUtility.setBold(tvSearchAlbumTitle, true);
 
         clearImg.setOnClickListener(this);
-        tvScanSearch.setOnClickListener(this);
+        scanImg.setOnClickListener(this);
+//        tvScanSearch.setOnClickListener(this);
 
         return v;
     }
@@ -509,7 +512,6 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         albumAdapter.notifyItemRangeInserted(0, currentAlbumList.size());
 
     }
-
 
     public void scrollToTop() {
 
@@ -1149,7 +1151,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                 edSearch.setText("");
                 break;
 
-            case R.id.tvScanSearch:
+            case R.id.scanImg:
 
                 switch (checkPermission(getActivity(), Manifest.permission.CAMERA)) {
 

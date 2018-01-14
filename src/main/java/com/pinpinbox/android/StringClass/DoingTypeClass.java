@@ -101,6 +101,8 @@ public class DoingTypeClass {
 
     public static final int DoGetPhoto = 47;
 
+    public static final int DoSearch = 48;
+
 
 
 

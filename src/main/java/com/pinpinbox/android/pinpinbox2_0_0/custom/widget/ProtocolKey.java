@@ -66,7 +66,7 @@ public class ProtocolKey {
     public static String description = "description";
     public static String download_id = "download_id";
     public static String difftime = "difftime";
-
+    public static String discuss = "discuss";
 
     //e
     public static String event = "event";
@@ -142,6 +142,7 @@ public class ProtocolKey {
     public static String pushqueue = "pushqueue";
     public static String pinterest = "pinterest";
     public static String pinpinboard = "pinpinboard";
+    public static String popularity = "popularity";
 
     public static String photo = "photo";
     public static String photo_audio_loop = "audio_loop";

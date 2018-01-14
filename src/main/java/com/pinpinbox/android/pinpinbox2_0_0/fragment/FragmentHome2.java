@@ -286,7 +286,27 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 }
             });
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
-            tvShowTime.setVisibility(View.GONE);
+
+            tvShowTime.setVisibility(View.VISIBLE);
+            tvShowTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (recyclerHomeAdapter != null) {
+
+                        if (!recyclerHomeAdapter.isShowTime()) {
+                            recyclerHomeAdapter.setShowTime(true);
+                        } else {
+                            recyclerHomeAdapter.setShowTime(false);
+                        }
+
+                        recyclerHomeAdapter.notifyDataSetChanged();
+
+                    }
+                }
+            });
+
+
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
             tvShowTime.setVisibility(View.GONE);
         }
@@ -371,7 +391,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 //        manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 //
 //        rvHome.setLayoutManager(manager);
-//
 //
 //        recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList);
 //        rvHome.setAdapter(recyclerHomeAdapter);
@@ -466,11 +485,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 if (itemAlbumCategoryList.get(position).getCategoryarea_id() == JsonParamTypeClass.NULLCATEGORYID) {
 
-
                     bundle.putString(Key.albumexplore, albumexplore);
 
                 }
-
 
                 bundle.putInt(Key.categoryarea_id, itemAlbumCategoryList.get(position).getCategoryarea_id());
 
@@ -486,6 +503,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             public boolean onItemLongClick(int position, View v) {
                 return false;
             }
+
         });
 
 

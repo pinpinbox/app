@@ -7,6 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:paddingTop="36dp">
 
@@ -27,16 +30,16 @@
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
                 android:layout_height="12dp"
+                android:layout_marginTop="8dp"
                 app:ci_drawable="@drawable/icon_2_0_0_indicator"
-                app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect"
-                android:layout_marginTop="8dp"/>
+                app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_2_0_0_divider"
-                android:layout_marginTop="16dp"/>
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.5dp"-->
+            <!--android:background="@color/pinpinbox_2_0_0_divider"-->
+            <!--android:layout_marginTop="16dp"/>-->
         </LinearLayout>
 
 
@@ -44,16 +47,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingTop="@dimen/ppb200_padding_margin_big">
+            android:paddingBottom="8dp">
             <!--16 => 8dp 移至 recyclerview-->
 
-            <TextView
-                android:id="@+id/tvExplore"
-                style="@style/ppb200_title_second"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:text="@string/pinpinbox_2_0_0_title_explore" />
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first">
+
+                <TextView
+                    android:id="@+id/tvExplore"
+                    style="@style/ppb200_title_second"
+                    android:text="@string/pinpinbox_2_0_0_title_explore" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_toEndOf="@+id/tvExplore"
+                    android:layout_toRightOf="@+id/tvExplore"
+                    android:background="@color/pinpinbox_2_0_0_divider" />
+
+
+            </RelativeLayout>
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvExplore"-->
+            <!--style="@style/ppb200_title_second"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
+            <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
+            <!--android:text="@string/pinpinbox_2_0_0_title_explore" />-->
             <!--ppb200_padding_margin_second 8dp 移至 recyclerview-->
 
 
@@ -67,26 +93,35 @@
         </LinearLayout>
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/pinpinbox_2_0_0_divider" />
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:background="@color/pinpinbox_2_0_0_divider" />-->
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first">
 
 
             <TextView
                 android:id="@+id/tvNewsFeed"
                 style="@style/ppb200_title_second"
+                android:text="@string/pinpinbox_2_0_0_title_for_you" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                android:text="@string/pinpinbox_2_0_0_title_news_feed"
-                android:layout_marginBottom="@dimen/ppb200_padding_margin_second"/>
-            <!--android:text="@string/pinpinbox_2_0_0_title_news_feed"-->
+                android:layout_toEndOf="@+id/tvNewsFeed"
+                android:layout_toRightOf="@+id/tvNewsFeed"
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -96,8 +131,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="-6dp"
                 android:gravity="bottom"
-                android:visibility="visible"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
 
                 <LinearLayout
@@ -105,9 +140,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:background="@drawable/click_2_0_0_default"
                     android:gravity="right"
                     android:orientation="vertical"
-                    android:background="@drawable/click_2_0_0_default"
                     android:padding="@dimen/ppb200_padding_margin_third">
 
                     <View
@@ -117,7 +152,7 @@
                         android:background="@drawable/border_2_0_0_grey_third_radius" />
 
                     <TextView
-                        android:id="@+id/tvHobby"
+                        android:id="@+id/tvNew"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/ppb200_padding_margin_third"
@@ -144,8 +179,8 @@
                         android:id="@+id/vFollow"
                         android:layout_width="36dp"
                         android:layout_height="8dp"
-                        android:visibility="invisible"
-                        android:background="@drawable/border_2_0_0_grey_third_radius" />
+                        android:background="@drawable/border_2_0_0_grey_third_radius"
+                        android:visibility="invisible" />
 
                     <TextView
                         android:id="@+id/tvFollow"
@@ -166,7 +201,6 @@
 
 
         </RelativeLayout>
-
 
 
     </LinearLayout>

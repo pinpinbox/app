@@ -146,6 +146,7 @@ public class Key {
 
 
     //s
+    public static String searchkey = "searchkey";
     public static String selfdescription = "selfdescription";
     public static String style_id = "style_id";
     public static String slot = "slot";

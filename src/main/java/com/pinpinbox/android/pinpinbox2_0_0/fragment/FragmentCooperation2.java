@@ -57,6 +57,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
@@ -271,6 +272,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                             String template = JsonUtility.GetString(obj, Key.template);
                             String cooperation = JsonUtility.GetString(obj, Key.cooperation);
                             String cooperationstatistics = JsonUtility.GetString(obj, Key.cooperationstatistics);
+                            String event = JsonUtility.GetString(obj, ProtocolKey.event);
 
                             JSONObject aj = new JSONObject(album);
                             String description = JsonUtility.GetString(aj, Key.description);//2016.07.04修正換行處裡
@@ -297,6 +299,10 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
                             JSONObject temj = new JSONObject(template);
                             String p17_json_template_id = JsonUtility.GetString(temj, Key.template_id);
+
+
+
+
 
                             HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -339,6 +345,12 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                             map.put("template_id", p17_json_template_id);
 
                             map.put("detail_is_open", false);
+
+                            if(event==null || event.equals("") || event.equals("null")){
+                                map.put("in_event", false);
+                            }else {
+                                map.put("in_event", true);
+                            }
 
 
                             p17arraylist.add(map);
@@ -434,7 +446,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 //        intent.putExtra(Intent.EXTRA_STREAM, u);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id") + "&autoplay=1");//分享內容
+        if((boolean)p17arraylist.get(clickPosition).get("in_event")){
+            intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id"));
+        }else {
+            intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id") + "&autoplay=1");
+        }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(Intent.createChooser(intent, getActivity().getTitle()));
     }
@@ -514,21 +530,29 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             String strCover = (String) p17arraylist.get(clickPosition).get("albumcover");
             String strAlbum_id = (String) p17arraylist.get(clickPosition).get("album_id");
 
+            String shareUrl = "";
+            if((boolean)p17arraylist.get(clickPosition).get("in_event")){
+               shareUrl = UrlClass.shareAlbumUrl + strAlbum_id;
+            }else {
+                shareUrl = UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1";
+            }
+
+
+
             if (strCover != null && !strCover.equals("")) {
 
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .setImageUrl(Uri.parse(strCover))
                         .build();
                 shareDialog.show(content);
 
             } else {
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .build();
                 shareDialog.show(content);
             }
-
 
         } else {
 

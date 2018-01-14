@@ -9,7 +9,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="@dimen/ppb200_title_margin_second"
-        android:text=""/>
+        android:text="" />
 
     <TextView
         android:id="@+id/tvBelowTitleText"
@@ -23,7 +23,7 @@
         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
         android:textSize="@dimen/ppb200_common_text_second"
         android:visibility="gone"
-        android:text="123"
+        android:text=""
         fontPath="fonts/OpenSans-Bold.ttf"/>
 
 

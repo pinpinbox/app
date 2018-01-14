@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="16dp"
             android:visibility="visible">
 
             <android.support.v4.view.ViewPager
@@ -33,11 +34,12 @@
                 app:ci_drawable="@drawable/icon_2_0_0_indicator"
                 app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first"-->
+                <!--android:background="@color/pinpinbox_2_0_0_divider" />-->
+
 
         </LinearLayout>
 
@@ -46,16 +48,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingTop="@dimen/ppb200_padding_margin_big">
-            <!--16 => 8dp 移至 recyclerview-->
+            android:paddingBottom="8dp">
 
-            <TextView
-                android:id="@+id/tvExplore"
-                style="@style/ppb200_title_second"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:text="@string/pinpinbox_2_0_0_title_explore" />
+               >
+
+                <TextView
+                    android:id="@+id/tvExplore"
+                    style="@style/ppb200_title_second"
+                    android:text="@string/pinpinbox_2_0_0_title_explore" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/pinpinbox_2_0_0_divider"
+                    android:layout_toRightOf="@+id/tvExplore"
+                    android:layout_toEndOf="@+id/tvExplore"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"/>
+
+
+
+            </RelativeLayout>
+
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvExplore"-->
+                <!--style="@style/ppb200_title_second"-->
+                <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
+                <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
+                <!--android:text="@string/pinpinbox_2_0_0_title_explore" />-->
             <!--ppb200_padding_margin_second 8dp 移至 recyclerview-->
 
 
@@ -69,25 +97,37 @@
         </LinearLayout>
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/pinpinbox_2_0_0_divider" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.5dp"-->
+            <!--android:background="@color/pinpinbox_2_0_0_divider" />-->
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_second">
 
 
             <TextView
                 android:id="@+id/tvNewsFeed"
                 style="@style/ppb200_title_second"
+                android:text="@string/pinpinbox_2_0_0_title_for_you"
+               />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvNewsFeed"
+                android:layout_toEndOf="@+id/tvNewsFeed"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                android:text="@string/pinpinbox_2_0_0_title_news_feed"
-                android:layout_marginBottom="@dimen/ppb200_padding_margin_second"/>
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -98,7 +138,7 @@
                 android:layout_marginBottom="-6dp"
                 android:gravity="bottom"
                 android:orientation="horizontal"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <LinearLayout

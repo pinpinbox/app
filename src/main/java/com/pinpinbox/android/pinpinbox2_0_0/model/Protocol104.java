@@ -164,6 +164,7 @@ public class Protocol104 {
                             itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
                             itemUser.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
                             itemUser.setPoint(JsonUtility.GetInt(jsonUser, ProtocolKey.point));
+                            itemUser.setDisscuss(JsonUtility.GetBoolean(jsonUser, ProtocolKey.discuss));
 
                             itemUserList.add(itemUser);
 

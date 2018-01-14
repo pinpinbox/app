@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
@@ -75,6 +77,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
     private String p17Result, p17Message;
     private String sendAlbum_id;
 
+    private int intPopularity = 0;
     private int p76Result = -1;
     private int doingType;
     private static final int DoGetEvent = 0;
@@ -90,8 +93,9 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
     private ImageView eventImg;
     private ImageView backImg;
-    private TextView tvName, tvTitle, tvEvent, tvContribute, tvExit;
+    private TextView tvName, tvTitle, tvEvent, tvContribute, tvExit, tvPopularity;
     private LinearLayout linVote;
+    private RelativeLayout rDetail;
 
     public void setCanCreate(boolean canCreate) {
         this.canCreate = canCreate;
@@ -142,12 +146,14 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         canContributeList = new ArrayList<>();
 
         linVote = (LinearLayout) findViewById(R.id.linVote);
+        rDetail = (RelativeLayout)findViewById(R.id.rDetail);
 
         tvName = (TextView) findViewById(R.id.tvName);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvEvent = (TextView) findViewById(R.id.tvEvent);
         tvContribute = (TextView) findViewById(R.id.tvContribute);
         tvExit = (TextView)findViewById(R.id.tvExit);
+        tvPopularity = (TextView)findViewById(R.id.tvPopularity);
 
         eventImg = (ImageView) findViewById(R.id.eventImg);
 //        backImg = (ImageView) findViewById(R.id.backImg);
@@ -162,6 +168,23 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         tvContribute.setOnClickListener(this);
         tvExit.setOnClickListener(this);
         linVote.setOnClickListener(this);
+
+
+        try {
+            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
+                if (rDetail != null) {
+                    rDetail.setBackground(
+                            ScrimUtil.makeCubicGradientScrimDrawable(
+                                    Color.parseColor(ColorClass.BLACK_ALPHA),
+                                    8, //渐变层数
+                                    Gravity.BOTTOM)); //起始方向
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -617,6 +640,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                         url = JsonUtility.GetString(jsonEvent, ProtocolKey.url);
                         strName = JsonUtility.GetString(jsonEvent, ProtocolKey.name);
                         strTitle = JsonUtility.GetString(jsonEvent, ProtocolKey.title);
+                        intPopularity = JsonUtility.GetInt(jsonEvent, ProtocolKey.popularity);
 
                         eventTemplateArray = new JSONArray(event_templatejoin);
 
@@ -651,6 +675,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
                 tvName.setText(strName);
                 tvTitle.setText(strTitle);
+                tvPopularity.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_popularity)+ intPopularity);
 
 
                 if(image!=null && !image.equals("") && !image.isEmpty()) {

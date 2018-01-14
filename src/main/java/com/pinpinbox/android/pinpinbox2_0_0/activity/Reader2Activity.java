@@ -158,6 +158,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private String event_id = "";
     private String strRecent = "[]";
     private String comfirmPoint = "0";
+    private String event;
 
     private int doingType;
     private int lastPosition = 0;
@@ -211,9 +212,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 //        getStatusControl().setStatusMode(StatusControl.DARK);
 
-        try{
+        try {
             MapsInitializer.initialize(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -425,7 +426,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             infoMap.getMapAsync(new AlbumMapCallBack());
 
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -485,10 +485,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             UiSettings setting = mapPhoto.getUiSettings();
             setting.setTiltGesturesEnabled(true);
 //            mapPhoto.setMyLocationEnabled(true);
-
-
-
-
 
 
         }
@@ -1383,7 +1379,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         /*此頁為圖片或影片才執行自動撥放*/
                     if (strUsefor.equals("image") || strUsefor.equals("video")) {
-                        autoScrollHandler.postDelayed(runnable, duration * 1000);
+                        autoScrollHandler.postDelayed(runnable, duration * 1500); //default 1000 手機上執行效果太快
                     }
                 }
             }
@@ -1437,7 +1433,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                                 }
                             });
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -1555,7 +1551,15 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //        }
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id + "&autoplay=1");//分享內容
+
+
+        MyLog.Set("e", getClass(), "event => " + event);
+
+        if (event.equals("") || event == null || event.equals("null")) {
+            intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id + "&autoplay=1");
+        } else {
+            intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id);
+        }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(Intent.createChooser(intent, mActivity.getTitle()));
     }
@@ -1637,17 +1641,27 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private void taskShare() {
         if (ShareDialog.canShow(ShareLinkContent.class)) {
 
+
+            String shareUrl = "";
+
+            if (event.equals("") || event == null || event.equals("null")) {
+                shareUrl = UrlClass.shareAlbumUrl + album_id + "&autoplay=1";
+            } else {
+                shareUrl = UrlClass.shareAlbumUrl + album_id;
+            }
+
+
             if (photoContentsList.size() > 0) {
 
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + album_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .setImageUrl(Uri.parse(photoContentsList.get(0).getImage_url()))
                         .build();
                 shareDialog.show(content);
 
             } else {
                 ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse(UrlClass.shareAlbumUrl + album_id + "&autoplay=1"))
+                        .setContentUrl(Uri.parse(shareUrl))
                         .build();
                 shareDialog.show(content);
             }
@@ -2047,6 +2061,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         JSONObject jsonData = new JSONObject(JsonUtility.GetString(jsonResult, ProtocolKey.data));
 
+
                     /*album detail*/
                         JSONObject jsonAlbum = new JSONObject(JsonUtility.GetString(jsonData, ProtocolKey.album));
                         itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_name));
@@ -2077,6 +2092,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
                         itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.user_name));
                         itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
+
+                    /*event*/
+                        event = JsonUtility.GetString(jsonData, ProtocolKey.event);
+
+
+
+
 
 
                     /*photo detail*/

@@ -275,7 +275,7 @@
     <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_canceled">Original size has been canceled</string>
     <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_selected">Original size has been selected</string>
     <string name="pinpinbox_2_0_0_toast_message_crop_error">Crop error</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_board_is_close">The creator\'s message board is closed</string>
 
 
 
@@ -321,7 +321,7 @@
     <string name="pinpinbox_2_0_0_itemtype_common_share">General</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_my">Mine</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_other">Collections</string>
-    <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">Shared</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">Groups</string>
     <string name="pinpinbox_2_0_0_itemtype_autoplay_audio">Autoplay audio</string>
     <string name="pinpinbox_2_0_0_itemtype_work_manager">Work Manager</string>
     <string name="pinpinbox_2_0_0_itemtype_logout">Log out</string>
@@ -386,6 +386,7 @@
     <string name="pinpinbox_2_0_0_title_explore">Explore</string>
     <string name="pinpinbox_2_0_0_title_news_feed">Newsfeed</string>
     <string name="pinpinbox_2_0_0_title_latest_event">Latest Event</string>
+    <string name="pinpinbox_2_0_0_title_for_you">For You</string>
 
 
 
@@ -484,12 +485,9 @@
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_1">Sharers:\n ▪ Add item\n ▪ Download</string>
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_2">Viewers :\n ▪ Download</string>
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_3">(The above three identity can\'t operate delete item or setting in Editor except for the creator.)</string>
-    <string name="pinpinbox_2_0_0_other_text_k_times_views">K&#160;views</string>
-    <string name="pinpinbox_2_0_0_other_text_times_views_single">&#160;view</string>
     <string name="pinpinbox_2_0_0_other_text_times_views">&#160;views</string>
-    <string name="pinpinbox_2_0_0_other_text_k_times_likes">K&#160;likes</string>
-    <string name="pinpinbox_2_0_0_other_text_times_likes_single">&#160;like</string>
     <string name="pinpinbox_2_0_0_other_text_times_likes">&#160;likes</string>
+    <string name="pinpinbox_2_0_0_other_text_times_message">messages</string>
     <string name="pinpinbox_2_0_0_other_text_links">&#160;Websites</string>
     <string name="pinpinbox_2_0_0_other_text_current_point0">Your points:</string>
     <string name="pinpinbox_2_0_0_other_text_current_point1"> </string>
@@ -521,6 +519,8 @@
     <string name="pinpinbox_2_0_0_other_text_to_works_manager">To works manager</string>
     <string name="pinpinbox_2_0_0_other_text_i_know">I got it!</string>
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;likes</string>
+
+    <string name="pinpinbox_2_0_0_other_text_popularity">Popularity:</string>
 
 
     <string name="crop__saving">相片儲存中</string>

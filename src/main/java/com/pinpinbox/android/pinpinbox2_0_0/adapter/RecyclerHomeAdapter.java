@@ -277,15 +277,11 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
                 if (intViewed > 9999) {
                     String strViewed = StringUtil.ThousandToK(intViewed);
-                    holder.tvViewed.setText(strViewed + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_k_times_views));
+                    holder.tvViewed.setText(strViewed + "K" + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
                 } else {
 
-                    if (intViewed < 2) {
-                        holder.tvViewed.setText(intViewed + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views_single));
-                    } else {
-                        holder.tvViewed.setText(intViewed + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
+                    holder.tvViewed.setText(intViewed + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
 
-                    }
 
                 }
             } catch (Exception e) {
@@ -297,14 +293,12 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
             if (like > 9999) {
                 String strLike = StringUtil.ThousandToK(like);
-                holder.tvLike.setText(" ▪ " + strLike + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_k_times_likes));
+                holder.tvLike.setText(" ▪ " + strLike + "K" + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_likes));
             } else {
 
-                if (like < 2) {
-                    holder.tvLike.setText(" ▪ " + like + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_likes_single));
-                } else {
-                    holder.tvLike.setText(" ▪ " + like + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_likes));
-                }
+
+                holder.tvLike.setText(" ▪ " + like + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_likes));
+
 
             }
 

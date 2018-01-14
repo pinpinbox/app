@@ -1,21 +1,25 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
 import com.pinpinbox.android.StringClass.SystemType;
@@ -32,6 +36,8 @@ import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerVoteAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -41,6 +47,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSearch2;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol99;
 import com.squareup.picasso.Picasso;
@@ -54,6 +61,8 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
     private Activity mActivity;
     private ExStaggeredGridLayoutManager manager = null;
+    private CountDownTimer countDownTimer;
+    private InputMethodManager inputMethodManager;
 
     private Protocol99 protocol99;
     private Protocol100 protocol100;
@@ -63,14 +72,17 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
     private List<ItemAlbum> itemAlbumList;
 
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
-    private SmoothProgressBar pbLoadMore;
+
+    private SmoothProgressBar pbLoadMore, pbRefresh;
     private RecyclerView rvVote;
-    private ImageView backImg;
+    private ImageView backImg, clearImg;
     private TextView tvRemaining;
     private View vHeader;
+    private EditText edSearch;
 
     private String event_id;
     private String id, token;
+    private String strSearch = "";
 
     private int deviceType;
 
@@ -95,6 +107,8 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         setRecycler();
 
         setProtocol();
+
+        setSearch();
 
         doGetVote();
 
@@ -124,20 +138,22 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         }
 
         mActivity = this;
+        inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
 
         itemAlbumList = new ArrayList<>();
 
-
+        edSearch = (EditText)findViewById(R.id.edSearch);
         tvRemaining = (TextView) findViewById(R.id.tvRemaining);
         backImg = (ImageView) findViewById(R.id.backImg);
+        clearImg = (ImageView)findViewById(R.id.clearImg);
         rvVote = (RecyclerView) findViewById(R.id.rvVote);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
 
 
-        SmoothProgressBar pbRefresh = (SmoothProgressBar) findViewById(R.id.pbRefresh);
+        pbRefresh = (SmoothProgressBar) findViewById(R.id.pbRefresh);
         pbRefresh.progressiveStop();
         pinPinBoxRefreshLayout.setRefreshView(findViewById(R.id.vRefreshAnim), pbRefresh);
 
@@ -146,9 +162,11 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         pbLoadMore.progressiveStop();
 
 
+        mOnScrollListener.setInputStatus(inputMethodManager, edSearch);
         rvVote.addItemDecoration(new SpacesItemDecoration(16, deviceType, true));
         rvVote.setItemAnimator(new DefaultItemAnimator());
         rvVote.addOnScrollListener(mOnScrollListener);
+
 
         /*********************************************************************************************************/
 
@@ -160,7 +178,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
         ViewControl.setMargins(tvTitle,
                 DensityUtility.dip2px(getApplicationContext(), 12),
-                DensityUtility.dip2px(getApplicationContext(), 92),
+                DensityUtility.dip2px(getApplicationContext(), 134),
                 0,
                 DensityUtility.dip2px(getApplicationContext(), 32));
 
@@ -168,7 +186,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
 
         backImg.setOnClickListener(this);
-
+        clearImg.setOnClickListener(this);
 
     }
 
@@ -263,6 +281,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                 id,
                 token,
                 event_id,
+                strSearch,
                 itemAlbumList,
                 new Protocol99.TaskCallBack() {
                     @Override
@@ -326,6 +345,10 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
                     @Override
                     public void Success(int doingType) {
+
+                        voteAdapter.setSearchKeyCheck(strSearch);
+
+
                         switch (doingType) {
 
                             case DoingTypeClass.DoDefault:
@@ -344,8 +367,6 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                             case DoingTypeClass.DoMoreData:
 
                                 tvRemaining.setText(protocol99.getVoteLeft());
-
-
                                 voteAdapter.notifyItemRangeInserted(protocol99.getItemAlbumList().size(), protocol99.getRangeCount());
 
 
@@ -384,6 +405,99 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                     }
                 });
     }
+
+    private void setSearch(){
+
+        countDownTimer = new CountDownTimer(1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                MyLog.Set("d", mActivity.getClass(), "timer =>" + (millisUntilFinished / 1000) + "");
+            }
+
+            @Override
+            public void onFinish() {
+                MyLog.Set("d", mActivity.getClass(), "timer => finish()");
+                countDownTimer.cancel();
+
+                if (edSearch.getText().toString().equals(strSearch)) {
+
+                    MyLog.Set("d", mActivity.getClass(), "字串沒變更");
+
+                } else {
+                    strSearch = edSearch.getText().toString();
+                    protocol99.setSearchKey(strSearch);
+                    doRefresh();
+                }
+            }
+        };
+
+
+        edSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                MyLog.Set("d", FragmentSearch2.class, "afterTextChanged");
+
+
+                if (s.toString().equals("")) {
+
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel();
+                    }
+
+//                    setDefaultData();
+
+                    strSearch = s.toString();
+                    protocol99.setSearchKey(strSearch);
+                    doRefresh();
+
+                    clearImg.setVisibility(View.GONE);
+
+                } else {
+
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel();
+                        countDownTimer.start();
+
+                        MyLog.Set("d", FragmentSearch2.class, "重新倒數");
+                    }
+
+                    clearImg.setVisibility(View.VISIBLE);
+
+
+                }
+
+
+            }
+        });
+
+
+
+
+
+    }
+
+//    private void loadDataBegin() {
+//        pbRefresh.setVisibility(View.VISIBLE);
+//        pbRefresh.progressiveStart();
+//        isLoading = true;
+//    }
+//
+//    private void loadDataEnd() {
+//        pbRefresh.progressiveStop();
+//        pbRefresh.setVisibility(View.GONE);
+//        isLoading = false;
+//    }
 
     private void doGetVote() {
 
@@ -524,6 +638,12 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
             case R.id.backImg:
 
                 back();
+
+                break;
+
+            case R.id.clearImg:
+
+                edSearch.setText("");
 
                 break;
 

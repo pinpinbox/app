@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ScreenUtils;
@@ -159,7 +161,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
             MyLog.Set("e", getClass(), "-------------------------------");
 
-            vFloatToolBar.setY(PPBApplication.getInstance().getStatusBarHeight()-1);
+            vFloatToolBar.setY(PPBApplication.getInstance().getStatusBarHeight() - 1);
 
             if (!(boolean) vFloatToolBar.getTag()) {
 
@@ -306,8 +308,25 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         int totalItemCount = layoutManager.getItemCount();
         if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE && (lastVisibleItemPosition) >= totalItemCount - 1)) {
             onLoadNextPage(recyclerView);
+        }
+
+        if(inputMethodManager!=null && editText!=null){
+            if (newState == 1) {
+                //在用手指滾動
+                inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            }
 
         }
+
+
+    }
+
+    private InputMethodManager inputMethodManager;
+    private EditText editText;
+
+    public void setInputStatus(InputMethodManager inputMethodManager, EditText editText) {
+        this.inputMethodManager = inputMethodManager;
+        this.editText = editText;
     }
 
 

@@ -36,7 +36,16 @@ public class ItemUser implements Serializable{
 
     private boolean follow = false;
     private boolean invite = false;
+    private boolean disscuss = false;
 
+
+    public boolean isDisscuss() {
+        return disscuss;
+    }
+
+    public void setDisscuss(boolean disscuss) {
+        this.disscuss = disscuss;
+    }
 
 
     public int getPoint() {
