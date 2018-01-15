@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,18 +21,18 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
 import com.pinpinbox.android.StringClass.TagClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
+import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -113,10 +114,6 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         SystemUtility.SysApplication.getInstance().addActivity(this);
 
 
-
-
-
-
         getBundle();
 
         init();
@@ -146,14 +143,14 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         canContributeList = new ArrayList<>();
 
         linVote = (LinearLayout) findViewById(R.id.linVote);
-        rDetail = (RelativeLayout)findViewById(R.id.rDetail);
+        rDetail = (RelativeLayout) findViewById(R.id.rDetail);
 
         tvName = (TextView) findViewById(R.id.tvName);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvEvent = (TextView) findViewById(R.id.tvEvent);
         tvContribute = (TextView) findViewById(R.id.tvContribute);
-        tvExit = (TextView)findViewById(R.id.tvExit);
-        tvPopularity = (TextView)findViewById(R.id.tvPopularity);
+        tvExit = (TextView) findViewById(R.id.tvExit);
+        tvPopularity = (TextView) findViewById(R.id.tvPopularity);
 
         eventImg = (ImageView) findViewById(R.id.eventImg);
 //        backImg = (ImageView) findViewById(R.id.backImg);
@@ -183,7 +180,6 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }
@@ -327,7 +323,6 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 //        startActivity(intent);
 
 
-
         //20171206
         Bundle bundle = new Bundle();
         bundle.putString("url", url);
@@ -430,6 +425,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     public void resetCanContributeList() {
 
         canContributeList.clear();
@@ -610,8 +606,6 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                 MyLog.Set("d", getClass(), "p76strJson => " + strJson);
 
 
-
-
             } catch (SocketTimeoutException timeout) {
                 p76Result = Key.TIMEOUT;
             } catch (Exception e) {
@@ -675,10 +669,10 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
                 tvName.setText(strName);
                 tvTitle.setText(strTitle);
-                tvPopularity.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_popularity)+ intPopularity);
+                tvPopularity.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_popularity) + intPopularity);
 
 
-                if(image!=null && !image.equals("") && !image.isEmpty()) {
+                if (image != null && !image.equals("") && !image.isEmpty()) {
 
                     Picasso.with(mActivity.getApplicationContext())
                             .load(image)
@@ -698,7 +692,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                                 }
                             });
 
-                }else {
+                } else {
 
                     eventImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     eventImg.setImageResource(R.drawable.bg_2_0_0_no_image);
@@ -706,10 +700,6 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                     viewAnimStart();
 
                 }
-
-
-
-
 
 
             } else if (p76Result == 0) {
@@ -725,7 +715,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
             }
         }
 
-        private void viewAnimStart(){
+        private void viewAnimStart() {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -789,6 +779,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
         }
     }
+
 
     public class SendContributeTask extends AsyncTask<Void, Void, Object> {
 
