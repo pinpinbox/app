@@ -93,9 +93,11 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private FragmentScanSearch2 fragmentScanSearch2;
     private MediaPlayer mediaPlayer;
 
+
     private GetSettingsTask getSettingsTask;
     private SetSettingsTask setSettingsTask;
     private GetPhotoCountTask getPhotoCountTask;
+    private SendContributeTask sendContributeTask;
     private Protocol33 protocol33;
     private Protocol96 protocol96;
     private Protocol97 protocol97;
@@ -704,6 +706,10 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                         doCheckPhotoCount();
                         break;
 
+                    case DoingTypeClass.DoSendContribute:
+                        doSendContribute();
+                        break;
+
                 }
             }
         };
@@ -785,17 +791,19 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                             closeCreation();
 
-                            Bundle bundle = new Bundle();
-                            bundle.putString(Key.album_id, album_id);
-                            bundle.putString(Key.event_id, event_id);
-                            bundle.putBoolean(Key.isNewCreate, isNewCreate);
-                            bundle.putBoolean(Key.isContribute, isContribute);
+                            doSendContribute();
 
-                            Intent intent = new Intent(mActivity, Reader2Activity.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                            finish();
-                            ActivityAnim.StartAnim(mActivity);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString(Key.album_id, album_id);
+//                            bundle.putString(Key.event_id, event_id);
+//                            bundle.putBoolean(Key.isNewCreate, isNewCreate);
+//                            bundle.putBoolean(Key.isContribute, isContribute);
+//
+//                            Intent intent = new Intent(mActivity, Reader2Activity.class);
+//                            intent.putExtras(bundle);
+//                            startActivity(intent);
+//                            finish();
+//                            ActivityAnim.StartAnim(mActivity);
 
                         } else {
 
@@ -989,6 +997,15 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         getPhotoCountTask.execute();
 
 
+    }
+
+    private void doSendContribute() {
+        if (!HttpUtility.isConnect(mActivity)) {
+            setNoConnect();
+            return;
+        }
+        sendContributeTask = new SendContributeTask();
+        sendContributeTask.execute();
     }
 
     private class GetSettingsTask extends AsyncTask<Void, Void, Object> {
@@ -1558,6 +1575,120 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
             }
 
+
+        }
+    }
+
+    public class SendContributeTask extends AsyncTask<Void, Void, Object> {
+
+        private boolean contributionstatus;
+        private String p73Result = "", p73Message = "";
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            doingType = DoingTypeClass.DoSendContribute;
+            startLoading();
+        }
+
+        @Override
+        protected Object doInBackground(Void... params) {
+            String strJson = "";
+            try {
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P73_SwitchStatusOfContribution
+                        , SetMapByProtocol.setParam73_switchstatusofcontribution(id, token, event_id, album_id)
+                        , null);
+                MyLog.Set("d", mActivity.getClass(), "p73strJson => " + strJson);
+
+            } catch (SocketTimeoutException timeout) {
+                p73Result = Key.timeout;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (strJson != null && !strJson.equals("")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(strJson);
+                    p73Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+                    if (p73Result.equals("1")) {
+
+                        String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+
+                        JSONObject jsonData = new JSONObject(jdata);
+                        String event = JsonUtility.GetString(jsonData, ProtocolKey.event);
+
+                        JSONObject jsonEvent = new JSONObject(event);
+                        contributionstatus = JsonUtility.GetBoolean(jsonEvent, ProtocolKey.contributionstatus);
+
+
+                    } else if (p73Result.equals("0")) {
+                        p73Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+                    } else {
+                        p73Result = "";
+                    }
+
+                } catch (Exception e) {
+                    p73Result = "";
+                    e.printStackTrace();
+                }
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+            dissmissLoading();
+
+            if (p73Result.equals("1")) {
+
+
+
+                if (contributionstatus) {
+
+                    PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_contribute_success);
+
+                } else {
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_contribute_cancel);
+
+                }
+
+                List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
+                for (int i = 0; i < activityList.size(); i++) {
+
+                    String strClassName = activityList.get(i).getClass().getSimpleName();
+                    if (strClassName.equals(Event2Activity.class.getSimpleName()) || strClassName.equals(SelectMyWorks2Activity.class.getSimpleName())) {
+                        activityList.get(i).finish();
+                    }
+                }
+
+
+                Bundle bundle = new Bundle();
+                bundle.putString(Key.album_id, album_id);
+                bundle.putString(Key.event_id, event_id);
+                bundle.putBoolean(Key.isNewCreate, isNewCreate);
+                bundle.putBoolean(Key.isContribute, isContribute);
+
+                Intent intent = new Intent(mActivity, Reader2Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+                ActivityAnim.StartAnim(mActivity);
+
+
+
+            } else if (p73Result.equals("0")) {
+                DialogV2Custom.BuildError(mActivity, p73Message);
+            } else if (p73Result.equals(Key.timeout)) {
+
+                connectInstability();
+
+            } else {
+                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
+            }
 
         }
     }

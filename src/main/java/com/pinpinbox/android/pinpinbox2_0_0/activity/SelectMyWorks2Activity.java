@@ -2,33 +2,35 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.TagClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.SelectMyWorksAdpater;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCheckContribute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -40,7 +42,6 @@ import org.json.JSONObject;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -48,7 +49,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by vmage on 2016/5/26.
  */
-public class SelectMyWorks2Activity extends DraggerActivity {
+public class SelectMyWorks2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity;
 
@@ -56,11 +57,11 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
     private GetMyCollectTask getMyCollectTask;
     private SendContributeTask sendContributeTask;
+    private FastCreateTask fastCreateTask;
 
     private ArrayList<String> templateidList;
-    private ArrayList<HashMap<String, Object>> canContributeList;
+    private ArrayList<ItemAlbum> canContributeAlbumList;
 
-    private String TAG = TagClass.TagSelectMyWorksActivity;
     private String id, token;
     private String event_id;
     private String p17Result, p17Message;
@@ -70,9 +71,13 @@ public class SelectMyWorks2Activity extends DraggerActivity {
     private int doingType;
     private static final int DoGetMyCollect = 0;
     private static final int DoSendContribute = 1;
+    private static final int DoFastCreate = 2;
     private int sendPosition;
+    private int sendMaxCount = 0;
+    private int isSendCount = 0;
 
     private ImageView backImg;
+    private TextView tvCreate;
     private GridView gridView;
 
 
@@ -83,7 +88,6 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
         getBundle();
         init();
-        back();
 
         doGetMyCollect();
 
@@ -95,6 +99,7 @@ public class SelectMyWorks2Activity extends DraggerActivity {
         if (bundle != null) {
             templateidList = bundle.getStringArrayList("templates");
             event_id = bundle.getString("event_id");
+            sendMaxCount = bundle.getInt("contribution");
         }
     }
 
@@ -103,12 +108,16 @@ public class SelectMyWorks2Activity extends DraggerActivity {
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
 
-        canContributeList = new ArrayList<>();
+        canContributeAlbumList = new ArrayList<>();
 
         backImg = (ImageView) findViewById(R.id.backImg);
         gridView = (GridView) findViewById(R.id.gridView);
+        tvCreate = (TextView) findViewById(R.id.tvCreate);
 
-        TextUtility.setBold((TextView)findViewById(R.id.tvTitle), true);
+        TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
+        
+        backImg.setOnClickListener(this);
+        tvCreate.setOnClickListener(this);
 
     }
 
@@ -118,30 +127,34 @@ public class SelectMyWorks2Activity extends DraggerActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                final String album_id = (String) canContributeList.get(position).get("album_id");
-                String name = (String) canContributeList.get(position).get("name");
-                String cover = (String) canContributeList.get(position).get("cover");
+                final String album_id = canContributeAlbumList.get(position).getAlbum_id();
+                String name = canContributeAlbumList.get(position).getName();
+                String cover = canContributeAlbumList.get(position).getCover();
 
-                boolean contributionstatus = (boolean) canContributeList.get(position).get("contributionstatus");
 
                 final DialogCheckContribute d = new DialogCheckContribute(mActivity);
                 d.getTvTitle().setText(name);
 
-                Picasso.with(mActivity.getApplicationContext())
-                        .load(cover)
-                        .config(Bitmap.Config.RGB_565)
-                        .error(R.drawable.bg_2_0_0_no_image)
-                        .centerInside()
-                        .resize(112, 168)
-                        .tag(mActivity.getApplicationContext())
-                        .into(d.getCoverImg());
+                if (cover != null && !cover.equals("") && !cover.equals("null")) {
+                    Picasso.with(mActivity.getApplicationContext())
+                            .load(cover)
+                            .config(Bitmap.Config.RGB_565)
+                            .error(R.drawable.bg_2_0_0_no_image)
+                            .centerInside()
+                            .resize(112, 168)
+                            .tag(mActivity.getApplicationContext())
+                            .into(d.getCoverImg());
+                } else {
+                    d.getCoverImg().setImageResource(R.drawable.bg_2_0_0_no_image);
+                }
 
-                if (contributionstatus) {
+
+                if (canContributeAlbumList.get(position).isContributionstatus()) {
                     d.getTvDirections().setTextColor(Color.parseColor(ColorClass.PINK_FRIST));
                     d.getTvDirections().setText(R.string.pinpinbox_2_0_0_dialog_message_reset_contribute);
                     d.getTvDirections().setGravity(View.FOCUS_LEFT);
                     d.getTvY().setText(R.string.pinpinbox_2_0_0_button_re_select);
-                }else {
+                } else {
                     d.getTvDirections().setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
                     d.getTvDirections().setText(R.string.pinpinbox_2_0_0_dialog_message_directions_works_contribute);
                     d.getTvDirections().setGravity(View.FOCUS_LEFT);
@@ -169,26 +182,59 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
     }
 
-    private void cleanPicasso() {
+    private void createNewWork() {
 
-        int count = canContributeList.size();
+        boolean fastCreate = false;
+
+        for (int i = 0; i < templateidList.size(); i++) {
+
+            String mTemid = templateidList.get(i);
+            if (mTemid.equals("0")) {
+                fastCreate = true;
+                break;
+            }
+
+        }
+
+        if (fastCreate) {
+
+            doFastCreate();
+
+        } else {
+
+                /*2017.08.02 目前沒有使用套版 如活動需求 要新增SubResultActivity*/
+
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(Key.isContribute, true);
+            bundle.putString("event_id", event_id);
+            bundle.putString("rank", "hot");//default
+
+            Intent intent = new Intent(mActivity, TemList2Activity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            ActivityAnim.StartAnim(mActivity);
+
+        }
+
+    }
+
+    private void cleanCache() {
+
+        int count = canContributeAlbumList.size();
+
 
         for (int i = 0; i < count; i++) {
-            String cover = (String) canContributeList.get(i).get("cover");
-            Picasso.with(mActivity.getApplicationContext()).invalidate(cover);
+            Picasso.with(mActivity.getApplicationContext()).invalidate(canContributeAlbumList.get(i).getCover());
         }
 
     }
 
     private void back() {
 
-        backImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                ActivityAnim.FinishAnim(mActivity);
-            }
-        });
+
+        finish();
+        ActivityAnim.FinishAnim(mActivity);
+
 
     }
 
@@ -206,6 +252,10 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
                     case DoSendContribute:
                         doSendContribute();
+                        break;
+
+                    case DoFastCreate:
+                        doFastCreate();
                         break;
 
 
@@ -235,6 +285,16 @@ public class SelectMyWorks2Activity extends DraggerActivity {
         sendContributeTask.execute();
     }
 
+    private void doFastCreate() {
+        if (!HttpUtility.isConnect(mActivity)) {
+            setNoConnect();
+            return;
+        }
+        fastCreateTask = new FastCreateTask();
+        fastCreateTask.execute();
+
+    }
+
     public class GetMyCollectTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -247,7 +307,7 @@ public class SelectMyWorks2Activity extends DraggerActivity {
         protected Object doInBackground(Void... params) {
             String strJson = "";
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P17_GetCloudAlbumList, SetMapByProtocol.setParam17_getcloudalbumlist(id, token, "mine", "0,300"), null);
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P17_GetCloudAlbumList, SetMapByProtocol.setParam17_getcloudalbumlist(id, token, "mine", "0,1000"), null);
                 MyLog.Set("d", getClass(), "p17strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p17Result = Key.timeout;
@@ -258,9 +318,11 @@ public class SelectMyWorks2Activity extends DraggerActivity {
             if (strJson != null && !strJson.equals("")) {
                 try {
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p17Result = jsonObject.getString(Key.result);
+                    p17Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+
                     if (p17Result.equals("1")) {
-                        String jdata = jsonObject.getString(Key.data);
+
+                        String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
                         JSONArray jsonArray = new JSONArray(jdata);
                         int array = jsonArray.length();
                         int templateSize = templateidList.size();
@@ -269,22 +331,23 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
                             JSONObject object = (JSONObject) jsonArray.get(i);
 
-                            HashMap<String, Object> map = new HashMap<String, Object>();
+                            ItemAlbum itemAlbum = new ItemAlbum();
 
-                            String album = JsonUtility.GetString(object, "album"); //get album_id, name, cover, zipped, act
-                            String template = JsonUtility.GetString(object, "template"); //get template_id
-                            String user = JsonUtility.GetString(object, "user"); //user
-                            String event = JsonUtility.GetString(object, "event"); //get can join event
+                            String album = JsonUtility.GetString(object, ProtocolKey.album); //get album_id, name, cover, zipped, act
+                            String template = JsonUtility.GetString(object, ProtocolKey.template); //get template_id
+                            String user = JsonUtility.GetString(object, ProtocolKey.user); //user
+                            String event = JsonUtility.GetString(object, ProtocolKey.event); //get can join event
 
-                            JSONObject obj = new JSONObject(template);
-                            String template_id = obj.getString("template_id");
+                            JSONObject jsonTemplate = new JSONObject(template);
+                            String template_id = JsonUtility.GetString(jsonTemplate, ProtocolKey.template_id);
 
-                            JSONObject uj = new JSONObject(user);
-                            String user_id = uj.getString("user_id");
+                            JSONObject jsonUser = new JSONObject(user);
+                            String user_id = JsonUtility.GetString(jsonUser, ProtocolKey.user_id);
 
-                            JSONObject aj = new JSONObject(album);
-                            String zipped = aj.getString("zipped");
-                            String act = aj.getString("act");
+                            JSONObject jsonAlbum = new JSONObject(album);
+
+                            String zipped = JsonUtility.GetString(jsonAlbum, ProtocolKey.zipped);
+                            String act = JsonUtility.GetString(jsonAlbum, ProtocolKey.act);
 
 
                             for (int k = 0; k < templateSize; k++) {
@@ -295,15 +358,12 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
                                         if (user_id.equals(id)) { //此用戶ID為自己
 
-                                            String album_id = aj.getString("album_id");
-                                            String name = aj.getString("name");
-                                            String cover = aj.getString("cover");
-                                            String description = aj.getString("description");
 
-                                            map.put("album_id", album_id);
-                                            map.put("name", name);
-                                            map.put("cover", cover);
-                                            map.put("description", description);
+                                            itemAlbum.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
+                                            itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_name));
+                                            itemAlbum.setCover(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover));
+                                            itemAlbum.setDescription(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_description));
+
 
                                             JSONArray eventArray = new JSONArray(event); //可參加投稿的活動列
 
@@ -314,37 +374,29 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
                                             for (int e = 0; e < eventCount; e++) {
 
-                                                JSONObject o = (JSONObject) eventArray.get(e);
+                                                JSONObject jsonEvent = (JSONObject) eventArray.get(e);
 
-                                                String mEvent_id = o.getString("event_id");
+                                                String mEvent_id = JsonUtility.GetString(jsonEvent, ProtocolKey.event_id);
 
                                                 MyLog.Set("d", mActivity.getClass(), "此活動ID => " + event_id);
                                                 MyLog.Set("d", mActivity.getClass(), "第" + e + "個活動ID => " + mEvent_id);
 
-                                                if (mEvent_id.equals(event_id)) { //可參加投稿的活動列其一的活動ID 等於此次活動ID
+                                                if (mEvent_id.equals(event_id)) {
 
+                                                    boolean contributionstatus = JsonUtility.GetBoolean(jsonEvent, ProtocolKey.contributionstatus);
+                                                    itemAlbum.setContributionstatus(contributionstatus);
 
-                                                    boolean contributionstatus = o.getBoolean("contributionstatus");
-                                                    map.put("contributionstatus", contributionstatus);
-
-                                                    MyLog.Set("d", mActivity.getClass(), "適用於此活動的作品 contributionstatus => " + contributionstatus);
+                                                    if(contributionstatus){
+                                                        isSendCount++;
+                                                    }
 
                                                     break;
                                                 }
                                             }
 
-                                            if (LOG.isLogMode) {
-                                                Log.d(TAG, "適用於此活動的作品 user_id => " + user_id);
-                                                Log.d(TAG, "適用於此活動的作品 template_id => " + template_id);
-                                                Log.d(TAG, "適用於此活動的作品 album_id => " + album_id);
-                                                Log.d(TAG, "適用於此活動的作品 name => " + name);
-                                                Log.d(TAG, "適用於此活動的作品 cover => " + cover);
-                                                Log.d(TAG, "適用於此活動的作品 description => " + description);
+                                            canContributeAlbumList.add(itemAlbum);
 
-                                                System.out.println("------------------------------------------------------------------------------------------------------");
-                                            }
 
-                                            canContributeList.add(map);
                                         }
                                     }
                                 }
@@ -353,7 +405,7 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
 
                     } else if (p17Result.equals("0")) {
-                        p17Message = jsonObject.getString(Key.message);
+                        p17Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                     } else {
                         p17Result = "";
                     }
@@ -375,7 +427,7 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
             if (p17Result.equals("1")) {
 
-                adapter = new SelectMyWorksAdpater(mActivity, canContributeList);
+                adapter = new SelectMyWorksAdpater(mActivity, canContributeAlbumList);
                 gridView.setAdapter(adapter);
 
                 select();
@@ -389,7 +441,7 @@ public class SelectMyWorks2Activity extends DraggerActivity {
                 connectInstability();
 
             } else {
-               DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
+                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
             }
 
 
@@ -468,7 +520,12 @@ public class SelectMyWorks2Activity extends DraggerActivity {
                     for (int i = 0; i < activityList.size(); i++) {
 
                         String strClassName = activityList.get(i).getClass().getSimpleName();
-                        if (strClassName.equals("Event2Activity")) {
+
+                        MyLog.Set("e", this.getClass(), "strClassName => " + strClassName);
+
+                        if (strClassName.equals(Event2Activity.class.getSimpleName())) {
+
+                            MyLog.Set("e", this.getClass(), "---------------------------------------------");
 
                             ((Event2Activity) activityList.get(i)).resetCanContributeList();
 
@@ -478,13 +535,9 @@ public class SelectMyWorks2Activity extends DraggerActivity {
                     }
 
 
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("album_id", (String) canContributeList.get(sendPosition).get("album_id"));
-                    map.put("name", (String) canContributeList.get(sendPosition).get("name"));
-                    map.put("cover", (String) canContributeList.get(sendPosition).get("cover"));
-                    map.put("description", (String) canContributeList.get(sendPosition).get("description"));
-                    map.put("contributionstatus", true);
-                    canContributeList.set(sendPosition, map);
+                    canContributeAlbumList.get(sendPosition).setContributionstatus(true);
+                    isSendCount++;
+
 
                 } else {
 
@@ -493,7 +546,12 @@ public class SelectMyWorks2Activity extends DraggerActivity {
                     for (int i = 0; i < activityList.size(); i++) {
 
                         String strClassName = activityList.get(i).getClass().getSimpleName();
-                        if (strClassName.equals("Event2Activity")) {
+
+                        MyLog.Set("e", this.getClass(), "strClassName => " + strClassName);
+
+                        if (strClassName.equals(Event2Activity.class.getSimpleName())) {
+
+                            MyLog.Set("e", this.getClass(), "---------------------------------------------");
 
                             ((Event2Activity) activityList.get(i)).resetCanContributeList();
 
@@ -502,14 +560,9 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
                     }
 
+                    canContributeAlbumList.get(sendPosition).setContributionstatus(false);
+                    isSendCount--;
 
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("album_id", (String) canContributeList.get(sendPosition).get("album_id"));
-                    map.put("name", (String) canContributeList.get(sendPosition).get("name"));
-                    map.put("cover", (String) canContributeList.get(sendPosition).get("cover"));
-                    map.put("description", (String) canContributeList.get(sendPosition).get("description"));
-                    map.put("contributionstatus", false);
-                    canContributeList.set(sendPosition, map);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -527,6 +580,88 @@ public class SelectMyWorks2Activity extends DraggerActivity {
         }
     }
 
+    public class FastCreateTask extends AsyncTask<Void, Void, Object> {
+
+        private String p54Result, p54Message;
+        private String new_album_id;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            doingType = DoFastCreate;
+            startLoading();
+        }
+
+        @Override
+        protected Object doInBackground(Void... params) {
+            String strJson = "";
+            try {
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P54_InsertAlbumOfDiy,
+                        SetMapByProtocol.setParam54_insertalbumofdiy(id, token, "0"), null);
+                MyLog.Set("d", getClass(), "p54strJson => " + strJson);
+            } catch (SocketTimeoutException timeout) {
+                p54Result = Key.timeout;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (strJson != null && !strJson.equals("")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(strJson);
+
+                    p54Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+
+                    if (p54Result.equals("1")) {
+                        new_album_id = jsonObject.getString(ProtocolKey.data);
+                    } else if (p54Result.equals("0")) {
+                        p54Message = jsonObject.getString(ProtocolKey.message);
+                    } else {
+                        p54Result = "";
+                    }
+
+                } catch (Exception e) {
+                    p54Result = "";
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+            dissmissLoading();
+            if (p54Result.equals("1")) {
+
+                if (new_album_id != null) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("album_id", new_album_id);
+                    bundle.putString("identity", "admin");
+                    bundle.putInt("create_mode", 0);
+                    bundle.putBoolean(Key.isContribute, true);
+                    bundle.putBoolean(Key.isNewCreate, true);
+                    bundle.putString("event_id", event_id);
+                    Intent intent = new Intent(mActivity, Creation2Activity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    ActivityAnim.StartAnim(mActivity);
+                }
+            } else if (p54Result.equals("0")) {
+
+                DialogV2Custom.BuildError(mActivity, p54Message);
+
+            } else if (p54Result.equals(Key.timeout)) {
+                connectInstability();
+            } else {
+                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
+            }
+
+        }
+    }
+
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -534,8 +669,40 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
-        ActivityAnim.FinishAnim(mActivity);
+        back();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+            return;
+        }
+        
+        switch (v.getId()){
+            
+            case R.id.tvCreate:
+
+
+                if(isSendCount>=sendMaxCount){
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_contribute_is_max);
+                }else {
+
+                    MyLog.Set("e", this.getClass(), "開始建立作品");
+                    createNewWork();
+                }
+
+                
+                break;
+                
+            case R.id.backImg:
+                
+                back();
+                
+                break;
+            
+        }
+
     }
 
     @Override
@@ -551,27 +718,24 @@ public class SelectMyWorks2Activity extends DraggerActivity {
 
     @Override
     protected void onPause() {
+
+        cleanCache();
+
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
 
+        cancelTask(getMyCollectTask);
+        getMyCollectTask = null;
 
-        if (getMyCollectTask != null && !getMyCollectTask.isCancelled()) {
-            getMyCollectTask.cancel(true);
-            getMyCollectTask = null;
-        }
+        cancelTask(sendContributeTask);
+        sendContributeTask = null;
 
-        if (sendContributeTask != null && !sendContributeTask.isCancelled()) {
-            sendContributeTask.cancel(true);
-            sendContributeTask = null;
-        }
-
-        cleanPicasso();
+        Recycle.IMG(backImg);
 
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
-
 
         System.gc();
 

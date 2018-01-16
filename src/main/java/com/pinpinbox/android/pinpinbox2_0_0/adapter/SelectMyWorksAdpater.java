@@ -11,10 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by vmage on 2016/5/26.
@@ -23,22 +23,22 @@ public class SelectMyWorksAdpater extends BaseAdapter {
 
     private Activity mActivity;
 
-    private ArrayList<HashMap<String, Object>> listData;
+    private ArrayList<ItemAlbum> canContributeAlbumList;
 
-    public SelectMyWorksAdpater(Activity mActivity, ArrayList<HashMap<String, Object>> listData){
+    public SelectMyWorksAdpater(Activity mActivity, ArrayList<ItemAlbum> canContributeAlbumList) {
         this.mActivity = mActivity;
-        this.listData = listData;
+        this.canContributeAlbumList = canContributeAlbumList;
     }
 
 
     @Override
     public int getCount() {
-        return listData.size();
+        return canContributeAlbumList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listData.get(position);
+        return canContributeAlbumList.get(position);
     }
 
     @Override
@@ -53,9 +53,9 @@ public class SelectMyWorksAdpater extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_contribute, null);
-            holder.rContributionstatus = (RelativeLayout)convertView.findViewById(R.id.rContributionstatus);
-            holder.tvName = (TextView)convertView.findViewById(R.id.tvName);
-            holder.coverImg = (ImageView)convertView.findViewById(R.id.coverImg);
+            holder.rContributionstatus = (RelativeLayout) convertView.findViewById(R.id.rContributionstatus);
+            holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+            holder.coverImg = (ImageView) convertView.findViewById(R.id.coverImg);
             convertView.setTag(holder);
 
         } else {
@@ -64,28 +64,27 @@ public class SelectMyWorksAdpater extends BaseAdapter {
 
         convertView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-        String cover = (String)listData.get(position).get("cover");
-        String name = (String)listData.get(position).get("name");
+        String cover = canContributeAlbumList.get(position).getCover();
+        String name = canContributeAlbumList.get(position).getName();
 
-        boolean contributionstatus = (boolean)listData.get(position).get("contributionstatus");
 
-        if(contributionstatus){
+        if (canContributeAlbumList.get(position).isContributionstatus()) {
             holder.rContributionstatus.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             holder.rContributionstatus.setVisibility(View.INVISIBLE);
         }
 
         holder.tvName.setText(name);
 
 
-        if(cover!=null && !cover.equals("") && !cover.equals("null")) {
+        if (cover != null && !cover.equals("") && !cover.equals("null")) {
             Picasso.with(mActivity.getApplicationContext())
                     .load(cover)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
                     .tag(mActivity.getApplicationContext())
                     .into(holder.coverImg);
-        }else {
+        } else {
             holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
         }
 
@@ -93,7 +92,7 @@ public class SelectMyWorksAdpater extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolder{
+    class ViewHolder {
 
         RelativeLayout rContributionstatus;
 

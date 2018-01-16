@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:fitsSystemWindows="false">
 
@@ -16,8 +17,10 @@
         android:listSelector="@android:color/transparent"
         android:numColumns="auto_fit"
         android:paddingTop="84dp"
+        android:paddingBottom="72dp"
         android:scrollbars="none"
         android:columnWidth="114dp"
+        tools:listitem="@layout/list_item_2_0_0_contribute"
          />
 
     <RelativeLayout
@@ -71,5 +74,25 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+
+
+        <TextView
+            android:id="@+id/tvCreate"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/pinpinbox_2_0_0_button_create_new_album" />
+
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

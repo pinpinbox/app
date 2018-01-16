@@ -59,6 +59,7 @@ public class ProtocolKey {
     public static String count_photo = "count_photo";
     public static String cover_hex = "cover_hex";
     public static String colorhex = "colorhex";
+    public static String contribution = "contribution";
 
 
     //d

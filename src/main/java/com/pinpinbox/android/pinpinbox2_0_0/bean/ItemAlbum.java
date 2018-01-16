@@ -17,9 +17,6 @@ public class ItemAlbum {
     private String difftime;
     private String cover_hex;
 
-//    private String act;
-//    private String template_id;
-//    private String identity;
 
     private int messageboard;
     private int likes;
@@ -36,9 +33,6 @@ public class ItemAlbum {
     public static final int LANDSCAPE = 2; //橫
 
 
-//    private int zipped;
-//    private int cooperation_count;//共用數
-
     private boolean is_likes;
     private boolean own; //是否擁有
     private boolean exchange; //是否有兌換券類相片
@@ -47,18 +41,10 @@ public class ItemAlbum {
     private boolean video; //是否有影片類相片
     private boolean audio; //是否有影音類相片
     private boolean audio_loop; //相本音訊循環
-//    private boolean detail_is_open; //作品設定選項是否開啟
 
-
-    public boolean isFocuse() {
-        return isFocuse;
-    }
-
-    public void setFocuse(boolean focuse) {
-        isFocuse = focuse;
-    }
-
+    private boolean contributionstatus;
     private boolean isFocuse = false;
+//    private boolean detail_is_open; //作品設定選項是否開啟
 
 
     /*活動類*/
@@ -75,54 +61,23 @@ public class ItemAlbum {
     private String user_name; //作者名稱
     private String user_picture;
 
-//    public boolean isDetail_is_open() {
-//        return detail_is_open;
-//    }
-//
-//    public void setDetail_is_open(boolean detail_is_open) {
-//        this.detail_is_open = detail_is_open;
-//    }
 
-//    public int getCooperation_count() {
-//        return cooperation_count;
-//    }
-//
-//    public void setCooperation_count(int cooperation_count) {
-//        this.cooperation_count = cooperation_count;
-//    }
+    public boolean isContributionstatus() {
+        return contributionstatus;
+    }
 
+    public void setContributionstatus(boolean contributionstatus) {
+        this.contributionstatus = contributionstatus;
+    }
 
-//    public String getAct() {
-//        return act;
-//    }
-//
-//    public void setAct(String act) {
-//        this.act = act;
-//    }
-//
-//    public String getTemplate_id() {
-//        return template_id;
-//    }
-//
-//    public void setTemplate_id(String template_id) {
-//        this.template_id = template_id;
-//    }
-//
-//    public String getIdentity() {
-//        return identity;
-//    }
-//
-//    public void setIdentity(String identity) {
-//        this.identity = identity;
-//    }
-//
-//    public int getZipped() {
-//        return zipped;
-//    }
-//
-//    public void setZipped(int zipped) {
-//        this.zipped = zipped;
-//    }
+    public boolean isFocuse() {
+        return isFocuse;
+    }
+
+    public void setFocuse(boolean focuse) {
+        isFocuse = focuse;
+    }
+
 
     public int getImage_orientation() {
         return image_orientation;

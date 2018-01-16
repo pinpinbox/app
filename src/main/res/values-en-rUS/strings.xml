@@ -82,7 +82,8 @@
     <string name="pinpinbox_2_0_0_button_change">Change</string>
     <string name="pinpinbox_2_0_0_button_all">All</string>
     <string name="pinpinbox_2_0_0_button_message">Message</string>
-
+    <string name="pinpinbox_2_0_0_button_create_new_album">Create new work</string>
+    <string name="pinpinbox_2_0_0_button_contribute_or_cancel">Submit/Cancel</string>
 
     <string name="pinpinbox_2_0_0_event_info">Details</string>
     <string name="pinpinbox_2_0_0_event_contributors">Submit</string>
@@ -188,8 +189,10 @@
     <string name="pinpinbox_2_0_0_dialog_message_delete_photo">Delete this photo?</string>
     <string name="pinpinbox_2_0_0_dialog_message_warning_to_logout">Warning!This action will be log out and turn on the scan.</string>
     <string name="pinpinbox_2_0_0_dialog_message_stop_to_upload">It\'s uploading, do you want to stop it?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_cancel_submission_go_to_events_page">If you want to cancel this submission, please go to the events page.</string>
 
 
+    <string name="pinpinbox_2_0_0_toast_message_contribute_is_max">You have reached maximum submission</string>
     <string name="pinpinbox_2_0_0_toast_message_audio_error">Audio error</string>
     <string name="pinpinbox_2_0_0_toast_message_register_success">Register done</string>
     <string name="pinpinbox_2_0_0_toast_message_send_report_success">Report done</string>
@@ -276,10 +279,6 @@
     <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_selected">Original size has been selected</string>
     <string name="pinpinbox_2_0_0_toast_message_crop_error">Crop error</string>
     <string name="pinpinbox_2_0_0_toast_message_board_is_close">The creator\'s message board is closed</string>
-
-
-
-
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
     <string name="pinpinbox_2_0_0_size_original">Original(Long time)</string>
@@ -519,7 +518,6 @@
     <string name="pinpinbox_2_0_0_other_text_to_works_manager">To works manager</string>
     <string name="pinpinbox_2_0_0_other_text_i_know">I got it!</string>
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;likes</string>
-
     <string name="pinpinbox_2_0_0_other_text_popularity">Popularity:</string>
 
 

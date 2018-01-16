@@ -636,21 +636,39 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         if (isNewCreate) {
 
-            if (isContribute) {
+//            if (isContribute) {
+//
+//                final DialogV2Custom d = new DialogV2Custom(mActivity);
+//                d.setStyle(DialogStyleClass.CHECK);
+//                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_directions_works_contribute_by_read_album);
+//                d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_cancel);
+//                d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_submit);
+//                d.setCheckExecute(new CheckExecute() {
+//                    @Override
+//                    public void DoCheck() {
+//                        doSendContribute();
+//                    }
+//                });
+//                d.show();
+//
+//                d.getTvLeftOrTop().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        d.dismiss();
+//                        toMyCollect();
+//                    }
+//                });
+//
+//            } else {
+//                toMyCollect();
+//            }
 
+            if(isContribute){
                 final DialogV2Custom d = new DialogV2Custom(mActivity);
                 d.setStyle(DialogStyleClass.CHECK);
-                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_directions_works_contribute_by_read_album);
-                d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_cancel);
-                d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_submit);
-                d.setCheckExecute(new CheckExecute() {
-                    @Override
-                    public void DoCheck() {
-                        doSendContribute();
-                    }
-                });
-                d.show();
-
+                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_cancel_submission_go_to_events_page);
+                d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_button_exit);
+                d.getTvRightOrBottom().setVisibility(View.GONE);
                 d.getTvLeftOrTop().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -658,10 +676,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         toMyCollect();
                     }
                 });
-
-            } else {
+                d.show();
+            }else {
                 toMyCollect();
             }
+
 
 
         } else {
