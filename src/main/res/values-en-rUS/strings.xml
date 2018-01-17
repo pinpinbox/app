@@ -519,6 +519,7 @@
     <string name="pinpinbox_2_0_0_other_text_i_know">I got it!</string>
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;likes</string>
     <string name="pinpinbox_2_0_0_other_text_popularity">Popularity:</string>
+    <string name="pinpinbox_2_0_0_other_text_cancel_contribute">Cancel</string>
 
 
     <string name="crop__saving">相片儲存中</string>

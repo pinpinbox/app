@@ -498,7 +498,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         System.gc();
 
-
     }
 
 

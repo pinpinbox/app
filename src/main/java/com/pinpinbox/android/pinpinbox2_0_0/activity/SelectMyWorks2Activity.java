@@ -733,6 +733,9 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
         cancelTask(sendContributeTask);
         sendContributeTask = null;
 
+        cancelTask(fastCreateTask);
+        fastCreateTask = null;
+
         Recycle.IMG(backImg);
 
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);

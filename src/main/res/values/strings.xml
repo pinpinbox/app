@@ -527,6 +527,7 @@
     <string name="pinpinbox_2_0_0_other_text_i_know">我知道了!</string>
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;次讚</string>
     <string name="pinpinbox_2_0_0_other_text_popularity">人氣:</string>
+    <string name="pinpinbox_2_0_0_other_text_cancel_contribute">取消投稿</string>
 
 
     <string name="crop__saving">相片儲存中</string>
