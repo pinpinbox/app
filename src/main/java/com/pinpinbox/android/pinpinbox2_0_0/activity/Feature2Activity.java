@@ -128,7 +128,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-
     private void init() {
 
         mActivity = this;
@@ -149,7 +148,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         tvAll.setOnClickListener(this);
 
     }
-
 
     private void doGetFeature() {
 
@@ -258,7 +256,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-
     private List<ItemAlbum> getAlbumList(JSONArray jsonArrayAlbum) {
 
         List<ItemAlbum> itemAlbumList = new ArrayList<>();
@@ -306,7 +303,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         return itemAlbumList;
     }
-
 
     private void setUserList(List<ItemUser> cgaUserList) {
 
@@ -400,7 +396,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-
     private void addUsers(List<ItemUser> cgaUserList, int position) {
 
         RoundCornerImageView userImg = (RoundCornerImageView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_category_user, null);
@@ -455,7 +450,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
 
     }
-
 
     private void back() {
         finish();

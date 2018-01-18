@@ -119,7 +119,8 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         vFloatToolBar.setTag(true);
 
 
-        defaultColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_first_main, null);
+//        defaultColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_first_main, null);
+        defaultColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_action_bar_color, null);
         actionColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_action_bar_color, null);
 
         gDrawable = (GradientDrawable) vScaleView.getBackground();
@@ -165,13 +166,14 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
             if (!(boolean) vFloatToolBar.getTag()) {
 
-                ViewPropertyAnimator alphaTo0 = vScaleView.animate();
-                alphaTo0.setDuration(200)
+                ViewPropertyAnimator scaleToMatch = vScaleView.animate();
+                scaleToMatch.setDuration(200)
                         .scaleX(ScaleSize)
+                        .translationZ(0f)
                         .start();
                 vFloatToolBar.setTag(true);
 
-                colorAnimationToAction.start();
+//                colorAnimationToAction.start();
             }
 
         } else {
@@ -182,11 +184,12 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
                 ViewPropertyAnimator scaleTo1 = vScaleView.animate();
                 scaleTo1.setDuration(200)
                         .scaleX(1.0f)
+                        .translationZ(32f)
                         .start();
 
                 vFloatToolBar.setTag(false);
 
-                colorAnimationToDefault.start();
+//                colorAnimationToDefault.start();
 
 
             }
