@@ -973,7 +973,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         moreDataTask.execute();
     }
 
-    private void doAtten() {
+    private void doFollow() {
         if (!HttpUtility.isConnect(mActivity)) {
             setNoConnect();
             return;
@@ -1002,7 +1002,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         break;
 
                     case DoingTypeClass.DoChangeFollow:
-                        doAtten();
+                        doFollow();
                         break;
                 }
             }
@@ -1345,7 +1345,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         for (int i = 0; i < activityList.size(); i++) {
                             if (activityList.get(i).getClass().getSimpleName().equals(SponsorList2Activity.class.getSimpleName())) {
                                 ((SponsorList2Activity) activityList.get(i)).changeUserFollow();
-
                                 break;
                             }
                         }
@@ -1573,7 +1572,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 
                 if (!itemUser.isFollow()) {
-                    doAtten();
+                    doFollow();
                 } else {
 
                     if (intChangeFollowItem != -1) {
@@ -1584,12 +1583,12 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         d.setCheckExecute(new CheckExecute() {
                             @Override
                             public void DoCheck() {
-                                doAtten();
+                                doFollow();
                             }
                         });
                         d.show();
                     } else {
-                        doAtten();
+                        doFollow();
                     }
                 }
 
