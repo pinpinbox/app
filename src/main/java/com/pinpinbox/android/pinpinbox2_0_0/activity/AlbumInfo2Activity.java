@@ -122,7 +122,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private ImageView backImg, messageImg, likeImg, moreImg;
     private ImageView signalVideoImg, signalSlotImg, signalAudioImg;
     private RoundCornerImageView userImg;
-    private View vGradient;
+//    private View vGradient;
 
     private ArrayList<HashMap<String, Object>> reportList;
     private List<String> strReportList;
@@ -1150,6 +1150,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                             strEventUrl = ej.getString("url");
                             bVotestatus = ej.getBoolean("votestatus");
 
+
                          /*eventjoin  票數 有活動再接即可*/
                             String eventjoin = object.getString("eventjoin");
                             JSONObject ejj = new JSONObject(eventjoin);
@@ -1776,7 +1777,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         }
     }
-
 
     private class FirstCollectAlbumTask extends AsyncTask<Void, Void, Object> {
 

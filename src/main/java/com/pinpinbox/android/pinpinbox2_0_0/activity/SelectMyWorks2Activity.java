@@ -140,8 +140,8 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
                             .load(cover)
                             .config(Bitmap.Config.RGB_565)
                             .error(R.drawable.bg_2_0_0_no_image)
-                            .centerInside()
-                            .resize(112, 168)
+                            .fit()
+                            .centerCrop()
                             .tag(mActivity.getApplicationContext())
                             .into(d.getCoverImg());
                 } else {
@@ -721,7 +721,15 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
 
         cleanCache();
 
+
+
         super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
     }
 
     @Override

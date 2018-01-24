@@ -22,13 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.DirClass;
@@ -42,6 +37,13 @@ import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBarCodeAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.HashMapKeyControl;
@@ -53,11 +55,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.UserGradeKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBarCodeAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMyUpLoad2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch2;
@@ -65,6 +64,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightEndedListe
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightStartedListener;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol96;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol97;
@@ -188,7 +188,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 //                        new Handler().postDelayed(new Runnable() {
 //                            @Override
 //                            public void run() {
-                                actImg.setClickable(true);
+                        actImg.setClickable(true);
 //                            }
 //                        }, 300);
 
@@ -793,17 +793,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                             doSendContribute();
 
-//                            Bundle bundle = new Bundle();
-//                            bundle.putString(Key.album_id, album_id);
-//                            bundle.putString(Key.event_id, event_id);
-//                            bundle.putBoolean(Key.isNewCreate, isNewCreate);
-//                            bundle.putBoolean(Key.isContribute, isContribute);
-//
-//                            Intent intent = new Intent(mActivity, Reader2Activity.class);
-//                            intent.putExtras(bundle);
-//                            startActivity(intent);
-//                            finish();
-//                            ActivityAnim.StartAnim(mActivity);
 
                         } else {
 
@@ -1646,7 +1635,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             if (p73Result.equals("1")) {
 
 
-
                 if (contributionstatus) {
 
                     PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_contribute_success);
@@ -1656,27 +1644,48 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                 }
 
+                //移至closeCreation() 這裡再check一次
                 List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
                 for (int i = 0; i < activityList.size(); i++) {
 
                     String strClassName = activityList.get(i).getClass().getSimpleName();
                     if (strClassName.equals(Event2Activity.class.getSimpleName()) || strClassName.equals(SelectMyWorks2Activity.class.getSimpleName())) {
+
+                        MyLog.Set("e", this.getClass(), "remove => " + strClassName);
+
                         activityList.get(i).finish();
                     }
                 }
 
+//                startLoading();
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, album_id);
-                bundle.putString(Key.event_id, event_id);
-                bundle.putBoolean(Key.isNewCreate, isNewCreate);
-                bundle.putBoolean(Key.isContribute, isContribute);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                       runOnUiThread(new Runnable() {
+//                           @Override
+//                           public void run() {
 
-                Intent intent = new Intent(mActivity, Reader2Activity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-                ActivityAnim.StartAnim(mActivity);
+//                               dissmissLoading();
+
+                               Bundle bundle = new Bundle();
+                               bundle.putString(Key.album_id, album_id);
+                               bundle.putString(Key.event_id, event_id);
+                               bundle.putBoolean(Key.isNewCreate, isNewCreate);
+                               bundle.putBoolean(Key.isContribute, isContribute);
+
+                               Intent intent = new Intent(mActivity, Reader2Activity.class);
+                               intent.putExtras(bundle);
+                               startActivity(intent);
+                               finish();
+                               ActivityAnim.StartAnim(mActivity);
+
+
+//                           }
+//                       });
+//                    }
+//                },750);
+
 
 
 
@@ -1689,25 +1698,57 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             } else {
                 DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
             }
-
         }
+
+
+
+
+
+
+//        private void checkClose(){
+//
+//            List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
+//
+//            Activity acE = null, acS = null;
+//
+//            for (int i = 0; i < activityList.size(); i++) {
+//
+//                String strClassName = activityList.get(i).getClass().getSimpleName();
+//
+//                if (strClassName.equals(Event2Activity.class.getSimpleName())){
+//                    acE = activityList.get(i);
+//                }
+//
+//                if (strClassName.equals(SelectMyWorks2Activity.class.getSimpleName())){
+//                    acS = activityList.get(i);
+//                }
+//
+//                if(acE==null && acS ==null){
+//
+//
+//                    break;
+//                }
+//
+//            }
+//
+//        }
+
     }
 
     private void closeCreation() {
 
         List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-        Activity ac = null;
+
         for (int i = 0; i < activityList.size(); i++) {
-            if (activityList.get(i).getClass().getSimpleName().equals(Creation2Activity.class.getSimpleName())) {
 
-                ac = activityList.get(i);
+            String strClassName = activityList.get(i).getClass().getSimpleName();
 
-                //20171113
-                activityList.remove(i);
+            if (strClassName.equals(Creation2Activity.class.getSimpleName())
+                    || strClassName.equals(Event2Activity.class.getSimpleName()) || strClassName.equals(SelectMyWorks2Activity.class.getSimpleName())
+                    ) {
 
+                activityList.get(i).finish();
 
-                ac.finish();
-                break;
             }
         }
     }
@@ -1785,7 +1826,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        if (ClickUtils.ButtonContinuousClick()) {
+        if (ClickUtils.ButtonContinuousClick_1s()) {
             return;
         }
 
@@ -1826,16 +1867,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                 doCheckPhotoCount();
 
-
-//                isModify = true;
-//
-//                if (strAct.equals("close")) {
-//                    strAct = "open";
-//                } else if (strAct.equals("open")) {
-//                    strAct = "close";
-//                }
-//
-//                changeActType();
 
                 break;
 
