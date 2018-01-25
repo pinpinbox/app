@@ -223,12 +223,12 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 //            return;
 //        }
 
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             svHorizontal.setVisibility(View.VISIBLE);
-        }else if(BuildConfig.FLAVOR.equals("www_private")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
             svHorizontal.setVisibility(View.INVISIBLE);
             return;
-        }else if(BuildConfig.FLAVOR.equals("www_public")){
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
             svHorizontal.setVisibility(View.INVISIBLE);
             return;
         }
@@ -2425,10 +2425,10 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
             if (strJson != null && !strJson.equals("")) {
                 try {
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p07Result = JsonUtility.GetInt(jsonObject, Key.result);
+                    p07Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
 
                     if (p07Result == 0) {
-                        p07Message = JsonUtility.GetString(jsonObject, Key.message);
+                        p07Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                     }
 
                 } catch (Exception e) {
@@ -2650,6 +2650,16 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {  //从gps获取经纬度
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location != null) {
                 latitude = location.getLatitude();
@@ -2673,6 +2683,16 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 //        double latitude = 0.0;
 //        double longitude = 0.0;
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener);
         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if (location != null) {

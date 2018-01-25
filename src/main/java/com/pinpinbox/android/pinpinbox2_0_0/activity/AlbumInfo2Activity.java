@@ -68,6 +68,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.TouchRange.TouchRange;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
@@ -414,8 +415,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         (findViewById(R.id.linLikeCount)).setOnClickListener(this);
         backImg.setOnClickListener(this);
-        tvVote.setOnClickListener(this);
-
 
     }
 
@@ -499,9 +498,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             String shareUrl = "";
 
             if (event.equals("") || event == null || event.equals("null")) {
-                shareUrl =UrlClass.shareAlbumUrl + album_id + "&autoplay=1";
-            }else {
-                shareUrl =UrlClass.shareAlbumUrl + album_id;
+                shareUrl = UrlClass.shareAlbumUrl + album_id + "&autoplay=1";
+            } else {
+                shareUrl = UrlClass.shareAlbumUrl + album_id;
             }
 
 
@@ -638,7 +637,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         if (event.equals("") || event == null || event.equals("null")) {
             intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id + "&autoplay=1");
-        }else {
+        } else {
             intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id);
         }
 
@@ -1315,10 +1314,10 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                       /*活動名稱*/
                     tvEvent.setText(strEventName);
 
-                    if(bVotestatus){
+                    if (bVotestatus) {
                         tvVote.setText(R.string.pinpinbox_2_0_0_other_text_voted);
                         tvVote.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                    }else {
+                    } else {
                         tvVote.setText(R.string.pinpinbox_2_0_0_button_voting_for_this_work);
                         tvVote.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
                     }
@@ -1329,6 +1328,17 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         linEvent.setVisibility(View.GONE);
 
                     }
+
+
+                    TouchRange.let(tvVote)
+                            // easy to use, like css padding
+                            .bounds()//default value is 14dp
+//                            .bounds(24.0f) //left,top,right,bottom=24dp
+//                .bounds(24.0f,30.0f) //left,right=24dp top,bottom=30dp
+//                .bounds(24.0f,30.0f,24.0f) //left=24dp,top=30dp,right=24dp,bottom=0dp
+//                .bounds(24.0f, 30.0f, 24.0f, 30.0f) //left=24dp,top=30dp,right=24dp,bottom=30dp
+                            .change();
+
 
                 }
 
@@ -1415,6 +1425,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 messageImg.setOnClickListener(AlbumInfo2Activity.this);
                 likeImg.setOnClickListener(AlbumInfo2Activity.this);
                 moreImg.setOnClickListener(AlbumInfo2Activity.this);
+                tvVote.setOnClickListener(AlbumInfo2Activity.this);
 
 
             } else if (p08Result == 0) {
@@ -2371,10 +2382,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             case R.id.tvVote:
 
 
-
-                if(bVotestatus){
+                if (bVotestatus) {
                     PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_other_text_voted);
-                }else {
+                } else {
 
 
                     DialogV2Custom d = new DialogV2Custom(mActivity);
@@ -2736,10 +2746,10 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     @Override
                     public void Success(String vote_left) {
 
-                       bVotestatus = true;
+                        bVotestatus = true;
 
-                       tvVote.setText(R.string.pinpinbox_2_0_0_other_text_voted);
-                       tvVote.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                        tvVote.setText(R.string.pinpinbox_2_0_0_other_text_voted);
+                        tvVote.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
                     }
 

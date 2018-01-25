@@ -24,12 +24,7 @@ import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
-import com.pinpinbox.android.Activity.ReadAlbum.ReadAlbumActivity;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.DirClass;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
@@ -49,6 +44,10 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCollectAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -95,7 +94,7 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
     private DeleteAlbumTask deleteAlbumTask;
     private CheckShareTask checkShareTask;
     private ShareTask shareTask;
-    private ToAlbumTask toAlbumTask;
+//    private ToAlbumTask toAlbumTask;
 
     public ArrayList<HashMap<String, Object>> p17arraylist;
 
@@ -685,7 +684,6 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
         shareTask.execute();
     }
 
-
     private class GetAlbumTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -1231,108 +1229,6 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
         }
     }
 
-    private class ToAlbumTask extends AsyncTask<Void, Void, Object> {
-
-        private String p68Result, p68Message;
-        private String sdpath = Environment.getExternalStorageDirectory() + "/";
-        private String myDir = "PinPinBox" + id + "/";
-        private String dirAlbumList = "albumlist/";
-
-        private int mPosition;
-
-        private long lastmodifytime;//最後修改時間
-
-        private long downloadtime;//下載時間
-
-        public ToAlbumTask(int position) {
-            this.mPosition = position;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loading.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            String album_id = (String) p17arraylist.get(mPosition).get("album_id");
-
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P68_CheckAlbumZip, SetMapByProtocol.setParam68_checkalbumofdiy(id, token, album_id), null);
-                MyLog.Set("d", getClass(), "p68strJson => " + strJson);
-            } catch (SocketTimeoutException timeout) {
-                p68Result = Key.timeout;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p68Result = JsonUtility.GetString(jsonObject, Key.result);
-                    if (p68Result.equals("1")) {
-                        String data = JsonUtility.GetString(jsonObject, "data");
-                        JSONObject object = new JSONObject(data);
-                        lastmodifytime = object.getLong("modifytime");
-                        downloadtime = getdata.getLong(album_id + "_modified_time", 0);
-
-                        MyLog.Set("d", getClass(), "lastmodifytime => " + lastmodifytime);
-                        MyLog.Set("d", getClass(), "downloadtime => " + downloadtime);
-                    } else if (p68Result.equals("0")) {
-                        p68Message = JsonUtility.GetString(jsonObject, Key.message);
-                    } else {
-                        p68Result = "";
-                    }
-                } catch (Exception e) {
-                    p68Result = "";
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            loading.dismiss();
-            if (p68Result.equals("1")) {
-                if (lastmodifytime != downloadtime) {
-                    File file = new File(sdpath + myDir + dirAlbumList + (String) p17arraylist.get(mPosition).get("album_id"));
-                    if (file.exists()) {
-                        FileUtility.delAllFile(sdpath + myDir + dirAlbumList + (String) p17arraylist.get(mPosition).get("album_id"));
-                        FileUtility.delFolder(sdpath + myDir + dirAlbumList + (String) p17arraylist.get(mPosition).get("album_id"));
-                        MyLog.Set("d", FragmentOther2.class, "in client album delete");
-                    }
-                }
-
-                /**儲存封面*/
-                String album_id = (String) p17arraylist.get(mPosition).get("album_id");
-                String cover = (String) p17arraylist.get(mPosition).get("albumcover");
-                getdata.edit().putString("album_" + album_id + "_" + "cover", cover).commit();
-
-                Intent intent = new Intent(getActivity(), ReadAlbumActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("album_id", album_id);
-                bundle.putBoolean("buy", false);
-                intent.putExtras(bundle);
-                getActivity().startActivity(intent);
-                ActivityAnim.StartAnim(getActivity());
-
-            } else if (p68Result.equals("0")) {
-                DialogV2Custom.BuildError(getActivity(), p68Message);
-            } else if (p68Result.equals(Key.timeout)) {
-                connectInstability();
-            } else {
-                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-            }
-
-
-        }
-
-    }
 
     public void changeDownloadType(int position, int doingType){
 

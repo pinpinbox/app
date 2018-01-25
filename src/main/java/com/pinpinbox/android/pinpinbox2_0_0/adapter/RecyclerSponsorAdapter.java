@@ -77,7 +77,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
 
         TouchRange.let( mHolder.tvFollow,  mHolder.tvMessage)
                 // easy to use, like css padding
-                .bounds()//default value is 14dp
+                .bounds()//default value is 8dp
 //                .bounds(24.0f) //left,top,right,bottom=24dp
 //                .bounds(24.0f,30.0f) //left,right=24dp top,bottom=30dp
 //                .bounds(24.0f,30.0f,24.0f) //left=24dp,top=30dp,right=24dp,bottom=0dp

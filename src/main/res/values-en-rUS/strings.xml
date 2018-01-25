@@ -121,7 +121,7 @@
     <string name="pinpinbox_2_0_0_dialog_setting">Settings</string>
     <string name="pinpinbox_2_0_0_dialog_go_buy_point">Buy point</string>
     <string name="pinpinbox_2_0_0_dialog_be_later">Skip</string>
-    <string name="pinpinbox_2_0_0_dialog_close_pinpinbox">Close pinpinbox</string>
+    <string name="pinpinbox_2_0_0_dialog_close_pinpinbox">Close app</string>
     <string name="pinpinbox_2_0_0_dialog_i_know">OK</string>
     <string name="pinpinbox_2_0_0_dialog_confirm_to_change_audio_mode">Change</string>
     <string name="pinpinbox_2_0_0_dialog_exit_last_schedule">Exit</string>

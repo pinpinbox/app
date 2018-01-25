@@ -124,7 +124,7 @@
     <string name="pinpinbox_2_0_0_dialog_setting">設定</string>
     <string name="pinpinbox_2_0_0_dialog_go_buy_point">前往購點</string>
     <string name="pinpinbox_2_0_0_dialog_be_later">稍後再說</string>
-    <string name="pinpinbox_2_0_0_dialog_close_pinpinbox">關閉pinpinbox</string>
+    <string name="pinpinbox_2_0_0_dialog_close_pinpinbox">關閉app</string>
     <string name="pinpinbox_2_0_0_dialog_i_know">我知道了</string>
     <string name="pinpinbox_2_0_0_dialog_confirm_to_change_audio_mode">確定切換</string>
     <string name="pinpinbox_2_0_0_dialog_exit_last_schedule">退出\n先前進度</string>

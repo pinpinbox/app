@@ -3,12 +3,10 @@ package com.pinpinbox.android.pinpinbox2_0_0.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,8 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.Utility.DensityUtility;
@@ -26,13 +22,11 @@ import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.OffLine2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.List;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
@@ -348,7 +342,9 @@ public class DialogV2Custom {
 
         tvLeftOrTop.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
         tvLeftOrTop.setBackgroundResource(R.drawable.click_2_0_0_default);
-        if (PPBApplication.getInstance().getId().equals("")) {
+
+
+//        if (PPBApplication.getInstance().getId().equals("")) {
 
 
             tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);
@@ -361,39 +357,36 @@ public class DialogV2Custom {
                 }
             });
 
-        } else {
-
-
-            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_offline_read);
-            tvLeftOrTop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    PPBApplication.getInstance().getData().edit().putBoolean(Key.clickOffLine, true).apply();
-
-                    dismiss();
-
-                    List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-                    for (int i = 0; i < activityList.size(); i++) {
-                        if (i == activityList.size() - 1) {
-
-                            Bundle bundle = new Bundle();
-                            bundle.putBoolean(Key.exitAPP, true);
-                            Intent intent = new Intent(mActivity, OffLine2Activity.class);
-                            intent.putExtras(bundle);
-                            mActivity.startActivity(intent);
-                            mActivity.finish();
-                            break;
-                        } else {
-                            activityList.get(i).finish();
-                        }
-                    }
-
-                }
-            });
-
-
-        }
+//        } else {
+//
+//
+//            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_offline_read);
+//            tvLeftOrTop.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                    PPBApplication.getInstance().getData().edit().putBoolean(Key.clickOffLine, true).apply();
+//
+//                    dismiss();
+//
+//                    List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
+//                    for (int i = 0; i < activityList.size(); i++) {
+//                        if (i == activityList.size() - 1) {
+//
+//                            Bundle bundle = new Bundle();
+//                            bundle.putBoolean(Key.exitAPP, true);
+//                            Intent intent = new Intent(mActivity, OffLine2Activity.class);
+//                            intent.putExtras(bundle);
+//                            mActivity.startActivity(intent);
+//                            mActivity.finish();
+//                            break;
+//                        } else {
+//                            activityList.get(i).finish();
+//                        }
+//                    }
+//                }
+//            });
+//        }
 
 
     }
@@ -476,46 +469,47 @@ public class DialogV2Custom {
         tvRightOrBottom.setBackgroundResource(R.drawable.click_2_0_0_default);
 
 
-        if (PPBApplication.getInstance().getId().equals("")) {
+//        if (PPBApplication.getInstance().getId().equals("")) {
+
             tvRightOrBottom.setVisibility(View.GONE);
 
             tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);//單行
 
-        } else {
-            ViewControl.setMargins(tvLeftOrTop, 0, 0, DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0);
-            ViewControl.setMargins(tvRightOrBottom, DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0, 0, 0);
-
-            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);//2行
-
-        }
+//        } else {
+//            ViewControl.setMargins(tvLeftOrTop, 0, 0, DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0);
+//            ViewControl.setMargins(tvRightOrBottom, DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0, 0, 0);
+//
+//            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);//2行
+//
+//        }
 
 
         tvLeftOrTop.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
         tvLeftOrTop.setBackgroundResource(R.drawable.click_2_0_0_default);
 
-        tvRightOrBottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                PPBApplication.getInstance().getData().edit().putBoolean(Key.clickOffLine, true).apply();
-
-
-                dismiss();
-
-                Bundle bundle = new Bundle();
-                bundle.putBoolean(Key.exitAPP, true);
-
-                Intent intent = new Intent(mActivity, OffLine2Activity.class);
-                intent.putExtras(bundle);
-                mActivity.startActivity(intent);
-                mActivity.finish();
-
+//        tvRightOrBottom.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                PPBApplication.getInstance().getData().edit().putBoolean(Key.clickOffLine, true).apply();
+//
+//
 //                dismiss();
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putBoolean(Key.exitAPP, true);
+//
+//                Intent intent = new Intent(mActivity, OffLine2Activity.class);
+//                intent.putExtras(bundle);
+//                mActivity.startActivity(intent);
 //                mActivity.finish();
-//                SystemUtility.SysApplication.getInstance().exit();
-
-            }
-        });
+//
+////                dismiss();
+////                mActivity.finish();
+////                SystemUtility.SysApplication.getInstance().exit();
+//
+//            }
+//        });
 
         tvLeftOrTop.setOnClickListener(new View.OnClickListener() {
             @Override
