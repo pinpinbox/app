@@ -144,6 +144,10 @@ public class ProtocolKey {
     public static String pinterest = "pinterest";
     public static String pinpinboard = "pinpinboard";
     public static String popularity = "popularity";
+    public static String photousefor = "photousefor";
+    public static String photousefor_user = "photousefor_user";
+    public static String photousefor_id = "photousefor_id";
+    public static String photousefor_user_id = "photousefor_user_id";
 
     public static String photo = "photo";
     public static String photo_audio_loop = "audio_loop";
@@ -159,6 +163,7 @@ public class ProtocolKey {
     public static String photo_video_target = "video_target";
     public static String photo_image_url = "image_url";
     public static String photo_image_url_thumbnail = "image_url_thumbnail";
+
 
 
     //q

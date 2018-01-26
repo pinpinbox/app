@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -48,13 +49,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
+import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.StringClass.TaskKeyClass;
 import com.pinpinbox.android.StringClass.UrlClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
@@ -71,7 +70,11 @@ import com.pinpinbox.android.Views.PinchImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.PhotoPageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerReaderAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
@@ -89,6 +92,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol42;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
@@ -636,7 +640,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         if (isNewCreate) {
 
-            if(isContribute){
+            if (isContribute) {
                 final DialogV2Custom d = new DialogV2Custom(mActivity);
                 d.setStyle(DialogStyleClass.CHECK);
                 d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_cancel_submission_go_to_events_page);
@@ -650,10 +654,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     }
                 });
                 d.show();
-            }else {
+            } else {
                 toMyCollect();
             }
-
 
 
         } else {
@@ -732,25 +735,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 }
                             });
 
-
-//                    adapter.getPicasso().build()
-//                            .load(url)
-//                            .config(Bitmap.Config.RGB_565)
-//                            .error(R.drawable.bg_2_0_0_no_image)
-//                            .tag(mActivity.getApplicationContext())
-//                            .into(picImg, new Callback() {
-//                                @Override
-//                                public void onSuccess() {
-//                                    refreshImg.setVisibility(View.GONE);
-//                                }
-//
-//                                @Override
-//                                public void onError() {
-//                                    MyLog.Set("d", Reader2Activity.class, "new Callback => onError");
-//                                    refreshImg.setVisibility(View.VISIBLE);
-//                                }
-//                            });
-
                 } else {
 
                     PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_photo_does_not_exist);
@@ -802,7 +786,68 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     if (!itemAlbum.isOwn()) {
                         isNoOwnShowCollectType(v, vType);
                     } else {
-                        centerImg.setImageResource(R.drawable.ic200_gift_white);
+
+                        vType.setVisibility(View.VISIBLE);
+
+                        findViewById(R.id.rExchange).setVisibility(View.VISIBLE);
+
+                        //依rExchange判斷是否呼叫接口
+
+                        String identifier = getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", "");
+
+                        Protocol42 protocol42 = new Protocol42(
+                                mActivity,
+                                PPBApplication.getInstance().getId(),
+                                PPBApplication.getInstance().getToken(),
+                                photoContentsList.get(position).getPhoto_id() + "",
+                                identifier,
+                                new Protocol42.TaskCallBack() {
+                                    @Override
+                                    public void Prepare() {
+
+                                    }
+
+                                    @Override
+                                    public void Post() {
+
+                                    }
+
+                                    @Override
+                                    public void Success(ItemExchange itemExchange) {
+
+                                        TextUtility.setBold((TextView)v.findViewById(R.id.tvExchangeName),true);
+                                        ((TextView)v.findViewById(R.id.tvExchangeName)).setText(itemExchange.getName());
+                                        ((TextView)v.findViewById(R.id.tvExchangeDescription)).setText(itemExchange.getDescription());
+
+                                        Picasso.with(mActivity.getApplicationContext())
+                                                .load(itemExchange.getImage())
+                                                .config(Bitmap.Config.RGB_565)
+                                                .error(R.drawable.bg_2_0_0_no_image)
+                                                .tag(mActivity.getApplicationContext())
+                                                .into((ImageView)v.findViewById(R.id.exchangeImg));
+
+                                    }
+
+                                    @Override
+                                    public void isAlreadyGet(ItemExchange itemExchange) {
+
+                                    }
+
+                                    @Override
+                                    public void isFinish() {
+
+                                    }
+
+                                    @Override
+                                    public void TimeOut() {
+
+                                    }
+                                }
+                        );
+
+
+
+
                     }
                     break;
 
@@ -3451,6 +3496,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();
@@ -3463,7 +3509,17 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             String bestProvider = mLocManager.getBestProvider(criteria, true);
             Location newLoction = null;
-            if (bestProvider != null)
+//            if (bestProvider != null)
+//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    // TODO: Consider calling
+//                    //    ActivityCompat#requestPermissions
+//                    // here to request the missing permissions, and then overriding
+//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                    //                                          int[] grantResults)
+//                    // to handle the case where the user grants the permission. See the documentation
+//                    // for ActivityCompat#requestPermissions for more details.
+//                    return;
+//                }
                 newLoction = mLocManager.getLastKnownLocation(bestProvider);
 
             if (mLocation == null) {

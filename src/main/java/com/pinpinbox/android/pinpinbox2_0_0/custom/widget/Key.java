@@ -92,6 +92,7 @@ public class Key {
     public static String index = "index";
     public static String imageView = "imageView";
     public static String image_orientation = "image_orientation";
+    public static String identifier = "identifier";
 
 
     //j
@@ -130,6 +131,7 @@ public class Key {
     public static String param = "param";
     public static String picfile = "picfile";
     public static String photo_default_path = "photo_default_path";
+    public static String photo_id = "photo_id";
 
 
     //q
