@@ -166,7 +166,7 @@ public class AppSettings2Activity extends DraggerActivity implements View.OnClic
     @Override
     public void onClick(View view) {
 
-        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+        if (ClickUtils.ButtonContinuousClick()) {
             return;
         }
 

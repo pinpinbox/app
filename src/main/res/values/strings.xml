@@ -82,6 +82,10 @@
     <string name="pinpinbox_2_0_0_button_change">變更</string>
     <string name="pinpinbox_2_0_0_button_all">全部</string>
     <string name="pinpinbox_2_0_0_button_message">留言</string>
+    <string name="pinpinbox_2_0_0_button_create_new_album">建立新作品</string>
+    <string name="pinpinbox_2_0_0_button_contribute_or_cancel">投稿/撤下</string>
+    <string name="pinpinbox_2_0_0_button_voting_for_this_work">投票給此作品</string>
+
 
 
 
@@ -121,7 +125,7 @@
     <string name="pinpinbox_2_0_0_dialog_setting">設定</string>
     <string name="pinpinbox_2_0_0_dialog_go_buy_point">前往購點</string>
     <string name="pinpinbox_2_0_0_dialog_be_later">稍後再說</string>
-    <string name="pinpinbox_2_0_0_dialog_close_pinpinbox">關閉pinpinbox</string>
+    <string name="pinpinbox_2_0_0_dialog_close_pinpinbox">關閉app</string>
     <string name="pinpinbox_2_0_0_dialog_i_know">我知道了</string>
     <string name="pinpinbox_2_0_0_dialog_confirm_to_change_audio_mode">確定切換</string>
     <string name="pinpinbox_2_0_0_dialog_exit_last_schedule">退出\n先前進度</string>
@@ -190,9 +194,10 @@
     <string name="pinpinbox_2_0_0_dialog_message_delete_photo">確定刪除此相片?</string>
     <string name="pinpinbox_2_0_0_dialog_message_warning_to_logout">注意!此動作將會登出，並開啟掃描功能</string>
     <string name="pinpinbox_2_0_0_dialog_message_stop_to_upload">正在上傳圖片，要停止傳送嗎?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_cancel_submission_go_to_events_page">要取消此次投稿，請至活動頁面</string>
 
 
-
+    <string name="pinpinbox_2_0_0_toast_message_contribute_is_max">投稿數量已達上限</string>
     <string name="pinpinbox_2_0_0_toast_message_audio_error">音效播放異常</string>
     <string name="pinpinbox_2_0_0_toast_message_register_success">註冊成功</string>
     <string name="pinpinbox_2_0_0_toast_message_send_report_success">檢舉完成</string>
@@ -524,6 +529,7 @@
     <string name="pinpinbox_2_0_0_other_text_i_know">我知道了!</string>
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;次讚</string>
     <string name="pinpinbox_2_0_0_other_text_popularity">人氣:</string>
+    <string name="pinpinbox_2_0_0_other_text_cancel_contribute">取消投稿</string>
 
 
     <string name="crop__saving">相片儲存中</string>

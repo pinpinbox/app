@@ -1,5 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,17 +21,22 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.util.Size;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -48,13 +55,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
 import com.pinpinbox.android.StringClass.ProtocolsClass;
+import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.StringClass.TaskKeyClass;
 import com.pinpinbox.android.StringClass.UrlClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
@@ -64,6 +69,8 @@ import com.pinpinbox.android.Utility.MapUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView;
+import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.ControlSizeScrollView;
 import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
@@ -71,7 +78,11 @@ import com.pinpinbox.android.Views.PinchImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.PhotoPageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerReaderAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
@@ -81,14 +92,17 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol42;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
@@ -637,20 +651,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         if (isNewCreate) {
 
             if (isContribute) {
-
                 final DialogV2Custom d = new DialogV2Custom(mActivity);
                 d.setStyle(DialogStyleClass.CHECK);
-                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_directions_works_contribute_by_read_album);
-                d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_cancel);
-                d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_submit);
-                d.setCheckExecute(new CheckExecute() {
-                    @Override
-                    public void DoCheck() {
-                        doSendContribute();
-                    }
-                });
-                d.show();
-
+                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_cancel_submission_go_to_events_page);
+                d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_button_exit);
+                d.getTvRightOrBottom().setVisibility(View.GONE);
                 d.getTvLeftOrTop().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -658,7 +663,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         toMyCollect();
                     }
                 });
-
+                d.show();
             } else {
                 toMyCollect();
             }
@@ -705,6 +710,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         final View vType = v.findViewById(R.id.vType);
         final ImageView refreshImg = (ImageView) v.findViewById(R.id.refreshImg);
+        final RelativeLayout rExchange = (RelativeLayout) v.findViewById(R.id.rExchange);
 
         refreshImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -739,25 +745,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                     refreshImg.setVisibility(View.VISIBLE);
                                 }
                             });
-
-
-//                    adapter.getPicasso().build()
-//                            .load(url)
-//                            .config(Bitmap.Config.RGB_565)
-//                            .error(R.drawable.bg_2_0_0_no_image)
-//                            .tag(mActivity.getApplicationContext())
-//                            .into(picImg, new Callback() {
-//                                @Override
-//                                public void onSuccess() {
-//                                    refreshImg.setVisibility(View.GONE);
-//                                }
-//
-//                                @Override
-//                                public void onError() {
-//                                    MyLog.Set("d", Reader2Activity.class, "new Callback => onError");
-//                                    refreshImg.setVisibility(View.VISIBLE);
-//                                }
-//                            });
 
                 } else {
 
@@ -810,7 +797,29 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     if (!itemAlbum.isOwn()) {
                         isNoOwnShowCollectType(v, vType);
                     } else {
-                        centerImg.setImageResource(R.drawable.ic200_gift_white);
+
+//                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) rExchange.getLayoutParams();
+//
+//                        layoutParams.height= SizeUtils.dp2px(64);
+//
+//                        rExchange.setLayoutParams(layoutParams);
+
+                        if (rExchange.getVisibility() == View.VISIBLE) {
+                            MyLog.Set("e", this.getClass(), "rExchange is visibility");
+                            return;
+                        }
+
+                        vType.setVisibility(View.VISIBLE);
+
+
+                        rExchange.setVisibility(View.VISIBLE);
+
+                        //依rExchange判斷是否呼叫接口
+
+                        String identifier = getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", "");
+
+                        doGetExchange(v, position, identifier, rExchange);
+
                     }
                     break;
 
@@ -818,6 +827,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     if (!itemAlbum.isOwn()) {
                         isNoOwnShowCollectType(v, vType);
                     } else {
+
+                        vType.setVisibility(View.VISIBLE);
+
                         centerImg.setImageResource(R.drawable.ic200_gift_white);
                     }
                     break;
@@ -957,6 +969,162 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+
+    private void doGetExchange(final View v, final int position, final String identifier, final RelativeLayout rExchange) {
+
+
+        /*error*/
+        final AVLoadingIndicatorView loading = (AVLoadingIndicatorView) v.findViewById(R.id.vRefreshExchange);
+        final LinearLayout linTimeout = (LinearLayout) v.findViewById(R.id.linTimeout);
+        final TextView tvAgain = (TextView) v.findViewById(R.id.tvAgain);
+
+
+        /*success*/
+        final TextView tvExchangeName = (TextView) v.findViewById(R.id.tvExchangeName);
+        final TextView tvExchangeDescription = (TextView) v.findViewById(R.id.tvExchangeDescription);
+        final TextView tvChange = (TextView) v.findViewById(R.id.tvChange);
+        final RoundCornerImageView exchangeImg = (RoundCornerImageView) v.findViewById(R.id.exchangeImg);
+
+        /*end*/
+        final TextView tvExchangeEnd = (TextView) v.findViewById(R.id.tvExchangeEnd);
+
+
+        final Protocol42 protocol42 = new Protocol42(
+                mActivity,
+                PPBApplication.getInstance().getId(),
+                PPBApplication.getInstance().getToken(),
+                photoContentsList.get(position).getPhoto_id() + "",
+                identifier,
+                new Protocol42.TaskCallBack() {
+
+
+                    @Override
+                    public void Prepare() {
+
+                        rExchange.setVisibility(View.GONE);
+                        rExchange.setAlpha(0f);
+
+                        linTimeout.setVisibility(View.GONE);
+                        linTimeout.setAlpha(0f);
+
+                        loading.smoothToShow();
+
+
+                    }
+
+                    @Override
+                    public void Post() {
+
+                        loading.smoothToHide();
+
+                    }
+
+                    private void showContents(ItemExchange itemExchange) {
+
+                        Picasso.with(mActivity.getApplicationContext())
+                                .load(itemExchange.getImage())
+                                .config(Bitmap.Config.RGB_565)
+                                .error(R.drawable.bg_2_0_0_no_image)
+                                .tag(mActivity.getApplicationContext())
+                                .into(exchangeImg);
+
+                        rExchange.setVisibility(View.VISIBLE);
+
+                        ViewControl.AlphaTo1(rExchange);
+
+                        TextUtility.setBold(tvExchangeName, true);
+                        tvExchangeName.setText(itemExchange.getName());
+
+                        tvExchangeDescription.setText(itemExchange.getDescription());
+
+
+                    }
+
+                    @Override
+                    public void Success(ItemExchange itemExchange) {
+
+
+                        showContents(itemExchange);
+
+                        tvChange.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View vv) {
+                                if (ClickUtils.ButtonContinuousClick_1s()) {
+                                    return;
+                                }
+
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void isAlreadyGet(ItemExchange itemExchange) {
+
+                        showContents(itemExchange);
+                        tvChange.setText("已兌換");
+                        tvChange.setBackground(null);
+                        tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+                    }
+
+                    @Override
+                    public void isEnd() {
+
+
+//                        ValueAnimator va = ValueAnimator.ofInt(SizeUtils.dp2px(384), SizeUtils.dp2px(64));
+//
+//                        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                            @Override
+//                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+//                                //获取当前的height值
+//                                //动态更新view的高度
+//                                rExchange.getLayoutParams().height = (Integer)valueAnimator.getAnimatedValue();
+//                                rExchange.requestLayout();
+//                            }
+//                        });
+//                        va.setDuration(1200);
+//                        //开始动画
+//                        va.start();
+
+                        TextUtility.setBold(tvExchangeEnd, true);
+
+                        tvExchangeEnd.setVisibility(View.VISIBLE);
+                        ViewControl.AlphaTo1(tvExchangeEnd);
+
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+
+
+                        linTimeout.setVisibility(View.VISIBLE);
+                        ViewControl.AlphaTo1(linTimeout);
+
+                        tvAgain.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View vv) {
+                                if (ClickUtils.ButtonContinuousClick_1s()) {
+                                    return;
+                                }
+                                doGetExchange(v, position, identifier, rExchange);
+                            }
+                        });
+
+
+                    }
+                }
+        );
+
+
+    }
+
+    private void doExchange(){
+
+    }
+
     private void setCurrentPoint() {
 
         if (tvCurrentPoint != null) {
@@ -1086,15 +1254,29 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         TextUtility.setBold(tvCollect, true);
 
         if (itemAlbum.getPoint() > 0) {
-            tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_button_sponsor) + itemAlbum.getPoint() + "P");
+
+
+//          tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_button_sponsor) + itemAlbum.getPoint() + "P");
+            tvCollect.setText(R.string.pinpinbox_2_0_0_button_sponsor);
+
         } else {
+
             tvCollect.setText(R.string.pinpinbox_2_0_0_button_collect);
         }
 
         tvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doCollectAlbum();
+
+                if (itemAlbum.getPoint() > 0) {
+
+                    vpReader.setCurrentItem(photoContentsList.size());
+
+                } else {
+                    doCollectAlbum();
+                }
+
+
             }
         });
 
@@ -3268,6 +3450,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
 
+        if (ClickUtils.ButtonContinuousClick()) {
+            return;
+        }
+
+
         switch (view.getId()) {
 
             case R.id.backImg:
@@ -3459,6 +3646,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();
@@ -3471,8 +3659,18 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             String bestProvider = mLocManager.getBestProvider(criteria, true);
             Location newLoction = null;
-            if (bestProvider != null)
-                newLoction = mLocManager.getLastKnownLocation(bestProvider);
+//            if (bestProvider != null)
+//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    // TODO: Consider calling
+//                    //    ActivityCompat#requestPermissions
+//                    // here to request the missing permissions, and then overriding
+//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                    //                                          int[] grantResults)
+//                    // to handle the case where the user grants the permission. See the documentation
+//                    // for ActivityCompat#requestPermissions for more details.
+//                    return;
+//                }
+            newLoction = mLocManager.getLastKnownLocation(bestProvider);
 
             if (mLocation == null) {
                 mLocation = new Location("");

@@ -19,10 +19,12 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
@@ -387,6 +389,16 @@ public class OldMainActivity extends FragmentActivity {
                 criteria.setPowerRequirement(Criteria.POWER_LOW); // 低功耗
 
                 String provider = locationManager.getBestProvider(criteria, true); // 获取GPS信息
+                if (ActivityCompat.checkSelfPermission(mActivity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mActivity, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 Location location = locationManager.getLastKnownLocation(provider); // 通过GPS获取位置
 
 
@@ -624,10 +636,18 @@ public class OldMainActivity extends FragmentActivity {
             }
         });
 
-        Button button21 = (Button) findViewById(R.id.button21);
+        final Button button21 = (Button) findViewById(R.id.button21);
         button21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+                ViewPropertyAnimator aaa = button21.animate();
+                aaa.setDuration(1000)
+                        .translationZ(32f)
+
+                        .start();
 
 
             }

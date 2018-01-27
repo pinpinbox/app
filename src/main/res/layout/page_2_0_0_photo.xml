@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false">
 
 
     <!--<pl.droidsonroids.gif.GifImageView-->
-        <!--android:id="@+id/gifImg"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scaleType="centerInside"-->
-        <!--android:visibility="gone" />-->
-
-
+    <!--android:id="@+id/gifImg"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:scaleType="centerInside"-->
+    <!--android:visibility="gone" />-->
 
 
     <com.pinpinbox.android.Views.PinchImageView
@@ -26,7 +25,7 @@
         android:id="@+id/vType"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.6"
+        android:alpha="0.8"
         android:background="@color/black"
         android:visibility="gone" />
 
@@ -53,6 +52,155 @@
         android:visibility="gone" />
 
 
+    <!--exchange-->
+    <RelativeLayout
+        android:id="@+id/rExchange"
+        android:layout_width="288dp"
+        android:layout_height="384dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/border_2_0_0_white_radius"
+        android:visibility="gone">
+
+
+        <!--contents-->
+        <ScrollView
+            android:id="@+id/svExchange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fadingEdgeLength="8dp"
+            android:paddingBottom="48dp"
+            android:requiresFadingEdge="vertical"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/ppb200_padding_margin_first">
+
+
+                <TextView
+                    android:id="@+id/tvExchangeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.1"
+                    android:text=""
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_title_second_size"
+                    android:textStyle="bold" />
+
+
+                <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                    android:id="@+id/exchangeImg"
+                    android:layout_width="256dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:adjustViewBounds="true"
+                    app:siBorderAlpha="0"
+                    app:siRadius="8dp" />
+
+
+                <TextView
+                    android:id="@+id/tvExchangeDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:letterSpacing="0.1"
+                    android:text=""
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <!--bottom-->
+        <RelativeLayout
+            android:id="@+id/rExchangeBottom"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/border_2_0_0_bar_bottom_white_alpha_radius8">
+
+            <TextView
+                android:id="@+id/tvChange"
+                style="@style/ppb200_Button_main_small_radius"
+                android:layout_centerInParent="true"
+                android:text="兌換" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <!--timeout-->
+    <LinearLayout
+        android:id="@+id/linTimeout"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/border_2_0_0_white_radius"
+        android:padding="@dimen/ppb200_padding_margin_first"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvExchangeMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_dialog_message_connection_instability"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+        <TextView
+            android:id="@+id/tvAgain"
+            style="@style/ppb200_Button_grey_small_radius8"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_dialog_try_again" />
+
+    </LinearLayout>
+
+
+    <!--end-->
+    <TextView
+        android:id="@+id/tvExchangeEnd"
+        android:layout_width="288dp"
+        android:layout_height="64dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/border_2_0_0_white_radius"
+        android:gravity="center"
+        android:letterSpacing="0.1"
+        android:text="活動已結束"
+        android:textColor="@color/pinpinbox_2_0_0_first_text"
+        android:textSize="@dimen/ppb200_title_second_size"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+
+
+
+    <!--loading-->
+    <com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView
+        android:id="@+id/vRefreshExchange"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/pinpinbox_2_0_0_third_main" />
+
+
+
+    <!--collect guide-->
     <LinearLayout
         android:id="@+id/linCollect"
         android:layout_width="280dp"
@@ -67,7 +215,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_other_text_has_to_be_used_for_collect"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
             android:textSize="@dimen/ppb200_common_text_first" />
@@ -80,7 +228,7 @@
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:background="@drawable/click_2_0_0_main_button_radius"
             android:gravity="center"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_button_collect"
             android:textColor="@color/white"
             android:textSize="@dimen/ppb200_buttontext_for_height48" />
@@ -89,6 +237,7 @@
     </LinearLayout>
 
 
+    <!--last pagew-->
     <LinearLayout
         android:id="@+id/linLastPage"
         android:layout_width="360dp"
@@ -126,7 +275,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:text=""
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:textSize="@dimen/ppb200_common_text_second" />
@@ -179,7 +328,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/click_2_0_0_main_button_radius"
             android:gravity="center"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.1"
             android:minWidth="@dimen/ppb200_common_button_width"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
             android:paddingRight="@dimen/ppb200_padding_margin_first"
@@ -190,17 +339,18 @@
 
     </LinearLayout>
 
+    <!--refresh img-->
     <ImageView
         android:id="@+id/refreshImg"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="96dp"
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-        android:src="@drawable/ic200_refresh_white"
+        android:layout_marginTop="96dp"
         android:background="@drawable/click_2_0_0_circle_main_first"
         android:padding="6dp"
-        android:visibility="gone"/>
+        android:src="@drawable/ic200_refresh_white"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

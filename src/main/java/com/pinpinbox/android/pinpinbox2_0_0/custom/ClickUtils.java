@@ -22,6 +22,18 @@ public class ClickUtils {
 
     }
 
+    public synchronized static boolean ButtonContinuousClick_1s() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if(timeD<1000){
+            return true;
+        }else {
+            lastClickTime = time;
+            return false;
+        }
+
+    }
+
 
     public synchronized static boolean ButtonContinuousClick_4s() {
         long time = System.currentTimeMillis();

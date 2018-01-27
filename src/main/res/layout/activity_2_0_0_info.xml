@@ -94,40 +94,36 @@
                     </LinearLayout>
 
 
-                        <TextView
-                            android:id="@+id/tvViewed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:letterSpacing="0.1"
-                            android:text=""
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
-                            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                            android:layout_gravity="right"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/ppb200_common_text_second" />
+                    <TextView
+                        android:id="@+id/tvViewed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                        android:gravity="center"
+                        android:letterSpacing="0.1"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_second" />
 
                     <TextView
                         android:id="@+id/tvMessageCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tvViewed"
+                        android:layout_alignBottom="@+id/tvViewed"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                        android:layout_toLeftOf="@+id/tvViewed"
+                        android:layout_toStartOf="@+id/tvViewed"
                         android:gravity="center"
                         android:letterSpacing="0.1"
                         android:text=""
-                        android:layout_gravity="right"
-                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/ppb200_common_text_second"
-                        android:layout_alignBaseline="@+id/tvViewed"
-                        android:layout_alignBottom="@+id/tvViewed"
-                        android:layout_toLeftOf="@+id/tvViewed"
-                        android:layout_toStartOf="@+id/tvViewed" />
-
-
-
-
+                        android:textSize="@dimen/ppb200_common_text_second" />
 
 
                 </RelativeLayout>
@@ -136,11 +132,11 @@
             </RelativeLayout>
 
 
-            <View
-                android:id="@+id/vGradient"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="-2dp" />
+            <!--<View-->
+            <!--android:id="@+id/vGradient"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="2dp"-->
+            <!--android:layout_marginTop="-2dp" />-->
 
 
             <LinearLayout
@@ -313,8 +309,10 @@
                     android:id="@+id/linEvent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-                    android:background="@drawable/border_2_0_0_click_list_item"
+                    android:background="@drawable/border_2_0_0_click_default_radius"
                     android:orientation="vertical"
                     android:padding="@dimen/ppb200_padding_margin_first"
                     android:visibility="gone">
@@ -340,6 +338,23 @@
                         android:textSize="@dimen/ppb200_common_text_first"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/tvVote"
+                        fontPath="fonts/OpenSans-Bold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ppb200_common_button_small_height"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                        android:background="@drawable/click_2_0_0_white_radius"
+                        android:gravity="center"
+                        android:letterSpacing="0.1"
+                        android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                        android:paddingRight="@dimen/ppb200_padding_margin_first"
+                        android:text="@string/pinpinbox_2_0_0_button_voting_for_this_work"
+                        android:textColor="@color/pinpinbox_2_0_0_first_text"
+                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:textStyle="bold" />
+
 
                 </LinearLayout>
 
@@ -348,6 +363,7 @@
 
 
         </LinearLayout>
+
 
     </com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView>
 
@@ -387,16 +403,16 @@
                     android:src="@drawable/ic200_message_dark" />
 
                 <!--<TextView-->
-                    <!--android:id="@+id/tvMessageCount"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/messageImg"-->
-                    <!--android:layout_marginTop="-12dp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:letterSpacing="0.1"-->
-                    <!--android:text=""-->
-                    <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
-                    <!--android:textSize="@dimen/ppb200_common_text_third" />-->
+                <!--android:id="@+id/tvMessageCount"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/messageImg"-->
+                <!--android:layout_marginTop="-12dp"-->
+                <!--android:gravity="center"-->
+                <!--android:letterSpacing="0.1"-->
+                <!--android:text=""-->
+                <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+                <!--android:textSize="@dimen/ppb200_common_text_third" />-->
 
             </RelativeLayout>
 

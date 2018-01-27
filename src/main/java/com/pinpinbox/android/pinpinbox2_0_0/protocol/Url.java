@@ -15,6 +15,12 @@ public class Url {
 
     public static String P33_AlbumSettings = domain + "/index/api/albumsettings" + "/2.0";
 
+
+    public static String P42_GetPhotoUseFor_User = domain + "/index/api/getphotousefor_user" + "/1.3";
+
+    public static String P43_UpdataPhotoUserFor_User = domain + "/index/api/updatephotousefor_user" + "/1.1";
+
+
     public static String P95_RefreshToken = domain + "/index/api/refreshtoken" + "/2.0";
 
     public static String P96_InsertAlbumIndex = domain + "/index/api/insertalbumindex" + "/2.0";

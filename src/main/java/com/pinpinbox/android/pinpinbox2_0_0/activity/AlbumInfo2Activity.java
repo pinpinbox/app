@@ -16,7 +16,6 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -32,17 +31,7 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.DoingTypeClass;
@@ -60,6 +49,10 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -72,8 +65,16 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.TouchRange.TouchRange;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -111,19 +112,20 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private SendLikeTask sendLikeTask;
     private DeleteLikeTask deleteLikeTask;
     private Protocol13 protocol13;
+    private Protocol100 protocol100;
 
 //    private GyroscopeObserver gyroscopeObserver;
 
     private RelativeLayout rLocation, rAuthor, rDetail;
     private LinearLayout linEvent, linType;
 
-    private TextView tvAlbumName, tvAlbumAuthor, tvViewed, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount;
+    private TextView tvAlbumName, tvAlbumAuthor, tvViewed, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvVote;
     private TextView tvRead;
     private RoundCornerImageView coverImg;
     private ImageView backImg, messageImg, likeImg, moreImg;
     private ImageView signalVideoImg, signalSlotImg, signalAudioImg;
     private RoundCornerImageView userImg;
-    private View vGradient;
+//    private View vGradient;
 
     private ArrayList<HashMap<String, Object>> reportList;
     private List<String> strReportList;
@@ -361,6 +363,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         tvEvent = (TextView) findViewById(R.id.tvEvent);
         tvMessageCount = (TextView) findViewById(R.id.tvMessageCount);
         tvLikeCount = (TextView) findViewById(R.id.tvLikeCount);
+        tvVote = (TextView) findViewById(R.id.tvVote);
 
 //        coverImg = (ImageView) findViewById(R.id.coverImg);
         userImg = (RoundCornerImageView) findViewById(R.id.userImg);
@@ -377,6 +380,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         TextUtility.setBold(tvAlbumAuthor, true);
         TextUtility.setBold(tvRead, true);
         TextUtility.setBold(tvEvent, true);
+        TextUtility.setBold(tvVote, true);
 
 
 //        try {
@@ -411,7 +415,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         (findViewById(R.id.linLikeCount)).setOnClickListener(this);
         backImg.setOnClickListener(this);
-
 
     }
 
@@ -495,9 +498,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             String shareUrl = "";
 
             if (event.equals("") || event == null || event.equals("null")) {
-                shareUrl =UrlClass.shareAlbumUrl + album_id + "&autoplay=1";
-            }else {
-                shareUrl =UrlClass.shareAlbumUrl + album_id;
+                shareUrl = UrlClass.shareAlbumUrl + album_id + "&autoplay=1";
+            } else {
+                shareUrl = UrlClass.shareAlbumUrl + album_id;
             }
 
 
@@ -634,7 +637,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         if (event.equals("") || event == null || event.equals("null")) {
             intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id + "&autoplay=1");
-        }else {
+        } else {
             intent.putExtra(Intent.EXTRA_TEXT, itemAlbum.getName() + " , " + UrlClass.shareAlbumUrl + album_id);
         }
 
@@ -1151,6 +1154,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                             strEventUrl = ej.getString("url");
                             bVotestatus = ej.getBoolean("votestatus");
 
+
                          /*eventjoin  票數 有活動再接即可*/
                             String eventjoin = object.getString("eventjoin");
                             JSONObject ejj = new JSONObject(eventjoin);
@@ -1310,12 +1314,31 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                       /*活動名稱*/
                     tvEvent.setText(strEventName);
 
+                    if (bVotestatus) {
+                        tvVote.setText(R.string.pinpinbox_2_0_0_other_text_voted);
+                        tvVote.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                    } else {
+                        tvVote.setText(R.string.pinpinbox_2_0_0_button_voting_for_this_work);
+                        tvVote.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+                    }
+
 
                     if (SystemUtility.checkActivityExist(Event2Activity.class.getSimpleName())) {
 
                         linEvent.setVisibility(View.GONE);
 
                     }
+
+
+                    TouchRange.let(tvVote)
+                            // easy to use, like css padding
+                            .bounds()//default value is 14dp
+//                            .bounds(24.0f) //left,top,right,bottom=24dp
+//                .bounds(24.0f,30.0f) //left,right=24dp top,bottom=30dp
+//                .bounds(24.0f,30.0f,24.0f) //left=24dp,top=30dp,right=24dp,bottom=0dp
+//                .bounds(24.0f, 30.0f, 24.0f, 30.0f) //left=24dp,top=30dp,right=24dp,bottom=30dp
+                            .change();
+
 
                 }
 
@@ -1359,17 +1382,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 }
 
 
-                ViewPropertyAnimator alphaTo1_a = findViewById(R.id.linAlpha).animate();
-                alphaTo1_a.setDuration(200)
-                        .alpha(1)
-                        .start();
+                ViewControl.AlphaTo1(findViewById(R.id.linAlpha), 200);
 
                 if (rDetail != null) {
 
-                    ViewPropertyAnimator alphaTo1_b = rDetail.animate();
-                    alphaTo1_b.setDuration(200)
-                            .alpha(1)
-                            .start();
+                    ViewControl.AlphaTo1(rDetail, 200);
+
+
                 }
 
 
@@ -1406,6 +1425,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 messageImg.setOnClickListener(AlbumInfo2Activity.this);
                 likeImg.setOnClickListener(AlbumInfo2Activity.this);
                 moreImg.setOnClickListener(AlbumInfo2Activity.this);
+                tvVote.setOnClickListener(AlbumInfo2Activity.this);
 
 
             } else if (p08Result == 0) {
@@ -1781,7 +1801,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         }
     }
-
 
     private class FirstCollectAlbumTask extends AsyncTask<Void, Void, Object> {
 
@@ -2360,6 +2379,29 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                 break;
 
+            case R.id.tvVote:
+
+
+                if (bVotestatus) {
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_other_text_voted);
+                } else {
+
+
+                    DialogV2Custom d = new DialogV2Custom(mActivity);
+                    d.setStyle(DialogStyleClass.CHECK);
+                    d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_vote_for) + itemAlbum.getName() + "]?");
+                    d.setCheckExecute(new CheckExecute() {
+                        @Override
+                        public void DoCheck() {
+                            doVote(0);
+                        }
+                    });
+                    d.show();
+
+                }
+
+                break;
+
 
         }
 
@@ -2673,6 +2715,50 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         intent.putExtras(bundle);
         startActivity(intent);
         ActivityAnim.StartAnim(mActivity);
+
+    }
+
+    /*click*/
+    private void doVote(final int position) {
+
+        if (!HttpUtility.isConnect(mActivity)) {
+            setNoConnect();
+            return;
+        }
+
+        protocol100 = new Protocol100(
+                mActivity,
+                id,
+                token,
+                event_id,
+                album_id,
+                new Protocol100.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success(String vote_left) {
+
+                        bVotestatus = true;
+
+                        tvVote.setText(R.string.pinpinbox_2_0_0_other_text_voted);
+                        tvVote.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doVote(position);
+                    }
+                }
+        );
 
     }
 

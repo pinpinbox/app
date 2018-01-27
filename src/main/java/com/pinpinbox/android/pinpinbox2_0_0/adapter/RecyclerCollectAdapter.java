@@ -372,12 +372,12 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             }
         });
 
-        holder.linDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onDetailClickListener.onDownloadClick(position);
-            }
-        });
+//        holder.linDownload.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onDetailClickListener.onDownloadClick(position);
+//            }
+//        });
 
 
         try {
@@ -459,17 +459,16 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             tvCooperationCount = (TextView) itemView.findViewById(R.id.tvCooperationCount);
             tvLoadType = (TextView) itemView.findViewById(R.id.tvLoadType);
 
-//            linPrivacy = (LinearLayout) itemView.findViewById(R.id.linPrivacy);
+
             linEdit = (LinearLayout) itemView.findViewById(R.id.linEdit);
             linCooperation = (LinearLayout) itemView.findViewById(R.id.linCooperation);
             linShare = (LinearLayout) itemView.findViewById(R.id.linShare);
             linDelete = (LinearLayout) itemView.findViewById(R.id.linDelete);
             linCooperationCount = (LinearLayout) itemView.findViewById(R.id.linCooperationCount);
-            linDownload = (LinearLayout) itemView.findViewById(R.id.linDownload);
+//            linDownload = (LinearLayout) itemView.findViewById(R.id.linDownload);
 
             avLoading = (AVLoadingIndicatorView) itemView.findViewById(R.id.avLoading);
 
-//            downloadImg = (ImageView)itemView.findViewById(R.id.downloadImg);
 
 
             rBackground.setOnClickListener(this);

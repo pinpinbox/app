@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -413,7 +414,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     public Fragment getFragment(String fragmentName) {
 
-        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+        @SuppressLint("RestrictedApi") List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
 
         Fragment getFragment = null;
 
@@ -2074,13 +2075,35 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
     @Override
+    protected void onPause() {
+
+        if (createImg != null){
+            createImg.setClickable(false);
+        }
+
+
+        super.onPause();
+    }
+
+    @Override
     public void onResume() {
 
 
-//        getStatusControl().setStatusColor();
+        if (createImg != null){
+            createImg.setClickable(false);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    createImg.setClickable(true);
+                    MyLog.Set("e", mActivity.getClass(), "可以點擊建立作品了");
+                }
+            },1000);
+
+        }
 
         super.onResume();
     }
+
 
     @Override
     public void onDestroy() {
