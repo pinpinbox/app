@@ -98,7 +98,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
     private DeleteAlbumTask deleteAlbumTask;
     private CheckShareTask checkShareTask;
     private ShareTask shareTask;
-//    private ToAlbumTask toAlbumTask;
+    //    private ToAlbumTask toAlbumTask;
     private GetOriginalSettingsTask getOriginalSettingsTask;
     private SendSettingsTask sendSettingsTask;
     private FastCreateTask fastCreateTask;
@@ -378,9 +378,9 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
                             map.put("detail_is_open", false);
 
-                            if(event==null || event.equals("") || event.equals("null")){
+                            if (event == null || event.equals("") || event.equals("null")) {
                                 map.put("in_event", false);
-                            }else {
+                            } else {
                                 map.put("in_event", true);
                             }
 
@@ -483,9 +483,9 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
 
-        if((boolean)p17arraylist.get(clickPosition).get("in_event")){
+        if ((boolean) p17arraylist.get(clickPosition).get("in_event")) {
             intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id"));
-        }else {
+        } else {
             intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id") + "&autoplay=1");
         }
 
@@ -568,9 +568,9 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
 
             String shareUrl = "";
-            if((boolean)p17arraylist.get(clickPosition).get("in_event")){
+            if ((boolean) p17arraylist.get(clickPosition).get("in_event")) {
                 shareUrl = UrlClass.shareAlbumUrl + strAlbum_id;
-            }else {
+            } else {
                 shareUrl = UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1";
             }
 
@@ -807,7 +807,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
                     if (adapter != null) {
                         adapter.notifyDataSetChanged();
-                        if(loadCount<rangeCount){
+                        if (loadCount < rangeCount) {
                             MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
@@ -867,11 +867,11 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                         PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_scroll_max);
                         isNoDataToastAppeared = true;
                     }
-                }else {
+                } else {
 
 
                     adapter.notifyItemRangeInserted(p17arraylist.size(), rangeCount);
-                    if(loadCount<rangeCount){
+                    if (loadCount < rangeCount) {
                         MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
                         sizeMax = true;
                         return;
@@ -879,8 +879,6 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                     round = round + rangeCount;
 
                 }
-
-
 
 
             } else if (p17Result.equals("0")) {
@@ -926,7 +924,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
                     if (adapter != null) {
                         adapter.notifyDataSetChanged();
-                        if(loadCount<rangeCount){
+                        if (loadCount < rangeCount) {
                             MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
@@ -1125,14 +1123,12 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             loading.dismiss();
             if (p84Result.equals("1")) {
                 /*任務已完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result.equals("2")) {
 
                 /*尚有次數未完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result.equals("0")) {
@@ -1147,6 +1143,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
 
         }
+
     }
 
     private class ShareTask extends AsyncTask<Void, Void, Object> {
@@ -1277,8 +1274,6 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                     /**儲存data*/
                     getdata.edit().putString("point", newP).commit();
 
-                    getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
-
                     getdata.edit().putBoolean("datachange", true).commit();
 
                 } else {
@@ -1301,15 +1296,12 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
             } else if (p83Result.equals("2")) {
 
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
-
 
             } else if (p83Result.equals("3")) {
 
 
             } else if (p83Result.equals("0")) {
 
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result.equals(Key.timeout)) {
                 connectInstability();
@@ -1849,12 +1841,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
         final String strAct = (String) p17arraylist.get(position).get(Key.act); // 隱私權 (close: 關閉 / open: 開啟)
         if (strAct != null && strAct.equals("open")) {
-            boolean bShareToFB = getdata.getBoolean(TaskKeyClass.share_to_fb, false);
-            if (bShareToFB) {
-                systemShare();
-            } else {
-                doCheckShare();
-            }
+            doCheckShare();
         } else {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_open_act_to_share);
         }

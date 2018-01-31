@@ -1031,14 +1031,12 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
             loading.dismiss();
             if (p84Result.equals("1")) {
                 /*任務已完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result.equals("2")) {
 
                 /*尚有次數未完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result.equals("0")) {
@@ -1183,8 +1181,6 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
                     /**儲存data*/
                     getdata.edit().putString("point", newP).commit();
 
-                    getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
-
                     getdata.edit().putBoolean("datachange", true).commit();
 
                 } else {
@@ -1195,7 +1191,6 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
                 d.getTvLink().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         Bundle bundle = new Bundle();
                         bundle.putString("url", url);
                         Intent intent = new Intent(getActivity(), WebView2Activity.class);
@@ -1207,15 +1202,9 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
 
             } else if (p83Result.equals("2")) {
 
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
-
-
             } else if (p83Result.equals("3")) {
 
-
             } else if (p83Result.equals("0")) {
-
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result.equals(Key.timeout)) {
                 connectInstability();
@@ -1280,12 +1269,7 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
         final String strAct = (String) p17arraylist.get(position).get(Key.act); // 隱私權 (close: 關閉 / open: 開啟)
 
         if (strAct != null && strAct.equals("open")) {
-            boolean bShareToFB = getdata.getBoolean(TaskKeyClass.share_to_fb, false);
-            if (bShareToFB) {
-                systemShare();
-            } else {
-                doCheckShare();
-            }
+            doCheckShare();
         } else {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_open_act_to_share);
         }

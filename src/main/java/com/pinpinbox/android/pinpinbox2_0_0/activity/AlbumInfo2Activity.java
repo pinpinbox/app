@@ -867,13 +867,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                             PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
 
-                            boolean bCollectFreeAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_free_album, false);
-                            if (!bCollectFreeAlbum) {
-                                doCollectTask();
-                            }
-                        } else {
+                            doCollectTask();
 
-//                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
+                        } else {
 
                             PinPinToast.showSponsorToast(
                                     mActivity.getApplicationContext(),
@@ -881,11 +877,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                                     itemAlbum.getUser_picture()
                             );
 
+                            doCollectTask();
 
-                            boolean bCollectPayAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_pay_album, false);
-                            if (!bCollectPayAlbum) {
-                                doCollectTask();
-                            }
                         }
                     }
 
@@ -1515,21 +1508,18 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             if (p84Result == 1) {
                 /*任務已完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result == 2) {
 
                 /*尚有次數未完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result == 0) {
 
                 systemShare();
 
-//                DialogV2Custom.BuildError(mActivity, p84Message);
 
             } else if (p84Result == Key.TIMEOUT) {
 
@@ -1537,12 +1527,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             } else {
 
-                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
 
             }
 
 
         }
+
     }
 
     private class ShareTask extends AsyncTask<Void, Void, Object> {
@@ -1671,8 +1662,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
 
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
-
 
                 } else {
                     d.getTvDescription().setText(reward_value);
@@ -1694,16 +1683,12 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             } else if (p83Result.equals("2")) {
 
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
-
 
             } else if (p83Result.equals("3")) {
 
 
             } else if (p83Result.equals("0")) {
 
-
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result.equals(Key.timeout)) {
 
@@ -1945,11 +1930,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
 
-                    if (itemAlbum.getPoint() == 0) {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
-                    } else {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
-                    }
+//                    if (itemAlbum.getPoint() == 0) {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
+//                    } else {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
+//                    }
 
                 } else {
                     d.getTvDescription().setText(reward_value);
@@ -1972,19 +1957,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             } else if (p83Result.equals("2")) {
 
-                if (itemAlbum.getPoint() == 0) {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, true).commit();
-                } else {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, true).commit();
-                }
-
             } else if (p83Result.equals("0")) {
-
-                if (itemAlbum.getPoint() == 0) {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, true).commit();
-                } else {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, true).commit();
-                }
 
             } else if (p83Result.equals("3")) {
 
@@ -2451,13 +2424,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     /*click*/
     private void share() {
-
-//        boolean bShareToFB = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.share_to_fb, false);
-//        if (bShareToFB) {
-//            systemShare();
-//        } else {
-//            doCheckShare();
-//        }
 
         doCheckShare();
 

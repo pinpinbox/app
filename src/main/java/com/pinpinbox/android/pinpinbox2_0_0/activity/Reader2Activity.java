@@ -1,6 +1,5 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -21,22 +20,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
-import android.util.Size;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -92,7 +86,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
@@ -710,7 +703,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         final View vType = v.findViewById(R.id.vType);
         final ImageView refreshImg = (ImageView) v.findViewById(R.id.refreshImg);
-        final RelativeLayout rExchange = (RelativeLayout) v.findViewById(R.id.rExchange);
+        final LinearLayout linExchange = (LinearLayout) v.findViewById(R.id.linExchange);
 
         refreshImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -804,21 +797,21 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //
 //                        rExchange.setLayoutParams(layoutParams);
 
-                        if (rExchange.getVisibility() == View.VISIBLE) {
-                            MyLog.Set("e", this.getClass(), "rExchange is visibility");
+                        if (linExchange.getVisibility() == View.VISIBLE) {
+                            MyLog.Set("e", this.getClass(), "linExchange is visibility");
                             return;
                         }
 
                         vType.setVisibility(View.VISIBLE);
 
 
-                        rExchange.setVisibility(View.VISIBLE);
+                        linExchange.setVisibility(View.VISIBLE);
 
-                        //依rExchange判斷是否呼叫接口
+                        //依linExchange判斷是否呼叫接口
 
                         String identifier = getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", "");
 
-                        doGetExchange(v, position, identifier, rExchange);
+                        doGetExchange(v, position, identifier, linExchange);
 
                     }
                     break;
@@ -970,7 +963,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     }
 
 
-    private void doGetExchange(final View v, final int position, final String identifier, final RelativeLayout rExchange) {
+    private void doGetExchange(final View v, final int position, final String identifier, final LinearLayout linExchange) {
 
 
         /*error*/
@@ -982,8 +975,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         /*success*/
         final TextView tvExchangeName = (TextView) v.findViewById(R.id.tvExchangeName);
         final TextView tvExchangeDescription = (TextView) v.findViewById(R.id.tvExchangeDescription);
-        final TextView tvChange = (TextView) v.findViewById(R.id.tvChange);
         final RoundCornerImageView exchangeImg = (RoundCornerImageView) v.findViewById(R.id.exchangeImg);
+
+        /*bottom*/
+        final TextView tvAddToExchangeList = (TextView) v.findViewById(R.id.tvAddToExchangeList);
+        final TextView tvChange = (TextView) v.findViewById(R.id.tvChange);
+        final RelativeLayout rExchangeBottom = (RelativeLayout) v.findViewById(R.id.rExchangeBottom);
+
 
         /*end*/
         final TextView tvExchangeEnd = (TextView) v.findViewById(R.id.tvExchangeEnd);
@@ -1001,8 +999,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     @Override
                     public void Prepare() {
 
-                        rExchange.setVisibility(View.GONE);
-                        rExchange.setAlpha(0f);
+                        linExchange.setVisibility(View.GONE);
+                        linExchange.setAlpha(0f);
 
                         linTimeout.setVisibility(View.GONE);
                         linTimeout.setAlpha(0f);
@@ -1028,9 +1026,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 .tag(mActivity.getApplicationContext())
                                 .into(exchangeImg);
 
-                        rExchange.setVisibility(View.VISIBLE);
+                        linExchange.setVisibility(View.VISIBLE);
+                        ViewControl.AlphaTo1(linExchange);
 
-                        ViewControl.AlphaTo1(rExchange);
 
                         TextUtility.setBold(tvExchangeName, true);
                         tvExchangeName.setText(itemExchange.getName());
@@ -1056,6 +1054,14 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             }
                         });
 
+                        /*依狀態判定是否可以點擊*/
+                        rExchangeBottom.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
+
 
                     }
 
@@ -1064,7 +1070,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         showContents(itemExchange);
                         tvChange.setText("已兌換");
-                        tvChange.setBackground(null);
+                        tvChange.setBackgroundResource(R.drawable.border_2_0_0_white_radius);
                         tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
                     }
@@ -1080,8 +1086,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
 //                                //获取当前的height值
 //                                //动态更新view的高度
-//                                rExchange.getLayoutParams().height = (Integer)valueAnimator.getAnimatedValue();
-//                                rExchange.requestLayout();
+//                                linExchange.getLayoutParams().height = (Integer)valueAnimator.getAnimatedValue();
+//                                linExchange.requestLayout();
 //                            }
 //                        });
 //                        va.setDuration(1200);
@@ -1109,7 +1115,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 if (ClickUtils.ButtonContinuousClick_1s()) {
                                     return;
                                 }
-                                doGetExchange(v, position, identifier, rExchange);
+                                doGetExchange(v, position, identifier, linExchange);
                             }
                         });
 
@@ -1121,7 +1127,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
-    private void doExchange(){
+    private void doExchange() {
 
     }
 
@@ -2109,18 +2115,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         if (itemAlbum.getPoint() == 0) {
 
-
-                            boolean bCollectFreeAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_free_album, false);
-                            if (!bCollectFreeAlbum) {
-                                doFirstCollectTask();
-                            }
+                            doFirstCollectTask();
 
                         } else {
 
-                            boolean bCollectPayAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_pay_album, false);
-                            if (!bCollectPayAlbum) {
-                                doFirstCollectTask();
-                            }
+                            doFirstCollectTask();
 
                         }
                     }
@@ -2136,9 +2135,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     }
                 });
 
-
-//        collectAlbumTask = new CollectAlbumTask();
-//        collectAlbumTask.execute();
     }
 
     private void doFirstCollectTask() {
@@ -2902,11 +2898,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
 
-                    if (itemAlbum.getPoint() == 0) {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
-                    } else {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
-                    }
+//                    if (itemAlbum.getPoint() == 0) {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
+//                    } else {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
+//                    }
 
 
                 } else {
@@ -2929,12 +2925,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
             } else if (p83Result == 2 || p83Result == 0) {
-
-                if (itemAlbum.getPoint() == 0) {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, true).commit();
-                } else {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, true).commit();
-                }
 
             } else if (p83Result == 3) {
 
@@ -3090,21 +3080,18 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             if (p84Result == 1) {
                 /*任務已完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result == 2) {
 
                 /*尚有次數未完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result == 0) {
 
                 systemShare();
 
-//                DialogV2Custom.BuildError(mActivity, p84Message);
 
             } else if (p84Result == Key.TIMEOUT) {
 
@@ -3229,20 +3216,18 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                 if (reward.equals("point")) {
                     d.getTvDescription().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_task_get_point) + reward_value + "P!");
-                    /**獲取當前使用者P點*/
+                    /*獲取當前使用者P點*/
                     String point = PPBApplication.getInstance().getData().getString(Key.point, "");
                     int p = StringIntMethod.StringToInt(point);
 
-                    /**任務獲得P點轉換型態*/
+                    /*任務獲得P點轉換型態*/
                     int rp = StringIntMethod.StringToInt(reward_value);
 
-                    /**加總*/
+                    /*加總*/
                     String newP = StringIntMethod.IntToString(rp + p);
 
-                    /**儲存data*/
+                    /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
-
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
 
 
                 } else {
@@ -3265,13 +3250,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             } else if (p83Result == 2) {
 
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
+
 
             } else if (p83Result == 3) {
 
             } else if (p83Result == 0) {
-
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result == Key.TIMEOUT) {
 

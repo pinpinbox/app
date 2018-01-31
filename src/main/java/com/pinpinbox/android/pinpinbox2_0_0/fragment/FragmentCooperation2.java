@@ -133,7 +133,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             super.onLoadNextPage(view);
             if (!sizeMax) {
                 MyLog.Set("e", FragmentCooperation2.class, "onLoad");
-                if(isDoingMore){
+                if (isDoingMore) {
                     MyLog.Set("e", FragmentCooperation2.class, "正在讀取更多項目");
                     return;
                 }
@@ -162,11 +162,10 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_2_0_0_collect_all, container, false);
-        rGuideCooperation = (RelativeLayout)v.findViewById(R.id.rGuideCooperation);
+        rGuideCooperation = (RelativeLayout) v.findViewById(R.id.rGuideCooperation);
         rvCollect = (RecyclerView) v.findViewById(R.id.rvCollect);
         pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
-
 
 
         rvCollect.setItemAnimator(new DefaultItemAnimator());
@@ -228,7 +227,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
 
-        loading = ((MyCollect2Activity)getActivity()).getLoading();
+        loading = ((MyCollect2Activity) getActivity()).getLoading();
 
         p17arraylist = new ArrayList<>();
 
@@ -280,14 +279,14 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                             String p17_json_albumcover = JsonUtility.GetString(aj, Key.cover);
 
 
-                            String p17_json_albumact =JsonUtility.GetString(aj, Key.act);
+                            String p17_json_albumact = JsonUtility.GetString(aj, Key.act);
                             String p17_json_albuminsertdate = JsonUtility.GetString(aj, Key.insertdate);
                             String p17_json_albumzipped = JsonUtility.GetString(aj, Key.zipped);
 
 
                             JSONObject uj = new JSONObject(user);
                             String p17_json_user_id = JsonUtility.GetString(uj, Key.user_id);
-                            String p17_json_username =JsonUtility.GetString(uj, Key.name);
+                            String p17_json_username = JsonUtility.GetString(uj, Key.name);
                             String p17_json_picture = JsonUtility.GetString(uj, Key.picture);
 
                             JSONObject cj = new JSONObject(cooperation);
@@ -300,9 +299,6 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                             String p17_json_template_id = JsonUtility.GetString(temj, Key.template_id);
 
 
-
-
-
                             HashMap<String, Object> map = new HashMap<String, Object>();
 
                                 /*0 => 一般狀態
@@ -311,11 +307,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
                             map.put(Key.downloadType, 0);
                             File file = new File(DirClass.sdPath + PPBApplication.getInstance().getMyDir(), DirClass.dirAlbumList);
-                            if(file!=null && file.exists()) {
+                            if (file != null && file.exists()) {
 
                                 String[] albumids = file.list();
 
-                                if(albumids!=null){
+                                if (albumids != null) {
                                     if (albumids.length > 0) {
                                         for (int k = 0; k < albumids.length; k++) {
                                             if (albumids[k].equals(p17_json_album_id)) {
@@ -345,9 +341,9 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
                             map.put("detail_is_open", false);
 
-                            if(event==null || event.equals("") || event.equals("null")){
+                            if (event == null || event.equals("") || event.equals("null")) {
                                 map.put("in_event", false);
-                            }else {
+                            } else {
                                 map.put("in_event", true);
                             }
 
@@ -393,7 +389,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                     intent.putExtras(bundle);
                     startActivity(intent);
                     ActivityAnim.StartAnim(getActivity());
-                }else {
+                } else {
                     PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_albumwork_undone);
                 }
 
@@ -445,9 +441,9 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 //        intent.putExtra(Intent.EXTRA_STREAM, u);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        if((boolean)p17arraylist.get(clickPosition).get("in_event")){
+        if ((boolean) p17arraylist.get(clickPosition).get("in_event")) {
             intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id"));
-        }else {
+        } else {
             intent.putExtra(Intent.EXTRA_TEXT, (String) p17arraylist.get(clickPosition).get("albumname") + " , " + UrlClass.shareAlbumUrl + (String) p17arraylist.get(clickPosition).get("album_id") + "&autoplay=1");
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -465,7 +461,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
         TextUtility.setBold(tvShareFB, true);
         TextUtility.setBold(tvShare, true);
-        TextUtility.setBold((TextView)p.getPopupView().findViewById(R.id.tvTitle), true);
+        TextUtility.setBold((TextView) p.getPopupView().findViewById(R.id.tvTitle), true);
 
         tvShareFB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -490,7 +486,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         });
 
 
-        p.show(((MyCollect2Activity)getActivity()).getBackground());
+        p.show(((MyCollect2Activity) getActivity()).getBackground());
 
 
     }
@@ -530,12 +526,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             String strAlbum_id = (String) p17arraylist.get(clickPosition).get("album_id");
 
             String shareUrl = "";
-            if((boolean)p17arraylist.get(clickPosition).get("in_event")){
-               shareUrl = UrlClass.shareAlbumUrl + strAlbum_id;
-            }else {
+            if ((boolean) p17arraylist.get(clickPosition).get("in_event")) {
+                shareUrl = UrlClass.shareAlbumUrl + strAlbum_id;
+            } else {
                 shareUrl = UrlClass.shareAlbumUrl + strAlbum_id + "&autoplay=1";
             }
-
 
 
             if (strCover != null && !strCover.equals("")) {
@@ -698,11 +693,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
             if (p17Result.equals("1")) {
 
-                if(p17arraylist.size()>0) {
+                if (p17arraylist.size() > 0) {
 
-                    if(adapter!=null) {
+                    if (adapter != null) {
                         adapter.notifyDataSetChanged();
-                        if(loadCount<rangeCount){
+                        if (loadCount < rangeCount) {
                             MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
@@ -710,7 +705,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                         round = round + rangeCount;
                     }
                     rGuideCooperation.setVisibility(View.GONE);
-                }else {
+                } else {
                     sizeMax = true;
                     rGuideCooperation.setVisibility(View.VISIBLE);
                 }
@@ -762,11 +757,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                         isNoDataToastAppeared = true;
                     }
 
-                }else {
+                } else {
 
 
                     adapter.notifyItemRangeInserted(p17arraylist.size(), rangeCount);
-                    if(loadCount<rangeCount){
+                    if (loadCount < rangeCount) {
                         MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
                         sizeMax = true;
                         return;
@@ -816,11 +811,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             if (p17Result.equals("1")) {
 
 
-                if(p17arraylist.size()>0) {
+                if (p17arraylist.size() > 0) {
 
-                    if(adapter!=null) {
+                    if (adapter != null) {
                         adapter.notifyDataSetChanged();
-                        if(loadCount<rangeCount){
+                        if (loadCount < rangeCount) {
                             MyLog.Set("d", this.getClass(), "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
@@ -828,7 +823,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                         round = round + rangeCount;
                     }
                     rGuideCooperation.setVisibility(View.GONE);
-                }else {
+                } else {
                     sizeMax = true;
                     rGuideCooperation.setVisibility(View.VISIBLE);
                 }
@@ -932,7 +927,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
 //                rvCollect.getItemAnimator().setSupportsChangeAnimations(false);
 
-                if(p17arraylist.size()<1) {
+                if (p17arraylist.size() < 1) {
                     rGuideCooperation.setVisibility(View.VISIBLE);
                 }
 
@@ -958,7 +953,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
                 }
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -978,7 +973,6 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             loading.show();
 
         }
-
 
         @Override
         protected Object doInBackground(Void... params) {
@@ -1019,14 +1013,12 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             loading.dismiss();
             if (p84Result.equals("1")) {
                 /*任務已完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result.equals("2")) {
 
                 /*尚有次數未完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result.equals("0")) {
@@ -1038,7 +1030,6 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             } else {
                 DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
             }
-
 
         }
     }
@@ -1171,8 +1162,6 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
                     /**儲存data*/
                     getdata.edit().putString("point", newP).commit();
 
-                    getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
-
                     getdata.edit().putBoolean("datachange", true).commit();
 
                 } else {
@@ -1195,15 +1184,9 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
             } else if (p83Result.equals("2")) {
 
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
-
-
             } else if (p83Result.equals("3")) {
 
-
             } else if (p83Result.equals("0")) {
-
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result.equals(Key.timeout)) {
                 connectInstability();
@@ -1218,7 +1201,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
     }
 
 
-    public void changeDownloadType(int position, int doingType){
+    public void changeDownloadType(int position, int doingType) {
 
         HashMap<String, Object> mp = p17arraylist.get(position);
 
@@ -1250,11 +1233,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
         clickPosition = position;
 
-        String identity = (String)p17arraylist.get(position).get(Key.identity);
+        String identity = (String) p17arraylist.get(position).get(Key.identity);
 
-        if(identity.equals(Key.viewer)){
+        if (identity.equals(Key.viewer)) {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_deficiency_identity);
-        }else {
+        } else {
 
             Bundle bundle = new Bundle();
             bundle.putString(Key.album_id, (String) p17arraylist.get(position).get(Key.album_id));
@@ -1275,9 +1258,6 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         }
 
 
-
-
-
     }
 
     @Override
@@ -1287,7 +1267,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         String identity = (String) p17arraylist.get(position).get("identity");
         String album_id = (String) p17arraylist.get(position).get("album_id");
 
-        if(identity.equals("admin") || identity.equals("approver")){
+        if (identity.equals("admin") || identity.equals("approver")) {
 
             Bundle bundle = new Bundle();
             bundle.putString(Key.album_id, album_id);
@@ -1298,8 +1278,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
             ActivityAnim.StartAnim(getActivity());
 
 
-
-        }else {
+        } else {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_deficiency_identity);
         }
 
@@ -1311,8 +1290,8 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         MyLog.Set("d", getClass(), "onShareClick => " + position);
         clickPosition = position;
 
-        String strZipped = (String)p17arraylist.get(position).get(Key.zipped);
-        if(!strZipped.equals("1")){
+        String strZipped = (String) p17arraylist.get(position).get(Key.zipped);
+        if (!strZipped.equals("1")) {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_albumwork_undone);
             return;
         }
@@ -1320,12 +1299,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         final String strAct = (String) p17arraylist.get(position).get(Key.act); // 隱私權 (close: 關閉 / open: 開啟)
 
         if (strAct != null && strAct.equals("open")) {
-            boolean bShareToFB = getdata.getBoolean(TaskKeyClass.share_to_fb, false);
-            if (bShareToFB) {
-                systemShare();
-            } else {
-                doCheckShare();
-            }
+            doCheckShare();
         } else {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_open_act_to_share);
         }
@@ -1337,7 +1311,6 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         MyLog.Set("d", getClass(), "onDeleteClick => " + position);
 
         clickPosition = position;
-
 
 
         final DialogV2Custom d = new DialogV2Custom(getActivity());
@@ -1360,17 +1333,14 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         FlurryUtil.onEvent(FlurryKey.work_manager_download);
 
 
-        String zipped = (String)p17arraylist.get(position).get(Key.zipped);
+        String zipped = (String) p17arraylist.get(position).get(Key.zipped);
 
-        if(zipped.equals("0")){
+        if (zipped.equals("0")) {
 
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_album_save_not_yet);
 
             return;
         }
-
-
-
 
 
         int downloadType = (int) p17arraylist.get(position).get(Key.downloadType);
