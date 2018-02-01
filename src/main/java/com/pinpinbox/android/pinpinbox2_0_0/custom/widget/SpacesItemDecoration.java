@@ -32,7 +32,6 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         int position = parent.getChildAdapterPosition(view);
         int spanIndex = ((StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams()).getSpanIndex();
 
-
         if (hasHeader) {
 
             if (position != 0) { //0

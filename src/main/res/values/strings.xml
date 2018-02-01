@@ -85,6 +85,7 @@
     <string name="pinpinbox_2_0_0_button_create_new_album">建立新作品</string>
     <string name="pinpinbox_2_0_0_button_contribute_or_cancel">投稿/撤下</string>
     <string name="pinpinbox_2_0_0_button_voting_for_this_work">投票給此作品</string>
+    <string name="pinpinbox_2_0_0_button_exchange_now">立即兌換</string>
 
 
 
@@ -348,6 +349,11 @@
     <string name="pinpinbox_2_0_0_itemtype_hobby">興趣</string>
     <string name="pinpinbox_2_0_0_itemtype_follow">關注</string>
     <string name="pinpinbox_2_0_0_itemtype_new">最新</string>
+    <string name="pinpinbox_2_0_0_itemtype_exchange_unfinished">未領取</string>
+    <string name="pinpinbox_2_0_0_itemtype_exchange_done">已完成</string>
+    <string name="pinpinbox_2_0_0_itemtype_real_name">真實姓名</string>
+    <string name="pinpinbox_2_0_0_itemtype_phone">電話</string>
+    <string name="pinpinbox_2_0_0_itemtype_address">地址</string>
 
 
 
@@ -396,6 +402,8 @@
     <string name="pinpinbox_2_0_0_title_news_feed">動態</string>
     <string name="pinpinbox_2_0_0_title_latest_event">最新活動</string>
     <string name="pinpinbox_2_0_0_title_for_you">推薦給你</string>
+    <string name="pinpinbox_2_0_0_title_exchange_list">兌換清單</string>
+    <string name="pinpinbox_2_0_0_title_contact">連絡資訊</string>
 
 
     <string name="pinpinbox_2_0_0_guide_cooperation">跟其他創作人合作也是一種樂趣</string>
@@ -530,6 +538,7 @@
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;次讚</string>
     <string name="pinpinbox_2_0_0_other_text_popularity">人氣:</string>
     <string name="pinpinbox_2_0_0_other_text_cancel_contribute">取消投稿</string>
+    <string name="pinpinbox_2_0_0_other_text_used_number_when_sign_up">使用註冊時用的號碼</string>
 
 
     <string name="crop__saving">相片儲存中</string>

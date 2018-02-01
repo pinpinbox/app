@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -134,6 +135,7 @@ public class MyCollect2Activity extends DraggerActivity implements View.OnClickL
 
     public Fragment getFragment(String fragmentName) {
 
+        @SuppressLint("RestrictedApi")
         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
 
         Fragment getFragment = null;

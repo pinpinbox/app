@@ -45,6 +45,7 @@ import com.pinpinbox.android.Test.TextTestActivity;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.OffLine2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.TypeFacebookFriend2Activity;
@@ -610,7 +611,7 @@ public class OldMainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-//                startActivity(new Intent(OldMainActivity.this, PieChartActivity.class));
+                startActivity(new Intent(OldMainActivity.this, ExchangeList2Activity.class));
 
 
             }

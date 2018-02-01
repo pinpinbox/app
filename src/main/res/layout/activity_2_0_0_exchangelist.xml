@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpExchange"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+        <TextView
+            android:id="@+id/tvActionBarTitle"
+            style="@style/ppb200_title_in_actionbar"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/ppb200_common_icon_side"
+            android:layout_marginRight="@dimen/ppb200_common_icon_side"
+            android:alpha="0"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/pinpinbox_2_0_0_title_exchange_list" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_common_icon_side"
+        android:layout_below="@+id/rActionBar"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+
+
+        <TextView
+            android:id="@+id/tvTabUnfinished"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/click_2_0_0_default"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:paddingLeft="@dimen/ppb200_padding_margin_second"
+            android:paddingRight="@dimen/ppb200_padding_margin_second"
+            android:text="@string/pinpinbox_2_0_0_itemtype_exchange_unfinished"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/pinpinbox_2_0_0_divider" />
+
+
+        <TextView
+            android:id="@+id/tvTabDone"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/click_2_0_0_default"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:paddingLeft="@dimen/ppb200_padding_margin_second"
+            android:paddingRight="@dimen/ppb200_padding_margin_second"
+            android:text="@string/pinpinbox_2_0_0_itemtype_exchange_done"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

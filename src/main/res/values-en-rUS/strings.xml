@@ -85,6 +85,7 @@
     <string name="pinpinbox_2_0_0_button_create_new_album">Create new work</string>
     <string name="pinpinbox_2_0_0_button_contribute_or_cancel">Submit/Cancel</string>
     <string name="pinpinbox_2_0_0_button_voting_for_this_work">Voting for this work</string>
+    <string name="pinpinbox_2_0_0_button_exchange_now">Exchange now</string>
 
     <string name="pinpinbox_2_0_0_event_info">Details</string>
     <string name="pinpinbox_2_0_0_event_contributors">Submit</string>
@@ -339,6 +340,11 @@
     <string name="pinpinbox_2_0_0_itemtype_hobby">Interested</string>
     <string name="pinpinbox_2_0_0_itemtype_follow">Follows</string>
     <string name="pinpinbox_2_0_0_itemtype_new">New</string>
+    <string name="pinpinbox_2_0_0_itemtype_exchange_unfinished">Unfinished</string>
+    <string name="pinpinbox_2_0_0_itemtype_exchange_done">Done</string>
+    <string name="pinpinbox_2_0_0_itemtype_real_name">Real Name</string>
+    <string name="pinpinbox_2_0_0_itemtype_phone">Phone</string>
+    <string name="pinpinbox_2_0_0_itemtype_address">Address</string>
 
 
 
@@ -387,7 +393,8 @@
     <string name="pinpinbox_2_0_0_title_news_feed">Newsfeed</string>
     <string name="pinpinbox_2_0_0_title_latest_event">Latest Event</string>
     <string name="pinpinbox_2_0_0_title_for_you">For You</string>
-
+    <string name="pinpinbox_2_0_0_title_exchange_list">Exchange List</string>
+    <string name="pinpinbox_2_0_0_title_contact">Contact Info</string>
 
 
     <string name="pinpinbox_2_0_0_guide_cooperation">Co-creating is fun, too.</string>
@@ -521,6 +528,7 @@
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;likes</string>
     <string name="pinpinbox_2_0_0_other_text_popularity">Popularity:</string>
     <string name="pinpinbox_2_0_0_other_text_cancel_contribute">Cancel</string>
+    <string name="pinpinbox_2_0_0_other_text_used_number_when_sign_up">Use the number when registration</string>
 
 
     <string name="crop__saving">相片儲存中</string>
