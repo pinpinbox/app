@@ -1,6 +1,7 @@
 package com.pinpinbox.android.Activity.ReadAlbum;
 
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +29,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -513,7 +516,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 //            UiSettings setting = mMap.getUiSettings();
 //            setting.setTiltGesturesEnabled(true);
 //            mMap.setMyLocationEnabled(true);
-
 
 
             mLocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -1091,7 +1093,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
 
                                     }
-
 
 
                                     break;
@@ -2018,7 +2019,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
     private void selectShareMode() {
 
 
-
     }
 
     private void systemShare() {
@@ -2517,7 +2517,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                 changePhoto(position, bmpExchangeImg);
 
 
-
             } else if (p42Result.equals("3")) {
 
                 p42Result = "";
@@ -2526,7 +2525,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
 
                 mExchangeImg.setClickable(false);
                 changeFinish(mExchangeImg, tvExchange, position, "3");
-
 
 
             }
@@ -2974,7 +2972,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
         protected Object doInBackground(Void... params) {
             String strJson = "";
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google"), null);
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google", "album", album_id), null);
                 MyLog.Set("d", getClass(), "p84strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p84Result = Key.timeout;
@@ -3022,7 +3020,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                 selectShareMode();
 
             } else if (p84Result.equals("0")) {
-
 
 
             } else if (p84Result.equals(Key.timeout)) {
@@ -3198,7 +3195,6 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                 }
 
 
-
                 getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result.equals(Key.timeout)) {
@@ -3317,7 +3313,7 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
             setShareClick();
 
 
-            if(strAlbumAudio_target!=null && !strAlbumAudio_target.equals("")) {
+            if (strAlbumAudio_target != null && !strAlbumAudio_target.equals("")) {
                 String str = strAlbumAudio_target.substring(0, 4);
 
                 if (str.equals("http")) {
@@ -3373,13 +3369,9 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
                     }
                 }
 
-            }else {
+            } else {
                 rVoice.setVisibility(View.GONE);
             }
-
-
-
-
 
 
             musicClick();
@@ -3621,7 +3613,16 @@ public class ReadAlbumActivity extends DraggerActivity implements LocationListen
         String bestProvider = getBestProvider();
         Location newLoction = null;
         if (bestProvider != null)
-            newLoction = mLocManager.getLastKnownLocation(bestProvider);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }newLoction = mLocManager.getLastKnownLocation(bestProvider);
 
         if (mLocation == null) {
             mLocation = new Location("");

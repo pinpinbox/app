@@ -71,9 +71,10 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
     private String TAG = TagClass.TagEventActivity;
     private String id, token;
-    private String url, event_id, image, strName, strTitle;
+    private String url, event_id, image, strName, strTitle,strPrefixText ;
     private String p17Result, p17Message;
     private String sendAlbum_id;
+
 
     private int contribution = 0;
     private int intPopularity = 0;
@@ -514,6 +515,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                         strTitle = JsonUtility.GetString(jsonEvent, ProtocolKey.title);
                         intPopularity = JsonUtility.GetInt(jsonEvent, ProtocolKey.popularity);
                         contribution = JsonUtility.GetInt(jsonEvent, ProtocolKey.contribution);
+                        strPrefixText = JsonUtility.GetString(jsonEvent, ProtocolKey.prefix_text);
 
                         eventTemplateArray = new JSONArray(event_templatejoin);
 
@@ -901,6 +903,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                     bundle.putStringArrayList("templates", eventTemplateList);
                     bundle.putString("event_id", event_id);
                     bundle.putInt("contribution", contribution);
+                    bundle.putString(Key.prefix_text, strPrefixText);
                     Intent intent = new Intent(Event2Activity.this, SelectMyWorks2Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);

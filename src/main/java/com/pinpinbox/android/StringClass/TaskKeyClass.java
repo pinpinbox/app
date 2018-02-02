@@ -21,6 +21,8 @@ public class TaskKeyClass {
 
     public static String firsttime_buy_point = "firsttime_buy_point"; /*首次購買P點*/
 
+    public static String follow_user = "follow_user";
+
 
 
 

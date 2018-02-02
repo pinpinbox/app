@@ -459,14 +459,29 @@ public class SetMapByProtocol {
         return sendData(map);
     }
 
-    public static Map<String, String> setParam84_checktaskcompleted(String id, String token, String task_for, String platform){
+    public static Map<String, String> setParam84_checktaskcompleted(String id, String token, String task_for, String platform, String type, String type_id){
         map = new HashMap<>();
         map.put(MapKey.id, id);
         map.put(MapKey.token, token);
         map.put(MapKey.task_for, task_for);
         map.put(MapKey.platform, platform);
+        map.put(MapKey.type, type);
+        map.put(MapKey.type_id, type_id);
         return sendData(map);
     }
+
+
+    public static Map<String, String> setParam84_checktaskcompleted(String id, String token, String task_for, String platform, Map<String, String> exceptData){
+        map = new HashMap<>();
+        map.put(MapKey.id, id);
+        map.put(MapKey.token, token);
+        map.put(MapKey.task_for, task_for);
+        map.put(MapKey.platform, platform);
+
+        return sendDataExcept(map, exceptData);
+    }
+
+
 
     public static Map<String, String> setParam86_getrecommendedlist(String id, String token, String type, String limit){
         map = new HashMap<>();
@@ -563,6 +578,27 @@ public class SetMapByProtocol {
             map.put(key, value);
         }
         map.put("sign",sign);
+        return map;
+    }
+
+
+    public static Map<String, String> sendDataExcept(Map<String, String> data, Map<String, String> exceptData){
+        String sign = IndexSheet.encodePPB(data);
+        Map<String, String> map = new HashMap<String, String>();
+
+        for (Map.Entry entry : data.entrySet()) {
+            String key = (String)entry.getKey( );
+            String value = (String)entry.getValue();
+            map.put(key, value);
+        }
+        map.put("sign",sign);
+
+        for (Map.Entry entry : exceptData.entrySet()) {
+            String key = (String)entry.getKey( );
+            String value = (String)entry.getValue();
+            map.put(key, value);
+        }
+
         return map;
     }
 

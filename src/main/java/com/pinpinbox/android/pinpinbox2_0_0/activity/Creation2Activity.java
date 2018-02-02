@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -175,8 +176,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private String aviaryPath = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_FromAviary;
     private String mp3Path = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
-    ;
 
+    private String strPrefixText;
     private String picUrl;//顯示中的相片
     private String album_id;//相本id
     //    private String template_id;//套版id
@@ -358,9 +359,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             event_id = bundle.getString(Key.event_id, "");
             isContribute = bundle.getBoolean(Key.isContribute, false);
+            strPrefixText = bundle.getString(Key.prefix_text, "");
 
             MyLog.Set("d", getClass(), "bundle => event_id => " + event_id);
             MyLog.Set("d", getClass(), "bundle => isContibute => " + isContribute);
+            MyLog.Set("d", getClass(), "bundle => strPrefixText => " + strPrefixText);
 
             //測試用
 //            createMode = CreationTemplate;
@@ -933,6 +936,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void recordingClick() {
 
         audioRecordingImg.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
 
@@ -2602,6 +2606,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         if (isContribute) {
             bundle.putBoolean(Key.isContribute, true);
             bundle.putString(Key.event_id, event_id);
+            bundle.putString(Key.prefix_text, strPrefixText);
         }
 
         /*判斷audio*/
@@ -3439,6 +3444,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         private Toast toast;
 
+        @SuppressLint("WrongConstant")
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -5128,6 +5134,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private boolean isPause = false;
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();

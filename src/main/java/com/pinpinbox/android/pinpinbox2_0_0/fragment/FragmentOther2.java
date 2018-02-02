@@ -57,6 +57,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -996,7 +997,12 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
         protected Object doInBackground(Void... params) {
             String strJson = "";
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google"), null);
+                HashMap<String, String>map = new HashMap<>();
+                map.put(Key.type, Value.album);
+                map.put(Key.type_id, (String)p17arraylist.get(clickPosition).get(Key.album_id));
+
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google", map), null);
+
                 MyLog.Set("d", getClass(), "p84strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p84Result = Key.timeout;

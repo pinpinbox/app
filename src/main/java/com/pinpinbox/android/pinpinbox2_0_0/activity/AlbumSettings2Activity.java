@@ -121,6 +121,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private String settings;
     private String event_id;
     private String strGetTitle, strGetDescription, strGetLocation, strGetPoint;
+    private String strPrefixText;
 
 
     private List<String> albumindexList;
@@ -244,7 +245,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 //            isCreationExist = bundle.getBoolean(Key.isCreationExist, false);
             event_id = bundle.getString(Key.event_id, "");
             isNewCreate = bundle.getBoolean(Key.isNewCreate, false);
-
+            strPrefixText = bundle.getString(Key.prefix_text, "");
 
             /*20171115*/
             List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
@@ -1317,7 +1318,14 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
         private void setData() {
 
-            edName.setText(strTitle);
+            if (isNewCreate && isContribute) {
+//                edName.setText(strPrefixText);
+                edName.setHint(strPrefixText);
+            } else {
+                edName.setText(strTitle);
+            }
+
+
             edDescription.setText(strDescription);
             edLocation.setText(strLocation);
             edPoint.setText(intPoint + "");
@@ -1668,25 +1676,23 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
 //                               dissmissLoading();
 
-                               Bundle bundle = new Bundle();
-                               bundle.putString(Key.album_id, album_id);
-                               bundle.putString(Key.event_id, event_id);
-                               bundle.putBoolean(Key.isNewCreate, isNewCreate);
-                               bundle.putBoolean(Key.isContribute, isContribute);
+                Bundle bundle = new Bundle();
+                bundle.putString(Key.album_id, album_id);
+                bundle.putString(Key.event_id, event_id);
+                bundle.putBoolean(Key.isNewCreate, isNewCreate);
+                bundle.putBoolean(Key.isContribute, isContribute);
 
-                               Intent intent = new Intent(mActivity, Reader2Activity.class);
-                               intent.putExtras(bundle);
-                               startActivity(intent);
-                               finish();
-                               ActivityAnim.StartAnim(mActivity);
+                Intent intent = new Intent(mActivity, Reader2Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+                ActivityAnim.StartAnim(mActivity);
 
 
 //                           }
 //                       });
 //                    }
 //                },750);
-
-
 
 
             } else if (p73Result.equals("0")) {
@@ -1699,10 +1705,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
             }
         }
-
-
-
-
 
 
 //        private void checkClose(){

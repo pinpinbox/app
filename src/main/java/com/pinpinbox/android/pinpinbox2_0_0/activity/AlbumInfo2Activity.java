@@ -64,6 +64,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
@@ -1472,7 +1473,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             String strJson = "";
 
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google"), null);
+
+
+                HashMap<String, String>map = new HashMap<>();
+                map.put(Key.type, Value.album);
+                map.put(Key.type_id, album_id);
+
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google", map), null);
                 MyLog.Set("d", getClass(), "p84strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p84Result = Key.TIMEOUT;
@@ -2764,6 +2771,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        MyLog.Set("e", getClass(), "requestCode => " + requestCode);
+        MyLog.Set("e", getClass(), "resultCode => " + resultCode);
+        MyLog.Set("e", getClass(), "data => " + data.toString());
+
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
