@@ -1,4 +1,4 @@
-package com.pinpinbox.android.StringClass;
+package com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass;
 
 /**
  * Created by kevin9594 on 2017/2/11.

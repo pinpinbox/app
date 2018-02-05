@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.DialogStyleClass;
 
 /**
  * Created by vmage on 2016/5/20.

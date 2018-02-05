@@ -17,7 +17,6 @@
 //
 //
 //import com.pinpinbox.android.R;
-//import com.pinpinbox.android.StringClass.ColorClass;
 //
 //import java.util.ArrayList;
 //

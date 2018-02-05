@@ -30,8 +30,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.CaptureActivityHa
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.InactivityTimer;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.view.ViewfinderView;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 

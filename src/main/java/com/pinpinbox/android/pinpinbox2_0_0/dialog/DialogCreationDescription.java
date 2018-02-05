@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ColorClass;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;

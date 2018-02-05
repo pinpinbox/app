@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import com.pinpinbox.android.StringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ColorClass;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
