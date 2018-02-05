@@ -1,6 +1,6 @@
 package com.pinpinbox.android.StringClass;
 
-import com.pinpinbox.android.Mode.TestMode;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.TestMode;
 
 /**
  * Created by vmage on 2015/5/12

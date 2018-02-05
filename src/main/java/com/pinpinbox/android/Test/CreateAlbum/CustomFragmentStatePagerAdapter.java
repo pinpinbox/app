@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.CreateAlbum;
+package com.pinpinbox.android.Test.CreateAlbum;
 
 /**
  * Created by kevin9594 on 2016/4/10.

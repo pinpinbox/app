@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Mode;
+package com.pinpinbox.android.pinpinbox2_0_0.mode;
 
 import com.pinpinbox.android.BuildConfig;
 

@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.ReadAlbum;
+package com.pinpinbox.android.Test.ReadAlbum;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

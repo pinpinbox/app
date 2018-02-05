@@ -13,7 +13,7 @@
  * permissions and limitations under the License.
  */
 
-package com.pinpinbox.android;
+package com.pinpinbox.android.Test;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -25,6 +25,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.service.MessageReceivingService;
 // Requires Android 2.2 or higher, Google Play Services on the target device, and an active google account on the device.
 

@@ -1,4 +1,4 @@
-package com.pinpinbox.android;
+package com.pinpinbox.android.Test;
 
 import android.location.Criteria;
 import android.location.Location;

@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;

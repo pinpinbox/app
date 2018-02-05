@@ -1,6 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.protocol;
 
-import com.pinpinbox.android.Mode.TestMode;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.TestMode;
 
 /**
  * Created by vmage on 2017/7/7.

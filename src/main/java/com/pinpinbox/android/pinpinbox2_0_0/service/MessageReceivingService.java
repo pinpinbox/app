@@ -19,7 +19,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HttpUtility;

@@ -379,7 +379,7 @@
     <string name="pinpinbox_2_0_0_title_mail">信箱</string>
     <string name="pinpinbox_2_0_0_title_password">密碼</string>
     <string name="pinpinbox_2_0_0_title_cellphone">手機</string>
-    <string name="pinpinbox_2_0_0_title_gender">姓別</string>
+    <string name="pinpinbox_2_0_0_title_gender">性別</string>
     <string name="pinpinbox_2_0_0_title_birthday">生日</string>
     <string name="pinpinbox_2_0_0_title_hobby">興趣</string>
     <string name="pinpinbox_2_0_0_title_click_to_select_long_click_to_watch">點擊選取，長按觀看</string>

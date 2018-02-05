@@ -29,7 +29,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.OldMainActivity;
+import com.pinpinbox.android.Test.OldMainActivity;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;

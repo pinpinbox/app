@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.BuyPoint;
+package com.pinpinbox.android.Test;
 
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;

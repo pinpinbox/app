@@ -11,7 +11,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pinpinbox.android.Activity.CreateAlbum.TemplateListAdapter;
+import com.pinpinbox.android.Test.CreateAlbum.TemplateListAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;

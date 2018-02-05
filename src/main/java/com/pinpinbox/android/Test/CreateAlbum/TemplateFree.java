@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.CreateAlbum;
+package com.pinpinbox.android.Test.CreateAlbum;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -45,7 +45,7 @@ import java.util.Map;
 /**
  * Created by vmage on 2015/10/30.
  */
-public class TemplateSponsored extends Fragment {
+public class TemplateFree extends Fragment {
 
     private TemplateListAdapter templateListAdapter;
     private TemplateListTask templateListTask;
@@ -66,7 +66,7 @@ public class TemplateSponsored extends Fragment {
     private String id, token;
     private String p36Result, p36Message;
     private String p36Description, p36Image, p36name, p36Point, p36Template_id, p36Count, p36User;
-    private static final String Rank = "sponsored";
+    private static final String Rank = "free";
 
     private int loadCount = 0;
     private int round, count;
@@ -486,7 +486,7 @@ public class TemplateSponsored extends Fragment {
         @Override
         protected Object doInBackground(Void... params) {
 
-            String strJson = ((CreateAlbumActivity) getActivity()).getStrSponsoredJson();
+            String strJson = ((CreateAlbumActivity) getActivity()).getStrFreeJson();
 
             if (strJson != null && !strJson.equals("")) {
                 try {
@@ -561,28 +561,20 @@ public class TemplateSponsored extends Fragment {
 
             if (getActivity() != null && p36Result!=null) {
 
-                try {
-                    if (p36Result.equals("1")) {
-                        try {
-                            setTemItem();
-                            setSubItem();
-                        } catch (Exception e) {
-                            //2015/12/23 error
-                            e.printStackTrace();
-                        }
-                    } else if (p36Result.equals("0")) {
-
-                    } else {
-                        DialogSet d = new DialogSet(getActivity());
-                        d.DialogUnKnow();
+                if (p36Result.equals("1")) {
+                    try {
+                        setTemItem();
+                        setSubItem();
+                    } catch (Exception e) {
+                        //2015/12/23 error
+                        e.printStackTrace();
                     }
-                }catch (Exception e){
-                    e.printStackTrace();
-                    getActivity().finish();
+                } else if (p36Result.equals("0")) {
+
+                } else {
+                    DialogSet d = new DialogSet(getActivity());
+                    d.DialogUnKnow();
                 }
-
-
-
             }
 
 

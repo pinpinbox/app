@@ -47,7 +47,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;

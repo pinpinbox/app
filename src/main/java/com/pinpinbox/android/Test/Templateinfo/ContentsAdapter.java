@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.TemplateInfo;
+package com.pinpinbox.android.Test.Templateinfo;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

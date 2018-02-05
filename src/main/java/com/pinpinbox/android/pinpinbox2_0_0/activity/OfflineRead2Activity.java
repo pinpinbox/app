@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.GalleryAdapter;
-import com.pinpinbox.android.Activity.ReadAlbum.PageAdapter;
+import com.pinpinbox.android.Test.ReadAlbum.PageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.R;

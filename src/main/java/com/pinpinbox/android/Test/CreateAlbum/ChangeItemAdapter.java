@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.CreateAlbum;
+package com.pinpinbox.android.Test.CreateAlbum;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -11,24 +11,22 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by vmage on 2016/11/29.
+ * Created by vmage on 2015/7/15
  */
-public class SelectPreviewAdapter extends BaseAdapter {
+public class ChangeItemAdapter extends BaseAdapter {
+   private LayoutInflater mInflater;
 
-    private LayoutInflater mInflater;
-
-    private ArrayList<HashMap<String, Object>> listData;
-    private Activity mActivity;
+   private ArrayList<HashMap<String, Object>> listData;
+   private Activity mActivity;
 
 
-    public SelectPreviewAdapter(Activity activity, ArrayList<HashMap<String, Object>> listData) {
+    public ChangeItemAdapter(Activity activity, ArrayList<HashMap<String, Object>> listData) {
         this.mActivity = activity;
         this.listData = listData;
         mInflater = LayoutInflater.from(mActivity);
@@ -56,14 +54,14 @@ public class SelectPreviewAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.list_item_2_0_0_select_preview, null);
+            convertView = mInflater.inflate(R.layout.list_item_2_0_0_change_item, null);
             holder.picImg = (ImageView) convertView.findViewById(R.id.item_pic);
             holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.selectImg = (ImageView)convertView.findViewById(R.id.selectImg);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
 
         Picasso.with(mActivity)
                 .load((String) listData.get(position).get("image_url_thumbnail"))
@@ -75,26 +73,16 @@ public class SelectPreviewAdapter extends BaseAdapter {
 
 
         if(position ==0){
-            holder.name.setText("封面");
-        }else {
+            holder.name.setText(R.string.pinpinbox_2_0_0_other_text_creation_cover);
+        }else
+        {
             holder.name.setText(StringIntMethod.IntToString(position));
         }
-
-        /**2016.11.29 new add*/
-        boolean b = (boolean)listData.get(position).get(Key.is_preview);
-        if(b){
-            holder.selectImg.setImageResource(R.drawable.icon_select_pink500_120x120);
-        }else {
-            holder.selectImg.setImageResource(R.drawable.icon_unselect_teal500_120x120);
-        }
-
-
-
         return convertView;
     }
 
     public class ViewHolder {
-        ImageView picImg, selectImg;
+        ImageView picImg;
         TextView name;
     }
 

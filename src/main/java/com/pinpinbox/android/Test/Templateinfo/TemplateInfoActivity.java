@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.TemplateInfo;
+package com.pinpinbox.android.Test.Templateinfo;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -23,14 +23,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.Activity.BuyPoint.PointActivity;
-import com.pinpinbox.android.Activity.CreateAlbum.CreateAlbumActivity;
-import com.pinpinbox.android.Activity.CreateAlbum.TemplateOwn;
+import com.pinpinbox.android.Test.PointActivity;
+import com.pinpinbox.android.Test.CreateAlbum.CreateAlbumActivity;
+import com.pinpinbox.android.Test.CreateAlbum.TemplateOwn;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;

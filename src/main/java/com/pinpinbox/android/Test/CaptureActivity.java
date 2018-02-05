@@ -1,4 +1,4 @@
-package com.pinpinbox.android;
+package com.pinpinbox.android.Test;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.camera.CameraManager;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.CaptureActivityHandler;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.InactivityTimer;

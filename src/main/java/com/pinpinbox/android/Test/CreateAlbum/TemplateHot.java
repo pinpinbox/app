@@ -1,4 +1,5 @@
-package com.pinpinbox.android.Activity.CreateAlbum;
+package com.pinpinbox.android.Test.CreateAlbum;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -42,10 +43,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * Created by vmage on 2015/10/30.
+ * Created by vmage on 2015/10/30
  */
-public class TemplateFree extends Fragment {
+public class TemplateHot extends Fragment {
 
     private TemplateListAdapter templateListAdapter;
     private TemplateListTask templateListTask;
@@ -66,7 +68,7 @@ public class TemplateFree extends Fragment {
     private String id, token;
     private String p36Result, p36Message;
     private String p36Description, p36Image, p36name, p36Point, p36Template_id, p36Count, p36User;
-    private static final String Rank = "free";
+    private static final String Rank = "hot";
 
     private int loadCount = 0;
     private int round, count;
@@ -486,7 +488,7 @@ public class TemplateFree extends Fragment {
         @Override
         protected Object doInBackground(Void... params) {
 
-            String strJson = ((CreateAlbumActivity) getActivity()).getStrFreeJson();
+            String strJson = ((CreateAlbumActivity) getActivity()).getStrHotJson();
 
             if (strJson != null && !strJson.equals("")) {
                 try {
@@ -702,5 +704,5 @@ public class TemplateFree extends Fragment {
         super.onDestroy();
     }
 
-}
 
+}

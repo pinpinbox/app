@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.pinpinbox.android.Activity.ReadAlbum.ReadAlbumActivity;
+import com.pinpinbox.android.Test.ReadAlbum.ReadAlbumActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.StringClass.ProtocolsClass;

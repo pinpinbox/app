@@ -207,7 +207,7 @@
             android:process=":aviarycds" />
         android:windowSoftInputMode="adjustPan|stateHidden"
         <activity
-            android:name=".Activity.BuyPoint.PointActivity"
+            android:name=".Test.PointActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger" />
@@ -219,7 +219,7 @@
 
         <!-- 閱讀作品 -->
         <activity
-            android:name=".Activity.ReadAlbum.ReadAlbumActivity"
+            android:name=".Test.ReadAlbum.ReadAlbumActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="user"
             android:theme="@style/dragger" />
@@ -260,7 +260,7 @@
 
 
         <activity
-            android:name=".OldMainActivity"
+            android:name=".Test.OldMainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"
@@ -274,7 +274,7 @@
 
         </activity>
         <activity
-            android:name=".CaptureActivity"
+            android:name=".Test.CaptureActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -294,7 +294,7 @@
             tools:ignore="ManifestResource" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Test.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".pinpinbox2_0_0.activity.YouTubeActivity"
@@ -319,13 +319,13 @@
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".Activity.CreateAlbum.CreateAlbumActivity"
+            android:name=".Test.CreateAlbum.CreateAlbumActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".Activity.TemplateInfo.TemplateInfoActivity"
+            android:name=".Test.Templateinfo.TemplateInfoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"

@@ -1,4 +1,4 @@
-package com.pinpinbox.android.Activity.ReadAlbum;
+package com.pinpinbox.android.Test.ReadAlbum;
 
 
 import android.Manifest;
@@ -58,7 +58,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.AlbumDownLoad;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;

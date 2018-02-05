@@ -1,5 +1,4 @@
-package com.pinpinbox.android.Activity.CreateAlbum;
-
+package com.pinpinbox.android.Test.CreateAlbum;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +15,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -43,11 +43,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * Created by vmage on 2015/10/30
+ * Created by vmage on 2015/10/30.
  */
-public class TemplateHot extends Fragment {
+
+
+public class TemplateOwn extends Fragment {
 
     private TemplateListAdapter templateListAdapter;
     private TemplateListTask templateListTask;
@@ -60,6 +61,7 @@ public class TemplateHot extends Fragment {
     private ListView subListView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View viewFooter;
+    private TextView tvNoTemUse;
 
     public ArrayList<HashMap<String, Object>> p36arraylist;
     private ArrayList<HashMap<String, Object>> sublist;
@@ -68,7 +70,7 @@ public class TemplateHot extends Fragment {
     private String id, token;
     private String p36Result, p36Message;
     private String p36Description, p36Image, p36name, p36Point, p36Template_id, p36Count, p36User;
-    private static final String Rank = "hot";
+    private static final String Rank = "own";
 
     private int loadCount = 0;
     private int round, count;
@@ -95,6 +97,7 @@ public class TemplateHot extends Fragment {
         r = (RelativeLayout) v.findViewById(R.id.rCreate_album_sublistview);
         temListView = (ListView) v.findViewById(R.id.template_listview);
         subListView = (ListView) v.findViewById(R.id.create_album_sublistview);
+        tvNoTemUse = (TextView) v.findViewById(R.id.tvNoTemUse);
 
 
         /**2016.10.27 new add*/
@@ -488,7 +491,7 @@ public class TemplateHot extends Fragment {
         @Override
         protected Object doInBackground(Void... params) {
 
-            String strJson = ((CreateAlbumActivity) getActivity()).getStrHotJson();
+            String strJson = ((CreateAlbumActivity) getActivity()).getStrOwnJson();
 
             if (strJson != null && !strJson.equals("")) {
                 try {
@@ -564,6 +567,13 @@ public class TemplateHot extends Fragment {
             if (getActivity() != null && p36Result!=null) {
 
                 if (p36Result.equals("1")) {
+
+                    if(p36arraylist.size()==0){
+                        tvNoTemUse.setVisibility(View.VISIBLE);
+                    }else {
+                        tvNoTemUse.setVisibility(View.GONE);
+                    }
+
                     try {
                         setTemItem();
                         setSubItem();
@@ -577,6 +587,8 @@ public class TemplateHot extends Fragment {
                     DialogSet d = new DialogSet(getActivity());
                     d.DialogUnKnow();
                 }
+
+
             }
 
 
@@ -613,6 +625,12 @@ public class TemplateHot extends Fragment {
             countMax = false;
 
             if(p36Result.equals("1")){
+
+                if(p36arraylist.size()==0){
+                    tvNoTemUse.setVisibility(View.VISIBLE);
+                }else {
+                    tvNoTemUse.setVisibility(View.GONE);
+                }
 
 //                templateListAdapter = new TemplateListAdapter(getActivity(), p36arraylist);
                 temListView.setAdapter(templateListAdapter);
@@ -703,6 +721,7 @@ public class TemplateHot extends Fragment {
         MyLog.Set("d", getClass(), "onDestroy");
         super.onDestroy();
     }
+
 
 
 }

@@ -1,9 +1,7 @@
 package com.pinpinbox.android.StringClass;
 
-import android.view.View;
-
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.Mode.TestMode;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.TestMode;
 
 /**
  * Created by vmage on 2015/3/13

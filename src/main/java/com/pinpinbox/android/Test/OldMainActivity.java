@@ -1,4 +1,4 @@
-package com.pinpinbox.android;
+package com.pinpinbox.android.Test;
 
 
 import android.app.Activity;
@@ -34,14 +34,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.StringClass.ColorClass;
 import com.pinpinbox.android.StringClass.DialogStyleClass;
 import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.StringClass.TagClass;
-import com.pinpinbox.android.Test.Category2Activity;
-import com.pinpinbox.android.Test.FragmentPhotoCrop;
-import com.pinpinbox.android.Test.TestStatusActivity;
-import com.pinpinbox.android.Test.TextTestActivity;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
