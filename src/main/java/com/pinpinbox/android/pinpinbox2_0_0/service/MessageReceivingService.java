@@ -21,7 +21,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;

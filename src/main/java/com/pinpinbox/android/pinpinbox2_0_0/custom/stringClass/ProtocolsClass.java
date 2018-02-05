@@ -1,4 +1,4 @@
-package com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass;
+package com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass;
 
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.TestMode;

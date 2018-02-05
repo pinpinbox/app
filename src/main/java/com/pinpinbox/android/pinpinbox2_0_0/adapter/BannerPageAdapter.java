@@ -23,7 +23,7 @@ import com.pinpinbox.android.Test.Templateinfo.TemplateInfoActivity;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ResultCodeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;

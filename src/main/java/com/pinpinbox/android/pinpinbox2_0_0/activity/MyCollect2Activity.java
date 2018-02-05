@@ -21,7 +21,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;

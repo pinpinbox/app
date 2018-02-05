@@ -1,6 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom;
 
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.Utility.FileUtility;
 
 /**

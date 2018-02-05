@@ -35,10 +35,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.TagClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TagClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;

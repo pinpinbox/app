@@ -16,7 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerMargin.SwipeBackActivityHelper;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerBackHelper;

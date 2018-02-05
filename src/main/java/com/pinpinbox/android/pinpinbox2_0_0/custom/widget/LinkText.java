@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.link_builder.Link;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.link_builder.LinkBuilder;
 

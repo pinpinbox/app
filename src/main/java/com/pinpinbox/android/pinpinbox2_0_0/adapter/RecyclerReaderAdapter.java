@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.StringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
