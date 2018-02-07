@@ -1194,17 +1194,23 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(getActivity(), WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        getActivity().startActivity(intent);
-                        ActivityAnim.StartAnim(getActivity());
-                    }
-                });
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(getActivity(), WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(getActivity());
+                        }
+                    });
+                }
 
             } else if (p83Result.equals("2")) {
 

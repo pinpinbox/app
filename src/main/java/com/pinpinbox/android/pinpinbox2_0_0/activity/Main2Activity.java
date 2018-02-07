@@ -1263,13 +1263,13 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         String task = JsonUtility.GetString(object, ProtocolKey.task);
                         String event = JsonUtility.GetString(object, ProtocolKey.event);
 
-                        JSONObject taskObj = new JSONObject(task);
-                        name = JsonUtility.GetString(taskObj, ProtocolKey.name);
-                        reward = JsonUtility.GetString(taskObj, ProtocolKey.reward);
-                        reward_value = JsonUtility.GetString(taskObj, ProtocolKey.reward_value);
+                        JSONObject jsonTask = new JSONObject(task);
+                        name = JsonUtility.GetString(jsonTask, ProtocolKey.name);
+                        reward = JsonUtility.GetString(jsonTask, ProtocolKey.reward);
+                        reward_value = JsonUtility.GetString(jsonTask, ProtocolKey.reward_value);
 
-                        JSONObject eventObj = new JSONObject(event);
-                        url = JsonUtility.GetString(eventObj, ProtocolKey.url);
+                        JSONObject jsonEvent = new JSONObject(event);
+                        url = JsonUtility.GetString(jsonEvent, ProtocolKey.url);
 
                     } else if (p83Result == 2) {
                         p83Message = jsonObject.getString(Key.message);
@@ -1325,18 +1325,23 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
 
 
             } else if (p83Result == 2) {

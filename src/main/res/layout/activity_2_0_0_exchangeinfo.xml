@@ -177,7 +177,8 @@
             style="@style/ppb200_ic_action_back"
             android:layout_alignParentBottom="true"
             android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_cancel_dark" />
+            android:src="@drawable/ic200_cancel_dark"
+            android:padding="16dp"/>
 
     </RelativeLayout>
 

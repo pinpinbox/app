@@ -32,12 +32,6 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
@@ -53,6 +47,12 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -590,15 +590,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         popPicker.setTitle(R.string.pinpinbox_2_0_0_pop_title_what_to_report);
         popPicker.setPickerData(strReportList);
 
-
         popPicker.getTvConfirm().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 strReportSelect = popPicker.getStrSelect();
 
-                if (strReportSelect == null) {
+                if (strReportSelect == null || strReportSelect.equals("null") || strReportSelect.equals("")) {
                     strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
                 }
 
@@ -621,9 +619,21 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             }
         });
 
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                popPicker.getPickerView().setSelected(reportList.size()/2);
+//                strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
+//                MyLog.Set("d", mActivity.getClass(), "strReportSelect =========> " + strReportSelect);
+//            }
+//        },500);
+
+
+
         popPicker.show((RelativeLayout) findViewById(R.id.rBackground));
 
     }
+
 
     private void systemShare() {
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -1675,18 +1685,29 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
+
+
+
+
 
             } else if (p83Result.equals("2")) {
 

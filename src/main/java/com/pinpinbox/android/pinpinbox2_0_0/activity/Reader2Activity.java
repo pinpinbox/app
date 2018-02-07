@@ -47,15 +47,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -78,6 +70,13 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -95,6 +94,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol42;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
@@ -962,7 +962,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         }
 
     }
-
 
     private void doGetExchange(final View v, final int position, final String identifier, final LinearLayout linExchange) {
 
@@ -2911,18 +2910,23 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if(url==null || url.equals("")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
 
 
             } else if (p83Result == 2 || p83Result == 0) {
@@ -3241,18 +3245,23 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
 
             } else if (p83Result == 2) {
 
@@ -3635,31 +3644,33 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+
+    private Criteria criteria;
+
+
     @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();
 
-        try {
 
-            Criteria criteria = new Criteria();
-            criteria.setPowerRequirement(Criteria.POWER_LOW);
-            criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        try{
+
+            if (criteria == null) {
+                criteria = new Criteria();
+                criteria.setPowerRequirement(Criteria.POWER_LOW);
+                criteria.setAccuracy(Criteria.ACCURACY_FINE);
+            }
+
+            if (mLocManager == null) {
+                mLocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            }
 
             String bestProvider = mLocManager.getBestProvider(criteria, true);
             Location newLoction = null;
-//            if (bestProvider != null)
-//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-            newLoction = mLocManager.getLastKnownLocation(bestProvider);
+            if (bestProvider != null) {
+                newLoction = mLocManager.getLastKnownLocation(bestProvider);
+            }
 
             if (mLocation == null) {
                 mLocation = new Location("");
@@ -3668,10 +3679,52 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             if (newLoction != null) {
                 mLocation.setLatitude(newLoction.getLatitude());
                 mLocation.setLongitude(newLoction.getLongitude());
+
+
+                MyLog.Set("e", getClass(), "newLoction.getLatitude() => " + newLoction.getLatitude());
+                MyLog.Set("e", getClass(), "newLoction.getLongitude() => " + newLoction.getLongitude());
+            } else {
+
+                MyLog.Set("e", getClass(), "-9-9-9-9-9-9--9-9-9-9-9-9");
             }
-        } catch (Exception e) {
+
+        }catch (Exception e){
             e.printStackTrace();
         }
+
+
+//        try {
+//
+//            Criteria criteria = new Criteria();
+//            criteria.setPowerRequirement(Criteria.POWER_LOW);
+//            criteria.setAccuracy(Criteria.ACCURACY_FINE);
+//
+//            String bestProvider = mLocManager.getBestProvider(criteria, true);
+//            Location newLoction = null;
+////            if (bestProvider != null)
+////                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+////                    // TODO: Consider calling
+////                    //    ActivityCompat#requestPermissions
+////                    // here to request the missing permissions, and then overriding
+////                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+////                    //                                          int[] grantResults)
+////                    // to handle the case where the user grants the permission. See the documentation
+////                    // for ActivityCompat#requestPermissions for more details.
+////                    return;
+////                }
+//            newLoction = mLocManager.getLastKnownLocation(bestProvider);
+//
+//            if (mLocation == null) {
+//                mLocation = new Location("");
+//            }
+//
+//            if (newLoction != null) {
+//                mLocation.setLatitude(newLoction.getLatitude());
+//                mLocation.setLongitude(newLoction.getLongitude());
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
         if (mediaPlayer != null && !mediaPlayer.isPlaying() && isPlayAudio) {

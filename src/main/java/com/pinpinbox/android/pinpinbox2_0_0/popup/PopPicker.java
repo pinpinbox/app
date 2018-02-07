@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,7 +101,12 @@ public class PopPicker {
             public void onDismiss() {
 
 
-                ((DraggerActivity)mActivity).setCurrentActivityStatusMode();
+                ((DraggerActivity) mActivity).setCurrentActivityStatusMode();
+
+                //20171214
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mActivity.getWindow().setStatusBarColor(acStatusColor);
+                }
 
                 /*恢復背景*/
                 ViewPropertyAnimator alphaTo0 = blurView.animate();
@@ -142,7 +148,6 @@ public class PopPicker {
 
         TextUtility.setBold(tvTitle, true);
 
-
         pickerView.setTextSize(DensityUtility.sp2px(mActivity.getApplicationContext(), 20));
         pickerView.setMarginAlpha(2.8f);
         pickerView.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
@@ -154,16 +159,17 @@ public class PopPicker {
         });
 
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            mActivity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//            mActivity.getWindow().setStatusBarColor(Color.parseColor(ColorClass.TRANSPARENT));
-//        }
-
     }
+
+
+    private int acStatusColor = 0;
 
     public void show(RelativeLayout rBackground) {
 
-        ((DraggerActivity)mActivity).setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            acStatusColor = mActivity.getWindow().getStatusBarColor();
+        }
+        ((DraggerActivity) mActivity).setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
 
         /*彈出時 設定background*/
         this.rBackground = rBackground;

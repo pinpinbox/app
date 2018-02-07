@@ -910,7 +910,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                     ActivityAnim.StartAnim(mActivity);
 
 
-//                    doGetMyCollect();
+
                 }
 
                 break;
