@@ -133,6 +133,7 @@ public class Key {
     public static String photo_default_path = "photo_default_path";
     public static String photo_id = "photo_id";
     public static String prefix_text = "prefix_text";
+    public static String photousefor_user_id = "photousefor_user_id";
 
     //q
 

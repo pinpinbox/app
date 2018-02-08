@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -95,8 +97,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol108;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol42;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
@@ -980,22 +983,163 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         /*bottom*/
         final TextView tvAddToExchangeList = (TextView) v.findViewById(R.id.tvAddToExchangeList);
         final TextView tvChange = (TextView) v.findViewById(R.id.tvChange);
-        final RelativeLayout rExchangeBottom = (RelativeLayout) v.findViewById(R.id.rExchangeBottom);
+        final RelativeLayout rAddToExchangeList = (RelativeLayout) v.findViewById(R.id.rAddToExchangeList);
 
 
         /*end*/
         final TextView tvExchangeEnd = (TextView) v.findViewById(R.id.tvExchangeEnd);
 
 
-        final Protocol42 protocol42 = new Protocol42(
+//        final Protocol42 protocol42 = new Protocol42(
+//                mActivity,
+//                PPBApplication.getInstance().getId(),
+//                PPBApplication.getInstance().getToken(),
+//                photoContentsList.get(position).getPhoto_id() + "",
+//                identifier,
+//                new Protocol42.TaskCallBack() {
+//
+//
+//                    @Override
+//                    public void Prepare() {
+//
+//                        linExchange.setVisibility(View.GONE);
+//                        linExchange.setAlpha(0f);
+//
+//                        linTimeout.setVisibility(View.GONE);
+//                        linTimeout.setAlpha(0f);
+//
+//                        loading.smoothToShow();
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void Post() {
+//
+//                        loading.smoothToHide();
+//
+//                    }
+//
+//                    private void showContents(ItemExchange itemExchange) {
+//
+//                        Picasso.with(mActivity.getApplicationContext())
+//                                .load(itemExchange.getImage())
+//                                .config(Bitmap.Config.RGB_565)
+//                                .error(R.drawable.bg_2_0_0_no_image)
+//                                .tag(mActivity.getApplicationContext())
+//                                .into(exchangeImg);
+//
+//                        linExchange.setVisibility(View.VISIBLE);
+//                        ViewControl.AlphaTo1(linExchange);
+//
+//
+//                        TextUtility.setBold(tvExchangeName, true);
+//                        tvExchangeName.setText(itemExchange.getName());
+//
+//                        tvExchangeDescription.setText(itemExchange.getDescription());
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void Success(ItemExchange itemExchange) {
+//
+//
+//                        showContents(itemExchange);
+//
+//                        tvChange.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View vv) {
+//                                if (ClickUtils.ButtonContinuousClick_1s()) {
+//                                    return;
+//                                }
+//
+//                            }
+//                        });
+//
+//                        /*依狀態判定是否可以點擊*/
+//                        rAddToExchangeList.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//
+//                            }
+//                        });
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void isAlreadyGet(ItemExchange itemExchange) {
+//
+//                        showContents(itemExchange);
+//                        tvChange.setText("已兌換");
+//                        tvChange.setBackgroundResource(R.drawable.border_2_0_0_white_radius);
+//                        tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+//
+//                    }
+//
+//                    @Override
+//                    public void isEnd() {
+//
+//
+////                        ValueAnimator va = ValueAnimator.ofInt(SizeUtils.dp2px(384), SizeUtils.dp2px(64));
+////
+////                        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+////                            @Override
+////                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+////                                //获取当前的height值
+////                                //动态更新view的高度
+////                                linExchange.getLayoutParams().height = (Integer)valueAnimator.getAnimatedValue();
+////                                linExchange.requestLayout();
+////                            }
+////                        });
+////                        va.setDuration(1200);
+////                        //开始动画
+////                        va.start();
+//
+//                        TextUtility.setBold(tvExchangeEnd, true);
+//
+//                        tvExchangeEnd.setVisibility(View.VISIBLE);
+//                        ViewControl.AlphaTo1(tvExchangeEnd);
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void TimeOut() {
+//
+//
+//                        linTimeout.setVisibility(View.VISIBLE);
+//                        ViewControl.AlphaTo1(linTimeout);
+//
+//                        tvAgain.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View vv) {
+//                                if (ClickUtils.ButtonContinuousClick_1s()) {
+//                                    return;
+//                                }
+//                                doGetExchange(v, position, identifier, linExchange);
+//                            }
+//                        });
+//
+//
+//                    }
+//                }
+//        );
+
+
+        TextUtility.setBold(tvExchangeName, true);
+        TextUtility.setBold(tvAddToExchangeList, true);
+        TextUtility.setBold(tvChange, true);
+        TextUtility.setBold(tvExchangeEnd, true);
+
+
+        Protocol108 protocol108 = new Protocol108(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 photoContentsList.get(position).getPhoto_id() + "",
-                identifier,
-                new Protocol42.TaskCallBack() {
-
-
+                new Protocol108.TaskCallBack() {
                     @Override
                     public void Prepare() {
 
@@ -1029,17 +1173,20 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         linExchange.setVisibility(View.VISIBLE);
                         ViewControl.AlphaTo1(linExchange);
 
-
-                        TextUtility.setBold(tvExchangeName, true);
                         tvExchangeName.setText(itemExchange.getName());
 
                         tvExchangeDescription.setText(itemExchange.getDescription());
 
+                    }
 
+                    private void isInExchangeList(){
+                        tvAddToExchangeList.setText(R.string.pinpinbox_2_0_0_other_text_is_in_exchange_list);
+                        tvAddToExchangeList.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                        rAddToExchangeList.setClickable(false);
                     }
 
                     @Override
-                    public void Success(ItemExchange itemExchange) {
+                    public void Success(final ItemExchange itemExchange) {
 
 
                         showContents(itemExchange);
@@ -1051,54 +1198,99 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                     return;
                                 }
 
+
+                                exchangeImg.setTransitionName(itemExchange.getImage());
+
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("exchangeItem",itemExchange);
+                                bundle.putBoolean("isExchanged", false);
+                                bundle.putInt(Key.photo_id, photoContentsList.get(position).getPhoto_id());
+
+                                Intent intent = new Intent(mActivity, ExchangeInfo2Activity.class).putExtras(bundle);
+
+                                linExchange.setTransitionName("bg_exchange");
+
+                                ActivityOptionsCompat option1 = ActivityOptionsCompat.
+                                        makeSceneTransitionAnimation(mActivity,
+                                                linExchange,
+                                                ViewCompat.getTransitionName(linExchange));
+
+                                ActivityOptionsCompat option2 = ActivityOptionsCompat.
+                                        makeSceneTransitionAnimation(mActivity,
+                                                exchangeImg,
+                                                ViewCompat.getTransitionName(exchangeImg));
+
+                                option2.update(option1);
+
+                                startActivity(intent, option2.toBundle());
+
                             }
                         });
 
                         /*依狀態判定是否可以點擊*/
-                        rExchangeBottom.setOnClickListener(new View.OnClickListener() {
+                        rAddToExchangeList.setOnClickListener(new View.OnClickListener() {
+
+                            private void doAddToExchangeList(){
+
+                                if (!HttpUtility.isConnect(mActivity)) {
+                                    setNoConnect();
+                                    return;
+                                }
+
+                                Protocol109 protocol109 = new Protocol109(
+                                        mActivity,
+                                        PPBApplication.getInstance().getId(),
+                                        PPBApplication.getInstance().getToken(),
+                                        photoContentsList.get(position).getPhoto_id() + "",
+                                        new Protocol109.TaskCallBack() {
+                                            @Override
+                                            public void Prepare() {
+                                                startLoading();
+                                            }
+
+                                            @Override
+                                            public void Post() {
+                                                dissmissLoading();
+                                            }
+
+                                            @Override
+                                            public void Success() {
+                                                isInExchangeList();
+                                            }
+
+                                            @Override
+                                            public void TimeOut() {
+                                                doAddToExchangeList();
+                                            }
+                                        }
+                                );
+
+
+                            }
+
+
                             @Override
                             public void onClick(View v) {
 
+
+                                if(ClickUtils.ButtonContinuousClick()){
+                                    return;
+                                }
+
+                                doAddToExchangeList();
+
                             }
                         });
-
 
                     }
 
                     @Override
                     public void isAlreadyGet(ItemExchange itemExchange) {
 
-                        showContents(itemExchange);
-                        tvChange.setText("已兌換");
-                        tvChange.setBackgroundResource(R.drawable.border_2_0_0_white_radius);
-                        tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-
                     }
 
                     @Override
                     public void isEnd() {
-
-
-//                        ValueAnimator va = ValueAnimator.ofInt(SizeUtils.dp2px(384), SizeUtils.dp2px(64));
-//
-//                        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                            @Override
-//                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                                //获取当前的height值
-//                                //动态更新view的高度
-//                                linExchange.getLayoutParams().height = (Integer)valueAnimator.getAnimatedValue();
-//                                linExchange.requestLayout();
-//                            }
-//                        });
-//                        va.setDuration(1200);
-//                        //开始动画
-//                        va.start();
-
-                        TextUtility.setBold(tvExchangeEnd, true);
-
-                        tvExchangeEnd.setVisibility(View.VISIBLE);
-                        ViewControl.AlphaTo1(tvExchangeEnd);
-
 
                     }
 
@@ -1122,8 +1314,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     }
                 }
-        );
 
+        );
 
     }
 

@@ -395,6 +395,7 @@
     <string name="pinpinbox_2_0_0_title_for_you">For You</string>
     <string name="pinpinbox_2_0_0_title_exchange_list">Exchange List</string>
     <string name="pinpinbox_2_0_0_title_contact">Contact Info</string>
+    <string name="pinpinbox_2_0_0_title_update_contact">Update Contact Info</string>
 
 
     <string name="pinpinbox_2_0_0_guide_cooperation">Co-creating is fun, too.</string>
@@ -529,6 +530,8 @@
     <string name="pinpinbox_2_0_0_other_text_popularity">Popularity:</string>
     <string name="pinpinbox_2_0_0_other_text_cancel_contribute">Cancel</string>
     <string name="pinpinbox_2_0_0_other_text_used_number_when_sign_up">Use the number when registration</string>
+    <string name="pinpinbox_2_0_0_other_text_is_in_exchange_list">Already in exchange list</string>
+    <string name="pinpinbox_2_0_0_other_text_add_to_exchange_list">Add to exchange list</string>
 
 
     <string name="crop__saving">相片儲存中</string>

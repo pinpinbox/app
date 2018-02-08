@@ -126,17 +126,18 @@
 
             <!--bottom-->
             <RelativeLayout
-                android:id="@+id/rExchangeBottom"
+                android:id="@+id/rAddToExchangeList"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/click_2_0_0_white_radius"
                 android:layout_alignParentBottom="true">
 
                 <TextView
+                    fontPath="fonts/OpenSans-Bold.ttf"
                     android:id="@+id/tvAddToExchangeList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="加入兌換清單"
+                    android:text="@string/pinpinbox_2_0_0_other_text_add_to_exchange_list"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_centerInParent="true"

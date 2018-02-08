@@ -120,6 +120,7 @@ public class FragmentExchangeUnfinished2 extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("exchangeItem", exchangeList.get(position));
+                bundle.putBoolean("isExchanged", false);
 
                 Intent intent = new Intent(getActivity(), ExchangeInfo2Activity.class).putExtras(bundle);
 
@@ -128,8 +129,6 @@ public class FragmentExchangeUnfinished2 extends Fragment {
                                 exchangeImg,
                                 ViewCompat.getTransitionName(exchangeImg));
                 startActivity(intent, options.toBundle());
-
-
 
             }
 

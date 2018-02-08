@@ -18,7 +18,7 @@ public class Url {
 
     public static String P42_GetPhotoUseFor_User = domain + "/index/api/getphotousefor_user" + "/1.3";
 
-    public static String P43_UpdataPhotoUserFor_User = domain + "/index/api/updatephotousefor_user" + "/1.1";
+    public static String P43_UpdataPhotoUserFor_User = domain + "/index/api/updatephotousefor_user" + "/2.0";
 
 
     public static String P95_RefreshToken = domain + "/index/api/refreshtoken" + "/2.0";
@@ -42,6 +42,13 @@ public class Url {
     public static String P104_GetSponsorList = domain + "/index/api/getsponsorlist" + "/2.0";
 
     public static String P105_GetLikesList = domain + "/index/api/getalbum2likeslist" + "/2.0";
+
+
+    public static String P106_GainPhotoUseFor = domain + "/index/api/gainphotousefor_user" + "/2.0";
+
+    public static String P108_GetPhotoUseFor = domain + "/index/api/getphotousefor" + "/2.0";
+
+    public static String P109_InsertBookMark = domain + "/index/api/insertbookmark" + "/2.0";
 
 
 
