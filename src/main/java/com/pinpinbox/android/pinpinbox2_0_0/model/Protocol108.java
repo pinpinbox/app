@@ -36,7 +36,9 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Success(ItemExchange itemExchange);
 
-        public abstract void IsEnd();
+        public abstract void isBelongUser(ItemExchange itemExchange);
+
+        public abstract void IsGained(ItemExchange itemExchange);
 
         public abstract void TimeOut();
     }
@@ -91,7 +93,9 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
                 JSONObject jsonObject = new JSONObject(response);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
-                if (result.equals(ResultType.SYSTEM_OK)) {
+                if (result.equals(ResultType.SYSTEM_OK) ||
+                        result.equals(ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED) ||
+                        result.equals(ResultType.PHOTOUSEFOR_USER_HAS_GAINED)) {
 
                     itemExchange = new ItemExchange();
 
@@ -113,7 +117,7 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
                     JSONObject jsonBookMark = new JSONObject(bookmark);
                     itemExchange.setIs_existing(JsonUtility.GetBoolean(jsonBookMark, ProtocolKey.is_existing));
 
-                }else {
+                } else {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
 
@@ -170,22 +174,15 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
 
             case ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED:
 
-               callBack.IsEnd();
+                callBack.isBelongUser(itemExchange);
 
                 break;
 
-//            case 2:
-//
-//                callBack.isAlreadyGet(itemExchange);
-//
-//                break;
-//
-//            case 3:
-//
-//                callBack.isEnd();
-//
-//                break;
+            case ResultType.PHOTOUSEFOR_USER_HAS_GAINED:
 
+                callBack.IsGained(itemExchange);
+
+                break;
 
 
             case ResultType.TIMEOUT:
@@ -215,7 +212,6 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
     public AsyncTask getTask() {
         return this;
     }
-
 
 
 }

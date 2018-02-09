@@ -85,7 +85,6 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
 
     }
 
-
     private void doGetExchangeList(){
 
         if (!HttpUtility.isConnect(this)) {
@@ -125,7 +124,6 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
         );
 
     }
-
 
     private void setFragment(List<ItemExchange> itemExchangeList) {
 
@@ -212,6 +210,12 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
         }
 
         return getFragment;
+    }
+
+    public void scrollToDonePage(){
+        if(vpExchange!=null){
+            vpExchange.setCurrentItem(1);
+        }
     }
 
     @Override

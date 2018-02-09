@@ -98,14 +98,27 @@
                         android:textStyle="bold" />
 
 
-                    <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
-                        android:id="@+id/exchangeImg"
-                        android:layout_width="256dp"
+                    <RelativeLayout
+                        android:id="@+id/rItemBg"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:adjustViewBounds="true"
-                        app:siBorderAlpha="0"
-                        app:siRadius="8dp" />
+                        android:background="@drawable/image_background_2_0_0_home_item_cover_border">
+
+                        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                            android:id="@+id/exchangeImg"
+                            android:layout_width="256dp"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.8"
+                            android:adjustViewBounds="true"
+                            app:siBorderAlpha="0"
+                            app:siRadius="8dp" />
+
+                    </RelativeLayout>
+
+
+
+
 
 
                     <TextView

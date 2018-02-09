@@ -21,6 +21,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentExchangeUnfinished2;
@@ -52,7 +53,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
     private RoundCornerImageView exchangeImg;
     private ItemExchange itemExchange;
 
-    private String photo_id;
+    private int photo_id;
     private int photousefor_user_id;
 
     private boolean isExchanged = false;
@@ -83,7 +84,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
             itemExchange = (ItemExchange) bundle.getSerializable("exchangeItem");
             isExchanged = bundle.getBoolean("isExchanged", false);
-            photo_id = bundle.getString(Key.photo_id, "");
+            photo_id = bundle.getInt(Key.photo_id, -1);
 
         }
     }
@@ -152,9 +153,9 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
         }
 
 
-        edName.setText(PPBApplication.getInstance().getData().getString(Key.contact_name,""));
-        edPhone.setText(PPBApplication.getInstance().getData().getString(Key.contact_phone,""));
-        edAddress.setText(PPBApplication.getInstance().getData().getString(Key.contact_address,""));
+        edName.setText(PPBApplication.getInstance().getData().getString(Key.contact_name, ""));
+        edPhone.setText(PPBApplication.getInstance().getData().getString(Key.contact_phone, ""));
+        edAddress.setText(PPBApplication.getInstance().getData().getString(Key.contact_address, ""));
 
         if (!itemExchange.getImage().equals("")) {
 
@@ -220,11 +221,11 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
         PPBApplication.getInstance().getData().edit().putString(Key.contact_phone, edPhone.getText().toString()).commit();
 
 
-         protocol110 = new Protocol110(
+        protocol110 = new Protocol110(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
-                photo_id,
+                photo_id + "",
                 getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
                 new Protocol110.TaskCallBack() {
                     @Override
@@ -242,12 +243,9 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                         photousefor_user_id = puf_user_id;
 
 
-
-
-
-                        if(isExchanged){
+                        if (isExchanged) {
                             doUpdate();
-                        }else {
+                        } else {
                             doExchange();
                         }
 
@@ -265,7 +263,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private void doExchange() {
 
-         protocol106 = new Protocol106(
+        protocol106 = new Protocol106(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
@@ -287,14 +285,26 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                         PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_exchange_success);
 
-                       Activity activity = SystemUtility.getActivity(ExchangeList2Activity.class.getSimpleName());
-                       if(activity!=null){
+                        Activity acExchangeList = SystemUtility.getActivity(ExchangeList2Activity.class.getSimpleName());
+                        if (acExchangeList != null) {
 
-                           FragmentExchangeUnfinished2 fragmentExchangeUnfinished2 = (FragmentExchangeUnfinished2)((ExchangeList2Activity)activity).getFragment(FragmentExchangeUnfinished2.class.getSimpleName());
 
-                           fragmentExchangeUnfinished2.moveItem();
 
-                       }
+                            FragmentExchangeUnfinished2 fragmentExchangeUnfinished2 = (FragmentExchangeUnfinished2) ((ExchangeList2Activity) acExchangeList).getFragment(FragmentExchangeUnfinished2.class.getSimpleName());
+
+                            fragmentExchangeUnfinished2.moveItem();
+
+                            ((ExchangeList2Activity)acExchangeList).scrollToDonePage();
+
+
+                        }
+
+                        Activity acReader = SystemUtility.getActivity(Reader2Activity.class.getSimpleName());
+                        if(acReader!=null){
+                            ((Reader2Activity)acReader).reFreshExchange();
+                        }
+
+
 
                     }
 
@@ -310,7 +320,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private void doUpdate() {
 
-         protocol43 = new Protocol43(
+        protocol43 = new Protocol43(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
@@ -359,6 +369,9 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                 break;
 
             case R.id.tvRegisterPhone:
+
+                edPhone.setText(PPBApplication.getInstance().getData().getString(Key.cellphone, ""));
+
 
                 break;
 

@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,7 +26,7 @@ public class PinPinToast {
         return toast;
     }
 
-
+    @SuppressLint("WrongConstant")
     public static void ShowToast(Activity mActivity, String message) {
 
         View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast, null);
@@ -47,7 +48,7 @@ public class PinPinToast {
 
     }
 
-
+    @SuppressLint("WrongConstant")
     public static void ShowToast(Activity mActivity, int message) {
 
         View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast, null);
@@ -65,6 +66,7 @@ public class PinPinToast {
         toast.show();
     }
 
+    @SuppressLint("WrongConstant")
     public static void showErrorToast(Activity mActivity, String message) {
         View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast_error, null);
         TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
@@ -78,6 +80,7 @@ public class PinPinToast {
         toast.show();
     }
 
+    @SuppressLint("WrongConstant")
     public static void showErrorToast(Context context, String message) {
         View view = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.pinpinbox_toast_error, null);
         TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
@@ -94,7 +97,7 @@ public class PinPinToast {
 
 
 
-
+    @SuppressLint("WrongConstant")
     public static void showErrorToast(Activity mActivity, int message) {
         View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast_error, null);
         TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
@@ -108,7 +111,7 @@ public class PinPinToast {
         toast.show();
     }
 
-
+    @SuppressLint("WrongConstant")
     public static void showErrorToast(Context context, int message) {
         View view = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.pinpinbox_toast_error, null);
         TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
@@ -125,7 +128,7 @@ public class PinPinToast {
 
 
 
-
+    @SuppressLint("WrongConstant")
     public static void showSuccessToast(Activity mActivity, String message) {
         View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast_success, null);
         TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
@@ -141,6 +144,7 @@ public class PinPinToast {
         toast.show();
     }
 
+    @SuppressLint("WrongConstant")
     public static void showSuccessToast(Activity mActivity, int message) {
         View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast_success, null);
         TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
@@ -156,7 +160,7 @@ public class PinPinToast {
         toast.show();
     }
 
-
+    @SuppressLint("WrongConstant")
     public static void showSuccessToast(Context context, String message) {
         View view = LayoutInflater.from(context).inflate(R.layout.pinpinbox_toast_success, null);
         TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
@@ -170,6 +174,7 @@ public class PinPinToast {
         toast.show();
     }
 
+    @SuppressLint("WrongConstant")
     public static void showSponsorToast(Context context, String message, String pictureUrl){
 
         View view = LayoutInflater.from(context).inflate(R.layout.pinpinbox_toast_sponsor, null);
