@@ -505,6 +505,14 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         StringUtil.ThousandToK(tvViewed, intViewed);
         StringUtil.ThousandToK(tvSponsor, intSponsor);
 
+
+        if(intSponsor<1){
+
+            viewHeader.findViewById(R.id.rSponsorList).setVisibility(View.GONE);
+
+        }
+
+
         authorAdapter.notifyDataSetChanged();
 
         setUrl();

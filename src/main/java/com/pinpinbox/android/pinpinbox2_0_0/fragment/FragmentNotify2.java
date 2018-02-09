@@ -493,6 +493,7 @@ public class FragmentNotify2 extends Fragment {
                             }
 
 
+
                             /*get notify detail*/
                             String pushqueue = JsonUtility.GetString(object, Key.pushqueue);
                             JSONObject pushqueueObj = new JSONObject(pushqueue);

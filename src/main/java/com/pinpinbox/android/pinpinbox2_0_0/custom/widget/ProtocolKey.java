@@ -39,6 +39,7 @@ public class ProtocolKey {
     //b
     public static String besponsored = "besponsored";
     public static String birthday = "birthday";
+    public static String bookmark = "bookmark";
 
 
     //c
@@ -94,6 +95,7 @@ public class ProtocolKey {
     public static String hobby = "hobby";
     public static String hobby_id = "hobby_id";
     public static String has_voted = "has_voted";
+    public static String has_gained = "has_gained";
 
 
     //i
@@ -108,6 +110,7 @@ public class ProtocolKey {
     public static String is_likes = "is_likes";
     public static String image_url = "image_url";
     public static String is_follow = "is_follow";
+    public static String is_existing = "is_existing";
 
     //j
 
@@ -189,6 +192,8 @@ public class ProtocolKey {
     public static String sum = "sum";
     public static String sumofsettlement = "sumofsettlement";
     public static String sumofunsettlement = "sumofunsettlement";
+    public static String starttime = "starttime";
+    public static String endtime = "endtime";
 
 
     //t

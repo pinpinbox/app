@@ -25,18 +25,6 @@
             android:paddingRight="@dimen/ppb200_padding_margin_first">
 
 
-            <TextView
-                android:id="@+id/tvExchangeTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:letterSpacing="0.1"
-                android:text=""
-                android:textColor="@color/pinpinbox_2_0_0_first_pink"
-                android:textSize="@dimen/ppb200_common_text_first"
-                android:textStyle="bold"
-                android:visibility="gone"/>
-
             <RelativeLayout
                 android:id="@+id/rItemBg"
                 android:layout_width="wrap_content"
@@ -181,6 +169,24 @@
             android:background="@drawable/click_2_0_0_default"
             android:src="@drawable/ic200_cancel_dark"
             android:padding="16dp"/>
+
+
+        <TextView
+            android:id="@+id/tvExchangeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_gravity="center_horizontal"
+            android:letterSpacing="0.1"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_pink"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold"
+            android:visibility="visible"/>
+
 
     </RelativeLayout>
 

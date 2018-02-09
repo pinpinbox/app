@@ -281,6 +281,9 @@
     <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_selected">Original size has been selected</string>
     <string name="pinpinbox_2_0_0_toast_message_crop_error">Crop error</string>
     <string name="pinpinbox_2_0_0_toast_message_board_is_close">The creator\'s message board is closed</string>
+    <string name="pinpinbox_2_0_0_toast_message_update_done">Update done</string>
+    <string name="pinpinbox_2_0_0_toast_message_exchange_success">Exchange success</string>
+
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
     <string name="pinpinbox_2_0_0_size_original">Original(Long time)</string>

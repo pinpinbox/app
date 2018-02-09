@@ -78,13 +78,13 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
         TextUtility.setBold(mHolder.tvExchangeName,true);
 
 
-        if(isShowTime){
-            mHolder.tvExchangeTime.setVisibility(View.VISIBLE);
-            mHolder.tvExchangeTime.setText(exchangeList.get(position).getTime());
-            TextUtility.setBold(mHolder.tvExchangeTime,true);
-        }else {
+//        if(isShowTime){
+//            mHolder.tvExchangeTime.setVisibility(View.VISIBLE);
+//            mHolder.tvExchangeTime.setText(exchangeList.get(position).getTime());
+//            TextUtility.setBold(mHolder.tvExchangeTime,true);
+//        }else {
             mHolder.tvExchangeTime.setVisibility(View.GONE);
-        }
+//        }
 
 
         try{

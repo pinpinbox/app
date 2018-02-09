@@ -22,5 +22,7 @@ public class ResultType {
     public static final String TIMEOUT = "TIMEOUT";
     public static final String TOKEN_ERROR = "TOKEN_ERROR";
 
+    public static final String PHOTOUSEFOR_USER_HAS_EXCHANGED = "PHOTOUSEFOR_USER_HAS_EXCHANGED";
+
 
 }

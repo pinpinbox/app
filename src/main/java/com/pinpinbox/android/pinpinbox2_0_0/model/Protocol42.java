@@ -3,15 +3,14 @@ package com.pinpinbox.android.pinpinbox2_0_0.model;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
 import org.json.JSONObject;
@@ -80,7 +79,7 @@ public class Protocol42 extends AsyncTask<Void, Void, Object> {
 
             response = HttpUtility.uploadSubmit(true, Url.P42_GetPhotoUseFor_User, putMap(), null);
 
-            Logger.json(response);
+            MyLog.Set("d", getClass(), "p42response => " + response);
 
 
         } catch (SocketTimeoutException t) {

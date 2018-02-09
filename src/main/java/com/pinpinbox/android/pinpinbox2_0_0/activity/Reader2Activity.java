@@ -147,6 +147,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private SendLikeTask sendLikeTask;
     private DeleteLikeTask deleteLikeTask;
     private Protocol13 protocol13;
+    private Protocol109 protocol109;
 
     private ItemAlbum itemAlbum;
     private List<ItemPhoto> photoContentsList;
@@ -795,16 +796,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         isNoOwnShowCollectType(v, vType);
                     } else {
 
-//                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) rExchange.getLayoutParams();
-//
-//                        layoutParams.height= SizeUtils.dp2px(64);
-//
-//                        rExchange.setLayoutParams(layoutParams);
 
-                        if (linExchange.getVisibility() == View.VISIBLE) {
-                            MyLog.Set("e", this.getClass(), "linExchange is visibility");
-                            return;
-                        }
+//                        if (linExchange.getVisibility() == View.VISIBLE) {
+//                            MyLog.Set("e", this.getClass(), "linExchange is visibility");
+//                            return;
+//                        }
 
                         vType.setVisibility(View.VISIBLE);
 
@@ -1179,7 +1175,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     }
 
-                    private void isInExchangeList(){
+                    private void isInExchangeList() {
                         tvAddToExchangeList.setText(R.string.pinpinbox_2_0_0_other_text_is_in_exchange_list);
                         tvAddToExchangeList.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                         rAddToExchangeList.setClickable(false);
@@ -1198,11 +1194,10 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                     return;
                                 }
 
-
                                 exchangeImg.setTransitionName(itemExchange.getImage());
 
                                 Bundle bundle = new Bundle();
-                                bundle.putSerializable("exchangeItem",itemExchange);
+                                bundle.putSerializable("exchangeItem", itemExchange);
                                 bundle.putBoolean("isExchanged", false);
                                 bundle.putInt(Key.photo_id, photoContentsList.get(position).getPhoto_id());
 
@@ -1227,72 +1222,74 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             }
                         });
 
-                        /*依狀態判定是否可以點擊*/
-                        rAddToExchangeList.setOnClickListener(new View.OnClickListener() {
 
-                            private void doAddToExchangeList(){
+                        if (itemExchange.isIs_existing()) {
+                            isInExchangeList();
+                        } else {
 
-                                if (!HttpUtility.isConnect(mActivity)) {
-                                    setNoConnect();
-                                    return;
+                            /*依狀態判定是否可以點擊*/
+                            rAddToExchangeList.setOnClickListener(new View.OnClickListener() {
+
+                                private void doAddToExchangeList() {
+
+                                    if (!HttpUtility.isConnect(mActivity)) {
+                                        setNoConnect();
+                                        return;
+                                    }
+
+                                    protocol109 = new Protocol109(
+                                            mActivity,
+                                            PPBApplication.getInstance().getId(),
+                                            PPBApplication.getInstance().getToken(),
+                                            photoContentsList.get(position).getPhoto_id() + "",
+                                            new Protocol109.TaskCallBack() {
+                                                @Override
+                                                public void Prepare() {
+                                                    startLoading();
+                                                }
+
+                                                @Override
+                                                public void Post() {
+                                                    dissmissLoading();
+                                                }
+
+                                                @Override
+                                                public void Success() {
+                                                    isInExchangeList();
+                                                }
+
+                                                @Override
+                                                public void TimeOut() {
+                                                    doAddToExchangeList();
+                                                }
+                                            }
+                                    );
+
+
                                 }
 
-                                Protocol109 protocol109 = new Protocol109(
-                                        mActivity,
-                                        PPBApplication.getInstance().getId(),
-                                        PPBApplication.getInstance().getToken(),
-                                        photoContentsList.get(position).getPhoto_id() + "",
-                                        new Protocol109.TaskCallBack() {
-                                            @Override
-                                            public void Prepare() {
-                                                startLoading();
-                                            }
+                                @Override
+                                public void onClick(View v) {
+                                    if (ClickUtils.ButtonContinuousClick()) {
+                                        return;
+                                    }
+                                    doAddToExchangeList();
 
-                                            @Override
-                                            public void Post() {
-                                                dissmissLoading();
-                                            }
-
-                                            @Override
-                                            public void Success() {
-                                                isInExchangeList();
-                                            }
-
-                                            @Override
-                                            public void TimeOut() {
-                                                doAddToExchangeList();
-                                            }
-                                        }
-                                );
-
-
-                            }
-
-
-                            @Override
-                            public void onClick(View v) {
-
-
-                                if(ClickUtils.ButtonContinuousClick()){
-                                    return;
                                 }
+                            });
 
-                                doAddToExchangeList();
+                        }
 
-                            }
-                        });
 
                     }
 
                     @Override
-                    public void isAlreadyGet(ItemExchange itemExchange) {
-
+                    public void IsEnd() {
+                        TextUtility.setBold(tvExchangeEnd, true);
+                        tvExchangeEnd.setVisibility(View.VISIBLE);
+                        ViewControl.AlphaTo1(tvExchangeEnd);
                     }
 
-                    @Override
-                    public void isEnd() {
-
-                    }
 
                     @Override
                     public void TimeOut() {
@@ -3102,9 +3099,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-                if(url==null || url.equals("")){
+                if (url == null || url.equals("")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -3240,7 +3237,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             String strJson = "";
 
             try {
-                HashMap<String, String>map = new HashMap<>();
+                HashMap<String, String> map = new HashMap<>();
                 map.put(Key.type, Value.album);
                 map.put(Key.type_id, album_id);
 
@@ -3437,9 +3434,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-                if(url==null || url.equals("")|| url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -3456,7 +3453,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
             } else if (p83Result == 2) {
-
 
 
             } else if (p83Result == 3) {
@@ -3846,7 +3842,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         super.onResume();
 
 
-        try{
+        try {
 
             if (criteria == null) {
                 criteria = new Criteria();
@@ -3880,7 +3876,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 MyLog.Set("e", getClass(), "-9-9-9-9-9-9--9-9-9-9-9-9");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -3958,6 +3954,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         cancelTask(checkShareTask);
         cancelTask(shareTask);
         cancelTask(protocol13);
+        cancelTask(protocol109);
 
         if (mediaPlayer != null) {
             mediaPlayer.reset();

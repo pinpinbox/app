@@ -43,12 +43,15 @@ public class Url {
 
     public static String P105_GetLikesList = domain + "/index/api/getalbum2likeslist" + "/2.0";
 
-
     public static String P106_GainPhotoUseFor = domain + "/index/api/gainphotousefor_user" + "/2.0";
+
+    public static String P107_GetBookmarkList = domain + "/index/api/getbookmarklist" + "/2.0";
 
     public static String P108_GetPhotoUseFor = domain + "/index/api/getphotousefor" + "/2.0";
 
     public static String P109_InsertBookMark = domain + "/index/api/insertbookmark" + "/2.0";
+
+    public static String P110_ExchangePhotoUseFor = domain + "/index/api/exchangephotousefor" + "/2.0";
 
 
 

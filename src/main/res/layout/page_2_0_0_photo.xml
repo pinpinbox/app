@@ -205,7 +205,7 @@
         android:background="@drawable/border_2_0_0_white_radius"
         android:gravity="center"
         android:letterSpacing="0.1"
-        android:text="活動已結束"
+        android:text="兌換已結束"
         android:textColor="@color/pinpinbox_2_0_0_first_text"
         android:textSize="@dimen/ppb200_title_second_size"
         android:textStyle="bold"

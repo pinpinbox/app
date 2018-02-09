@@ -12,7 +12,9 @@ public class ItemExchange implements Serializable {
     private String image;
     private String name;
     private String time;
+//    private String endtime, starttime;
 
+    private int photo_id;
     private int photousefor_id;
     private int photousefor_user_id;
 
@@ -20,6 +22,17 @@ public class ItemExchange implements Serializable {
     /*custom*/
     private int imageWidth;
     private int imageHeight;
+
+    private boolean is_existing;
+    private boolean has_gained;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getDescription() {
         return description;
@@ -45,13 +58,21 @@ public class ItemExchange implements Serializable {
         this.name = name;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
+//    public String getEndtime() {
+//        return endtime;
+//    }
+//
+//    public void setEndtime(String endtime) {
+//        this.endtime = endtime;
+//    }
+//
+//    public String getStarttime() {
+//        return starttime;
+//    }
+//
+//    public void setStarttime(String starttime) {
+//        this.starttime = starttime;
+//    }
 
     public int getPhotousefor_id() {
         return photousefor_id;
@@ -84,6 +105,32 @@ public class ItemExchange implements Serializable {
     public void setImageHeight(int imageHeight) {
         this.imageHeight = imageHeight;
     }
+
+    public int getPhoto_id() {
+        return photo_id;
+    }
+
+    public void setPhoto_id(int photo_id) {
+        this.photo_id = photo_id;
+    }
+
+    public boolean isHas_gained() {
+        return has_gained;
+    }
+
+    public void setHas_gained(boolean has_gained) {
+        this.has_gained = has_gained;
+    }
+
+    public boolean isIs_existing() {
+        return is_existing;
+    }
+
+    public void setIs_existing(boolean is_existing) {
+        this.is_existing = is_existing;
+    }
+
+
 }
 
 

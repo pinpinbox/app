@@ -371,21 +371,29 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
 
                                             MyLog.Set("d", mActivity.getClass(), "eventArray.toString()" + eventArray.toString());
 
-
                                             int eventCount = eventArray.length();
+
+                                            boolean canAddToList = true;
 
                                             for (int e = 0; e < eventCount; e++) {
 
                                                 JSONObject jsonEvent = (JSONObject) eventArray.get(e);
 
                                                 String mEvent_id = JsonUtility.GetString(jsonEvent, ProtocolKey.event_id);
+                                                boolean contributionstatus = JsonUtility.GetBoolean(jsonEvent, ProtocolKey.contributionstatus);
+
+                                                //獲取到的活動不等於本活動ID 但已投稿
+                                                if(!mEvent_id.equals(event_id) && contributionstatus){
+
+                                                    canAddToList = false;
+
+                                                    break;
+                                                }
 
                                                 MyLog.Set("d", mActivity.getClass(), "此活動ID => " + event_id);
                                                 MyLog.Set("d", mActivity.getClass(), "第" + e + "個活動ID => " + mEvent_id);
 
                                                 if (mEvent_id.equals(event_id)) {
-
-                                                    boolean contributionstatus = JsonUtility.GetBoolean(jsonEvent, ProtocolKey.contributionstatus);
                                                     itemAlbum.setContributionstatus(contributionstatus);
 
                                                     if(contributionstatus){
@@ -394,9 +402,14 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
 
                                                     break;
                                                 }
+
                                             }
 
-                                            canContributeAlbumList.add(itemAlbum);
+                                            if(canAddToList){
+                                                canContributeAlbumList.add(itemAlbum);
+                                            }
+
+
 
 
                                         }
@@ -404,6 +417,10 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
                                 }
                             }
                         }
+
+
+
+
 
 
                     } else if (p17Result.equals("0")) {

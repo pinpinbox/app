@@ -13,15 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeInfo2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerExchangeListAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 
 import java.util.ArrayList;
@@ -35,11 +36,12 @@ public class FragmentExchangeUnfinished2 extends Fragment {
 
     private RecyclerExchangeListAdapter adapter;
 
-    private List<ItemExchange> exchangeList;
+    private List<ItemExchange> itemExchangeList;
 
     private RecyclerView rvExchangelist;
 
     private int deviceType;
+    private int clickPosition = -1;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -62,35 +64,48 @@ public class FragmentExchangeUnfinished2 extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        getBundle();
+
         init();
 
         setRecycler();
-
-        ItemExchange itemExchange = new ItemExchange();
-        itemExchange.setName("LASKO保溫瓶");
-        itemExchange.setDescription("LASKO你耀紅保溫瓶");
-        itemExchange.setImage("https://ppb.sharemomo.com/upload/pinpinbox/diy/20180201/5a720323180ba_358x501.jpg");
-        itemExchange.setTime("剩餘時間:50天20小時16分");
-        itemExchange.setImageWidth(PPBApplication.getInstance().getStaggeredWidth());
-        itemExchange.setImageHeight(PPBApplication.getInstance().getStaggeredWidth());
-
-        exchangeList.add(itemExchange);
 
         adapter.notifyDataSetChanged();
 
 
     }
 
+    private void getBundle(){
+
+        Bundle bundle = getArguments();
+
+        if(bundle!=null){
+
+            List<ItemExchange> allExchangeList = (List<ItemExchange>) bundle.getSerializable("exchangeList");
+            itemExchangeList = new ArrayList<>();
+
+            for (int i = 0; i < allExchangeList.size(); i++) {
+                boolean hasGained = allExchangeList.get(i).isHas_gained();
+                if(!hasGained){
+                    itemExchangeList.add(allExchangeList.get(i));
+                }
+
+            }
+
+        }
+
+    }
+
     private void init(){
 
-        exchangeList = new ArrayList<>();
+
 
     }
 
 
     private void setRecycler() {
 
-        adapter = new RecyclerExchangeListAdapter(getActivity(), exchangeList, true);
+        adapter = new RecyclerExchangeListAdapter(getActivity(), itemExchangeList, true);
         rvExchangelist.setAdapter(adapter);
 
         ExStaggeredGridLayoutManager manager = null;
@@ -116,11 +131,14 @@ public class FragmentExchangeUnfinished2 extends Fragment {
                     return;
                 }
 
+                clickPosition = position;
+
                 RoundCornerImageView exchangeImg = (RoundCornerImageView)v.findViewById(R.id.exchangeImg);
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("exchangeItem", exchangeList.get(position));
+                bundle.putSerializable("exchangeItem", itemExchangeList.get(position));
                 bundle.putBoolean("isExchanged", false);
+                bundle.putString(Key.photo_id, itemExchangeList.get(position).getPhoto_id() + "");
 
                 Intent intent = new Intent(getActivity(), ExchangeInfo2Activity.class).putExtras(bundle);
 
@@ -138,7 +156,28 @@ public class FragmentExchangeUnfinished2 extends Fragment {
             }
         });
 
+    }
 
+    public void moveItem(){
+
+        FragmentExchangeDone2 fragmentExchangeDone2 = (FragmentExchangeDone2)((ExchangeList2Activity)getActivity()).getFragment(FragmentExchangeDone2.class.getSimpleName());
+
+        //成功兌換 將狀態改為已領取移至"已完成"
+        itemExchangeList.get(clickPosition).setHas_gained(true);
+        fragmentExchangeDone2.addItem(itemExchangeList.get(clickPosition));
+
+        itemExchangeList.remove(clickPosition);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    private void cleanCache(){
+
+        if(itemExchangeList!=null && itemExchangeList.size()>0){
+            for (int i = 0; i < itemExchangeList.size(); i++) {
+                com.squareup.picasso.Picasso.with(getActivity().getApplicationContext()).invalidate(itemExchangeList.get(i).getImage());
+            }
+        }
     }
 
 
@@ -149,6 +188,11 @@ public class FragmentExchangeUnfinished2 extends Fragment {
 
     @Override
     public void onDestroy() {
+
+
+        cleanCache();
+
+        System.gc();
 
         super.onDestroy();
     }
