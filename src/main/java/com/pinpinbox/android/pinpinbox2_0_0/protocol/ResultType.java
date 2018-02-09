@@ -22,5 +22,9 @@ public class ResultType {
     public static final String TIMEOUT = "TIMEOUT";
     public static final String TOKEN_ERROR = "TOKEN_ERROR";
 
+    public static final String PHOTOUSEFOR_USER_HAS_EXCHANGED = "PHOTOUSEFOR_USER_HAS_EXCHANGED";//已歸屬兌換的用戶
+    public static final String PHOTOUSEFOR_USER_HAS_GAINED = "PHOTOUSEFOR_USER_HAS_GAINED";//用戶已獲得
+
+
 
 }
