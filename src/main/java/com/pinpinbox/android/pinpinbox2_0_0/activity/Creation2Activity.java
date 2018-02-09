@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -41,19 +42,19 @@ import com.aviary.android.feather.sdk.AviaryIntent;
 import com.aviary.android.feather.sdk.internal.Constants;
 import com.aviary.android.feather.sdk.internal.headless.utils.MegaPixels;
 import com.czt.mp3recorder.MP3Recorder;
-import com.pinpinbox.android.Activity.CreateAlbum.ChangeItemAdapter;
-import com.pinpinbox.android.Activity.CreateAlbum.SelectPreviewAdapter;
+import com.pinpinbox.android.Test.CreateAlbum.ChangeItemAdapter;
+import com.pinpinbox.android.Test.CreateAlbum.SelectPreviewAdapter;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.StringClass.ColorClass;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
-import com.pinpinbox.android.StringClass.DirClass;
-import com.pinpinbox.android.StringClass.DoingTypeClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.StringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -175,8 +176,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private String aviaryPath = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_FromAviary;
     private String mp3Path = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
-    ;
 
+    private String strPrefixText;
     private String picUrl;//顯示中的相片
     private String album_id;//相本id
     //    private String template_id;//套版id
@@ -358,9 +359,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             event_id = bundle.getString(Key.event_id, "");
             isContribute = bundle.getBoolean(Key.isContribute, false);
+            strPrefixText = bundle.getString(Key.prefix_text, "");
 
             MyLog.Set("d", getClass(), "bundle => event_id => " + event_id);
             MyLog.Set("d", getClass(), "bundle => isContibute => " + isContribute);
+            MyLog.Set("d", getClass(), "bundle => strPrefixText => " + strPrefixText);
 
             //測試用
 //            createMode = CreationTemplate;
@@ -933,6 +936,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void recordingClick() {
 
         audioRecordingImg.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
 
@@ -2602,6 +2606,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         if (isContribute) {
             bundle.putBoolean(Key.isContribute, true);
             bundle.putString(Key.event_id, event_id);
+            bundle.putString(Key.prefix_text, strPrefixText);
         }
 
         /*判斷audio*/
@@ -3439,6 +3444,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         private Toast toast;
 
+        @SuppressLint("WrongConstant")
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -4482,17 +4488,23 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
 
                 d.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
@@ -5128,6 +5140,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private boolean isPause = false;
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();

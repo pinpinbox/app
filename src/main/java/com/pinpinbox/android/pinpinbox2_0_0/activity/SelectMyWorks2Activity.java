@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.ColorClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
@@ -67,6 +67,7 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
     private String p17Result, p17Message;
     private String p73Result, p73Message;
     private String sendAlbum_id;
+    private String strPrefixText;
 
     private int doingType;
     private static final int DoGetMyCollect = 0;
@@ -100,6 +101,7 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
             templateidList = bundle.getStringArrayList("templates");
             event_id = bundle.getString("event_id");
             sendMaxCount = bundle.getInt("contribution");
+            strPrefixText = bundle.getString(Key.prefix_text, "");
         }
     }
 
@@ -369,21 +371,29 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
 
                                             MyLog.Set("d", mActivity.getClass(), "eventArray.toString()" + eventArray.toString());
 
-
                                             int eventCount = eventArray.length();
+
+                                            boolean canAddToList = true;
 
                                             for (int e = 0; e < eventCount; e++) {
 
                                                 JSONObject jsonEvent = (JSONObject) eventArray.get(e);
 
                                                 String mEvent_id = JsonUtility.GetString(jsonEvent, ProtocolKey.event_id);
+                                                boolean contributionstatus = JsonUtility.GetBoolean(jsonEvent, ProtocolKey.contributionstatus);
+
+                                                //獲取到的活動不等於本活動ID 但已投稿
+                                                if(!mEvent_id.equals(event_id) && contributionstatus){
+
+                                                    canAddToList = false;
+
+                                                    break;
+                                                }
 
                                                 MyLog.Set("d", mActivity.getClass(), "此活動ID => " + event_id);
                                                 MyLog.Set("d", mActivity.getClass(), "第" + e + "個活動ID => " + mEvent_id);
 
                                                 if (mEvent_id.equals(event_id)) {
-
-                                                    boolean contributionstatus = JsonUtility.GetBoolean(jsonEvent, ProtocolKey.contributionstatus);
                                                     itemAlbum.setContributionstatus(contributionstatus);
 
                                                     if(contributionstatus){
@@ -392,9 +402,14 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
 
                                                     break;
                                                 }
+
                                             }
 
-                                            canContributeAlbumList.add(itemAlbum);
+                                            if(canAddToList){
+                                                canContributeAlbumList.add(itemAlbum);
+                                            }
+
+
 
 
                                         }
@@ -402,6 +417,10 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
                                 }
                             }
                         }
+
+
+
+
 
 
                     } else if (p17Result.equals("0")) {
@@ -643,6 +662,7 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
                     bundle.putBoolean(Key.isContribute, true);
                     bundle.putBoolean(Key.isNewCreate, true);
                     bundle.putString("event_id", event_id);
+                    bundle.putString(Key.prefix_text, strPrefixText);
                     Intent intent = new Intent(mActivity, Creation2Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);

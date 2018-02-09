@@ -98,7 +98,8 @@
             android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_button_event_link"
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-            android:textSize="@dimen/ppb200_buttontext_for_height48" />
+            android:textSize="@dimen/ppb200_buttontext_for_height48"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

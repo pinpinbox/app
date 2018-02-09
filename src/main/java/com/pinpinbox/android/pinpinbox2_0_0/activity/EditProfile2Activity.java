@@ -28,18 +28,18 @@ import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.StringClass.ColorClass;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
-import com.pinpinbox.android.StringClass.DirClass;
-import com.pinpinbox.android.StringClass.DoingTypeClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -862,17 +862,27 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 
                 }
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
+
+
+
                 d.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {

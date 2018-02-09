@@ -25,12 +25,12 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
-import com.pinpinbox.android.StringClass.DirClass;
-import com.pinpinbox.android.StringClass.DoingTypeClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.TaskKeyClass;
-import com.pinpinbox.android.StringClass.UrlClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -57,6 +57,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -996,7 +997,12 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
         protected Object doInBackground(Void... params) {
             String strJson = "";
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google"), null);
+                HashMap<String, String>map = new HashMap<>();
+                map.put(Key.type, Value.album);
+                map.put(Key.type_id, (String)p17arraylist.get(clickPosition).get(Key.album_id));
+
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google", map), null);
+
                 MyLog.Set("d", getClass(), "p84strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p84Result = Key.timeout;
@@ -1031,14 +1037,12 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
             loading.dismiss();
             if (p84Result.equals("1")) {
                 /*任務已完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result.equals("2")) {
 
                 /*尚有次數未完成*/
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result.equals("0")) {
@@ -1183,8 +1187,6 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
                     /**儲存data*/
                     getdata.edit().putString("point", newP).commit();
 
-                    getdata.edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
-
                     getdata.edit().putBoolean("datachange", true).commit();
 
                 } else {
@@ -1192,30 +1194,29 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(getActivity(), WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        getActivity().startActivity(intent);
-                        ActivityAnim.StartAnim(getActivity());
-                    }
-                });
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(getActivity(), WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(getActivity());
+                        }
+                    });
+                }
 
             } else if (p83Result.equals("2")) {
 
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
-
-
             } else if (p83Result.equals("3")) {
 
-
             } else if (p83Result.equals("0")) {
-
-                getdata.edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result.equals(Key.timeout)) {
                 connectInstability();
@@ -1280,12 +1281,7 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener {
         final String strAct = (String) p17arraylist.get(position).get(Key.act); // 隱私權 (close: 關閉 / open: 開啟)
 
         if (strAct != null && strAct.equals("open")) {
-            boolean bShareToFB = getdata.getBoolean(TaskKeyClass.share_to_fb, false);
-            if (bShareToFB) {
-                systemShare();
-            } else {
-                doCheckShare();
-            }
+            doCheckShare();
         } else {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_open_act_to_share);
         }

@@ -24,17 +24,18 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.StringClass.ColorClass;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
-import com.pinpinbox.android.StringClass.DoingTypeClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.StringClass.UrlClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -54,14 +55,18 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
@@ -93,6 +98,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     private MoreDataTask moreDataTask;
     private RefreshTask refreshTask;
     private AttentionTask attentionTask;
+    private FollowTask followTask;
 
     private PopBoard board;
 
@@ -240,7 +246,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 
     }
-
 
     private void getBundle() {
         Bundle bundle = getIntent().getExtras();
@@ -404,7 +409,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
-
     private void setRecyclerRefreshLayouControl() {
 
 
@@ -488,7 +492,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 //            }
 
 
-
             tvCreativeName.setText(itemUser.getCreative_name());
             tvCreativeName.setVisibility(View.VISIBLE);
         }
@@ -501,6 +504,14 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         StringUtil.ThousandToK(tvFollow, intFollow);
         StringUtil.ThousandToK(tvViewed, intViewed);
         StringUtil.ThousandToK(tvSponsor, intSponsor);
+
+
+        if(intSponsor<1){
+
+            viewHeader.findViewById(R.id.rSponsorList).setVisibility(View.GONE);
+
+        }
+
 
         authorAdapter.notifyDataSetChanged();
 
@@ -792,7 +803,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                     String strCreativeName = JsonUtility.GetString(jsonUser, ProtocolKey.creative_name);
 
-                    if(StringUtils.isTrimEmpty(strCreativeName)){
+                    if (StringUtils.isTrimEmpty(strCreativeName)) {
 
                         strCreativeName = "";
 
@@ -984,6 +995,16 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+    private void doFollowTask() {
+        if (!HttpUtility.isConnect(mActivity)) {
+            setNoConnect();
+            return;
+        }
+
+        followTask = new FollowTask();
+        followTask.execute();
+    }
+
     private void connectInstability() {
 
         ConnectInstability connectInstability = new ConnectInstability() {
@@ -1004,6 +1025,11 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     case DoingTypeClass.DoChangeFollow:
                         doFollow();
                         break;
+
+                    case DoingTypeClass.DoFollowTask:
+                        doFollowTask();
+                        break;
+
                 }
             }
         };
@@ -1110,7 +1136,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 //                round = round + rangeCount;
 
 
-
                 if (p40JsonArray.length() == 0) {
                     sizeMax = true;
                     if (!isNoDataToastAppeared) {
@@ -1178,7 +1203,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 
                 setdata();
-
 
 
                 if (p40JsonArray.length() == 0) {
@@ -1350,6 +1374,9 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         }
 
 
+                        doFollowTask();
+
+
                         break;
                 }
 
@@ -1362,6 +1389,185 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             } else {
                 DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
             }
+        }
+    }
+
+    private class FollowTask extends AsyncTask<Void, Void, Object> {
+
+        private String restriction;
+        private String restriction_value;
+        private String name;
+        private String reward;
+        private String reward_value;
+        private String url;
+        private String p83Result = "", p83Message = "";
+
+        private int numberofcompleted;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            doingType = DoingTypeClass.DoFollowTask;
+            startLoading();
+
+        }
+
+        @Override
+        protected Object doInBackground(Void... params) {
+
+            Map<String, String> map = new HashMap<>();
+            map.put(MapKey.id, id);
+            map.put(MapKey.token, token);
+            map.put(MapKey.task_for, TaskKeyClass.follow_user);
+            map.put(MapKey.platform, "google");
+            String sign = IndexSheet.encodePPB(map);
+            Map<String, String> sendData = new HashMap<String, String>();
+            sendData.put(MapKey.id, id);
+            sendData.put(MapKey.token, token);
+            sendData.put(MapKey.task_for, TaskKeyClass.follow_user);
+            sendData.put(MapKey.platform, "google");
+            sendData.put(MapKey.type, Value.user);
+            sendData.put(MapKey.type_id, itemUser.getUser_id());
+            sendData.put("sign", sign);
+
+            String strJson = "";
+
+
+            try {
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P83_DoTask, sendData, null);
+                MyLog.Set("d", mActivity.getClass(), "p83strJson => " + strJson);
+            } catch (SocketTimeoutException timeout) {
+                p83Result = Key.timeout;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (strJson != null && !strJson.equals("")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(strJson);
+                    p83Result = jsonObject.getString(Key.result);
+
+                    if (p83Result.equals("1")) {
+
+                        String jdata = jsonObject.getString(Key.data);
+
+                        JSONObject object = new JSONObject(jdata);
+
+                        String task = object.getString(Key.task);
+                        String event = object.getString(Key.event);
+
+                        JSONObject taskObj = new JSONObject(task);
+                        name = taskObj.getString(Key.name);
+                        reward = taskObj.getString(Key.reward);
+                        reward_value = taskObj.getString(Key.reward_value);
+                        restriction = taskObj.getString(Key.restriction);
+                        restriction_value = taskObj.getString(Key.restriction_value);
+
+                        numberofcompleted = taskObj.getInt(Key.numberofcompleted);
+
+                        JSONObject eventObj = new JSONObject(event);
+                        url = eventObj.getString(Key.url);
+
+                    } else if (p83Result.equals("2")) {
+                        p83Message = jsonObject.getString(Key.message);
+                    } else if (p83Result.equals("3")) {
+                        p83Message = jsonObject.getString(Key.message);
+                    } else if (p83Result.equals("0")) {
+                        p83Message = jsonObject.getString(Key.message);
+                    } else {
+                        p83Result = "";
+                    }
+                } catch (Exception e) {
+                    p83Result = "";
+                    e.printStackTrace();
+                }
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+
+            dissmissLoading();
+
+            if (p83Result.equals("1")) {
+
+                final DialogHandselPoint d = new DialogHandselPoint(mActivity);
+
+                if (restriction.equals("personal")) {
+                    d.getTvTitle().setText(name);
+                    d.getTvRestriction().setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_count) + numberofcompleted + "/" + restriction_value);
+                    d.getTvRestriction().setVisibility(View.VISIBLE);
+                } else {
+                    d.getTvTitle().setText(name);
+                }
+
+                if (reward.equals("point")) {
+                    d.getTvDescription().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_task_get_point) + reward_value + "P!");
+                    /*獲取當前使用者P點*/
+                    String point = PPBApplication.getInstance().getData().getString(Key.point, "");
+                    int p = StringIntMethod.StringToInt(point);
+
+                    /*任務獲得P點轉換型態*/
+                    int rp = StringIntMethod.StringToInt(reward_value);
+
+                    /*加總*/
+                    String newP = StringIntMethod.IntToString(rp + p);
+
+                    /*儲存data*/
+                    PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
+
+
+                } else {
+                    d.getTvDescription().setText(reward_value);
+                }
+
+
+
+
+
+                if(url==null || url.equals("") || url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
+
+
+
+
+            } else if (p83Result.equals("2")) {
+
+
+            } else if (p83Result.equals("3")) {
+
+
+            } else if (p83Result.equals("0")) {
+
+
+            } else if (p83Result.equals(Key.timeout)) {
+
+                connectInstability();
+
+            } else {
+                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+            }
+
+
         }
     }
 
@@ -1531,13 +1737,12 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
             case R.id.messageImg:
 
-                if(!itemUser.isDisscuss()){
+                if (!itemUser.isDisscuss()) {
 
                     PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_board_is_close);
 
                     return;
                 }
-
 
 
                 if (board == null) {
@@ -1646,34 +1851,31 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
     @Override
     protected void onPause() {
-        super.onPause();
+
         cleanPicasso();
+
+        super.onPause();
     }
 
 
     @Override
     public void onDestroy() {
 
-        if (getCreativeTask != null && !getCreativeTask.isCancelled()) {
-            getCreativeTask.cancel(true);
-            getCreativeTask = null;
-        }
 
-        if (moreDataTask != null && !moreDataTask.isCancelled()) {
-            moreDataTask.cancel(true);
-            moreDataTask = null;
-        }
+        cancelTask(getCreativeTask);
+        getCreativeTask = null;
 
-        if (refreshTask != null && !refreshTask.isCancelled()) {
-            refreshTask.cancel(true);
-            refreshTask = null;
-        }
+        cancelTask(moreDataTask);
+        moreDataTask = null;
 
+        cancelTask(attentionTask);
+        attentionTask = null;
 
-        if (attentionTask != null && !attentionTask.isCancelled()) {
-            attentionTask.cancel(true);
-            attentionTask = null;
-        }
+        cancelTask(refreshTask);
+        refreshTask = null;
+
+        cancelTask(followTask);
+        followTask = null;
 
         Recycle.IMG(backImg);
         Recycle.IMG(webImg);

@@ -9,9 +9,9 @@ import com.aviary.android.feather.sdk.IAviaryClientCredentials;
 import com.blankj.utilcode.util.Utils;
 import com.flurry.android.FlurryAgent;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 

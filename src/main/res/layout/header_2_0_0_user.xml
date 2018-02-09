@@ -159,7 +159,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:letterSpacing="0.1"
-                                android:text="12345"
+                                android:text=""
                                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                                 android:textSize="@dimen/ppb200_title_second_size" />
 

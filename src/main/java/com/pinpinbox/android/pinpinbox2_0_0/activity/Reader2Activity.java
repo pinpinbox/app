@@ -1,6 +1,5 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -17,26 +16,23 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
-import android.util.Size;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -53,15 +49,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.Mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.ColorClass;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
-import com.pinpinbox.android.StringClass.DoingTypeClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.StringClass.TaskKeyClass;
-import com.pinpinbox.android.StringClass.UrlClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -84,6 +72,13 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -92,17 +87,19 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol108;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol42;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
@@ -150,6 +147,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private SendLikeTask sendLikeTask;
     private DeleteLikeTask deleteLikeTask;
     private Protocol13 protocol13;
+    private Protocol109 protocol109;
 
     private ItemAlbum itemAlbum;
     private List<ItemPhoto> photoContentsList;
@@ -710,7 +708,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         final View vType = v.findViewById(R.id.vType);
         final ImageView refreshImg = (ImageView) v.findViewById(R.id.refreshImg);
-        final RelativeLayout rExchange = (RelativeLayout) v.findViewById(R.id.rExchange);
+        final LinearLayout linExchange = (LinearLayout) v.findViewById(R.id.linExchange);
 
         refreshImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -798,27 +796,22 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         isNoOwnShowCollectType(v, vType);
                     } else {
 
-//                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) rExchange.getLayoutParams();
-//
-//                        layoutParams.height= SizeUtils.dp2px(64);
-//
-//                        rExchange.setLayoutParams(layoutParams);
 
-                        if (rExchange.getVisibility() == View.VISIBLE) {
-                            MyLog.Set("e", this.getClass(), "rExchange is visibility");
-                            return;
-                        }
+//                        if (linExchange.getVisibility() == View.VISIBLE) {
+//                            MyLog.Set("e", this.getClass(), "linExchange is visibility");
+//                            return;
+//                        }
 
                         vType.setVisibility(View.VISIBLE);
 
 
-                        rExchange.setVisibility(View.VISIBLE);
+                        linExchange.setVisibility(View.VISIBLE);
 
-                        //依rExchange判斷是否呼叫接口
+                        //依linExchange判斷是否呼叫接口
 
                         String identifier = getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", "");
 
-                        doGetExchange(v, position, identifier, rExchange);
+                        doGetExchange(v, position, identifier, linExchange);
 
                     }
                     break;
@@ -969,8 +962,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
-
-    private void doGetExchange(final View v, final int position, final String identifier, final RelativeLayout rExchange) {
+    private void doGetExchange(final View v, final int position, final String identifier, final LinearLayout linExchange) {
 
 
         /*error*/
@@ -982,27 +974,173 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         /*success*/
         final TextView tvExchangeName = (TextView) v.findViewById(R.id.tvExchangeName);
         final TextView tvExchangeDescription = (TextView) v.findViewById(R.id.tvExchangeDescription);
-        final TextView tvChange = (TextView) v.findViewById(R.id.tvChange);
         final RoundCornerImageView exchangeImg = (RoundCornerImageView) v.findViewById(R.id.exchangeImg);
+
+        /*bottom*/
+        final TextView tvAddToExchangeList = (TextView) v.findViewById(R.id.tvAddToExchangeList);
+        final TextView tvChange = (TextView) v.findViewById(R.id.tvChange);
+        final RelativeLayout rAddToExchangeList = (RelativeLayout) v.findViewById(R.id.rAddToExchangeList);
+
 
         /*end*/
         final TextView tvExchangeEnd = (TextView) v.findViewById(R.id.tvExchangeEnd);
 
 
-        final Protocol42 protocol42 = new Protocol42(
+//        final Protocol42 protocol42 = new Protocol42(
+//                mActivity,
+//                PPBApplication.getInstance().getId(),
+//                PPBApplication.getInstance().getToken(),
+//                photoContentsList.get(position).getPhoto_id() + "",
+//                identifier,
+//                new Protocol42.TaskCallBack() {
+//
+//
+//                    @Override
+//                    public void Prepare() {
+//
+//                        linExchange.setVisibility(View.GONE);
+//                        linExchange.setAlpha(0f);
+//
+//                        linTimeout.setVisibility(View.GONE);
+//                        linTimeout.setAlpha(0f);
+//
+//                        loading.smoothToShow();
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void Post() {
+//
+//                        loading.smoothToHide();
+//
+//                    }
+//
+//                    private void showContents(ItemExchange itemExchange) {
+//
+//                        Picasso.with(mActivity.getApplicationContext())
+//                                .load(itemExchange.getImage())
+//                                .config(Bitmap.Config.RGB_565)
+//                                .error(R.drawable.bg_2_0_0_no_image)
+//                                .tag(mActivity.getApplicationContext())
+//                                .into(exchangeImg);
+//
+//                        linExchange.setVisibility(View.VISIBLE);
+//                        ViewControl.AlphaTo1(linExchange);
+//
+//
+//                        TextUtility.setBold(tvExchangeName, true);
+//                        tvExchangeName.setText(itemExchange.getName());
+//
+//                        tvExchangeDescription.setText(itemExchange.getDescription());
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void Success(ItemExchange itemExchange) {
+//
+//
+//                        showContents(itemExchange);
+//
+//                        tvChange.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View vv) {
+//                                if (ClickUtils.ButtonContinuousClick_1s()) {
+//                                    return;
+//                                }
+//
+//                            }
+//                        });
+//
+//                        /*依狀態判定是否可以點擊*/
+//                        rAddToExchangeList.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//
+//                            }
+//                        });
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void isAlreadyGet(ItemExchange itemExchange) {
+//
+//                        showContents(itemExchange);
+//                        tvChange.setText("已兌換");
+//                        tvChange.setBackgroundResource(R.drawable.border_2_0_0_white_radius);
+//                        tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+//
+//                    }
+//
+//                    @Override
+//                    public void isEnd() {
+//
+//
+////                        ValueAnimator va = ValueAnimator.ofInt(SizeUtils.dp2px(384), SizeUtils.dp2px(64));
+////
+////                        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+////                            @Override
+////                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+////                                //获取当前的height值
+////                                //动态更新view的高度
+////                                linExchange.getLayoutParams().height = (Integer)valueAnimator.getAnimatedValue();
+////                                linExchange.requestLayout();
+////                            }
+////                        });
+////                        va.setDuration(1200);
+////                        //开始动画
+////                        va.start();
+//
+//                        TextUtility.setBold(tvExchangeEnd, true);
+//
+//                        tvExchangeEnd.setVisibility(View.VISIBLE);
+//                        ViewControl.AlphaTo1(tvExchangeEnd);
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void TimeOut() {
+//
+//
+//                        linTimeout.setVisibility(View.VISIBLE);
+//                        ViewControl.AlphaTo1(linTimeout);
+//
+//                        tvAgain.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View vv) {
+//                                if (ClickUtils.ButtonContinuousClick_1s()) {
+//                                    return;
+//                                }
+//                                doGetExchange(v, position, identifier, linExchange);
+//                            }
+//                        });
+//
+//
+//                    }
+//                }
+//        );
+
+
+        TextUtility.setBold(tvExchangeName, true);
+        TextUtility.setBold(tvAddToExchangeList, true);
+        TextUtility.setBold(tvChange, true);
+        TextUtility.setBold(tvExchangeEnd, true);
+
+
+        Protocol108 protocol108 = new Protocol108(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 photoContentsList.get(position).getPhoto_id() + "",
-                identifier,
-                new Protocol42.TaskCallBack() {
-
-
+                new Protocol108.TaskCallBack() {
                     @Override
                     public void Prepare() {
 
-                        rExchange.setVisibility(View.GONE);
-                        rExchange.setAlpha(0f);
+                        linExchange.setVisibility(View.GONE);
+                        linExchange.setAlpha(0f);
 
                         linTimeout.setVisibility(View.GONE);
                         linTimeout.setAlpha(0f);
@@ -1028,20 +1166,23 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 .tag(mActivity.getApplicationContext())
                                 .into(exchangeImg);
 
-                        rExchange.setVisibility(View.VISIBLE);
+                        linExchange.setVisibility(View.VISIBLE);
+                        ViewControl.AlphaTo1(linExchange);
 
-                        ViewControl.AlphaTo1(rExchange);
-
-                        TextUtility.setBold(tvExchangeName, true);
                         tvExchangeName.setText(itemExchange.getName());
 
                         tvExchangeDescription.setText(itemExchange.getDescription());
 
+                    }
 
+                    private void isInExchangeList() {
+                        tvAddToExchangeList.setText(R.string.pinpinbox_2_0_0_other_text_is_in_exchange_list);
+                        tvAddToExchangeList.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                        rAddToExchangeList.setClickable(false);
                     }
 
                     @Override
-                    public void Success(ItemExchange itemExchange) {
+                    public void Success(final ItemExchange itemExchange) {
 
 
                         showContents(itemExchange);
@@ -1053,48 +1194,102 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                     return;
                                 }
 
+                                exchangeImg.setTransitionName(itemExchange.getImage());
+
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("exchangeItem", itemExchange);
+                                bundle.putBoolean("isExchanged", false);
+                                bundle.putInt(Key.photo_id, photoContentsList.get(position).getPhoto_id());
+
+                                Intent intent = new Intent(mActivity, ExchangeInfo2Activity.class).putExtras(bundle);
+
+                                linExchange.setTransitionName("bg_exchange");
+
+                                ActivityOptionsCompat option1 = ActivityOptionsCompat.
+                                        makeSceneTransitionAnimation(mActivity,
+                                                linExchange,
+                                                ViewCompat.getTransitionName(linExchange));
+
+                                ActivityOptionsCompat option2 = ActivityOptionsCompat.
+                                        makeSceneTransitionAnimation(mActivity,
+                                                exchangeImg,
+                                                ViewCompat.getTransitionName(exchangeImg));
+
+                                option2.update(option1);
+
+                                startActivity(intent, option2.toBundle());
+
                             }
                         });
 
 
+                        if (itemExchange.isIs_existing()) {
+                            isInExchangeList();
+                        } else {
+
+                            /*依狀態判定是否可以點擊*/
+                            rAddToExchangeList.setOnClickListener(new View.OnClickListener() {
+
+                                private void doAddToExchangeList() {
+
+                                    if (!HttpUtility.isConnect(mActivity)) {
+                                        setNoConnect();
+                                        return;
+                                    }
+
+                                    protocol109 = new Protocol109(
+                                            mActivity,
+                                            PPBApplication.getInstance().getId(),
+                                            PPBApplication.getInstance().getToken(),
+                                            photoContentsList.get(position).getPhoto_id() + "",
+                                            new Protocol109.TaskCallBack() {
+                                                @Override
+                                                public void Prepare() {
+                                                    startLoading();
+                                                }
+
+                                                @Override
+                                                public void Post() {
+                                                    dissmissLoading();
+                                                }
+
+                                                @Override
+                                                public void Success() {
+                                                    isInExchangeList();
+                                                }
+
+                                                @Override
+                                                public void TimeOut() {
+                                                    doAddToExchangeList();
+                                                }
+                                            }
+                                    );
+
+
+                                }
+
+                                @Override
+                                public void onClick(View v) {
+                                    if (ClickUtils.ButtonContinuousClick()) {
+                                        return;
+                                    }
+                                    doAddToExchangeList();
+
+                                }
+                            });
+
+                        }
+
+
                     }
 
                     @Override
-                    public void isAlreadyGet(ItemExchange itemExchange) {
-
-                        showContents(itemExchange);
-                        tvChange.setText("已兌換");
-                        tvChange.setBackground(null);
-                        tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-
-                    }
-
-                    @Override
-                    public void isEnd() {
-
-
-//                        ValueAnimator va = ValueAnimator.ofInt(SizeUtils.dp2px(384), SizeUtils.dp2px(64));
-//
-//                        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                            @Override
-//                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                                //获取当前的height值
-//                                //动态更新view的高度
-//                                rExchange.getLayoutParams().height = (Integer)valueAnimator.getAnimatedValue();
-//                                rExchange.requestLayout();
-//                            }
-//                        });
-//                        va.setDuration(1200);
-//                        //开始动画
-//                        va.start();
-
+                    public void IsEnd() {
                         TextUtility.setBold(tvExchangeEnd, true);
-
                         tvExchangeEnd.setVisibility(View.VISIBLE);
                         ViewControl.AlphaTo1(tvExchangeEnd);
-
-
                     }
+
 
                     @Override
                     public void TimeOut() {
@@ -1109,19 +1304,19 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 if (ClickUtils.ButtonContinuousClick_1s()) {
                                     return;
                                 }
-                                doGetExchange(v, position, identifier, rExchange);
+                                doGetExchange(v, position, identifier, linExchange);
                             }
                         });
 
 
                     }
                 }
-        );
 
+        );
 
     }
 
-    private void doExchange(){
+    private void doExchange() {
 
     }
 
@@ -2109,18 +2304,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         if (itemAlbum.getPoint() == 0) {
 
-
-                            boolean bCollectFreeAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_free_album, false);
-                            if (!bCollectFreeAlbum) {
-                                doFirstCollectTask();
-                            }
+                            doFirstCollectTask();
 
                         } else {
 
-                            boolean bCollectPayAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_pay_album, false);
-                            if (!bCollectPayAlbum) {
-                                doFirstCollectTask();
-                            }
+                            doFirstCollectTask();
 
                         }
                     }
@@ -2136,9 +2324,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     }
                 });
 
-
-//        collectAlbumTask = new CollectAlbumTask();
-//        collectAlbumTask.execute();
     }
 
     private void doFirstCollectTask() {
@@ -2902,11 +3087,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
 
-                    if (itemAlbum.getPoint() == 0) {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
-                    } else {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
-                    }
+//                    if (itemAlbum.getPoint() == 0) {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
+//                    } else {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
+//                    }
 
 
                 } else {
@@ -2914,27 +3099,26 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if (url == null || url.equals("")) {
+                    d.getTvLink().setVisibility(View.GONE);
+                } else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
 
 
             } else if (p83Result == 2 || p83Result == 0) {
-
-                if (itemAlbum.getPoint() == 0) {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, true).commit();
-                } else {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, true).commit();
-                }
 
             } else if (p83Result == 3) {
 
@@ -3053,7 +3237,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             String strJson = "";
 
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google"), null);
+                HashMap<String, String> map = new HashMap<>();
+                map.put(Key.type, Value.album);
+                map.put(Key.type_id, album_id);
+
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google", map), null);
+
                 MyLog.Set("d", getClass(), "p84strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p84Result = Key.TIMEOUT;
@@ -3090,21 +3279,18 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             if (p84Result == 1) {
                 /*任務已完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result == 2) {
 
                 /*尚有次數未完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result == 0) {
 
                 systemShare();
 
-//                DialogV2Custom.BuildError(mActivity, p84Message);
 
             } else if (p84Result == Key.TIMEOUT) {
 
@@ -3229,20 +3415,18 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                 if (reward.equals("point")) {
                     d.getTvDescription().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_task_get_point) + reward_value + "P!");
-                    /**獲取當前使用者P點*/
+                    /*獲取當前使用者P點*/
                     String point = PPBApplication.getInstance().getData().getString(Key.point, "");
                     int p = StringIntMethod.StringToInt(point);
 
-                    /**任務獲得P點轉換型態*/
+                    /*任務獲得P點轉換型態*/
                     int rp = StringIntMethod.StringToInt(reward_value);
 
-                    /**加總*/
+                    /*加總*/
                     String newP = StringIntMethod.IntToString(rp + p);
 
-                    /**儲存data*/
+                    /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
-
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
 
 
                 } else {
@@ -3250,28 +3434,30 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if (url == null || url.equals("") || url.equals("null")) {
+                    d.getTvLink().setVisibility(View.GONE);
+                } else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
 
             } else if (p83Result == 2) {
 
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result == 3) {
 
             } else if (p83Result == 0) {
-
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result == Key.TIMEOUT) {
 
@@ -3646,31 +3832,33 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+
+    private Criteria criteria;
+
+
     @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
         super.onResume();
 
+
         try {
 
-            Criteria criteria = new Criteria();
-            criteria.setPowerRequirement(Criteria.POWER_LOW);
-            criteria.setAccuracy(Criteria.ACCURACY_FINE);
+            if (criteria == null) {
+                criteria = new Criteria();
+                criteria.setPowerRequirement(Criteria.POWER_LOW);
+                criteria.setAccuracy(Criteria.ACCURACY_FINE);
+            }
+
+            if (mLocManager == null) {
+                mLocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            }
 
             String bestProvider = mLocManager.getBestProvider(criteria, true);
             Location newLoction = null;
-//            if (bestProvider != null)
-//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-            newLoction = mLocManager.getLastKnownLocation(bestProvider);
+            if (bestProvider != null) {
+                newLoction = mLocManager.getLastKnownLocation(bestProvider);
+            }
 
             if (mLocation == null) {
                 mLocation = new Location("");
@@ -3679,10 +3867,52 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             if (newLoction != null) {
                 mLocation.setLatitude(newLoction.getLatitude());
                 mLocation.setLongitude(newLoction.getLongitude());
+
+
+                MyLog.Set("e", getClass(), "newLoction.getLatitude() => " + newLoction.getLatitude());
+                MyLog.Set("e", getClass(), "newLoction.getLongitude() => " + newLoction.getLongitude());
+            } else {
+
+                MyLog.Set("e", getClass(), "-9-9-9-9-9-9--9-9-9-9-9-9");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+//        try {
+//
+//            Criteria criteria = new Criteria();
+//            criteria.setPowerRequirement(Criteria.POWER_LOW);
+//            criteria.setAccuracy(Criteria.ACCURACY_FINE);
+//
+//            String bestProvider = mLocManager.getBestProvider(criteria, true);
+//            Location newLoction = null;
+////            if (bestProvider != null)
+////                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+////                    // TODO: Consider calling
+////                    //    ActivityCompat#requestPermissions
+////                    // here to request the missing permissions, and then overriding
+////                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+////                    //                                          int[] grantResults)
+////                    // to handle the case where the user grants the permission. See the documentation
+////                    // for ActivityCompat#requestPermissions for more details.
+////                    return;
+////                }
+//            newLoction = mLocManager.getLastKnownLocation(bestProvider);
+//
+//            if (mLocation == null) {
+//                mLocation = new Location("");
+//            }
+//
+//            if (newLoction != null) {
+//                mLocation.setLatitude(newLoction.getLatitude());
+//                mLocation.setLongitude(newLoction.getLongitude());
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
         if (mediaPlayer != null && !mediaPlayer.isPlaying() && isPlayAudio) {
@@ -3724,6 +3954,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         cancelTask(checkShareTask);
         cancelTask(shareTask);
         cancelTask(protocol13);
+        cancelTask(protocol109);
 
         if (mediaPlayer != null) {
             mediaPlayer.reset();

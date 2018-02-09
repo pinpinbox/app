@@ -16,12 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.GalleryAdapter;
-import com.pinpinbox.android.Activity.ReadAlbum.PageAdapter;
+import com.pinpinbox.android.Test.ReadAlbum.PageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.DirClass;
-import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Views.ControllableViewPager;

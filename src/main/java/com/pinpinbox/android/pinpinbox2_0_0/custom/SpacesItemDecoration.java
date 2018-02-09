@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
-import com.pinpinbox.android.StringClass.SystemType;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 
 /**
  * Created by vmage on 2017/10/11.

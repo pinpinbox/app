@@ -46,6 +46,9 @@ public class Key {
     public static String categoryarea_id = "categoryarea_id";
     public static String categoryarea_name = "categoryarea_name";
     public static String company_identity = "company_identity";
+    public static String contact_name = "contact_name";
+    public static String contact_address = "contact_address";
+    public static String contact_phone = "contact_phone";
 
 
     //d
@@ -132,7 +135,8 @@ public class Key {
     public static String picfile = "picfile";
     public static String photo_default_path = "photo_default_path";
     public static String photo_id = "photo_id";
-
+    public static String prefix_text = "prefix_text";
+    public static String photousefor_user_id = "photousefor_user_id";
 
     //q
 

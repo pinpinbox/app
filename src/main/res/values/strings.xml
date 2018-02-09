@@ -85,6 +85,7 @@
     <string name="pinpinbox_2_0_0_button_create_new_album">建立新作品</string>
     <string name="pinpinbox_2_0_0_button_contribute_or_cancel">投稿/撤下</string>
     <string name="pinpinbox_2_0_0_button_voting_for_this_work">投票給此作品</string>
+    <string name="pinpinbox_2_0_0_button_exchange_now">立即兌換</string>
 
 
 
@@ -284,6 +285,8 @@
     <string name="pinpinbox_2_0_0_toast_message_original_size_has_been_selected">已選擇原始尺寸</string>
     <string name="pinpinbox_2_0_0_toast_message_crop_error">剪裁失敗</string>
     <string name="pinpinbox_2_0_0_toast_message_board_is_close">該創作人的留言板為關閉</string>
+    <string name="pinpinbox_2_0_0_toast_message_update_done">修改完成</string>
+    <string name="pinpinbox_2_0_0_toast_message_exchange_success">兌換成功</string>
 
 
 
@@ -348,6 +351,11 @@
     <string name="pinpinbox_2_0_0_itemtype_hobby">興趣</string>
     <string name="pinpinbox_2_0_0_itemtype_follow">關注</string>
     <string name="pinpinbox_2_0_0_itemtype_new">最新</string>
+    <string name="pinpinbox_2_0_0_itemtype_exchange_unfinished">未領取</string>
+    <string name="pinpinbox_2_0_0_itemtype_exchange_done">已完成</string>
+    <string name="pinpinbox_2_0_0_itemtype_real_name">真實姓名</string>
+    <string name="pinpinbox_2_0_0_itemtype_phone">電話</string>
+    <string name="pinpinbox_2_0_0_itemtype_address">地址</string>
 
 
 
@@ -373,7 +381,7 @@
     <string name="pinpinbox_2_0_0_title_mail">信箱</string>
     <string name="pinpinbox_2_0_0_title_password">密碼</string>
     <string name="pinpinbox_2_0_0_title_cellphone">手機</string>
-    <string name="pinpinbox_2_0_0_title_gender">姓別</string>
+    <string name="pinpinbox_2_0_0_title_gender">性別</string>
     <string name="pinpinbox_2_0_0_title_birthday">生日</string>
     <string name="pinpinbox_2_0_0_title_hobby">興趣</string>
     <string name="pinpinbox_2_0_0_title_click_to_select_long_click_to_watch">點擊選取，長按觀看</string>
@@ -396,6 +404,9 @@
     <string name="pinpinbox_2_0_0_title_news_feed">動態</string>
     <string name="pinpinbox_2_0_0_title_latest_event">最新活動</string>
     <string name="pinpinbox_2_0_0_title_for_you">推薦給你</string>
+    <string name="pinpinbox_2_0_0_title_exchange_list">兌換清單</string>
+    <string name="pinpinbox_2_0_0_title_contact">連絡資訊</string>
+    <string name="pinpinbox_2_0_0_title_update_contact">修改連絡資訊</string>
 
 
     <string name="pinpinbox_2_0_0_guide_cooperation">跟其他創作人合作也是一種樂趣</string>
@@ -530,6 +541,9 @@
     <string name="pinpinbox_2_0_0_other_text_like_count">&#160;次讚</string>
     <string name="pinpinbox_2_0_0_other_text_popularity">人氣:</string>
     <string name="pinpinbox_2_0_0_other_text_cancel_contribute">取消投稿</string>
+    <string name="pinpinbox_2_0_0_other_text_used_number_when_sign_up">使用註冊時用的號碼</string>
+    <string name="pinpinbox_2_0_0_other_text_is_in_exchange_list">已加入兌換清單</string>
+    <string name="pinpinbox_2_0_0_other_text_add_to_exchange_list">加入兌換清單</string>
 
 
     <string name="crop__saving">相片儲存中</string>

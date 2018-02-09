@@ -22,14 +22,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.Mode.LOG;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.ColorClass;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
-import com.pinpinbox.android.StringClass.DirClass;
-import com.pinpinbox.android.StringClass.DoingTypeClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -121,6 +121,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private String settings;
     private String event_id;
     private String strGetTitle, strGetDescription, strGetLocation, strGetPoint;
+    private String strPrefixText;
 
 
     private List<String> albumindexList;
@@ -244,7 +245,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 //            isCreationExist = bundle.getBoolean(Key.isCreationExist, false);
             event_id = bundle.getString(Key.event_id, "");
             isNewCreate = bundle.getBoolean(Key.isNewCreate, false);
-
+            strPrefixText = bundle.getString(Key.prefix_text, "");
 
             /*20171115*/
             List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
@@ -1317,7 +1318,14 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
         private void setData() {
 
-            edName.setText(strTitle);
+            if (isNewCreate && isContribute) {
+//                edName.setText(strPrefixText);
+                edName.setHint(strPrefixText);
+            } else {
+                edName.setText(strTitle);
+            }
+
+
             edDescription.setText(strDescription);
             edLocation.setText(strLocation);
             edPoint.setText(intPoint + "");
@@ -1668,25 +1676,23 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
 //                               dissmissLoading();
 
-                               Bundle bundle = new Bundle();
-                               bundle.putString(Key.album_id, album_id);
-                               bundle.putString(Key.event_id, event_id);
-                               bundle.putBoolean(Key.isNewCreate, isNewCreate);
-                               bundle.putBoolean(Key.isContribute, isContribute);
+                Bundle bundle = new Bundle();
+                bundle.putString(Key.album_id, album_id);
+                bundle.putString(Key.event_id, event_id);
+                bundle.putBoolean(Key.isNewCreate, isNewCreate);
+                bundle.putBoolean(Key.isContribute, isContribute);
 
-                               Intent intent = new Intent(mActivity, Reader2Activity.class);
-                               intent.putExtras(bundle);
-                               startActivity(intent);
-                               finish();
-                               ActivityAnim.StartAnim(mActivity);
+                Intent intent = new Intent(mActivity, Reader2Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+                ActivityAnim.StartAnim(mActivity);
 
 
 //                           }
 //                       });
 //                    }
 //                },750);
-
-
 
 
             } else if (p73Result.equals("0")) {
@@ -1699,10 +1705,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
             }
         }
-
-
-
-
 
 
 //        private void checkClose(){

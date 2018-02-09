@@ -32,12 +32,6 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.StringClass.ColorClass;
-import com.pinpinbox.android.StringClass.DialogStyleClass;
-import com.pinpinbox.android.StringClass.DoingTypeClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.TaskKeyClass;
-import com.pinpinbox.android.StringClass.UrlClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
@@ -53,6 +47,12 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -64,6 +64,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
@@ -589,15 +590,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         popPicker.setTitle(R.string.pinpinbox_2_0_0_pop_title_what_to_report);
         popPicker.setPickerData(strReportList);
 
-
         popPicker.getTvConfirm().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 strReportSelect = popPicker.getStrSelect();
 
-                if (strReportSelect == null) {
+                if (strReportSelect == null || strReportSelect.equals("null") || strReportSelect.equals("")) {
                     strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
                 }
 
@@ -620,9 +619,21 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             }
         });
 
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                popPicker.getPickerView().setSelected(reportList.size()/2);
+//                strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
+//                MyLog.Set("d", mActivity.getClass(), "strReportSelect =========> " + strReportSelect);
+//            }
+//        },500);
+
+
+
         popPicker.show((RelativeLayout) findViewById(R.id.rBackground));
 
     }
+
 
     private void systemShare() {
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -867,13 +878,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                             PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
 
-                            boolean bCollectFreeAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_free_album, false);
-                            if (!bCollectFreeAlbum) {
-                                doCollectTask();
-                            }
-                        } else {
+                            doCollectTask();
 
-//                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
+                        } else {
 
                             PinPinToast.showSponsorToast(
                                     mActivity.getApplicationContext(),
@@ -881,11 +888,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                                     itemAlbum.getUser_picture()
                             );
 
+                            doCollectTask();
 
-                            boolean bCollectPayAlbum = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.collect_pay_album, false);
-                            if (!bCollectPayAlbum) {
-                                doCollectTask();
-                            }
                         }
                     }
 
@@ -1479,7 +1483,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             String strJson = "";
 
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google"), null);
+
+
+                HashMap<String, String>map = new HashMap<>();
+                map.put(Key.type, Value.album);
+                map.put(Key.type_id, album_id);
+
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P84_CheckTaskCompleted, SetMapByProtocol.setParam84_checktaskcompleted(id, token, TaskKeyClass.share_to_fb, "google", map), null);
                 MyLog.Set("d", getClass(), "p84strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p84Result = Key.TIMEOUT;
@@ -1515,21 +1525,18 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             if (p84Result == 1) {
                 /*任務已完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
                 systemShare();
 
 
             } else if (p84Result == 2) {
 
                 /*尚有次數未完成*/
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
                 selectShareMode();
 
             } else if (p84Result == 0) {
 
                 systemShare();
 
-//                DialogV2Custom.BuildError(mActivity, p84Message);
 
             } else if (p84Result == Key.TIMEOUT) {
 
@@ -1537,12 +1544,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             } else {
 
-                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
 
             }
 
 
         }
+
     }
 
     private class ShareTask extends AsyncTask<Void, Void, Object> {
@@ -1671,30 +1679,37 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
 
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, false).commit();
-
 
                 } else {
                     d.getTvDescription().setText(reward_value);
                 }
 
 
-                d.getTvLink().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                });
+
+                if(url==null || url.equals("")|| url.equals("null")){
+                    d.getTvLink().setVisibility(View.GONE);
+                }else {
+                    d.getTvLink().setVisibility(View.VISIBLE);
+                    d.getTvLink().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            Intent intent = new Intent(mActivity, WebView2Activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            ActivityAnim.StartAnim(mActivity);
+                        }
+                    });
+                }
+
+
+
+
 
             } else if (p83Result.equals("2")) {
-
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
 
             } else if (p83Result.equals("3")) {
@@ -1702,8 +1717,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             } else if (p83Result.equals("0")) {
 
-
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.share_to_fb, true).commit();
 
             } else if (p83Result.equals(Key.timeout)) {
 
@@ -1945,11 +1958,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     /*儲存data*/
                     PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
 
-                    if (itemAlbum.getPoint() == 0) {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
-                    } else {
-                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
-                    }
+//                    if (itemAlbum.getPoint() == 0) {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, false).commit();
+//                    } else {
+//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, false).commit();
+//                    }
 
                 } else {
                     d.getTvDescription().setText(reward_value);
@@ -1972,19 +1985,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             } else if (p83Result.equals("2")) {
 
-                if (itemAlbum.getPoint() == 0) {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, true).commit();
-                } else {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, true).commit();
-                }
-
             } else if (p83Result.equals("0")) {
-
-                if (itemAlbum.getPoint() == 0) {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_free_album, true).commit();
-                } else {
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.collect_pay_album, true).commit();
-                }
 
             } else if (p83Result.equals("3")) {
 
@@ -2452,13 +2453,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     /*click*/
     private void share() {
 
-//        boolean bShareToFB = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.share_to_fb, false);
-//        if (bShareToFB) {
-//            systemShare();
-//        } else {
-//            doCheckShare();
-//        }
-
         doCheckShare();
 
     }
@@ -2798,6 +2792,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        MyLog.Set("e", getClass(), "requestCode => " + requestCode);
+        MyLog.Set("e", getClass(), "resultCode => " + resultCode);
+        MyLog.Set("e", getClass(), "data => " + data.toString());
+
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 

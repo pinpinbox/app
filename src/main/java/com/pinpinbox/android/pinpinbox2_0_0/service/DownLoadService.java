@@ -12,9 +12,9 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.StringClass.DirClass;
-import com.pinpinbox.android.StringClass.ProtocolsClass;
-import com.pinpinbox.android.StringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.OkHttpClientManager;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.ZipUtility;

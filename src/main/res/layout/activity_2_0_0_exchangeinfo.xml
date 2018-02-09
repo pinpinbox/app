@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:transitionName="bg_exchange">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        android:paddingTop="76dp"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/ppb200_padding_margin_first"
+            android:paddingRight="@dimen/ppb200_padding_margin_first">
+
+
+            <RelativeLayout
+                android:id="@+id/rItemBg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/image_background_2_0_0_home_item_cover_border">
+
+                <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                    android:id="@+id/exchangeImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:alpha="0.8"
+                    app:siBorderAlpha="0"
+                    app:siRadius="8dp" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/ppb200_work_name"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                style="@style/ppb200_detail_description"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+
+                <TextView
+                    android:id="@+id/tvContactTitle"
+                    style="@style/ppb200_title_second"
+                    android:text="@string/pinpinbox_2_0_0_title_contact" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_toEndOf="@+id/tvContactTitle"
+                    android:layout_toRightOf="@+id/tvContactTitle"
+                    android:background="@color/pinpinbox_2_0_0_divider" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_real_name"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_first" />
+
+            <EditText
+                android:id="@+id/edName"
+                style="@style/ppb200_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:text="" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:letterSpacing="0.1"
+                    android:text="@string/pinpinbox_2_0_0_itemtype_phone"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_first" />
+
+                <TextView
+                    android:id="@+id/tvRegisterPhone"
+                    fontPath="fonts/OpenSans-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.1"
+                    android:text="@string/pinpinbox_2_0_0_other_text_used_number_when_sign_up"
+                    android:textColor="@color/pinpinbox_2_0_0_first_main"
+                    android:textSize="@dimen/ppb200_common_text_first"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/edPhone"
+                style="@style/ppb200_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:inputType="phone"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:letterSpacing="0.1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_address"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_first" />
+
+            <EditText
+                android:id="@+id/edAddress"
+                style="@style/ppb200_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:text="" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/click_2_0_0_default"
+            android:src="@drawable/ic200_cancel_dark"
+            android:padding="16dp"/>
+
+
+        <TextView
+            android:id="@+id/tvExchangeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_gravity="center_horizontal"
+            android:letterSpacing="0.1"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_pink"
+            android:textSize="@dimen/ppb200_common_text_first"
+            android:textStyle="bold"
+            android:visibility="visible"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_bottom_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+
+
+        <TextView
+            android:id="@+id/tvExchange"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_centerInParent="true"
+            android:text="@string/pinpinbox_2_0_0_button_exchange_now" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

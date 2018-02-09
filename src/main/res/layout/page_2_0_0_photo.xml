@@ -53,90 +53,115 @@
 
 
     <!--exchange-->
-    <RelativeLayout
-        android:id="@+id/rExchange"
+
+    <LinearLayout
+        android:id="@+id/linExchange"
         android:layout_width="288dp"
-        android:layout_height="384dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:alpha="0"
-        android:background="@drawable/border_2_0_0_white_radius"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:orientation="vertical">
 
-
-        <!--contents-->
-        <ScrollView
-            android:id="@+id/svExchange"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:fadingEdgeLength="8dp"
-            android:paddingBottom="48dp"
-            android:requiresFadingEdge="vertical"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/ppb200_padding_margin_first">
-
-
-                <TextView
-                    android:id="@+id/tvExchangeName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:letterSpacing="0.1"
-                    android:text=""
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_title_second_size"
-                    android:textStyle="bold" />
-
-
-                <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
-                    android:id="@+id/exchangeImg"
-                    android:layout_width="256dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:adjustViewBounds="true"
-                    app:siBorderAlpha="0"
-                    app:siRadius="8dp" />
-
-
-                <TextView
-                    android:id="@+id/tvExchangeDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:letterSpacing="0.1"
-                    android:text=""
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="18sp" />
-
-
-            </LinearLayout>
-
-
-        </ScrollView>
-
-        <!--bottom-->
         <RelativeLayout
-            android:id="@+id/rExchangeBottom"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/border_2_0_0_bar_bottom_white_alpha_radius8">
+            android:layout_width="288dp"
+            android:layout_height="336dp"
+            android:background="@drawable/border_2_0_0_white_radius">
 
-            <TextView
-                android:id="@+id/tvChange"
-                style="@style/ppb200_Button_main_small_radius"
-                android:layout_centerInParent="true"
-                android:text="兌換" />
+
+            <!--contents-->
+            <ScrollView
+                android:id="@+id/svExchange"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:fadingEdgeLength="8dp"
+                android:paddingBottom="48dp"
+                android:requiresFadingEdge="vertical"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/ppb200_padding_margin_first">
+
+
+                    <TextView
+                        android:id="@+id/tvExchangeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.1"
+                        android:text=""
+                        android:textColor="@color/pinpinbox_2_0_0_first_text"
+                        android:textSize="@dimen/ppb200_title_second_size"
+                        android:textStyle="bold" />
+
+
+                    <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                        android:id="@+id/exchangeImg"
+                        android:layout_width="256dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:adjustViewBounds="true"
+                        app:siBorderAlpha="0"
+                        app:siRadius="8dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvExchangeDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:letterSpacing="0.1"
+                        android:text=""
+                        android:textColor="@color/pinpinbox_2_0_0_first_text"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+            <!--bottom-->
+            <RelativeLayout
+                android:id="@+id/rAddToExchangeList"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/click_2_0_0_white_radius"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    fontPath="fonts/OpenSans-Bold.ttf"
+                    android:id="@+id/tvAddToExchangeList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pinpinbox_2_0_0_other_text_add_to_exchange_list"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"
+                    android:letterSpacing="0.1"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"/>
+
+
+            </RelativeLayout>
 
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tvChange"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_width="288dp"
+            android:text="立即兌換"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"/>
 
-    </RelativeLayout>
+    </LinearLayout>
+
+
+
+
 
 
     <!--timeout-->
@@ -180,7 +205,7 @@
         android:background="@drawable/border_2_0_0_white_radius"
         android:gravity="center"
         android:letterSpacing="0.1"
-        android:text="活動已結束"
+        android:text="兌換已結束"
         android:textColor="@color/pinpinbox_2_0_0_first_text"
         android:textSize="@dimen/ppb200_title_second_size"
         android:textStyle="bold"
