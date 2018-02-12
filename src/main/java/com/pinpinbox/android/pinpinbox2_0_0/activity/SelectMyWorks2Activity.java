@@ -68,6 +68,7 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
     private String p73Result, p73Message;
     private String sendAlbum_id;
     private String strPrefixText;
+    private String strSpecialUrl;
 
     private int doingType;
     private static final int DoGetMyCollect = 0;
@@ -102,6 +103,7 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
             event_id = bundle.getString("event_id");
             sendMaxCount = bundle.getInt("contribution");
             strPrefixText = bundle.getString(Key.prefix_text, "");
+            strSpecialUrl = bundle.getString(Key.special, "");
         }
     }
 
@@ -663,6 +665,7 @@ public class SelectMyWorks2Activity extends DraggerActivity implements View.OnCl
                     bundle.putBoolean(Key.isNewCreate, true);
                     bundle.putString("event_id", event_id);
                     bundle.putString(Key.prefix_text, strPrefixText);
+                    bundle.putString(Key.special, strSpecialUrl);
                     Intent intent = new Intent(mActivity, Creation2Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);

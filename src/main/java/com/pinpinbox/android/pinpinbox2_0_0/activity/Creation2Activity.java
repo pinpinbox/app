@@ -178,6 +178,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private String mp3Path = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
 
     private String strPrefixText;
+    private String strSpecialUrl;
     private String picUrl;//顯示中的相片
     private String album_id;//相本id
     //    private String template_id;//套版id
@@ -360,6 +361,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             event_id = bundle.getString(Key.event_id, "");
             isContribute = bundle.getBoolean(Key.isContribute, false);
             strPrefixText = bundle.getString(Key.prefix_text, "");
+            strSpecialUrl = bundle.getString(Key.special, "");
 
             MyLog.Set("d", getClass(), "bundle => event_id => " + event_id);
             MyLog.Set("d", getClass(), "bundle => isContibute => " + isContribute);
@@ -2607,6 +2609,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             bundle.putBoolean(Key.isContribute, true);
             bundle.putString(Key.event_id, event_id);
             bundle.putString(Key.prefix_text, strPrefixText);
+            bundle.putString(Key.special, strSpecialUrl);
         }
 
         /*判斷audio*/

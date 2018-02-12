@@ -152,6 +152,7 @@ public class ProtocolKey {
     public static String photousefor_id = "photousefor_id";
     public static String photousefor_user_id = "photousefor_user_id";
     public static String prefix_text = "prefix_text";
+    public static String special = "special";
 
     public static String photo = "photo";
     public static String photo_audio_loop = "audio_loop";

@@ -86,6 +86,9 @@
     <string name="pinpinbox_2_0_0_button_contribute_or_cancel">Submit/Cancel</string>
     <string name="pinpinbox_2_0_0_button_voting_for_this_work">Voting for this work</string>
     <string name="pinpinbox_2_0_0_button_exchange_now">Exchange now</string>
+    <string name="pinpinbox_2_0_0_button_eventexchange">Exchange</string>
+
+
 
     <string name="pinpinbox_2_0_0_event_info">Details</string>
     <string name="pinpinbox_2_0_0_event_contributors">Submit</string>

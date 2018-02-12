@@ -121,7 +121,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private String settings;
     private String event_id;
     private String strGetTitle, strGetDescription, strGetLocation, strGetPoint;
-    private String strPrefixText;
+    private String strPrefixText, strSpecialUrl;
 
 
     private List<String> albumindexList;
@@ -246,6 +246,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             event_id = bundle.getString(Key.event_id, "");
             isNewCreate = bundle.getBoolean(Key.isNewCreate, false);
             strPrefixText = bundle.getString(Key.prefix_text, "");
+            strSpecialUrl = bundle.getString(Key.special, "");
 
             /*20171115*/
             List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
@@ -1681,6 +1682,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 bundle.putString(Key.event_id, event_id);
                 bundle.putBoolean(Key.isNewCreate, isNewCreate);
                 bundle.putBoolean(Key.isContribute, isContribute);
+                bundle.putString(Key.special, strSpecialUrl);
 
                 Intent intent = new Intent(mActivity, Reader2Activity.class);
                 intent.putExtras(bundle);

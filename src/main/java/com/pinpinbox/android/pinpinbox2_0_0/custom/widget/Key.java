@@ -165,6 +165,7 @@ public class Key {
     public static String sum = "sum";
     public static String sumofsettlement = "sumofsettlement";
     public static String sumofunsettlement = "sumofunsettlement";
+    public static String special = "special";
 
     public static String sociallink_facebook = "sociallink_facebook";
     public static String sociallink_google = "sociallink_google";

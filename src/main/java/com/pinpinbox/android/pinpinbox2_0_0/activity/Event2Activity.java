@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +19,6 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TagClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -30,6 +28,9 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TagClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -71,7 +72,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
     private String TAG = TagClass.TagEventActivity;
     private String id, token;
-    private String url, event_id, image, strName, strTitle,strPrefixText ;
+    private String url, event_id, image, strName, strTitle, strPrefixText, strSpecialUrl;
     private String p17Result, p17Message;
     private String sendAlbum_id;
 
@@ -93,7 +94,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
     private ImageView eventImg;
     private ImageView backImg;
-    private TextView tvName, tvTitle, tvEvent, tvContribute, tvExit, tvPopularity;
+    private TextView tvName, tvTitle, tvEvent, tvContribute, tvExit, tvPopularity, tvExchange;
     private LinearLayout linVote;
     private RelativeLayout rDetail;
 
@@ -150,12 +151,14 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         tvContribute = (TextView) findViewById(R.id.tvContribute);
         tvExit = (TextView) findViewById(R.id.tvExit);
         tvPopularity = (TextView) findViewById(R.id.tvPopularity);
+        tvExchange = (TextView) findViewById(R.id.tvExchange);
 
         eventImg = (ImageView) findViewById(R.id.eventImg);
 
         TextUtility.setBold(tvName, true);
         TextUtility.setBold(tvEvent, true);
         TextUtility.setBold(tvContribute, true);
+        TextUtility.setBold(tvExchange, true);
         TextUtility.setBold((TextView) findViewById(R.id.tvVote), true);
 
 
@@ -163,6 +166,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         tvContribute.setOnClickListener(this);
         tvExit.setOnClickListener(this);
         linVote.setOnClickListener(this);
+        tvExchange.setOnClickListener(this);
 
 
         try {
@@ -207,6 +211,16 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         startActivity(intent);
         ActivityAnim.StartAnim(mActivity);
 
+
+    }
+
+    private void toSpecialUrl() {
+
+        Uri content_url = Uri.parse(strSpecialUrl);
+        Intent intent = new Intent();
+        intent.setData(content_url);
+
+        startActivity(intent);
 
     }
 
@@ -267,25 +281,41 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         getMyCollectTask.execute();
     }
 
-//    private void doSendContribute() {
-//        if (!HttpUtility.isConnect(mActivity)) {
-//            setNoConnect();
-//            return;
-//        }
-//
-//        sendContributeTask = new SendContributeTask();
-//        sendContributeTask.execute();
-//    }
+    private void setContributeButton() {
 
-//    private void doFastCreate() {
-//        if (!HttpUtility.isConnect(mActivity)) {
-//            setNoConnect();
-//            return;
-//        }
-//        fastCreateTask = new FastCreateTask();
-//        fastCreateTask.execute();
-//
-//    }
+        int count = canContributeList.size();
+
+        if (count > 0) {
+
+            for (int i = 0; i < count; i++) {
+
+                boolean contributionstatus = (boolean) canContributeList.get(i).get("contributionstatus");
+
+                if (contributionstatus) {
+
+                    tvContribute.setText(R.string.pinpinbox_2_0_0_button_contribute_or_cancel);
+
+                    if (strSpecialUrl != null && !strSpecialUrl.equals("") && !strSpecialUrl.equals("null")) {
+                        tvExchange.setVisibility(View.VISIBLE);
+                    }
+
+                    break;
+                } else {
+                    tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
+                    tvExchange.setVisibility(View.GONE);
+                }
+
+            }
+
+        } else {
+
+            tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
+            tvExchange.setVisibility(View.GONE);
+
+        }
+
+    }
+
 
     @SuppressLint("StaticFieldLeak")
     public void resetCanContributeList() {
@@ -308,30 +338,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
                 if (p17Result.equals("1")) {
 
-                    int count = canContributeList.size();
-
-                    if (count > 0) {
-
-                        for (int i = 0; i < count; i++) {
-
-                            boolean contributionstatus = (boolean)canContributeList.get(i).get("contributionstatus");
-
-                            if(contributionstatus){
-
-                                tvContribute.setText(R.string.pinpinbox_2_0_0_button_contribute_or_cancel);
-
-                                break;
-                            }else {
-                                tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
-                            }
-
-                        }
-
-                    }else {
-
-                        tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
-
-                    }
+                    setContributeButton();
 
 
                 } else if (p17Result.equals("0")) {
@@ -507,6 +514,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
                         String event = JsonUtility.GetString(jsonData, ProtocolKey.event);
                         String event_templatejoin = JsonUtility.GetString(jsonData, ProtocolKey.event_templatejoin);
+                        String special = JsonUtility.GetString(jsonData, ProtocolKey.special);
 
                         JSONObject jsonEvent = new JSONObject(event);
                         image = JsonUtility.GetString(jsonEvent, ProtocolKey.image);
@@ -516,6 +524,9 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                         intPopularity = JsonUtility.GetInt(jsonEvent, ProtocolKey.popularity);
                         contribution = JsonUtility.GetInt(jsonEvent, ProtocolKey.contribution);
                         strPrefixText = JsonUtility.GetString(jsonEvent, ProtocolKey.prefix_text);
+
+                        JSONObject jsonSpecial = new JSONObject(special);
+                        strSpecialUrl = JsonUtility.GetString(jsonSpecial, ProtocolKey.url);
 
                         eventTemplateArray = new JSONArray(event_templatejoin);
 
@@ -582,15 +593,14 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                 }
 
 
-                if (p76Result == 1){
+                if (p76Result == 1) {
                     doGetMyCollect();
-                }else if(p76Result == 2){
+                } else if (p76Result == 2) {
                     tvContribute.setBackgroundResource(R.drawable.click_2_0_0_second_grey_button_frame_white_radius);
                     tvContribute.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                     tvContribute.setText(R.string.pinpinbox_2_0_0_toast_message_event_is_finish);
                     tvContribute.setClickable(false);
                 }
-
 
 
             } else if (p76Result == 0) {
@@ -649,30 +659,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
             if (p17Result.equals("1")) {
 
-                int count = canContributeList.size();
-
-                if (count > 0) {
-
-                    for (int i = 0; i < count; i++) {
-
-                        boolean contributionstatus = (boolean)canContributeList.get(i).get("contributionstatus");
-
-                        if(contributionstatus){
-
-                            tvContribute.setText(R.string.pinpinbox_2_0_0_button_contribute_or_cancel);
-
-                            break;
-                        }else {
-                            tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
-                        }
-
-                    }
-
-                }else {
-
-                    tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
-
-                }
+                setContributeButton();
 
             } else if (p17Result.equals("0")) {
                 DialogV2Custom.BuildError(mActivity, p17Message);
@@ -904,11 +891,11 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                     bundle.putString("event_id", event_id);
                     bundle.putInt("contribution", contribution);
                     bundle.putString(Key.prefix_text, strPrefixText);
+                    bundle.putString(Key.special, strSpecialUrl);
                     Intent intent = new Intent(Event2Activity.this, SelectMyWorks2Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     ActivityAnim.StartAnim(mActivity);
-
 
 
                 }
@@ -929,6 +916,13 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
             case R.id.linVote:
 
                 toVote();
+
+                break;
+
+            case R.id.tvExchange:
+
+                toSpecialUrl();
+
 
                 break;
 

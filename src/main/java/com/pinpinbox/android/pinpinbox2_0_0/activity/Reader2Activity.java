@@ -34,7 +34,6 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -78,7 +77,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
@@ -174,6 +172,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private String strRecent = "[]";
     private String comfirmPoint = "0";
     private String event;
+    private String strSpecialUrl;
 
     private int doingType;
     private int lastPosition = 0;
@@ -301,6 +300,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         Bundle bundle = getIntent().getExtras();
         album_id = bundle.getString(Key.album_id, "");
         event_id = bundle.getString(Key.event_id, "");
+        strSpecialUrl = bundle.getString(Key.special, "");
         isNewCreate = bundle.getBoolean(Key.isNewCreate, false);
         isContribute = bundle.getBoolean(Key.isContribute, false);
     }
@@ -655,7 +655,22 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 d.setStyle(DialogStyleClass.CHECK);
                 d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_cancel_submission_go_to_events_page);
                 d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_button_exit);
-                d.getTvRightOrBottom().setVisibility(View.GONE);
+
+                if(strSpecialUrl!=null && !strSpecialUrl.equals("") && !strSpecialUrl.equals("null")){
+                    d.getTvRightOrBottom().setVisibility(View.VISIBLE);
+                    d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_eventexchange);
+                    d.getTvRightOrBottom().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toSpecialUrl();
+                        }
+                    });
+                }else {
+                    d.getTvRightOrBottom().setVisibility(View.GONE);
+                }
+
+
+
                 d.getTvLeftOrTop().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -663,6 +678,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         toMyCollect();
                     }
                 });
+
+
+
                 d.show();
             } else {
                 toMyCollect();
@@ -687,6 +705,14 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         finish();
         ActivityAnim.FinishAnim(mActivity);
+    }
+
+    private void toSpecialUrl(){
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(strSpecialUrl);
+        intent.setData(content_url);
+        startActivity(intent);
     }
 
     private void setPage(int position) {

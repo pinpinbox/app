@@ -21,8 +21,13 @@
     <drawable name="background">#ffffff</drawable>
 
 
+
     <color name="toast_pink">#e91e63</color><!--pink500-->
     <color name="toast_teal">#00bfa5</color><!--tealaccent700-->
+
+    <!--fd9b64-->
+    <color name="pinpinbox2_0_0_gradient_dark_eventexchange">#d27d4d</color>
+    <color name="pinpinbox2_0_0_gradient_light_eventexchange">#ffb184</color>
 
     <color name="pinpinbox2_0_0_black_alpha">#c8000000</color>
     <color name="pinpinbox_2_0_0_divider">@color/pinpinbox_2_0_0_third_grey</color>

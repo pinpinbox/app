@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
-        android:scrollbars="none"
         android:clipToPadding="false"
-        android:paddingTop="24dp">
+        android:paddingTop="24dp"
+        android:scrollbars="none">
         <!--status bar height => 24-->
 
 
@@ -25,8 +25,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-              >
+                android:layout_height="wrap_content">
 
 
                 <ImageView
@@ -42,32 +41,41 @@
                     android:layout_alignParentBottom="true"
                     android:alpha="1">
 
+                    <TextView
+                        android:id="@+id/tvExchange"
+                        style="@style/ppb200_Button_main_small_radius"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                        android:background="@drawable/click_2_0_0_eventexchange_radius"
+                        android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                        android:paddingRight="@dimen/ppb200_padding_margin_first"
+                        android:text="@string/pinpinbox_2_0_0_button_eventexchange"
+                        android:textColor="@color/white"
+                        android:visibility="gone"/>
+
 
                     <TextView
                         android:id="@+id/tvPopularity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                         android:gravity="center"
                         android:letterSpacing="0.1"
                         android:text=""
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
-                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                        android:layout_gravity="right"
                         android:textColor="@color/white"
                         android:textSize="@dimen/ppb200_common_text_second" />
-
-
-
 
 
                 </RelativeLayout>
 
 
             </RelativeLayout>
-
-
 
 
             <TextView
@@ -170,11 +178,11 @@
             android:background="@drawable/click_2_0_0_default"
             android:gravity="center"
             android:letterSpacing="0.1"
+            android:paddingLeft="@dimen/ppb200_padding_margin_second"
+            android:paddingRight="@dimen/ppb200_padding_margin_second"
             android:text="@string/pinpinbox_2_0_0_button_exit"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_first"
-            android:paddingLeft="@dimen/ppb200_padding_margin_second"
-            android:paddingRight="@dimen/ppb200_padding_margin_second"/>
+            android:textSize="@dimen/ppb200_common_text_first" />
 
 
     </RelativeLayout>
