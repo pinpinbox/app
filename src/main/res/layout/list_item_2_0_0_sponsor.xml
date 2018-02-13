@@ -84,7 +84,8 @@
             android:layout_toStartOf="@+id/tvFollow"
             android:text="@string/pinpinbox_2_0_0_button_message"
             android:textSize="@dimen/ppb200_common_text_third"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvFollow"
@@ -94,7 +95,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_button_follow"
-            android:textSize="@dimen/ppb200_common_text_third" />
+            android:textSize="@dimen/ppb200_common_text_third"
+            android:visibility="gone"/>
 
         <!--<ImageView-->
         <!--android:id="@+id/messageImg"-->

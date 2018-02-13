@@ -22,14 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -44,6 +37,12 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.HashMapKeyControl;
@@ -65,6 +64,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightStartedLis
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol96;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol97;
@@ -800,11 +800,19 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                             closeCreation();
 
-                            if (isNewCreate) {
-                                SnackManager.showCustomSnack();
-                            }
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (isNewCreate) {
+                                        SnackManager.showCustomSnack();
+                                    }
+                                    back();
+                                }
+                            },100);
 
-                            back();
+
+
+
 
                         }
 
@@ -888,6 +896,9 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
 
     }
+
+
+
 
     private void doAddBarCode() {
 
@@ -1666,16 +1677,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                     }
                 }
 
-//                startLoading();
-
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                       runOnUiThread(new Runnable() {
-//                           @Override
-//                           public void run() {
-
-//                               dissmissLoading();
 
                 Bundle bundle = new Bundle();
                 bundle.putString(Key.album_id, album_id);
@@ -1690,11 +1691,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 finish();
                 ActivityAnim.StartAnim(mActivity);
 
-
-//                           }
-//                       });
-//                    }
-//                },750);
 
 
             } else if (p73Result.equals("0")) {

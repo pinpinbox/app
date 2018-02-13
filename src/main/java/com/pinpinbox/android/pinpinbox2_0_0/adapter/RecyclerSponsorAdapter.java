@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
@@ -91,8 +95,6 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         int point = itemUserList.get(position).getPoint();
         boolean is_follow = itemUserList.get(position).isFollow();
 
-        mHolder.tvName.setText(strName);
-
         if(point>0){
             mHolder.tvPoint.setVisibility(View.VISIBLE);
             mHolder.tvPtext.setVisibility(View.VISIBLE);
@@ -118,6 +120,32 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
                     .tag(mActivity.getApplicationContext())
                     .into(mHolder.userImg);
         }
+
+
+
+        if(itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())){
+
+            //me
+
+            String me = strName + "(本人)";
+            SpannableStringBuilder builder = new SpannableStringBuilder(me);
+            ForegroundColorSpan secondgrey = new ForegroundColorSpan(Color.parseColor(ColorClass.GREY_SECOND));
+            builder.setSpan(secondgrey, strName.length() , me.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            mHolder.tvName.setText(builder);
+
+            mHolder.tvMessage.setVisibility(View.GONE);
+            mHolder.tvFollow.setVisibility(View.GONE);
+        }else {
+
+            mHolder.tvName.setText(strName);
+
+
+            mHolder.tvMessage.setVisibility(View.VISIBLE);
+            mHolder.tvFollow.setVisibility(View.VISIBLE);
+        }
+
+
 
 
         mHolder.tvMessage.setOnClickListener(new View.OnClickListener() {

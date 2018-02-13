@@ -909,7 +909,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
             case R.id.tvExit:
 
-                back();
+//                back();
 
                 break;
 

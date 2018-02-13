@@ -402,6 +402,8 @@
     <string name="pinpinbox_2_0_0_title_exchange_list">Exchange List</string>
     <string name="pinpinbox_2_0_0_title_contact">Contact Info</string>
     <string name="pinpinbox_2_0_0_title_update_contact">Update Contact Info</string>
+    <string name="pinpinbox_2_0_0_title_your_sponsor">Your Sponsor</string>
+    <string name="pinpinbox_2_0_0_title_who_like_this_work">Who like this work</string>
 
 
     <string name="pinpinbox_2_0_0_guide_cooperation">Co-creating is fun, too.</string>

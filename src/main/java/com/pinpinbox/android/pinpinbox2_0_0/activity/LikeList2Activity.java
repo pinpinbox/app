@@ -164,7 +164,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
 
         backImg.setOnClickListener(this);
 
-        ((TextView) findViewById(R.id.tvActionBarTitle)).setText("給作品讚的人");
+        ((TextView) findViewById(R.id.tvActionBarTitle)).setText(R.string.pinpinbox_2_0_0_title_who_like_this_work);
 
     }
 
@@ -183,6 +183,11 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
             public void onItemClick(int position, View v) {
 
                 if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                    return;
+                }
+
+
+                if(itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())){
                     return;
                 }
 

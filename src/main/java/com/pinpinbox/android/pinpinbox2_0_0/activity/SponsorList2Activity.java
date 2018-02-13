@@ -163,7 +163,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
         backImg.setOnClickListener(this);
 
-        ((TextView)findViewById(R.id.tvActionBarTitle)).setText("贊助你的人");
+        ((TextView)findViewById(R.id.tvActionBarTitle)).setText(R.string.pinpinbox_2_0_0_title_your_sponsor);
 
     }
 
@@ -184,6 +184,12 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                 if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
                     return;
                 }
+
+
+                if(itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())){
+                    return;
+                }
+
 
                 clickPosition = position;
 
