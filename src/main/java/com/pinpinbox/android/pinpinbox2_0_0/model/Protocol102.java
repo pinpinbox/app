@@ -113,7 +113,11 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
                 String name = JsonUtility.GetString(jsonAlbumexploreX, ProtocolKey.name);
 
+                String url = JsonUtility.GetString(jsonAlbumexploreX, ProtocolKey.url);
+
                 itemAlbumExplore.setName(name);
+
+                itemAlbumExplore.setUrl(url);
 
                 itemAlbumExploreList.add(itemAlbumExplore);
 

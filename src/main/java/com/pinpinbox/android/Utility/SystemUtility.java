@@ -14,10 +14,9 @@ import android.os.Build;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.Log;
 
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -179,7 +178,8 @@ public class SystemUtility {
             Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if (imageUri != null) {
 //处理单张图片
-                Log.v("从其他APP分享的", imageUri.getPath());
+
+                MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => singular number" + imageUri.getPath());
 
 
                 if (imageUri.getPath().contains("external/images/media")) {
@@ -210,7 +210,8 @@ public class SystemUtility {
 //处理多张图片
                 for (int i = 0; i < imageUris.size(); i++) {
 
-                    Log.v("从其他APP分享的", imageUris.get(i).getPath());
+
+                    MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => plural number" + imageUris.get(i).getPath());
 
 
 //                    if (imageUris.get(i).getPath().contains("external/video/media")) {

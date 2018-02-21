@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -20,25 +21,25 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerExploreAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerExploreAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCategoryUser;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102;
 import com.squareup.picasso.Picasso;
@@ -80,6 +81,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_0_0_feature);
+
         SystemUtility.SysApplication.getInstance().addActivity(this);
 
 
@@ -240,7 +242,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                 String albumexploreX = JsonUtility.GetString(jsonAlbumexplore, ProtocolKey.albumexplore);
                 JSONObject jsonAlbumexploreX = new JSONObject(albumexploreX);
                 String name = JsonUtility.GetString(jsonAlbumexploreX, ProtocolKey.name);
+                String url = JsonUtility.GetString(jsonAlbumexploreX, ProtocolKey.url);
                 itemAlbumExplore.setName(name);
+                itemAlbumExplore.setUrl(url);
 
                 itemAlbumExploreList.add(itemAlbumExplore);
 
@@ -344,6 +348,71 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
             tvName.setText(itemAlbumExploreList.get(i).getName());
 
+
+            TextView tvMore = (TextView)view.findViewById(R.id.tvMore);
+
+            if(itemAlbumExploreList.get(i).getUrl()!=null && !itemAlbumExploreList.get(i).getUrl().equals("") && !itemAlbumExploreList.get(i).getUrl().equals("null")){
+                tvMore.setVisibility(View.VISIBLE);
+                final int finalI = i;
+                tvMore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyLog.Set("e", mActivity.getClass(), "itemAlbumExploreList.get(i).getUrl() => " + itemAlbumExploreList.get(finalI).getUrl());
+
+                        Uri uri = Uri.parse(itemAlbumExploreList.get(finalI).getUrl());
+                        String user_id = uri.getQueryParameter(Key.user_id);
+                        String album_id = uri.getQueryParameter(Key.album_id);
+                        String categoryarea_id = uri.getQueryParameter(Key.categoryarea_id);
+                        String event_id = uri.getQueryParameter(Key.event_id);
+
+                        if(user_id==null){
+                            MyLog.Set("e", mActivity.getClass(), "user_id==null");
+                        }else {
+                            MyLog.Set("e", mActivity.getClass(), "user_id => " + user_id);
+                            toUser(user_id);
+                            return;
+                        }
+
+                        if(album_id==null){
+                            MyLog.Set("e", mActivity.getClass(), "album_id==null");
+                        }else {
+                            MyLog.Set("e", mActivity.getClass(), "album_id => " + album_id);
+                            toAlbum(album_id);
+                            return;
+                        }
+
+//                        if(categoryarea_id==null){
+//                            MyLog.Set("e", mActivity.getClass(), "categoryarea_id==null");
+//                        }else {
+//                            MyLog.Set("e", mActivity.getClass(), "categoryarea_id => " + categoryarea_id);
+//                            toFeature(StringIntMethod.StringToInt(categoryarea_id));
+//                            return;
+//                        }
+
+                        if(event_id==null){
+                            MyLog.Set("e", mActivity.getClass(), "event_id==null");
+                        }else {
+                            MyLog.Set("e", mActivity.getClass(), "event_id => " + event_id);
+                            toEvent(event_id);
+                            return;
+                        }
+
+                        toWeb(itemAlbumExploreList.get(finalI).getUrl(),"");
+
+
+
+
+
+
+
+                    }
+                });
+            }else {
+                tvMore.setVisibility(View.GONE);
+            }
+
+
+
             RecyclerView rvFeatureContent = (RecyclerView) view.findViewById(R.id.rvFeatureContent);
 
 
@@ -360,6 +429,10 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
             exploreAdapter.setOnRecyclerViewListener(new RecyclerExploreAdapter.OnRecyclerViewListener() {
                 @Override
                 public void onItemClick(int position, View v) {
+
+                    if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                        return;
+                    }
 
                     final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
 
@@ -439,17 +512,86 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void toCurrentAllWorks() {
+    private void toCurrentAllWorks(int categoryarea_id, String title) {
 
         Bundle bundle = new Bundle();
         bundle.putInt(Key.categoryarea_id, categoryarea_id);
-        bundle.putString(Key.categoryarea_name, strTitle);
+        bundle.putString(Key.categoryarea_name, title);
 
         startActivity(new Intent(mActivity, CurrentCategoryAll2Activity.class).putExtras(bundle));
         ActivityAnim.StartAnim(mActivity);
 
+    }
+
+    private void toFeature(int categoryarea_id){
+
+        Bundle bundle = new Bundle();
+
+//        if (itemAlbumCategoryList.get(position).getCategoryarea_id() == JsonParamTypeClass.NULLCATEGORYID) {
+//
+//            bundle.putString(Key.albumexplore, albumexplore);
+//
+//        }
+
+        bundle.putInt(Key.categoryarea_id,categoryarea_id);
+
+//        bundle.putString(Key.title, albumExploreList.get(1).getName());
+
+        startActivity(new Intent(mActivity, Feature2Activity.class).putExtras(bundle));
+
+        ActivityAnim.StartAnim(mActivity);
+
 
     }
+
+    private void toAlbum(String album_id){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, album_id);
+        bundle.putBoolean(Key.closeToBottom, true);
+        Intent intent = new Intent(mActivity, AlbumInfo2Activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        overridePendingTransition(R.anim.bottom_enter, R.anim.view_stay);
+
+    }
+
+    private void toUser(String user_id){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.author_id, user_id);
+        Intent intent = new Intent(mActivity, Author2Activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        ActivityAnim.StartAnim(mActivity);
+
+    }
+
+    private void toEvent(String event_id){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.event_id, event_id);
+        Intent intent = new Intent(mActivity, Event2Activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        ActivityAnim.StartAnim(mActivity);
+
+    }
+
+    private void toWeb(String url, String title){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.url, url);
+        bundle.putString(Key.title, title);
+        Intent intent = new Intent(mActivity, WebView2Activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        ActivityAnim.StartAnim(mActivity);
+
+
+    }
+
+
 
     private void back() {
         finish();
@@ -526,7 +668,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
             case R.id.tvAll:
 
-                toCurrentAllWorks();
+                toCurrentAllWorks(categoryarea_id, strTitle);
 
                 break;
 

@@ -2,23 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clipChildren="false">
 
 
-    <TextView
-        android:id="@+id/tvName"
-        style="@style/ppb200_title_second"
-        android:text=""
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/ppb200_padding_margin_big"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-        android:layout_marginRight="@dimen/ppb200_padding_margin_first"/>
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+        >
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/ppb200_title_second"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/tvMore"
+            android:layout_toStartOf="@+id/tvMore"
+            android:text="" />
+
+
+        <TextView
+            android:id="@+id/tvMore"
+            style="@style/ppb200_Button_grey_small_radius8"
+            android:layout_alignBottom="@+id/tvName"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:text="更多" />
+
+
+
+    </RelativeLayout>
+
+
+
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvFeatureContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
+        android:clipToPadding="false"/>
 
     <!--180+18-->
 

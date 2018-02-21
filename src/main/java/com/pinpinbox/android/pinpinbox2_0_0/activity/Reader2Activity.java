@@ -3279,7 +3279,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             sendData.put(MapKey.platform, "google");
             sendData.put(MapKey.type, "album");
             sendData.put(MapKey.type_id, album_id);
-            sendData.put("sign", sign);
+            sendData.put(Key.sign, sign);
 
             String strJson = "";
 

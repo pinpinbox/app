@@ -11,7 +11,17 @@ public class ItemAlbumExplore {
 
     private String name;
 
+    private String url;
+
     private List<ItemAlbum> itemAlbumList;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getName() {
         return name;
