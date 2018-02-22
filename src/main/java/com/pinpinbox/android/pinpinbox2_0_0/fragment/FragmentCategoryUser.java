@@ -1,11 +1,8 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,17 +13,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -140,31 +134,42 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                     return;
                 }
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.author_id, (String) mapUserList.get(position).get(Key.user_id));
-                bundle.putString(Key.picture, (String) mapUserList.get(position).get(Key.picture));
-                bundle.putString(Key.name, (String) mapUserList.get(position).get(Key.name));
+                ActivityIntent.toUser(
+                        getActivity(),
+                        true,
+                        (String) mapUserList.get(position).get(Key.user_id),
+                        (String) mapUserList.get(position).get(Key.picture),
+                        (String) mapUserList.get(position).get(Key.name),
+                        v.findViewById(R.id.userImg)
+                );
 
 
-                if (SystemUtility.Above_Equal_V5()) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString(Key.author_id, (String) mapUserList.get(position).get(Key.user_id));
+//                bundle.putString(Key.picture, (String) mapUserList.get(position).get(Key.picture));
+//                bundle.putString(Key.name, (String) mapUserList.get(position).get(Key.name));
+//
+//
+//                if (SystemUtility.Above_Equal_V5()) {
+//
+//                    Intent intent = new Intent(getActivity(), Author2Activity.class).putExtras(bundle);
+//                    RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
+//                    ActivityOptionsCompat options = ActivityOptionsCompat.
+//                            makeSceneTransitionAnimation(getActivity(),
+//                                    userImg,
+//                                    ViewCompat.getTransitionName(userImg));
+//                    startActivity(intent, options.toBundle());
+//
+//
+//                } else {
+//
+//                    Intent intent = new Intent(getActivity(), Author2Activity.class);
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+//                    ActivityAnim.StartAnim(getActivity());
+//
+//                }
 
-                    Intent intent = new Intent(getActivity(), Author2Activity.class).putExtras(bundle);
-                    RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation(getActivity(),
-                                    userImg,
-                                    ViewCompat.getTransitionName(userImg));
-                    startActivity(intent, options.toBundle());
-
-
-                } else {
-
-                    Intent intent = new Intent(getActivity(), Author2Activity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    ActivityAnim.StartAnim(getActivity());
-
-                }
 
             }
 
@@ -175,7 +180,6 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
         });
 
     }
-
 
 
     @Override
@@ -193,7 +197,7 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                     @Override
                     public void run() {
                         Animation animation = AnimationUtils.loadAnimation(getActivity().getApplication(), R.anim.right_enter);
-                        ((Feature2Activity)getActivity()).getLinUser().startAnimation(animation);
+                        ((Feature2Activity) getActivity()).getLinUser().startAnimation(animation);
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
                                 .setCustomAnimations(R.anim.top_enter, R.anim.top_exit)
@@ -201,10 +205,10 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                                 .commitAllowingStateLoss();
                         fragment = null;
 
-                        ((Feature2Activity)getActivity()).removeFragment();
+                        ((Feature2Activity) getActivity()).removeFragment();
 
                     }
-                },100);
+                }, 100);
 
                 break;
 

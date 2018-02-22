@@ -19,22 +19,22 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.pinpinbox.android.Test.Templateinfo.TemplateInfoActivity;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
+import com.pinpinbox.android.Test.Templateinfo.TemplateInfoActivity;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -358,12 +358,8 @@ public class BannerPageAdapter extends PagerAdapter {
 
                     if (user_id != null && !user_id.equals("")) {
 
-                        bundle.putBoolean(Key.shareElement, false);
-                        bundle.putString(Key.author_id, user_id);
-                        intent.putExtras(bundle);
-                        intent.setClass(mActivity, Author2Activity.class);
-                        mActivity.startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
+                        ActivityIntent.toUser(mActivity, false, user_id, null, null ,null);
+
                         return;
                     }
 

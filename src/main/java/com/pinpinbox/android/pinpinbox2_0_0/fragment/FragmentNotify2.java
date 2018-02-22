@@ -6,9 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,27 +19,25 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerNotifyAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -323,42 +319,15 @@ public class FragmentNotify2 extends Fragment {
 
         if (type.equals(Key.user) || type.equals(Key.user_messageboard)) {
 
-            Bundle bundle = new Bundle();
-            bundle.putString(Key.author_id, type_id);
-            bundle.putString(Key.picture, (String) p87arrayList.get(position).get(Key.image));
-            /*無 user name 傳遞*/
 
-
-            if (SystemUtility.Above_Equal_V5()) {
-
-                Intent intent = new Intent(getActivity(), Author2Activity.class).putExtras(bundle);
-                RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(getActivity(),
-                                userImg,
-                                ViewCompat.getTransitionName(userImg));
-                startActivity(intent, options.toBundle());
-
-
-            } else {
-
-
-                Intent intent = new Intent(getActivity(), Author2Activity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                ActivityAnim.StartAnim(getActivity());
-
-
-            }
-
-
-//            Bundle bundle = new Bundle();
-//            bundle.putString(Key.author_id, type_id);
-//            Intent intent = new Intent(getActivity(), Author2Activity.class);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-//            ActivityAnim.StartAnim(getActivity());
-
+            ActivityIntent.toUser(
+                    getActivity(),
+                    true,
+                    type_id,
+                    (String) p87arrayList.get(position).get(Key.image),
+                    null,
+                    v.findViewById(R.id.userImg)
+            );
 
         }
 

@@ -36,6 +36,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
@@ -72,10 +73,10 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     private TextView tvTitle, tvAll;
     private ScrollView svContents;
 
+    private String strJsonData = "";
+
     private int categoryarea_id;
 
-    private String strTitle;
-    private String albumexplore = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,10 +120,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         if (bundle != null) {
             categoryarea_id = bundle.getInt(Key.categoryarea_id, JsonParamTypeClass.NULLCATEGORYID);
-            strTitle = bundle.getString(Key.title, "");
 
             if (categoryarea_id == JsonParamTypeClass.NULLCATEGORYID) {
-                albumexplore = bundle.getString(Key.albumexplore, "");
+                strJsonData = bundle.getString(Key.jsonData, "");
             }
 
 
@@ -189,13 +189,13 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                         }
 
                         @Override
-                        public void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList) {
+                        public void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, String categoryareaName) {
 
                             setUserList(cgaUserList);
 
                             setCGAList(itemAlbumExploreList);
 
-                            showContents();
+                            showContents(categoryareaName);
 
                         }
 
@@ -218,11 +218,21 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     private void decodeJsonToSetTheme() {
 
-
         List<ItemAlbumExplore> itemAlbumExploreList = new ArrayList<>();
 
+        String strCategoryareaName = "";
 
         try {
+
+            JSONObject jsonData = new JSONObject(strJsonData);
+
+            String themearea = JsonUtility.GetString(jsonData, ProtocolKey.themearea);
+
+            JSONObject jsonThemeArea = new JSONObject(themearea);
+
+            strCategoryareaName = JsonUtility.GetString(jsonThemeArea, ProtocolKey.name);
+
+            String albumexplore = JsonUtility.GetString(jsonData, ProtocolKey.albumexplore);
 
             JSONArray jsonArrayAE = new JSONArray(albumexplore);
 
@@ -256,7 +266,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         setCGAList(itemAlbumExploreList);
 
-        showContents();
+        showContents(strCategoryareaName);
 
     }
 
@@ -462,8 +472,8 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void showContents(){
-        tvTitle.setText(strTitle);
+    private void showContents(String categoryareaName){
+        tvTitle.setText(categoryareaName);
 
         ViewControl.AlphaTo1(svContents);
 
@@ -518,7 +528,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         bundle.putInt(Key.categoryarea_id, categoryarea_id);
         bundle.putString(Key.categoryarea_name, title);
 
-        startActivity(new Intent(mActivity, CurrentCategoryAll2Activity.class).putExtras(bundle));
+        startActivity(new Intent(mActivity, CategoryContents2Activity.class).putExtras(bundle));
         ActivityAnim.StartAnim(mActivity);
 
     }
@@ -527,15 +537,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         Bundle bundle = new Bundle();
 
-//        if (itemAlbumCategoryList.get(position).getCategoryarea_id() == JsonParamTypeClass.NULLCATEGORYID) {
-//
-//            bundle.putString(Key.albumexplore, albumexplore);
-//
-//        }
-
         bundle.putInt(Key.categoryarea_id,categoryarea_id);
-
-//        bundle.putString(Key.title, albumExploreList.get(1).getName());
 
         startActivity(new Intent(mActivity, Feature2Activity.class).putExtras(bundle));
 
@@ -557,14 +559,14 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     }
 
     private void toUser(String user_id){
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.author_id, user_id);
-        Intent intent = new Intent(mActivity, Author2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
-
+        ActivityIntent.toUser(
+                mActivity,
+                false,
+                user_id,
+                null,
+                null,
+                null
+        );
     }
 
     private void toEvent(String event_id){
@@ -668,7 +670,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
             case R.id.tvAll:
 
-                toCurrentAllWorks(categoryarea_id, strTitle);
+                toCurrentAllWorks(categoryarea_id, tvTitle.getText().toString());
 
                 break;
 

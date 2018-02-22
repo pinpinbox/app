@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
@@ -18,6 +17,7 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
@@ -78,7 +78,7 @@ public class WebView2Activity extends DraggerActivity {
 
         w = (WebView) findViewById(R.id.messageWebView);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvBack = (TextView)findViewById(R.id.tvBack);
+        tvBack = (TextView) findViewById(R.id.tvBack);
 //        backImg = (ImageView) findViewById(R.id.web_back);
 
         TextUtility.setBold(tvTitle, true);
@@ -117,10 +117,6 @@ public class WebView2Activity extends DraggerActivity {
         }
 
 
-
-
-
-
         w.loadUrl(url);
 
         w.canGoBack();
@@ -147,7 +143,7 @@ public class WebView2Activity extends DraggerActivity {
 
                 Uri uri = Uri.parse(url);
 
-                if(url.startsWith("intent")) {
+                if (url.startsWith("intent")) {
 
                     if (uri != null) {
 
@@ -157,12 +153,7 @@ public class WebView2Activity extends DraggerActivity {
 
                             String userId = uri.getQueryParameter(Key.user_id);
 
-                            Bundle bundle = new Bundle();
-                            bundle.putString(Key.author_id, userId);
-                            Intent intent = new Intent(mActivity, Author2Activity.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                            ActivityAnim.StartAnim(mActivity);
+                            ActivityIntent.toUser(mActivity, false, userId, null, null, null);
 
                             scrollPosition = w.getScrollY();
 
@@ -173,23 +164,17 @@ public class WebView2Activity extends DraggerActivity {
 
                     return true;
 
-                }else {
+                } else {
 
-                    if(url.startsWith("http") || url.startsWith("https")){
+                    if (url.startsWith("http") || url.startsWith("https")) {
                         view.loadUrl(url);
                     }
-
-
-
 
 
                 }
 
 
-
-
-
-                if(scrollPosition!=-1){
+                if (scrollPosition != -1) {
                     w.setScrollY(scrollPosition);
                 }
 
@@ -226,8 +211,6 @@ public class WebView2Activity extends DraggerActivity {
     }
 
 
-
-
     private void back() {
 
         tvBack.setOnClickListener(new View.OnClickListener() {
@@ -245,8 +228,7 @@ public class WebView2Activity extends DraggerActivity {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-        }
-        else {
+        } else {
 
         }
     }
@@ -277,7 +259,6 @@ public class WebView2Activity extends DraggerActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 
     @Override

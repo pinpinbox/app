@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,22 +14,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSponsorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -190,41 +188,16 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                     return;
                 }
 
-
                 clickPosition = position;
 
-                RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
-
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.author_id, itemUserList.get(position).getUser_id());
-                bundle.putString(Key.picture, itemUserList.get(position).getPicture());
-                bundle.putString(Key.name, itemUserList.get(position).getName());
-
-                MyLog.Set("e", mActivity.getClass(), "itemUserList.get(position).getUser_id() => " + itemUserList.get(position).getUser_id());
-                MyLog.Set("e", mActivity.getClass(), "itemUserList.get(position).getPicture() => " + itemUserList.get(position).getPicture());
-                MyLog.Set("e", mActivity.getClass(), "itemUserList.get(position).getName() => " + itemUserList.get(position).getName());
-
-                if (SystemUtility.Above_Equal_V5()) {
-
-                    Intent intent = new Intent(SponsorList2Activity.this, Author2Activity.class);
-                    intent.putExtras(bundle);
-
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation(mActivity,
-                                    userImg,
-                                    ViewCompat.getTransitionName(userImg));
-                    startActivity(intent, options.toBundle());
-
-
-                } else {
-
-                    Intent intent = new Intent(mActivity, Author2Activity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    ActivityAnim.StartAnim(mActivity);
-
-                }
-
+                ActivityIntent.toUser(
+                        mActivity,
+                        true,
+                        itemUserList.get(position).getUser_id(),
+                        itemUserList.get(position).getPicture(),
+                        itemUserList.get(position).getName(),
+                        v.findViewById(R.id.userImg)
+                );
 
             }
 

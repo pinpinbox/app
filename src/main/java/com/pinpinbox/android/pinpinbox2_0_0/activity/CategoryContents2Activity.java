@@ -59,7 +59,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by kevin9594 on 2017/3/19.
  */
-public class CurrentCategoryAll2Activity extends DraggerActivity implements View.OnClickListener {
+public class CategoryContents2Activity extends DraggerActivity implements View.OnClickListener {
 
 
     private Activity mActivity;
@@ -106,7 +106,7 @@ public class CurrentCategoryAll2Activity extends DraggerActivity implements View
             if (!sizeMax) {
                 MyLog.Set("e", mActivity.getClass(), "onLoad");
                 if (isDoingMore) {
-                    MyLog.Set("e", CurrentCategoryAll2Activity.class, "正在讀取更多項目");
+                    MyLog.Set("e", CategoryContents2Activity.class, "正在讀取更多項目");
                     return;
                 }
                 doMoreData();

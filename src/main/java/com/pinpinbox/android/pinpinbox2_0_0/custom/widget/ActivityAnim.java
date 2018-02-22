@@ -22,5 +22,10 @@ public class ActivityAnim {
 
     }
 
+    public static void StartAnimFromBottom(Activity activity){
+
+        activity.overridePendingTransition(R.anim.bottom_enter, R.anim.view_stay);
+
+    }
 
 }

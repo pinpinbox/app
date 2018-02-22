@@ -118,7 +118,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private String p103Result = "";
     private String p103Message = "";
     private String strRank;
-    private String albumexplore;
+//    private String albumexplore;
+    private String strJsonData = "";
 
 
     private int p09Result = -1;
@@ -485,13 +486,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 if (itemAlbumCategoryList.get(position).getCategoryarea_id() == JsonParamTypeClass.NULLCATEGORYID) {
 
-                    bundle.putString(Key.albumexplore, albumexplore);
+                    bundle.putString(Key.jsonData, strJsonData);
 
                 }
 
                 bundle.putInt(Key.categoryarea_id, itemAlbumCategoryList.get(position).getCategoryarea_id());
-
-                bundle.putString(Key.title, itemAlbumCategoryList.get(position).getName());
 
                 startActivity(new Intent(getActivity(), Feature2Activity.class).putExtras(bundle));
 
@@ -1038,8 +1037,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 if (p103Result.equals(ResultType.SYSTEM_OK)) {
 
-                    String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONObject jsonData = new JSONObject(data);
+                    /*Feature需要獲取name*/
+                    strJsonData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONObject jsonData = new JSONObject(strJsonData);
 
                     /*添加theme至第一項*/
                     String themearea = JsonUtility.GetString(jsonData, ProtocolKey.themearea);
@@ -1053,7 +1053,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                     itemAlbumCategoryList.add(itemAlbumCategory);
 
-                    albumexplore = JsonUtility.GetString(jsonData, ProtocolKey.albumexplore);
 
                 }
 

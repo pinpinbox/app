@@ -12,8 +12,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,6 +52,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
@@ -2317,7 +2316,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 if (isReturn) {
                     back();
                 } else {
+
                     toAuthor();
+
                 }
 
                 break;
@@ -2460,31 +2461,42 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     /*click*/
     private void toAuthor() {
 
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.author_id, itemAlbum.getUser_id() + "");
-        bundle.putString(Key.picture, itemAlbum.getUser_picture());
-        bundle.putString(Key.name, itemAlbum.getUser_name());
 
-        if (SystemUtility.Above_Equal_V5()) {
+        ActivityIntent.toUser(
+                mActivity,
+                true,
+                StringIntMethod.IntToString(itemAlbum.getUser_id()),
+                itemAlbum.getUser_picture(),
+                itemAlbum.getUser_name(),
+                userImg
+        );
 
-            Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);
 
-            userImg.setTransitionName(itemAlbum.getUser_picture());
-
-            ActivityOptionsCompat options = ActivityOptionsCompat.
-                    makeSceneTransitionAnimation(mActivity,
-                            userImg,
-                            ViewCompat.getTransitionName(userImg));
-            startActivity(intent, options.toBundle());
-
-        } else {
-
-            Intent intent = new Intent(mActivity, Author2Activity.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            ActivityAnim.StartAnim(mActivity);
-
-        }
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Key.author_id, itemAlbum.getUser_id() + "");
+//        bundle.putString(Key.picture, itemAlbum.getUser_picture());
+//        bundle.putString(Key.name, itemAlbum.getUser_name());
+//
+//        if (SystemUtility.Above_Equal_V5()) {
+//
+//            Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);
+//
+//            userImg.setTransitionName(itemAlbum.getUser_picture());
+//
+//            ActivityOptionsCompat options = ActivityOptionsCompat.
+//                    makeSceneTransitionAnimation(mActivity,
+//                            userImg,
+//                            ViewCompat.getTransitionName(userImg));
+//            startActivity(intent, options.toBundle());
+//
+//        } else {
+//
+//            Intent intent = new Intent(mActivity, Author2Activity.class);
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//            ActivityAnim.StartAnim(mActivity);
+//
+//        }
 
     }
 

@@ -99,6 +99,7 @@ public class Key {
 
 
     //j
+    public static String jsonData = "jsonData";
 
     //k
 

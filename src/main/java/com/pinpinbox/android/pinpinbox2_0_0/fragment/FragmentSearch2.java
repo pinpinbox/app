@@ -28,29 +28,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchAlbumAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -58,12 +59,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchAlbumAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -213,7 +211,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(int position, View v) {
 
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 
@@ -231,33 +229,15 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                     FlurryUtil.onEvent(FlurryKey.search_success_user_to_select);
                 }
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.author_id, (String) currentUserList.get(position).get(Key.user_id));
-                bundle.putString(Key.picture, (String) currentUserList.get(position).get(Key.picture));
-                bundle.putString(Key.name, (String) currentUserList.get(position).get(Key.name));
 
-
-                if (SystemUtility.Above_Equal_V5()) {
-
-                    Intent intent = new Intent(getActivity(), Author2Activity.class).putExtras(bundle);
-                    RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation(getActivity(),
-                                    userImg,
-                                    ViewCompat.getTransitionName(userImg));
-                    startActivity(intent, options.toBundle());
-
-
-                } else {
-
-
-                    Intent intent = new Intent(getActivity(), Author2Activity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    ActivityAnim.StartAnim(getActivity());
-
-
-                }
+                ActivityIntent.toUser(
+                        getActivity(),
+                        true,
+                        (String) currentUserList.get(position).get(Key.user_id),
+                        (String) currentUserList.get(position).get(Key.picture),
+                        (String) currentUserList.get(position).get(Key.name),
+                        v.findViewById(R.id.userImg)
+                );
 
 
             }

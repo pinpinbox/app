@@ -1,16 +1,12 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,20 +21,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -123,7 +117,7 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
         /*set album name*/
         try {
-            TextUtility.setBold(holder.tvAlbumName,true);
+            TextUtility.setBold(holder.tvAlbumName, true);
             holder.tvAlbumName.setText(albumList.get(position).getName());
         } catch (Exception e) {
             e.printStackTrace();
@@ -330,35 +324,16 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
                     ((Main2Activity) mActivity).toMePage();
 
-
                 } else {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Key.author_id, author_id);
-                    bundle.putString(Key.picture, albumList.get(position).getUser_picture());
-
-
-                    if (SystemUtility.Above_Equal_V5()) {
-
-                        Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.
-                                makeSceneTransitionAnimation(mActivity,
-                                        holder.userImg,
-                                        ViewCompat.getTransitionName(holder.userImg));
-                        mActivity.startActivity(intent, options.toBundle());
-
-
-                    } else {
-
-
-                        Intent intent = new Intent(mActivity, Author2Activity.class);
-                        intent.putExtras(bundle);
-                        mActivity.startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-
-
-                    }
-
+                    ActivityIntent.toUser(
+                            mActivity,
+                            true,
+                            author_id,
+                            albumList.get(position).getUser_picture(),
+                            null,
+                            holder.userImg
+                    );
 
                 }
 
@@ -371,10 +346,8 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
     }
 
-
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-
 
     private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnLongClickListener, View.OnTouchListener {

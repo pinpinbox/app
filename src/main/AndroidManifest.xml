@@ -685,7 +685,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name=".pinpinbox2_0_0.activity.CurrentCategoryAll2Activity"
+            android:name=".pinpinbox2_0_0.activity.CategoryContents2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"

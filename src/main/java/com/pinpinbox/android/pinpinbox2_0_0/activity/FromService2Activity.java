@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
@@ -120,13 +121,7 @@ public class FromService2Activity extends Activity {
     //    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     private void toUserArea() {
 
-        Bundle bundle = new Bundle();
-        bundle.putString("author_id", type_id);
-
-        Intent intent = new Intent(FromService2Activity.this, Author2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
+        ActivityIntent.toUser(mActivity, false, type_id, null, null, null);
 
     }
 

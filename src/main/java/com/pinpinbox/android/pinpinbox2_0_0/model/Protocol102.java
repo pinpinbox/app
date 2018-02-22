@@ -40,7 +40,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Post();
 
-        public abstract void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList);
+        public abstract void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, String categoryareaName);
 
         public abstract void TimeOut();
     }
@@ -58,6 +58,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
     private String result = "";
     private String message = "";
     private String reponse = "";
+    private String name = "";
 
     private List<ItemUser> cgaUserList;
     private List<ItemAlbumExplore> itemAlbumExploreList;
@@ -134,8 +135,6 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
     private List<ItemAlbum> getAlbumList(JSONArray jsonArrayAlbum){
 
         List<ItemAlbum> itemAlbumList = new ArrayList<>();
-
-
 
 
         try {
@@ -220,7 +219,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
     }
 
 
-    private void getCGAuserList(JSONObject jsonData){
+    private void getCGAuserListAndCGAName(JSONObject jsonData){
 
         try {
 
@@ -228,6 +227,13 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
             JSONObject jsonCGA = new JSONObject(categoryarea);
 
+            /*get name*/
+            String categoryareaX = JsonUtility.GetString(jsonCGA, ProtocolKey.categoryarea);
+            JSONObject jsonCGAX = new JSONObject(categoryareaX);
+            name = JsonUtility.GetString(jsonCGAX, ProtocolKey.name);
+
+
+            /*get user*/
             String user = JsonUtility.GetString(jsonCGA, ProtocolKey.user);
 
             JSONArray userArray = new JSONArray(user);
@@ -283,7 +289,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
                     getCGAList(jsonData);
 
-                    getCGAuserList(jsonData);
+                    getCGAuserListAndCGAName(jsonData);
 
 
                 } else {
@@ -312,7 +318,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
             case ResultType.SYSTEM_OK:
 
-                callBack.Success(cgaUserList, itemAlbumExploreList);
+                callBack.Success(cgaUserList, itemAlbumExploreList, name);
 
                 break;
 

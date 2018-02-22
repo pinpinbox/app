@@ -44,6 +44,7 @@ import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -672,12 +673,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 //    }
 
     private void toAuthor(String value) {
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.author_id, value);
-        Intent intent = new Intent(mActivity, Author2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
+
+        ActivityIntent.toUser(mActivity, false, value, null, null, null);
+
     }
 
     public void toMePage() {
