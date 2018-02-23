@@ -2,12 +2,9 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -16,13 +13,7 @@ import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -32,7 +23,14 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -42,8 +40,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -247,25 +245,18 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
             @Override
             public void onItemClick(int position, View v) {
 
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 
-
-
-                final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
-
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, albumList.get(position).getAlbum_id());
-                bundle.putString(Key.cover, albumList.get(position).getCover());
-                bundle.putInt(Key.image_orientation, albumList.get(position).getImage_orientation());
-                Intent intent = new Intent(mActivity, AlbumInfo2Activity.class).putExtras(bundle);
-
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(mActivity,
-                                img,
-                                ViewCompat.getTransitionName(img));
-                startActivity(intent, options.toBundle());
+                ActivityIntent.toAlbumInfo(
+                        mActivity,
+                        true,
+                        albumList.get(position).getAlbum_id(),
+                        albumList.get(position).getCover(),
+                        albumList.get(position).getImage_orientation(),
+                        v.findViewById(R.id.coverImg)
+                );
 
             }
 

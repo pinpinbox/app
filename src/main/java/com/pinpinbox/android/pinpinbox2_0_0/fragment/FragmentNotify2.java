@@ -333,14 +333,7 @@ public class FragmentNotify2 extends Fragment {
 
         if (type.equals(Key.albumqueue)) {
 
-            Bundle bundle = new Bundle();
-            bundle.putString(Key.album_id, type_id);
-            bundle.putBoolean(Key.closeToBottom, true);
-            Intent intent = new Intent(getActivity(), AlbumInfo2Activity.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-
-            getActivity().overridePendingTransition(R.anim.bottom_enter, R.anim.view_stay);
+            ActivityIntent.toAlbumInfo(getActivity(), false, type_id, null, 0, null);
 
         }
 
@@ -350,11 +343,12 @@ public class FragmentNotify2 extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString(Key.album_id, type_id);
             bundle.putBoolean(Key.pinpinboard, true);
+            bundle.putBoolean(Key.shareElement, false);
             Intent intent = new Intent(getActivity(), AlbumInfo2Activity.class);
             intent.putExtras(bundle);
             startActivity(intent);
-
             getActivity().overridePendingTransition(R.anim.bottom_enter, R.anim.view_stay);
+
 
         }
 
@@ -794,8 +788,6 @@ public class FragmentNotify2 extends Fragment {
 
 
             loading.show();
-
-
 
 
         }

@@ -23,19 +23,19 @@ import android.view.ViewGroup;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumSettings2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumSettings2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -757,13 +757,8 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
         surfaceView.setVisibility(View.INVISIBLE);
         viewfinderView.setVisibility(View.INVISIBLE);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("album_id", album_id);
 
-        Intent intent = new Intent(getActivity(), AlbumInfo2Activity.class);
-        intent.putExtras(bundle);
-        getActivity().startActivity(intent);
-        ActivityAnim.StartAnim(getActivity());
+        ActivityIntent.toAlbumInfo(getActivity(), false, album_id, null, 0, null);
 
     }
 

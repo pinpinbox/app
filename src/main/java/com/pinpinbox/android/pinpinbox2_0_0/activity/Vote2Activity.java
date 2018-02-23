@@ -2,11 +2,8 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -20,9 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
@@ -38,7 +32,11 @@ import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerVoteAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
@@ -213,20 +211,14 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                 }
 
 
-                final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
+                ActivityIntent.toAlbumInfo(
+                        mActivity,
+                        true,itemAlbumList.get(position).getAlbum_id(),
+                        itemAlbumList.get(position).getCover(),
+                        itemAlbumList.get(position).getImage_orientation(),
+                        v.findViewById(R.id.coverImg)
+                );
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, itemAlbumList.get(position).getAlbum_id());
-                bundle.putString(Key.cover, itemAlbumList.get(position).getCover());
-                bundle.putBoolean("return", true);
-
-                Intent intent = new Intent(mActivity, AlbumInfo2Activity.class).putExtras(bundle);
-
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(mActivity,
-                                img,
-                                ViewCompat.getTransitionName(img));
-                startActivity(intent, options.toBundle());
 
 
             }

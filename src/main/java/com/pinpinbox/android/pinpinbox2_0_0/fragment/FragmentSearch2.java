@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.AsyncTask;
@@ -11,9 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -39,7 +36,6 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchAlbumAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
@@ -286,7 +282,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(int position, View v) {
 
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 
@@ -302,24 +298,14 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                     FlurryUtil.onEvent(FlurryKey.search_success_album_to_select);
                 }
 
-                ImageView img = (ImageView) v.findViewById(R.id.coverImg);
-
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, currentAlbumList.get(position).getAlbum_id());
-                bundle.putString(Key.cover, currentAlbumList.get(position).getCover());
-                bundle.putInt(Key.image_orientation, currentAlbumList.get(position).getImage_orientation());
-                Intent intent = new Intent(getActivity(), AlbumInfo2Activity.class);
-                intent.putExtras(bundle);
-
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(getActivity(),
-                                img,
-                                ViewCompat.getTransitionName(img));
-                startActivity(intent, options.toBundle());
-
-
-//                startActivity(intent);
-//                ActivityAnim.StartAnim(getActivity());
+                ActivityIntent.toAlbumInfo(
+                        getActivity(),
+                        true,
+                        currentAlbumList.get(position).getAlbum_id(),
+                        currentAlbumList.get(position).getCover(),
+                        currentAlbumList.get(position).getImage_orientation(),
+                        v.findViewById(R.id.coverImg)
+                );
 
             }
 

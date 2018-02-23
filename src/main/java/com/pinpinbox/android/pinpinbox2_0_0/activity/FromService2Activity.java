@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
@@ -128,23 +129,28 @@ public class FromService2Activity extends Activity {
     private void toAlbumInfo() {
 
         Bundle bundle = new Bundle();
-        bundle.putString("album_id", type_id);
-
-        Intent intent = new Intent(FromService2Activity.this, AlbumInfo2Activity.class);
+        bundle.putString(Key.album_id, type_id);
+        bundle.putBoolean(Key.shareElement, false);
+        Intent intent = new Intent(mActivity, AlbumInfo2Activity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
+        ActivityAnim.StartAnimFromBottom(mActivity);
 
     }
 
     private void toAlbumInfoMessageBoard() {
         Bundle bundle = new Bundle();
-        bundle.putString("album_id", type_id);
+        bundle.putString(Key.album_id, type_id);
         bundle.putBoolean(Key.pinpinboard, true);
+        bundle.putBoolean(Key.shareElement, false);
         Intent intent = new Intent(mActivity, AlbumInfo2Activity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
+        ActivityAnim.StartAnimFromBottom(mActivity);
+
+
     }
 
     private void toCooperation() {

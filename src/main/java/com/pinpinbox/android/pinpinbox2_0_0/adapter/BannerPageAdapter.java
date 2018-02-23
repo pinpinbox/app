@@ -24,8 +24,6 @@ import com.pinpinbox.android.Test.Templateinfo.TemplateInfoActivity;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
@@ -338,12 +336,10 @@ public class BannerPageAdapter extends PagerAdapter {
 
 
                     if (album_id != null && !album_id.equals("")) {
-                        bundle.putString(Key.album_id, album_id);
-                        bundle.putBoolean(Key.closeToBottom, true);
-                        intent.putExtras(bundle);
-                        intent.setClass(mActivity, AlbumInfo2Activity.class);
-                        mActivity.startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
+
+
+                        ActivityIntent.toAlbumInfo(mActivity, false, album_id, null, 0, null);
+
                         return;
                     }
 
@@ -365,11 +361,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
                     if (event_id != null && !event_id.equals("")) {
 
-                        bundle.putString(Key.event_id, event_id);
-                        intent.putExtras(bundle);
-                        intent.setClass(mActivity, Event2Activity.class);
-                        mActivity.startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
+                        ActivityIntent.toEvent(mActivity, event_id);
 
                     } else {
 

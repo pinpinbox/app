@@ -164,7 +164,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     //    private boolean isVideo = false, isExchange = false, isSlot = false, isAudio = false;
     private boolean isReturn = false;
     private boolean isFBShareComplate = false;
-    private boolean closeToBottom = false;
+    private boolean shareElement = true;
 
     private CallbackManager callbackManager;
     private ShareDialog shareDialog;
@@ -328,7 +328,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         if (bundle != null) {
             album_id = bundle.getString(Key.album_id, "");
             isReturn = bundle.getBoolean("return", false);
-            closeToBottom = bundle.getBoolean(Key.closeToBottom, false);
+            shareElement = bundle.getBoolean(Key.shareElement, true);
         }
 
     }
@@ -337,15 +337,12 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         mActivity = this;
 
-//        getdata = PPBApplication.getInstance().getData();
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
         myDir = PPBApplication.getInstance().getMyDir();
 
         reportList = new ArrayList<>();
         strReportList = new ArrayList<>();
-
-//        vGradient = findViewById(R.id.vGradient);
 
         rLocation = (RelativeLayout) findViewById(R.id.rLocation);
         rAuthor = (RelativeLayout) findViewById(R.id.rAuthor);
@@ -658,20 +655,10 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     }
 
     private void backCheck() {
-        if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {
-
-            if (closeToBottom) {
-                finish();
-                overridePendingTransition(0, R.anim.bottom_exit);
-            } else {
-                coverImg.setRadius(16);//(px)
-                supportFinishAfterTransition();
-            }
-
-
+        if (SystemUtility.getSystemVersion() >= SystemUtility.V5 && shareElement) {
+            coverImg.setRadius(16);//(px)
+            supportFinishAfterTransition();
         } else {
-            MyLog.Set("d", getClass(), "手機版本小於5.0");
-
             finish();
             overridePendingTransition(0, R.anim.bottom_exit);
         }
@@ -2654,25 +2641,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     /*click*/
     private void toEvent() {
-//        Bundle bundle = new Bundle();
-//        bundle.putString("url", strEventUrl);
-//        bundle.putString("title", strEventName);
-//
-//        Intent intent = new Intent(mActivity, WebView2Activity.class);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-//        ActivityAnim.StartAnim(mActivity);
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.event_id, event_id);
-
-
-        Intent intent = new Intent(mActivity, Event2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
-
-
+        ActivityIntent.toEvent(mActivity, event_id);
     }
 
     /*click*/

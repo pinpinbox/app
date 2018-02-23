@@ -5,9 +5,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,11 +24,6 @@ import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -43,7 +36,6 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.BannerPageAdapter;
@@ -57,7 +49,13 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.AutoPageScrollManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -439,22 +437,34 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 FlurryUtil.onEventUseMap(FlurryKey.home_click_albuminfo, params);
 
 
-                String currentAlbum_id = itemAlbumList.get(position).getAlbum_id() + "";
-                String cover = itemAlbumList.get(position).getCover();
+                ActivityIntent.toAlbumInfo(
+                        getActivity(),
+                        true,
+                        itemAlbumList.get(position).getAlbum_id(),
+                        itemAlbumList.get(position).getCover(),
+                        itemAlbumList.get(position).getImage_orientation(),
+                        v.findViewById(R.id.coverImg)
+                );
 
-                final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, currentAlbum_id);
-                bundle.putString(Key.cover, cover);
-                bundle.putInt(Key.image_orientation, itemAlbumList.get(position).getImage_orientation());
-                Intent intent = new Intent(getActivity(), AlbumInfo2Activity.class).putExtras(bundle);
 
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(getActivity(),
-                                img,
-                                ViewCompat.getTransitionName(img));
-                startActivity(intent, options.toBundle());
+
+//                String currentAlbum_id = itemAlbumList.get(position).getAlbum_id() + "";
+//                String cover = itemAlbumList.get(position).getCover();
+//
+//                final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putString(Key.album_id, currentAlbum_id);
+//                bundle.putString(Key.cover, cover);
+//                bundle.putInt(Key.image_orientation, itemAlbumList.get(position).getImage_orientation());
+//                Intent intent = new Intent(getActivity(), AlbumInfo2Activity.class).putExtras(bundle);
+//
+//                ActivityOptionsCompat options = ActivityOptionsCompat.
+//                        makeSceneTransitionAnimation(getActivity(),
+//                                img,
+//                                ViewCompat.getTransitionName(img));
+//                startActivity(intent, options.toBundle());
             }
 
             @Override

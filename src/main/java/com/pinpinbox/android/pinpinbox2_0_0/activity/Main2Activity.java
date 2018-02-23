@@ -655,12 +655,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
 
     private void toAlbumInfo(String value) {
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.album_id, value);
-        Intent intent = new Intent(mActivity, AlbumInfo2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
+        ActivityIntent.toAlbumInfo(mActivity, false, value, null, 0, null);
     }
 
 //    private void toTemInfo(String value) {
@@ -684,13 +679,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     private void toEvent(String value) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.event_id, value);
-
-        Intent intent = new Intent(mActivity, Event2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
+        ActivityIntent.toEvent(mActivity, value);
 
 
     }
@@ -753,12 +742,13 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                     case "albumqueue@messageboard":
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("album_id", type_id);
+                        bundle.putString(Key.album_id, type_id);
                         bundle.putBoolean(Key.pinpinboard, true);
+                        bundle.putBoolean(Key.shareElement, false);
                         Intent intent = new Intent(mActivity, AlbumInfo2Activity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
+                       ActivityAnim.StartAnimFromBottom(mActivity);
 
 
                         break;

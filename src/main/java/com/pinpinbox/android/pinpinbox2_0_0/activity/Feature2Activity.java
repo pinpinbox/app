@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +21,6 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
@@ -40,6 +37,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCategoryUser;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102;
@@ -83,7 +81,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_0_0_feature);
 
-        SystemUtility.SysApplication.getInstance().addActivity(this);
+//        SystemUtility.SysApplication.getInstance().addActivity(this);
 
 
         getBundle();
@@ -95,14 +93,15 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     }
 
     private boolean isFocus = false;
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 
         MyLog.Set("e", getClass(), "hasFocus => " + hasFocus);
 
-        if(hasFocus){
+        if (hasFocus) {
 
-            if(!isFocus){
+            if (!isFocus) {
 //                doGetFeature();
                 isFocus = true;
             }
@@ -359,9 +358,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
             tvName.setText(itemAlbumExploreList.get(i).getName());
 
 
-            TextView tvMore = (TextView)view.findViewById(R.id.tvMore);
+            TextView tvMore = (TextView) view.findViewById(R.id.tvMore);
 
-            if(itemAlbumExploreList.get(i).getUrl()!=null && !itemAlbumExploreList.get(i).getUrl().equals("") && !itemAlbumExploreList.get(i).getUrl().equals("null")){
+            if (itemAlbumExploreList.get(i).getUrl() != null && !itemAlbumExploreList.get(i).getUrl().equals("") && !itemAlbumExploreList.get(i).getUrl().equals("null")) {
                 tvMore.setVisibility(View.VISIBLE);
                 final int finalI = i;
                 tvMore.setOnClickListener(new View.OnClickListener() {
@@ -375,52 +374,50 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                         String categoryarea_id = uri.getQueryParameter(Key.categoryarea_id);
                         String event_id = uri.getQueryParameter(Key.event_id);
 
-                        if(user_id==null){
+                        String category_id = uri.getQueryParameter("category_id");
+
+                        if (user_id == null) {
                             MyLog.Set("e", mActivity.getClass(), "user_id==null");
-                        }else {
+                        } else {
                             MyLog.Set("e", mActivity.getClass(), "user_id => " + user_id);
                             toUser(user_id);
                             return;
                         }
 
-                        if(album_id==null){
+                        if (album_id == null) {
                             MyLog.Set("e", mActivity.getClass(), "album_id==null");
-                        }else {
+                        } else {
                             MyLog.Set("e", mActivity.getClass(), "album_id => " + album_id);
                             toAlbum(album_id);
                             return;
                         }
 
-//                        if(categoryarea_id==null){
-//                            MyLog.Set("e", mActivity.getClass(), "categoryarea_id==null");
-//                        }else {
-//                            MyLog.Set("e", mActivity.getClass(), "categoryarea_id => " + categoryarea_id);
-//                            toFeature(StringIntMethod.StringToInt(categoryarea_id));
-//                            return;
-//                        }
+                        if(categoryarea_id!=null && category_id==null){
 
-                        if(event_id==null){
-                            MyLog.Set("e", mActivity.getClass(), "event_id==null");
+                            MyLog.Set("e", mActivity.getClass(), "categoryarea_id => " + categoryarea_id);
+                            toFeature(StringIntMethod.StringToInt(categoryarea_id));
+                            return;
+
                         }else {
+                            MyLog.Set("e", mActivity.getClass(), "categoryarea_id==null");
+                        }
+
+                        if (event_id == null) {
+                            MyLog.Set("e", mActivity.getClass(), "event_id==null");
+                        } else {
                             MyLog.Set("e", mActivity.getClass(), "event_id => " + event_id);
                             toEvent(event_id);
                             return;
                         }
 
-                        toWeb(itemAlbumExploreList.get(finalI).getUrl(),"");
-
-
-
-
-
+                        toWeb(itemAlbumExploreList.get(finalI).getUrl(), "");
 
 
                     }
                 });
-            }else {
+            } else {
                 tvMore.setVisibility(View.GONE);
             }
-
 
 
             RecyclerView rvFeatureContent = (RecyclerView) view.findViewById(R.id.rvFeatureContent);
@@ -440,25 +437,20 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                 @Override
                 public void onItemClick(int position, View v) {
 
-                    if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                    if (ClickUtils.ButtonContinuousClick()) {
                         return;
                     }
 
-                    final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Key.album_id, (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getAlbum_id());
-                    bundle.putString(Key.cover, (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getCover());
-                    bundle.putInt(Key.image_orientation, (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getImage_orientation());
+                    ActivityIntent.toAlbumInfo(
+                            mActivity,
+                            true,
+                            (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getAlbum_id(),
+                            (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getCover(),
+                            (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getImage_orientation(),
+                            v.findViewById(R.id.coverImg)
+                    );
 
-
-                    Intent intent = new Intent(mActivity, AlbumInfo2Activity.class).putExtras(bundle);
-
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation(mActivity,
-                                    img,
-                                    ViewCompat.getTransitionName(img));
-                    startActivity(intent, options.toBundle());
 
                 }
 
@@ -472,7 +464,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void showContents(String categoryareaName){
+    private void showContents(String categoryareaName) {
         tvTitle.setText(categoryareaName);
 
         ViewControl.AlphaTo1(svContents);
@@ -533,11 +525,11 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void toFeature(int categoryarea_id){
+    private void toFeature(int categoryarea_id) {
 
         Bundle bundle = new Bundle();
 
-        bundle.putInt(Key.categoryarea_id,categoryarea_id);
+        bundle.putInt(Key.categoryarea_id, categoryarea_id);
 
         startActivity(new Intent(mActivity, Feature2Activity.class).putExtras(bundle));
 
@@ -546,41 +538,21 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void toAlbum(String album_id){
+    private void toAlbum(String album_id) {
+        ActivityIntent.toAlbumInfo(mActivity, false, album_id, null, 0, null);
+    }
 
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.album_id, album_id);
-        bundle.putBoolean(Key.closeToBottom, true);
-        Intent intent = new Intent(mActivity, AlbumInfo2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        overridePendingTransition(R.anim.bottom_enter, R.anim.view_stay);
+    private void toUser(String user_id) {
+        ActivityIntent.toUser(mActivity, false, user_id, null, null, null);
+    }
+
+    private void toEvent(String event_id) {
+
+        ActivityIntent.toEvent(mActivity, event_id);
 
     }
 
-    private void toUser(String user_id){
-        ActivityIntent.toUser(
-                mActivity,
-                false,
-                user_id,
-                null,
-                null,
-                null
-        );
-    }
-
-    private void toEvent(String event_id){
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.event_id, event_id);
-        Intent intent = new Intent(mActivity, Event2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
-
-    }
-
-    private void toWeb(String url, String title){
+    private void toWeb(String url, String title) {
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.url, url);
@@ -592,7 +564,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
 
     }
-
 
 
     private void back() {
@@ -702,7 +673,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     public void onDestroy() {
 
 
-        SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
+//        SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
 
         cancelTask(protocol102);
 

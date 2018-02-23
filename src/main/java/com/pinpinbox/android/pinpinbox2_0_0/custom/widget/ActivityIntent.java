@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 
 /**
  * Created by vmage on 2018/2/21.
@@ -20,54 +20,45 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
 public class ActivityIntent {
 
 
-    public static void toAlbumInfoByGeneral(Activity currentActivity, String album_id) {
-
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.album_id, album_id);
-        bundle.putBoolean(Key.closeToBottom, true);
-
-        currentActivity.startActivity(
-                new Intent(currentActivity, AlbumInfo2Activity.class).putExtras(bundle)
-        );
-        ActivityAnim.StartAnimFromBottom(currentActivity);
-
-    }
-
-    public static void toAlbumInfoBySharedElement(Activity currentActivity, String album_id, String coverUrl, int imageOrientation, ImageView imageView) {
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.album_id, album_id);
-        bundle.putString(Key.cover, coverUrl);
-        bundle.putInt(Key.image_orientation, imageOrientation);
-
-        ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(
-                        currentActivity,
-                        imageView,
-                        ViewCompat.getTransitionName(imageView)
-                );
-
-        Intent intent = new Intent(currentActivity, AlbumInfo2Activity.class).putExtras(bundle);
-
-        currentActivity.startActivity(intent, options.toBundle());
-
-    }
-
-
-
     public static void toAlbumInfo(Activity currentActivity, boolean sharedElement, String album_id, String coverUrl, int imageOrientation, View coverImg){
 
 
+        Bundle bundle = new Bundle();
+
+        bundle.putString(Key.album_id, album_id);
+        bundle.putBoolean(Key.shareElement, sharedElement);
+
+        if (SystemUtility.Above_Equal_V5() && sharedElement) {
+
+            bundle.putString(Key.cover, coverUrl);
+            bundle.putInt(Key.image_orientation, imageOrientation);
+
+            coverImg.setTransitionName(coverUrl);
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.
+                    makeSceneTransitionAnimation(
+                            currentActivity,
+                            coverImg,
+                            ViewCompat.getTransitionName(coverImg)
+                    );
+
+            currentActivity.startActivity(
+                    new Intent(currentActivity, AlbumInfo2Activity.class).putExtras(bundle), options.toBundle()
+            );
 
 
+        }else {
 
+            currentActivity.startActivity(
+                    new Intent(currentActivity, AlbumInfo2Activity.class).putExtras(bundle)
+            );
+            ActivityAnim.StartAnimFromBottom(currentActivity);
+
+
+        }
 
 
     }
-
-
-
 
     public static void toUser(Activity currentActivity, boolean sharedElement, String user_id, String picture, String name, View userImg) {
 
@@ -106,6 +97,18 @@ public class ActivityIntent {
 
     }
 
+    public static void toEvent(Activity currentActivity, String event_id){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.event_id, event_id);
+
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, Event2Activity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
 
     public static void toCategoryContents(Activity currentActivity, int categoryarea_id, String name) {
 

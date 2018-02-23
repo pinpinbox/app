@@ -600,28 +600,47 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     return;
                 }
 
-                //20170820
-//                if(albumList.get(position).getAlbum_id().equals(strAlbumIdFromInfo)){
-//                    backCheck();
-//                    return;
-//                }
 
 
-                final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
 
                 Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, albumList.get(position).getAlbum_id());
-                bundle.putString(Key.cover, albumList.get(position).getCover());
+
+                bundle.putString(Key.album_id,  albumList.get(position).getAlbum_id());
                 bundle.putBoolean("return", true);
-                bundle.putInt(Key.image_orientation, albumList.get(position).getImage_orientation());
 
-                Intent intent = new Intent(mActivity, AlbumInfo2Activity.class).putExtras(bundle);
+                if (SystemUtility.Above_Equal_V5()) {
 
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(mActivity,
-                                img,
-                                ViewCompat.getTransitionName(img));
-                startActivity(intent, options.toBundle());
+                    bundle.putBoolean(Key.shareElement, true);
+                    bundle.putString(Key.cover, albumList.get(position).getCover());
+                    bundle.putInt(Key.image_orientation, albumList.get(position).getImage_orientation());
+
+                    final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
+
+                    img.setTransitionName(albumList.get(position).getCover());
+
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(
+                                    mActivity,
+                                    img,
+                                    ViewCompat.getTransitionName(img)
+                            );
+
+                    startActivity(
+                            new Intent(mActivity, AlbumInfo2Activity.class).putExtras(bundle), options.toBundle()
+                    );
+
+
+                }else {
+
+                    bundle.putBoolean(Key.shareElement, false);
+                    startActivity(
+                            new Intent(mActivity, Author2Activity.class).putExtras(bundle)
+                    );
+                    ActivityAnim.StartAnimFromBottom(mActivity);
+
+
+                }
+
 
 
             }

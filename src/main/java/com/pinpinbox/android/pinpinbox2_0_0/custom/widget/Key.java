@@ -41,7 +41,6 @@ public class Key {
     public static String clickOffLine = "clickOffLine";
     public static String changeFollowStatusItem = "changeFollowStatusItem";
     public static String className = "className";
-    public static String closeToBottom = "closeToBottom";
     public static String contributeMode = "contributeMode";
     public static String categoryarea_id = "categoryarea_id";
     public static String categoryarea_name = "categoryarea_name";

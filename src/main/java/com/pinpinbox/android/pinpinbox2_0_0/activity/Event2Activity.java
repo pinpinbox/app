@@ -193,7 +193,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
         Bundle bundle = new Bundle();
         bundle.putString("url", url);
 
-        Intent intent = new Intent(Event2Activity.this, WebView2Activity.class);
+        Intent intent = new Intent(mActivity, WebView2Activity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         ActivityAnim.StartAnim(mActivity);
@@ -892,7 +892,7 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
                     bundle.putInt("contribution", contribution);
                     bundle.putString(Key.prefix_text, strPrefixText);
                     bundle.putString(Key.special, strSpecialUrl);
-                    Intent intent = new Intent(Event2Activity.this, SelectMyWorks2Activity.class);
+                    Intent intent = new Intent(mActivity, SelectMyWorks2Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     ActivityAnim.StartAnim(mActivity);
