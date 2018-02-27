@@ -36,6 +36,7 @@
                     android:id="@+id/tvTitle"
                     style="@style/ppb200_title_first"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     android:text="" />
 
                 <TextView
@@ -52,7 +53,8 @@
                     android:letterSpacing="0.1"
                     android:background="@drawable/click_2_0_0_default"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_common_text_first" />
+                    android:textSize="@dimen/ppb200_common_text_first"
+                    android:visibility="gone"/>
 
 
             </RelativeLayout>

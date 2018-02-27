@@ -57,9 +57,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-/**
- * Created by vmage on 2015/12/29.
- */
 public class VideoPlayActivity extends DraggerActivity {
 
     private Activity mActivity;
@@ -471,8 +468,6 @@ public class VideoPlayActivity extends DraggerActivity {
         }
 
 
-/************************************************************************************************/
-
         frameLayout.setVisibility(View.GONE);
         videoView.setVisibility(View.VISIBLE);
 
@@ -493,7 +488,6 @@ public class VideoPlayActivity extends DraggerActivity {
             }
         });
 
-/************************************************************************************************/
 
                         /* 设置模式-播放进度条 */
 //        videoView.setMediaController(new MediaController(VideoPlayActivity.this));
@@ -554,46 +548,6 @@ public class VideoPlayActivity extends DraggerActivity {
         webView.getSettings().setLoadWithOverviewMode(true);
 
         webView.loadUrl(url);
-
-//        WebSettings settings = webView.getSettings();
-//        settings.setJavaScriptEnabled(true);
-//        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-//        settings.setSupportZoom(true);
-//        settings.setBuiltInZoomControls(true);//必須添加 不然縮放不起作用
-//        settings.setDisplayZoomControls(false);
-//        //自适应屏幕
-//        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-//        settings.setLoadWithOverviewMode(true);
-//
-//
-//        webView.setWebViewClient(new WebViewClient() {
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                // TODO Auto-generated method stub
-//                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-//                view.loadUrl(url);
-//                return true;
-//            }
-//
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                super.onPageFinished(view, url);
-////                view.loadUrl(url);
-//
-//                if (LOG.isLogMode) {
-//
-//                    Log.d("webview", " super.onPageFinished");
-//                }
-//
-//            }
-//
-//
-//        });
-//
-//
-//        webView.loadUrl(url);
-//
-//        webView.canGoBack();
 
     }
 
@@ -702,10 +656,6 @@ public class VideoPlayActivity extends DraggerActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-
-
-
-
 
     }
 

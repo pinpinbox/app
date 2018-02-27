@@ -33,7 +33,7 @@
             android:layout_alignParentRight="true"
             android:visibility="gone"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-            android:text="更多" />
+            android:text="@string/pinpinbox_2_0_0_button_more" />
 
 
 

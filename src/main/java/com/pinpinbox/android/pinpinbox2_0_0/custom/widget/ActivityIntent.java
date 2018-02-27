@@ -102,7 +102,6 @@ public class ActivityIntent {
         Bundle bundle = new Bundle();
         bundle.putString(Key.event_id, event_id);
 
-
         currentActivity.startActivity(
                 new Intent(currentActivity, Event2Activity.class).putExtras(bundle)
         );
@@ -110,11 +109,10 @@ public class ActivityIntent {
 
     }
 
-    public static void toCategoryContents(Activity currentActivity, int categoryarea_id, String name) {
+    public static void toCategoryArea(Activity currentActivity, int categoryarea_id) {
 
         Bundle bundle = new Bundle();
         bundle.putInt(Key.categoryarea_id, categoryarea_id);
-        bundle.putString(Key.categoryarea_name, name);
 
         currentActivity.startActivity(
                 new Intent(currentActivity, CategoryContents2Activity.class).putExtras(bundle)

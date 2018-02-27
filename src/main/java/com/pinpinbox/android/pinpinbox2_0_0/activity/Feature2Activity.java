@@ -68,7 +68,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     private LinearLayout linContents, linUser;
     private ImageView backImg;
-    private TextView tvTitle, tvAll;
+    private TextView tvTitle;
     private ScrollView svContents;
 
     private String strJsonData = "";
@@ -140,13 +140,13 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         svContents = (ScrollView) findViewById(R.id.svContents);
         backImg = (ImageView) findViewById(R.id.backImg);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvAll = (TextView) findViewById(R.id.tvAll);
+//        tvAll = (TextView) findViewById(R.id.tvAll);
 
         TextUtility.setBold(tvTitle, true);
 
         linUser.setOnClickListener(this);
         backImg.setOnClickListener(this);
-        tvAll.setOnClickListener(this);
+//        tvAll.setOnClickListener(this);
 
     }
 
@@ -160,7 +160,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         if (categoryarea_id == JsonParamTypeClass.NULLCATEGORYID) {
             linUser.setVisibility(View.GONE);
-            tvAll.setVisibility(View.GONE);
+//            tvAll.setVisibility(View.GONE);
 
             decodeJsonToSetTheme();
 
@@ -275,9 +275,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         try {
 
-            for (int j = 0; j < jsonArrayAlbum.length(); j++) {
+            for (int i = 0; i < jsonArrayAlbum.length(); i++) {
 
-                JSONObject jsonItem = (JSONObject) jsonArrayAlbum.get(j);
+                JSONObject jsonItem = (JSONObject) jsonArrayAlbum.get(i);
 
                 String album = JsonUtility.GetString(jsonItem, ProtocolKey.album);
                 String user = JsonUtility.GetString(jsonItem, ProtocolKey.user);
@@ -373,7 +373,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                         String album_id = uri.getQueryParameter(Key.album_id);
                         String categoryarea_id = uri.getQueryParameter(Key.categoryarea_id);
                         String event_id = uri.getQueryParameter(Key.event_id);
-
                         String category_id = uri.getQueryParameter("category_id");
 
                         if (user_id == null) {
@@ -393,9 +392,31 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                         }
 
                         if(categoryarea_id!=null && category_id==null){
-
                             MyLog.Set("e", mActivity.getClass(), "categoryarea_id => " + categoryarea_id);
-                            toFeature(StringIntMethod.StringToInt(categoryarea_id));
+
+                            List<String> list = uri.getPathSegments();
+
+                            //有explore => 書櫃，無則前往全部瀑布流
+
+                            boolean toAll = true;
+
+                            for (int j = 0; j < list.size(); j++) {
+                                if(list.get(j).equals("explore")){
+                                    toAll = false;
+                                    break;
+                                }
+                            }
+
+                            if(toAll){
+                                toCurrentAllWorks(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
+                            }else {
+                                toFeature(StringIntMethod.StringToInt(categoryarea_id));
+                            }
+
+
+
+
+
                             return;
 
                         }else {
@@ -639,11 +660,11 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
                 break;
 
-            case R.id.tvAll:
-
-                toCurrentAllWorks(categoryarea_id, tvTitle.getText().toString());
-
-                break;
+//            case R.id.tvAll:
+//
+//                toCurrentAllWorks(categoryarea_id, tvTitle.getText().toString());
+//
+//                break;
 
         }
 

@@ -824,14 +824,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         isNoOwnShowCollectType(v, vType);
                     } else {
 
-
-//                        if (linExchange.getVisibility() == View.VISIBLE) {
-//                            MyLog.Set("e", this.getClass(), "linExchange is visibility");
-//                            return;
-//                        }
-
                         vType.setVisibility(View.VISIBLE);
-
 
                         linExchange.setVisibility(View.VISIBLE);
 
@@ -850,6 +843,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         vType.setVisibility(View.VISIBLE);
 
                         centerImg.setImageResource(R.drawable.ic200_gift_white);
+
+
+
                     }
                     break;
 
@@ -1222,14 +1218,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
                     }
-
-
-//                    @Override
-//                    public void IsEnd() {
-//                        TextUtility.setBold(tvExchangeEnd, true);
-//                        tvExchangeEnd.setVisibility(View.VISIBLE);
-//                        ViewControl.AlphaTo1(tvExchangeEnd);
-//                    }
 
 
                     @Override
@@ -2324,7 +2312,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         deleteLikeTask = new DeleteLikeTask();
         deleteLikeTask.execute();
     }
-
 
     private class GetAlbumInfoTask extends AsyncTask<Void, Void, Object> {
 
@@ -3496,7 +3483,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             super.onPreExecute();
             doingType = DoingTypeClass.DoDeleteLike;
             startLoading();
-
         }
 
 

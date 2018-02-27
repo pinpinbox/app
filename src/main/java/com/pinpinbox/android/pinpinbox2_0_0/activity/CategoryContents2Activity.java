@@ -85,7 +85,7 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
     private int doingType;
     private int round, count;
     private int loadCount;
-    private int category_id;
+    private int categoryarea_id;
     private int deviceType;
     private static final int PHONE = 10001;
     private static final int TABLE = 10002;
@@ -166,7 +166,7 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
 
         if(bundle!=null){
 
-            category_id = bundle.getInt(Key.categoryarea_id, -1);
+            categoryarea_id = bundle.getInt(Key.categoryarea_id, -1);
 
             strCategoryName = bundle.getString(Key.categoryarea_name, "");
 
@@ -276,7 +276,7 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
 
         try {
             strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P10_RetrieveRankList,
-                    SetMapByProtocol.setParam10_retrievehotrank(id, token, StringIntMethod.IntToString(category_id), limit),
+                    SetMapByProtocol.setParam10_retrievehotrank(id, token, StringIntMethod.IntToString(categoryarea_id), limit),
                     null);
             MyLog.Set("json", getClass(), strJson);
         } catch (SocketTimeoutException timeout) {
