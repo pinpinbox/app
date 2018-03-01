@@ -39,17 +39,17 @@
         android:scaleType="centerCrop" />
 
 
-    <TextView
-        android:id="@+id/tvCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:letterSpacing="0.1"
-        android:padding="16dp"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="48sp"
-        android:visibility="gone" />
+    <!--<TextView-->
+    <!--android:id="@+id/tvCenter"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:letterSpacing="0.1"-->
+    <!--android:padding="16dp"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="48sp"-->
+    <!--android:visibility="gone" />-->
 
 
     <!--exchange-->
@@ -60,8 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:alpha="0"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:transitionName="bg_exchange"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="288dp"
@@ -109,16 +110,12 @@
                             android:id="@+id/exchangeImg"
                             android:layout_width="256dp"
                             android:layout_height="wrap_content"
-                            android:alpha="0.8"
                             android:adjustViewBounds="true"
+                            android:alpha="0.8"
                             app:siBorderAlpha="0"
                             app:siRadius="8dp" />
 
                     </RelativeLayout>
-
-
-
-
 
 
                     <TextView
@@ -142,20 +139,20 @@
                 android:id="@+id/rAddToExchangeList"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/click_2_0_0_white_radius"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/click_2_0_0_white_radius">
 
                 <TextView
-                    fontPath="fonts/OpenSans-Bold.ttf"
                     android:id="@+id/tvAddToExchangeList"
+                    fontPath="fonts/OpenSans-Bold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/pinpinbox_2_0_0_other_text_add_to_exchange_list"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     android:layout_centerInParent="true"
                     android:letterSpacing="0.1"
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"/>
+                    android:text="@string/pinpinbox_2_0_0_other_text_add_to_exchange_list"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
 
             </RelativeLayout>
@@ -167,14 +164,10 @@
             android:id="@+id/tvChange"
             style="@style/ppb200_Button_main_common_radius"
             android:layout_width="288dp"
-            android:text="立即兌換"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_first"/>
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_exchange_now" />
 
     </LinearLayout>
-
-
-
-
 
 
     <!--timeout-->
@@ -184,9 +177,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:alpha="0"
+        android:background="@drawable/border_2_0_0_white_radius"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@drawable/border_2_0_0_white_radius"
         android:padding="@dimen/ppb200_padding_margin_first"
         android:visibility="gone">
 
@@ -225,8 +218,6 @@
         android:visibility="gone" />
 
 
-
-
     <!--loading-->
     <com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView
         android:id="@+id/vRefreshExchange"
@@ -235,7 +226,6 @@
         android:layout_centerInParent="true"
         android:visibility="gone"
         app:indicatorColor="@color/pinpinbox_2_0_0_third_main" />
-
 
 
     <!--collect guide-->

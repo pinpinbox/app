@@ -20,17 +20,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.pinpinbox.android.Test.ReadAlbum.ReadAlbumActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.OkHttpClientManager;
 import com.pinpinbox.android.Utility.ZipUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -485,7 +484,6 @@ public class AlbumDownLoad {
 
         if (!HttpUtility.isConnect(mActivity)) {
             noConnect = new NoConnect(mActivity);
-            ((ReadAlbumActivity) mActivity).setNoConnect(noConnect);
             return;
         }
 

@@ -12,6 +12,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 
 /**
  * Created by vmage on 2018/2/21.
@@ -104,6 +105,16 @@ public class ActivityIntent {
 
         currentActivity.startActivity(
                 new Intent(currentActivity, Event2Activity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
+
+    public static void toExchangeList(Activity currentActivity){
+
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, ExchangeList2Activity.class)
         );
         ActivityAnim.StartAnim(currentActivity);
 

@@ -879,6 +879,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         ActivityAnim.StartAnim(getActivity());
     }
 
+    private void toExchangeList(){
+
+        ActivityIntent.toExchangeList(getActivity());
+
+    }
+
     private void toRecent() {
         startActivity(new Intent(getActivity(), RecentAlbum2Activity.class));
         ActivityAnim.StartAnim(getActivity());
@@ -908,7 +914,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
             TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToMyFollow), true);
             TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToRecent), true);
             TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToBuyPoint), true);
+            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToExchangeList), true);
             TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvSettings), true);
+
 
 
             LinearLayout linToEditProfile = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToEditProfile);
@@ -916,6 +924,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
             LinearLayout linToMyFollow = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToMyFollow);
             LinearLayout linToRecent = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToRecent);
             LinearLayout linToBuyPoint = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToBuyPoint);
+            LinearLayout linToExchangeList = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToExchangeList);
             LinearLayout linSettings = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linSettings);
 
             linToEditProfile.setOnClickListener(this);
@@ -923,6 +932,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
             linToMyFollow.setOnClickListener(this);
             linToRecent.setOnClickListener(this);
             linToBuyPoint.setOnClickListener(this);
+            linToExchangeList.setOnClickListener(this);
             linSettings.setOnClickListener(this);
 
             popMenu.show(((Main2Activity) getActivity()).getBackground());
@@ -1583,6 +1593,11 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
             case R.id.linToBuyPoint:
                 popMenu.dismiss();
                 toBuyPoint();
+                break;
+
+            case R.id.linToExchangeList:
+                popMenu.dismiss();
+                toExchangeList();
                 break;
 
             case R.id.linSettings:

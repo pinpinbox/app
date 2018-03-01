@@ -358,6 +358,7 @@
     <string name="pinpinbox_2_0_0_itemtype_real_name">真實姓名</string>
     <string name="pinpinbox_2_0_0_itemtype_phone">電話</string>
     <string name="pinpinbox_2_0_0_itemtype_address">地址</string>
+    <string name="pinpinbox_2_0_0_itemtype_exchange_list">兌換清單</string>
 
 
 
@@ -554,6 +555,7 @@
     <string name="pinpinbox_2_0_0_other_text_add_to_exchange_list">加入兌換清單</string>
 
 
+
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>
     <string name="crop__pick_error">找不到相片</string>
@@ -574,11 +576,6 @@
     <!-- pinpinbox_vamge -->
     <!--<string name="google_maps_key" templateMergeStrategy="preserve">AIzaSyDsGHWEnVsCuq3KehPMxAyRAWtIlPDsIB0</string>-->
 
-
-    <!--ReadAlbumActivity-->
-    <string name="exchange">兌 換</string>
-    <string name="exchanged">已兌換</string>
-    <string name="exchanged_end">已結束</string>
 
 
     <!--AlbumInformation-->

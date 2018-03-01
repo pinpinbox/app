@@ -352,7 +352,7 @@
     <string name="pinpinbox_2_0_0_itemtype_real_name">Real Name</string>
     <string name="pinpinbox_2_0_0_itemtype_phone">Phone</string>
     <string name="pinpinbox_2_0_0_itemtype_address">Address</string>
-
+    <string name="pinpinbox_2_0_0_itemtype_exchange_list">Exchange List</string>
 
 
     <string name="pinpinbox_2_0_0_title_editprofile">Edit Profile</string>
@@ -565,10 +565,7 @@
     <!--<string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDsGHWEnVsCuq3KehPMxAyRAWtIlPDsIB0</string>-->
 
 
-    <!--ReadAlbumActivity-->
-    <string name="exchange">兌 換</string>
-    <string name="exchanged">已兌換</string>
-    <string name="exchanged_end">已結束</string>
+
 
 
     <!--AlbumInformation-->

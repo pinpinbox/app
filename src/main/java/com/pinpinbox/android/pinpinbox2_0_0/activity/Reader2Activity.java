@@ -77,6 +77,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
@@ -99,6 +100,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol108;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol111;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
@@ -149,6 +151,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private Protocol13 protocol13;
     private Protocol108 protocol108;
     private Protocol109 protocol109;
+    private Protocol111 protocol111;
 
     private ItemAlbum itemAlbum;
     private List<ItemPhoto> photoContentsList;
@@ -656,7 +659,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_cancel_submission_go_to_events_page);
                 d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_button_exit);
 
-                if(strSpecialUrl!=null && !strSpecialUrl.equals("") && !strSpecialUrl.equals("null")){
+                if (strSpecialUrl != null && !strSpecialUrl.equals("") && !strSpecialUrl.equals("null")) {
                     d.getTvRightOrBottom().setVisibility(View.VISIBLE);
                     d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_eventexchange);
                     d.getTvRightOrBottom().setOnClickListener(new View.OnClickListener() {
@@ -665,10 +668,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             toSpecialUrl();
                         }
                     });
-                }else {
+                } else {
                     d.getTvRightOrBottom().setVisibility(View.GONE);
                 }
-
 
 
                 d.getTvLeftOrTop().setOnClickListener(new View.OnClickListener() {
@@ -678,7 +680,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         toMyCollect();
                     }
                 });
-
 
 
                 d.show();
@@ -707,7 +708,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         ActivityAnim.FinishAnim(mActivity);
     }
 
-    private void toSpecialUrl(){
+    private void toSpecialUrl() {
         Intent intent = new Intent();
         intent.setAction("android.intent.action.VIEW");
         Uri content_url = Uri.parse(strSpecialUrl);
@@ -725,18 +726,19 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void setPageDetail(final int position) {
 
-        final View v = vpReader.findViewById(position);
+        final View vPage = vpReader.findViewById(position);
 
-        if (v == null || vpReader == null) {
+        if (vPage == null || vpReader == null) {
             DialogV2Custom.BuildUnKnow(mActivity, "setPageDetail error");
             return;
         }
 
-        ImageView centerImg = (ImageView) v.findViewById(R.id.centerImg);
+        ImageView centerImg = (ImageView) vPage.findViewById(R.id.centerImg);
 
-        final View vType = v.findViewById(R.id.vType);
-        final ImageView refreshImg = (ImageView) v.findViewById(R.id.refreshImg);
-        final LinearLayout linExchange = (LinearLayout) v.findViewById(R.id.linExchange);
+        final View vType = vPage.findViewById(R.id.vType);
+        final ImageView refreshImg = (ImageView) vPage.findViewById(R.id.refreshImg);
+        final LinearLayout linExchange = (LinearLayout) vPage.findViewById(R.id.linExchange);
+
 
         refreshImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -748,7 +750,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-                final PinchImageView picImg = (PinchImageView) v.findViewById(R.id.photoImg);
+                final PinchImageView picImg = (PinchImageView) vPage.findViewById(R.id.photoImg);
 
                 String url = photoContentsList.get(position).getImage_url();
 
@@ -800,7 +802,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     centerImg.setImageResource(R.drawable.click_2_0_0_video_white);
                     centerImg.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View view) {
+                        public void onClick(View v) {
                             if (ClickUtils.ButtonContinuousClick()) {
                                 return;
                             }
@@ -821,7 +823,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 case "exchange":
 
                     if (!itemAlbum.isOwn()) {
-                        isNoOwnShowCollectType(v, vType);
+                        isNoOwnShowCollectType(vPage, vType);
                     } else {
 
                         vType.setVisibility(View.VISIBLE);
@@ -830,41 +832,87 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         //依linExchange判斷是否呼叫接口
 
-                        doGetExchange(v, position, linExchange);
+                        doGetExchange(vPage, position, linExchange);
 
                     }
                     break;
 
                 case "slot":
+
+
+
                     if (!itemAlbum.isOwn()) {
-                        isNoOwnShowCollectType(v, vType);
+                        isNoOwnShowCollectType(vPage, vType);
                     } else {
 
                         vType.setVisibility(View.VISIBLE);
 
-                        centerImg.setImageResource(R.drawable.ic200_gift_white);
+                        JSONArray jsonArray = new JSONArray(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
+
+                        boolean isSlotted = false;
+
+
+                        if(jsonArray.length()>0){
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject object = (JSONObject)jsonArray.get(i);
+
+                                String sPhoto_id = object.getString(Key.photo_id);
+
+                                if(sPhoto_id.equals(photoContentsList.get(position).getPhoto_id() + "")){
+                                    isSlotted = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(isSlotted){
+                            doSlot(vPage, position, linExchange);
+                        }else {
+                            centerImg.setImageResource(R.drawable.ic200_gift_white);
+                            centerImg.setBackgroundResource(R.drawable.click_2_0_0_default);
+                            centerImg.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    if (ClickUtils.ButtonContinuousClick()) {
+                                        return;
+                                    }
+
+                                    doSlot(vPage, position, linExchange);
+
+                                }
+                            });
+                        }
+
+
 
 
 
                     }
+
+
+
+
                     break;
 
                 case "lastPage":
 
 
                     //最後一頁
-                    LinearLayout linLastPage = (LinearLayout) v.findViewById(R.id.linLastPage);
+                    LinearLayout linLastPage = (LinearLayout) vPage.findViewById(R.id.linLastPage);
                     linLastPage.setVisibility(View.VISIBLE);
 
-                    LinearLayout linSponsor = (LinearLayout) v.findViewById(R.id.linSponsor);
-                    TextView tvTitle = (TextView) v.findViewById(R.id.tvTitle);
-                    tvCurrentPoint = (TextView) v.findViewById(R.id.tvCurrentPoint);
-                    edPoint = (EditText) v.findViewById(R.id.edPoint);
-                    TextView tvClick = (TextView) v.findViewById(R.id.tvClick);
+                    LinearLayout linSponsor = (LinearLayout) vPage.findViewById(R.id.linSponsor);
+                    TextView tvTitle = (TextView) vPage.findViewById(R.id.tvTitle);
+                    tvCurrentPoint = (TextView) vPage.findViewById(R.id.tvCurrentPoint);
+                    edPoint = (EditText) vPage.findViewById(R.id.edPoint);
+                    TextView tvClick = (TextView) vPage.findViewById(R.id.tvClick);
 
                     TextUtility.setBold(tvTitle, true);
 
-                    ImageView lastPageImg = (ImageView) v.findViewById(R.id.lastPageImg);
+                    ImageView lastPageImg = (ImageView) vPage.findViewById(R.id.lastPageImg);
 
 
                     if (itemAlbum.getPoint() == 0) {
@@ -988,28 +1036,28 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private HashMap<Integer, Protocol108> protocol108HashMap;
 
     @SuppressLint("UseSparseArrays")
-    private void doGetExchange(final View v, final int position, final LinearLayout linExchange) {
+    private void doGetExchange(final View vPage, final int position, final LinearLayout linExchange) {
 
 
         /*error*/
-        final AVLoadingIndicatorView loading = (AVLoadingIndicatorView) v.findViewById(R.id.vRefreshExchange);
-        final LinearLayout linTimeout = (LinearLayout) v.findViewById(R.id.linTimeout);
-        final TextView tvAgain = (TextView) v.findViewById(R.id.tvAgain);
+        final AVLoadingIndicatorView loading = (AVLoadingIndicatorView) vPage.findViewById(R.id.vRefreshExchange);
+        final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
+        final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
 
 
         /*success*/
-        final TextView tvExchangeName = (TextView) v.findViewById(R.id.tvExchangeName);
-        final TextView tvExchangeDescription = (TextView) v.findViewById(R.id.tvExchangeDescription);
-        final RoundCornerImageView exchangeImg = (RoundCornerImageView) v.findViewById(R.id.exchangeImg);
+        final TextView tvExchangeName = (TextView) vPage.findViewById(R.id.tvExchangeName);
+        final TextView tvExchangeDescription = (TextView) vPage.findViewById(R.id.tvExchangeDescription);
+        final RoundCornerImageView exchangeImg = (RoundCornerImageView) vPage.findViewById(R.id.exchangeImg);
 
         /*bottom*/
-        final TextView tvAddToExchangeList = (TextView) v.findViewById(R.id.tvAddToExchangeList);
-        final TextView tvChange = (TextView) v.findViewById(R.id.tvChange);
-        final RelativeLayout rAddToExchangeList = (RelativeLayout) v.findViewById(R.id.rAddToExchangeList);
+        final TextView tvAddToExchangeList = (TextView) vPage.findViewById(R.id.tvAddToExchangeList);
+        final TextView tvChange = (TextView) vPage.findViewById(R.id.tvChange);
+        final RelativeLayout rAddToExchangeList = (RelativeLayout) vPage.findViewById(R.id.rAddToExchangeList);
 
 
         /*end*/
-        final TextView tvExchangeEnd = (TextView) v.findViewById(R.id.tvExchangeEnd);
+        final TextView tvExchangeEnd = (TextView) vPage.findViewById(R.id.tvExchangeEnd);
 
         TextUtility.setBold(tvExchangeName, true);
         TextUtility.setBold(tvAddToExchangeList, true);
@@ -1017,11 +1065,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         TextUtility.setBold(tvExchangeEnd, true);
 
 
-        if(protocol108HashMap==null){
+        if (protocol108HashMap == null) {
             protocol108HashMap = new HashMap<>();
         }
 
-        if(protocol108HashMap.size()>0 && !protocol108HashMap.get(position).isCancelled()){
+        if (protocol108HashMap.size() > 0 && !protocol108HashMap.get(position).isCancelled()) {
             cancelTask(protocol108HashMap.get(position));
             protocol108HashMap.remove(position);
 
@@ -1053,7 +1101,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     }
 
-                    private void canExchange(final ItemExchange itemExchange){
+                    private void canExchange(final ItemExchange itemExchange) {
+
                         showContents(itemExchange);
 
                         tvChange.setOnClickListener(new View.OnClickListener() {
@@ -1156,16 +1205,16 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         rAddToExchangeList.setClickable(false);
                     }
 
-                    private void gained(){
+                    private void gained() {
 
                         rAddToExchangeList.setVisibility(View.GONE);
 
-                        ScrollView svExchange = (ScrollView) v.findViewById(R.id.svExchange);
-                        svExchange.setPadding(0,0,0, 0);
+                        ScrollView svExchange = (ScrollView) vPage.findViewById(R.id.svExchange);
+                        svExchange.setPadding(0, 0, 0, 0);
 
 
                         tvChange.setBackgroundResource(R.drawable.border_2_0_0_white_radius);
-                        tvChange.setText("已兌換");
+                        tvChange.setText(R.string.pinpinbox_2_0_0_itemtype_exchange_done);
                         tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                         tvChange.setClickable(false);
                     }
@@ -1197,7 +1246,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         loading.smoothToHide();
 
                     }
-
 
 
                     @Override
@@ -1232,7 +1280,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 if (ClickUtils.ButtonContinuousClick_1s()) {
                                     return;
                                 }
-                                doGetExchange(v, position, linExchange);
+                                doGetExchange(vPage, position, linExchange);
                             }
                         });
 
@@ -1241,6 +1289,284 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
         );
+
+    }
+
+    private void doSlot(final View vPage, final int position, final LinearLayout linExchange) {
+
+
+        /*error*/
+        final AVLoadingIndicatorView loading = (AVLoadingIndicatorView) vPage.findViewById(R.id.vRefreshExchange);
+        final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
+        final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
+
+
+        /*success*/
+        final TextView tvExchangeName = (TextView) vPage.findViewById(R.id.tvExchangeName);
+        final TextView tvExchangeDescription = (TextView) vPage.findViewById(R.id.tvExchangeDescription);
+        final RoundCornerImageView exchangeImg = (RoundCornerImageView) vPage.findViewById(R.id.exchangeImg);
+
+        /*bottom*/
+        final TextView tvAddToExchangeList = (TextView) vPage.findViewById(R.id.tvAddToExchangeList);
+        final TextView tvChange = (TextView) vPage.findViewById(R.id.tvChange);
+        final RelativeLayout rAddToExchangeList = (RelativeLayout) vPage.findViewById(R.id.rAddToExchangeList);
+
+
+        /*end*/
+        final TextView tvExchangeEnd = (TextView) vPage.findViewById(R.id.tvExchangeEnd);
+
+        TextUtility.setBold(tvExchangeName, true);
+        TextUtility.setBold(tvAddToExchangeList, true);
+        TextUtility.setBold(tvChange, true);
+        TextUtility.setBold(tvExchangeEnd, true);
+
+
+        protocol111 = new Protocol111(
+                mActivity,
+                PPBApplication.getInstance().getId(),
+                PPBApplication.getInstance().getToken(),
+                photoContentsList.get(position).getPhoto_id() + "",
+                getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
+                new Protocol111.TaskCallBack() {
+
+
+                    private void showContents(ItemExchange itemExchange) {
+                        Picasso.with(mActivity.getApplicationContext())
+                                .load(itemExchange.getImage())
+                                .config(Bitmap.Config.RGB_565)
+                                .error(R.drawable.bg_2_0_0_no_image)
+                                .tag(mActivity.getApplicationContext())
+                                .into(exchangeImg);
+
+                        linExchange.setVisibility(View.VISIBLE);
+                        ViewControl.AlphaTo1(linExchange);
+
+                        tvExchangeName.setText(itemExchange.getName());
+
+                        tvExchangeDescription.setText(itemExchange.getDescription());
+
+                        /*本地保存*/
+                        try {
+                            JSONObject object = new JSONObject();
+                            object.put(Key.slot_photo_id, photoContentsList.get(position).getPhoto_id() + "");
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            /*獲取原排序array*/
+                            JSONArray jsonCookieArray = new JSONArray(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
+
+                            /*判斷是否在原排序內*/
+                            boolean isPhotoIdExist = false;
+                            for (int i = 0; i < jsonCookieArray.length(); i++) {
+                                JSONObject obj = (JSONObject) jsonCookieArray.get(i);
+
+                                String photo_id = obj.getString(Key.photo_id);
+                                if (photo_id != null && photo_id.equals(photoContentsList.get(position).getPhoto_id() + "")) {
+                                    isPhotoIdExist = true;
+                                    break;
+                                }
+                            }
+
+                            if(isPhotoIdExist){
+                                return;
+                            }else {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put(Key.photo_id, photoContentsList.get(position).getPhoto_id() + "");
+                                jsonCookieArray.put(jsonObject);
+                            }
+
+                            PPBApplication.getInstance().getData().edit().putString(Key.slot_photo_id, jsonCookieArray.toString()).commit();
+                            Logger.json(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
+
+
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    private void canExchange(final ItemExchange itemExchange) {
+
+                        showContents(itemExchange);
+
+                        tvChange.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (ClickUtils.ButtonContinuousClick_1s()) {
+                                    return;
+                                }
+
+                                exchangeImg.setTransitionName(itemExchange.getImage());
+                                linExchange.setTransitionName("bg_exchange");
+
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("exchangeItem", itemExchange);
+                                bundle.putBoolean("isExchanged", false);
+                                bundle.putBoolean("isSlotType", true);
+                                bundle.putInt(Key.photo_id, photoContentsList.get(position).getPhoto_id());
+
+                                Intent intent = new Intent(mActivity, ExchangeInfo2Activity.class).putExtras(bundle);
+
+
+                                ActivityOptionsCompat option1 = ActivityOptionsCompat.
+                                        makeSceneTransitionAnimation(mActivity,
+                                                linExchange,
+                                                ViewCompat.getTransitionName(linExchange));
+
+                                ActivityOptionsCompat option2 = ActivityOptionsCompat.
+                                        makeSceneTransitionAnimation(mActivity,
+                                                exchangeImg,
+                                                ViewCompat.getTransitionName(exchangeImg));
+
+                                option2.update(option1);
+
+                                startActivity(intent, option2.toBundle());
+
+                            }
+                        });
+
+
+                        if (itemExchange.isIs_existing()) {
+                            isInExchangeList();
+                        } else {
+
+                            /*依狀態判定是否可以點擊*/
+                            rAddToExchangeList.setOnClickListener(new View.OnClickListener() {
+
+                                private void doAddToExchangeList() {
+
+                                    if (!HttpUtility.isConnect(mActivity)) {
+                                        setNoConnect();
+                                        return;
+                                    }
+
+                                    protocol109 = new Protocol109(
+                                            mActivity,
+                                            PPBApplication.getInstance().getId(),
+                                            PPBApplication.getInstance().getToken(),
+                                            photoContentsList.get(position).getPhoto_id() + "",
+                                            new Protocol109.TaskCallBack() {
+                                                @Override
+                                                public void Prepare() {
+                                                    startLoading();
+                                                }
+
+                                                @Override
+                                                public void Post() {
+                                                    dissmissLoading();
+                                                }
+
+                                                @Override
+                                                public void Success() {
+                                                    isInExchangeList();
+                                                }
+
+                                                @Override
+                                                public void TimeOut() {
+                                                    doAddToExchangeList();
+                                                }
+                                            }
+                                    );
+
+
+                                }
+
+                                @Override
+                                public void onClick(View v) {
+                                    if (ClickUtils.ButtonContinuousClick()) {
+                                        return;
+                                    }
+                                    doAddToExchangeList();
+
+                                }
+                            });
+
+                        }
+                    }
+
+                    private void isInExchangeList() {
+                        tvAddToExchangeList.setText(R.string.pinpinbox_2_0_0_other_text_is_in_exchange_list);
+                        tvAddToExchangeList.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                        rAddToExchangeList.setClickable(false);
+                    }
+
+                    private void gained() {
+
+                        rAddToExchangeList.setVisibility(View.GONE);
+
+                        ScrollView svExchange = (ScrollView) vPage.findViewById(R.id.svExchange);
+                        svExchange.setPadding(0, 0, 0, 0);
+
+                        tvChange.setBackgroundResource(R.drawable.border_2_0_0_white_radius);
+                        tvChange.setText(R.string.pinpinbox_2_0_0_itemtype_exchange_done);
+                        tvChange.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                        tvChange.setClickable(false);
+                    }
+
+
+                    @Override
+                    public void Prepare() {
+
+                        linExchange.setVisibility(View.GONE);
+                        linExchange.setAlpha(0f);
+
+                        linTimeout.setVisibility(View.GONE);
+                        linTimeout.setAlpha(0f);
+
+                        startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success(ItemExchange itemExchange) {
+                        canExchange(itemExchange);
+                    }
+
+                    @Override
+                    public void isBelongUser(ItemExchange itemExchange) {
+                        canExchange(itemExchange);
+                    }
+
+                    @Override
+                    public void IsGained(ItemExchange itemExchange) {
+                        showContents(itemExchange);
+                        gained();
+                    }
+
+                    @Override
+                    public void IsSlot(ItemExchange itemExchange) {
+                        canExchange(itemExchange);
+                    }
+
+                    @Override
+                    public void TimeOut() {
+
+                        linTimeout.setVisibility(View.VISIBLE);
+                        ViewControl.AlphaTo1(linTimeout);
+
+                        tvAgain.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (ClickUtils.ButtonContinuousClick_1s()) {
+                                    return;
+                                }
+                                doSlot(vPage, position, linExchange);
+                            }
+                        });
+
+                    }
+                });
+
 
     }
 
@@ -3555,8 +3881,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
-    public void reFreshExchange(){
-       setPageDetail(vpReader.getCurrentItem());
+    public void reFreshExchange() {
+        setPageDetail(vpReader.getCurrentItem());
     }
 
     @Override
@@ -3874,19 +4200,19 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         cancelTask(deleteLikeTask);
         cancelTask(getAlbumInfoTask);
         cancelTask(getPointTask);
-//        cancelTask(collectAlbumTask);
         cancelTask(firstCollectAlbumTask);
         cancelTask(sendContributeTask);
         cancelTask(checkShareTask);
         cancelTask(shareTask);
         cancelTask(protocol13);
         cancelTask(protocol109);
+        cancelTask(protocol111);
 
-        if(protocol108HashMap!=null && protocol108HashMap.size()>0){
+        if (protocol108HashMap != null && protocol108HashMap.size() > 0) {
 
             for (int i = 0; i < protocol108HashMap.size(); i++) {
 
-                if(protocol108HashMap.get(i)!=null && !protocol108HashMap.get(i).isCancelled()){
+                if (protocol108HashMap.get(i) != null && !protocol108HashMap.get(i).isCancelled()) {
                     cancelTask(protocol108HashMap.get(i));
                 }
 

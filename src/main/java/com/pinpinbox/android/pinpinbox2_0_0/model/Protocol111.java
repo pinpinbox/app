@@ -23,10 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2018/2/8.
+ * Created by vmage on 2018/3/1.
  */
 
-public class Protocol108 extends AsyncTask<Void, Void, Object> {
+public class Protocol111 extends AsyncTask<Void, Void, Object> {
+
+
 
     public static abstract class TaskCallBack {
 
@@ -40,29 +42,32 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
 
         public abstract void IsGained(ItemExchange itemExchange);
 
+        public abstract void IsSlot(ItemExchange itemExchange);
+
         public abstract void TimeOut();
     }
 
     private Activity mActivity;
     private TaskCallBack callBack;
-    private String user_id, token, photo_id;
-
+    private String response;
+    private String user_id, token, photo_id, identifier;
+    private String message;
     private String result = "";
-    private String message = "";
-    private String response = "";
+
+    private static final String TIMEOUT = "timeout";
 
     private ItemExchange itemExchange;
 
-
-    public Protocol108(Activity mActivity, String user_id, String token, String photo_id, TaskCallBack callBack) {
+    public Protocol111(Activity mActivity, String user_id, String token, String photo_id, String identifier, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
         this.photo_id = photo_id;
+        this.identifier = identifier;
+
         execute();
     }
-
 
     @Override
     public void onPreExecute() {
@@ -75,13 +80,13 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            response = HttpUtility.uploadSubmit(true, Url.P108_GetPhotoUseFor, putMap(), null);
+            response = HttpUtility.uploadSubmit(true, Url.P111_SlotPhotoUseFor, putMap(), null);
 
-            MyLog.Set("d", getClass(), "p108reponse => " + response);
+            MyLog.Set("d", getClass(), "p111response => " + response);
 
 
         } catch (SocketTimeoutException t) {
-            result = ResultType.TIMEOUT;
+            result = TIMEOUT;
             t.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,18 +99,25 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
                 if (result.equals(ResultType.SYSTEM_OK) ||
-                        result.equals(ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED) ||
                         result.equals(ResultType.PHOTOUSEFOR_USER_HAS_GAINED) ||
+                        result.equals(ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED) ||
                         result.equals(ResultType.PHOTOUSEFOR_USER_HAS_SLOTTED)) {
 
                     itemExchange = new ItemExchange();
 
                     String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-
                     JSONObject jsonData = new JSONObject(data);
 
-                    String photousefor = JsonUtility.GetString(jsonData, ProtocolKey.photousefor);
+                    /*獎項是否在清單*/
+                    String bookmark = JsonUtility.GetString(jsonData, ProtocolKey.bookmark);
+                    JSONObject jsonBookMark = new JSONObject(bookmark);
 
+                    itemExchange.setIs_existing(JsonUtility.GetBoolean(jsonBookMark, ProtocolKey.is_existing));
+
+
+
+                    /*獎項資訊*/
+                    String photousefor = JsonUtility.GetString(jsonData, ProtocolKey.photousefor);
                     JSONObject jsonPhotoUseFor = new JSONObject(photousefor);
 
                     itemExchange.setDescription(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.description));
@@ -113,10 +125,14 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
                     itemExchange.setName(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.name));
                     itemExchange.setPhotousefor_id(JsonUtility.GetInt(jsonPhotoUseFor, ProtocolKey.photousefor_id));
 
-                    String bookmark = JsonUtility.GetString(jsonData, ProtocolKey.bookmark);
 
-                    JSONObject jsonBookMark = new JSONObject(bookmark);
-                    itemExchange.setIs_existing(JsonUtility.GetBoolean(jsonBookMark, ProtocolKey.is_existing));
+
+                    /*for user id*/
+                    String photousefor_user = JsonUtility.GetString(jsonData, ProtocolKey.photousefor_user);
+                    JSONObject jsonPhotoUseForUser = new JSONObject(photousefor_user);
+
+                    itemExchange.setPhotousefor_user_id(JsonUtility.GetInt(jsonPhotoUseForUser, ProtocolKey.photousefor_user_id));
+
 
                 } else {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
@@ -126,12 +142,12 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
                 e.printStackTrace();
             }
 
-
         }
-
 
         return null;
     }
+
+
 
     @Override
     public void onPostExecute(Object obj) {
@@ -185,6 +201,12 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
 
                 break;
 
+            case ResultType.PHOTOUSEFOR_USER_HAS_SLOTTED:
+
+                callBack.IsSlot(itemExchange);
+
+                break;
+
 
             case ResultType.TIMEOUT:
 
@@ -199,12 +221,14 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
     }
 
 
+
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
         map.put(Key.photo_id, photo_id);
+        map.put(Key.identifier, identifier);
 
         return map;
     }
@@ -213,6 +237,8 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
     public AsyncTask getTask() {
         return this;
     }
+
+
 
 
 }

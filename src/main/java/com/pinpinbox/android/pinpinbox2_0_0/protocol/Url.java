@@ -53,6 +53,8 @@ public class Url {
 
     public static String P110_ExchangePhotoUseFor = domain + "/index/api/exchangephotousefor" + "/2.0";
 
+    public static String P111_SlotPhotoUseFor = domain + "/index/api/slotphotousefor" + "/2.0";
+
 
 
 }

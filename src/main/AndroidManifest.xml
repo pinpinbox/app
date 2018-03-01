@@ -218,11 +218,6 @@
             android:theme="@style/dragger" />
 
         <!-- 閱讀作品 -->
-        <activity
-            android:name=".Test.ReadAlbum.ReadAlbumActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="user"
-            android:theme="@style/dragger" />
         <!-- android:configChanges="keyboardHidden|orientation|screenSize" => 横竖屏切换的时候会直接调用onCreate方法中的onConfigurationChanged方法，而不会重新执行onCreate方法 -->
 
         android:screenOrientation =

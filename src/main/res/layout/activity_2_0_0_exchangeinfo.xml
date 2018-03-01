@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:transitionName="bg_exchange">
 
 
@@ -92,8 +94,7 @@
                 style="@style/ppb200_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-                android:text="" />
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -167,25 +168,25 @@
             style="@style/ppb200_ic_action_back"
             android:layout_alignParentBottom="true"
             android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_cancel_dark"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            android:src="@drawable/ic200_cancel_dark" />
 
 
         <TextView
             android:id="@+id/tvExchangeTime"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/ppb200_common_icon_side"
-            android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:gravity="center"
             android:letterSpacing="0.1"
             android:text=""
             android:textColor="@color/pinpinbox_2_0_0_first_pink"
             android:textSize="@dimen/ppb200_common_text_first"
             android:textStyle="bold"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
 
     </RelativeLayout>

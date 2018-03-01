@@ -26,6 +26,7 @@ public class ResultType {
 
     public static final String PHOTOUSEFOR_USER_HAS_EXCHANGED = "PHOTOUSEFOR_USER_HAS_EXCHANGED";
     public static final String PHOTOUSEFOR_USER_HAS_GAINED = "PHOTOUSEFOR_USER_HAS_GAINED";
+    public static final String PHOTOUSEFOR_USER_HAS_SLOTTED = "PHOTOUSEFOR_USER_HAS_SLOTTED";
 
 
 

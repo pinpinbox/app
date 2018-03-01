@@ -26,6 +26,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentExchangeUnfinished2;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol106;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol110;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol43;
 import com.squareup.picasso.Callback;
@@ -57,6 +58,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
     private int photousefor_user_id;
 
     private boolean isExchanged = false;
+    private boolean isSlotType = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
             itemExchange = (ItemExchange) bundle.getSerializable("exchangeItem");
             isExchanged = bundle.getBoolean("isExchanged", false);
+            isSlotType = bundle.getBoolean("isSlotType", false);
             photo_id = bundle.getInt(Key.photo_id, -1);
 
         }
@@ -145,6 +148,9 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
     private void setData() {
 
 //        tvExchangeTime.setText(itemExchange.getTime());
+
+
+
         tvName.setText(itemExchange.getName());
         tvDescription.setText(itemExchange.getDescription());
 
@@ -221,42 +227,61 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
         PPBApplication.getInstance().getData().edit().putString(Key.contact_phone, edPhone.getText().toString()).commit();
 
 
-        protocol110 = new Protocol110(
-                mActivity,
-                PPBApplication.getInstance().getId(),
-                PPBApplication.getInstance().getToken(),
-                photo_id + "",
-                getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
-                new Protocol110.TaskCallBack() {
-                    @Override
-                    public void Prepare() {
-                        startLoading();
-                    }
+        if(isSlotType){
 
-                    @Override
-                    public void Post() {
-                        dissmissLoading();
-                    }
+            //為抽獎得到的獎項 故不需要接口110歸屬用戶
 
-                    @Override
-                    public void Success(int puf_user_id) {
-                        photousefor_user_id = puf_user_id;
+            photousefor_user_id = itemExchange.getPhotousefor_user_id();
+
+            if (isExchanged) {
+                doUpdate();
+            } else {
+                doExchange();
+            }
 
 
-                        if (isExchanged) {
-                            doUpdate();
-                        } else {
-                            doExchange();
+        }else {
+            protocol110 = new Protocol110(
+                    mActivity,
+                    PPBApplication.getInstance().getId(),
+                    PPBApplication.getInstance().getToken(),
+                    photo_id + "",
+                    getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
+                    new Protocol110.TaskCallBack() {
+                        @Override
+                        public void Prepare() {
+                            startLoading();
                         }
 
-                    }
+                        @Override
+                        public void Post() {
+                            dissmissLoading();
+                        }
 
-                    @Override
-                    public void TimeOut() {
-                        doGetPhotousefor_user_id();
+                        @Override
+                        public void Success(int puf_user_id) {
+                            photousefor_user_id = puf_user_id;
+
+
+                            if (isExchanged) {
+                                doUpdate();
+                            } else {
+                                doExchange();
+                            }
+
+                        }
+
+                        @Override
+                        public void TimeOut() {
+                            doGetPhotousefor_user_id();
+                        }
                     }
-                }
-        );
+            );
+        }
+
+
+
+
 
 
     }
@@ -288,8 +313,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                         Activity acExchangeList = SystemUtility.getActivity(ExchangeList2Activity.class.getSimpleName());
                         if (acExchangeList != null) {
 
-
-
                             FragmentExchangeUnfinished2 fragmentExchangeUnfinished2 = (FragmentExchangeUnfinished2) ((ExchangeList2Activity) acExchangeList).getFragment(FragmentExchangeUnfinished2.class.getSimpleName());
 
                             fragmentExchangeUnfinished2.moveItem();
@@ -297,6 +320,10 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                             ((ExchangeList2Activity)acExchangeList).scrollToDonePage();
 
 
+
+
+                        }else {
+                            doAddToDoneList();
                         }
 
                         Activity acReader = SystemUtility.getActivity(Reader2Activity.class.getSimpleName());
@@ -305,6 +332,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                         }
 
 
+                        doAddToDoneList();
 
                     }
 
@@ -315,6 +343,65 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                 }
         );
 
+
+    }
+
+    private void doAddToDoneList(){
+
+        Protocol109 protocol109 = new Protocol109(
+                mActivity,
+                PPBApplication.getInstance().getId(),
+                PPBApplication.getInstance().getToken(),
+                photo_id + "",
+                new Protocol109.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success() {
+
+//                        Activity acExchangeList = SystemUtility.getActivity(ExchangeList2Activity.class.getSimpleName());
+//                        if (acExchangeList != null) {
+//
+//
+//                            ItemExchange newItemExchange = new ItemExchange();
+//                            newItemExchange.setHas_gained(true);
+//                            newItemExchange.setPhoto_id(photo_id);
+//                            newItemExchange.setDescription(itemExchange.getDescription());
+//                            newItemExchange.setImage(itemExchange.getImage());
+//                            newItemExchange.setName(itemExchange.getName());
+//                            newItemExchange.setPhotousefor_id(itemExchange.getPhotousefor_id());
+//                            newItemExchange.setImageWidth(PPBApplication.getInstance().getStaggeredWidth());
+//                            newItemExchange.setImageHeight(PPBApplication.getInstance().getStaggeredWidth());
+//
+//                            newItemExchange.setPhotousefor_user_id(itemExchange.getPhotousefor_user_id());
+//
+//
+//                            FragmentExchangeDone2 fragmentExchangeDone2 = (FragmentExchangeDone2) ((ExchangeList2Activity) acExchangeList).getFragment(FragmentExchangeDone2.class.getSimpleName());
+//
+//                            fragmentExchangeDone2.addItem(newItemExchange);
+
+                            MyLog.Set("e", mActivity.getClass(), "---------成功加入清單---------");
+
+
+//                        }
+
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doAddToDoneList();
+                    }
+                }
+        );
 
     }
 
