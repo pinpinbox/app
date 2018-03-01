@@ -1114,10 +1114,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                                 exchangeImg.setTransitionName(itemExchange.getImage());
 
+                                itemExchange.setPhoto_id(photoContentsList.get(position).getPhoto_id());
+
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("exchangeItem", itemExchange);
                                 bundle.putBoolean("isExchanged", false);
-                                bundle.putInt(Key.photo_id, photoContentsList.get(position).getPhoto_id());
+
 
                                 Intent intent = new Intent(mActivity, ExchangeInfo2Activity.class).putExtras(bundle);
 
@@ -1405,11 +1407,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 exchangeImg.setTransitionName(itemExchange.getImage());
                                 linExchange.setTransitionName("bg_exchange");
 
+                                itemExchange.setPhoto_id(photoContentsList.get(position).getPhoto_id());
+
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("exchangeItem", itemExchange);
                                 bundle.putBoolean("isExchanged", false);
                                 bundle.putBoolean("isSlotType", true);
-                                bundle.putInt(Key.photo_id, photoContentsList.get(position).getPhoto_id());
 
                                 Intent intent = new Intent(mActivity, ExchangeInfo2Activity.class).putExtras(bundle);
 

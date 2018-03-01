@@ -54,9 +54,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
     private RoundCornerImageView exchangeImg;
     private ItemExchange itemExchange;
 
-    private int photo_id;
-    private int photousefor_user_id;
-
     private boolean isExchanged = false;
     private boolean isSlotType = false;
 
@@ -87,7 +84,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
             itemExchange = (ItemExchange) bundle.getSerializable("exchangeItem");
             isExchanged = bundle.getBoolean("isExchanged", false);
             isSlotType = bundle.getBoolean("isSlotType", false);
-            photo_id = bundle.getInt(Key.photo_id, -1);
+
 
         }
     }
@@ -147,10 +144,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private void setData() {
 
-//        tvExchangeTime.setText(itemExchange.getTime());
-
-
-
         tvName.setText(itemExchange.getName());
         tvDescription.setText(itemExchange.getDescription());
 
@@ -196,25 +189,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     }
 
-    private String getParam() {
-
-        String strParam = "";
-
-        try {
-            JSONObject jsonParam = new JSONObject();
-            jsonParam.put("address", edAddress.getText().toString());
-            jsonParam.put("cellphone", edPhone.getText().toString());
-            jsonParam.put("name", edName.getText().toString());
-
-            strParam = jsonParam.toString();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return strParam;
-
-    }
-
     private void doGetPhotousefor_user_id() {
 
         if (!HttpUtility.isConnect(this)) {
@@ -227,25 +201,25 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
         PPBApplication.getInstance().getData().edit().putString(Key.contact_phone, edPhone.getText().toString()).commit();
 
 
-        if(isSlotType){
+        if (isSlotType) {
 
             //為抽獎得到的獎項 故不需要接口110歸屬用戶
 
-            photousefor_user_id = itemExchange.getPhotousefor_user_id();
-
             if (isExchanged) {
-                doUpdate();
+                doUpdate(itemExchange.getPhotousefor_user_id());
             } else {
-                doExchange();
+                doExchange(itemExchange.getPhotousefor_user_id());
             }
 
 
-        }else {
+        } else {
+
+
             protocol110 = new Protocol110(
                     mActivity,
                     PPBApplication.getInstance().getId(),
                     PPBApplication.getInstance().getToken(),
-                    photo_id + "",
+                    itemExchange.getPhoto_id() + "",
                     getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
                     new Protocol110.TaskCallBack() {
                         @Override
@@ -259,14 +233,12 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                         }
 
                         @Override
-                        public void Success(int puf_user_id) {
-                            photousefor_user_id = puf_user_id;
-
+                        public void Success(int puuId) {
 
                             if (isExchanged) {
-                                doUpdate();
+                                doUpdate(puuId);
                             } else {
-                                doExchange();
+                                doExchange(puuId);
                             }
 
                         }
@@ -280,19 +252,15 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
         }
 
 
-
-
-
-
     }
 
-    private void doExchange() {
+    private void doExchange(final int puuId) {
 
         protocol106 = new Protocol106(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
-                photousefor_user_id,
+                puuId,
                 getParam(),
                 new Protocol106.TaskCallBack() {
                     @Override
@@ -317,18 +285,16 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                             fragmentExchangeUnfinished2.moveItem();
 
-                            ((ExchangeList2Activity)acExchangeList).scrollToDonePage();
+                            ((ExchangeList2Activity) acExchangeList).scrollToDonePage();
 
 
-
-
-                        }else {
+                        } else {
                             doAddToDoneList();
                         }
 
                         Activity acReader = SystemUtility.getActivity(Reader2Activity.class.getSimpleName());
-                        if(acReader!=null){
-                            ((Reader2Activity)acReader).reFreshExchange();
+                        if (acReader != null) {
+                            ((Reader2Activity) acReader).reFreshExchange();
                         }
 
 
@@ -338,7 +304,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                     @Override
                     public void TimeOut() {
-                        doExchange();
+                        doExchange(puuId);
                     }
                 }
         );
@@ -346,13 +312,13 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     }
 
-    private void doAddToDoneList(){
+    private void doAddToDoneList() {
 
         Protocol109 protocol109 = new Protocol109(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
-                photo_id + "",
+                itemExchange.getPhoto_id() + "",
                 new Protocol109.TaskCallBack() {
                     @Override
                     public void Prepare() {
@@ -367,32 +333,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                     @Override
                     public void Success() {
 
-//                        Activity acExchangeList = SystemUtility.getActivity(ExchangeList2Activity.class.getSimpleName());
-//                        if (acExchangeList != null) {
-//
-//
-//                            ItemExchange newItemExchange = new ItemExchange();
-//                            newItemExchange.setHas_gained(true);
-//                            newItemExchange.setPhoto_id(photo_id);
-//                            newItemExchange.setDescription(itemExchange.getDescription());
-//                            newItemExchange.setImage(itemExchange.getImage());
-//                            newItemExchange.setName(itemExchange.getName());
-//                            newItemExchange.setPhotousefor_id(itemExchange.getPhotousefor_id());
-//                            newItemExchange.setImageWidth(PPBApplication.getInstance().getStaggeredWidth());
-//                            newItemExchange.setImageHeight(PPBApplication.getInstance().getStaggeredWidth());
-//
-//                            newItemExchange.setPhotousefor_user_id(itemExchange.getPhotousefor_user_id());
-//
-//
-//                            FragmentExchangeDone2 fragmentExchangeDone2 = (FragmentExchangeDone2) ((ExchangeList2Activity) acExchangeList).getFragment(FragmentExchangeDone2.class.getSimpleName());
-//
-//                            fragmentExchangeDone2.addItem(newItemExchange);
-
-                            MyLog.Set("e", mActivity.getClass(), "---------成功加入清單---------");
-
-
-//                        }
-
+                        MyLog.Set("e", mActivity.getClass(), "---------成功加入清單---------");
 
                     }
 
@@ -405,13 +346,14 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     }
 
-    private void doUpdate() {
+    private void doUpdate(final int puuId) {
+
 
         protocol43 = new Protocol43(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
-                photousefor_user_id,
+                puuId,
                 getParam(),
                 new Protocol43.TaskCallBack() {
                     @Override
@@ -433,7 +375,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                     @Override
                     public void TimeOut() {
-                        doUpdate();
+                        doUpdate(puuId);
                     }
                 }
         );
@@ -441,6 +383,24 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     }
 
+    private String getParam() {
+
+        String strParam = "";
+
+        try {
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("address", edAddress.getText().toString());
+            jsonParam.put("cellphone", edPhone.getText().toString());
+            jsonParam.put("name", edName.getText().toString());
+
+            strParam = jsonParam.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return strParam;
+
+    }
 
     @Override
     public void onClick(View v) {

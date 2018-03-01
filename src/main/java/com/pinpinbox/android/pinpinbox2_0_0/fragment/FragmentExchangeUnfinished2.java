@@ -138,7 +138,6 @@ public class FragmentExchangeUnfinished2 extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("exchangeItem", itemExchangeList.get(position));
                 bundle.putBoolean("isExchanged", false);
-                bundle.putInt(Key.photo_id, itemExchangeList.get(position).getPhoto_id());
 
                 Intent intent = new Intent(getActivity(), ExchangeInfo2Activity.class).putExtras(bundle);
 

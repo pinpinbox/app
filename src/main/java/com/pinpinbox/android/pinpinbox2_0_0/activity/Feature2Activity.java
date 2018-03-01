@@ -398,17 +398,17 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
                             //有explore => 書櫃，無則前往全部瀑布流
 
-                            boolean toAll = true;
+                            boolean toContents = true;
 
                             for (int j = 0; j < list.size(); j++) {
                                 if(list.get(j).equals("explore")){
-                                    toAll = false;
+                                    toContents = false;
                                     break;
                                 }
                             }
 
-                            if(toAll){
-                                toCurrentAllWorks(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
+                            if(toContents){
+                                toCurrentContents(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
                             }else {
                                 toFeature(StringIntMethod.StringToInt(categoryarea_id));
                             }
@@ -535,14 +535,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void toCurrentAllWorks(int categoryarea_id, String title) {
+    private void toCurrentContents(int categoryarea_id, String title) {
 
-        Bundle bundle = new Bundle();
-        bundle.putInt(Key.categoryarea_id, categoryarea_id);
-        bundle.putString(Key.categoryarea_name, title);
-
-        startActivity(new Intent(mActivity, CategoryContents2Activity.class).putExtras(bundle));
-        ActivityAnim.StartAnim(mActivity);
+        ActivityIntent.toCategoryContents(mActivity, categoryarea_id, title);
 
     }
 

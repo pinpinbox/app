@@ -13,6 +13,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 
 /**
  * Created by vmage on 2018/2/21.
@@ -120,10 +121,11 @@ public class ActivityIntent {
 
     }
 
-    public static void toCategoryArea(Activity currentActivity, int categoryarea_id) {
+    public static void toCategoryContents(Activity currentActivity, int categoryarea_id, String categoryarea_name) {
 
         Bundle bundle = new Bundle();
         bundle.putInt(Key.categoryarea_id, categoryarea_id);
+        bundle.putString(Key.categoryarea_name, categoryarea_name);
 
         currentActivity.startActivity(
                 new Intent(currentActivity, CategoryContents2Activity.class).putExtras(bundle)
@@ -135,6 +137,13 @@ public class ActivityIntent {
 
     public static void toFeature(Activity currentActivity, int categoryarea_id) {
 
+        Bundle bundle = new Bundle();
+        bundle.putInt(Key.categoryarea_id, categoryarea_id);
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, Feature2Activity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
 
     }
 

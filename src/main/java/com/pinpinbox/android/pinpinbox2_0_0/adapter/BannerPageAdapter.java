@@ -24,10 +24,7 @@ import com.pinpinbox.android.Test.Templateinfo.TemplateInfoActivity;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
@@ -367,51 +364,17 @@ public class BannerPageAdapter extends PagerAdapter {
 
                         if (url == null || url.equals("")) {
 
-
                             PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_null_intent);
-
 
                         } else {
 
-
                             Uri uri = Uri.parse(url);
-
 
                             String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
 
-                            int categoryarea_id = 0;
-                            String title = "";
-
                             if (categoryareaId != null && !categoryareaId.equals("")) {
 
-                                categoryarea_id = StringIntMethod.StringToInt(categoryareaId);
-
-                                FragmentHome2 fragmentHome2 = (FragmentHome2) ((Main2Activity) mActivity).getFragment(FragmentHome2.class.getSimpleName());
-
-                                if (fragmentHome2 != null) {
-                                    List<ItemAlbumCategory> itemAlbumCategoryList = fragmentHome2.getItemAlbumCategoryList();
-
-                                    for (int i = 0; i < itemAlbumCategoryList.size(); i++) {
-
-                                        int cId = itemAlbumCategoryList.get(i).getCategoryarea_id();
-
-                                        if (cId == categoryarea_id) {
-                                            title = itemAlbumCategoryList.get(i).getName();
-                                            break;
-                                        }
-
-                                    }
-
-                                }
-
-
-                                bundle.putInt(Key.categoryarea_id, categoryarea_id);
-
-                                bundle.putString(Key.title, title);
-
-                                mActivity.startActivity(new Intent(mActivity, Feature2Activity.class).putExtras(bundle));
-
-                                ActivityAnim.StartAnim(mActivity);
+                                ActivityIntent.toFeature(mActivity, StringIntMethod.StringToInt(categoryareaId));
 
 
                             } else {

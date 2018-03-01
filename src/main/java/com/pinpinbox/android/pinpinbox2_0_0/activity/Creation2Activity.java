@@ -544,7 +544,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private void setAllPop() {
 
-        /***/
+        /**/
         popCreatePreview = new PopupCustom(mActivity);
         popCreatePreview.setPopup(R.layout.pop_2_0_0_creation_preview, R.style.pinpinbox_popupAnimation_bottom);
         gvPreview = (GridView) popCreatePreview.getPopupView().findViewById(R.id.gvPreview);
@@ -560,7 +560,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             }
         });
 
-        /***/
+        /**/
         popCreateSort = new PopupCustom(mActivity);
         popCreateSort.setPopup(R.layout.pop_2_0_0_creation_sort, R.style.pinpinbox_popupAnimation_bottom);
         gvSort = (EditDragGridView) popCreateSort.getPopupView().findViewById(R.id.gvSort);
@@ -576,7 +576,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             }
         });
 
-        /***/
+        /**/
         popCreationSet = new PopupCustom(mActivity);
         popCreationSet.setPopup(R.layout.pop_2_0_0_creation_set, R.style.pinpinbox_popupAnimation_bottom);
         TextView tvSort = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSort);
@@ -592,7 +592,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         tvSetAudio.setOnClickListener(this);
 
 
-        /***/
+        /**/
         popCreateAdd = new PopupCustom(mActivity);
         popCreateAdd.setPopup(R.layout.pop_2_0_0_creation_add, R.style.pinpinbox_popupAnimation_bottom);
         LinearLayout linAddPhoto = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddPhoto);
@@ -608,7 +608,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         linAddVideo.setOnClickListener(this);
 
 
-        /***/
+        /**/
         popCreateAudio = new PopupCustom(mActivity);
         popCreateAudio.setPopup(R.layout.pop_2_0_0_creation_audio, R.style.pinpinbox_popupAnimation_bottom);
 
@@ -629,11 +629,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold(tvSelectAudioPage, true);
         TextUtility.setBold(tvSelectAudioBackground, true);
         TextUtility.setBold((TextView) popCreateAudio.getPopupView().findViewById(R.id.tvSave), true);
-
-
-//        LinearLayout linSelectAudioNouse = (LinearLayout) popCreateAudio.getPopupView().findViewById(R.id.linSelectAudioNouse);
-//        LinearLayout linSelectAudioPage = (LinearLayout) popCreateAudio.getPopupView().findViewById(R.id.linSelectAudioPage);
-//        LinearLayout linSelectAudioBackground = (LinearLayout) popCreateAudio.getPopupView().findViewById(R.id.linSelectAudioBackground);
 
 
         linearLayoutManager = new ScrollLinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);

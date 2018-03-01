@@ -78,7 +78,7 @@ public class Protocol110 extends AsyncTask<Void, Void, Object> {
 
             response = HttpUtility.uploadSubmit(true, Url.P110_ExchangePhotoUseFor, putMap(), null);
 
-            MyLog.Set("d", getClass(), "p110response => " + response);
+            MyLog.Set("d", this.getClass(), "p110response => " + response);
 
 
         } catch (SocketTimeoutException t) {
