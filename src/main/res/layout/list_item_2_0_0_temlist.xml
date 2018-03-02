@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="234dp"
-            android:background="@drawable/image_background_2_0_0_radius4">
+            android:background="@drawable/image_background_2_0_0_radius">
 
             <com.pinpinbox.android.Views.CircleView.RoundedImageView
                 android:id="@+id/coverImg"

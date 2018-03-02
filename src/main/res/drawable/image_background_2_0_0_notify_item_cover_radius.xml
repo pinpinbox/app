@@ -3,5 +3,5 @@
     <solid android:color="@color/pinpinbox_2_0_0_third_grey" />
     <!--500-->
     <corners
-        android:radius="9dp" />
+        android:radius="@dimen/ppb200_radius_general" />
 </shape>

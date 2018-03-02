@@ -15,6 +15,7 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -102,7 +103,17 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                         .priority(Picasso.Priority.HIGH)
                         .error(R.drawable.bg_2_0_0_no_image)
                         .tag(mActivity.getApplicationContext())
-                        .into(mHolder.exchangeImg);
+                        .into(mHolder.exchangeImg, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                mHolder.exchangeImg.setAlpha(0.8f);
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
 
             }else {
                 mHolder.exchangeImg.setImageResource(R.drawable.bg_2_0_0_no_image);

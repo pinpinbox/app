@@ -3,8 +3,8 @@
     <solid android:color="@color/pinpinbox_2_0_0_second_grey" />
     <!--500-->
     <corners
-    android:topLeftRadius="9dp"
-    android:topRightRadius="9dp"
-    android:bottomLeftRadius="9dp"
-    android:bottomRightRadius="9dp" />
+        android:radius="@dimen/ppb200_staggeredgrid_cover_radius"/>
+
+
+
 </shape>

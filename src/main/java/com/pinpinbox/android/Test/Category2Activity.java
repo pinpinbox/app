@@ -113,7 +113,7 @@ public class Category2Activity extends DraggerActivity implements View.OnClickLi
             if (!sizeMax) {
                 MyLog.Set("e", mActivity.getClass(), "onLoad");
                 if(isDoingMore){
-                    MyLog.Set("e", Category2Activity.class, "正在讀取更多項目");
+                    MyLog.Set("e", mActivity.getClass(), "正在讀取更多項目");
                     return;
                 }
                 doMoreData();

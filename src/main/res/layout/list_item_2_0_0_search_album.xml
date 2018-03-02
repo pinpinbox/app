@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/ppb200_staggeredgrid_click_padding">
 
         <RelativeLayout
-            android:id="@+id/rItemBg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/image_background_2_0_0_home_item_cover_border">
+            style="@style/ppb200_staggered_bg_cover"
+            android:id="@+id/rItemBg">
 
 
             <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
@@ -23,58 +21,42 @@
                 android:layout_height="234dp"
                 android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
-                app:siRadius="8dp"
                 app:siBorderAlpha="0"
-                />
+                app:siRadius="@dimen/ppb200_staggeredgrid_cover_radius" />
 
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:padding="8dp">
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/ppb200_padding_margin_second">
 
                 <LinearLayout
+                    style="@style/ppb200_staggered_type_linear"
                     android:id="@+id/linType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignWithParentIfMissing="true"
-                    android:background="@drawable/border_2_0_0_other_bg_album_type"
-                    android:gravity="right"
-                    android:orientation="horizontal"
-                    android:padding="4dp"
                     android:visibility="gone">
 
                     <ImageView
+                        style="@style/ppb200_staggered_type_icon"
                         android:id="@+id/audioImg"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="2dp"
                         android:src="@drawable/ic200_audio_play_dark"
                         android:visibility="gone" />
 
                     <ImageView
+                        style="@style/ppb200_staggered_type_icon"
                         android:id="@+id/videoImg"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="2dp"
                         android:src="@drawable/ic200_video_border_dark"
                         android:visibility="gone" />
 
                     <ImageView
+                        style="@style/ppb200_staggered_type_icon"
                         android:id="@+id/slotImg"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="3dp"
                         android:src="@drawable/ic200_gift_dark"
                         android:visibility="gone" />
 
 
                 </LinearLayout>
-
 
 
             </RelativeLayout>
@@ -84,51 +66,41 @@
 
         <!--作品名稱-->
         <TextView
-            android:letterSpacing="0.1"
             android:id="@+id/tvAlbumName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_staggeredgrid_album_name"
-            android:layout_marginTop="4dp"
-            android:maxLines="3"
-            android:ellipsize="end"/>
+            style="@style/ppb200_staggered_album_name"
+            android:layout_marginTop="@dimen/ppb200_staggeredgrid_album_name_margin_top" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp"
-            android:visibility="gone">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:visibility="gone">-->
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:padding="2dp"
-                android:layout_marginLeft="-2dp"
-                android:src="@drawable/ic200_user_light"/>
-
-
-            <TextView
-                android:letterSpacing="0.1"
-                android:id="@+id/tvUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                android:textSize="12sp" />
+            <!--<ImageView-->
+                <!--android:layout_width="16dp"-->
+                <!--android:layout_height="16dp"-->
+                <!--android:layout_marginLeft="-2dp"-->
+                <!--android:padding="2dp"-->
+                <!--android:src="@drawable/ic200_user_light" />-->
 
 
+            <!--<TextView-->
+                <!--android:id="@+id/tvUserName"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:letterSpacing="0.1"-->
+                <!--android:text=""-->
+                <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+                <!--android:textSize="12sp" />-->
 
-        </LinearLayout>
 
+        <!--</LinearLayout>-->
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

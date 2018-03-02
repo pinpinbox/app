@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -141,6 +142,8 @@ public class Hobby2Activity extends DraggerActivity implements View.OnClickListe
 
 
         TextView tvTitle = (TextView) vHeader.findViewById(R.id.tvTitle);
+        tvTitle.setTextSize(24);
+
         TextView tvBelowTitleText = (TextView) vHeader.findViewById(R.id.tvBelowTitleText);
         tvBelowTitleText.setVisibility(View.VISIBLE);
 

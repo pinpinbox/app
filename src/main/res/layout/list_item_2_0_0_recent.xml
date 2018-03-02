@@ -24,7 +24,7 @@
                 android:id="@+id/rCover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/image_background_2_0_0_notify_item_cover_corner9">
+                android:background="@drawable/image_background_2_0_0_notify_item_cover_radius">
 
                 <com.pinpinbox.android.Views.CircleView.RoundedImageView
                     android:id="@+id/coverImg"

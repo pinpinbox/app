@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHobby;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
@@ -52,7 +53,7 @@ public class HobbyAdapter extends BaseAdapter {
 
         convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_hobby, null);
 
-        RoundedImageView hobbyImg = (RoundedImageView) convertView.findViewById(R.id.hobbyImg);
+        RoundCornerImageView hobbyImg = (RoundCornerImageView) convertView.findViewById(R.id.hobbyImg);
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
         LinearLayout linSelect = (LinearLayout) convertView.findViewById(R.id.linSelect);
 

@@ -85,7 +85,7 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
                                 Color.parseColor(color), //颜色
                                 2, //渐变层数 (偶數)
                                 Gravity.BOTTOM,//起始方向
-                                8)); //圓角
+                                12)); //圓角
             }
         } catch (Exception e) {
             e.printStackTrace();

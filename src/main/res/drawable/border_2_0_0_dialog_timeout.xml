@@ -3,8 +3,8 @@
 
     <solid android:color="@color/timeout" />
 
-    <corners android:topLeftRadius="16dp"
-        android:topRightRadius="16dp"
+    <corners android:topLeftRadius="@dimen/ppb200_radius_big"
+        android:topRightRadius="@dimen/ppb200_radius_big"
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"/>
 

@@ -3,7 +3,7 @@
 
     <solid android:color="@color/pinpinbox_2_0_0_album_type_background_in_item" />
 
-    <corners android:radius="6dp" />
+    <corners android:radius="@dimen/ppb200_radius_general" />
 
 
 </shape>

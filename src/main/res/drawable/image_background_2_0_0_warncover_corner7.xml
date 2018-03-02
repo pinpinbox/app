@@ -3,5 +3,5 @@
     <solid android:color="#dcffffff" />
     <!--500-->
     <corners
-        android:radius="7dp" />
+        android:radius="@dimen/ppb200_radius_general" />
 </shape>

@@ -74,7 +74,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:background="@drawable/border_2_0_0_bar_top_white_alpha_radius8"
+            android:background="@drawable/border_2_0_0_bar_top_white_alpha_radius"
             android:orientation="horizontal">
 
             <ImageView
@@ -116,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/border_2_0_0_bar_bottom_white_alpha_radius8"
+            android:background="@drawable/border_2_0_0_bar_bottom_white_alpha_radius"
             android:orientation="vertical"
             android:paddingBottom="@dimen/ppb200_padding_margin_second">
 

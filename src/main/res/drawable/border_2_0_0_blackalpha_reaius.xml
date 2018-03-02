@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <solid android:color="@color/pinpinbox2_0_0_black_alpha" />
-    <corners android:radius="4dp" />
+    <corners android:radius="@dimen/ppb200_radius_general" />
 
 
 </shape>

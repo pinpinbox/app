@@ -5,8 +5,8 @@
 
     <solid android:color="@color/pinpinbox_2_0_0_first_pink" />
 
-    <corners android:topLeftRadius="16dp"
-        android:topRightRadius="16dp"
+    <corners android:topLeftRadius="@dimen/ppb200_radius_big"
+        android:topRightRadius="@dimen/ppb200_radius_big"
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"/>
 

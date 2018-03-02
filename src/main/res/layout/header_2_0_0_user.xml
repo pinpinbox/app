@@ -32,7 +32,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:layout_marginRight="@dimen/ppb200_padding_margin_second"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_first"

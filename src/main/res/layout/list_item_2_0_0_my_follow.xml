@@ -25,6 +25,7 @@
 
 
         <TextView
+            fontPath="fonts/OpenSans-Bold.ttf"
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
             android:textSize="16sp" />
 
         <TextView
+            fontPath="fonts/OpenSans-Bold.ttf"
             android:id="@+id/tvFollow"
             android:layout_width="112dp"
             android:layout_height="36dp"

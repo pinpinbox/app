@@ -16,7 +16,7 @@
             android:id="@+id/rItemBg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/image_background_2_0_0_home_item_cover_border"
+            android:background="@drawable/image_background_2_0_0_home_item_cover_radius"
             android:visibility="visible">
 
 

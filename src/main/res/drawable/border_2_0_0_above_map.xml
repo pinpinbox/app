@@ -6,7 +6,7 @@
         android:width="16dp"
         android:color="@color/white" />
 
-    <corners android:radius="16dp" />
+    <corners android:radius="@dimen/ppb200_radius_big" />
 
 
 </shape>

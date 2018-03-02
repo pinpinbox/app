@@ -5,7 +5,6 @@
     <!--<dimen name="ppb200_pad_common_button_width">192dp</dimen>-->
 
 
-
     <dimen name="ppb200_divider_height">0.5dp</dimen>
 
     <dimen name="ppb200_title_margin_first">108dp</dimen>
@@ -34,6 +33,7 @@
     <dimen name="ppb200_padding_margin_first">16dp</dimen>
     <dimen name="ppb200_padding_margin_second">8dp</dimen>
     <dimen name="ppb200_padding_margin_third">4dp</dimen>
+    <dimen name="ppb200_padding_margin_small">2dp</dimen>
 
     <dimen name="ppb200_lineSpacingExtra_first">4dp</dimen>
     <dimen name="ppb200_lineSpacingExtra_second">2dp</dimen>
@@ -49,7 +49,7 @@
     <dimen name="ppb200_common_button_height">48dp</dimen>
     <dimen name="ppb200_common_button_small_width">88dp</dimen>
     <dimen name="ppb200_common_button_small_height">36dp</dimen>
-    <dimen name="ppb200_common_button_radius">8dp</dimen>
+    <dimen name="ppb200_common_button_radius">@dimen/ppb200_radius_general</dimen>
 
     <dimen name="ppb200_common_icon_side">48dp</dimen>
 
@@ -70,9 +70,21 @@
 
 
     <dimen name="ppb200_radius_big">16dp</dimen>
-    <dimen name="ppb200_radius_general">8dp</dimen>
+    <dimen name="ppb200_radius_general">6dp</dimen>
 
-    <dimen name="ppb200_staggeredgrid_album_name">@dimen/ppb200_common_text_third</dimen>
+
+
+    <!--staggeredgrid-->
+    <dimen name="ppb200_staggeredgrid_album_name">@dimen/ppb200_common_text_small</dimen>
+    <dimen name="ppb200_staggeredgrid_album_name_margin_top">@dimen/ppb200_padding_margin_third</dimen>
+    <dimen name="ppb200_staggeredgrid_cover_radius">@dimen/ppb200_radius_general</dimen>
+    <dimen name="ppb200_staggeredgrid_click_padding">@dimen/ppb200_padding_margin_second</dimen>
+    <dimen name="ppb200_staggeredgrid_type_image_w_h">18dp</dimen>
+    <dimen name="ppb200_staggeredgrid_type_image_padding">@dimen/ppb200_padding_margin_small</dimen>
+
+
+
+
 
 
 </resources>

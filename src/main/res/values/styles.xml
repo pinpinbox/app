@@ -1,5 +1,48 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+
+    <!--staggered-->
+    <style name="ppb200_staggered_album_name" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_staggeredgrid_album_name</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
+        <item name="android:maxLines">3</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+    <style name="ppb200_staggered_type_icon">
+        <item name="android:layout_width">@dimen/ppb200_staggeredgrid_type_image_w_h</item>
+        <item name="android:layout_height">@dimen/ppb200_staggeredgrid_type_image_w_h</item>
+        <item name="android:padding">@dimen/ppb200_staggeredgrid_type_image_padding</item>
+    </style>
+
+    <style name="ppb200_staggered_bg_cover">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/image_background_2_0_0_home_item_cover_radius</item>
+    </style>
+
+    <style name="ppb200_staggered_type_linear">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/border_2_0_0_other_bg_album_type</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignWithParentIfMissing">true</item>
+        <item name="android:gravity">right</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">@dimen/ppb200_padding_margin_small</item>
+    </style>
+
+
+
+
+
     <style name="ppb200_title_first" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
