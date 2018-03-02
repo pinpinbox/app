@@ -1772,8 +1772,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 //            ActivityAnim.StartAnim(mActivity);
 
 
-//            setResult(ResultCodeClass.creationback);
-
 
 //            SnackManager.showCollectionSnack();
             SnackManager.showCustomSnack();

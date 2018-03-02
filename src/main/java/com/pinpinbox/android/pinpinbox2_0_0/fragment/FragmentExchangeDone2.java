@@ -21,8 +21,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerExchangeListAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +136,10 @@ public class FragmentExchangeDone2 extends Fragment {
                 bundle.putSerializable("exchangeItem", itemExchangeList.get(position));
                 bundle.putBoolean("isExchanged", true);
 
+                if(itemExchangeList.get(position).getPhotousefor_user_id()>0){
+                    bundle.putBoolean("isSlotType", true);
+                }
+
 
                 Intent intent = new Intent(getActivity(), ExchangeInfo2Activity.class).putExtras(bundle);
 
@@ -159,13 +163,14 @@ public class FragmentExchangeDone2 extends Fragment {
     public void addItem(ItemExchange itemExchange){
         itemExchangeList.add(0, itemExchange);
         adapter.notifyDataSetChanged();
+
     }
 
     private void cleanCache(){
 
         if(itemExchangeList!=null && itemExchangeList.size()>0){
             for (int i = 0; i < itemExchangeList.size(); i++) {
-                com.squareup.picasso.Picasso.with(getActivity().getApplicationContext()).invalidate(itemExchangeList.get(i).getImage());
+                Picasso.with(getActivity().getApplicationContext()).invalidate(itemExchangeList.get(i).getImage());
             }
         }
     }

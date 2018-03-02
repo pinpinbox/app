@@ -27,7 +27,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
@@ -36,7 +36,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.RoundTransform;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentHome2;
 
 import org.json.JSONArray;
 
@@ -275,7 +274,7 @@ public class BannerPageAdapter extends PagerAdapter {
                                                             ViewCompat.getTransitionName(img));
 //                                            mActivity.startActivity(intent, options.toBundle());
 
-                                            fragment.startActivityForResult(intent, ResultCodeClass.CloseHighLight, options.toBundle());
+                                            fragment.startActivityForResult(intent, RequestCodeClass.CloseHighLight, options.toBundle());
 
 
                                         } else {

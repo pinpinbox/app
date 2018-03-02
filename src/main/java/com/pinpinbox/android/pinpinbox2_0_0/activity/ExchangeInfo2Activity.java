@@ -18,13 +18,13 @@ import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentExchangeUnfinished2;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol106;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol110;
@@ -46,6 +46,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private Protocol43 protocol43;
     private Protocol106 protocol106;
+    private Protocol109 protocol109;
     private Protocol110 protocol110;
 
     private ImageView backImg;
@@ -278,27 +279,26 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                         PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_exchange_success);
 
-                        Activity acExchangeList = SystemUtility.getActivity(ExchangeList2Activity.class.getSimpleName());
-                        if (acExchangeList != null) {
-
-                            FragmentExchangeUnfinished2 fragmentExchangeUnfinished2 = (FragmentExchangeUnfinished2) ((ExchangeList2Activity) acExchangeList).getFragment(FragmentExchangeUnfinished2.class.getSimpleName());
-
-                            fragmentExchangeUnfinished2.moveItem();
-
-                            ((ExchangeList2Activity) acExchangeList).scrollToDonePage();
-
-
-                        } else {
-                            doAddToDoneList();
-                        }
-
                         Activity acReader = SystemUtility.getActivity(Reader2Activity.class.getSimpleName());
                         if (acReader != null) {
                             ((Reader2Activity) acReader).reFreshExchange();
                         }
 
 
-                        doAddToDoneList();
+                        Activity acExchangeList = SystemUtility.getActivity(ExchangeList2Activity.class.getSimpleName());
+                        if (acExchangeList != null) {
+                            setResult(ResultCodeClass.ScrollToDonePage);
+                        }
+
+
+
+
+                        if (!itemExchange.isIs_existing()) {
+                            doAddToDoneList();
+                        } else {
+                            onBackPressed();
+                        }
+
 
                     }
 
@@ -314,7 +314,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private void doAddToDoneList() {
 
-        Protocol109 protocol109 = new Protocol109(
+        protocol109 = new Protocol109(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
@@ -334,6 +334,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                     public void Success() {
 
                         MyLog.Set("e", mActivity.getClass(), "---------成功加入清單---------");
+                        onBackPressed();
 
                     }
 
@@ -370,6 +371,9 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                     public void Success() {
 
                         PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_update_done);
+
+                        onBackPressed();
+
 
                     }
 
@@ -443,6 +447,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
     @Override
     public void onBackPressed() {
 
+
         if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {
             supportFinishAfterTransition();
         } else {
@@ -465,6 +470,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
         cancelTask(protocol43);
         cancelTask(protocol106);
+        cancelTask(protocol109);
         cancelTask(protocol110);
 
         Recycle.IMG(backImg);

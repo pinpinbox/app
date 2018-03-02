@@ -1,11 +1,11 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass;
 
 /**
- * Created by vmage on 2017/11/13.
+ * Created by vmage on 2018/3/2.
  */
 
 public class ResultCodeClass {
 
-    public final static int CloseHighLight = 2001;
+    public static int ScrollToDonePage = 3001;
 
 }

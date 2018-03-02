@@ -94,7 +94,7 @@ public class Protocol110 extends AsyncTask<Void, Void, Object> {
                 JSONObject jsonObject = new JSONObject(response);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
-                if (result.equals(ResultType.SYSTEM_OK)|| result.equals(ResultType.PHOTOUSEFOR_USER_HAS_GAINED)) {
+                if (result.equals(ResultType.SYSTEM_OK)|| result.equals(ResultType.PHOTOUSEFOR_USER_HAS_GAINED) || result.equals(ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED)) {
 
                     String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
                     JSONObject jsonData = new JSONObject(data);
@@ -135,6 +135,10 @@ public class Protocol110 extends AsyncTask<Void, Void, Object> {
                 break;
 
             case ResultType.PHOTOUSEFOR_USER_HAS_GAINED:
+                callBack.Success(photousefor_user_id);
+                break;
+
+            case ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED:
                 callBack.Success(photousefor_user_id);
                 break;
 

@@ -3,8 +3,10 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
@@ -85,7 +89,7 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
 
     }
 
-    private void doGetExchangeList(){
+    private void doGetExchangeList() {
 
         if (!HttpUtility.isConnect(this)) {
             setNoConnect();
@@ -128,7 +132,7 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
     private void setFragment(List<ItemExchange> itemExchangeList) {
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("exchangeList", (Serializable)itemExchangeList);
+        bundle.putSerializable("exchangeList", (Serializable) itemExchangeList);
 
         adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(mActivity)
@@ -212,8 +216,8 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
         return getFragment;
     }
 
-    public void scrollToDonePage(){
-        if(vpExchange!=null){
+    public void scrollToDonePage() {
+        if (vpExchange != null) {
             vpExchange.setCurrentItem(1);
         }
     }
@@ -243,6 +247,35 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        MyLog.Set("d", getClass(), "requestCode => " + requestCode);
+        MyLog.Set("d", getClass(), "resultCode => " + resultCode);
+
+        if (requestCode == RequestCodeClass.CloseToScrollDonePage && resultCode == ResultCodeClass.ScrollToDonePage) {
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentExchangeUnfinished2 fragmentExchangeUnfinished2 = (FragmentExchangeUnfinished2) ((ExchangeList2Activity) mActivity).getFragment(FragmentExchangeUnfinished2.class.getSimpleName());
+
+                    fragmentExchangeUnfinished2.moveItem();
+
+                    ((ExchangeList2Activity) mActivity).scrollToDonePage();
+                }
+            },250);
+
+
+
+        }
+
+
+    }
+
 
     @Override
     public void onBackPressed() {

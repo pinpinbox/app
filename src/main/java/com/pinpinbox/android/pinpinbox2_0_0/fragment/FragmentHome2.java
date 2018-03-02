@@ -53,7 +53,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
@@ -1943,7 +1943,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         MyLog.Set("d", getClass(), "requestCode => " + requestCode);
 
 
-        if (requestCode == ResultCodeClass.CloseHighLight) {
+        if (requestCode == RequestCodeClass.CloseHighLight) {
 
 
 //            if (autoPageScrollManager != null) {

@@ -118,6 +118,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import pl.droidsonroids.gif.AnimationListener;
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 import uk.breedrapps.vimeoextractor.OnVimeoExtractionListener;
 import uk.breedrapps.vimeoextractor.VimeoExtractor;
 import uk.breedrapps.vimeoextractor.VimeoVideo;
@@ -841,6 +844,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
 
+
                     if (!itemAlbum.isOwn()) {
                         isNoOwnShowCollectType(vPage, vType);
                     } else {
@@ -870,9 +874,21 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         if(isSlotted){
                             doSlot(vPage, position, linExchange);
                         }else {
-                            centerImg.setImageResource(R.drawable.ic200_gift_white);
-                            centerImg.setBackgroundResource(R.drawable.click_2_0_0_default);
-                            centerImg.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+
+                            final GifImageView slotgiftImg = (GifImageView)vPage.findViewById(R.id.slotgiftImg);
+
+                            final GifDrawable slotgiftDrawable = new GifDrawable( getResources(), R.drawable.ic200_slotgift_2);
+
+                            slotgiftDrawable.stop();
+
+                            slotgiftImg.setImageDrawable(slotgiftDrawable);
+
+
+                            slotgiftImg.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 
@@ -880,10 +896,54 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                         return;
                                     }
 
-                                    doSlot(vPage, position, linExchange);
+                                    slotgiftDrawable.start();
+
+                                    slotgiftDrawable.addAnimationListener(new AnimationListener() {
+                                        @Override
+                                        public void onAnimationCompleted(int loopNumber) {
+
+
+                                           MyLog.Set("e", mActivity.getClass(), "onAnimationCompleted loopNumber => " + loopNumber);
+
+
+                                            doSlot(vPage, position, linExchange);
+
+
+                                        }
+                                    });
+
+
+
 
                                 }
                             });
+
+
+                            TextView tvClickToStart = (TextView)vPage.findViewById(R.id.tvClickToStart);
+                            tvClickToStart.setText("點擊開始抽獎");
+
+
+
+
+
+
+//                            centerImg.setImageResource(R.drawable.test_gift);
+//                            centerImg.setBackgroundResource(R.drawable.click_2_0_0_default);
+//                            centerImg.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//
+//                                    if (ClickUtils.ButtonContinuousClick()) {
+//                                        return;
+//                                    }
+//
+//                                    doSlot(vPage, position, linExchange);
+//
+//                                }
+//                            });
+
+
+
                         }
 
 

@@ -3,6 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.model;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -22,9 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.SocketTimeoutException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +87,8 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
 
             MyLog.Set("d", getClass(), "p107reponse => " + response);
 
+            Logger.json(response);
+
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -110,10 +111,10 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
 
                     JSONArray dataArray = new JSONArray(data);
 
-                    //get time
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-                    String strCurrentTime = df.format(curDate);
+                    /*get time*/
+//                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                    Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+//                    String strCurrentTime = df.format(curDate);
 
 
                     for (int i = 0; i < dataArray.length(); i++) {
@@ -124,9 +125,11 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
 
                         String photo = JsonUtility.GetString(object, ProtocolKey.photo);
                         String photousefor = JsonUtility.GetString(object, ProtocolKey.photousefor);
+                        String photousefor_user = JsonUtility.GetString(object, ProtocolKey.photousefor_user);
 
                         JSONObject jsonPhoto = new JSONObject(photo);
                         JSONObject jsonPhotoUseFor = new JSONObject(photousefor);
+
 
                         itemExchange.setHas_gained(JsonUtility.GetBoolean(jsonPhoto, ProtocolKey.has_gained));
                         itemExchange.setPhoto_id(JsonUtility.GetInt(jsonPhoto, ProtocolKey.photo_id));
@@ -136,8 +139,18 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
                         itemExchange.setName(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.name));
                         itemExchange.setPhotousefor_id(JsonUtility.GetInt(jsonPhotoUseFor, ProtocolKey.photousefor_id));
 
-                        String time = "";
+                        if(photousefor_user!=null && !photousefor_user.equals("") && !photousefor_user.equals("null")){
+                            JSONObject jsonPhotoUseForUser = new JSONObject(photousefor_user);
+                            itemExchange.setPhotousefor_user_id(JsonUtility.GetInt(jsonPhotoUseForUser, ProtocolKey.photousefor_user_id));
+                        }else {
+                            itemExchange.setPhotousefor_user_id(-1);
+                        }
 
+
+
+//                        String time = "";
+
+                        /*get end time*/
 //                        String strEndTime = JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.endtime);
 //
 //                        if (strEndTime != null && !strEndTime.equals("") && !strEndTime.equals("null")) {
@@ -153,11 +166,12 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
 //                            }
 //                        }
 
-                        itemExchange.setTime(time);
+//                        itemExchange.setTime(time);
 
 
                         itemExchange.setImageWidth(PPBApplication.getInstance().getStaggeredWidth());
                         itemExchange.setImageHeight(PPBApplication.getInstance().getStaggeredWidth());
+                        itemExchange.setIs_existing(true); //該接口為列表 必為true
 
 
                         itemExchangeList.add(itemExchange);
