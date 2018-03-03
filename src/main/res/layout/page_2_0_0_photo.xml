@@ -38,41 +38,108 @@
         android:layout_centerVertical="true"
         android:scaleType="centerCrop" />
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/slotgiftImg"
-        android:layout_width="216dp"
-        android:layout_height="216dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
 
-    <TextView
-        android:id="@+id/tvClickToStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/slotgiftImg"
-        android:layout_centerHorizontal="true"
-        fontPath="fonts/OpenSans-Bold.ttf"
-        android:layout_marginTop="8dp"
-        android:textSize="12sp"
-        android:letterSpacing="0.1"
-        android:textColor="@color/white" />
+    <!--gift-->
+    <RelativeLayout
+        android:id="@+id/rGift"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/star1Img"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_above="@+id/bottomView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-48dp"
+            android:src="@drawable/gift_star_1" />
+
+        <ImageView
+            android:id="@+id/star2Img"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_above="@+id/bottomView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-48dp"
+            android:src="@drawable/gift_star_2" />
+
+        <ImageView
+            android:id="@+id/star3Img"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_above="@+id/bottomView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-48dp"
+            android:src="@drawable/gift_star_3" />
+
+        <ImageView
+            android:id="@+id/star4Img"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_above="@+id/bottomView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-48dp"
+            android:src="@drawable/gift_star_4" />
 
 
-    <!--<TextView-->
-    <!--android:id="@+id/tvCenter"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:letterSpacing="0.1"-->
-    <!--android:padding="16dp"-->
-    <!--android:text=""-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="48sp"-->
-    <!--android:visibility="gone" />-->
+        <ImageView
+            android:id="@+id/bottomView"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-24dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/gift_bottom" />
+
+
+        <RelativeLayout
+            android:id="@+id/topView"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/aa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/gift_top" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/aa"
+                android:alpha="0.4"
+                android:background="#000000" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvClickToStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bottomView"
+            android:layout_centerHorizontal="true"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_marginTop="16dp"
+            android:textSize="12sp"
+            android:letterSpacing="0.1"
+            android:text="@string/pinpinbox_2_0_0_other_text_click_to_lottery"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
 
 
     <!--exchange-->
-
     <LinearLayout
         android:id="@+id/linExchange"
         android:layout_width="288dp"

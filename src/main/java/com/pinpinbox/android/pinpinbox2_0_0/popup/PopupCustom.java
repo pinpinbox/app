@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -17,6 +20,9 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
+import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -28,6 +34,7 @@ import eightbitlab.com.blurview.RenderScriptBlur;
  * Created by kevin9594 on 2017/1/7.
  */
 public class PopupCustom {
+
 
     public interface DissmissWorks {
         void excute();
@@ -43,18 +50,18 @@ public class PopupCustom {
 
     private DissmissWorks dissmissWorks;
 
-
     private Activity mActivity;
 
     private PopupWindow popupWindow;
-
     private RelativeLayout rBackground;
-
     private BlurView blurView;
-
-    private View vPopup;
+    private View vPopup, vContent;
 
     private final static int intAnimDuration = 150;
+
+    private int acStatusColor = 0;
+    private boolean closePop = false;
+
 
     public PopupCustom(Activity mActivity) {
         this.mActivity = mActivity;
@@ -134,7 +141,6 @@ public class PopupCustom {
             }
         });
 
-
     }
 
 
@@ -146,7 +152,80 @@ public class PopupCustom {
         return this.vPopup;
     }
 
-    private int acStatusColor = 0;
+    private void setBlur(RelativeLayout rBackground) {
+
+        /*建立模糊視窗*/
+        blurView = new BlurView(mActivity);
+        blurView.setLayoutParams(new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT));
+        blurView.setOverlayColor(Color.parseColor("#82000000"));
+
+        final float radius = 4f;
+        final View decorView = mActivity.getWindow().getDecorView();
+        final View rootView = decorView.findViewById(android.R.id.content);
+        final Drawable windowBackground = decorView.getBackground();
+        blurView.setupWith(rootView)
+                .windowBackground(windowBackground)
+                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
+                .blurRadius(radius);
+
+        /*先設置為透明*/
+        blurView.setAlpha(0);
+
+        /*添加置background*/
+        rBackground.addView(blurView);
+
+
+    }
+
+    public void setScrollDismiss(final View vContent) {
+
+        this.vContent = vContent;
+
+
+        vPopup.setOnTouchListener(new View.OnTouchListener() {
+
+            float downY;
+            float moveY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+
+                        downY = event.getRawY();
+
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+
+                        moveY = event.getRawY();//手指所在位置
+
+                        MyLog.Set("e", PopupCustom.class, "moveY => " + moveY);
+
+                        if(moveY>=downY){
+                            vPopup.setTranslationY(moveY - downY);
+
+                        }
+
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+
+                        vPopup.animate()
+                                .translationY(0f)
+                                .start();
+
+
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+    }
+
 
     public void show(RelativeLayout rBackground) {
 
@@ -180,33 +259,6 @@ public class PopupCustom {
     public void dismiss() {
 
         popupWindow.dismiss();
-    }
-
-    private void setBlur(RelativeLayout rBackground) {
-
-        /*建立模糊視窗*/
-        blurView = new BlurView(mActivity);
-        blurView.setLayoutParams(new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT));
-        blurView.setOverlayColor(Color.parseColor("#82000000"));
-
-        final float radius = 4f;
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-
-        /*先設置為透明*/
-        blurView.setAlpha(0);
-
-        /*添加置background*/
-        rBackground.addView(blurView);
-
-
     }
 
 

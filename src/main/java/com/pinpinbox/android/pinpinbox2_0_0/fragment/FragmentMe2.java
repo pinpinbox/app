@@ -935,6 +935,10 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
             linToExchangeList.setOnClickListener(this);
             linSettings.setOnClickListener(this);
 
+
+//            popMenu.setScrollDismiss(popMenu.getPopupView().findViewById(R.id.linContent));
+
+
             popMenu.show(((Main2Activity) getActivity()).getBackground());
 
         } else {
@@ -1482,6 +1486,157 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         return this.albumList;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isVisible = isVisibleToUser;
+        // Make sure that fragment is currently visible
+        if (!isVisible && isResumed()) {
+            // 调用Fragment隐藏的代码段
+
+            MyLog.Set("e", getClass(), "目前看不到 FragmentMe2");
+
+
+        } else if (isVisible && isResumed()) {
+            // 调用Fragment显示的代码段
+
+            MyLog.Set("e", getClass(), "可看見 FragmentMe2");
+
+            if (!dowork) {
+                init();
+                setRecycler();
+                doGetCreative();
+                dowork = true;
+            } else {
+
+                if (albumList.size() > 0) {
+                    ((Main2Activity) getActivity()).showGuideCreate(false);
+                } else {
+                    ((Main2Activity) getActivity()).showGuideCreate(true);
+                }
+
+
+            }
+        }
+    }
+
+    private Intent fromCrop;
+
+    public void doUploadCover(final Intent data) {
+
+        fromCrop = data;
+
+
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        BitmapFactory.decodeFile(fileCover.getPath(), options);
+
+
+        options.inJustDecodeBounds = false;
+
+        Bitmap bmp = BitmapFactory.decodeFile(fileCover.getPath(), options);
+
+
+        final Bitmap bitmap = BitmapUtility.zoom(bmp, 960, 450);
+
+        try {
+            FileOutputStream out = new FileOutputStream(fileCover);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+//        fileCover.delete();
+//
+//        BitmapUtility.saveToLocal(bitmap, fileCover.getPath(), 100);
+
+
+        /* **********************************************************************************/
+
+
+//        BitmapFactory.Options option = new BitmapFactory.Options();
+//        option.inJustDecodeBounds = true;
+//        BitmapFactory.decodeFile(fileCover.getPath(), option);
+//        option.inSampleSize = calculateInSampleSize(option, 960, 450);  //110,160：转换后的宽和高，具体值会有些出入
+//        option.inJustDecodeBounds = false;
+//        final Bitmap bitmap = BitmapFactory.decodeFile(fileCover.getPath(), option);
+//
+//        File ffff =new File(DirClass.test);
+//
+//        try{
+////            FileOutputStream out = new FileOutputStream(fileCover);
+//            FileOutputStream out = new FileOutputStream(ffff);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
+
+        Bundle extras = data.getExtras();
+        if (extras != null) {
+
+            protocol101 = new Protocol101(
+                    getActivity(),
+                    itemUser.getUser_id(),
+                    token,
+                    fileCover,
+                    new Protocol101.TaskCallBack() {
+                        @Override
+                        public void Prepare() {
+
+                        }
+
+                        @Override
+                        public void Post() {
+
+                        }
+
+                        @Override
+                        public void Success(String cover) {
+
+
+                            itemUser.setCover(cover);
+
+
+                            if (cover == null || cover.equals("") || cover.equals("null")) {
+                                bannerImg.setImageResource(R.drawable.bg200_user_default);
+                            } else {
+                                Picasso.with(getActivity().getApplicationContext())
+                                        .load(cover)
+                                        .config(Bitmap.Config.RGB_565)
+                                        .error(R.drawable.bg200_user_default)
+                                        .tag(getActivity().getApplicationContext())
+                                        .into(bannerImg);
+                            }
+
+                            if (bitmap != null && !bitmap.isRecycled()) {
+                                bitmap.recycle();
+                            }
+
+
+                            if (fileCover != null && fileCover.exists()) {
+                                fileCover.delete();
+                                fileCover = null;
+                            }
+
+                        }
+
+                        @Override
+                        public void TimeOut() {
+
+                            doUploadCover(fromCrop);
+
+                        }
+                    });
+
+
+        }
+
+
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -1611,159 +1766,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                 toSponsorList();
 
                 break;
-
-
-        }
-
-
-    }
-
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        isVisible = isVisibleToUser;
-        // Make sure that fragment is currently visible
-        if (!isVisible && isResumed()) {
-            // 调用Fragment隐藏的代码段
-
-            MyLog.Set("e", getClass(), "目前看不到 FragmentMe2");
-
-
-        } else if (isVisible && isResumed()) {
-            // 调用Fragment显示的代码段
-
-            MyLog.Set("e", getClass(), "可看見 FragmentMe2");
-
-            if (!dowork) {
-                init();
-                setRecycler();
-                doGetCreative();
-                dowork = true;
-            } else {
-
-                if (albumList.size() > 0) {
-                    ((Main2Activity) getActivity()).showGuideCreate(false);
-                } else {
-                    ((Main2Activity) getActivity()).showGuideCreate(true);
-                }
-
-
-            }
-        }
-    }
-
-
-    private Intent fromCrop;
-
-    public void doUploadCover(final Intent data) {
-
-        fromCrop = data;
-
-
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        BitmapFactory.decodeFile(fileCover.getPath(), options);
-
-
-        options.inJustDecodeBounds = false;
-
-        Bitmap bmp = BitmapFactory.decodeFile(fileCover.getPath(), options);
-
-
-        final Bitmap bitmap = BitmapUtility.zoom(bmp, 960, 450);
-
-        try {
-            FileOutputStream out = new FileOutputStream(fileCover);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-//        fileCover.delete();
-//
-//        BitmapUtility.saveToLocal(bitmap, fileCover.getPath(), 100);
-
-
-        /* **********************************************************************************/
-
-
-//        BitmapFactory.Options option = new BitmapFactory.Options();
-//        option.inJustDecodeBounds = true;
-//        BitmapFactory.decodeFile(fileCover.getPath(), option);
-//        option.inSampleSize = calculateInSampleSize(option, 960, 450);  //110,160：转换后的宽和高，具体值会有些出入
-//        option.inJustDecodeBounds = false;
-//        final Bitmap bitmap = BitmapFactory.decodeFile(fileCover.getPath(), option);
-//
-//        File ffff =new File(DirClass.test);
-//
-//        try{
-////            FileOutputStream out = new FileOutputStream(fileCover);
-//            FileOutputStream out = new FileOutputStream(ffff);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-
-            protocol101 = new Protocol101(
-                    getActivity(),
-                    itemUser.getUser_id(),
-                    token,
-                    fileCover,
-                    new Protocol101.TaskCallBack() {
-                        @Override
-                        public void Prepare() {
-
-                        }
-
-                        @Override
-                        public void Post() {
-
-                        }
-
-                        @Override
-                        public void Success(String cover) {
-
-
-                            itemUser.setCover(cover);
-
-
-                            if (cover == null || cover.equals("") || cover.equals("null")) {
-                                bannerImg.setImageResource(R.drawable.bg200_user_default);
-                            } else {
-                                Picasso.with(getActivity().getApplicationContext())
-                                        .load(cover)
-                                        .config(Bitmap.Config.RGB_565)
-                                        .error(R.drawable.bg200_user_default)
-                                        .tag(getActivity().getApplicationContext())
-                                        .into(bannerImg);
-                            }
-
-                            if (bitmap != null && !bitmap.isRecycled()) {
-                                bitmap.recycle();
-                            }
-
-
-                            if (fileCover != null && fileCover.exists()) {
-                                fileCover.delete();
-                                fileCover = null;
-                            }
-
-                        }
-
-                        @Override
-                        public void TimeOut() {
-
-                            doUploadCover(fromCrop);
-
-                        }
-                    });
 
 
         }

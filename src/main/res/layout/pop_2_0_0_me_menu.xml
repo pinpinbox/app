@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linContent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
 
     <TextView
         android:id="@+id/tvTitle"
         style="@style/ppb200_title_pop_second"
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-        android:text="@string/pinpinbox_2_0_0_pop_title_where_to_go"
-         />
+        android:text="@string/pinpinbox_2_0_0_pop_title_where_to_go" />
 
 
     <LinearLayout
@@ -64,7 +65,6 @@
                 android:text="@string/pinpinbox_2_0_0_itemtype_work_manager" />
 
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -123,7 +123,7 @@
                 android:layout_height="@dimen/ppb200_common_icon_side"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
                 android:padding="14dp"
-                android:src="@drawable/ic200_buypoint_dark"/>
+                android:src="@drawable/ic200_buypoint_dark" />
 
             <TextView
                 android:id="@+id/tvToBuyPoint"
@@ -146,7 +146,7 @@
                 android:layout_height="@dimen/ppb200_common_icon_side"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
                 android:padding="14dp"
-                android:src="@drawable/ic200_gift_dark"/>
+                android:src="@drawable/ic200_gift_dark" />
 
             <TextView
                 android:id="@+id/tvToExchangeList"
@@ -155,9 +155,6 @@
 
 
         </LinearLayout>
-
-
-
 
         <LinearLayout
             android:id="@+id/linSettings"
@@ -171,13 +168,12 @@
                 android:layout_height="@dimen/ppb200_common_icon_side"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
                 android:padding="15dp"
-                android:src="@drawable/ic200_setting_dark"/>
+                android:src="@drawable/ic200_setting_dark" />
 
             <TextView
                 android:id="@+id/tvSettings"
                 style="@style/ppb200_pop_item"
-                android:text="@string/pinpinbox_2_0_0_title_app_settings"
-                 />
+                android:text="@string/pinpinbox_2_0_0_title_app_settings" />
 
 
         </LinearLayout>

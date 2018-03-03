@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -208,6 +209,8 @@ public class PinPinToast {
                 .duration(600)
                 .repeat(1)
                 .playOn(userImg);
+
+
 
 
     }
