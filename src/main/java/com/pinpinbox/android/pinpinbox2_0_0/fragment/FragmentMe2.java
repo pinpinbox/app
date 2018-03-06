@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -59,6 +60,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -107,13 +109,12 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by vmage on 2017/3/24.
  */
-public class FragmentMe2 extends Fragment implements View.OnClickListener {
+public class FragmentMe2 extends Fragment implements View.OnClickListener, ClickDragDismissListener.ActionUpListener{
 
     private LoadingAnimation loading;
     private ExStaggeredGridLayoutManager manager;
 
     private Protocol101 protocol101;
-
 
     private File fileCover;
 
@@ -900,6 +901,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         ActivityAnim.StartAnim(getActivity());
     }
 
+
+
+    @SuppressLint("ClickableViewAccessibility")
     private void showMenu() {
 
         if (popMenu == null) {
@@ -927,17 +931,25 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
             LinearLayout linToExchangeList = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToExchangeList);
             LinearLayout linSettings = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linSettings);
 
-            linToEditProfile.setOnClickListener(this);
-            linToWorkManage.setOnClickListener(this);
-            linToMyFollow.setOnClickListener(this);
-            linToRecent.setOnClickListener(this);
-            linToBuyPoint.setOnClickListener(this);
-            linToExchangeList.setOnClickListener(this);
-            linSettings.setOnClickListener(this);
+//            linToEditProfile.setOnClickListener(this);
+//            linToWorkManage.setOnClickListener(this);
+//            linToMyFollow.setOnClickListener(this);
+//            linToRecent.setOnClickListener(this);
+//            linToBuyPoint.setOnClickListener(this);
+//            linToExchangeList.setOnClickListener(this);
+//            linSettings.setOnClickListener(this);
+            View vContent = popMenu.getPopupView().findViewById(R.id.linContent);
+
+            linToEditProfile.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+            linToWorkManage.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+            linToMyFollow.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+            linToRecent.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+            linToBuyPoint.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+            linToExchangeList.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+            linSettings.setOnTouchListener(new ClickDragDismissListener(vContent, this));
 
 
 //            popMenu.setScrollDismiss(popMenu.getPopupView().findViewById(R.id.linContent));
-
 
             popMenu.show(((Main2Activity) getActivity()).getBackground());
 
@@ -947,6 +959,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         }
 
     }
+
+
+
 
     private void systemShare() {
 
@@ -1102,6 +1117,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
         };
         DialogV2Custom.BuildTimeOut(getActivity(), connectInstability);
     }
+
 
     private class GetCreativeTask extends AsyncTask<Void, Void, Object> {
         @Override
@@ -1720,6 +1736,27 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                 break;
 
 
+            case R.id.rSponsorList:
+
+                toSponsorList();
+
+                break;
+
+
+        }
+
+
+    }
+
+
+    @Override
+    public void OnClick(View v) {
+
+        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+            return;
+        }
+
+        switch (v.getId()){
             case R.id.linToEditProfile:
                 popMenu.dismiss();
                 FlurryUtil.onEvent(FlurryKey.myprefecture_click_edit_profile);
@@ -1760,18 +1797,16 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener {
                 FlurryUtil.onEvent(FlurryKey.myprefecture_click_settings);
                 toAppSetting();
                 break;
-
-            case R.id.rSponsorList:
-
-                toSponsorList();
-
-                break;
-
-
         }
 
-
     }
+
+    @Override
+    public void OnDismiss() {
+        popMenu.dismiss();
+    }
+
+
 
 
     @Override

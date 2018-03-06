@@ -54,8 +54,6 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
     private String message;
     private String result = "";
 
-    private static final String TIMEOUT = "timeout";
-
     private ItemExchange itemExchange;
 
     public Protocol111(Activity mActivity, String user_id, String token, String photo_id, String identifier, TaskCallBack callBack) {
@@ -86,7 +84,7 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
 
 
         } catch (SocketTimeoutException t) {
-            result = TIMEOUT;
+            result = ResultType.TIMEOUT;
             t.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

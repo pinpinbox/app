@@ -45,6 +45,7 @@ import com.czt.mp3recorder.MP3Recorder;
 import com.pinpinbox.android.Test.CreateAlbum.ChangeItemAdapter;
 import com.pinpinbox.android.Test.CreateAlbum.SelectPreviewAdapter;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -120,7 +121,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by vmage on 2017/3/8.
  */
-public class Creation2Activity extends DraggerActivity implements View.OnClickListener, LocationListener {
+public class Creation2Activity extends DraggerActivity implements View.OnClickListener, LocationListener, ClickDragDismissListener.ActionUpListener {
 
 
     private Activity mActivity;
@@ -542,6 +543,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setAllPop() {
 
         /**/
@@ -587,9 +589,14 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold(tvSort, true);
         TextUtility.setBold(tvSelectPreview, true);
         TextUtility.setBold(tvSetAudio, true);
-        tvSort.setOnClickListener(this);
-        tvSelectPreview.setOnClickListener(this);
-        tvSetAudio.setOnClickListener(this);
+
+
+        View vContentSet = popCreationSet.getPopupView().findViewById(R.id.linContent);
+
+        tvSort.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        tvSelectPreview.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        tvSetAudio.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+
 
 
         /**/
@@ -604,14 +611,17 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvVideo), true);
         TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle), true);
 
-        linAddPhoto.setOnClickListener(this);
-        linAddVideo.setOnClickListener(this);
+        View vContentAdd = popCreateAdd.getPopupView().findViewById(R.id.linContent);
+
+        linAddPhoto.setOnTouchListener(new ClickDragDismissListener(vContentAdd, this));
+        linAddVideo.setOnTouchListener(new ClickDragDismissListener(vContentAdd, this));
+
+
 
 
         /**/
         popCreateAudio = new PopupCustom(mActivity);
         popCreateAudio.setPopup(R.layout.pop_2_0_0_creation_audio, R.style.pinpinbox_popupAnimation_bottom);
-
         (popCreateAudio.getPopupView().findViewById(R.id.tvSave)).setOnClickListener(this);
 
 
@@ -2945,6 +2955,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
+
     /*protocol32*/
     private class GetSettingsTask extends AsyncTask<Void, Void, Object> {
 
@@ -4791,44 +4802,14 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             case R.id.albumSetImg:
 
-                //20171018
-//                if(!checkMyPhoto(thisPosition)){
-//                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-//                    return;
-//                }
-
-                //20171019
                 if (!identity.equals("admin")) {
                     PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deficiency_identity);
                     return;
                 }
 
-
                 popCreationSet.show(rBackground);
                 break;
 
-            /*pop creation set*/
-            case R.id.tvSort:
-                popCreationSet.dismiss();
-                changeItemClick();
-                break;
-
-            case R.id.tvSelectPreview:
-                popCreationSet.dismiss();
-                selectPreviewClick();
-                break;
-
-            case R.id.tvSetAudio:
-                popCreationSet.dismiss();
-
-                setAudioMode(currentAudioMode);
-                popCreateAudio.show(rBackground);
-
-                if (audioList == null || audioList.size() == 0) {
-                    doGetSettings();
-                }
-
-                break;
 
              /*pop creation audio*/
             case R.id.tvSave:
@@ -4866,25 +4847,71 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 popCreateSort.dismiss();
                 break;
 
-            /*pop creation add*/
+        }
+
+    }
+
+    @Override
+    public void OnClick(View v) {
+
+        if(ClickUtils.ButtonContinuousClick()){
+            return;
+        }
+
+        switch (v.getId()){
+
+             /*pop  add*/
             case R.id.linAddPhoto:
                 popCreateAdd.dismiss();
-
                 addPicByFast();
-
                 break;
 
             case R.id.linAddVideo:
                 popCreateAdd.dismiss();
-
                 addVideo();
-
                 break;
+
+            /*pop  set*/
+            case R.id.tvSort:
+                popCreationSet.dismiss();
+                changeItemClick();
+                break;
+
+            case R.id.tvSelectPreview:
+                popCreationSet.dismiss();
+                selectPreviewClick();
+                break;
+
+            case R.id.tvSetAudio:
+                popCreationSet.dismiss();
+                setAudioMode(currentAudioMode);
+                popCreateAudio.show(rBackground);
+                if (audioList == null || audioList.size() == 0) {
+                    doGetSettings();
+                }
+                break;
+
+
 
 
         }
 
     }
+
+    @Override
+    public void OnDismiss() {
+
+        if(popCreateAdd!=null && popCreateAdd.getPopupWindow().isShowing()){
+
+            popCreateAdd.dismiss();
+        }
+
+        if(popCreationSet!=null && popCreationSet.getPopupWindow().isShowing()){
+            popCreationSet.dismiss();
+        }
+
+    }
+
 
 
     public String getAlbum_id() {

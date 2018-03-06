@@ -133,7 +133,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/linToExchangeList"
             android:layout_width="match_parent"

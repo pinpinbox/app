@@ -42,6 +42,7 @@ import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -93,10 +94,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by kevin9594 on 2016/12/26.
  */
-public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickListener {
+public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickListener, ClickDragDismissListener.ActionUpListener {
 
     private Activity mActivity;
     //
+    private PopupCustom popSelectShare, popMore;
     private PopPicker popPicker;
     private PopBoard board;
     private ItemAlbum itemAlbum;
@@ -417,73 +419,23 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     private void selectShareMode() {
 
-        final PopupCustom p = new PopupCustom(mActivity);
-        p.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
+        popSelectShare = new PopupCustom(mActivity);
+        popSelectShare.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvShareFB = (TextView) p.getPopupView().findViewById(R.id.tvShareFB);
-        TextView tvShare = (TextView) p.getPopupView().findViewById(R.id.tvShare);
+        TextView tvShareFB = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
+        TextView tvShare = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShare);
 
-        TextUtility.setBold((TextView) p.getPopupView().findViewById(R.id.tvTitle), true);
+        TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
         TextUtility.setBold(tvShareFB, true);
         TextUtility.setBold(tvShare, true);
 
-        tvShareFB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.getPopupWindow().dismiss();
+        View vContents = popSelectShare.getPopupView().findViewById(R.id.linContent);
 
-                if (!isFBShareComplate) {
-
-                          /*設置facebook api*/
-                    FacebookSdk.sdkInitialize(getApplicationContext());
-                    callbackManager = CallbackManager.Factory.create();
-
-                       /*設置facebook share api*/
-                    shareDialog = new ShareDialog(mActivity);
-                    shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-
-                        @Override
-                        public void onSuccess(Sharer.Result result) {
-                            doShareTask();
-                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onSuccess");
-                        }
-
-                        @Override
-                        public void onCancel() {
-                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onCancel");
-                        }
-
-                        @Override
-                        public void onError(FacebookException error) {
-                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onError");
-                        }
-                    });
-
-                    isFBShareComplate = true;
-                }
-
-                taskShare();
-            }
-        });
-
-        tvShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
+        tvShareFB.setOnTouchListener(new ClickDragDismissListener(vContents, this));
+        tvShare.setOnTouchListener(new ClickDragDismissListener(vContents, this));
 
 
-                p.getPopupWindow().dismiss();
-                systemShare();
-            }
-        });
-
-        p.show((RelativeLayout) findViewById(R.id.rBackground));
+        popSelectShare.show((RelativeLayout) findViewById(R.id.rBackground));
 
 
     }
@@ -625,7 +577,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 //        },500);
 
 
-
         popPicker.show((RelativeLayout) findViewById(R.id.rBackground));
 
     }
@@ -722,6 +673,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         }
     }
+
 
     private class CloseClick implements View.OnClickListener {
 
@@ -1471,7 +1423,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             try {
 
 
-                HashMap<String, String>map = new HashMap<>();
+                HashMap<String, String> map = new HashMap<>();
                 map.put(Key.type, Value.album);
                 map.put(Key.type_id, album_id);
 
@@ -1671,11 +1623,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 }
 
 
-
-
-                if(url==null || url.equals("")|| url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -1690,9 +1640,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         }
                     });
                 }
-
-
-
 
 
             } else if (p83Result.equals("2")) {
@@ -2397,6 +2344,114 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     }
 
 
+    @Override
+    public void OnClick(View v) {
+        if (ClickUtils.ButtonContinuousClick()) {
+            return;
+        }
+
+        switch (v.getId()) {
+
+            case R.id.tvShareFB:
+
+                popSelectShare.getPopupWindow().dismiss();
+
+                if (!isFBShareComplate) {
+
+                          /*設置facebook api*/
+                    FacebookSdk.sdkInitialize(getApplicationContext());
+                    callbackManager = CallbackManager.Factory.create();
+
+                       /*設置facebook share api*/
+                    shareDialog = new ShareDialog(mActivity);
+                    shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+
+                        @Override
+                        public void onSuccess(Sharer.Result result) {
+                            doShareTask();
+                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onSuccess");
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onCancel");
+                        }
+
+                        @Override
+                        public void onError(FacebookException error) {
+                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onError");
+                        }
+                    });
+
+                    isFBShareComplate = true;
+                }
+
+                taskShare();
+
+
+                break;
+
+            case R.id.tvShare:
+
+                popSelectShare.getPopupWindow().dismiss();
+                systemShare();
+
+                break;
+
+
+            case R.id.linEditWork:
+                popMore.dismiss();
+                toCreation();
+                break;
+
+            case R.id.linEditInfo:
+
+                popMore.dismiss();
+                toAlbumInfo();
+                
+                break;
+
+            case R.id.linCollect:
+
+                if(!itemAlbum.isOwn()) {
+                    popMore.dismiss();
+                    FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
+                    collectAlbum();
+                }
+
+                break;
+
+            case R.id.linShare:
+                popMore.dismiss();
+                FlurryUtil.onEvent(FlurryKey.albuminfo_click_share);
+                share();
+                break;
+
+            case R.id.linReport:
+                popMore.dismiss();
+                report();
+                break;
+
+
+        }
+
+    }
+
+    @Override
+    public void OnDismiss() {
+
+        if (popSelectShare != null && popSelectShare.getPopupWindow().isShowing()) {
+            popSelectShare.getPopupWindow().dismiss();
+        }
+
+        if (popMore != null && popMore.getPopupWindow().isShowing()) {
+            popMore.getPopupWindow().dismiss();
+        }
+
+
+    }
+
+
     /*click*/
     private void collectAlbum() {
 
@@ -2490,98 +2545,37 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     /*click*/
     private void showMore() {
 
-        final PopupCustom p = new PopupCustom(mActivity);
-        p.setPopup(R.layout.pop_2_0_0_albuminfo_more, R.style.pinpinbox_popupAnimation_bottom);
-        View v = p.getPopupView();
+        popMore = new PopupCustom(mActivity);
+        popMore.setPopup(R.layout.pop_2_0_0_albuminfo_more, R.style.pinpinbox_popupAnimation_bottom);
+        View v = popMore.getPopupView();
 
 
-       /*20171114*/
         LinearLayout linEditContent = (LinearLayout) v.findViewById(R.id.linEditContent);
+
         LinearLayout linEditWork = (LinearLayout) v.findViewById(R.id.linEditWork);
         LinearLayout linEditInfo = (LinearLayout) v.findViewById(R.id.linEditInfo);
-
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvEditWork), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvEditInfo), true);
-
-        linEditWork.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-
-                p.dismiss();
-
-                toCreation();
-
-            }
-        });
-
-        linEditInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-
-                p.dismiss();
-
-                toAlbumInfo();
-
-            }
-        });
-        /* *******************************************************************/
-
 
         LinearLayout linCollect = (LinearLayout) v.findViewById(R.id.linCollect);
         LinearLayout linShare = (LinearLayout) v.findViewById(R.id.linShare);
         LinearLayout linReport = (LinearLayout) v.findViewById(R.id.linReport);
 
-        TextView tvCollect = (TextView) v.findViewById(R.id.tvCollect);
+        TextUtility.setBold((TextView) v.findViewById(R.id.tvEditWork), true);
+        TextUtility.setBold((TextView) v.findViewById(R.id.tvEditInfo), true);
 
-        TextUtility.setBold(tvCollect, true);
         TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
         TextUtility.setBold((TextView) v.findViewById(R.id.tvShare), true);
         TextUtility.setBold((TextView) v.findViewById(R.id.tvReport), true);
 
-        linCollect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-                p.dismiss();
-                FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
-                collectAlbum();
+        TextView tvCollect = (TextView) v.findViewById(R.id.tvCollect);
+        TextUtility.setBold(tvCollect, true);
 
-            }
-        });
+        View vContent = v.findViewById(R.id.linContent);
 
-        linShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-
-                p.dismiss();
-                FlurryUtil.onEvent(FlurryKey.albuminfo_click_share);
-                share();
-            }
-        });
-
-        linReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-                p.dismiss();
-                report();
-            }
-        });
+        linEditWork.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+        linEditInfo.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+        linCollect.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+        linShare.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+        linReport.setOnTouchListener(new ClickDragDismissListener(vContent, this));
 
 
         if (id.equals(itemAlbum.getUser_id() + "")) {
@@ -2614,7 +2608,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     tvSponsorMore.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            p.dismiss();
+                            popMore.dismiss();
 
                             DialogV2Custom d = new DialogV2Custom(mActivity);
                             d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point);
@@ -2635,7 +2629,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
 
 
-        p.show((RelativeLayout) findViewById(R.id.rBackground));
+        popMore.show((RelativeLayout) findViewById(R.id.rBackground));
 
     }
 

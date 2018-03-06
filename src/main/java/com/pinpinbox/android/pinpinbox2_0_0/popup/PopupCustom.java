@@ -7,11 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Handler;
-import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -20,11 +17,8 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.SizeUtils;
-import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import eightbitlab.com.blurview.BlurView;
@@ -175,53 +169,6 @@ public class PopupCustom {
 
         /*添加置background*/
         rBackground.addView(blurView);
-
-
-    }
-
-    public void setScrollDismiss(final View vContent) {
-
-        this.vContent = vContent;
-
-
-        vPopup.setOnTouchListener(new View.OnTouchListener() {
-
-            float downY;
-            float moveY;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-
-                        downY = event.getRawY();
-
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-
-                        moveY = event.getRawY();//手指所在位置
-
-                        MyLog.Set("e", PopupCustom.class, "moveY => " + moveY);
-
-                        if(moveY>=downY){
-                            vPopup.setTranslationY(moveY - downY);
-
-                        }
-
-
-                        break;
-                    case MotionEvent.ACTION_UP:
-
-                        vPopup.animate()
-                                .translationY(0f)
-                                .start();
-
-
-                        break;
-                }
-                return true;
-            }
-        });
 
 
     }

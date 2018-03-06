@@ -23,9 +23,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -71,6 +69,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerReaderAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GiftAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
@@ -121,9 +120,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import pl.droidsonroids.gif.AnimationListener;
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
 import uk.breedrapps.vimeoextractor.OnVimeoExtractionListener;
 import uk.breedrapps.vimeoextractor.VimeoExtractor;
 import uk.breedrapps.vimeoextractor.VimeoVideo;
@@ -132,7 +128,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by vmage on 2017/2/21.
  */
-public class Reader2Activity extends DraggerActivity implements View.OnClickListener, LocationListener {
+public class Reader2Activity extends DraggerActivity implements View.OnClickListener, LocationListener, ClickDragDismissListener.ActionUpListener {
 
     private Activity mActivity;
     private ShareDialog shareDialog;
@@ -142,7 +138,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private LocationManager mLocManager;
     private Location mLocation = null;
     private GoogleMap mapAlbum, mapPhoto;
-    private PopupCustom popInfo, popPageMap;
+    private PopupCustom popInfo, popPageMap, popMore;
     private PopBoard board;
 
     private GetAlbumInfoTask getAlbumInfoTask;
@@ -2119,44 +2115,52 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void showMore() {
 
-        final PopupCustom p = new PopupCustom(mActivity);
-        p.setPopup(R.layout.pop_2_0_0_albuminfo_more_in_reader, R.style.pinpinbox_popupAnimation_bottom);
-        View v = p.getPopupView();
+        popMore = new PopupCustom(mActivity);
+        popMore.setPopup(R.layout.pop_2_0_0_albuminfo_more_in_reader, R.style.pinpinbox_popupAnimation_bottom);
 
-        LinearLayout linCollect = (LinearLayout) v.findViewById(R.id.linCollect);
-        LinearLayout linShare = (LinearLayout) v.findViewById(R.id.linShare);
-        LinearLayout linInfo = (LinearLayout) v.findViewById(R.id.linInfo);
 
-        TextView tvCollect = (TextView) v.findViewById(R.id.tvCollect);
+        LinearLayout linCollect = (LinearLayout) popMore.getPopupView().findViewById(R.id.linCollect);
+        LinearLayout linShare = (LinearLayout) popMore.getPopupView().findViewById(R.id.linShare);
+        LinearLayout linInfo = (LinearLayout) popMore.getPopupView().findViewById(R.id.linInfo);
+
+        TextView tvCollect = (TextView) popMore.getPopupView().findViewById(R.id.tvCollect);
 
         TextUtility.setBold(tvCollect, true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvShare), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvInfo), true);
+        TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvTitle), true);
+        TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvShare), true);
+        TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvInfo), true);
 
-        linCollect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p.dismiss();
-                checkToCollectAlbum(itemAlbum.getPoint() + "");
-            }
-        });
 
-        linShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p.dismiss();
-                share();
-            }
-        });
 
-        linInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p.dismiss();
-                popInfo.show((RelativeLayout) findViewById(R.id.rBackground));
-            }
-        });
+        View vContent = popMore.getPopupView().findViewById(R.id.linContent);
+
+        linCollect.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+        linShare.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+        linInfo.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+
+//        linCollect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popMore.getPopupWindow().dismiss();
+//                checkToCollectAlbum(itemAlbum.getPoint() + "");
+//            }
+//        });
+//
+//        linShare.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popMore.getPopupWindow().dismiss();
+//                share();
+//            }
+//        });
+//
+//        linInfo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popMore.getPopupWindow().dismiss();
+//                popInfo.show((RelativeLayout) findViewById(R.id.rBackground));
+//            }
+//        });
 
         if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
 
@@ -2178,12 +2182,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_itemtype_collect_need_sponsor) + itemAlbum.getPoint() + "P)");
 
-                    TextView tvSponsorMore = (TextView) v.findViewById(R.id.tvSponsorMore);
+                    TextView tvSponsorMore = (TextView) popMore.getPopupView().findViewById(R.id.tvSponsorMore);
                     tvSponsorMore.setVisibility(View.VISIBLE);
                     tvSponsorMore.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            p.dismiss();
+                            popMore.getPopupWindow().dismiss();
                             vpReader.setCurrentItem(photoContentsList.size() - 1);
                         }
                     });
@@ -2198,7 +2202,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
             }
         }
-        p.show((RelativeLayout) findViewById(R.id.rBackground));
+        popMore.show((RelativeLayout) findViewById(R.id.rBackground));
 
     }
 
@@ -2566,6 +2570,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     @Override
                     public void Success() {
                         dissmissLoading();
+
+                        itemAlbum.setOwn(true);
 
                         if (itemAlbum.getPoint() > 0) {
 //                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
@@ -4025,6 +4031,54 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             case R.id.closeMapImg:
                 popPageMap.dismiss();
                 break;
+        }
+
+    }
+
+    @Override
+    public void OnClick(View v) {
+
+
+        if(ClickUtils.ButtonContinuousClick()){
+            return;
+        }
+
+
+        switch (v.getId()){
+
+            case R.id.linCollect:
+
+                if(!itemAlbum.isOwn()) {
+                    popMore.dismiss();
+                    checkToCollectAlbum(itemAlbum.getPoint() + "");
+                }
+
+
+                break;
+
+            case R.id.linShare:
+                popMore.dismiss();
+                share();
+                break;
+
+            case R.id.linInfo:
+                popMore.dismiss();
+                popInfo.show((RelativeLayout) findViewById(R.id.rBackground));
+                break;
+
+
+        }
+
+
+
+
+    }
+
+    @Override
+    public void OnDismiss() {
+
+        if(popMore!=null && popMore.getPopupWindow().isShowing()){
+            popMore.dismiss();
         }
 
     }
