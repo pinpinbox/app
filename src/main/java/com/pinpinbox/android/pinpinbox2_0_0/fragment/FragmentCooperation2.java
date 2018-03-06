@@ -19,12 +19,15 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
@@ -84,11 +87,12 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by vmage on 2017/1/6.
  */
-public class FragmentCooperation2 extends Fragment implements OnDetailClickListener {
+public class FragmentCooperation2 extends Fragment implements OnDetailClickListener, ClickDragDismissListener.ActionUpListener {
 
     private SharedPreferences getdata;
     private ShareDialog shareDialog;
     private LoadingAnimation loading;
+    private PopupCustom popSelectShare;
 
     private GetAlbumTask getAlbumTask;
     private MoreDataTask moreDataTask;
@@ -454,40 +458,24 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
     private void selectShareMode() {
 
 
-        final PopupCustom p = new PopupCustom(getActivity());
-        p.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
+        popSelectShare = new PopupCustom(getActivity());
+        popSelectShare.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvShareFB = (TextView) p.getPopupView().findViewById(R.id.tvShareFB);
-        TextView tvShare = (TextView) p.getPopupView().findViewById(R.id.tvShare);
+        TextView tvShareFB = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
+        TextView tvShare = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShare);
 
+        TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
         TextUtility.setBold(tvShareFB, true);
         TextUtility.setBold(tvShare, true);
-        TextUtility.setBold((TextView) p.getPopupView().findViewById(R.id.tvTitle), true);
 
-        tvShareFB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.getPopupWindow().dismiss();
-                taskShare();
-            }
-        });
+        View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);
 
-        tvShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.getPopupWindow().dismiss();
-                systemShare();
-            }
-        });
+        tvShareFB.setOnTouchListener(new ClickDragDismissListener(vContents, this));
+        tvShare.setOnTouchListener(new ClickDragDismissListener(vContents, this));
 
 
-        p.show(((MyCollect2Activity) getActivity()).getBackground());
+
+        popSelectShare.show(((MyCollect2Activity) getActivity()).getBackground());
 
 
     }
@@ -667,6 +655,7 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         shareTask = new ShareTask(clickPosition);
         shareTask.execute();
     }
+
 
 
     private class GetAlbumTask extends AsyncTask<Void, Void, Object> {
@@ -1400,6 +1389,41 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
 
     }
+
+
+    @Override
+    public void OnClick(View v) {
+        if (ClickUtils.ButtonContinuousClick()) {
+            return;
+        }
+
+        switch (v.getId()){
+
+            case R.id.tvShareFB:
+                popSelectShare.dismiss();
+                taskShare();
+                break;
+
+            case R.id.tvShare:
+
+                popSelectShare.dismiss();
+                systemShare();
+
+                break;
+
+        }
+
+
+
+    }
+
+    @Override
+    public void OnDismiss() {
+        if (popSelectShare != null && popSelectShare.getPopupWindow().isShowing()) {
+            popSelectShare.dismiss();
+        }
+    }
+
 
     @Override
     public void onPause() {

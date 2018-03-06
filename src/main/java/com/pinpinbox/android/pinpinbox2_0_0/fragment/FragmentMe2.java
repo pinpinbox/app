@@ -938,7 +938,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 //            linToBuyPoint.setOnClickListener(this);
 //            linToExchangeList.setOnClickListener(this);
 //            linSettings.setOnClickListener(this);
-            View vContent = popMenu.getPopupView().findViewById(R.id.linContent);
+            View vContent = popMenu.getPopupView().findViewById(R.id.linBackground);
 
             linToEditProfile.setOnTouchListener(new ClickDragDismissListener(vContent, this));
             linToWorkManage.setOnTouchListener(new ClickDragDismissListener(vContent, this));

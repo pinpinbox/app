@@ -25,6 +25,7 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
@@ -87,11 +88,12 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by vmage on 2017/1/6.
  */
-public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener {
+public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener, ClickDragDismissListener.ActionUpListener  {
 
     private SharedPreferences getdata;
     private ShareDialog shareDialog;
     private LoadingAnimation loading;
+    private PopupCustom popSelectShare, popEdit;
 
     private GetAlbumTask getAlbumTask;
     private MoreDataTask moreDataTask;
@@ -495,41 +497,27 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
     }
 
     private void selectShareMode() {
-        final PopupCustom p = new PopupCustom(getActivity());
-        p.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvShareFB = (TextView) p.getPopupView().findViewById(R.id.tvShareFB);
-        TextView tvShare = (TextView) p.getPopupView().findViewById(R.id.tvShare);
 
+        popSelectShare = new PopupCustom(getActivity());
+        popSelectShare.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
+
+        TextView tvShareFB = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
+        TextView tvShare = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShare);
+
+        TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
         TextUtility.setBold(tvShareFB, true);
         TextUtility.setBold(tvShare, true);
-        TextUtility.setBold((TextView) p.getPopupView().findViewById(R.id.tvTitle), true);
+
+        View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);
+
+        tvShareFB.setOnTouchListener(new ClickDragDismissListener(vContents, this));
+        tvShare.setOnTouchListener(new ClickDragDismissListener(vContents, this));
 
 
-        tvShareFB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.getPopupWindow().dismiss();
-                taskShare();
-            }
-        });
 
-        tvShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.getPopupWindow().dismiss();
-                systemShare();
-            }
-        });
+        popSelectShare.show(((MyCollect2Activity) getActivity()).getBackground());
 
-
-        p.show(((MyCollect2Activity) getActivity()).getBackground());
 
     }
 
@@ -603,6 +591,43 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
         adapter.notifyItemChanged(clickPosition);
 
+
+    }
+
+    private void toCreation(){
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, (String) p17arraylist.get(clickPosition).get(Key.album_id));
+        bundle.putString(Key.identity, (String) p17arraylist.get(clickPosition).get(Key.identity));
+        String strTemplate_id = (String) p17arraylist.get(clickPosition).get(Key.template_id);
+        if (strTemplate_id.equals("0")) {
+            bundle.putInt(Key.create_mode, 0);
+        } else {
+            bundle.putInt(Key.create_mode, 1);
+        }
+
+        Intent intent = new Intent(getActivity(), Creation2Activity.class);
+        intent.putExtras(bundle);
+        getActivity().startActivity(intent);
+        ActivityAnim.StartAnim(getActivity());
+    }
+
+    private void toAlbumSettings(){
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, (String) p17arraylist.get(clickPosition).get(Key.album_id));
+        bundle.putString(Key.identity, (String) p17arraylist.get(clickPosition).get(Key.identity));
+
+
+        if (p17arraylist.get(clickPosition).get("isAudio") == null) {
+            bundle.putBoolean(Key.audio, false);
+        } else {
+            bundle.putBoolean(Key.audio, (boolean) p17arraylist.get(clickPosition).get("isAudio"));
+        }
+
+
+        Intent intent = new Intent(getActivity(), AlbumSettings2Activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        ActivityAnim.StartAnim(getActivity());
 
     }
 
@@ -777,6 +802,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
         fastCreateTask = new FastCreateTask();
         fastCreateTask.execute();
     }
+
 
 
     private class GetAlbumTask extends AsyncTask<Void, Void, Object> {
@@ -1741,86 +1767,28 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
         clickPosition = position;
 
-        final PopupCustom p = new PopupCustom(getActivity());
-        p.setPopup(R.layout.pop_2_0_0_select_edit_album, R.style.pinpinbox_popupAnimation_bottom);
-        p.show(((MyCollect2Activity) getActivity()).getBackground());
+        if(popEdit==null){
+            popEdit = new PopupCustom(getActivity());
+            popEdit.setPopup(R.layout.pop_2_0_0_select_edit_album, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvEditAlbum = (TextView) p.getPopupView().findViewById(R.id.tvEditAlbum);
-        TextView tvEditAlbumInfo = (TextView) p.getPopupView().findViewById(R.id.tvEditAlbumInfo);
+            TextView tvEditAlbum = (TextView) popEdit.getPopupView().findViewById(R.id.tvEditAlbum);
+            TextView tvEditAlbumInfo = (TextView) popEdit.getPopupView().findViewById(R.id.tvEditAlbumInfo);
 
-        TextUtility.setBold(tvEditAlbum, true);
-        TextUtility.setBold(tvEditAlbumInfo, true);
+            TextUtility.setBold(tvEditAlbum, true);
+            TextUtility.setBold(tvEditAlbumInfo, true);
+            TextUtility.setBold((TextView) popEdit.getPopupView().findViewById(R.id.tvTitle), true);
 
-        TextUtility.setBold((TextView) p.getPopupView().findViewById(R.id.tvTitle), true);
+            View vContent = popEdit.getPopupView().findViewById(R.id.linBackground);
 
+            tvEditAlbum.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+            tvEditAlbumInfo.setOnTouchListener(new ClickDragDismissListener(vContent, this));
 
-        tvEditAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.dismiss();
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, (String) p17arraylist.get(position).get(Key.album_id));
-                bundle.putString(Key.identity, (String) p17arraylist.get(position).get(Key.identity));
-                String strTemplate_id = (String) p17arraylist.get(position).get(Key.template_id);
-                if (strTemplate_id.equals("0")) {
-                    bundle.putInt(Key.create_mode, 0);
-                } else {
-                    bundle.putInt(Key.create_mode, 1);
-                }
+        }
 
-                Intent intent = new Intent(getActivity(), Creation2Activity.class);
-                intent.putExtras(bundle);
-                getActivity().startActivity(intent);
-                ActivityAnim.StartAnim(getActivity());
-            }
-        });
-
-        tvEditAlbumInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.dismiss();
-
-                Bundle bundle = new Bundle();
-                bundle.putString(Key.album_id, (String) p17arraylist.get(position).get(Key.album_id));
-                bundle.putString(Key.identity, (String) p17arraylist.get(position).get(Key.identity));
-
-//                String cover = (String) p17arraylist.get(position).get("albumcover");
-//
-//                MyLog.Set("d", FragmentMyUpLoad2.class, "cover => " + cover);
-//
-//                if (cover != null && !cover.equals("") && !cover.equals("null")) {
-//
-//                    MyLog.Set("d", FragmentMyUpLoad2.class, "cover is exist");
-//
-//                    bundle.putBoolean(Key.cover, true);
-//                } else {
-//
-//                    MyLog.Set("d", FragmentMyUpLoad2.class, "cover is no exist");
-//
-//                    bundle.putBoolean(Key.cover, false);
-//                }
+        popEdit.show(((MyCollect2Activity) getActivity()).getBackground());
 
 
-                if (p17arraylist.get(position).get("isAudio") == null) {
-                    bundle.putBoolean(Key.audio, false);
-                } else {
-                    bundle.putBoolean(Key.audio, (boolean) p17arraylist.get(position).get("isAudio"));
-                }
 
-
-                Intent intent = new Intent(getActivity(), AlbumSettings2Activity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                ActivityAnim.StartAnim(getActivity());
-
-            }
-        });
 
     }
 
@@ -1960,6 +1928,60 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             downLoadService.addAlbum(map);
         }
 
+
+    }
+
+    @Override
+    public void OnClick(View v) {
+        if (ClickUtils.ButtonContinuousClick()) {
+            return;
+        }
+
+        switch (v.getId()){
+
+            case R.id.tvShareFB:
+                popSelectShare.dismiss();
+                taskShare();
+                break;
+
+            case R.id.tvShare:
+
+                popSelectShare.dismiss();
+                systemShare();
+
+                break;
+
+
+            case R.id.tvEditAlbum:
+
+                popEdit.dismiss();
+                toCreation();
+
+                break;
+
+            case R.id.tvEditAlbumInfo:
+
+                popEdit.dismiss();
+                toAlbumSettings();
+
+                break;
+
+
+        }
+
+
+
+    }
+
+    @Override
+    public void OnDismiss() {
+        if (popSelectShare != null && popSelectShare.getPopupWindow().isShowing()) {
+            popSelectShare.dismiss();
+        }
+
+        if (popEdit != null && popEdit.getPopupWindow().isShowing()) {
+            popEdit.dismiss();
+        }
 
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linContent"
+    android:id="@+id/linBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,6 +11,7 @@
         style="@style/ppb200_title_pop_second"
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
         android:text="@string/pinpinbox_2_0_0_pop_title_where_to_go" />
 
 

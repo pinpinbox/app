@@ -111,7 +111,7 @@
     </style>
 
     <style name="ppb200_title_pop_second" parent="android:TextAppearance.Widget.TextView">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:letterSpacing">0.1</item>

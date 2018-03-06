@@ -152,6 +152,8 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
         super.onPostExecute(obj);
         callBack.Post();
 
+        result = ResultType.TIMEOUT;
+
 
         switch (result) {
 

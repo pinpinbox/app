@@ -61,8 +61,6 @@ public class Event2Activity extends DraggerActivity implements View.OnClickListe
 
     private Activity mActivity;
 
-    private PopupCustom popContributeWay;
-
     private JSONArray eventTemplateArray;
 
     private GetEventTask getEventTask;

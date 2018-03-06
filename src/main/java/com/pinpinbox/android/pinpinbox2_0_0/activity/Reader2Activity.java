@@ -138,7 +138,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private LocationManager mLocManager;
     private Location mLocation = null;
     private GoogleMap mapAlbum, mapPhoto;
-    private PopupCustom popInfo, popPageMap, popMore;
+    private PopupCustom popInfo, popPageMap, popMore, popSelectShare;
     private PopBoard board;
 
     private GetAlbumInfoTask getAlbumInfoTask;
@@ -1593,6 +1593,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     @Override
                     public void TimeOut() {
 
+                        MyLog.Set("e", mActivity.getClass(), "-----888888");
+
                         linTimeout.setVisibility(View.VISIBLE);
                         ViewControl.AlphaTo1(linTimeout);
 
@@ -2132,7 +2134,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
 
-        View vContent = popMore.getPopupView().findViewById(R.id.linContent);
+        View vContent = popMore.getPopupView().findViewById(R.id.linBackground);
 
         linCollect.setOnTouchListener(new ClickDragDismissListener(vContent, this));
         linShare.setOnTouchListener(new ClickDragDismissListener(vContent, this));
@@ -2243,74 +2245,24 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void selectShareMode() {
 
-        final PopupCustom p = new PopupCustom(mActivity);
-        p.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
+        popSelectShare = new PopupCustom(mActivity);
+        popSelectShare.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvShareFB = (TextView) p.getPopupView().findViewById(R.id.tvShareFB);
-        TextView tvShare = (TextView) p.getPopupView().findViewById(R.id.tvShare);
+        TextView tvShareFB = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
+        TextView tvShare = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShare);
 
-        TextUtility.setBold((TextView) p.getPopupView().findViewById(R.id.tvTitle), true);
+        TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
         TextUtility.setBold(tvShareFB, true);
         TextUtility.setBold(tvShare, true);
 
-        tvShareFB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.getPopupWindow().dismiss();
+
+        View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);
+
+        tvShareFB.setOnTouchListener(new ClickDragDismissListener(vContents, this));
+        tvShare.setOnTouchListener(new ClickDragDismissListener(vContents, this));
 
 
-                if (!isFBShareComplate) {
-
-                          /*設置facebook api*/
-                    FacebookSdk.sdkInitialize(getApplicationContext());
-                    callbackManager = CallbackManager.Factory.create();
-
-
-                       /*設置facebook share api*/
-                    shareDialog = new ShareDialog(mActivity);
-                    shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-
-                        @Override
-                        public void onSuccess(Sharer.Result result) {
-                            doShareTask();
-                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onSuccess");
-                        }
-
-                        @Override
-                        public void onCancel() {
-                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onCancel");
-                        }
-
-                        @Override
-                        public void onError(FacebookException error) {
-                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onError");
-                        }
-                    });
-
-                    isFBShareComplate = true;
-
-                }
-
-
-                taskShare();
-            }
-        });
-
-        tvShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-                p.getPopupWindow().dismiss();
-                systemShare();
-            }
-        });
-
-        p.show((RelativeLayout) findViewById(R.id.rBackground));
+        popSelectShare.show((RelativeLayout) findViewById(R.id.rBackground));
 
 
     }
@@ -4053,7 +4005,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     checkToCollectAlbum(itemAlbum.getPoint() + "");
                 }
 
-
                 break;
 
             case R.id.linShare:
@@ -4064,6 +4015,50 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             case R.id.linInfo:
                 popMore.dismiss();
                 popInfo.show((RelativeLayout) findViewById(R.id.rBackground));
+                break;
+
+
+
+
+            case R.id.tvShareFB:
+                popSelectShare.dismiss();
+                if (!isFBShareComplate) {
+
+                          /*設置facebook api*/
+                    FacebookSdk.sdkInitialize(getApplicationContext());
+                    callbackManager = CallbackManager.Factory.create();
+
+
+                       /*設置facebook share api*/
+                    shareDialog = new ShareDialog(mActivity);
+                    shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+
+                        @Override
+                        public void onSuccess(Sharer.Result result) {
+                            doShareTask();
+                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onSuccess");
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onCancel");
+                        }
+
+                        @Override
+                        public void onError(FacebookException error) {
+                            MyLog.Set("d", mActivity.getClass(), "shareDialog => onError");
+                        }
+                    });
+                    isFBShareComplate = true;
+                }
+
+                taskShare();
+                break;
+
+            case R.id.tvShare:
+                popSelectShare.dismiss();
+                systemShare();
+
                 break;
 
 
@@ -4079,6 +4074,10 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         if(popMore!=null && popMore.getPopupWindow().isShowing()){
             popMore.dismiss();
+        }
+
+        if(popSelectShare!=null && popSelectShare.getPopupWindow().isShowing()){
+            popSelectShare.dismiss();
         }
 
     }

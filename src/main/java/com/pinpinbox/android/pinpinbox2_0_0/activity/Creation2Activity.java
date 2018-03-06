@@ -561,6 +561,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 popCreatePreview.dismiss();
             }
         });
+//        View vContentPreview = popCreatePreview.getPopupView().findViewById(R.id.linBackground);
+//        new ClickDragDismissListener(vContentPreview, this);
 
         /**/
         popCreateSort = new PopupCustom(mActivity);
@@ -577,6 +579,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 popCreateSort.dismiss();
             }
         });
+//        View vContentSort = popCreatePreview.getPopupView().findViewById(R.id.linBackground);
+//        new ClickDragDismissListener(vContentSort, this);
 
         /**/
         popCreationSet = new PopupCustom(mActivity);
@@ -591,7 +595,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold(tvSetAudio, true);
 
 
-        View vContentSet = popCreationSet.getPopupView().findViewById(R.id.linContent);
+        View vContentSet = popCreationSet.getPopupView().findViewById(R.id.linBackground);
 
         tvSort.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
         tvSelectPreview.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
@@ -611,7 +615,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvVideo), true);
         TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle), true);
 
-        View vContentAdd = popCreateAdd.getPopupView().findViewById(R.id.linContent);
+        View vContentAdd = popCreateAdd.getPopupView().findViewById(R.id.linBackground);
 
         linAddPhoto.setOnTouchListener(new ClickDragDismissListener(vContentAdd, this));
         linAddVideo.setOnTouchListener(new ClickDragDismissListener(vContentAdd, this));
@@ -729,13 +733,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 mpBackground = null;
             }
         });
-//        popCreateAudio.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//                popCreateAudio.resetBackground();
-//
-//            }
-//        });
+
+//        View vContentAudio = popCreateAudio.getPopupView().findViewById(R.id.linBackground);
+//        new ClickDragDismissListener(vContentAudio, this);
 
 
     }
@@ -1249,28 +1249,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     /*單頁說明*/
     private void addDescription() {
-
-//        addDescriptionImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                final DialogCreationDescription d = new DialogCreationDescription(mActivity);
-//                d.getEtDescription().setText(strDescription);
-//                d.getConfirmImg().setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                        d.getDialog().dismiss();
-//                        MyLog.Set("d", mActivity.getClass(), "準備傳遞說明");
-//                        strDescription = d.getEtDescription().getText().toString();
-//                        doDescription(strDescription);
-//
-//                    }
-//                });
-//
-//
-//            }
-//        });
 
         tvAddDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -4894,6 +4872,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
 
+
+
         }
 
     }
@@ -4908,6 +4888,19 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         if(popCreationSet!=null && popCreationSet.getPopupWindow().isShowing()){
             popCreationSet.dismiss();
+        }
+
+
+        if(popCreatePreview!=null && popCreatePreview.getPopupWindow().isShowing()){
+            popCreatePreview.dismiss();
+        }
+
+        if(popCreateSort!=null && popCreateSort.getPopupWindow().isShowing()){
+            popCreateSort.dismiss();
+        }
+
+        if(popCreateAudio!=null && popCreateAudio.getPopupWindow().isShowing()){
+            popCreateAudio.dismiss();
         }
 
     }

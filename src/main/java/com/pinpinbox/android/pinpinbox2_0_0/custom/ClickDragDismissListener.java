@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 
@@ -34,6 +35,9 @@ public class ClickDragDismissListener implements View.OnTouchListener {
         this.vDrag = vDrag;
         this.actionUpListener = actionUpListener;
 
+//        if (vDrag.getId() == R.id.linBackground) {
+//            vDrag.setOnTouchListener(this);
+//        }
 
     }
 
@@ -47,7 +51,10 @@ public class ClickDragDismissListener implements View.OnTouchListener {
 
                 MyLog.Set("e", PopupCustom.class, "downY => " + downY);
 
-                v.setPressed(true);
+                if (v.getId() != R.id.linBackground) {
+                    v.setPressed(true);
+                }
+
 
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -76,7 +83,7 @@ public class ClickDragDismissListener implements View.OnTouchListener {
                     if (moveY - downY - safeClickArea > vDrag.getHeight() / 4) {
                         MyLog.Set("d", this.getClass(), "大於vDrag.getHeight()/4");
                         doDissmiss = true;
-                    }else {
+                    } else {
                         MyLog.Set("d", this.getClass(), "小於vDrag.getHeight()/4");
                         doDissmiss = false;
                     }

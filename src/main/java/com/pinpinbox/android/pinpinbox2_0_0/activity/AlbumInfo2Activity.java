@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -429,7 +430,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         TextUtility.setBold(tvShareFB, true);
         TextUtility.setBold(tvShare, true);
 
-        View vContents = popSelectShare.getPopupView().findViewById(R.id.linContent);
+        View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);
 
         tvShareFB.setOnTouchListener(new ClickDragDismissListener(vContents, this));
         tvShare.setOnTouchListener(new ClickDragDismissListener(vContents, this));
@@ -2354,8 +2355,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             case R.id.tvShareFB:
 
-                popSelectShare.getPopupWindow().dismiss();
-
+                popSelectShare.dismiss();
                 if (!isFBShareComplate) {
 
                           /*設置facebook api*/
@@ -2393,7 +2393,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             case R.id.tvShare:
 
-                popSelectShare.getPopupWindow().dismiss();
+                popSelectShare.dismiss();
                 systemShare();
 
                 break;
@@ -2441,11 +2441,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     public void OnDismiss() {
 
         if (popSelectShare != null && popSelectShare.getPopupWindow().isShowing()) {
-            popSelectShare.getPopupWindow().dismiss();
+            popSelectShare.dismiss();
         }
 
         if (popMore != null && popMore.getPopupWindow().isShowing()) {
-            popMore.getPopupWindow().dismiss();
+            popMore.dismiss();
         }
 
 
@@ -2569,7 +2569,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         TextView tvCollect = (TextView) v.findViewById(R.id.tvCollect);
         TextUtility.setBold(tvCollect, true);
 
-        View vContent = v.findViewById(R.id.linContent);
+        View vContent = v.findViewById(R.id.linBackground);
 
         linEditWork.setOnTouchListener(new ClickDragDismissListener(vContent, this));
         linEditInfo.setOnTouchListener(new ClickDragDismissListener(vContent, this));

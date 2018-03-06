@@ -9,6 +9,7 @@
         android:id="@+id/tvTitle"
         style="@style/ppb200_title_pop_second"
         android:text=""
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"/>
 

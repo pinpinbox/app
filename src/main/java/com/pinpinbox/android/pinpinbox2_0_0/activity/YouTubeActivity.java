@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -23,7 +24,6 @@ import java.util.regex.Pattern;
  */
 public class YouTubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    private String TAG = "YouTubeActivity";
     static private final String DEVELOPER_KEY = "AIzaSyATCeohA43aiTn-DkMI0ATpLJMiMWMDhdU";
 
     private YouTubePlayer mYouTubePlayer;

@@ -14,10 +14,12 @@ import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
@@ -134,6 +136,32 @@ public class PopupCustom {
 
             }
         });
+
+        if(vPopup instanceof LinearLayout){
+
+            MyLog.Set("e", getClass(), "getChildCount => " + ((LinearLayout)vPopup).getChildCount());
+
+
+            for (int i = 0; i < ((LinearLayout)vPopup).getChildCount(); i++) {
+
+                View v = ((LinearLayout)vPopup).getChildAt(i);
+
+                v.setOnTouchListener(new ClickDragDismissListener(vPopup, new ClickDragDismissListener.ActionUpListener() {
+                    @Override
+                    public void OnClick(View v) {
+
+                    }
+
+                    @Override
+                    public void OnDismiss() {
+                        dismiss();
+                    }
+                }));
+
+            }
+
+        }
+
 
     }
 

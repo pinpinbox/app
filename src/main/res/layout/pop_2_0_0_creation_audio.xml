@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/linContent"
+    android:id="@+id/linBackground"
     android:orientation="vertical">
 
     <TextView
@@ -10,6 +10,7 @@
         style="@style/ppb200_title_pop_second"
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
         android:text="@string/pinpinbox_2_0_0_pop_title_select_audio_type" />
 
 
