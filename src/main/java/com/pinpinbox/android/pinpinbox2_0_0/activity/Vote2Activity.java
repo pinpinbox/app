@@ -83,6 +83,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
     private String strSearch = "";
 
     private int deviceType;
+    private int clickposition = -1;
 
     private boolean isDoingMore = false;
 
@@ -209,6 +210,8 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                 if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
                     return;
                 }
+
+                clickposition = position;
 
 
                 ActivityIntent.toAlbumInfo(
@@ -569,6 +572,15 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         );
 
     }
+
+//    public void changeVoteStatus(boolean vote, String remain){
+//
+//        itemAlbumList.get(clickposition).setHas_voted(vote);
+//        voteAdapter.notifyItemChanged(clickposition);
+//
+//        tvRemaining.setText(remain);
+//
+//    }
 
     private void back() {
         finish();

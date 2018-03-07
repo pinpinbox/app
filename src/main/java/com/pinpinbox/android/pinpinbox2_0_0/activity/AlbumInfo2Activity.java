@@ -1,6 +1,5 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -984,7 +983,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     e.printStackTrace();
                 }
 
-                sendData.put("sign", sign);
+                sendData.put(Key.sign, sign);
 
                 strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P08_RetrieveAlbumProfile, sendData, null);//08
 
@@ -1282,7 +1281,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 //                .bounds(24.0f, 30.0f, 24.0f, 30.0f) //left=24dp,top=30dp,right=24dp,bottom=30dp
                             .change();
 
-
                 }
 
 
@@ -1328,12 +1326,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 ViewControl.AlphaTo1(findViewById(R.id.linAlpha), 200);
 
                 if (rDetail != null) {
-
                     ViewControl.AlphaTo1(rDetail, 200);
-
-
                 }
-
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
