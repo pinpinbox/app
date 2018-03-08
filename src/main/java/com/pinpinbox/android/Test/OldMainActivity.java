@@ -698,7 +698,8 @@ public class OldMainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-//                aaaa++;
+
+              startActivity(  new Intent(OldMainActivity.this, TestGalleryActivity.class));
 
 
             }

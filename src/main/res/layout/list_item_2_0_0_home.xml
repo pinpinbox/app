@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false">
-
+    android:layout_height="match_parent">
+    <!--clipChildren default => true，設置false可超出parent-->
+    <!--clipToPadding也要設定 false-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/ppb200_staggeredgrid_click_padding"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/ppb200_staggeredgrid_click_padding">
 
 
         <!--shadow setting-->
@@ -38,25 +38,25 @@
                 android:padding="@dimen/ppb200_padding_margin_second">
 
                 <LinearLayout
-                    style="@style/ppb200_staggered_type_linear"
                     android:id="@+id/linType"
+                    style="@style/ppb200_staggered_type_linear"
                     android:visibility="gone">
 
                     <ImageView
-                        style="@style/ppb200_staggered_type_icon"
                         android:id="@+id/audioImg"
+                        style="@style/ppb200_staggered_type_icon"
                         android:src="@drawable/ic200_audio_play_dark"
                         android:visibility="gone" />
 
                     <ImageView
-                        style="@style/ppb200_staggered_type_icon"
                         android:id="@+id/videoImg"
+                        style="@style/ppb200_staggered_type_icon"
                         android:src="@drawable/ic200_video_border_dark"
                         android:visibility="gone" />
 
                     <ImageView
-                        style="@style/ppb200_staggered_type_icon"
                         android:id="@+id/slotImg"
+                        style="@style/ppb200_staggered_type_icon"
                         android:src="@drawable/ic200_gift_dark"
                         android:visibility="gone" />
 

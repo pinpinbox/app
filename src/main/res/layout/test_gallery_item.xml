@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <RelativeLayout
+        android:id="@+id/rItemBg"
+        android:layout_width="288dp"
+        android:layout_height="288dp"
+        android:outlineProvider="bounds"
+        android:layout_centerInParent="true"
+        android:elevation="8dp"
+        android:translationZ="12dp">
+
+        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:siBorderAlpha="0"
+            app:siRadius="@dimen/ppb200_staggeredgrid_cover_radius" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

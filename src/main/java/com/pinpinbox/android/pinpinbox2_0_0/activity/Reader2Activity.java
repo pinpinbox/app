@@ -1132,7 +1132,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 .into(exchangeImg);
 
                         linExchange.setVisibility(View.VISIBLE);
-                        ViewControl.AlphaTo1(linExchange);
+
+                        if(linExchange.getAlpha()==0f){
+                            ViewControl.AlphaTo1(linExchange);
+                        }else {
+                            linExchange.setAlpha(1f);
+                        }
 
                         tvExchangeName.setText(itemExchange.getName());
 
@@ -1266,9 +1271,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         protocol108HashMap.put(position, protocol108);
 
-                        linExchange.setVisibility(View.GONE);
-                        linExchange.setAlpha(0f);
-
                         linTimeout.setVisibility(View.GONE);
                         linTimeout.setAlpha(0f);
 
@@ -1311,6 +1313,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     @Override
                     public void TimeOut() {
+
+
+                        if(linExchange.getVisibility()==View.VISIBLE){
+                            linExchange.setVisibility(View.GONE);
+                            linExchange.setAlpha(0f);
+                        }
+
 
                         linTimeout.setVisibility(View.VISIBLE);
                         ViewControl.AlphaTo1(linTimeout);
@@ -1380,7 +1389,14 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 .into(exchangeImg);
 
                         linExchange.setVisibility(View.VISIBLE);
-                        ViewControl.AlphaTo1(linExchange);
+
+                        if(linExchange.getAlpha()==0f){
+                            ViewControl.AlphaTo1(linExchange);
+                        }else {
+                            linExchange.setAlpha(1f);
+                        }
+
+
 
                         tvExchangeName.setText(itemExchange.getName());
 
@@ -1555,8 +1571,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     @Override
                     public void Prepare() {
 
-                        linExchange.setVisibility(View.GONE);
-                        linExchange.setAlpha(0f);
 
                         linTimeout.setVisibility(View.GONE);
                         linTimeout.setAlpha(0f);
@@ -1593,7 +1607,14 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     @Override
                     public void TimeOut() {
 
-                        MyLog.Set("e", mActivity.getClass(), "-----888888");
+                        MyLog.Set("e", mActivity.getClass(), "-----TimeOut");
+
+
+                        if(linExchange.getVisibility()==View.VISIBLE){
+                            linExchange.setVisibility(View.GONE);
+                            linExchange.setAlpha(0f);
+                        }
+
 
                         linTimeout.setVisibility(View.VISIBLE);
                         ViewControl.AlphaTo1(linTimeout);
