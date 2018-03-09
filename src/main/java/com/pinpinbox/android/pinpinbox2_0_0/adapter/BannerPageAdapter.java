@@ -90,12 +90,12 @@ public class BannerPageAdapter extends PagerAdapter {
         if (SystemUtility.isTablet(mActivity.getApplicationContext())) {
 
             //平版
-            radius = 2;
+            radius = 4;
 
         } else {
 
             //手機
-            radius = 4;
+            radius = 6;
 
         }
 

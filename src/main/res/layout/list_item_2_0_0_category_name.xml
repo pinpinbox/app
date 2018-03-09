@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <!--<RelativeLayout-->
-    <!--android:id="@+id/rBackground"-->
-    <!--android:layout_width="@dimen/ppb200_common_button_width"-->
-    <!--android:layout_height="@dimen/ppb200_common_button_height"-->
-    <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-    <!--android:layout_marginTop="@dimen/ppb200_padding_margin_second"-->
-    <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_second">-->
+        <!--android:id="@+id/rBackground"-->
+        <!--android:layout_width="@dimen/ppb200_common_button_width"-->
+        <!--android:layout_height="@dimen/ppb200_common_button_height"-->
+        <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_first"-->
+        <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
+        <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first">-->
 
-    <!--<View-->
-    <!--android:id="@+id/vGradient"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--/>-->
 
-    <!--<TextView-->
-    <!--android:id="@+id/tvName"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:textSize="@dimen/ppb200_common_text_first"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-    <!--android:letterSpacing="0.1"-->
-    <!--android:text=""/>-->
+        <!--<com.pinpinbox.android.Views.CircleView.RoundCornerImageView-->
+            <!--android:id="@+id/img"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--app:siBorderAlpha="0"-->
+            <!--app:siRadius="@dimen/ppb200_staggeredgrid_cover_radius" />-->
+
+
+        <!--<View-->
+            <!--android:id="@+id/vGradient"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/gradient_black_alpha_down_to_up_radius"/>-->
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvName"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:gravity="center"-->
+            <!--android:letterSpacing="0.1"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/ppb200_common_text_third"-->
+            <!--android:textStyle="bold" />-->
 
 
     <!--</RelativeLayout>-->
@@ -39,10 +55,7 @@
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-        android:background="@null"/>
-
-
-
+        android:background="@null" />
 
 
 </RelativeLayout>
