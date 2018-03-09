@@ -20,6 +20,7 @@ public class Url {
 
     public static String P43_UpdataPhotoUserFor_User = domain + "/index/api/updatephotousefor_user" + "/2.0";
 
+    public static String P53_UpdateCellphone = domain + "/index/api/updatecellphone" + "/2.0";
 
     public static String P95_RefreshToken = domain + "/index/api/refreshtoken" + "/2.0";
 
@@ -54,6 +55,8 @@ public class Url {
     public static String P110_ExchangePhotoUseFor = domain + "/index/api/exchangephotousefor" + "/2.0";
 
     public static String P111_SlotPhotoUseFor = domain + "/index/api/slotphotousefor" + "/2.0";
+
+    public static String P112_RequestSMSForUpdateCellphone = domain + "/index/api/requestsmspwdforupdatecellphone" + "/2.0";
 
 
 

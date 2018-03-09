@@ -167,6 +167,7 @@ public class Key {
     public static String sumofunsettlement = "sumofunsettlement";
     public static String special = "special";
     public static String slot_photo_id = "slot_photo_id";
+    public static String smspassword = "smspassword";
 
     public static String sociallink_facebook = "sociallink_facebook";
     public static String sociallink_google = "sociallink_google";

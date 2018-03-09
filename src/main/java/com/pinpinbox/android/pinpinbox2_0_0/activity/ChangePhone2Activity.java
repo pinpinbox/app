@@ -15,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol112;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol53;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
@@ -52,8 +54,10 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
     private PopPicker popPicker;
     private CountDownTimer cTimer;
 
-    private RequestSmsTask requestSmsTask;
-    private UpdateCellphoneTask updateCellphoneTask;
+    private Protocol53 protocol53;
+    private Protocol112 protocol112;
+    //    private RequestSmsTask requestSmsTask;
+//    private UpdateCellphoneTask updateCellphoneTask;
 
     private RelativeLayout rCode;
     private ImageView backImg;
@@ -159,13 +163,6 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
 
     }
 
-
-    private void back() {
-        finish();
-        ActivityAnim.FinishAnim(mActivity);
-    }
-
-
     private void connectInstability() {
 
         ConnectInstability connectInstability = new ConnectInstability() {
@@ -191,8 +188,66 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
             setNoConnect();
             return;
         }
-        requestSmsTask = new RequestSmsTask();
-        requestSmsTask.execute();
+//        requestSmsTask = new RequestSmsTask();
+//        requestSmsTask.execute();
+
+
+        String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
+        String strCompletePhone = "+" + strCountryNumber + edPhone.getText().toString();
+
+        protocol112 = new Protocol112(
+                mActivity,
+                PPBApplication.getInstance().getId(),
+                PPBApplication.getInstance().getToken(),
+                strCompletePhone,
+                new Protocol112.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success() {
+                        PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_ver_code_is_already_send);
+                        cTimer = new CountDownTimer(60000, 1000) {
+                            public void onTick(long millisUntilFinished) {
+
+                                MyLog.Set("d", mActivity.getClass(), "剩餘 " + millisUntilFinished / 1000 + " 秒");
+
+                                tvTime.setVisibility(View.VISIBLE);
+                                tvSendPhone.setBackgroundResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                                tvSendPhone.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+                                String strTime = (millisUntilFinished / 1000) + "";
+
+                                tvTime.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_left0) + strTime + getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_left1));
+
+                                isCanSendAgain = false;
+                            }
+
+                            public void onFinish() {
+                                tvTime.setVisibility(View.INVISIBLE);
+                                tvSendPhone.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
+                                tvSendPhone.setTextColor(Color.parseColor(ColorClass.WHITE));
+                                isCanSendAgain = true;
+                            }
+                        }.start();
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doRequestSms();
+                    }
+                }
+
+        );
+
+
     }
 
     private void doUpdateCellPhone() {
@@ -200,202 +255,245 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
             setNoConnect();
             return;
         }
-        updateCellphoneTask = new UpdateCellphoneTask();
-        updateCellphoneTask.execute();
-    }
+//        updateCellphoneTask = new UpdateCellphoneTask();
+//        updateCellphoneTask.execute();
 
+        String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
+        String strCompletePhone = "+" + strCountryNumber + edPhone.getText().toString();
 
-    private class RequestSmsTask extends AsyncTask<Void, Void, Object> {
-
-        private int p03Result = -1;
-        private String p03Message = "";
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoRequestSms;
-            startLoading();
-        }
-
-
-        @Override
-        protected Object doInBackground(Void... params) {
-            String strJson = "";
-
-            String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
-            String strCompletePhone = strCountryNumber + "," + edPhone.getText().toString();
-
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P03_RequestSmsPassword,
-                        SetMapByProtocol.setParam03_requestsmspwd(PPBApplication.getInstance().getData().getString(Key.account, ""),
-                                strCompletePhone, "editcellphone"), null);
-                MyLog.Set("d", getClass(), "p03strJson => " + strJson);
-            } catch (SocketTimeoutException timeout) {
-                p03Result = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p03Result = JsonUtility.GetInt(jsonObject, Key.result);
-                    if (p03Result == 0) {
-                        p03Message = JsonUtility.GetString(jsonObject, Key.message);
+        protocol53 = new Protocol53(
+                mActivity,
+                PPBApplication.getInstance().getId(),
+                PPBApplication.getInstance().getToken(),
+                strCompletePhone,
+                edCode.getText().toString(),
+                new Protocol53.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        startLoading();
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success() {
+                        PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_edit_finish);
+
+                        SharedPreferences.Editor editor = PPBApplication.getInstance().getData().edit();
+                        editor.putString("countrynumber", tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1));
+                        editor.putString("nocountry_phonenumber", edPhone.getText().toString());
+                        editor.putString("cellphone", tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1) + "," + edPhone.getText().toString());
+                        editor.commit();
+
+                        onBackPressed();
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doUpdateCellPhone();
+                    }
                 }
+        );
 
-            }
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            dissmissLoading();
-
-            if (p03Result == 1) {
-
-                PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_ver_code_is_already_send);
-
-
-                cTimer = new CountDownTimer(60000, 1000) {
-                    public void onTick(long millisUntilFinished) {
-
-
-                        MyLog.Set("d", mActivity.getClass(), "剩餘 " + millisUntilFinished / 1000 + " 秒");
-
-                        tvTime.setVisibility(View.VISIBLE);
-                        tvSendPhone.setBackgroundResource(R.drawable.border_2_0_0_white_frame_grey_second_radius_big);
-                        tvSendPhone.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-
-                        String strTime = (millisUntilFinished / 1000) + "";
-
-                        tvTime.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_left0) + strTime + getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_left1));
-
-                        isCanSendAgain = false;
-                    }
-
-                    public void onFinish() {
-                        tvTime.setVisibility(View.INVISIBLE);
-                        tvSendPhone.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
-                        tvSendPhone.setTextColor(Color.parseColor(ColorClass.WHITE));
-                        isCanSendAgain = true;
-                    }
-                }.start();
-
-            } else if (p03Result == 0) {
-                DialogV2Custom.BuildError(mActivity, p03Message);
-            } else if (p03Result == Key.TIMEOUT) {
-                connectInstability();
-            } else {
-                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
-            }
-
-        }
 
     }
 
-    private class UpdateCellphoneTask extends AsyncTask<Void, Void, Object> {
 
-        private int p53Result = -1;
-        private String p53Message;
+//    private class RequestSmsTask extends AsyncTask<Void, Void, Object> {
+//
+//        private int p03Result = -1;
+//        private String p03Message = "";
+//
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            doingType = DoingTypeClass.DoRequestSms;
+//            startLoading();
+//        }
+//
+//
+//        @Override
+//        protected Object doInBackground(Void... params) {
+//            String strJson = "";
+//
+//            String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
+//            String strCompletePhone = strCountryNumber + "," + edPhone.getText().toString();
+//
+//
+//            try {
+//                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P03_RequestSmsPassword,
+//                        SetMapByProtocol.setParam03_requestsmspwd(PPBApplication.getInstance().getData().getString(Key.account, ""),
+//                                strCompletePhone, "editcellphone"), null);
+//                MyLog.Set("d", getClass(), "p03strJson => " + strJson);
+//            } catch (SocketTimeoutException timeout) {
+//                p03Result = Key.TIMEOUT;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            if (strJson != null && !strJson.equals("")) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(strJson);
+//                    p03Result = JsonUtility.GetInt(jsonObject, Key.result);
+//                    if (p03Result == 0) {
+//                        p03Message = JsonUtility.GetString(jsonObject, Key.message);
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Object result) {
+//            super.onPostExecute(result);
+//            dissmissLoading();
+//
+//            if (p03Result == 1) {
+//
+//                PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_ver_code_is_already_send);
+//
+//
+//                cTimer = new CountDownTimer(60000, 1000) {
+//                    public void onTick(long millisUntilFinished) {
+//
+//
+//                        MyLog.Set("d", mActivity.getClass(), "剩餘 " + millisUntilFinished / 1000 + " 秒");
+//
+//                        tvTime.setVisibility(View.VISIBLE);
+//                        tvSendPhone.setBackgroundResource(R.drawable.border_2_0_0_white_frame_grey_second_radius_big);
+//                        tvSendPhone.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+//
+//                        String strTime = (millisUntilFinished / 1000) + "";
+//
+//                        tvTime.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_left0) + strTime + getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_left1));
+//
+//                        isCanSendAgain = false;
+//                    }
+//
+//                    public void onFinish() {
+//                        tvTime.setVisibility(View.INVISIBLE);
+//                        tvSendPhone.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
+//                        tvSendPhone.setTextColor(Color.parseColor(ColorClass.WHITE));
+//                        isCanSendAgain = true;
+//                    }
+//                }.start();
+//
+//            } else if (p03Result == 0) {
+//                DialogV2Custom.BuildError(mActivity, p03Message);
+//            } else if (p03Result == Key.TIMEOUT) {
+//                connectInstability();
+//            } else {
+//                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+//            }
+//
+//        }
+//
+//    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoUpDateCellPhone;
-            startLoading();
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-
-            String strOldPhone = PPBApplication.getInstance().getData().getString(Key.cellphone, "");
-
-
-            String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
-            String strCompletePhone = strCountryNumber + "," + edPhone.getText().toString();
-
-
-            Map<String, String> data = new HashMap<String, String>();
-            data.put(Key.id, PPBApplication.getInstance().getId());
-            data.put(Key.token, PPBApplication.getInstance().getToken());
-            data.put("oldcellphone", strOldPhone);
-            data.put("newcellphone", strCompletePhone);
-            data.put("smspassword", edCode.getText().toString());
-            String sign = IndexSheet.encodePPB(data);
-
-            Map<String, String> sendData = new HashMap<String, String>();
-            sendData.put(Key.id, PPBApplication.getInstance().getId());
-            sendData.put(Key.token, PPBApplication.getInstance().getToken());
-            sendData.put("oldcellphone", strOldPhone);
-            sendData.put("newcellphone", strCompletePhone);
-            sendData.put("smspassword", edCode.getText().toString());
-            sendData.put(Key.sign, sign);
-
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P53_UpdateCellphone, sendData, null);
-                MyLog.Set("d", getClass(), "p53strJson => " + strJson);
-            } catch (SocketTimeoutException timeout) {
-                p53Result = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p53Result = JsonUtility.GetInt(jsonObject, Key.result);
-                    if (p53Result == 0) {
-                        p53Message = jsonObject.getString(Key.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            dissmissLoading();
-            if (p53Result == 1) {
-
-
-                PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_edit_finish);
-
-                SharedPreferences.Editor editor = PPBApplication.getInstance().getData().edit();
-                editor.putString("countrynumber", tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1));
-                editor.putString("nocountry_phonenumber", edPhone.getText().toString());
-                editor.putString("cellphone", tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1) + "," + edPhone.getText().toString());
-                editor.commit();
-
-
-                back();
-
-
-            } else if (p53Result == 0) {
-                DialogV2Custom.BuildError(mActivity, p53Message);
-            } else if (p53Result == Key.TIMEOUT) {
-                connectInstability();
-            } else {
-                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
-            }
-        }
-    }
+//    private class UpdateCellphoneTask extends AsyncTask<Void, Void, Object> {
+//
+//        private int p53Result = -1;
+//        private String p53Message;
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            doingType = DoingTypeClass.DoUpDateCellPhone;
+//            startLoading();
+//        }
+//
+//        @Override
+//        protected Object doInBackground(Void... params) {
+//
+//
+//            String strOldPhone = PPBApplication.getInstance().getData().getString(Key.cellphone, "");
+//
+//
+//            String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
+//            String strCompletePhone = strCountryNumber + "," + edPhone.getText().toString();
+//
+//
+//            Map<String, String> data = new HashMap<String, String>();
+//            data.put(Key.id, PPBApplication.getInstance().getId());
+//            data.put(Key.token, PPBApplication.getInstance().getToken());
+//            data.put("oldcellphone", strOldPhone);
+//            data.put("newcellphone", strCompletePhone);
+//            data.put("smspassword", edCode.getText().toString());
+//            String sign = IndexSheet.encodePPB(data);
+//
+//            Map<String, String> sendData = new HashMap<String, String>();
+//            sendData.put(Key.id, PPBApplication.getInstance().getId());
+//            sendData.put(Key.token, PPBApplication.getInstance().getToken());
+//            sendData.put("oldcellphone", strOldPhone);
+//            sendData.put("newcellphone", strCompletePhone);
+//            sendData.put("smspassword", edCode.getText().toString());
+//            sendData.put(Key.sign, sign);
+//
+//            String strJson = "";
+//
+//            try {
+//                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P53_UpdateCellphone, sendData, null);
+//                MyLog.Set("d", getClass(), "p53strJson => " + strJson);
+//            } catch (SocketTimeoutException timeout) {
+//                p53Result = Key.TIMEOUT;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            if (strJson != null && !strJson.equals("")) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(strJson);
+//                    p53Result = JsonUtility.GetInt(jsonObject, Key.result);
+//                    if (p53Result == 0) {
+//                        p53Message = jsonObject.getString(Key.message);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Object result) {
+//            super.onPostExecute(result);
+//            dissmissLoading();
+//            if (p53Result == 1) {
+//
+//
+//                PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_edit_finish);
+//
+//                SharedPreferences.Editor editor = PPBApplication.getInstance().getData().edit();
+//                editor.putString("countrynumber", tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1));
+//                editor.putString("nocountry_phonenumber", edPhone.getText().toString());
+//                editor.putString("cellphone", tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1) + "," + edPhone.getText().toString());
+//                editor.commit();
+//
+//
+//                back();
+//
+//
+//            } else if (p53Result == 0) {
+//                DialogV2Custom.BuildError(mActivity, p53Message);
+//            } else if (p53Result == Key.TIMEOUT) {
+//                connectInstability();
+//            } else {
+//                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+//            }
+//        }
+//    }
 
 
     @Override
@@ -460,7 +558,7 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
                 break;
 
             case R.id.backImg:
-                back();
+                onBackPressed();
                 break;
 
         }
@@ -469,14 +567,15 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
-        back();
+        finish();
+        ActivityAnim.FinishAnim(mActivity);
     }
 
 
     @Override
     public void onDestroy() {
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
-        cancelTask(requestSmsTask);
+        cancelTask(protocol112);
 
         if (cTimer != null) {
             cTimer.cancel();
