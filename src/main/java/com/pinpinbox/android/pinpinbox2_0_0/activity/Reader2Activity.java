@@ -29,11 +29,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+
+import com.devbrackets.android.exomedia.listener.OnCompletionListener;
+import com.devbrackets.android.exomedia.listener.OnPreparedListener;
+import com.devbrackets.android.exomedia.ui.widget.EMVideoView;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -726,6 +731,59 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+
+    private void setVideo(View vPage, final String videoTarget){
+
+        RelativeLayout rVideo = (RelativeLayout)vPage.findViewById(R.id.rVideo);
+        rVideo.setVisibility(View.VISIBLE);
+
+
+        final EMVideoView videoView = (EMVideoView) vPage.findViewById(R.id.videoview);
+
+        Uri uri = null;
+        uri = Uri.parse(videoTarget);
+
+        videoView.setVideoURI(uri);
+
+        videoView.setOnPreparedListener(new OnPreparedListener() {
+            @Override
+            public void onPrepared() {
+                videoView.start();
+            }
+        });
+
+        videoView.setOnCompletionListener(new OnCompletionListener() {
+            @Override
+            public void onCompletion() {
+
+            }
+        });
+
+
+    }
+
+    private void setVideoClick(ImageView centerImg, final int position){
+        centerImg.setImageResource(R.drawable.click_2_0_0_video_white);
+        centerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
+                if (!HttpUtility.isConnect(mActivity)) {
+                    setNoConnect();
+                    return;
+                }
+
+                PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_play_audio_ready);
+
+                checkAudioType(position);
+            }
+        });
+
+    }
+
     private void setPageDetail(final int position) {
 
         final View vPage = vpReader.findViewById(position);
@@ -824,6 +882,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 case "video":
 
                     vType.setVisibility(View.VISIBLE);
+
+
                     centerImg.setImageResource(R.drawable.click_2_0_0_video_white);
                     centerImg.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -842,6 +902,43 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             checkAudioType(position);
                         }
                     });
+
+
+//                    String videoRefer = photoContentsList.get(position).getVideo_refer();
+//                    final String videoTarget = photoContentsList.get(position).getVideo_target();
+//
+//
+//                    if (videoRefer.equals("file")) {
+//
+//
+//                        setVideo(vPage, videoTarget);
+//
+//
+//                    } else if (videoRefer.equals("embed")) {
+//
+//                        String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
+//                        if (youtubeUrl == null || youtubeUrl.equals("null")) {
+//
+//                            if (!StringUtil.containsString(videoTarget, "vimeo") &&
+//                                    !StringUtil.containsString(videoTarget, "dailymotion") &&
+//                                    !StringUtil.containsString(videoTarget, "facebook")) {
+//
+//                                setVideo(vPage, videoTarget);
+//
+//                            }else {
+//
+//                                setVideoClick(centerImg, position);
+//
+//                            }
+//
+//                        } else {
+//
+//                            setVideoClick(centerImg, position);
+//
+//                        }
+//
+//                    }
+
 
                     break;
 
