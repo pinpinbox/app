@@ -730,10 +730,33 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         final View vPage = vpReader.findViewById(position);
 
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                PinPinToast.ShowToast(mActivity, "重新啟動閱讀器");
+
+//                Bundle bundle = new Bundle();
+//
+//                bundle.putString(Key.album_id, album_id);
+//                bundle.putString(Key.event_id, event_id);
+//                bundle.putString(Key.special, strSpecialUrl);
+//                bundle.putBoolean(Key.isNewCreate, isNewCreate);
+//                bundle.putBoolean(Key.isContribute, isContribute);
+//
+//
+//                startActivity(new Intent(mActivity, Reader2Activity.class).putExtras(bundle));
+//                finish();
+//
+//            }
+//        },3000);
+
+
         if (vPage == null || vpReader == null) {
             DialogV2Custom.BuildUnKnow(mActivity, "setPageDetail error");
             return;
         }
+
 
         ImageView centerImg = (ImageView) vPage.findViewById(R.id.centerImg);
 
@@ -842,8 +865,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 case "slot":
 
 
-
-
                     if (!itemAlbum.isOwn()) {
                         isNoOwnShowCollectType(vPage, vType);
                     } else {
@@ -855,24 +876,24 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         boolean isSlotted = false;
 
 
-                        if(jsonArray.length()>0){
+                        if (jsonArray.length() > 0) {
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
-                                JSONObject object = (JSONObject)jsonArray.get(i);
+                                JSONObject object = (JSONObject) jsonArray.get(i);
 
                                 String sPhoto_id = object.getString(Key.photo_id);
 
-                                if(sPhoto_id.equals(photoContentsList.get(position).getPhoto_id() + "")){
+                                if (sPhoto_id.equals(photoContentsList.get(position).getPhoto_id() + "")) {
                                     isSlotted = true;
                                     break;
                                 }
                             }
                         }
 
-                        if(isSlotted){
+                        if (isSlotted) {
                             doSlot(vPage, position, linExchange);
-                        }else {
+                        } else {
 
 //                            View vGift = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_gift, null);
 //                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -926,12 +947,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         }
 
 
-
-
-
                     }
-
-
 
 
                     break;
@@ -1133,9 +1149,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         linExchange.setVisibility(View.VISIBLE);
 
-                        if(linExchange.getAlpha()==0f){
+                        if (linExchange.getAlpha() == 0f) {
                             ViewControl.AlphaTo1(linExchange);
-                        }else {
+                        } else {
                             linExchange.setAlpha(1f);
                         }
 
@@ -1315,7 +1331,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     public void TimeOut() {
 
 
-                        if(linExchange.getVisibility()==View.VISIBLE){
+                        if (linExchange.getVisibility() == View.VISIBLE) {
                             linExchange.setVisibility(View.GONE);
                             linExchange.setAlpha(0f);
                         }
@@ -1390,12 +1406,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         linExchange.setVisibility(View.VISIBLE);
 
-                        if(linExchange.getAlpha()==0f){
+                        if (linExchange.getAlpha() == 0f) {
                             ViewControl.AlphaTo1(linExchange);
-                        }else {
+                        } else {
                             linExchange.setAlpha(1f);
                         }
-
 
 
                         tvExchangeName.setText(itemExchange.getName());
@@ -1427,9 +1442,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 }
                             }
 
-                            if(isPhotoIdExist){
+                            if (isPhotoIdExist) {
                                 return;
-                            }else {
+                            } else {
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put(Key.photo_id, photoContentsList.get(position).getPhoto_id() + "");
                                 jsonCookieArray.put(jsonObject);
@@ -1437,8 +1452,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                             PPBApplication.getInstance().getData().edit().putString(Key.slot_photo_id, jsonCookieArray.toString()).commit();
                             Logger.json(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
-
-
 
 
                         } catch (Exception e) {
@@ -1610,7 +1623,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         MyLog.Set("e", mActivity.getClass(), "-----TimeOut");
 
 
-                        if(linExchange.getVisibility()==View.VISIBLE){
+                        if (linExchange.getVisibility() == View.VISIBLE) {
                             linExchange.setVisibility(View.GONE);
                             linExchange.setAlpha(0f);
                         }
@@ -1794,16 +1807,14 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void setPhotoMode(int position) {
 
+        if (vpReader == null) {
+            DialogV2Custom.BuildUnKnow(mActivity, "setPhotoMode error");
+            return;
+        }
+
         if (vpReader.findViewById(position) != null) {
 
             View v = vpReader.findViewById(position);
-
-            if (vpReader == null) {
-
-                DialogV2Custom.BuildUnKnow(mActivity, "setPhotoMode error");
-
-                return;
-            }
 
             PinchImageView photoImg = (PinchImageView) v.findViewById(R.id.photoImg);
 
@@ -2152,7 +2163,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvTitle), true);
         TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvShare), true);
         TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvInfo), true);
-
 
 
         View vContent = popMore.getPopupView().findViewById(R.id.linBackground);
@@ -4012,16 +4022,16 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     public void OnClick(View v) {
 
 
-        if(ClickUtils.ButtonContinuousClick()){
+        if (ClickUtils.ButtonContinuousClick()) {
             return;
         }
 
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.linCollect:
 
-                if(!itemAlbum.isOwn()) {
+                if (!itemAlbum.isOwn()) {
                     popMore.dismiss();
                     checkToCollectAlbum(itemAlbum.getPoint() + "");
                 }
@@ -4037,8 +4047,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 popMore.dismiss();
                 popInfo.show((RelativeLayout) findViewById(R.id.rBackground));
                 break;
-
-
 
 
             case R.id.tvShareFB:
@@ -4086,18 +4094,16 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         }
 
 
-
-
     }
 
     @Override
     public void OnDismiss() {
 
-        if(popMore!=null && popMore.getPopupWindow().isShowing()){
+        if (popMore != null && popMore.getPopupWindow().isShowing()) {
             popMore.dismiss();
         }
 
-        if(popSelectShare!=null && popSelectShare.getPopupWindow().isShowing()){
+        if (popSelectShare != null && popSelectShare.getPopupWindow().isShowing()) {
             popSelectShare.dismiss();
         }
 
