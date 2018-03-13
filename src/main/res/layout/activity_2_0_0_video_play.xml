@@ -6,12 +6,13 @@
     android:background="@color/black">
 
 
-    <com.devbrackets.android.exomedia.ui.widget.EMVideoView
+    <com.devbrackets.android.exomedia.ui.widget.VideoView
         android:id="@+id/videoview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        EMVideoView:useDefaultControls="true" />
+        EMVideoView:useDefaultControls="true"
+        />
 
     <FrameLayout
         android:id="@+id/framelayout"

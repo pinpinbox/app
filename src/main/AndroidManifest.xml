@@ -299,8 +299,9 @@
             android:name=".pinpinbox2_0_0.activity.VideoPlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="true"
-            android:screenOrientation="user"
-            android:theme="@style/dragger" />
+            android:screenOrientation="user" />
+        <!--android:theme="@style/dragger"-->
+
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"

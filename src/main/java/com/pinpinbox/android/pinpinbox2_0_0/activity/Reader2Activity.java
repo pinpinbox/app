@@ -29,16 +29,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
-import com.devbrackets.android.exomedia.ui.widget.EMVideoView;
+import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -233,6 +231,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_0_0_reader);
 
+        setSwipeBackEnable(false);
 
 //        getStatusControl().setStatusMode(StatusControl.DARK);
 
@@ -734,11 +733,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void setVideo(View vPage, final String videoTarget){
 
-        RelativeLayout rVideo = (RelativeLayout)vPage.findViewById(R.id.rVideo);
-        rVideo.setVisibility(View.VISIBLE);
+//        RelativeLayout rVideo = (RelativeLayout)vPage.findViewById(R.id.rVideo);
+//        rVideo.setVisibility(View.VISIBLE);
 
 
-        final EMVideoView videoView = (EMVideoView) vPage.findViewById(R.id.videoview);
+        final VideoView videoView = (VideoView) vPage.findViewById(R.id.videoview);
+
 
         Uri uri = null;
         uri = Uri.parse(videoTarget);
@@ -883,25 +883,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     vType.setVisibility(View.VISIBLE);
 
+                    setVideoClick(centerImg, position);
 
-                    centerImg.setImageResource(R.drawable.click_2_0_0_video_white);
-                    centerImg.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (ClickUtils.ButtonContinuousClick()) {
-                                return;
-                            }
-
-                            if (!HttpUtility.isConnect(mActivity)) {
-                                setNoConnect();
-                                return;
-                            }
-
-                            PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_play_audio_ready);
-
-                            checkAudioType(position);
-                        }
-                    });
 
 
 //                    String videoRefer = photoContentsList.get(position).getVideo_refer();
@@ -1895,7 +1878,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 } else {
                     doCollectAlbum();
                 }
-
 
             }
         });
@@ -4348,7 +4330,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 MyLog.Set("e", getClass(), "newLoction.getLongitude() => " + newLoction.getLongitude());
             } else {
 
-                MyLog.Set("e", getClass(), "-9-9-9-9-9-9--9-9-9-9-9-9");
+                MyLog.Set("e", getClass(), "newLoction == null");
             }
 
         } catch (Exception e) {

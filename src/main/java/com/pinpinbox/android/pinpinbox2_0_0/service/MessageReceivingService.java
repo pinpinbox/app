@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.service;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -292,7 +293,7 @@ public class MessageReceivingService extends Service {
             super.onPostExecute(result);
 
             final NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            final PendingIntent pendingIntent = PendingIntent.getActivity(
+            @SuppressLint("WrongConstant") final PendingIntent pendingIntent = PendingIntent.getActivity(
                     context,
                     0,
                     intentAction,

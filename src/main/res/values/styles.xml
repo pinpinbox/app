@@ -288,7 +288,6 @@
 
 
     當前activity需要透明背景時
-
     <style name="myTransparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowNoTitle">true</item>

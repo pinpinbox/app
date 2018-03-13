@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
@@ -22,7 +24,8 @@ import android.widget.FrameLayout;
 import com.dailymotion.android.player.sdk.PlayerWebView;
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
-import com.devbrackets.android.exomedia.ui.widget.EMVideoView;
+import com.devbrackets.android.exomedia.listener.VideoControlsButtonListener;
+import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -36,13 +39,12 @@ import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -57,13 +59,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class VideoPlayActivity extends DraggerActivity {
+public class VideoPlayActivity extends FragmentActivity {
 
     private Activity mActivity;
     private LoadingAnimation loading;
     private CallbackManager callbackManager;
 
-    private EMVideoView videoView;
+    private VideoView videoView;
     private WebView webView;
 
     private String copyPath = Environment.getExternalStorageDirectory() + "/" + "pinpinbox_Instant_Play.mp4";
@@ -76,6 +78,8 @@ public class VideoPlayActivity extends DraggerActivity {
     private final static int UrlMode = 1;
     private final static int VimeoMode = 2;
 
+    private boolean isEnd = false;
+
     AccessTokenTracker tokenTracker;
     AccessToken accessToken;
 
@@ -83,6 +87,7 @@ public class VideoPlayActivity extends DraggerActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_2_0_0_video_play);
         SystemUtility.SysApplication.getInstance().addActivity(this);
 
@@ -117,7 +122,7 @@ public class VideoPlayActivity extends DraggerActivity {
         mActivity = this;
 
         webView = (WebView) findViewById(R.id.webView);
-        videoView = (EMVideoView) findViewById(R.id.videoview);
+        videoView = (VideoView) findViewById(R.id.videoview);
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         dmWebView = (PlayerWebView) findViewById(R.id.dmWebView);
 
@@ -229,10 +234,10 @@ public class VideoPlayActivity extends DraggerActivity {
             try {
 
 
-                int responseCode = 0 ;
+                int responseCode = 0;
                 responseCode = response.getConnection().getResponseCode();
 
-                if(responseCode == 200){
+                if (responseCode == 200) {
 
                     MyLog.Set("e", VideoPlayActivity.class, "responseCode == 200");
 
@@ -337,7 +342,7 @@ public class VideoPlayActivity extends DraggerActivity {
 
                 });
 
-            }
+    }
 
     private String getFacebookVideoId(String path) {
 
@@ -472,21 +477,77 @@ public class VideoPlayActivity extends DraggerActivity {
         videoView.setVisibility(View.VISIBLE);
 
 
+
+
         videoView.setVideoURI(uri);
         videoView.setOnPreparedListener(new OnPreparedListener() {
             @Override
             public void onPrepared() {
                 videoView.start();
+
             }
         });
         videoView.setOnCompletionListener(new OnCompletionListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onCompletion() {
-
-                mActivity.finish();
-
+                isEnd = true;
+//                mActivity.finish();
             }
         });
+
+        videoView.getVideoControls().setButtonListener(new VideoControlsButtonListener() {
+            @Override
+            public boolean onPlayPauseClicked() {
+
+                MyLog.Set("e", mActivity.getClass(), "onPlayPauseClicked");
+
+                if (isEnd) {
+                    videoView.restart();
+                    isEnd = false;
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onPreviousClicked() {
+                MyLog.Set("e", this.getClass(), "onPreviousClicked");
+                return false;
+            }
+
+            @Override
+            public boolean onNextClicked() {
+                MyLog.Set("e", this.getClass(), "onNextClicked");
+                return false;
+            }
+
+            @Override
+            public boolean onRewindClicked() {
+                MyLog.Set("e", this.getClass(), "onRewindClicked");
+                return false;
+            }
+
+            @Override
+            public boolean onFastForwardClicked() {
+                MyLog.Set("e", this.getClass(), "onFastForwardClicked");
+                return false;
+            }
+        });
+
+//        videoView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (videoView.isPlaying()){
+//                    videoView.pause();
+//                } else {
+//                    videoView.start();
+//                }
+//            }
+//        });
+
+
+
 
 
                         /* 设置模式-播放进度条 */
