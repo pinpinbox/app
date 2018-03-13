@@ -1,5 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.bean;
 
+import com.devbrackets.android.exomedia.ui.widget.VideoView;
+
 /**
  * Created by kevin9594 on 2017/2/25.
  */
@@ -32,13 +34,23 @@ public class ItemPhoto {
 
     private boolean audio_loop;
 
+
+    private VideoView videoView;
+
+
     /*連結類*/
 //    private String hyperlink_icon; //圖示
 //    private String hyperlink_text; //說明
 //    private String hyperlink_url; //連結
 
 
+    public VideoView getVideoView() {
+        return videoView;
+    }
 
+    public void setVideoView(VideoView videoView) {
+        this.videoView = videoView;
+    }
 
     public String getAudio_refer() {
         return audio_refer;

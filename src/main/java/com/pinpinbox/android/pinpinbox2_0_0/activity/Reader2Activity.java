@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
+import com.devbrackets.android.exomedia.listener.VideoControlsButtonListener;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -563,19 +564,31 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             @Override
             public void onPageSelected(int position) {
+                //****先執行 後執行onPageSelected
 
                 if (!HttpUtility.isConnect(mActivity)) {
                     setNoConnect();
                     return;
                 }
 
+
                 page = position;
 
+                //更新縮圖選擇邊框
                 photoContentsList.get(lastPosition).setSelect(false);
                 photoContentsList.get(position).setSelect(true);
                 recyclerReaderAdapter.notifyItemChanged(lastPosition);
                 recyclerReaderAdapter.notifyItemChanged(position);
                 rvReader.scrollToPosition(position);
+
+
+                //銷毀前頁撥放器
+                if (photoContentsList.get(lastPosition).getVideoView() != null) {
+                    MyLog.Set("d", mActivity.getClass(), "重置videoView => " + lastPosition);
+                    photoContentsList.get(lastPosition).getVideoView().reset();
+//                    photoContentsList.get(lastPosition).setVideoView(null);
+                }
+
 
                 setPage(position);
                 setPageDetail(position);
@@ -606,6 +619,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         break;
 
                     case 2://滑動完畢
+                        //****先執行 後執行onPageSelected
                         MyLog.Set("d", mActivity.getClass(), "滑動完畢");
 
                         int p = vpReader.getCurrentItem();
@@ -731,38 +745,103 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     }
 
 
-    private void setVideo(View vPage, final String videoTarget){
+    private void setVideo(View vPage, final String videoTarget, int position) {
 
-//        RelativeLayout rVideo = (RelativeLayout)vPage.findViewById(R.id.rVideo);
-//        rVideo.setVisibility(View.VISIBLE);
+        RelativeLayout rVideo = (RelativeLayout) vPage.findViewById(R.id.rVideo);
+        rVideo.setVisibility(View.VISIBLE);
+
+        VideoView videoView = null;
+        if (photoContentsList.get(position).getVideoView() == null) {
+            videoView = (VideoView) vPage.findViewById(R.id.videoview);
+            photoContentsList.get(position).setVideoView(videoView);
+        } else {
+            videoView = photoContentsList.get(position).getVideoView();
+        }
 
 
-        final VideoView videoView = (VideoView) vPage.findViewById(R.id.videoview);
 
+        vPage.findViewById(R.id.vModeChange).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isPhotoMode) {
+                    //一般模式 => 相片模式
+                    rBottom.setVisibility(View.GONE);
+                    rActionBar.setVisibility(View.GONE);
+                    isPhotoMode = true;
+                } else {
+                    //相片模式 => 一般模式
+                    rBottom.setVisibility(View.VISIBLE);
+                    rActionBar.setVisibility(View.VISIBLE);
+                    isPhotoMode = false;
+                }
+            }
+        });
 
         Uri uri = null;
         uri = Uri.parse(videoTarget);
-
         videoView.setVideoURI(uri);
 
+        final boolean[] isEnd = {false};
+
+        final VideoView finalVideoView = videoView;
         videoView.setOnPreparedListener(new OnPreparedListener() {
             @Override
             public void onPrepared() {
-                videoView.start();
+                finalVideoView.start();
             }
         });
 
         videoView.setOnCompletionListener(new OnCompletionListener() {
             @Override
             public void onCompletion() {
+                isEnd[0] = true;
+            }
+        });
 
+        videoView.getVideoControls().setButtonListener(new VideoControlsButtonListener() {
+            @Override
+            public boolean onPlayPauseClicked() {
+
+                MyLog.Set("e", mActivity.getClass(), "onPlayPauseClicked");
+
+                if (isEnd[0]) {
+                    finalVideoView.restart();
+                    isEnd[0] = false;
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onPreviousClicked() {
+                MyLog.Set("e", this.getClass(), "onPreviousClicked");
+                return false;
+            }
+
+            @Override
+            public boolean onNextClicked() {
+                MyLog.Set("e", this.getClass(), "onNextClicked");
+                return false;
+            }
+
+            @Override
+            public boolean onRewindClicked() {
+                MyLog.Set("e", this.getClass(), "onRewindClicked");
+                return false;
+            }
+
+            @Override
+            public boolean onFastForwardClicked() {
+                MyLog.Set("e", this.getClass(), "onFastForwardClicked");
+                return false;
             }
         });
 
 
+
     }
 
-    private void setVideoClick(ImageView centerImg, final int position){
+    private void setVideoClick(ImageView centerImg, final int position) {
         centerImg.setImageResource(R.drawable.click_2_0_0_video_white);
         centerImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -886,41 +965,40 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     setVideoClick(centerImg, position);
 
 
+                    String videoRefer = photoContentsList.get(position).getVideo_refer();
+                    final String videoTarget = photoContentsList.get(position).getVideo_target();
 
-//                    String videoRefer = photoContentsList.get(position).getVideo_refer();
-//                    final String videoTarget = photoContentsList.get(position).getVideo_target();
-//
-//
-//                    if (videoRefer.equals("file")) {
-//
-//
-//                        setVideo(vPage, videoTarget);
-//
-//
-//                    } else if (videoRefer.equals("embed")) {
-//
-//                        String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
-//                        if (youtubeUrl == null || youtubeUrl.equals("null")) {
-//
-//                            if (!StringUtil.containsString(videoTarget, "vimeo") &&
-//                                    !StringUtil.containsString(videoTarget, "dailymotion") &&
-//                                    !StringUtil.containsString(videoTarget, "facebook")) {
-//
-//                                setVideo(vPage, videoTarget);
-//
-//                            }else {
-//
-//                                setVideoClick(centerImg, position);
-//
-//                            }
-//
-//                        } else {
-//
-//                            setVideoClick(centerImg, position);
-//
-//                        }
-//
-//                    }
+
+                    if (videoRefer.equals("file")) {
+
+
+                        setVideo(vPage, videoTarget, position);
+
+
+                    } else if (videoRefer.equals("embed")) {
+
+                        String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
+                        if (youtubeUrl == null || youtubeUrl.equals("null")) {
+
+                            if (!StringUtil.containsString(videoTarget, "vimeo") &&
+                                    !StringUtil.containsString(videoTarget, "dailymotion") &&
+                                    !StringUtil.containsString(videoTarget, "facebook")) {
+
+                                setVideo(vPage, videoTarget, position);
+
+                            } else {
+
+                                setVideoClick(centerImg, position);
+
+                            }
+
+                        } else {
+
+                            setVideoClick(centerImg, position);
+
+                        }
+
+                    }
 
 
                     break;
