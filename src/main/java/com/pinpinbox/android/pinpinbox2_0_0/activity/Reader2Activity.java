@@ -953,43 +953,43 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 case "video":
 
 
-                    setVideoClick(centerImg, position);
+//                    setVideoClick(centerImg, position);
 
 
-//                    String videoRefer = photoContentsList.get(position).getVideo_refer();
-//                    final String videoTarget = photoContentsList.get(position).getVideo_target();
-//
-//
-//                    if (videoRefer.equals("file")) {
-//
-//
-//                        setVideo(vPage, videoTarget, position);
-//
-//
-//                    } else if (videoRefer.equals("embed")) {
-//
-//                        String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
-//                        if (youtubeUrl == null || youtubeUrl.equals("null")) {
-//
-//                            if (!StringUtil.containsString(videoTarget, "vimeo") &&
-//                                    !StringUtil.containsString(videoTarget, "dailymotion") &&
-//                                    !StringUtil.containsString(videoTarget, "facebook")) {
-//
-//                                setVideo(vPage, videoTarget, position);
-//
-//                            } else {
-//
-//                                setVideoClick(centerImg, position);
-//
-//                            }
-//
-//                        } else {
-//
-//                            setVideoClick(centerImg, position);
-//
-//                        }
-//
-//                    }
+                    String videoRefer = photoContentsList.get(position).getVideo_refer();
+                    final String videoTarget = photoContentsList.get(position).getVideo_target();
+
+
+                    if (videoRefer.equals("file")) {
+
+
+                        setVideo(vPage, videoTarget, position);
+
+
+                    } else if (videoRefer.equals("embed")) {
+
+                        String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
+                        if (youtubeUrl == null || youtubeUrl.equals("null")) {
+
+                            if (!StringUtil.containsString(videoTarget, "vimeo") &&
+                                    !StringUtil.containsString(videoTarget, "dailymotion") &&
+                                    !StringUtil.containsString(videoTarget, "facebook")) {
+
+                                setVideo(vPage, videoTarget, position);
+
+                            } else {
+
+                                setVideoClick(centerImg, position);
+
+                            }
+
+                        } else {
+
+                            setVideoClick(centerImg, position);
+
+                        }
+
+                    }
 
 
                     break;
