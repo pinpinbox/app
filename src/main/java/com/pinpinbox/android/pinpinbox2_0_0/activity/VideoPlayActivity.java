@@ -46,6 +46,7 @@ import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 
@@ -111,7 +112,7 @@ public class VideoPlayActivity extends FragmentActivity {
     private void getBundleVideoPath() {
 
         Bundle bundle = getIntent().getExtras();
-        videoPath = bundle.getString("videopath", "");
+        videoPath = bundle.getString(Key.path_or_url, "");
 
 
     }

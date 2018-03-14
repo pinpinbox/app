@@ -14,6 +14,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
 
 /**
  * Created by vmage on 2018/2/21.
@@ -134,7 +135,6 @@ public class ActivityIntent {
 
     }
 
-
     public static void toFeature(Activity currentActivity, int categoryarea_id) {
 
         Bundle bundle = new Bundle();
@@ -142,6 +142,18 @@ public class ActivityIntent {
 
         currentActivity.startActivity(
                 new Intent(currentActivity, Feature2Activity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
+
+    public static void toVideoPlay(Activity currentActivity, String path_or_url){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.path_or_url, path_or_url);
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, VideoPlayActivity.class).putExtras(bundle)
         );
         ActivityAnim.StartAnim(currentActivity);
 

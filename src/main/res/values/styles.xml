@@ -24,7 +24,8 @@
     <style name="ppb200_staggered_bg_cover">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/image_background_2_0_0_home_item_cover_radius</item>
+        <item name="android:background">@drawable/image_background_2_0_0_home_item_cover_radius
+        </item>
     </style>
 
     <style name="ppb200_staggered_type_linear">
@@ -38,9 +39,6 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">@dimen/ppb200_padding_margin_small</item>
     </style>
-
-
-
 
 
     <style name="ppb200_title_first" parent="android:TextAppearance.Widget.TextView">
@@ -288,6 +286,7 @@
 
 
     當前activity需要透明背景時
+
     <style name="myTransparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowNoTitle">true</item>
@@ -327,6 +326,17 @@
         <!--<item name="android:windowReenterTransition">@transition/change_bounds</item>&lt;!&ndash;B 返回到 A时，使A中的View进入场景的transition&ndash;&gt;-->
         <!--<item name="android:windowReturnTransition">@transition/change_bounds</item>&lt;!&ndash;B 返回到 A时，使B中的View退出场景的transition&ndash;&gt;-->
     </style>
+
+
+
+    reader
+
+    <style name="reader" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
 
 
     <!--first style-->

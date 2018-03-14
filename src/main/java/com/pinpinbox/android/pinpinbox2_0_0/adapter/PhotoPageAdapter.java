@@ -10,9 +10,11 @@ import android.widget.ImageView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.PinchImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -72,33 +74,30 @@ public class PhotoPageAdapter extends PagerAdapter {
 
             if (url != null && !url.equals("") && !url.equals("null")) {
                 Picasso.with(mActivity).invalidate(url);
-//                picasso.build().invalidate(url);
-
-
-//                try{
-//                    picasso.build().invalidate(url);
-//                }catch (OutOfMemoryError outOfMemoryError){
-//                    outOfMemoryError.printStackTrace();
-//                }
-
-
             }
         }
 
     }
 
+    private void checkType(View vPage, int position){
 
-    @Override
-    public Object instantiateItem(final ViewGroup container, final int position) {
+        View vType = vPage.findViewById(R.id.vType);
 
-        View v = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.page_2_0_0_photo, null);
+        String usefor = itemPhotoList.get(position).getUsefor();
 
-        v.setId(position);
+        if(usefor.equals("image") || usefor.equals("lastPage")){
+            vType.setVisibility(View.GONE);
+        }else {
+            vType.setVisibility(View.VISIBLE);
+        }
 
-        final PinchImageView picImg = (PinchImageView) v.findViewById(R.id.photoImg);
+    }
 
-        final ImageView refreshImg = (ImageView) v.findViewById(R.id.refreshImg);
+    private void setImageContents(View vPage, int position) {
 
+        final PinchImageView picImg = (PinchImageView) vPage.findViewById(R.id.photoImg);
+
+        final ImageView refreshImg = (ImageView) vPage.findViewById(R.id.refreshImg);
 
         if (picImg != null) {
 
@@ -106,88 +105,32 @@ public class PhotoPageAdapter extends PagerAdapter {
 
             if (itemAlbum.isOwn()) {
                 //已收藏或贊助
-                if (url == null || url.equals("") || url.equals("null")) {
-                    picImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-
-                    MyLog.Set("d", PhotoPageAdapter.class, "url => null or empty");
-
-                    refreshImg.setVisibility(View.VISIBLE);
-
-                } else {
-
-//                    /*20171023*/
-//                    picasso.build()
-//                            .load(url)
-//                            .config(Bitmap.Config.RGB_565)
-//                            .error(R.drawable.no_image)
-//                            .tag(mActivity.getApplicationContext())
-//                            .into(picImg, new Callback() {
-//                                @Override
-//                                public void onSuccess() {
-//                                    refreshImg.setVisibility(View.GONE);
-//                                }
-//
-//                                @Override
-//                                public void onError() {
-//                                    MyLog.Set("d", PhotoPageAdapter.class, "new Callback => onError");
-//                                    refreshImg.setVisibility(View.VISIBLE);
-//                                }
-//                            });
-
-
-                    Picasso.with(mActivity.getApplicationContext())
-                            .load(url)
-                            .config(Bitmap.Config.RGB_565)
-                            .error(R.drawable.bg_2_0_0_no_image)
-                            .tag(mActivity.getApplicationContext())
-                            .into(picImg, new Callback() {
-                                @Override
-                                public void onSuccess() {
-                                    refreshImg.setVisibility(View.GONE);
-                                }
-
-                                @Override
-                                public void onError() {
-                                    MyLog.Set("d", PhotoPageAdapter.class, "new Callback => onError");
-                                    refreshImg.setVisibility(View.VISIBLE);
-                                }
-                            });
-                }
-
+                setImage(url, picImg, refreshImg);
             } else {
                 //尚未收藏贊助
                 if (position == itemPhotoList.size() - 1) {
-
                     picImg.setBackgroundResource(R.drawable.bg200_preview_normal);
-
                 } else {
+                    setImage(url, picImg, refreshImg);
+                }
+            }
 
-                    if (url == null || url.equals("") || url.equals("null")) {
-                        picImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-                        MyLog.Set("d", PhotoPageAdapter.class, "url => null or empty");
-                        refreshImg.setVisibility(View.VISIBLE);
-                    } else {
+        }
 
+    }
 
-//                        /*20171023*/
-//                        picasso.build()
-//                                .load(url)
-//                                .config(Bitmap.Config.RGB_565)
-//                                .error(R.drawable.no_image)
-//                                .tag(mActivity.getApplicationContext())
-//                                .into(picImg, new Callback() {
-//                                    @Override
-//                                    public void onSuccess() {
-//                                        refreshImg.setVisibility(View.GONE);
-//                                    }
-//
-//                                    @Override
-//                                    public void onError() {
-//                                        MyLog.Set("d", PhotoPageAdapter.class, "new Callback => onError");
-//                                        refreshImg.setVisibility(View.VISIBLE);
-//                                    }
-//                                });
+    private void setImage(final String url, final PinchImageView picImg, final ImageView refreshImg) {
+        if (url == null || url.equals("") || url.equals("null")) {
+            picImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+            refreshImg.setVisibility(View.VISIBLE);
+            refreshImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (ClickUtils.ButtonContinuousClick()) {
+                        return;
+                    }
 
+                    if (url != null && !url.equals("") && !url.equals("null") && !url.isEmpty()) {
 
                         Picasso.with(mActivity.getApplicationContext())
                                 .load(url)
@@ -202,20 +145,59 @@ public class PhotoPageAdapter extends PagerAdapter {
 
                                     @Override
                                     public void onError() {
-                                        MyLog.Set("d", PhotoPageAdapter.class, "new Callback => onError");
                                         refreshImg.setVisibility(View.VISIBLE);
                                     }
                                 });
 
+                    } else {
+
+                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_photo_does_not_exist);
 
                     }
+
+
                 }
-            }
+            });
+
+
+        } else {
+
+            Picasso.with(mActivity.getApplicationContext())
+                    .load(url)
+                    .config(Bitmap.Config.RGB_565)
+                    .error(R.drawable.bg_2_0_0_no_image)
+                    .tag(mActivity.getApplicationContext())
+                    .into(picImg, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            refreshImg.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            refreshImg.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+
         }
+    }
 
 
-        container.addView(v, 0);
-        return v;
+    @Override
+    public Object instantiateItem(final ViewGroup container, final int position) {
+
+        View vPage = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.page_2_0_0_photo, null);
+
+        vPage.setId(position);
+
+        checkType(vPage, position);
+
+        setImageContents(vPage, position);
+
+
+        container.addView(vPage, 0);
+        return vPage;
 
     }
 
@@ -236,6 +218,266 @@ public class PhotoPageAdapter extends PagerAdapter {
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
+
+
+//    private void setVideoContents(View vPage, int position){
+//
+//        ImageView centerImg = (ImageView)vPage.findViewById(R.id.centerImg);
+//
+//        String usefor = itemPhotoList.get(position).getUsefor();
+//
+//        if(usefor.equals("video")){
+//            String videoRefer = itemPhotoList.get(position).getVideo_refer();
+//            final String videoTarget = itemPhotoList.get(position).getVideo_target();
+//
+//
+//            if (videoRefer.equals("file")) {
+//
+//                setVideo(vPage, videoTarget, position);
+//
+//            } else if (videoRefer.equals("embed")) {
+//
+//                String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
+//                if (youtubeUrl == null || youtubeUrl.equals("null")) {
+//
+//                    if (!StringUtil.containsString(videoTarget, "vimeo") &&
+//                            !StringUtil.containsString(videoTarget, "dailymotion") &&
+//                            !StringUtil.containsString(videoTarget, "facebook")) {
+//                        setVideo(vPage, videoTarget, position);
+//                    } else {
+//                        setVideoClick(centerImg, position);
+//                    }
+//
+//                } else {
+//                    setVideoClick(centerImg, position);
+//                }
+//
+//            }
+//
+//
+//        }
+//
+//    }
+//
+//
+//    private void setVideo(View vPage, final String videoTarget, int position) {
+//
+//        RelativeLayout rVideo = (RelativeLayout) vPage.findViewById(R.id.rVideo);
+//        rVideo.setVisibility(View.VISIBLE);
+//
+//        VideoView videoView = null;
+//        if (itemPhotoList.get(position).getVideoView() == null) {
+//            videoView = (VideoView) vPage.findViewById(R.id.videoview);
+//            itemPhotoList.get(position).setVideoView(videoView);
+//        } else {
+//            videoView = itemPhotoList.get(position).getVideoView();
+//        }
+//
+//
+//
+//        vPage.findViewById(R.id.vModeChange).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((Reader2Activity)mActivity).setModeChange();
+//            }
+//        });
+//
+//        Uri uri = null;
+//        uri = Uri.parse(videoTarget);
+//        videoView.setVideoURI(uri);
+//
+//        final boolean[] isEnd = {false};
+//
+//        final VideoView finalVideoView = videoView;
+//        videoView.setOnPreparedListener(new OnPreparedListener() {
+//            @Override
+//            public void onPrepared() {
+////                finalVideoView.start();
+//            }
+//        });
+//
+//        videoView.setOnCompletionListener(new OnCompletionListener() {
+//            @Override
+//            public void onCompletion() {
+//                isEnd[0] = true;
+//            }
+//        });
+//
+//        videoView.getVideoControls().setButtonListener(new VideoControlsButtonListener() {
+//            @Override
+//            public boolean onPlayPauseClicked() {
+//
+//                MyLog.Set("e", mActivity.getClass(), "onPlayPauseClicked");
+//
+//                if (isEnd[0]) {
+//                    finalVideoView.restart();
+//                    isEnd[0] = false;
+//                }
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onPreviousClicked() {
+//                MyLog.Set("e", this.getClass(), "onPreviousClicked");
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onNextClicked() {
+//                MyLog.Set("e", this.getClass(), "onNextClicked");
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onRewindClicked() {
+//                MyLog.Set("e", this.getClass(), "onRewindClicked");
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onFastForwardClicked() {
+//                MyLog.Set("e", this.getClass(), "onFastForwardClicked");
+//                return false;
+//            }
+//        });
+//
+//
+//
+//    }
+//
+//    private void setVideoClick(ImageView centerImg, final int position) {
+//        centerImg.setImageResource(R.drawable.click_2_0_0_video_white);
+//        centerImg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (ClickUtils.ButtonContinuousClick()) {
+//                    return;
+//                }
+//
+//                if (!HttpUtility.isConnect(mActivity)) {
+//                    ((Reader2Activity)mActivity).setNoConnect();
+//                    return;
+//                }
+//
+//                PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_play_audio_ready);
+//
+//                checkAudioType(position);
+//            }
+//        });
+//
+//    }
+//
+//    private void checkAudioType(int position) {
+//
+//        String videoRefer = itemPhotoList.get(position).getVideo_refer();
+//        final String videoTarget = itemPhotoList.get(position).getVideo_target();
+//
+//        MyLog.Set("d", getClass(), "videoRefer => " + videoRefer);
+//
+//        switch (videoRefer) {
+//
+//            case "file":
+//                toPlayVideo(videoTarget);
+//                break;
+//
+//            case "embed":
+//                String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
+//                try {
+//                    if (youtubeUrl == null || youtubeUrl.equals("null")) {
+//                        if (StringUtil.containsString(videoTarget, "vimeo")) {
+//                            MyLog.Set("d", mActivity.getClass(), "vimeo播放 => " + videoTarget);
+//                            VimeoExtractor.getInstance().fetchVideoWithURL(videoTarget, null, new OnVimeoExtractionListener() {
+//                                @Override
+//                                public void onSuccess(VimeoVideo video) {
+//                                    MyLog.Set("d", mActivity.getClass(), "video.getStreams().toString() =>" + video.getStreams().toString());
+//                                    String stream = "";
+//                                    stream = video.getStreams().get("1080p");
+//                                    if (stream == null || stream.equals("null")) {
+//
+//                                        stream = video.getStreams().get("720p");
+//
+//                                        if (stream == null || stream.equals("null")) {
+//
+//                                            stream = video.getStreams().get("540p");
+//
+//                                            if (stream == null || stream.equals("null")) {
+//                                                stream = video.getStreams().get("360p");
+//                                            }
+//
+//                                        }
+//
+//
+//                                    }
+//
+//                                    MyLog.Set("d", mActivity.getClass(), "stream => " + stream);
+//
+//                                    if (stream == null) {
+//
+//                                        Bundle bundle = new Bundle();
+//                                        bundle.putString(Key.url, videoTarget);
+//                                        Intent intent = new Intent(mActivity, WebView2Activity.class);
+//                                        intent.putExtras(bundle);
+//                                        mActivity.startActivity(intent);
+//                                        ActivityAnim.StartAnim(mActivity);
+//
+//                                    } else {
+//                                        toPlayVideo(stream);
+//                                    }
+//
+//
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Throwable throwable) {
+//                                }
+//                            });
+//
+//
+//                        } else if (StringUtil.containsString(videoTarget, "dailymotion")) {
+//
+////                            PinPinToast.ShowToast(mActivity, "dailymotion");
+//
+//                            toPlayVideo(videoTarget);
+//
+//                        } else {
+//                            toPlayVideo(videoTarget);
+//                        }
+//
+//
+//                    } else {
+//                        MyLog.Set("d", mActivity.getClass(), "youtube播放 => " + youtubeUrl);
+//                        Intent intent = new Intent(mActivity, YouTubeActivity.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("path", videoTarget);
+//                        intent.putExtras(bundle);
+//                        mActivity.startActivity(intent);
+//                        ActivityAnim.StartAnim(mActivity);
+//                    }
+//                } catch (Exception e) {
+//                    toPlayVideo(videoTarget);
+//                    e.printStackTrace();
+//                }
+//
+//                break;
+//            case "none":
+//                MyLog.Set("d", getClass(), "play mode => none");
+//                break;
+//            case "system":
+//                MyLog.Set("d", getClass(), "play mode => system");
+//                break;
+//        }
+//    }
+//
+//
+//    private void toPlayVideo(String url) {
+//        Intent intent = new Intent(mActivity, VideoPlayActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("videopath", url);
+//        intent.putExtras(bundle);
+//        mActivity.startActivity(intent);
+//        ActivityAnim.StartAnim(mActivity);
+//    }
 
 
 }

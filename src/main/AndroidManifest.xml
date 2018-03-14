@@ -501,7 +501,9 @@
             android:name=".pinpinbox2_0_0.activity.Reader2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="user"
-            android:theme="@style/dragger" />
+            android:theme="@style/reader" />
+
+
         <activity
             android:name=".pinpinbox2_0_0.activity.EditProfile2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"

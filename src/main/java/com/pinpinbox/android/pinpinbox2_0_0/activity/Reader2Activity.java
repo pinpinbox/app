@@ -26,6 +26,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -87,6 +88,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferences
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
@@ -110,7 +112,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol111;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -438,13 +439,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         tvAlbumUser = (TextView) v.findViewById(R.id.tvAlbumUser);
 
         try {
-//            mapAlbum = (
-//                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)
-//            ).getMap();
-//            mapAlbum.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-//            UiSettings setting = mapAlbum.getUiSettings();
-//            setting.setTiltGesturesEnabled(true);
-//            mapAlbum.setMyLocationEnabled(true);
 
             SupportMapFragment infoMap = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
@@ -470,13 +464,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         closeMapImg = (ImageView) v.findViewById(R.id.closeMapImg);
 
         try {
-//            mapPhoto = (
-//                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapPageLocation)
-//            ).getMap();
-//            mapPhoto.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-//            UiSettings setting = mapPhoto.getUiSettings();
-//            setting.setTiltGesturesEnabled(true);
-//            mapPhoto.setMyLocationEnabled(true);
 
             SupportMapFragment pageMap = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.mapPageLocation);
@@ -717,10 +704,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     }
 
     private void toMyCollect() {
-//        Intent intent = new Intent(mActivity, MyCollect2Activity.class);
-//        startActivity(intent);
-//        finish();
-//        ActivityAnim.StartAnim(mActivity);
 
         SnackManager.showCustomSnack();
 
@@ -745,7 +728,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     }
 
 
-    private void setVideo(View vPage, final String videoTarget, int position) {
+    private void setVideo(final View vPage, final String videoTarget, final int position) {
 
         RelativeLayout rVideo = (RelativeLayout) vPage.findViewById(R.id.rVideo);
         rVideo.setVisibility(View.VISIBLE);
@@ -759,85 +742,93 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         }
 
 
-
         vPage.findViewById(R.id.vModeChange).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isPhotoMode) {
-                    //一般模式 => 相片模式
-                    rBottom.setVisibility(View.GONE);
-                    rActionBar.setVisibility(View.GONE);
-                    isPhotoMode = true;
-                } else {
-                    //相片模式 => 一般模式
-                    rBottom.setVisibility(View.VISIBLE);
-                    rActionBar.setVisibility(View.VISIBLE);
-                    isPhotoMode = false;
+                setModeChange();
+            }
+        });
+
+        final Button btRefreshVideo = (Button)vPage.findViewById(R.id.btRefreshVideo);
+
+        try{
+            Uri uri = null;
+            uri = Uri.parse(videoTarget);
+            videoView.setVideoURI(uri);
+
+            final boolean[] isEnd = {false};
+
+            final VideoView finalVideoView = videoView;
+            videoView.setOnPreparedListener(new OnPreparedListener() {
+                @Override
+                public void onPrepared() {
+                    btRefreshVideo.setVisibility(View.GONE);
+                    finalVideoView.start();
                 }
-            }
-        });
+            });
 
-        Uri uri = null;
-        uri = Uri.parse(videoTarget);
-        videoView.setVideoURI(uri);
+            videoView.setOnCompletionListener(new OnCompletionListener() {
+                @Override
+                public void onCompletion() {
+                    isEnd[0] = true;
+                }
+            });
 
-        final boolean[] isEnd = {false};
+            videoView.getVideoControls().setButtonListener(new VideoControlsButtonListener() {
+                @Override
+                public boolean onPlayPauseClicked() {
 
-        final VideoView finalVideoView = videoView;
-        videoView.setOnPreparedListener(new OnPreparedListener() {
-            @Override
-            public void onPrepared() {
-                finalVideoView.start();
-            }
-        });
+                    MyLog.Set("e", mActivity.getClass(), "onPlayPauseClicked");
 
-        videoView.setOnCompletionListener(new OnCompletionListener() {
-            @Override
-            public void onCompletion() {
-                isEnd[0] = true;
-            }
-        });
+                    if (isEnd[0]) {
+                        finalVideoView.restart();
+                        isEnd[0] = false;
+                    }
 
-        videoView.getVideoControls().setButtonListener(new VideoControlsButtonListener() {
-            @Override
-            public boolean onPlayPauseClicked() {
-
-                MyLog.Set("e", mActivity.getClass(), "onPlayPauseClicked");
-
-                if (isEnd[0]) {
-                    finalVideoView.restart();
-                    isEnd[0] = false;
+                    return false;
                 }
 
-                return false;
-            }
+                @Override
+                public boolean onPreviousClicked() {
+                    MyLog.Set("e", this.getClass(), "onPreviousClicked");
+                    return false;
+                }
 
-            @Override
-            public boolean onPreviousClicked() {
-                MyLog.Set("e", this.getClass(), "onPreviousClicked");
-                return false;
-            }
+                @Override
+                public boolean onNextClicked() {
+                    MyLog.Set("e", this.getClass(), "onNextClicked");
+                    return false;
+                }
 
-            @Override
-            public boolean onNextClicked() {
-                MyLog.Set("e", this.getClass(), "onNextClicked");
-                return false;
-            }
+                @Override
+                public boolean onRewindClicked() {
+                    MyLog.Set("e", this.getClass(), "onRewindClicked");
+                    return false;
+                }
 
-            @Override
-            public boolean onRewindClicked() {
-                MyLog.Set("e", this.getClass(), "onRewindClicked");
-                return false;
-            }
+                @Override
+                public boolean onFastForwardClicked() {
+                    MyLog.Set("e", this.getClass(), "onFastForwardClicked");
+                    return false;
+                }
+            });
 
-            @Override
-            public boolean onFastForwardClicked() {
-                MyLog.Set("e", this.getClass(), "onFastForwardClicked");
-                return false;
-            }
-        });
+        }catch (Exception e){
+
+            videoView.release();
+            photoContentsList.get(position).setVideoView(null);
+
+            btRefreshVideo.setVisibility(View.VISIBLE);
+            btRefreshVideo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btRefreshVideo.setVisibility(View.GONE);
+                    setVideo(vPage, videoTarget, position);
+                }
+            });
 
 
+        }
 
     }
 
@@ -897,54 +888,56 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         ImageView centerImg = (ImageView) vPage.findViewById(R.id.centerImg);
 
-        final View vType = vPage.findViewById(R.id.vType);
-        final ImageView refreshImg = (ImageView) vPage.findViewById(R.id.refreshImg);
+        /*移置adapter執行*/
+//        final View vType = vPage.findViewById(R.id.vType);
+
         final LinearLayout linExchange = (LinearLayout) vPage.findViewById(R.id.linExchange);
 
-
-        refreshImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-
-                final PinchImageView picImg = (PinchImageView) vPage.findViewById(R.id.photoImg);
-
-                String url = photoContentsList.get(position).getImage_url();
-
-                if (url != null && !url.equals("") && !url.equals("null") && !url.isEmpty()) {
-
-                    Picasso.with(getApplicationContext())
-                            .load(url)
-                            .config(Bitmap.Config.RGB_565)
-                            .error(R.drawable.bg_2_0_0_no_image)
-                            .tag(mActivity.getApplicationContext())
-                            .into(picImg, new Callback() {
-                                @Override
-                                public void onSuccess() {
-                                    refreshImg.setVisibility(View.GONE);
-                                }
-
-                                @Override
-                                public void onError() {
-                                    MyLog.Set("d", Reader2Activity.class, "new Callback => onError");
-                                    refreshImg.setVisibility(View.VISIBLE);
-                                }
-                            });
-
-                } else {
-
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_photo_does_not_exist);
-
-                }
-
-
-            }
-        });
+        /*移置adapter執行*/
+//        final ImageView refreshImg = (ImageView) vPage.findViewById(R.id.refreshImg);
+//        refreshImg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//                if (ClickUtils.ButtonContinuousClick()) {
+//                    return;
+//                }
+//
+//
+//                final PinchImageView picImg = (PinchImageView) vPage.findViewById(R.id.photoImg);
+//
+//                String url = photoContentsList.get(position).getImage_url();
+//
+//                if (url != null && !url.equals("") && !url.equals("null") && !url.isEmpty()) {
+//
+//                    Picasso.with(getApplicationContext())
+//                            .load(url)
+//                            .config(Bitmap.Config.RGB_565)
+//                            .error(R.drawable.bg_2_0_0_no_image)
+//                            .tag(mActivity.getApplicationContext())
+//                            .into(picImg, new Callback() {
+//                                @Override
+//                                public void onSuccess() {
+//                                    refreshImg.setVisibility(View.GONE);
+//                                }
+//
+//                                @Override
+//                                public void onError() {
+//                                    MyLog.Set("d", Reader2Activity.class, "new Callback => onError");
+//                                    refreshImg.setVisibility(View.VISIBLE);
+//                                }
+//                            });
+//
+//                } else {
+//
+//                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_photo_does_not_exist);
+//
+//                }
+//
+//
+//            }
+//        });
 
         try {
 
@@ -954,51 +947,49 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                 case "image":
 
-                    vType.setVisibility(View.GONE);
 
                     break;
 
                 case "video":
 
-                    vType.setVisibility(View.VISIBLE);
 
                     setVideoClick(centerImg, position);
 
 
-                    String videoRefer = photoContentsList.get(position).getVideo_refer();
-                    final String videoTarget = photoContentsList.get(position).getVideo_target();
-
-
-                    if (videoRefer.equals("file")) {
-
-
-                        setVideo(vPage, videoTarget, position);
-
-
-                    } else if (videoRefer.equals("embed")) {
-
-                        String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
-                        if (youtubeUrl == null || youtubeUrl.equals("null")) {
-
-                            if (!StringUtil.containsString(videoTarget, "vimeo") &&
-                                    !StringUtil.containsString(videoTarget, "dailymotion") &&
-                                    !StringUtil.containsString(videoTarget, "facebook")) {
-
-                                setVideo(vPage, videoTarget, position);
-
-                            } else {
-
-                                setVideoClick(centerImg, position);
-
-                            }
-
-                        } else {
-
-                            setVideoClick(centerImg, position);
-
-                        }
-
-                    }
+//                    String videoRefer = photoContentsList.get(position).getVideo_refer();
+//                    final String videoTarget = photoContentsList.get(position).getVideo_target();
+//
+//
+//                    if (videoRefer.equals("file")) {
+//
+//
+//                        setVideo(vPage, videoTarget, position);
+//
+//
+//                    } else if (videoRefer.equals("embed")) {
+//
+//                        String youtubeUrl = StringUtil.checkYoutubeId(videoTarget);
+//                        if (youtubeUrl == null || youtubeUrl.equals("null")) {
+//
+//                            if (!StringUtil.containsString(videoTarget, "vimeo") &&
+//                                    !StringUtil.containsString(videoTarget, "dailymotion") &&
+//                                    !StringUtil.containsString(videoTarget, "facebook")) {
+//
+//                                setVideo(vPage, videoTarget, position);
+//
+//                            } else {
+//
+//                                setVideoClick(centerImg, position);
+//
+//                            }
+//
+//                        } else {
+//
+//                            setVideoClick(centerImg, position);
+//
+//                        }
+//
+//                    }
 
 
                     break;
@@ -1006,10 +997,10 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 case "exchange":
 
                     if (!itemAlbum.isOwn()) {
-                        isNoOwnShowCollectType(vPage, vType);
+                        isNoOwnShowCollectType(vPage);
                     } else {
 
-                        vType.setVisibility(View.VISIBLE);
+//                        vType.setVisibility(View.VISIBLE);
 
                         linExchange.setVisibility(View.VISIBLE);
 
@@ -1024,10 +1015,10 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
                     if (!itemAlbum.isOwn()) {
-                        isNoOwnShowCollectType(vPage, vType);
+                        isNoOwnShowCollectType(vPage);
                     } else {
 
-                        vType.setVisibility(View.VISIBLE);
+//                        vType.setVisibility(View.VISIBLE);
 
                         JSONArray jsonArray = new JSONArray(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
 
@@ -1918,17 +1909,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     }
 
     private void toPlayVideo(String url) {
-        Intent intent = new Intent(Reader2Activity.this, VideoPlayActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("videopath", url);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
+
+        ActivityIntent.toVideoPlay(mActivity, url);
     }
 
-    private void isNoOwnShowCollectType(View parent, View vType) {
+    private void isNoOwnShowCollectType(View parent) {
 
-        vType.setVisibility(View.VISIBLE);
+//        vType.setVisibility(View.VISIBLE);
         LinearLayout linCollect = (LinearLayout) parent.findViewById(R.id.linCollect);
         linCollect.setVisibility(View.VISIBLE);
         TextView tvCollect = (TextView) parent.findViewById(R.id.tvCollect);
@@ -1962,6 +1949,23 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
+    public void setModeChange() {
+        if (!isPhotoMode) {
+            //一般模式 => 相片模式
+            rBottom.setVisibility(View.GONE);
+            rActionBar.setVisibility(View.GONE);
+
+            isPhotoMode = true;
+        } else {
+            //相片模式 => 一般模式
+
+            rBottom.setVisibility(View.VISIBLE);
+            rActionBar.setVisibility(View.VISIBLE);
+
+            isPhotoMode = false;
+        }
+    }
+
     private void setPhotoMode(int position) {
 
         if (vpReader == null) {
@@ -1979,20 +1983,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 @Override
                 public void onClick(View v) {
 
-                    if (!isPhotoMode) {
-                        //一般模式 => 相片模式
-                        rBottom.setVisibility(View.GONE);
-                        rActionBar.setVisibility(View.GONE);
-
-                        isPhotoMode = true;
-                    } else {
-                        //相片模式 => 一般模式
-
-                        rBottom.setVisibility(View.VISIBLE);
-                        rActionBar.setVisibility(View.VISIBLE);
-
-                        isPhotoMode = false;
-                    }
+                    setModeChange();
                 }
             });
         }
@@ -4534,23 +4525,20 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         int count = photoContentsList.size();
         for (int i = 0; i < count; i++) {
 
-//            if(picassoBuilder!=null){
-
             String url = photoContentsList.get(i).getImage_url();
-
-//                try{
-//                    picassoBuilder.build().invalidate(url);
-//                }catch (OutOfMemoryError outOfMemoryError){
-//                    outOfMemoryError.printStackTrace();
-//                }
-//
-//            }
 
             Picasso.with(getApplicationContext()).invalidate(url);
 
 
             String urlthum = photoContentsList.get(i).getImage_url_thumbnail();
             Picasso.with(getApplicationContext()).invalidate(urlthum);
+
+
+            if (photoContentsList.get(i).getVideoView() != null) {
+                photoContentsList.get(i).getVideoView().release();
+            }
+
+
         }
 
 

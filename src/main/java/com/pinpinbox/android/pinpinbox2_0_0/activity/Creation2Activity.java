@@ -71,6 +71,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -1235,12 +1236,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     return;
                 }
 
-                Bundle bundle = new Bundle();
-                bundle.putString("videopath", videoUrl);
-                Intent intent = new Intent(mActivity, VideoPlayActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                ActivityAnim.StartAnim(mActivity);
+
+                ActivityIntent.toVideoPlay(mActivity, videoUrl);
 
             }
         });

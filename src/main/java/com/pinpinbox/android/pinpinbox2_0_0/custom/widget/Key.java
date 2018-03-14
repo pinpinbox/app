@@ -137,6 +137,7 @@ public class Key {
     public static String photo_id = "photo_id";
     public static String prefix_text = "prefix_text";
     public static String photousefor_user_id = "photousefor_user_id";
+    public static String path_or_url = "path_or_url";
 
     //q
 
