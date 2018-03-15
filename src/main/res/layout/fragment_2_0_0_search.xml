@@ -109,7 +109,7 @@
 
             <ImageView
                 android:id="@+id/scanImg"
-                style="@style/ppb200_Button_grey_small_radius8"
+                style="@style/ppb200_Button_grey_small_radius"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_alignParentRight="true"

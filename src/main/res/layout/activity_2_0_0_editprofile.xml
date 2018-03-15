@@ -138,7 +138,7 @@
 
                     <TextView
                         android:id="@+id/tvPassword"
-                        style="@style/ppb200_Button_grey_common_radius8"
+                        style="@style/ppb200_Button_grey_common_radius"
                         android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                         android:text="@string/pinpinbox_2_0_0_other_text_change" />
 
@@ -152,7 +152,7 @@
 
                 <TextView
                     android:id="@+id/tvPhone"
-                    style="@style/ppb200_Button_grey_common_radius8"
+                    style="@style/ppb200_Button_grey_common_radius"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                     android:text="@string/pinpinbox_2_0_0_other_text_change" />
 
@@ -164,7 +164,7 @@
 
                 <TextView
                     android:id="@+id/tvHobby"
-                    style="@style/ppb200_Button_grey_common_radius8"
+                    style="@style/ppb200_Button_grey_common_radius"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                     android:text="@string/pinpinbox_2_0_0_other_text_change" />
 

@@ -26,7 +26,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -749,7 +748,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             }
         });
 
-        final Button btRefreshVideo = (Button)vPage.findViewById(R.id.btRefreshVideo);
+
+        final TextView tvRefreshVideo = (TextView)vPage.findViewById(R.id.tvRefreshVideo);
 
         try{
             Uri uri = null;
@@ -762,7 +762,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             videoView.setOnPreparedListener(new OnPreparedListener() {
                 @Override
                 public void onPrepared() {
-                    btRefreshVideo.setVisibility(View.GONE);
+                    tvRefreshVideo.setVisibility(View.GONE);
                     finalVideoView.start();
                 }
             });
@@ -818,11 +818,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             videoView.release();
             photoContentsList.get(position).setVideoView(null);
 
-            btRefreshVideo.setVisibility(View.VISIBLE);
-            btRefreshVideo.setOnClickListener(new View.OnClickListener() {
+            tvRefreshVideo.setVisibility(View.VISIBLE);
+            tvRefreshVideo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    btRefreshVideo.setVisibility(View.GONE);
+                    tvRefreshVideo.setVisibility(View.GONE);
                     setVideo(vPage, videoTarget, position);
                 }
             });

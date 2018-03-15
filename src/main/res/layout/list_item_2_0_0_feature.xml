@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/tvMore"
-            style="@style/ppb200_Button_grey_small_radius8"
+            style="@style/ppb200_Button_grey_small_radius"
             android:layout_alignBottom="@+id/tvName"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

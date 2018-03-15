@@ -76,7 +76,7 @@
 
         <TextView
             android:id="@+id/tvMessage"
-            style="@style/ppb200_Button_grey_small_radius8"
+            style="@style/ppb200_Button_grey_small_radius"
             android:layout_width="72dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/ppb200_padding_margin_second"

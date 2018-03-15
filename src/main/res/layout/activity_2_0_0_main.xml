@@ -207,17 +207,17 @@
             android:scaleType="centerInside"
             android:src="@drawable/click_2_0_0_circle_create_plus" />
 
-        <!--新訊息icon-->
-        <ImageView
-            android:id="@+id/newImg"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+
+        <View
+            android:id="@+id/vRPnotify"
+            style="@style/ppb200_red_point"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="28dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/icon_2_0_0_new_message"
-            android:visibility="gone" />
+            android:layout_marginBottom="36dp"
+            android:layout_marginRight="18dp"/>
+
+
 
         <ImageView
             android:id="@+id/testbutton"

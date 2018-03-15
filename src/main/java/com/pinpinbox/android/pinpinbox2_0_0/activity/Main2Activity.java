@@ -116,8 +116,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     private ViewPager viewPager;
     private RelativeLayout rGudieCreate, rNotify, rUser, rSearch, rHome;
-    private ImageView homeImg, searchImg, createImg, newImg;
+    private ImageView homeImg, searchImg, createImg;
     private RichPathView svgNotify, svgUser, svgSearch, svgHome;
+    private View vRPnotify;
 
 
     private String strCooperationAlbumId = "";
@@ -336,7 +337,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         homeImg = (ImageView) findViewById(R.id.homeImg);
         searchImg = (ImageView) findViewById(R.id.searchImg);
         createImg = (ImageView) findViewById(R.id.createImg);
-        newImg = (ImageView) findViewById(R.id.newImg);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         rGudieCreate = (RelativeLayout) findViewById(R.id.rGudieCreate);
         rNotify = (RelativeLayout) findViewById(R.id.rNotify);
@@ -347,6 +347,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         svgUser = (RichPathView) findViewById(R.id.svgUser);
         svgSearch = (RichPathView) findViewById(R.id.svgSearch);
         svgHome = (RichPathView) findViewById(R.id.svgHome);
+        vRPnotify = findViewById(R.id.vRPnotify);
 
 
         viewPager.setOffscreenPageLimit(3);
@@ -513,14 +514,14 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         userNormal();
                         notifyPressed();
 
-                        if (newImg.getVisibility() == View.VISIBLE) {
+                        if (vRPnotify.getVisibility() == View.VISIBLE) {
                             Fragment fragment = getFragment(FragmentNotify2.class.getSimpleName());
 
                             if (((FragmentNotify2) fragment).isGetPushQueue()) {
                                 ((FragmentNotify2) fragment).doRefresh(false);
-                                newImg.setVisibility(View.GONE);
+                                vRPnotify.setVisibility(View.GONE);
                             } else {
-                                newImg.setVisibility(View.GONE);
+                                vRPnotify.setVisibility(View.GONE);
                             }
 
                         }
@@ -807,10 +808,10 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
 
-    public void showNewIcon() {
+    public void showRP_notify() {
 
 
-        newImg.setVisibility(View.VISIBLE);
+        vRPnotify.setVisibility(View.VISIBLE);
 
         RichPath top = svgNotify.findRichPathByName("top");
         RichPath bottom = svgNotify.findRichPathByName("bottom");
@@ -830,8 +831,8 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-    public void hideNewIcon() {
-        newImg.setVisibility(View.GONE);
+    public void hideRP_notify(){
+        vRPnotify.setVisibility(View.GONE);
     }
 
 

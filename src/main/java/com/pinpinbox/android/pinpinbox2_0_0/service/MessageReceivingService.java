@@ -332,7 +332,7 @@ public class MessageReceivingService extends Service {
             }
 
             if (mActivity != null) {
-                ((Main2Activity) mActivity).showNewIcon();
+                ((Main2Activity) mActivity).showRP_notify();
             }
 
 

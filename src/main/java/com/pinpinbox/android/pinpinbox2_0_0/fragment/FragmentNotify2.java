@@ -964,7 +964,7 @@ public class FragmentNotify2 extends Fragment {
 
             if (p87Result.equals("1")) {
 
-                ((Main2Activity) getActivity()).hideNewIcon();
+                ((Main2Activity) getActivity()).hideRP_notify();
 
                 if (p87arrayList.size() > 0) {
                     tvGuide.setVisibility(View.GONE);
