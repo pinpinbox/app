@@ -168,7 +168,7 @@
             <!--android:layout_alignRight="@+id/linearLayout"-->
             <!--android:layout_alignStart="@+id/linearLayout"-->
             <!--android:translationZ="32dp"-->
-            <!--android:background="@drawable/border_2_0_0_white_radius_for_toolbar" />-->
+            <!--android:background="@drawable/border_2_0_0_white_radius_side" />-->
 
         <!--<LinearLayout-->
             <!--android:id="@+id/linearLayout"-->

@@ -71,6 +71,7 @@ public class Key {
     public static String follow = "follow";
     public static String followto = "followto";
     public static String facebook_id = "facebook_id";
+    public static String from_album_info = "from_album_info";
 
     //g
     public static String gender = "gender";

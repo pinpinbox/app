@@ -1,17 +1,25 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+
+
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +38,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Test.ScaleTouhListener;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
@@ -118,8 +127,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 //    private GyroscopeObserver gyroscopeObserver;
 
-    private RelativeLayout rLocation, rAuthor, rDetail;
-    private LinearLayout linEvent, linType;
+    private RelativeLayout rLocation, rDetail;
+    private LinearLayout linEvent, linType, linAuthor;
 
     private TextView tvAlbumName, tvAlbumAuthor, tvViewed, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvVote;
     private TextView tvRead;
@@ -347,7 +356,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         strReportList = new ArrayList<>();
 
         rLocation = (RelativeLayout) findViewById(R.id.rLocation);
-        rAuthor = (RelativeLayout) findViewById(R.id.rAuthor);
+//        rAuthor = (RelativeLayout) findViewById(R.id.rAuthor);
+        linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
 
         linEvent = (LinearLayout) findViewById(R.id.linEvent);
         linType = (LinearLayout) findViewById(R.id.linType);
@@ -1116,6 +1126,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             return null;
         }
 
+
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
@@ -1130,9 +1141,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                 /*作者*/
                 if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
-                    rAuthor.setVisibility(View.GONE);
+                    linAuthor.setVisibility(View.GONE);
                 } else {
-                    rAuthor.setVisibility(View.VISIBLE);
+                    linAuthor.setVisibility(View.VISIBLE);
                     tvAlbumAuthor.setText(itemAlbum.getUser_name());
 
                     strPicture = itemAlbum.getUser_picture();
@@ -1355,8 +1366,29 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 }, 200);
 
 
+                linAuthor.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+                    @Override
+                    public void Up() {
+
+                        if(ClickUtils.ButtonContinuousClick()){
+                            return;
+                        }
+
+                        FlurryUtil.onEvent(FlurryKey.albuminfo_click_user);
+
+                        if (isReturn) {
+                            back();
+                        } else {
+
+                            toAuthor();
+
+                        }
+                    }
+                }));
+
+
                 tvRead.setOnClickListener(AlbumInfo2Activity.this);
-                rAuthor.setOnClickListener(AlbumInfo2Activity.this);
+//                linAuthor.setOnClickListener(AlbumInfo2Activity.this);
                 linEvent.setOnClickListener(AlbumInfo2Activity.this);
                 coverImg.setOnClickListener(AlbumInfo2Activity.this);
                 messageImg.setOnClickListener(AlbumInfo2Activity.this);
@@ -2238,7 +2270,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 readAlbum();
                 break;
 
-            case R.id.rAuthor:
+            case R.id.linAuthor:
 
                 FlurryUtil.onEvent(FlurryKey.albuminfo_click_user);
 
@@ -2402,12 +2434,12 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                 popMore.dismiss();
                 toAlbumInfo();
-                
+
                 break;
 
             case R.id.linCollect:
 
-                if(!itemAlbum.isOwn()) {
+                if (!itemAlbum.isOwn()) {
                     popMore.dismiss();
                     FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
                     collectAlbum();
@@ -2498,41 +2530,87 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private void toAuthor() {
 
 
-        ActivityIntent.toUser(
-                mActivity,
-                true,
-                StringIntMethod.IntToString(itemAlbum.getUser_id()),
-                itemAlbum.getUser_picture(),
-                itemAlbum.getUser_name(),
-                userImg
-        );
+//        ActivityIntent.toUser(
+//                mActivity,
+//                true,
+//                StringIntMethod.IntToString(itemAlbum.getUser_id()),
+//                itemAlbum.getUser_picture(),
+//                itemAlbum.getUser_name(),
+//                userImg
+//        );
 
 
-//        Bundle bundle = new Bundle();
-//        bundle.putString(Key.author_id, itemAlbum.getUser_id() + "");
-//        bundle.putString(Key.picture, itemAlbum.getUser_picture());
-//        bundle.putString(Key.name, itemAlbum.getUser_name());
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.author_id, itemAlbum.getUser_id() + "");
+        bundle.putString(Key.picture, itemAlbum.getUser_picture());
+        bundle.putString(Key.name, itemAlbum.getUser_name());
+
+        if (SystemUtility.Above_Equal_V5()) {
+
+
+            bundle.putBoolean(Key.shareElement, true);
+            bundle.putBoolean(Key.from_album_info, true);
+
+            userImg.setTransitionName(itemAlbum.getUser_picture());
+
+
+
+            Pair<View, String> pImg = Pair.create(findViewById(R.id.userImg), itemAlbum.getUser_picture());
+            Pair<View, String> pBg = Pair.create(findViewById(R.id.linAuthor), linAuthor.getTransitionName());
+            Pair<View, String> pName = Pair.create(findViewById(R.id.tvAuthor), tvAlbumAuthor.getTransitionName());
+
+
+            ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, pImg, pBg, pName);
+
+//            ActivityOptionsCompat ccc = ActivityOptionsCompat
+//                    .makeScaleUpAnimation(
+//                            linAuthor,
+//                            (int)linAuthor.getX(),
+//                            (int)linAuthor.getY(),
+//                            0,
+//                            0);
 //
-//        if (SystemUtility.Above_Equal_V5()) {
-//
-//            Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);
-//
-//            userImg.setTransitionName(itemAlbum.getUser_picture());
-//
-//            ActivityOptionsCompat options = ActivityOptionsCompat.
+//            ccc.update(compat);
+
+
+            Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);
+            intent.putExtras(bundle);
+
+
+            ActivityCompat.startActivity(mActivity, intent, compat.toBundle());
+
+            /*無效果*/
+//            ActivityOptionsCompat option1 = ActivityOptionsCompat.
 //                    makeSceneTransitionAnimation(mActivity,
 //                            userImg,
 //                            ViewCompat.getTransitionName(userImg));
-//            startActivity(intent, options.toBundle());
 //
-//        } else {
 //
-//            Intent intent = new Intent(mActivity, Author2Activity.class);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-//            ActivityAnim.StartAnim(mActivity);
+//            ActivityOptionsCompat option2 = ActivityOptionsCompat.
+//                    makeSceneTransitionAnimation(mActivity,
+//                            linAuthor,
+//                            ViewCompat.getTransitionName(linAuthor));
 //
-//        }
+//            ActivityOptionsCompat option3 = ActivityOptionsCompat.
+//                    makeSceneTransitionAnimation(mActivity,
+//                            tvAlbumAuthor,
+//                            ViewCompat.getTransitionName(tvAlbumAuthor));
+//
+//            option2.update(option1);
+//            option3.update(option2);
+//
+//            startActivity(intent, option3.toBundle());
+
+        } else {
+
+            bundle.putBoolean(Key.shareElement, false);
+
+            Intent intent = new Intent(mActivity, Author2Activity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            ActivityAnim.StartAnim(mActivity);
+
+        }
 
     }
 

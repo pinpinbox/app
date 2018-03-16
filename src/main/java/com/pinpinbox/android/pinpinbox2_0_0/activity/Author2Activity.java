@@ -129,6 +129,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     private boolean isDoingMore = false;
     private boolean shareElement = true;
     private boolean showSponsor = false;
+    private boolean from_album_info = false;
 
 
     private int round; //listview添加前的初始值
@@ -168,17 +169,17 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     };
 
 
-    private void scheduleStartPostponedTransition(final View sharedElement) {
-        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-                        startPostponedEnterTransition();
-                        return true;
-                    }
-                });
-    }
+//    private void scheduleStartPostponedTransition(final View sharedElement) {
+//        sharedElement.getViewTreeObserver().addOnPreDrawListener(
+//                new ViewTreeObserver.OnPreDrawListener() {
+//                    @Override
+//                    public boolean onPreDraw() {
+//                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
+//                        startPostponedEnterTransition();
+//                        return true;
+//                    }
+//                });
+//    }
 
 //    @Override
 //    public void onActivityReenter(int resultCode, Intent data) {
@@ -258,6 +259,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             strName = bundle.getString(Key.name, "");
             shareElement = bundle.getBoolean(Key.shareElement, true);
             showSponsor = bundle.getBoolean("showSponsor", false);
+            from_album_info = bundle.getBoolean(Key.from_album_info, false);
 
         } else {
 
@@ -678,9 +680,10 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                             MyLog.Set("d", Author2Activity.class, "onSuccess strPicture => " + strPicture);
 
-//                            supportStartPostponedEnterTransition();
+
                             if (SystemUtility.Above_Equal_V5()) {
-                                scheduleStartPostponedTransition(userImg);
+//                                scheduleStartPostponedTransition(userImg);
+                                startPostponedEnterTransition();
                             }
 
                             doGetCreative();
@@ -692,9 +695,10 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                             MyLog.Set("d", Author2Activity.class, "onError strPicture => " + strPicture);
 
-//                            supportStartPostponedEnterTransition();
+
                             if (SystemUtility.Above_Equal_V5()) {
-                                scheduleStartPostponedTransition(userImg);
+//                                scheduleStartPostponedTransition(userImg);
+                                startPostponedEnterTransition();
                             }
 
                             doGetCreative();
@@ -704,7 +708,8 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 //            supportStartPostponedEnterTransition();
             if (SystemUtility.Above_Equal_V5()) {
-                scheduleStartPostponedTransition(userImg);
+//                scheduleStartPostponedTransition(userImg);
+                startPostponedEnterTransition();
             }
             doGetCreative();
 
@@ -728,7 +733,20 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {
 
             if (shareElement) {
+
+
+
                 supportFinishAfterTransition();
+
+                //視覺上先隱藏
+                findViewById(R.id.rActionBar).setVisibility(View.GONE);
+                rBackgroundParallax.setVisibility(View.GONE);
+                if(from_album_info){
+                    //如從做品資訊頁進入 需先圓角化背景
+                    findViewById(R.id.rBackground).setBackgroundResource(R.drawable.border_2_0_0_white_radius_side);
+                }
+
+
             } else {
                 finish();
                 ActivityAnim.FinishAnim(mActivity);

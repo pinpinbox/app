@@ -446,6 +446,9 @@
             android:theme="@style/sharedElementEnterTransition_by_above_v5"
             android:windowSoftInputMode="adjustPan|stateHidden" >
 
+
+
+
             <intent-filter>
 
                 會員專區
