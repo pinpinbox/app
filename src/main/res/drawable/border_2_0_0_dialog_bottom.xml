@@ -5,8 +5,8 @@
 
     <corners android:topLeftRadius="0dp"
         android:topRightRadius="0dp"
-        android:bottomLeftRadius="@dimen/ppb200_radius_big"
-        android:bottomRightRadius="@dimen/ppb200_radius_big"/>
+        android:bottomLeftRadius="@dimen/ppb200_radius_general"
+        android:bottomRightRadius="@dimen/ppb200_radius_general"/>
 
 
 </shape>

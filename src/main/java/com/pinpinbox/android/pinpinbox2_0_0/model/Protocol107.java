@@ -138,6 +138,8 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
                         itemExchange.setImage(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.image));
                         itemExchange.setName(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.name));
                         itemExchange.setPhotousefor_id(JsonUtility.GetInt(jsonPhotoUseFor, ProtocolKey.photousefor_id));
+                        itemExchange.setStarttime(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.starttime));
+                        itemExchange.setEndtime(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.endtime));
 
                         if(photousefor_user!=null && !photousefor_user.equals("") && !photousefor_user.equals("null")){
                             JSONObject jsonPhotoUseForUser = new JSONObject(photousefor_user);

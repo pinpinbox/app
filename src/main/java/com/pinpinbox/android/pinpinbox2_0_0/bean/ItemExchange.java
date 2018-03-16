@@ -11,8 +11,8 @@ public class ItemExchange implements Serializable {
     private String description;
     private String image;
     private String name;
-    private String time;
-//    private String endtime, starttime;
+
+    private String endtime, starttime;
 
     private int photo_id;
     private int photousefor_id;
@@ -25,14 +25,17 @@ public class ItemExchange implements Serializable {
 
     private boolean is_existing;
     private boolean has_gained;
+    private boolean useless_award;
 
-    public String getTime() {
-        return time;
+    public boolean isUseless_award() {
+        return useless_award;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setUseless_award(boolean useless_award) {
+        this.useless_award = useless_award;
     }
+
+
 
     public String getDescription() {
         return description;
@@ -58,21 +61,21 @@ public class ItemExchange implements Serializable {
         this.name = name;
     }
 
-//    public String getEndtime() {
-//        return endtime;
-//    }
-//
-//    public void setEndtime(String endtime) {
-//        this.endtime = endtime;
-//    }
-//
-//    public String getStarttime() {
-//        return starttime;
-//    }
-//
-//    public void setStarttime(String starttime) {
-//        this.starttime = starttime;
-//    }
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
+
+    public String getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
+    }
 
     public int getPhotousefor_id() {
         return photousefor_id;

@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/pinpinbox_2_0_0_first_main" />
 
-    <corners android:topLeftRadius="@dimen/ppb200_radius_big"
-        android:topRightRadius="@dimen/ppb200_radius_big"
+    <corners android:topLeftRadius="@dimen/ppb200_radius_general"
+        android:topRightRadius="@dimen/ppb200_radius_general"
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"/>
 </shape>

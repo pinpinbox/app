@@ -48,7 +48,7 @@ public class GiftAnim {
         vGift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
+                if (ClickUtils.ButtonContinuousClick_4s()) {
                     return;
                 }
                 animBounce();
@@ -166,6 +166,7 @@ public class GiftAnim {
     }
 
     private void star4() {
+
 
         star4Img.animate()
                 .setStartDelay(250)

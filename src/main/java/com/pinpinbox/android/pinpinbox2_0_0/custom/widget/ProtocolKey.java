@@ -217,6 +217,7 @@ public class ProtocolKey {
     public static String usefor = "usefor";
     public static String userstatistics = "userstatistics";
     public static String user_name = "name";
+    public static String useless_award = "useless_award";
 
 
     //v

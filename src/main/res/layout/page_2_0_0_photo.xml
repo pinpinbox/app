@@ -223,14 +223,14 @@
                         android:text=""
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
                         android:textSize="@dimen/ppb200_title_second_size"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp"/>
 
 
                     <RelativeLayout
                         android:id="@+id/rItemBg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:background="@drawable/image_background_2_0_0_home_item_cover_radius">
 
                         <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
@@ -399,7 +399,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/ppb200_padding_margin_big"
-        android:background="@drawable/border_2_0_0_white_radius_big"
+        android:background="@drawable/border_2_0_0_white_radius"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:gravity="center"

@@ -44,6 +44,10 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
 
         public abstract void IsSlot(ItemExchange itemExchange);
 
+        public abstract void IsExpired();
+
+        public abstract void Fail();
+
         public abstract void TimeOut();
     }
 
@@ -113,7 +117,6 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
                     itemExchange.setIs_existing(JsonUtility.GetBoolean(jsonBookMark, ProtocolKey.is_existing));
 
 
-
                     /*獎項資訊*/
                     String photousefor = JsonUtility.GetString(jsonData, ProtocolKey.photousefor);
                     JSONObject jsonPhotoUseFor = new JSONObject(photousefor);
@@ -122,6 +125,9 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
                     itemExchange.setImage(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.image));
                     itemExchange.setName(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.name));
                     itemExchange.setPhotousefor_id(JsonUtility.GetInt(jsonPhotoUseFor, ProtocolKey.photousefor_id));
+                    itemExchange.setUseless_award(JsonUtility.GetBoolean(jsonPhotoUseFor, ProtocolKey.useless_award));
+                    itemExchange.setStarttime(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.starttime));
+                    itemExchange.setEndtime(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.endtime));
 
 
 
@@ -175,6 +181,8 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
 
                 DialogV2Custom.BuildError(mActivity, message);
 
+                callBack.Fail();
+
                 break;
 
             case ResultType.SYSTEM_ERROR:
@@ -202,6 +210,18 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
             case ResultType.PHOTOUSEFOR_USER_HAS_SLOTTED:
 
                 callBack.IsSlot(itemExchange);
+
+                break;
+
+            case ResultType.PHOTOUSEFOR_HAS_EXPIRED:
+
+                callBack.IsExpired();
+
+                break;
+
+            case ResultType.PHOTOUSEFOR_HAS_SENT_FINISHED:
+
+                callBack.IsExpired();
 
                 break;
 

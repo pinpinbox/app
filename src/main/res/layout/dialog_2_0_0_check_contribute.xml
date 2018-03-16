@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/ppb200_padding_margin_big"
-        android:background="@drawable/border_2_0_0_white_radius_big"
+        android:background="@drawable/border_2_0_0_white_radius"
         android:orientation="vertical">
 
         <LinearLayout

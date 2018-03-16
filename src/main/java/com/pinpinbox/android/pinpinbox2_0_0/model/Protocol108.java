@@ -40,6 +40,8 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
 
         public abstract void IsGained(ItemExchange itemExchange);
 
+        public abstract void IsExpired();
+
         public abstract void TimeOut();
     }
 
@@ -112,6 +114,8 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
                     itemExchange.setImage(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.image));
                     itemExchange.setName(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.name));
                     itemExchange.setPhotousefor_id(JsonUtility.GetInt(jsonPhotoUseFor, ProtocolKey.photousefor_id));
+                    itemExchange.setStarttime(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.starttime));
+                    itemExchange.setEndtime(JsonUtility.GetString(jsonPhotoUseFor, ProtocolKey.endtime));
 
                     String bookmark = JsonUtility.GetString(jsonData, ProtocolKey.bookmark);
 
@@ -182,6 +186,18 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
             case ResultType.PHOTOUSEFOR_USER_HAS_GAINED:
 
                 callBack.IsGained(itemExchange);
+
+                break;
+
+            case ResultType.PHOTOUSEFOR_HAS_EXPIRED:
+
+                callBack.IsExpired();
+
+                break;
+
+            case ResultType.PHOTOUSEFOR_HAS_SENT_FINISHED:
+
+                callBack.IsExpired();
 
                 break;
 

@@ -1044,12 +1044,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             doSlot(vPage, position, linExchange);
                         } else {
 
-//                            View vGift = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_gift, null);
-//                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//                            vGift.setLayoutParams(params);
-//
-//                            ((RelativeLayout)vPage).addView(vGift);
-
 
                             GiftAnim giftAnim = new GiftAnim(mActivity,
                                     vPage,
@@ -1062,35 +1056,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                     });
 
 
-//                            final GifImageView slotgiftImg = (GifImageView)vPage.findViewById(R.id.slotgiftImg);
-//
-//                            final GifDrawable slotgiftDrawable = new GifDrawable( getResources(), R.drawable.test_gift4);
-//
-//                            slotgiftDrawable.stop();
-//
-//                            slotgiftImg.setImageDrawable(slotgiftDrawable);
-//
-//
-//                            slotgiftImg.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//
-//                                    if (ClickUtils.ButtonContinuousClick()) {
-//                                        return;
-//                                    }
-//
-//                                    slotgiftDrawable.start();
-//
-//                                    slotgiftDrawable.addAnimationListener(new AnimationListener() {
-//                                        @Override
-//                                        public void onAnimationCompleted(int loopNumber) {
-//                                           MyLog.Set("e", mActivity.getClass(), "onAnimationCompleted loopNumber => " + loopNumber);
-////                                            doSlot(vPage, position, linExchange);
-//                                        }
-//                                    });
-//
-//                                }
-//                            });
+
 
 
                         }
@@ -1430,6 +1396,16 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         tvChange.setClickable(false);
                     }
 
+                    private void expired(){
+                        tvExchangeEnd.setVisibility(View.VISIBLE);
+
+                        if (tvExchangeEnd.getAlpha() == 0f) {
+                            ViewControl.AlphaTo1(tvExchangeEnd);
+                        } else {
+                            tvExchangeEnd.setAlpha(1f);
+                        }
+
+                    }
 
                     @Override
                     public void Prepare() {
@@ -1441,16 +1417,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         loading.smoothToShow();
 
-
                     }
 
                     @Override
                     public void Post() {
 
-
                         protocol108HashMap.remove(position);
-
-
                         loading.smoothToHide();
 
                     }
@@ -1471,8 +1443,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         showContents(itemExchange);
 
                         gained();
+                    }
 
-
+                    @Override
+                    public void IsExpired(){
+                        expired();
                     }
 
 
@@ -1544,8 +1519,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
                 new Protocol111.TaskCallBack() {
 
-
                     private void showContents(ItemExchange itemExchange) {
+
+
                         Picasso.with(mActivity.getApplicationContext())
                                 .load(itemExchange.getImage())
                                 .config(Bitmap.Config.RGB_565)
@@ -1561,58 +1537,34 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             linExchange.setAlpha(1f);
                         }
 
+                        if(itemExchange.getName()!=null && !itemExchange.getName().equals("null") && !itemExchange.getName().equals("")){
+                            tvExchangeName.setText(itemExchange.getName());
+                        }else {
+                            tvExchangeName.setVisibility(View.VISIBLE);
+                        }
 
-                        tvExchangeName.setText(itemExchange.getName());
 
                         tvExchangeDescription.setText(itemExchange.getDescription());
 
+
+                        if(itemExchange.isUseless_award()){
+                            tvChange.setVisibility(View.GONE);
+                            rAddToExchangeList.setVisibility(View.GONE);
+                            ScrollView svExchange = (ScrollView) vPage.findViewById(R.id.svExchange);
+                            svExchange.setPadding(0, 0, 0, 0);
+
+                        }else {
+                            tvChange.setVisibility(View.VISIBLE);
+                        }
+
+
                         /*本地保存*/
-                        try {
-                            JSONObject object = new JSONObject();
-                            object.put(Key.slot_photo_id, photoContentsList.get(position).getPhoto_id() + "");
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        try {
-                            /*獲取原排序array*/
-                            JSONArray jsonCookieArray = new JSONArray(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
-
-                            /*判斷是否在原排序內*/
-                            boolean isPhotoIdExist = false;
-                            for (int i = 0; i < jsonCookieArray.length(); i++) {
-                                JSONObject obj = (JSONObject) jsonCookieArray.get(i);
-
-                                String photo_id = obj.getString(Key.photo_id);
-                                if (photo_id != null && photo_id.equals(photoContentsList.get(position).getPhoto_id() + "")) {
-                                    isPhotoIdExist = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPhotoIdExist) {
-                                return;
-                            } else {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put(Key.photo_id, photoContentsList.get(position).getPhoto_id() + "");
-                                jsonCookieArray.put(jsonObject);
-                            }
-
-                            PPBApplication.getInstance().getData().edit().putString(Key.slot_photo_id, jsonCookieArray.toString()).commit();
-                            Logger.json(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        save();
 
 
                     }
 
                     private void canExchange(final ItemExchange itemExchange) {
-
-                        showContents(itemExchange);
 
                         tvChange.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -1729,10 +1681,64 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         tvChange.setClickable(false);
                     }
 
+                    private void expired(){
+
+                        save();
+
+                        tvExchangeEnd.setVisibility(View.VISIBLE);
+
+                        if (tvExchangeEnd.getAlpha() == 0f) {
+                            ViewControl.AlphaTo1(tvExchangeEnd);
+                        } else {
+                            tvExchangeEnd.setAlpha(1f);
+                        }
+
+                    }
+
+                    private void save(){
+                        try {
+                            JSONObject object = new JSONObject();
+                            object.put(Key.slot_photo_id, photoContentsList.get(position).getPhoto_id() + "");
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            /*獲取原排序array*/
+                            JSONArray jsonCookieArray = new JSONArray(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
+
+                            /*判斷是否在原排序內*/
+                            boolean isPhotoIdExist = false;
+                            for (int i = 0; i < jsonCookieArray.length(); i++) {
+                                JSONObject obj = (JSONObject) jsonCookieArray.get(i);
+
+                                String photo_id = obj.getString(Key.photo_id);
+                                if (photo_id != null && photo_id.equals(photoContentsList.get(position).getPhoto_id() + "")) {
+                                    isPhotoIdExist = true;
+                                    break;
+                                }
+                            }
+
+                            if (isPhotoIdExist) {
+                                return;
+                            } else {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put(Key.photo_id, photoContentsList.get(position).getPhoto_id() + "");
+                                jsonCookieArray.put(jsonObject);
+                            }
+
+                            PPBApplication.getInstance().getData().edit().putString(Key.slot_photo_id, jsonCookieArray.toString()).commit();
+                            Logger.json(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
+
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                     @Override
                     public void Prepare() {
-
 
                         linTimeout.setVisibility(View.GONE);
                         linTimeout.setAlpha(0f);
@@ -1747,11 +1753,16 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     @Override
                     public void Success(ItemExchange itemExchange) {
+
+                        showContents(itemExchange);
+
                         canExchange(itemExchange);
                     }
 
                     @Override
                     public void isBelongUser(ItemExchange itemExchange) {
+
+                        showContents(itemExchange);
                         canExchange(itemExchange);
                     }
 
@@ -1763,7 +1774,24 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     @Override
                     public void IsSlot(ItemExchange itemExchange) {
+
+                        showContents(itemExchange);
                         canExchange(itemExchange);
+                    }
+
+                    @Override
+                    public void IsExpired() {
+                        expired();
+                    }
+
+                    @Override
+                    public void Fail() {
+
+                        vPage.findViewById(R.id.rGift).animate()
+                                .alpha(1f)
+                                .setDuration(600)
+                                .start();
+
                     }
 
                     @Override

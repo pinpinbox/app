@@ -18,6 +18,7 @@ import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
@@ -25,6 +26,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol106;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol110;
@@ -201,67 +204,77 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
         PPBApplication.getInstance().getData().edit().putString(Key.contact_address, edAddress.getText().toString()).commit();
         PPBApplication.getInstance().getData().edit().putString(Key.contact_phone, edPhone.getText().toString()).commit();
 
+        if (isExchanged) {
 
-        if (isSlotType) {
-
-            //為抽獎得到的獎項 故不需要接口110歸屬用戶
-
-            if (isExchanged) {
-                doUpdate(itemExchange.getPhotousefor_user_id());
-            } else {
-                doExchange(itemExchange.getPhotousefor_user_id());
-            }
-
+            doUpdate();
 
         } else {
 
+            DialogV2Custom d = new DialogV2Custom(mActivity);
+            d.setStyle(DialogStyleClass.CHECK);
+            d.setMessage("注意獎項是否註明現場領取或寄送，如為現場領取則領取方本人須在現場執行兌換動作");
+            d.getTvRightOrBottom().setText("兌換");
+            d.setCheckExecute(new CheckExecute() {
+                @Override
+                public void DoCheck() {
 
-            protocol110 = new Protocol110(
-                    mActivity,
-                    PPBApplication.getInstance().getId(),
-                    PPBApplication.getInstance().getToken(),
-                    itemExchange.getPhoto_id() + "",
-                    getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
-                    new Protocol110.TaskCallBack() {
-                        @Override
-                        public void Prepare() {
-                            startLoading();
-                        }
+                    if (isSlotType) {
 
-                        @Override
-                        public void Post() {
-                            dissmissLoading();
-                        }
+                        doExchange();
 
-                        @Override
-                        public void Success(int puuId) {
+                    } else {
 
-                            if (isExchanged) {
-                                doUpdate(puuId);
-                            } else {
-                                doExchange(puuId);
-                            }
+                        protocol110 = new Protocol110(
+                                mActivity,
+                                PPBApplication.getInstance().getId(),
+                                PPBApplication.getInstance().getToken(),
+                                itemExchange.getPhoto_id() + "",
+                                getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
 
-                        }
+                                new Protocol110.TaskCallBack() {
+                                    @Override
+                                    public void Prepare() {
+                                        startLoading();
+                                    }
 
-                        @Override
-                        public void TimeOut() {
-                            doGetPhotousefor_user_id();
-                        }
+                                    @Override
+                                    public void Post() {
+                                        dissmissLoading();
+                                    }
+
+                                    @Override
+                                    public void Success(int puuId) {
+                                        itemExchange.setPhotousefor_user_id(puuId);
+                                        doExchange();
+                                    }
+
+                                    @Override
+                                    public void TimeOut() {
+                                        doGetPhotousefor_user_id();
+                                    }
+                                }
+                        );
+
                     }
-            );
+
+                }
+            });
+            d.show();
+
+
         }
 
 
     }
 
-    private void doExchange(final int puuId) {
+
+    private void doExchange() {
 
         protocol106 = new Protocol106(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
-                puuId,
+                itemExchange.getPhotousefor_user_id(),
                 getParam(),
                 new Protocol106.TaskCallBack() {
                     @Override
@@ -291,8 +304,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                         }
 
 
-
-
                         if (!itemExchange.isIs_existing()) {
                             doAddToDoneList();
                         } else {
@@ -304,7 +315,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                     @Override
                     public void TimeOut() {
-                        doExchange(puuId);
+                        doExchange();
                     }
                 }
         );
@@ -347,14 +358,14 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     }
 
-    private void doUpdate(final int puuId) {
+    private void doUpdate() {
 
 
         protocol43 = new Protocol43(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
-                puuId,
+                itemExchange.getPhotousefor_user_id(),
                 getParam(),
                 new Protocol43.TaskCallBack() {
                     @Override
@@ -379,7 +390,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                     @Override
                     public void TimeOut() {
-                        doUpdate(puuId);
+                        doUpdate();
                     }
                 }
         );
