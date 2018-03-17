@@ -33,6 +33,7 @@ import com.pinpinbox.android.Test.OldMainActivity;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
@@ -56,6 +57,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentHome2;
@@ -241,10 +243,19 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
+
+//                RedPointManager.showOrHideOnSettings(true);
+//                RedPointManager.showOrHideOnRecent(true);
+
+
                 Intent intent = new Intent(mActivity, OldMainActivity.class);
                 startActivity(intent);
                 finish();
                 ActivityAnim.StartAnim(mActivity);
+
+
+
+
 
             }
         });
@@ -416,7 +427,8 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     public Fragment getFragment(String fragmentName) {
 
-        @SuppressLint("RestrictedApi") List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+        @SuppressLint("RestrictedApi")
+        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
 
         Fragment getFragment = null;
 

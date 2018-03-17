@@ -64,6 +64,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
@@ -142,7 +143,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax, rSponsorList;
     private LinearLayout linLink;
     private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvLink, tvSponsor, tvUploadBanner;
-    private View viewHeader;
+    private View viewHeader, vRPmenu;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
 
     private String id, token;
@@ -245,6 +246,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         aboutImg = (ImageView) v.findViewById(R.id.aboutImg);
         shareImg = (ImageView) v.findViewById(R.id.shareImg);
         incomeImg = (ImageView) v.findViewById(R.id.incomeImg);
+
+        vRPmenu = v.findViewById(R.id.vRPmenu);
+
 
         tvUploadBanner = (TextView) v.findViewById(R.id.tvUploadBanner);
 
@@ -903,6 +907,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
 
 
+    private View vRPeditProfile, vRPworkManage,
+            vRPmyFollow, vRPrecent, vRPbutPoint, vRPexchangeList, vRPsettings;
+
     @SuppressLint("ClickableViewAccessibility")
     private void showMenu() {
 
@@ -922,6 +929,23 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvSettings), true);
 
 
+            vRPeditProfile = popMenu.getPopupView().findViewById(R.id.vRPeditProfile);
+            vRPworkManage = popMenu.getPopupView().findViewById(R.id.vRPworkManage);
+            vRPmyFollow = popMenu.getPopupView().findViewById(R.id.vRPmyFollow);
+            vRPrecent = popMenu.getPopupView().findViewById(R.id.vRPrecent);
+            vRPbutPoint = popMenu.getPopupView().findViewById(R.id.vRPbutPoint);
+            vRPexchangeList = popMenu.getPopupView().findViewById(R.id.vRPexchangeList);
+            vRPsettings = popMenu.getPopupView().findViewById(R.id.vRPsettings);
+
+            final List<View> vRedPointList = new ArrayList<>();
+            vRedPointList.add(vRPeditProfile);
+            vRedPointList.add(vRPworkManage);
+            vRedPointList.add(vRPmyFollow);
+            vRedPointList.add(vRPrecent);
+            vRedPointList.add(vRPbutPoint);
+            vRedPointList.add(vRPexchangeList);
+            vRedPointList.add(vRPsettings);
+
 
             LinearLayout linToEditProfile = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToEditProfile);
             LinearLayout linToWorkManage = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToWorkManage);
@@ -931,13 +955,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             LinearLayout linToExchangeList = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToExchangeList);
             LinearLayout linSettings = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linSettings);
 
-//            linToEditProfile.setOnClickListener(this);
-//            linToWorkManage.setOnClickListener(this);
-//            linToMyFollow.setOnClickListener(this);
-//            linToRecent.setOnClickListener(this);
-//            linToBuyPoint.setOnClickListener(this);
-//            linToExchangeList.setOnClickListener(this);
-//            linSettings.setOnClickListener(this);
             View vContent = popMenu.getPopupView().findViewById(R.id.linBackground);
 
             linToEditProfile.setOnTouchListener(new ClickDragDismissListener(vContent, this));
@@ -949,19 +966,52 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             linSettings.setOnTouchListener(new ClickDragDismissListener(vContent, this));
 
 
-//            popMenu.setScrollDismiss(popMenu.getPopupView().findViewById(R.id.linContent));
+            popMenu.setDissmissWorks(new PopupCustom.DissmissWorks() {
+                @Override
+                public void excute() {
 
+                    if (vRedPointList != null && vRedPointList.size() > 0) {
+
+                        if (vRPmenu != null) {
+
+                            boolean allclear = true;
+
+                            for (int i = 0; i < vRedPointList.size(); i++) {
+
+                                if (vRedPointList.get(i).getVisibility() == View.VISIBLE) {
+                                    allclear = false;
+                                    break;
+                                }
+
+                            }
+
+                            if (allclear) {
+                                vRPmenu.setVisibility(View.GONE);
+                            } else {
+                                vRPmenu.setVisibility(View.VISIBLE);
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+
+            checkShowRedPoints();
             popMenu.show(((Main2Activity) getActivity()).getBackground());
+//            popMenu.showWithRedPointsCheck(((Main2Activity) getActivity()).getBackground(), vRedPointList, vRPmenu);
+
+
 
         } else {
-
+            checkShowRedPoints();
             popMenu.show(((Main2Activity) getActivity()).getBackground());
         }
 
     }
-
-
-
 
     private void systemShare() {
 
@@ -1502,6 +1552,67 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         return this.albumList;
     }
 
+    private void checkShowRedPoints(){
+
+        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_editProfile, false)){
+            vRPeditProfile.setVisibility(View.VISIBLE);
+        }else {
+            vRPeditProfile.setVisibility(View.GONE);
+        }
+
+
+        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_workManage, false)){
+            vRPworkManage.setVisibility(View.VISIBLE);
+        }else {
+            vRPworkManage.setVisibility(View.GONE);
+        }
+
+
+        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_myFollow, false)){
+            vRPmyFollow.setVisibility(View.VISIBLE);
+        }else {
+            vRPmyFollow.setVisibility(View.GONE);
+        }
+
+
+        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_recent, false)){
+            vRPrecent.setVisibility(View.VISIBLE);
+        }else {
+            vRPrecent.setVisibility(View.GONE);
+        }
+
+
+        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_butPoint, false)){
+            vRPbutPoint.setVisibility(View.VISIBLE);
+        }else {
+            vRPbutPoint.setVisibility(View.GONE);
+        }
+
+
+        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_exchangeList, false)){
+            vRPexchangeList.setVisibility(View.VISIBLE);
+        }else {
+            vRPexchangeList.setVisibility(View.GONE);
+        }
+
+
+        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_settings, false)){
+            vRPsettings.setVisibility(View.VISIBLE);
+        }else {
+            vRPsettings.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    public void showRP_menu(){
+        vRPmenu.setVisibility(View.VISIBLE);
+    }
+
+    public void hide_menu(){
+        vRPmenu.setVisibility(View.GONE);
+    }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -1530,8 +1641,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 } else {
                     ((Main2Activity) getActivity()).showGuideCreate(true);
                 }
-
-
             }
         }
     }
@@ -1758,42 +1867,56 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
         switch (v.getId()){
             case R.id.linToEditProfile:
-                popMenu.dismiss();
+                popMenu.dismissWithRedPoint(vRPeditProfile);
+                RedPointManager.showOrHideOnEditProfile(false);
+
                 FlurryUtil.onEvent(FlurryKey.myprefecture_click_edit_profile);
                 toEditProfile();
                 break;
 
             case R.id.linToWorkManage:
-                popMenu.dismiss();
+                popMenu.dismissWithRedPoint(vRPworkManage);
+                RedPointManager.showOrHideOnWorkManage(false);
+
                 FlurryUtil.onEvent(FlurryKey.myprefecture_click_work_manage);
                 afterCheckPermissionType = toWorkManager;
                 toCheckPermission(toWorkManager);
                 break;
 
             case R.id.linToMyFollow:
-                popMenu.dismiss();
+                popMenu.dismissWithRedPoint(vRPmyFollow);
+                RedPointManager.showOrHideOnMyFollow(false);
+
                 FlurryUtil.onEvent(FlurryKey.myprefecture_click_myattentionlist);
                 toMyFollow();
                 break;
 
             case R.id.linToRecent:
-                popMenu.dismiss();
+                popMenu.dismissWithRedPoint(vRPrecent);
+                RedPointManager.showOrHideOnRecent(false);
+
                 FlurryUtil.onEvent(FlurryKey.myprefecture_click_recent);
                 toRecent();
                 break;
 
             case R.id.linToBuyPoint:
-                popMenu.dismiss();
+                popMenu.dismissWithRedPoint(vRPbutPoint);
+                RedPointManager.showOrHideOnBuyPoint(false);
+
                 toBuyPoint();
                 break;
 
             case R.id.linToExchangeList:
-                popMenu.dismiss();
+                popMenu.dismissWithRedPoint(vRPexchangeList);
+                RedPointManager.showOrHideOnExchangeList(false);
+
                 toExchangeList();
                 break;
 
             case R.id.linSettings:
-                popMenu.dismiss();
+                popMenu.dismissWithRedPoint(vRPsettings);
+                RedPointManager.showOrHideOnSettings(false);
+
                 FlurryUtil.onEvent(FlurryKey.myprefecture_click_settings);
                 toAppSetting();
                 break;

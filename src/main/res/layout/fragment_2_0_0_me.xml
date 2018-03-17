@@ -61,14 +61,35 @@
     <RelativeLayout
         style="@style/ppb200_action_bar_with_status">
 
-        <ImageView
-            android:id="@+id/menuImg"
+
+        <RelativeLayout
             android:layout_width="@dimen/ppb200_common_icon_side"
             android:layout_height="@dimen/ppb200_common_icon_side"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            android:padding="15dp"
-            android:src="@drawable/ic200_menu_dark" />
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/menuImg"
+                android:layout_width="@dimen/ppb200_common_icon_side"
+                android:layout_height="@dimen/ppb200_common_icon_side"
+                android:background="@drawable/click_2_0_0_default"
+                android:padding="15dp"
+                android:src="@drawable/ic200_menu_dark" />
+
+
+            <View
+                android:id="@+id/vRPmenu"
+               style="@style/ppb200_red_point"
+                android:visibility="gone"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_third"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:layout_alignParentRight="true"/>
+
+
+        </RelativeLayout>
+
+
+
+
 
 
         <LinearLayout

@@ -249,6 +249,8 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
 
                 if (SystemUtility.Above_Equal_V5()) {
 
+                    bundle.putBoolean(Key.shareElement, true);
+
                     Intent intent = new Intent(MyFollow2Activity.this, Author2Activity.class);
                     intent.putExtras(bundle);
 

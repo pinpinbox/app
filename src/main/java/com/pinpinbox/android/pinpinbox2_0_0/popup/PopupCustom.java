@@ -23,6 +23,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
+import java.util.List;
+
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 
@@ -36,9 +38,6 @@ public class PopupCustom {
         void excute();
     }
 
-    public DissmissWorks dissmissWorks() {
-        return dissmissWorks;
-    }
 
     public void setDissmissWorks(DissmissWorks dissmissWorks) {
         this.dissmissWorks = dissmissWorks;
@@ -51,7 +50,7 @@ public class PopupCustom {
     private PopupWindow popupWindow;
     private RelativeLayout rBackground;
     private BlurView blurView;
-    private View vPopup, vContent;
+    private View vPopup;
 
     private final static int intAnimDuration = 150;
 
@@ -63,7 +62,7 @@ public class PopupCustom {
         this.mActivity = mActivity;
     }
 
-    public void resetBackground() {
+    private void resetBackground() {
 
         if (blurView != null) {
 
@@ -137,14 +136,13 @@ public class PopupCustom {
             }
         });
 
-        if(vPopup instanceof LinearLayout){
+        if (vPopup instanceof LinearLayout) {
 
-            MyLog.Set("e", getClass(), "getChildCount => " + ((LinearLayout)vPopup).getChildCount());
+            MyLog.Set("e", getClass(), "getChildCount => " + ((LinearLayout) vPopup).getChildCount());
 
+            for (int i = 0; i < ((LinearLayout) vPopup).getChildCount(); i++) {
 
-            for (int i = 0; i < ((LinearLayout)vPopup).getChildCount(); i++) {
-
-                View v = ((LinearLayout)vPopup).getChildAt(i);
+                View v = ((LinearLayout) vPopup).getChildAt(i);
 
                 v.setOnTouchListener(new ClickDragDismissListener(vPopup, new ClickDragDismissListener.ActionUpListener() {
                     @Override
@@ -162,16 +160,6 @@ public class PopupCustom {
 
         }
 
-
-    }
-
-
-    public PopupWindow getPopupWindow() {
-        return this.popupWindow;
-    }
-
-    public View getPopupView() {
-        return this.vPopup;
     }
 
     private void setBlur(RelativeLayout rBackground) {
@@ -201,24 +189,15 @@ public class PopupCustom {
 
     }
 
-
-    public void show(RelativeLayout rBackground) {
-
-
+    private void statusControl() {
         //20171214
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
             acStatusColor = mActivity.getWindow().getStatusBarColor();
-
         }
-
         ((DraggerActivity) mActivity).setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
+    }
 
-
-        /*彈出時 設定background*/
-        this.rBackground = rBackground;
-
+    private void backgroundControl(RelativeLayout rBackground) {
         /*設定背景模糊*/
         setBlur(rBackground);
 
@@ -228,12 +207,36 @@ public class PopupCustom {
                 .alpha(1)
                 .start();
         popupWindow.showAtLocation(rBackground, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+    }
+
+
+    public void show(RelativeLayout rBackground) {
+
+        this.rBackground = rBackground;
+
+        statusControl();
+
+        backgroundControl(rBackground);
 
     }
 
-    public void dismiss() {
 
+    public void dismiss() {
         popupWindow.dismiss();
+    }
+
+    public void dismissWithRedPoint(View vRedPoint){
+        vRedPoint.setVisibility(View.GONE);
+        popupWindow.dismiss();
+    }
+
+
+    public PopupWindow getPopupWindow() {
+        return this.popupWindow;
+    }
+
+    public View getPopupView() {
+        return this.vPopup;
     }
 
 

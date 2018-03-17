@@ -39,12 +39,20 @@
                 android:src="@drawable/ic200_edit_dark" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvToEditProfile"
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_itemtype_edit_profile" />
 
-        </LinearLayout>
+            <View
+                android:id="@+id/vRPeditProfile"
+                style="@style/ppb200_red_point"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
 
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linToWorkManage"
@@ -61,12 +69,20 @@
                 android:src="@drawable/ic200_manage_dark" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvToWorkManage"
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_itemtype_work_manager" />
 
-        </LinearLayout>
+            <View
+                android:id="@+id/vRPworkManage"
+                style="@style/ppb200_red_point"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
 
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linToMyFollow"
@@ -83,9 +99,18 @@
                 android:src="@drawable/ic200_myattention_dark" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvToMyFollow"
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_title_myfollow" />
+
+            <View
+                android:id="@+id/vRPmyFollow"
+                style="@style/ppb200_red_point"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
 
 
         </LinearLayout>
@@ -105,9 +130,18 @@
                 android:src="@drawable/ic200_recent_dark" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvToRecent"
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_title_recent" />
+
+            <View
+                android:id="@+id/vRPrecent"
+                style="@style/ppb200_red_point"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
 
 
         </LinearLayout>
@@ -127,9 +161,18 @@
                 android:src="@drawable/ic200_buypoint_dark" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvToBuyPoint"
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_title_buypoint" />
+
+            <View
+                android:id="@+id/vRPbutPoint"
+                style="@style/ppb200_red_point"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
 
 
         </LinearLayout>
@@ -149,9 +192,18 @@
                 android:src="@drawable/ic200_gift_dark" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvToExchangeList"
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_itemtype_exchange_list" />
+
+            <View
+                android:id="@+id/vRPexchangeList"
+                style="@style/ppb200_red_point"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
 
 
         </LinearLayout>
@@ -171,12 +223,23 @@
                 android:src="@drawable/ic200_setting_dark" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvSettings"
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_title_app_settings" />
 
+            <View
+                android:id="@+id/vRPsettings"
+                style="@style/ppb200_red_point"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                />
+
 
         </LinearLayout>
+
+
 
     </LinearLayout>
 

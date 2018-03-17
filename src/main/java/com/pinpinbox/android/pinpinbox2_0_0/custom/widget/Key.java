@@ -1,5 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
+import com.pinpinbox.android.R;
+
 /**
  * Created by vmage on 2016/5/10.
  */
@@ -48,6 +50,15 @@ public class Key {
     public static String contact_name = "contact_name";
     public static String contact_address = "contact_address";
     public static String contact_phone = "contact_phone";
+
+    public static String checkRP_menu = "checkRP_menu";
+    public static String checkRP_editProfile = "checkRP_editProfile";
+    public static String checkRP_workManage = "checkRP_workManage";
+    public static String checkRP_myFollow = "checkRP_myFollow";
+    public static String checkRP_recent = "checkRP_recent";
+    public static String checkRP_butPoint = "checkRP_butPoint";
+    public static String checkRP_exchangeList = "checkRP_exchangeList";
+    public static String checkRP_settings = "checkRP_settings";
 
 
     //d

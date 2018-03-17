@@ -18,6 +18,7 @@ import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
@@ -27,7 +28,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DismissExcute;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol106;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol110;
@@ -290,7 +293,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                     @Override
                     public void Success() {
 
-                        PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_exchange_success);
+//                        PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_exchange_success);
 
                         Activity acReader = SystemUtility.getActivity(Reader2Activity.class.getSimpleName());
                         if (acReader != null) {
@@ -307,7 +310,16 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                         if (!itemExchange.isIs_existing()) {
                             doAddToDoneList();
                         } else {
-                            onBackPressed();
+
+                            DialogExchange d = new DialogExchange(mActivity);
+                            d.setDismissExcute(new DismissExcute() {
+                                @Override
+                                public void AfterDismissDo() {
+                                    onBackPressed();
+                                }
+                            });
+                            d.show();
+
                         }
 
 
@@ -344,9 +356,19 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                     @Override
                     public void Success() {
 
-                        MyLog.Set("e", mActivity.getClass(), "---------成功加入清單---------");
-                        onBackPressed();
+                        MyLog.Set("d", mActivity.getClass(), "---------成功加入清單---------");
 
+                        DialogExchange d = new DialogExchange(mActivity);
+                        d.setDismissExcute(new DismissExcute() {
+                            @Override
+                            public void AfterDismissDo() {
+
+                                RedPointManager.showOrHideOnExchangeList(true);
+
+                                onBackPressed();
+                            }
+                        });
+                        d.show();
                     }
 
                     @Override
