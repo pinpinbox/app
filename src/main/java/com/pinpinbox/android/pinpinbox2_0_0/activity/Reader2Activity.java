@@ -1540,7 +1540,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         if(itemExchange.getName()!=null && !itemExchange.getName().equals("null") && !itemExchange.getName().equals("")){
                             tvExchangeName.setText(itemExchange.getName());
                         }else {
-                            tvExchangeName.setVisibility(View.VISIBLE);
+                            tvExchangeName.setVisibility(View.GONE);
                         }
 
 
@@ -1761,7 +1761,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     @Override
                     public void isBelongUser(ItemExchange itemExchange) {
-
+                        //PHOTOUSEFOR_USER_HAS_EXCHANGED
                         showContents(itemExchange);
                         canExchange(itemExchange);
                     }

@@ -40,6 +40,9 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
@@ -79,6 +82,8 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
         setData();
 
+        setTime();
+
 
     }
 
@@ -91,7 +96,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
             itemExchange = (ItemExchange) bundle.getSerializable("exchangeItem");
             isExchanged = bundle.getBoolean("isExchanged", false);
             isSlotType = bundle.getBoolean("isSlotType", false);
-
 
         }
     }
@@ -151,6 +155,15 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private void setData() {
 
+
+        MyLog.Set("e", getClass(), "startTime => " + itemExchange.getStarttime());
+        MyLog.Set("e", getClass(), "endTime => " + itemExchange.getEndtime());
+
+        if (!isExchanged) {
+            setTime();
+        }
+
+
         tvName.setText(itemExchange.getName());
         tvDescription.setText(itemExchange.getDescription());
 
@@ -193,6 +206,55 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
             supportStartPostponedEnterTransition();
 
         }
+
+    }
+
+    private void setTime() {
+
+
+        if (itemExchange.getEndtime() == null || itemExchange.getEndtime().equals("") || itemExchange.getEndtime().equals("null")) {
+
+
+        } else {
+                    /*獲取當前時間*/
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+
+            try {
+                Date endDate = df.parse(itemExchange.getEndtime());
+
+
+                long l = endDate.getTime() - curDate.getTime();
+                long day = l / (24 * 60 * 60 * 1000);
+                long hour = (l / (60 * 60 * 1000) - day * 24);
+                long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
+
+//                tvExchangeTime.setText("剩餘時間:" + (int)(day-1) + "天" + (int)(24-hour - 1) + "小時" + min + "分");
+                tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+//            try {
+//
+//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+//                Date endDate = df.parse(itemExchange.getEndtime());
+//
+//                long diff =  endDate.getTime() -curDate.getTime() ;
+//                long days = diff / (1000 * 60 * 60 * 24);
+//                long hours = (diff - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+//                long minutes = (diff - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
+//                tvExchangeTime.setText("剩餘時間:" + days + "天" + hours + "小時" + minutes + "分");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
+
+        }
+
 
     }
 

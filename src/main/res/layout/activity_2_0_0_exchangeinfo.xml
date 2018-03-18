@@ -173,6 +173,7 @@
 
 
         <TextView
+            fontPath="fonts/OpenSans-Bold.ttf"
             android:id="@+id/tvExchangeTime"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/ppb200_common_icon_side"
@@ -182,7 +183,6 @@
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:gravity="center"
             android:letterSpacing="0.1"
-            android:text=""
             android:textColor="@color/pinpinbox_2_0_0_first_pink"
             android:textSize="@dimen/ppb200_common_text_first"
             android:textStyle="bold"

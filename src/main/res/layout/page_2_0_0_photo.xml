@@ -216,13 +216,14 @@
 
 
                     <TextView
+                        fontPath="fonts/OpenSans-Bold.ttf"
                         android:id="@+id/tvExchangeName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.1"
                         android:text=""
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
-                        android:textSize="@dimen/ppb200_title_second_size"
+                        android:textSize="@dimen/ppb200_common_text_first"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 
@@ -253,7 +254,7 @@
                         android:letterSpacing="0.1"
                         android:text=""
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/ppb200_common_text_second" />
 
 
                 </LinearLayout>
