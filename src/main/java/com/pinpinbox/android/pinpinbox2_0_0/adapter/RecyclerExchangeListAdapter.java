@@ -2,6 +2,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,12 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +32,10 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
 
 
     private Activity mActivity;
+
+    private Date curDate;
+    private SimpleDateFormat df;
+
     private List<ItemExchange> exchangeList;
     private boolean isShowTime = false;
 
@@ -47,6 +55,9 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
         this.mActivity = activity;
         this.exchangeList = exchangeList;
         this.isShowTime = isShowTime;
+
+         df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+         curDate = new Date(System.currentTimeMillis());//获取当前时间
 
     }
 
@@ -79,13 +90,42 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
         TextUtility.setBold(mHolder.tvExchangeName,true);
 
 
-//        if(isShowTime){
-//            mHolder.tvExchangeTime.setVisibility(View.VISIBLE);
-//            mHolder.tvExchangeTime.setText(exchangeList.get(position).getTime());
-//            TextUtility.setBold(mHolder.tvExchangeTime,true);
-//        }else {
+        if(isShowTime){
+
+            if (exchangeList.get(position).getEndtime() == null || exchangeList.get(position).getEndtime().equals("") || exchangeList.get(position).getEndtime().equals("null")) {
+                //∞
+                mHolder.tvExchangeTime.setText("無期限");
+                mHolder.tvExchangeTime.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+
+            }else {
+
+                try {
+                    Date endDate = df.parse(exchangeList.get(position).getEndtime());
+
+                    long l = endDate.getTime() - curDate.getTime();
+                    long day = l / (24 * 60 * 60 * 1000);
+                    long hour = (l / (60 * 60 * 1000) - day * 24);
+                    long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
+
+                    //改為直向列表後 再優化英文版
+                    mHolder.tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
+                    mHolder.tvExchangeTime.setTextColor(Color.parseColor(ColorClass.PINK_FRIST));
+
+                    TextUtility.setBold(mHolder.tvExchangeTime,true);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            mHolder.tvExchangeTime.setVisibility(View.VISIBLE);
+
+        }else {
             mHolder.tvExchangeTime.setVisibility(View.GONE);
-//        }
+        }
 
 
         try{

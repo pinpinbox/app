@@ -220,13 +220,19 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
             if (albumList.get(position).isSlot()) {
                 holder.slotImg.setVisibility(View.VISIBLE);
             } else {
-                holder.slotImg.setVisibility(View.GONE);
+
+                if(albumList.get(position).isExchange()){
+                    holder.slotImg.setVisibility(View.VISIBLE);
+                }else {
+                    holder.slotImg.setVisibility(View.GONE);
+                }
+
             }
-            if (albumList.get(position).isExchange()) {
-                holder.slotImg.setVisibility(View.VISIBLE);
-            } else {
-                holder.slotImg.setVisibility(View.GONE);
-            }//歸類於slot
+//            if (albumList.get(position).isExchange()) {
+//                holder.slotImg.setVisibility(View.VISIBLE);
+//            } else {
+//                holder.slotImg.setVisibility(View.GONE);
+//            }//歸類於slot
         } else {
             holder.linType.setVisibility(View.GONE);
         }

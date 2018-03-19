@@ -3,6 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
@@ -214,6 +216,8 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
         if (itemExchange.getEndtime() == null || itemExchange.getEndtime().equals("") || itemExchange.getEndtime().equals("null")) {
 
+            tvExchangeTime.setText("無期限");
+            tvExchangeTime.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
         } else {
                     /*獲取當前時間*/
@@ -222,7 +226,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
             try {
                 Date endDate = df.parse(itemExchange.getEndtime());
-
 
                 long l = endDate.getTime() - curDate.getTime();
                 long day = l / (24 * 60 * 60 * 1000);

@@ -79,7 +79,7 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
         try {
             holder.tvAlbumName.setText(albumList.get(position).getName());
             TextUtility.setBold(holder.tvAlbumName, true);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -88,19 +88,19 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
         holder.coverImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         String color = albumList.get(position).getCover_hex();
-        final GradientDrawable drawable = (GradientDrawable)holder.rItemBg.getBackground();
-        if(color!=null && !color.equals("")){
+        final GradientDrawable drawable = (GradientDrawable) holder.rItemBg.getBackground();
+        if (color != null && !color.equals("")) {
             drawable.setColor(Color.parseColor(color));
-        }else {
+        } else {
             drawable.setColor(Color.parseColor(ColorClass.GREY_SECOND));
         }
 
 
-        if(SystemUtility.Above_Equal_V5()) {
+        if (SystemUtility.Above_Equal_V5()) {
             holder.coverImg.setTransitionName(albumList.get(position).getCover());
         }
 
-        if(!albumList.get(position).getCover().equals("")){
+        if (!albumList.get(position).getCover().equals("")) {
             Picasso.with(mActivity.getApplicationContext())
                     .load(albumList.get(position).getCover())
                     .config(Bitmap.Config.RGB_565)
@@ -120,18 +120,40 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
 
                         }
                     });
-        }else {
+        } else {
             holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
         }
 
-        if(albumList.get(position).isVideo() || albumList.get(position).isSlot() || albumList.get(position).isExchange() ||  albumList.get(position).isAudio()){
+        if (albumList.get(position).isVideo() || albumList.get(position).isSlot() || albumList.get(position).isExchange() || albumList.get(position).isAudio()) {
             holder.linType.setVisibility(View.VISIBLE);
 
-            if(albumList.get(position).isAudio()) {holder.audioImg.setVisibility(View.VISIBLE);}else {holder.audioImg.setVisibility(View.GONE);}
-            if(albumList.get(position).isVideo()){holder.videoImg.setVisibility(View.VISIBLE);}else {holder.videoImg.setVisibility(View.GONE);}
-            if(albumList.get(position).isSlot()){holder.slotImg.setVisibility(View.VISIBLE);}else {holder.slotImg.setVisibility(View.GONE);}
-            if(albumList.get(position).isExchange()){holder.slotImg.setVisibility(View.VISIBLE);}else{holder.slotImg.setVisibility(View.GONE);}//歸類於slot
-        }else {
+            if (albumList.get(position).isAudio()) {
+                holder.audioImg.setVisibility(View.VISIBLE);
+            } else {
+                holder.audioImg.setVisibility(View.GONE);
+            }
+            if (albumList.get(position).isVideo()) {
+                holder.videoImg.setVisibility(View.VISIBLE);
+            } else {
+                holder.videoImg.setVisibility(View.GONE);
+            }
+            if (albumList.get(position).isSlot()) {
+                holder.slotImg.setVisibility(View.VISIBLE);
+            } else {
+
+                if(albumList.get(position).isExchange()){
+                    holder.slotImg.setVisibility(View.VISIBLE);
+                }else {
+                    holder.slotImg.setVisibility(View.GONE);
+                }
+
+            }
+//            if (albumList.get(position).isExchange()) {
+//                holder.slotImg.setVisibility(View.VISIBLE);
+//            } else {
+//                holder.slotImg.setVisibility(View.GONE);
+//            }//歸類於slot
+        } else {
             holder.linType.setVisibility(View.GONE);
         }
 
@@ -156,12 +178,12 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
             rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
-            coverImg = (RoundCornerImageView)itemView.findViewById(R.id.coverImg);
-            tvAlbumName = (TextView)itemView.findViewById(R.id.tvAlbumName);
-            linType = (LinearLayout)itemView.findViewById(R.id.linType);
-            audioImg = (ImageView)itemView.findViewById(R.id.audioImg);
-            videoImg = (ImageView)itemView.findViewById(R.id.videoImg);
-            slotImg = (ImageView)itemView.findViewById(R.id.slotImg);
+            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
+            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
+            linType = (LinearLayout) itemView.findViewById(R.id.linType);
+            audioImg = (ImageView) itemView.findViewById(R.id.audioImg);
+            videoImg = (ImageView) itemView.findViewById(R.id.videoImg);
+            slotImg = (ImageView) itemView.findViewById(R.id.slotImg);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
