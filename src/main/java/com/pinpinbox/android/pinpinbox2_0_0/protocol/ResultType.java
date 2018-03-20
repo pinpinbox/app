@@ -29,6 +29,7 @@ public class ResultType {
     public static final String PHOTOUSEFOR_USER_HAS_SLOTTED = "PHOTOUSEFOR_USER_HAS_SLOTTED";
     public static final String PHOTOUSEFOR_HAS_EXPIRED = "PHOTOUSEFOR_HAS_EXPIRED";
     public static final String PHOTOUSEFOR_HAS_SENT_FINISHED ="PHOTOUSEFOR_HAS_SENT_FINISHED";
+    public static final String PHOTOUSEFOR_NOT_YET_STARTED = "PHOTOUSEFOR_NOT_YET_STARTED";
 
 
 

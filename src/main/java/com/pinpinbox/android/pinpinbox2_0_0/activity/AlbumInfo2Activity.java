@@ -1,22 +1,17 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-
-
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -2538,7 +2533,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 //                itemAlbum.getUser_name(),
 //                userImg
 //        );
-
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.author_id, itemAlbum.getUser_id() + "");

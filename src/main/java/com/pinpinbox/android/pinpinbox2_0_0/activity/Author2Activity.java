@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,18 +23,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -53,6 +41,16 @@ import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
@@ -69,6 +67,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -470,7 +469,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         @Override
                         public void onSuccess() {
                             rBackgroundParallax.setBackgroundColor(Color.parseColor(ColorClass.GREY_SECOND));
-
                             bannerImg.setAlpha(0.8f);
                         }
 
@@ -492,7 +490,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 //            if( StringUtils.isTrimEmpty(itemUser.getCreative_name())){..
 //                MyLog.Set("e", getClass(), "isTrimEmpty");
 //            }
-
 
             tvCreativeName.setText(itemUser.getCreative_name());
             tvCreativeName.setVisibility(View.VISIBLE);
@@ -640,10 +637,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     );
                     ActivityAnim.StartAnimFromBottom(mActivity);
 
-
                 }
-
-
 
             }
 
@@ -661,7 +655,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     }
 
     private void setShareElementAnim() {
-
 
         if (SystemUtility.Above_Equal_V5()) {
             userImg.setTransitionName(strPicture);
@@ -684,6 +677,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                             if (SystemUtility.Above_Equal_V5()) {
 //                                scheduleStartPostponedTransition(userImg);
                                 startPostponedEnterTransition();
+
                             }
 
                             doGetCreative();
@@ -741,10 +735,10 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                 //視覺上先隱藏
                 findViewById(R.id.rActionBar).setVisibility(View.GONE);
                 rBackgroundParallax.setVisibility(View.GONE);
-                if(from_album_info){
-                    //如從做品資訊頁進入 需先圓角化背景
-                    findViewById(R.id.rBackground).setBackgroundResource(R.drawable.border_2_0_0_white_radius_side);
-                }
+//                if(from_album_info){
+//                    //如從做品資訊頁進入 需先圓角化背景
+//                    findViewById(R.id.rBackground).setBackgroundResource(R.drawable.border_2_0_0_white_radius_side);
+//                }
 
 
             } else {

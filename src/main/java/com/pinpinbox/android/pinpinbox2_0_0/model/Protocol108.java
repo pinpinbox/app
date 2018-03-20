@@ -42,6 +42,8 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
 
         public abstract void IsExpired();
 
+        public abstract void IsNotYetStarted();
+
         public abstract void TimeOut();
     }
 
@@ -198,6 +200,12 @@ public class Protocol108 extends AsyncTask<Void, Void, Object> {
             case ResultType.PHOTOUSEFOR_HAS_SENT_FINISHED:
 
                 callBack.IsExpired();
+
+                break;
+
+            case ResultType.PHOTOUSEFOR_NOT_YET_STARTED:
+
+                callBack.IsNotYetStarted();
 
                 break;
 

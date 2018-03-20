@@ -544,6 +544,7 @@
     <string name="pinpinbox_2_0_0_other_text_add_to_exchange_list">Add to exchange list</string>
     <string name="pinpinbox_2_0_0_other_text_click_to_lottery">Click</string>
     <string name="pinpinbox_2_0_0_other_text_exchange_end">Exchange end</string>
+    <string name="pinpinbox_2_0_0_other_text_not_yet_begun">Not yet begun</string>
 
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>

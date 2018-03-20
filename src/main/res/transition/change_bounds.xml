@@ -5,7 +5,7 @@
     <!--android:duration="2000" />-->
 
     <!--default-->
-    <changeBounds android:duration="150" />
+    <changeBounds android:duration="250" />
 
 
 

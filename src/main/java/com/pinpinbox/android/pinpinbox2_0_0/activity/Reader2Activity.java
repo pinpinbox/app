@@ -1041,17 +1041,17 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         }
 
                         if (isSlotted) {
-                            doSlot(vPage, position, linExchange);
+                            doSlot(vPage, position, linExchange, null);
                         } else {
 
 
-                            GiftAnim giftAnim = new GiftAnim(mActivity,
+                            final GiftAnim giftAnim = new GiftAnim(mActivity,
                                     vPage,
                                     new GiftAnim.Call() {
                                         @Override
-                                        public void onEnd() {
+                                        public void onEnd(GiftAnim ga) {
                                             MyLog.Set("d", this.getClass(), "GiftAnim onEnd");
-                                            doSlot(vPage, position, linExchange);
+                                            doSlot(vPage, position, linExchange, ga);
                                         }
                                     });
 
@@ -1450,6 +1450,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         expired();
                     }
 
+                    @Override
+                    public void IsNotYetStarted() {
+
+                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_other_text_not_yet_begun);
+
+                    }
+
 
                     @Override
                     public void TimeOut() {
@@ -1482,7 +1489,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
-    private void doSlot(final View vPage, final int position, final LinearLayout linExchange) {
+    private void doSlot(final View vPage, final int position, final LinearLayout linExchange, final GiftAnim giftAnim) {
 
 
         /*error*/
@@ -1695,6 +1702,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     }
 
+
                     private void save(){
                         try {
                             JSONObject object = new JSONObject();
@@ -1785,6 +1793,28 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     }
 
                     @Override
+                    public void IsNotYetStarted() {
+
+//                        tvExchangeEnd.setVisibility(View.VISIBLE);
+//                        tvExchangeEnd.setText(R.string.pinpinbox_2_0_0_other_text_not_yet_begun);
+//
+//                        if (tvExchangeEnd.getAlpha() == 0f) {
+//                            ViewControl.AlphaTo1(tvExchangeEnd);
+//                        } else {
+//                            tvExchangeEnd.setAlpha(1f);
+//                        }
+
+                        giftAnim.resetGift();
+
+                        giftAnim.setClickable(true);
+
+
+                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_other_text_not_yet_begun);
+
+
+                    }
+
+                    @Override
                     public void Fail() {
 
                         vPage.findViewById(R.id.rGift).animate()
@@ -1815,7 +1845,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 if (ClickUtils.ButtonContinuousClick_1s()) {
                                     return;
                                 }
-                                doSlot(vPage, position, linExchange);
+                                doSlot(vPage, position, linExchange, giftAnim);
                             }
                         });
 

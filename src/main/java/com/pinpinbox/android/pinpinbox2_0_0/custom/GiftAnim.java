@@ -20,11 +20,12 @@ public class GiftAnim {
 
 
     public static abstract class Call {
-        public abstract void onEnd();
+        public abstract void onEnd(GiftAnim giftAnim);
     }
 
     private Activity mActivity;
     private Call call;
+    private GiftAnim giftAnim;
 
     private View vParent;
     private View vGift;
@@ -32,10 +33,10 @@ public class GiftAnim {
     private View star1Img, star2Img, star3Img, star4Img;
 
     public GiftAnim(Activity mActivity, View vParent, Call call) {
-
         this.mActivity = mActivity;
         this.vParent = vParent;
         this.call = call;
+        giftAnim = this;
 
         vGift = vParent.findViewById(R.id.rGift);
         topView = vParent.findViewById(R.id.topView);
@@ -58,6 +59,17 @@ public class GiftAnim {
         vGift.setVisibility(View.VISIBLE);
 
     }
+
+
+    public void resetGift() {
+
+        vGift.animate()
+                .alpha(1f)
+                .setDuration(1)
+                .start();
+
+    }
+
 
     public void setClickable(boolean click) {
         vGift.setClickable(click);
@@ -89,11 +101,10 @@ public class GiftAnim {
         MyLog.Set("e", getClass(), "getScreenWidth => " + ScreenUtils.getScreenWidth());
         MyLog.Set("e", getClass(), "getScreenHeight => " + ScreenUtils.getScreenHeight());
 
-
         topView.animate()
                 .rotation(45f)//角度
-                .translationY(-ScreenUtils.getScreenHeight()/18)//18.5  default-96
-                .translationX(ScreenUtils.getScreenWidth()/6)//6 default180
+                .translationY(-ScreenUtils.getScreenHeight() / 18)//18.5  default-96
+                .translationX(ScreenUtils.getScreenWidth() / 6)//6 default180
                 .setDuration(400)
                 .setListener(new Animator.AnimatorListener() {
                     @Override
@@ -130,8 +141,8 @@ public class GiftAnim {
         star1Img.animate()
                 .setStartDelay(100)
                 .setInterpolator(new DecelerateInterpolator())
-                .translationY(-ScreenUtils.getScreenHeight()/5)//5 default-356
-                .translationX(-ScreenUtils.getScreenWidth()/22)//22.5 default-48
+                .translationY(-ScreenUtils.getScreenHeight() / 5)//5 default-356
+                .translationX(-ScreenUtils.getScreenWidth() / 22)//22.5 default-48
                 .setDuration(600)
                 .start();
 
@@ -142,8 +153,8 @@ public class GiftAnim {
         star2Img.animate()
                 .setStartDelay(150)
                 .setInterpolator(new DecelerateInterpolator())
-                .translationY(-ScreenUtils.getScreenHeight()/4)//3.7 default-480
-                .translationX(-ScreenUtils.getScreenWidth()/6)//5.8 default-186
+                .translationY(-ScreenUtils.getScreenHeight() / 4)//3.7 default-480
+                .translationX(-ScreenUtils.getScreenWidth() / 6)//5.8 default-186
                 .scaleX(1.5f)
                 .scaleY(1.5f)
                 .setDuration(600)
@@ -156,8 +167,8 @@ public class GiftAnim {
         star3Img.animate()
                 .setStartDelay(200)
                 .setInterpolator(new DecelerateInterpolator())
-                .translationY(-ScreenUtils.getScreenHeight()/7)//7.4 default-240
-                .translationX(-ScreenUtils.getScreenWidth()/5)//4.7 default-228
+                .translationY(-ScreenUtils.getScreenHeight() / 7)//7.4 default-240
+                .translationX(-ScreenUtils.getScreenWidth() / 5)//4.7 default-228
                 .scaleX(0.8f)
                 .scaleY(0.8f)
                 .setDuration(600)
@@ -171,8 +182,8 @@ public class GiftAnim {
         star4Img.animate()
                 .setStartDelay(250)
                 .setInterpolator(new DecelerateInterpolator())
-                .translationY(-ScreenUtils.getScreenHeight()/9)//9 default-196
-                .translationX(-ScreenUtils.getScreenWidth()/17)//16.8 default-64
+                .translationY(-ScreenUtils.getScreenHeight() / 9)//9 default-196
+                .translationX(-ScreenUtils.getScreenWidth() / 17)//16.8 default-64
                 .scaleX(1.2f)
                 .scaleY(1.2f)
                 .setDuration(600)
@@ -192,7 +203,7 @@ public class GiftAnim {
                                     .setDuration(600)
                                     .start();
 
-                            call.onEnd();
+                            call.onEnd(giftAnim);
                             setClickable(false);
                         }
 

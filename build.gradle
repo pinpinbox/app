@@ -186,7 +186,7 @@ dependencies {
     implementation "me.leolin:ShortcutBadger:1.1.18@aar"
     implementation 'com.blankj:utilcode:1.9.8'
     implementation 'com.flyco.labelview:FlycoLabelView_Lib:1.0.2@aar'
-    implementation 'com.google.firebase:firebase-analytics:11.8.0'
+//    implementation 'com.google.firebase:firebase-analytics:11.8.0'
 //    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
 

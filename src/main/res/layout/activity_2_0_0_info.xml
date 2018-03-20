@@ -472,7 +472,6 @@
         android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
         android:background="@drawable/click_2_0_0_toolbar"
-
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/ppb200_padding_margin_first"
@@ -486,10 +485,9 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:scaleType="centerCrop"
-
             app:siBorderColor="@color/pinpinbox_2_0_0_divider"
             app:siBorderWidth="0.5dp"
-            app:siRadius="28dp" />
+            app:siRadius="96dp" />
 
         <TextView
             android:id="@+id/tvAuthor"
@@ -498,7 +496,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
             android:ellipsize="end"
-            android:gravity="center_vertical"
+            android:gravity="left"
             android:includeFontPadding="false"
             android:letterSpacing="0.1"
             android:lineSpacingExtra="2dp"

@@ -5,8 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:transitionName="bg_user"
     android:fitsSystemWindows="false">
+
+    <RelativeLayout
+        android:transitionName="bg_user"
+        android:background="@drawable/border_2_0_0_white_radius_side"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
     <RelativeLayout
@@ -161,5 +166,6 @@
         app:spb_stroke_separator_length="0dp"
         app:spb_stroke_width="4dp" />
 
+</RelativeLayout>
 
 </RelativeLayout>
