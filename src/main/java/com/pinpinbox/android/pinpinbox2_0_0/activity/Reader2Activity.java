@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.listener.VideoControlsButtonListener;
@@ -55,6 +57,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -4380,6 +4383,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             setSwipeBackEnable(false);
 
+//           tvPageDescription.setPadding(
+//                   SizeUtils.dp2px(4),
+//                   SizeUtils.dp2px(4),
+//                   SizeUtils.dp2px(4),
+//                   SizeUtils.dp2px(4));
+
 
         } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             MyLog.Set("d", getClass(), "-------------portrait(直)");
@@ -4395,7 +4404,14 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             (findViewById(R.id.vStatusHeight)).setVisibility(View.VISIBLE);
 
 
-            setSwipeBackEnable(true);
+            setSwipeBackEnable(false);
+
+//            tvPageDescription.setPadding(
+//                    SizeUtils.dp2px(16),
+//                    SizeUtils.dp2px(4),
+//                    SizeUtils.dp2px(16),
+//                    SizeUtils.dp2px(4));
+
 
         }
     }

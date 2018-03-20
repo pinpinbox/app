@@ -66,7 +66,6 @@ public class FirstInstallActivity extends DraggerActivity {
     private boolean fromAwsMessage = false;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +141,6 @@ public class FirstInstallActivity extends DraggerActivity {
     }
 
 
-
     private void connectInstability() {
 
         ConnectInstability connectInstability = new ConnectInstability() {
@@ -177,26 +175,51 @@ public class FirstInstallActivity extends DraggerActivity {
         private String p88Message = "";
 
 
-        private Handler mHandler = new Handler() {
+        public Handler mHandler = new Handler() {
+
 
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
+
                     case 0:
+
                         OkHttpClient mOkHttpClient = new OkHttpClient();
                         final Request request = new Request.Builder().url("https://play.google.com/store/apps/details?id=com.pinpinbox.android").build();
                         Call call = mOkHttpClient.newCall(request);
                         call.enqueue(new com.squareup.okhttp.Callback() {
                             @Override
                             public void onFailure(Request request, IOException e) {
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        dissmissLoading();
+                                    }
+                                });
+
+                                MyLog.Set("e", mActivity.getClass(), "77777");
+
                             }
 
                             @Override
                             public void onResponse(final Response response) throws IOException {
+
+
+                                MyLog.Set("e", mActivity.getClass(), "88888");
+
+
                                 String htmlStr = response.body().string();
                                 Pattern pattern = Pattern.compile("\"softwareVersion\"\\W*([\\d\\.]+)");
                                 Matcher matcher = pattern.matcher(htmlStr);
                                 if (matcher.find()) {
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            dissmissLoading();
+                                        }
+                                    });
 
                                     if (!SystemUtility.getVersionName(mActivity).equals(matcher.group(1))) {
                                         MyLog.Set("e", FirstInstallActivity.class, "------------------------- 版本不一樣 可更新 -------------------------");
@@ -223,6 +246,27 @@ public class FirstInstallActivity extends DraggerActivity {
                                     }
 
                                 } else { //有可能Google Play的網頁內容變動，但仍需讓使用者可以進到下一頁面
+
+                                    MyLog.Set("e", mActivity.getClass(), "99999");
+
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            startLoading();
+                                        }
+                                    });
+
+
+
+
+                                    Message msg = new Message();
+                                    msg.what = 0;
+                                    mHandler.sendMessageDelayed(msg,1500);
+
+
+//                                    dowork();
+
                                 }
                             }
                         });
@@ -275,7 +319,6 @@ public class FirstInstallActivity extends DraggerActivity {
                         dowork();
                         break;
 
-
                 }
 
             }
@@ -289,7 +332,6 @@ public class FirstInstallActivity extends DraggerActivity {
             doingType = DoingTypeClass.DoDefault;
 
             MyLog.Set("e", FirstInstallActivity.class, "FirstInstallActivity  => loading");
-//            showLoading();
             startLoading();
 
         }
@@ -334,10 +376,13 @@ public class FirstInstallActivity extends DraggerActivity {
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
-            dissmissLoading();
-//            stopLoading();
+            /*各別判斷*/
+//            dissmissLoading();
             MyLog.Set("e", FirstInstallActivity.class, "FirstInstallActivity  => dissmissLoading");
             if (p88Result == 1) {
+
+                dissmissLoading();
+
                 //要更新
                 final DialogV2Custom d = new DialogV2Custom(mActivity);
                 d.setOrientation(LinearLayout.VERTICAL);
@@ -380,13 +425,21 @@ public class FirstInstallActivity extends DraggerActivity {
 
 
             } else if (p88Result == 0) {
+
+                dissmissLoading();
+
                 DialogV2Custom.BuildError(mActivity, p88Message);
 
             } else if (p88Result == Key.TIMEOUT) {
 
+                dissmissLoading();
+
                 connectInstability();
 
             } else {
+
+                dissmissLoading();
+
                 dowork();
             }
         }
@@ -551,6 +604,11 @@ public class FirstInstallActivity extends DraggerActivity {
         System.gc();
 
         MyLog.Set("d", getClass(), "onDestroy()");
+
+        if(checkVersionTask!=null && !checkVersionTask.isCancelled()){
+            checkVersionTask.mHandler.removeCallbacksAndMessages(null);
+            cancelTask(checkVersionTask);
+        }
 
 
         super.onDestroy();
