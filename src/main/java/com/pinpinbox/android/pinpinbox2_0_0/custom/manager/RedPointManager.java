@@ -7,7 +7,6 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 
 /**
@@ -28,9 +27,6 @@ public class RedPointManager {
                 }
             }
         }
-
-
-
     }
 
 
