@@ -63,7 +63,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
     private Activity mActivity;
     private List<ItemUser> itemUserList;
     private RecyclerSponsorAdapter adapter;
-
+//
     private FollowTask followTask;
     private AttentionTask attentionTask;
     private Protocol105 protocol105;
