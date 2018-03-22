@@ -79,6 +79,15 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="(依活動說明選填即可)"
+                android:letterSpacing="0.1"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                android:textSize="@dimen/ppb200_common_text_small"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"/>
+
 
             <TextView
                 android:layout_width="wrap_content"

@@ -32,6 +32,7 @@ public class IntentControl {
 
                 PPBApplication.getInstance().getData().edit().remove(Key.token).commit();
                 PPBApplication.getInstance().getData().edit().remove(Key.id).commit();
+                PPBApplication.getInstance().getData().edit().remove(Key.slot_photo_id).commit();
 
                 loading = new LoadingAnimation(currentActivity);
                 loading.show();
@@ -79,6 +80,7 @@ public class IntentControl {
 
                 PPBApplication.getInstance().getData().edit().remove(Key.token).commit();
                 PPBApplication.getInstance().getData().edit().remove(Key.id).commit();
+                PPBApplication.getInstance().getData().edit().remove(Key.slot_photo_id).commit();
 
                 loading = new LoadingAnimation(currentActivity);
                 loading.show();
