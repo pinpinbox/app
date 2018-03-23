@@ -8,9 +8,12 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,14 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -39,15 +35,23 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBoardAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBoardAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSearch2;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -57,11 +61,15 @@ import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
+
 
 /**
  * Created by kevin9594 on 2017/4/8.
@@ -70,6 +78,7 @@ public class PopBoard {
 
 
     private Activity mActivity;
+    private CountDownTimer countDownTimer;
 
 
     private GetBoardTask getBoardTask;
@@ -89,6 +98,7 @@ public class PopBoard {
     /***********************************************/
     private RecyclerView rvBoard;
     private EditText edText;
+    //    private AutoCompleteEditText edText;
     private SmoothProgressBar pbLoadMore;
     private RoundedImageView userImg;
     private TextView tvTitle, tvSecondTitle;
@@ -101,6 +111,7 @@ public class PopBoard {
     private String type_id;
     private String id, token;
     private String p90Message = "";
+    private String strSendText = "";
 
 
     private final static int intAnimDuration = 300;
@@ -145,7 +156,6 @@ public class PopBoard {
         doGetBoard();
 
 
-
     }
 
     private void initView() {
@@ -158,7 +168,7 @@ public class PopBoard {
         edText = (EditText) v.findViewById(R.id.edText);
         userImg = (RoundedImageView) v.findViewById(R.id.userImg);
         tvTitle = (TextView) v.findViewById(R.id.tvTitle);
-        tvSecondTitle = (TextView)v.findViewById(R.id.tvSecondTitle);
+        tvSecondTitle = (TextView) v.findViewById(R.id.tvSecondTitle);
 
 
         popupWindow = new PopupWindow(v, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -175,8 +185,8 @@ public class PopBoard {
             public void onDismiss() {
 
 
-                if(changeToDarkStatus){
-                    ((DraggerActivity)mActivity).setCurrentActivityStatusMode();
+                if (changeToDarkStatus) {
+                    ((DraggerActivity) mActivity).setCurrentActivityStatusMode();
                 }
 
 
@@ -217,7 +227,257 @@ public class PopBoard {
             }
         });
 
+
+        final String reg = " @" + "\\S*\\z";
+
+
+
+        edText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                String strInput = edText.getText().toString();
+
+                if (strInput.length() == 1 && strInput.substring(0, 1).equals("@")) {
+                    edText.setText(" @");
+                    edText.setSelection(edText.getText().toString().length());
+                }
+
+
+                String text = "";
+
+                String beforeCursor = edText.getText().toString().substring(0, edText.getSelectionStart());
+
+                Pattern pattern = Pattern.compile(reg);
+                Matcher matcher = pattern.matcher(beforeCursor);
+                if (matcher.find()) {
+                    text = matcher.group(0);
+                    MyLog.Set("e", mActivity.getClass(), "text => " + text);
+
+                    strSendText = text.substring(2);
+
+                    MyLog.Set("e", mActivity.getClass(), "strSendText => " + strSendText);
+
+
+                    if (strSendText.equals("")) {
+                        if (countDownTimer != null) {
+                            countDownTimer.cancel();
+                            MyLog.Set("d", FragmentSearch2.class, "取消倒數");
+                        }
+                    } else {
+
+                        if (countDownTimer != null) {
+                            countDownTimer.cancel();
+                            countDownTimer.start();
+
+                            MyLog.Set("d", FragmentSearch2.class, "重新倒數");
+                        }
+                    }
+
+
+
+                } else {
+                    MyLog.Set("e", mActivity.getClass(), "text => " + text);
+                }
+
+
+
+
+
+                /**************************************************************************/
+
+
+//                Pattern pattern = Pattern.compile("@");
+//                Matcher matcher = pattern.matcher(edText.getText());
+//
+//
+//                if(matcher.find()){
+//                    MyLog.Set("e", mActivity.getClass(), "88888");
+//                }else {
+//                    MyLog.Set("e", mActivity.getClass(), "99999");
+//                }
+                /**************************************************************************/
+
+
+//                String reg = "/\\B@(\\w*)$/";
+//                Pattern pattern = Pattern.compile(reg, Pattern.CASE_INSENSITIVE);
+//                Matcher matcher = pattern.matcher(edText.getText());
+//
+//                MyLog.Set("e", mActivity.getClass(), "matcher.toString() => " +      matcher.toString());
+
+//                if(matcher.find()){
+//                    MyLog.Set("e", mActivity.getClass(), "88888");
+//                }else {
+//                    MyLog.Set("e", mActivity.getClass(), "99999");
+//                }
+
+                /**************************************************************************/
+
+
+            }
+        });
+
+
+        countDownTimer = new CountDownTimer(1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                MyLog.Set("d", mActivity.getClass(), "timer =>" + (millisUntilFinished / 1000) + "");
+            }
+
+            @Override
+            public void onFinish() {
+                MyLog.Set("d", FragmentSearch2.class, "timer => finish()");
+                countDownTimer.cancel();
+                doSearchUser();
+            }
+        };
+
+
     }
+
+
+    private void doSearchUser() {
+
+        UserListTask userListTask = new UserListTask();
+        userListTask.execute();
+    }
+
+
+    private class UserListTask extends AsyncTask<Void, Void, Object> {
+
+        private int p41Result = -1;
+        private String p41Message = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            doingType = DoingTypeClass.DoSearchUserList;
+
+            /*執行搜尋前全部移除*/
+//            userAdapter.notifyItemRangeRemoved(0, currentUserList.size());
+//
+//            if (searchUserList.size() > 0) {
+//                searchUserList.clear();
+//            }
+//
+//            if (currentUserList.size() > 0) {
+//                for (int i = 0; i < currentUserList.size(); i++) {
+//                    String strPicture = (String) currentUserList.get(i).get(Key.picture);
+//                    Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
+//                }
+//                currentUserList.clear();
+//            }
+
+        }
+
+        @Override
+        protected Object doInBackground(Void... params) {
+
+            String strJson = "";
+
+            try {
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P41_Search,
+                        SetMapByProtocol.setParam41_search(id, token, "user", strSendText, "0,32"), null);
+                MyLog.Set("d", mActivity.getClass(), "p41strJson(user) =>" + strJson);
+            } catch (SocketTimeoutException timeout) {
+                p41Result = Key.TIMEOUT;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (strJson != null && !strJson.equals("")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(strJson);
+                    p41Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                    if (p41Result == 1) {
+
+                        String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                        JSONArray jsonArray = new JSONArray(jdata);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject j = (JSONObject) jsonArray.get(i);
+
+
+                            String user = JsonUtility.GetString(j, ProtocolKey.user);
+                            JSONObject object = new JSONObject(user);
+
+                            String name = JsonUtility.GetString(object, ProtocolKey.name);
+                            String picture = JsonUtility.GetString(object, ProtocolKey.picture);
+                            String user_id = JsonUtility.GetString(object, ProtocolKey.user_id);
+
+                            HashMap<String, Object> map = new HashMap<String, Object>();
+                            map.put(Key.name, name);
+                            map.put(Key.user_id, user_id);
+                            map.put(Key.picture, picture);
+
+                            if (!user_id.equals(id)) {
+//                                searchUserList.add(map);
+                            }
+                        }
+
+
+                    } else if (p41Result == 0) {
+                        p41Message = jsonObject.getString(Key.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+
+//            loadDataEnd();
+//
+//
+//            if (p41Result == 1) {
+//
+//                tvSearchUserTitle.setText(R.string.pinpinbox_2_0_0_title_find_creator);
+//                setSearchUserData();
+//
+//                //20171113
+//                if(rvSearch.getAlpha()==0f){
+//
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ViewPropertyAnimator alphaTo1 = rvSearch.animate();
+//                            alphaTo1.setDuration(400)
+//                                    .alpha(1)
+//                                    .start();
+//                        }
+//                    }, 200);
+//
+//                }
+//
+//
+//
+//            } else if (p41Result == 0) {
+//                DialogV2Custom.BuildError(getActivity(), p41Message);
+//            } else if (p41Result == Key.TIMEOUT) {
+//                connectInstability();
+//            } else {
+//                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
+//            }
+
+        }
+
+
+    }
+
 
     private void set() {
 
@@ -734,18 +994,18 @@ public class PopBoard {
                             String strMessageTime = "";
                             if (day != 0) {
 
-                                if(day<2){
+                                if (day < 2) {
                                     strMessageTime = day + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_before_day_single);
-                                }else {
+                                } else {
                                     strMessageTime = day + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_before_day);
                                 }
 
 
                             } else if (hour != 0) {
 
-                                if(hour<2){
+                                if (hour < 2) {
                                     strMessageTime = hour + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_before_hour_single);
-                                }else {
+                                } else {
                                     strMessageTime = hour + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_before_hour);
                                 }
 
@@ -753,9 +1013,9 @@ public class PopBoard {
                             } else if (min != 0) {
 
 
-                                if(min<2){
+                                if (min < 2) {
                                     strMessageTime = min + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_before_minute_single);
-                                }else {
+                                } else {
                                     strMessageTime = min + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_before_minute);
                                 }
 
@@ -864,8 +1124,8 @@ public class PopBoard {
 
     public void show(RelativeLayout rBackground) {
 
-        if(changeToDarkStatus){
-            ((DraggerActivity)mActivity).setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
+        if (changeToDarkStatus) {
+            ((DraggerActivity) mActivity).setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
         }
 
 
@@ -886,13 +1146,7 @@ public class PopBoard {
 
     public void dismiss() {
 
-//        ((DraggerActivity)mActivity).getStatusControl().setCurrentActivityMode();
-
-
         popupWindow.dismiss();
-
-
-
 
     }
 
@@ -923,7 +1177,7 @@ public class PopBoard {
 
     }
 
-    public void setSecondTitle(String secTitle){
+    public void setSecondTitle(String secTitle) {
         tvSecondTitle.setVisibility(View.VISIBLE);
         tvSecondTitle.setText(secTitle);
     }

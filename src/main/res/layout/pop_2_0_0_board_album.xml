@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="72dp"-->
+        <!--android:background="@color/white" />-->
 
 
     <LinearLayout
@@ -15,7 +22,8 @@
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"
         android:layout_marginTop="92dp"
         android:orientation="horizontal">
-
+        <!--android:layout_marginTop="92dp"-->
+        <!--android:layout_marginTop="16dp"-->
         <TextView
             android:id="@+id/tvTitle"
             style="@style/ppb200_title_pop_second"
@@ -26,11 +34,11 @@
 
         <TextView
             android:id="@+id/tvSecondTitle"
-            android:letterSpacing="0.1"
             fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:letterSpacing="0.1"
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:textSize="18sp"
             android:visibility="gone" />
@@ -84,7 +92,36 @@
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textColorHint="@color/pinpinbox_2_0_0_hint_alpha"
                 android:textCursorDrawable="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_third" />
+                android:textSize="@dimen/ppb200_common_text_third"
+                />
+
+            <!--<mabbas007.tagsedittext.TagsEditText-->
+            <!--android:id="@+id/edText"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_second"-->
+            <!--android:layout_toEndOf="@+id/userImg"-->
+            <!--android:layout_toRightOf="@+id/userImg"-->
+            <!--android:background="@drawable/border_2_0_0_grey_third_radius"-->
+            <!--android:hint="@string/pinpinbox_2_0_0_input_hint_board_express"-->
+            <!--android:letterSpacing="0.1"-->
+            <!--android:lineSpacingExtra="2dp"-->
+            <!--android:maxLength="128"-->
+            <!--android:minHeight="36dp"-->
+            <!--android:padding="8dp"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
+            <!--android:textColorHint="@color/pinpinbox_2_0_0_hint_alpha"-->
+            <!--android:textCursorDrawable="@color/pinpinbox_2_0_0_first_text"-->
+            <!--android:textSize="@dimen/ppb200_common_text_third"-->
+
+            <!--TagsEditText:allowSpaceInTag="true"-->
+            <!--TagsEditText:tagsCloseImageRight="@drawable/tag_close"-->
+            <!--TagsEditText:tagsBackground="@drawable/square"-->
+            <!--TagsEditText:tagsTextColor="@color/white"-->
+            <!--TagsEditText:tagsTextSize="@dimen/defaultTagsTextSize"-->
+            <!--TagsEditText:tagsCloseImagePadding="@dimen/defaultTagsCloseImagePadding"/>-->
+
 
             <TextView
                 android:id="@+id/tvSend"

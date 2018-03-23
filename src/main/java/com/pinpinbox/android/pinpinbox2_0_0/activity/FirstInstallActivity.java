@@ -209,6 +209,13 @@ public class FirstInstallActivity extends DraggerActivity {
                                 MyLog.Set("e", mActivity.getClass(), "88888");
 
 
+//                                String htmlStr = response.body().string();
+//                                Pattern pattern = Pattern.compile(SystemUtility.getVersionName(mActivity));
+//                                Matcher matcher = pattern.matcher(htmlStr);
+
+
+
+
                                 String htmlStr = response.body().string();
                                 Pattern pattern = Pattern.compile("\"softwareVersion\"\\W*([\\d\\.]+)");
                                 Matcher matcher = pattern.matcher(htmlStr);
@@ -250,22 +257,18 @@ public class FirstInstallActivity extends DraggerActivity {
                                     MyLog.Set("e", mActivity.getClass(), "99999");
 
 
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            startLoading();
-                                        }
-                                    });
+//                                    runOnUiThread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            startLoading();
+//                                        }
+//                                    });
+//
+//                                    Message msg = new Message();
+//                                    msg.what = 0;
+//                                    mHandler.sendMessageDelayed(msg,1500);
 
-
-
-
-                                    Message msg = new Message();
-                                    msg.what = 0;
-                                    mHandler.sendMessageDelayed(msg,1500);
-
-
-//                                    dowork();
+                                    dowork();
 
                                 }
                             }

@@ -161,6 +161,7 @@
     <orderEntry type="library" name="com.android.support:palette-v7-23.3.0" level="project" />
     <orderEntry type="library" name="com.zzhoujay.richtext:richtext-2.5.4" level="project" />
     <orderEntry type="library" name="com.github.castorflex.smoothprogressbar:library-1.1.0" level="project" />
+    <orderEntry type="library" name="com.github.mabbas007:TagsEditText-1.0.5" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-iid-license-11.8.0" level="project" />
     <orderEntry type="library" name="com.android.support:design-24.2.1" level="project" />
     <orderEntry type="library" name="com.github.tarek360.RichPath:richpath-0.0.5" level="project" />
