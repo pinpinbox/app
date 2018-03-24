@@ -147,7 +147,6 @@ public class PopBoard {
     private boolean sizeMax = false;
     private boolean isNoDataToastAppeared = false; //判斷無資料訊息是否出現過
     private boolean isShowRecyclerPadding = false;
-
     private boolean changeToDarkStatus = true;
 
     public PopBoard(Activity mActivity, int type, String type_id, RelativeLayout rShow, boolean changeToDarkStatus) {
@@ -280,22 +279,38 @@ public class PopBoard {
 
                 /*判斷是否已經tag*/
                 if(tagsList!=null && tagsList.size()>0){
-
                     for (int i = 0; i < tagsList.size(); i++) {
-
                         if( (tagsList.get(i).getUser_id()).equals(itemUserList.get(position).getUser_id())){
-
                             PinPinToast.showErrorToast(mActivity, "不可重複標記");
-
                             return;
-
                         }
-
                     }
-
                 }
 
-                edText.setText(edText.getText().toString().replaceFirst("@" + strSendText, itemUserList.get(position).getName()));
+
+                /*判斷前字符是否為tag*/
+                boolean isTag = false;
+                if(tagsList!=null && tagsList.size()>0) {
+                    int a = edText.getSelectionStart();
+                    MyLog.Set("e", mActivity.getClass(), "a => " + a);
+                    for (int i = 0; i < tagsList.size(); i++) {
+                        if(a==tagsList.get(i).getEndIndex()+2){
+                            isTag = true;
+                            break;
+                        }
+                    }
+                }
+
+                if(isTag){
+
+                    //評估是否添加一空格
+
+                    MyLog.Set("e", mActivity.getClass(), "isTag");
+                    edText.setText(edText.getText().toString().replaceFirst("@" + strSendText, itemUserList.get(position).getName()));
+                }else {
+                    MyLog.Set("e", mActivity.getClass(), "!isTag");
+                    edText.setText(edText.getText().toString().replaceFirst(" @" + strSendText, itemUserList.get(position).getName()));
+                }
 
 
                 /*建立tag*/
@@ -326,33 +341,17 @@ public class PopBoard {
                 for (int i = 0; i < tagsList.size(); i++) {
 
 
-                    RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 4, Color.parseColor(ColorClass.PINK_FRIST));
+                    RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 8, Color.parseColor(ColorClass.PINK_FRIST));
                     spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
 //                    ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
 //                    spanString.setSpan(span, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-
                 }
 
                 edText.setText(spanString);
                 setSelection();
-
-
-//                edText.setText("0123456789");
-//
-//                SpannableString spanString = new SpannableString(edText.getText());
-//
-//                ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
-//                spanString.setSpan(span, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//
-//
-//
-//                ForegroundColorSpan span2 = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
-//                spanString.setSpan(span2, 6, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                edText.setText(spanString);
-
 
             }
 
@@ -360,7 +359,10 @@ public class PopBoard {
             public boolean onItemLongClick(int position, View v) {
                 return false;
             }
+
         });
+
+
 
     }
 
@@ -566,7 +568,7 @@ public class PopBoard {
         pbLoadMore.progressiveStop();
 
         /*設定留言列表*/
-        LinearLayoutManager manager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
+        final LinearLayoutManager manager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
         boardAdapter = new RecyclerBoardAdapter(mActivity, itemBoardList);
         rvBoard.setAdapter(boardAdapter);
         rvBoard.setLayoutManager(manager);
@@ -580,12 +582,33 @@ public class PopBoard {
                 popupWindow.dismiss();
             }
         });
+
         v.findViewById(R.id.tvClear).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edText.setText("");
+
+
+                /*模擬送出字串*/
+                String readySendText = edText.getText().toString();
+
+                for (int i = 0; i < tagsList.size(); i++) {
+
+                    Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+                    Matcher matcher = pattern.matcher(readySendText);
+
+                    if(matcher.find()){
+                        readySendText = readySendText.replaceFirst(tagsList.get(i).getName(), tagsList.get(i).getSendType());
+                    }
+                }
+
+
+                MyLog.Set("e", mActivity.getClass(), "readySendText => " + readySendText);
+
+
+//                edText.setText("");
             }
         });
+
         v.findViewById(R.id.tvSend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -593,7 +616,6 @@ public class PopBoard {
                 for (int i = 0; i < tagsList.size(); i++) {
 
                     MyLog.Set("e", mActivity.getClass(), tagsList.get(i).getSendType());
-
 
                 }
 
