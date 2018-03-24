@@ -17,6 +17,7 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -40,6 +41,7 @@ import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
+import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
@@ -54,6 +56,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemTagUser;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.RadiusBackgroundSpan;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
@@ -251,7 +254,6 @@ public class PopBoard {
 
     }
 
-
     private void setTag() {
 
         itemUserList = new ArrayList<>();
@@ -272,6 +274,26 @@ public class PopBoard {
             @Override
             public void onItemClick(int position, View v) {
 
+                if(ClickUtils.ButtonContinuousClick()){
+                    return;
+                }
+
+                /*判斷是否已經tag*/
+                if(tagsList!=null && tagsList.size()>0){
+
+                    for (int i = 0; i < tagsList.size(); i++) {
+
+                        if( (tagsList.get(i).getUser_id()).equals(itemUserList.get(position).getUser_id())){
+
+                            PinPinToast.showErrorToast(mActivity, "不可重複標記");
+
+                            return;
+
+                        }
+
+                    }
+
+                }
 
                 edText.setText(edText.getText().toString().replaceFirst("@" + strSendText, itemUserList.get(position).getName()));
 
@@ -282,7 +304,7 @@ public class PopBoard {
                 tags.setUser_id(itemUserList.get(position).getUser_id());
 
                 /*移除name後面空格*/
-                String name = itemUserList.get(position).getName().substring(0, itemUserList.get(position).getName().length()-1);
+                String name = itemUserList.get(position).getName().substring(1, itemUserList.get(position).getName().length()-1);
                 tags.setSendType("[" + itemUserList.get(position).getUser_id() + ":" + name + "]");
 
                 /*該次tag位置*/
@@ -303,8 +325,14 @@ public class PopBoard {
                 SpannableString spanString = new SpannableString(edText.getText());
                 for (int i = 0; i < tagsList.size(); i++) {
 
-                    ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
-                    spanString.setSpan(span, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 4, Color.parseColor(ColorClass.PINK_FRIST));
+                    spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+//                    ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
+//                    spanString.setSpan(span, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
 
                 }
 
@@ -335,7 +363,6 @@ public class PopBoard {
         });
 
     }
-
 
     private void setTagListener() {
 
@@ -378,24 +405,24 @@ public class PopBoard {
                         if(!matcher.find()){
 
                             MyLog.Set("e", mActivity.getClass(), "名稱損毀");
-
-                            /*或取損毀後的文字*/
-                            String strDamage= edText.getText().toString().substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex()-1);
-                            MyLog.Set("e", mActivity.getClass(), "strDamage => " + strDamage);
-
-                            /*確認損毀文字位置*/
-                            Pattern dPattern = Pattern.compile(strDamage);
-                            Matcher m = dPattern.matcher(edText.getText().toString());//重新獲取字串
-                            if(m.find()){
-                                int dStartIndex = m.start();
-                                int dEndInedx = m.end();
-
-                                isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
-
-                                edText.getText().delete(dStartIndex, dEndInedx);
-
-                            }
-
+//
+//                            /*或取損毀後的文字*/
+//                            String strDamage= edText.getText().toString().substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex()-1);
+//                            MyLog.Set("e", mActivity.getClass(), "strDamage => " + strDamage);
+//
+//                            /*確認損毀文字位置*/
+//                            Pattern dPattern = Pattern.compile(strDamage);
+//                            Matcher m = dPattern.matcher(edText.getText().toString());//重新獲取字串
+//                            if(m.find()){
+//                                int dStartIndex = m.start();
+//                                int dEndInedx = m.end();
+//
+//                                isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
+//
+//                                edText.getText().delete(dStartIndex, dEndInedx);
+//
+//                            }
+//
                             tagsList.remove(i);
 
                         }else {
@@ -480,6 +507,14 @@ public class PopBoard {
 //                }
 
             }
+
+
+
+
+
+
+
+
         });
 
 
@@ -554,21 +589,31 @@ public class PopBoard {
         v.findViewById(R.id.tvSend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ClickUtils.ButtonContinuousClick_4s()) {//1秒內防止連續點擊
-                    if (showToastBySendTextContinuous) {
-                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
-                        showToastBySendTextContinuous = false;
-                    }
-                    return;
-                }
-                showToastBySendTextContinuous = true;
 
-                if (edText.getText().toString().equals("")) {
-                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_text_is_not_fill_in);
-                    return;
+                for (int i = 0; i < tagsList.size(); i++) {
+
+                    MyLog.Set("e", mActivity.getClass(), tagsList.get(i).getSendType());
+
+
                 }
 
-                doSendText();
+                MyLog.Set("e", mActivity.getClass(), edText.getText().length() + "");
+
+//                if (ClickUtils.ButtonContinuousClick_4s()) {//1秒內防止連續點擊
+//                    if (showToastBySendTextContinuous) {
+//                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
+//                        showToastBySendTextContinuous = false;
+//                    }
+//                    return;
+//                }
+//                showToastBySendTextContinuous = true;
+//
+//                if (edText.getText().toString().equals("")) {
+//                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_text_is_not_fill_in);
+//                    return;
+//                }
+//
+//                doSendText();
             }
         });
 
@@ -1197,7 +1242,7 @@ public class PopBoard {
                             JSONObject object = new JSONObject(user);
 
                             ItemUser itemUser = new ItemUser();
-                            itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name) + " ");
+                            itemUser.setName( " " + JsonUtility.GetString(object, ProtocolKey.name) + " ");
                             itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
                             itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
 
