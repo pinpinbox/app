@@ -8,10 +8,14 @@
     android:orientation="vertical">
 
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="72dp"-->
-        <!--android:background="@color/white" />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvTag"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+        android:background="@drawable/border_2_0_0_white_radius"
+        android:visibility="invisible" />
 
 
     <LinearLayout
@@ -20,7 +24,7 @@
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
         <!--android:layout_marginTop="92dp"-->
         <!--android:layout_marginTop="16dp"-->
@@ -74,6 +78,9 @@
                 app:riv_oval="true" />
 
 
+
+
+
             <EditText
                 android:id="@+id/edText"
                 android:layout_width="match_parent"
@@ -92,8 +99,7 @@
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textColorHint="@color/pinpinbox_2_0_0_hint_alpha"
                 android:textCursorDrawable="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_third"
-                />
+                android:textSize="@dimen/ppb200_common_text_third" />
 
             <!--<mabbas007.tagsedittext.TagsEditText-->
             <!--android:id="@+id/edText"-->
@@ -116,11 +122,11 @@
             <!--android:textSize="@dimen/ppb200_common_text_third"-->
 
             <!--TagsEditText:allowSpaceInTag="true"-->
-            <!--TagsEditText:tagsCloseImageRight="@drawable/tag_close"-->
             <!--TagsEditText:tagsBackground="@drawable/square"-->
+            <!--TagsEditText:tagsCloseImagePadding="@dimen/defaultTagsCloseImagePadding"-->
+            <!--TagsEditText:tagsCloseImageRight="@drawable/tag_close"-->
             <!--TagsEditText:tagsTextColor="@color/white"-->
-            <!--TagsEditText:tagsTextSize="@dimen/defaultTagsTextSize"-->
-            <!--TagsEditText:tagsCloseImagePadding="@dimen/defaultTagsCloseImagePadding"/>-->
+            <!--TagsEditText:tagsTextSize="@dimen/ppb200_common_text_third" />-->
 
 
             <TextView

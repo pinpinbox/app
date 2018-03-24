@@ -7,15 +7,23 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
+import android.view.ActionMode;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -26,6 +34,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -36,9 +45,13 @@ import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBoardAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerTagUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemTagUser;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -84,10 +97,14 @@ public class PopBoard {
     private GetBoardTask getBoardTask;
     private SendBoardTask sendBoardTask;
     private MoreDataTask moreDataTask;
+    private UserListTask userListTask;
 
     private RecyclerBoardAdapter boardAdapter;
+    private RecyclerTagUserAdapter tagUserAdapter;
 
     private List<ItemBoard> itemBoardList;
+    private List<ItemUser> itemUserList;
+    private List<ItemTagUser> tagsList;
 
 
     /***********************************************/
@@ -96,7 +113,7 @@ public class PopBoard {
     private BlurView blurView;
     private View v;
     /***********************************************/
-    private RecyclerView rvBoard;
+    private RecyclerView rvBoard, rvTag;
     private EditText edText;
     //    private AutoCompleteEditText edText;
     private SmoothProgressBar pbLoadMore;
@@ -149,7 +166,11 @@ public class PopBoard {
 
         initView();
 
-        set();
+        setBoard();
+
+        setTag();
+
+        setTagListener();
 
         checkType();
 
@@ -165,6 +186,7 @@ public class PopBoard {
 
         pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
         rvBoard = (RecyclerView) v.findViewById(R.id.rvBoard);
+        rvTag = (RecyclerView) v.findViewById(R.id.rvTag);
         edText = (EditText) v.findViewById(R.id.edText);
         userImg = (RoundedImageView) v.findViewById(R.id.userImg);
         tvTitle = (TextView) v.findViewById(R.id.tvTitle);
@@ -227,12 +249,103 @@ public class PopBoard {
             }
         });
 
+    }
+
+
+    private void setTag() {
+
+        itemUserList = new ArrayList<>();
+
+        rvTag.setHorizontalFadingEdgeEnabled(true);
+        rvTag.setFadingEdgeLength(32);
+
+        final LinearLayoutManager manager = new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
+        rvTag.setLayoutManager(manager);
+        tagUserAdapter = new RecyclerTagUserAdapter(mActivity, itemUserList);
+        rvTag.setAdapter(tagUserAdapter);
+
+
+        tagsList = new ArrayList<>();
+
+
+        tagUserAdapter.setOnRecyclerViewListener(new RecyclerTagUserAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+
+
+                edText.setText(edText.getText().toString().replaceFirst("@" + strSendText, itemUserList.get(position).getName()));
+
+
+                /*建立tag*/
+                ItemTagUser tags = new ItemTagUser();
+                tags.setName(itemUserList.get(position).getName());
+                tags.setUser_id(itemUserList.get(position).getUser_id());
+
+                /*移除name後面空格*/
+                String name = itemUserList.get(position).getName().substring(0, itemUserList.get(position).getName().length()-1);
+                tags.setSendType("[" + itemUserList.get(position).getUser_id() + ":" + name + "]");
+
+                /*該次tag位置*/
+                Pattern pattern = Pattern.compile(itemUserList.get(position).getName());
+                Matcher matcher = pattern.matcher(edText.getText().toString());
+
+                if (matcher.find()) {
+                    MyLog.Set("e", mActivity.getClass(), "matcher.start() => " + matcher.start());
+                    MyLog.Set("e", mActivity.getClass(), "matcher.end() => " + matcher.end());
+                    tags.setStartIndex(matcher.start());
+                    tags.setEndIndex(matcher.end());
+                }
+
+                tagsList.add(tags);
+
+
+                /*設定字串樣式*/
+                SpannableString spanString = new SpannableString(edText.getText());
+                for (int i = 0; i < tagsList.size(); i++) {
+
+                    ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
+                    spanString.setSpan(span, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                }
+
+                edText.setText(spanString);
+                setSelection();
+
+
+//                edText.setText("0123456789");
+//
+//                SpannableString spanString = new SpannableString(edText.getText());
+//
+//                ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
+//                spanString.setSpan(span, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//
+//
+//                ForegroundColorSpan span2 = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
+//                spanString.setSpan(span2, 6, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                edText.setText(spanString);
+
+
+            }
+
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+        });
+
+    }
+
+
+    private void setTagListener() {
 
         final String reg = " @" + "\\S*\\z";
 
 
-
         edText.addTextChangedListener(new TextWatcher() {
+
+            private boolean isDeleteIng = false;
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -246,11 +359,67 @@ public class PopBoard {
             @Override
             public void afterTextChanged(Editable s) {
 
+                if(isDeleteIng){
+                    isDeleteIng = false;
+                    return;
+                }
+
                 String strInput = edText.getText().toString();
+
+
+                if(tagsList!=null && tagsList.size()>0){
+
+                    for (int i = 0; i < tagsList.size(); i++) {
+
+                        /*檢查名稱是否還在字串內*/
+                        Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+                        Matcher matcher = pattern.matcher(strInput);
+
+                        if(!matcher.find()){
+
+                            MyLog.Set("e", mActivity.getClass(), "名稱損毀");
+
+                            /*或取損毀後的文字*/
+                            String strDamage= edText.getText().toString().substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex()-1);
+                            MyLog.Set("e", mActivity.getClass(), "strDamage => " + strDamage);
+
+                            /*確認損毀文字位置*/
+                            Pattern dPattern = Pattern.compile(strDamage);
+                            Matcher m = dPattern.matcher(edText.getText().toString());//重新獲取字串
+                            if(m.find()){
+                                int dStartIndex = m.start();
+                                int dEndInedx = m.end();
+
+                                isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
+
+                                edText.getText().delete(dStartIndex, dEndInedx);
+
+                            }
+
+                            tagsList.remove(i);
+
+                        }else {
+
+                            MyLog.Set("e", mActivity.getClass(), "名稱還在");
+
+                            /*重新設置位置*/
+
+                            MyLog.Set("e", mActivity.getClass(), "reset matcher.start() => " + matcher.start());
+                            MyLog.Set("e", mActivity.getClass(), "reset matcher.end() => " + matcher.end());
+
+                            tagsList.get(i).setStartIndex(matcher.start());
+                            tagsList.get(i).setEndIndex(matcher.end());
+                        }
+
+                    }
+
+                }
+
+
 
                 if (strInput.length() == 1 && strInput.substring(0, 1).equals("@")) {
                     edText.setText(" @");
-                    edText.setSelection(edText.getText().toString().length());
+                    setSelection();
                 }
 
 
@@ -261,6 +430,7 @@ public class PopBoard {
                 Pattern pattern = Pattern.compile(reg);
                 Matcher matcher = pattern.matcher(beforeCursor);
                 if (matcher.find()) {
+
                     text = matcher.group(0);
                     MyLog.Set("e", mActivity.getClass(), "text => " + text);
 
@@ -285,27 +455,15 @@ public class PopBoard {
                     }
 
 
-
                 } else {
                     MyLog.Set("e", mActivity.getClass(), "text => " + text);
+                    rvTag.setVisibility(View.INVISIBLE);
                 }
 
 
 
 
 
-                /**************************************************************************/
-
-
-//                Pattern pattern = Pattern.compile("@");
-//                Matcher matcher = pattern.matcher(edText.getText());
-//
-//
-//                if(matcher.find()){
-//                    MyLog.Set("e", mActivity.getClass(), "88888");
-//                }else {
-//                    MyLog.Set("e", mActivity.getClass(), "99999");
-//                }
                 /**************************************************************************/
 
 
@@ -321,11 +479,9 @@ public class PopBoard {
 //                    MyLog.Set("e", mActivity.getClass(), "99999");
 //                }
 
-                /**************************************************************************/
-
-
             }
         });
+
 
 
         countDownTimer = new CountDownTimer(1000, 1000) {
@@ -343,143 +499,14 @@ public class PopBoard {
         };
 
 
-    }
-
-
-    private void doSearchUser() {
-
-        UserListTask userListTask = new UserListTask();
-        userListTask.execute();
-    }
-
-
-    private class UserListTask extends AsyncTask<Void, Void, Object> {
-
-        private int p41Result = -1;
-        private String p41Message = "";
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoSearchUserList;
-
-            /*執行搜尋前全部移除*/
-//            userAdapter.notifyItemRangeRemoved(0, currentUserList.size());
-//
-//            if (searchUserList.size() > 0) {
-//                searchUserList.clear();
-//            }
-//
-//            if (currentUserList.size() > 0) {
-//                for (int i = 0; i < currentUserList.size(); i++) {
-//                    String strPicture = (String) currentUserList.get(i).get(Key.picture);
-//                    Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
-//                }
-//                currentUserList.clear();
-//            }
-
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P41_Search,
-                        SetMapByProtocol.setParam41_search(id, token, "user", strSendText, "0,32"), null);
-                MyLog.Set("d", mActivity.getClass(), "p41strJson(user) =>" + strJson);
-            } catch (SocketTimeoutException timeout) {
-                p41Result = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p41Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                    if (p41Result == 1) {
-
-                        String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                        JSONArray jsonArray = new JSONArray(jdata);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject j = (JSONObject) jsonArray.get(i);
-
-
-                            String user = JsonUtility.GetString(j, ProtocolKey.user);
-                            JSONObject object = new JSONObject(user);
-
-                            String name = JsonUtility.GetString(object, ProtocolKey.name);
-                            String picture = JsonUtility.GetString(object, ProtocolKey.picture);
-                            String user_id = JsonUtility.GetString(object, ProtocolKey.user_id);
-
-                            HashMap<String, Object> map = new HashMap<String, Object>();
-                            map.put(Key.name, name);
-                            map.put(Key.user_id, user_id);
-                            map.put(Key.picture, picture);
-
-                            if (!user_id.equals(id)) {
-//                                searchUserList.add(map);
-                            }
-                        }
-
-
-                    } else if (p41Result == 0) {
-                        p41Message = jsonObject.getString(Key.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-
-//            loadDataEnd();
-//
-//
-//            if (p41Result == 1) {
-//
-//                tvSearchUserTitle.setText(R.string.pinpinbox_2_0_0_title_find_creator);
-//                setSearchUserData();
-//
-//                //20171113
-//                if(rvSearch.getAlpha()==0f){
-//
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            ViewPropertyAnimator alphaTo1 = rvSearch.animate();
-//                            alphaTo1.setDuration(400)
-//                                    .alpha(1)
-//                                    .start();
-//                        }
-//                    }, 200);
-//
-//                }
-//
-//
-//
-//            } else if (p41Result == 0) {
-//                DialogV2Custom.BuildError(getActivity(), p41Message);
-//            } else if (p41Result == Key.TIMEOUT) {
-//                connectInstability();
-//            } else {
-//                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-//            }
-
-        }
-
 
     }
 
+    private void setSelection() {
+        edText.setSelection(edText.getText().toString().length());
+    }
 
-    private void set() {
+    private void setBoard() {
 
         /*創建array*/
         itemBoardList = new ArrayList<>();
@@ -574,8 +601,11 @@ public class PopBoard {
 
             ((Reader2Activity) mActivity).setNoConnect();
 
-        }
+        } else if (actName.equals(Author2Activity.class.getSimpleName())) {
 
+            ((Author2Activity) mActivity).setNoConnect();
+
+        }
 
     }
 
@@ -590,6 +620,10 @@ public class PopBoard {
         } else if (actName.equals(Reader2Activity.class.getSimpleName())) {
 
             ((Reader2Activity) mActivity).startLoading();
+
+        } else if (actName.equals(Author2Activity.class.getSimpleName())) {
+
+            ((Author2Activity) mActivity).startLoading();
 
         }
     }
@@ -606,7 +640,12 @@ public class PopBoard {
 
             ((Reader2Activity) mActivity).dissmissLoading();
 
+        } else if (actName.equals(Author2Activity.class.getSimpleName())) {
+
+            ((Author2Activity) mActivity).dissmissLoading();
+
         }
+
 
     }
 
@@ -758,6 +797,9 @@ public class PopBoard {
                         doSendText();
                         break;
 
+                    case DoingTypeClass.DoSearchUserList:
+                        doSearchUser();
+                        break;
 
                 }
             }
@@ -799,6 +841,18 @@ public class PopBoard {
         moreDataTask = new MoreDataTask();
         moreDataTask.execute();
     }
+
+    private void doSearchUser() {
+
+        if (!HttpUtility.isConnect(mActivity)) {
+            setNoConnect();
+            return;
+        }
+
+        userListTask = new UserListTask();
+        userListTask.execute();
+    }
+
 
     private class GetBoardTask extends AsyncTask<Void, Void, Object> {
 
@@ -1084,6 +1138,111 @@ public class PopBoard {
 
 
         }
+    }
+
+    private class UserListTask extends AsyncTask<Void, Void, Object> {
+
+        private int p41Result = -1;
+        private String p41Message = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            doingType = DoingTypeClass.DoSearchUserList;
+
+            /*執行搜尋前全部移除*/
+            tagUserAdapter.notifyItemRangeRemoved(0, itemUserList.size());
+
+            if (itemUserList.size() > 0) {
+                itemUserList.clear();
+            }
+
+            if (itemUserList.size() > 0) {
+                for (int i = 0; i < itemUserList.size(); i++) {
+                    String strPicture = itemUserList.get(i).getPicture();
+                    Picasso.with(mActivity.getApplicationContext()).invalidate(strPicture);
+                }
+                itemUserList.clear();
+            }
+
+        }
+
+        @Override
+        protected Object doInBackground(Void... params) {
+
+            String strJson = "";
+
+            try {
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P41_Search,
+                        SetMapByProtocol.setParam41_search(id, token, "user", strSendText, "0,8"), null);
+                MyLog.Set("d", mActivity.getClass(), "p41strJson(user) =>" + strJson);
+            } catch (SocketTimeoutException timeout) {
+                p41Result = Key.TIMEOUT;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (strJson != null && !strJson.equals("")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(strJson);
+                    p41Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                    if (p41Result == 1) {
+
+                        String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                        JSONArray jsonArray = new JSONArray(jdata);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject j = (JSONObject) jsonArray.get(i);
+
+                            String user = JsonUtility.GetString(j, ProtocolKey.user);
+                            JSONObject object = new JSONObject(user);
+
+                            ItemUser itemUser = new ItemUser();
+                            itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name) + " ");
+                            itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
+                            itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+
+
+                            if (!itemUser.getUser_id().equals(id)) {
+                                itemUserList.add(itemUser);
+                            }
+                        }
+
+
+                    } else if (p41Result == 0) {
+                        p41Message = jsonObject.getString(Key.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+
+            if (p41Result == 1) {
+
+                tagUserAdapter.notifyItemRangeInserted(0, itemUserList.size());
+
+                if (itemUserList.size() > 0) {
+                    rvTag.setVisibility(View.VISIBLE);
+                }
+
+
+            } else if (p41Result == 0) {
+                DialogV2Custom.BuildError(mActivity, p41Message);
+            } else if (p41Result == Key.TIMEOUT) {
+                connectInstability();
+            } else {
+                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+            }
+
+        }
+
+
     }
 
 
