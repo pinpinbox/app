@@ -1,13 +1,13 @@
 package com.pinpinbox.android.pinpinbox2_0_0.popup;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -17,14 +17,8 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
-import android.view.ActionMode;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
@@ -35,13 +29,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.StringUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
-import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
@@ -66,7 +58,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSearch2;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
@@ -77,7 +68,7 @@ import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -87,9 +78,6 @@ import eightbitlab.com.blurview.RenderScriptBlur;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
-/**
- * Created by kevin9594 on 2017/4/8.
- */
 public class PopBoard {
 
 
@@ -229,6 +217,12 @@ public class PopBoard {
                 }
                 sendBoardTask = null;
 
+                if (userListTask != null && !userListTask.isCancelled()) {
+                    userListTask.cancel(true);
+                }
+                userListTask = null;
+
+
                 int count = itemBoardList.size();
                 if (count > 0) {
                     for (int i = 0; i < count; i++) {
@@ -273,14 +267,14 @@ public class PopBoard {
             @Override
             public void onItemClick(int position, View v) {
 
-                if(ClickUtils.ButtonContinuousClick()){
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 
                 /*判斷是否已經tag*/
-                if(tagsList!=null && tagsList.size()>0){
+                if (tagsList != null && tagsList.size() > 0) {
                     for (int i = 0; i < tagsList.size(); i++) {
-                        if( (tagsList.get(i).getUser_id()).equals(itemUserList.get(position).getUser_id())){
+                        if ((tagsList.get(i).getUser_id()).equals(itemUserList.get(position).getUser_id())) {
                             PinPinToast.showErrorToast(mActivity, "不可重複標記");
                             return;
                         }
@@ -290,25 +284,23 @@ public class PopBoard {
 
                 /*判斷前字符是否為tag*/
                 boolean isTag = false;
-                if(tagsList!=null && tagsList.size()>0) {
-                    int a = edText.getSelectionStart();
-                    MyLog.Set("e", mActivity.getClass(), "a => " + a);
+                if (tagsList != null && tagsList.size() > 0) {
+                    int cursorIndex = edText.getSelectionStart();
+                    MyLog.Set("e", PopBoard.class, "cursorIndex => " + cursorIndex);
                     for (int i = 0; i < tagsList.size(); i++) {
-                        if(a==tagsList.get(i).getEndIndex()+2){
+                        if (cursorIndex == tagsList.get(i).getEndIndex() + 2) {
                             isTag = true;
                             break;
                         }
                     }
                 }
 
-                if(isTag){
-
+                if (isTag) {
                     //評估是否添加一空格
-
-                    MyLog.Set("e", mActivity.getClass(), "isTag");
+                    MyLog.Set("e", PopBoard.class, "isTag");
                     edText.setText(edText.getText().toString().replaceFirst("@" + strSendText, itemUserList.get(position).getName()));
-                }else {
-                    MyLog.Set("e", mActivity.getClass(), "!isTag");
+                } else {
+                    MyLog.Set("e", PopBoard.class, "!isTag");
                     edText.setText(edText.getText().toString().replaceFirst(" @" + strSendText, itemUserList.get(position).getName()));
                 }
 
@@ -319,7 +311,7 @@ public class PopBoard {
                 tags.setUser_id(itemUserList.get(position).getUser_id());
 
                 /*移除name後面空格*/
-                String name = itemUserList.get(position).getName().substring(1, itemUserList.get(position).getName().length()-1);
+                String name = itemUserList.get(position).getName().substring(1, itemUserList.get(position).getName().length() - 1);
                 tags.setSendType("[" + itemUserList.get(position).getUser_id() + ":" + name + "]");
 
                 /*該次tag位置*/
@@ -327,8 +319,8 @@ public class PopBoard {
                 Matcher matcher = pattern.matcher(edText.getText().toString());
 
                 if (matcher.find()) {
-                    MyLog.Set("e", mActivity.getClass(), "matcher.start() => " + matcher.start());
-                    MyLog.Set("e", mActivity.getClass(), "matcher.end() => " + matcher.end());
+                    MyLog.Set("e", PopBoard.class, "matcher.start() => " + matcher.start());
+                    MyLog.Set("e", PopBoard.class, "matcher.end() => " + matcher.end());
                     tags.setStartIndex(matcher.start());
                     tags.setEndIndex(matcher.end());
                 }
@@ -363,17 +355,56 @@ public class PopBoard {
         });
 
 
-
     }
 
     private void setTagListener() {
 
-        final String reg = " @" + "\\S*\\z";
-
-
         edText.addTextChangedListener(new TextWatcher() {
 
-            private boolean isDeleteIng = false;
+//            private boolean isDeleteIng = false;
+
+            private void searchUser() {
+
+                String reg = " @" + "\\S*\\z";
+
+                String text = "";
+
+                String beforeCursor = edText.getText().toString().substring(0, edText.getSelectionStart());
+
+                Pattern pattern = Pattern.compile(reg);
+                Matcher matcher = pattern.matcher(beforeCursor);
+                if (matcher.find()) {
+
+                    text = matcher.group(0);
+                    MyLog.Set("e", PopBoard.class, "text => " + text);
+
+                    strSendText = text.substring(2);
+
+                    MyLog.Set("e", PopBoard.class, "strSendText => " + strSendText);
+
+
+                    if (strSendText.equals("")) {
+                        if (countDownTimer != null) {
+                            countDownTimer.cancel();
+                            MyLog.Set("d", PopBoard.class, "取消倒數");
+                        }
+                    } else {
+
+                        if (countDownTimer != null) {
+                            countDownTimer.cancel();
+                            countDownTimer.start();
+                            MyLog.Set("d", PopBoard.class, "重新倒數");
+                        }
+                    }
+
+
+                } else {
+                    MyLog.Set("e", PopBoard.class, "text => " + text);
+                    rvTag.setVisibility(View.INVISIBLE);
+                }
+
+
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -388,15 +419,14 @@ public class PopBoard {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(isDeleteIng){
-                    isDeleteIng = false;
-                    return;
-                }
+//                if (isDeleteIng) {
+//                    isDeleteIng = false;
+//                    return;
+//                }
 
                 String strInput = edText.getText().toString();
 
-
-                if(tagsList!=null && tagsList.size()>0){
+                if (tagsList != null && tagsList.size() > 0) {
 
                     for (int i = 0; i < tagsList.size(); i++) {
 
@@ -404,13 +434,13 @@ public class PopBoard {
                         Pattern pattern = Pattern.compile(tagsList.get(i).getName());
                         Matcher matcher = pattern.matcher(strInput);
 
-                        if(!matcher.find()){
+                        if (!matcher.find()) {
 
-                            MyLog.Set("e", mActivity.getClass(), "名稱損毀");
+                            MyLog.Set("e", PopBoard.class, "名稱損毀");
 //
 //                            /*或取損毀後的文字*/
 //                            String strDamage= edText.getText().toString().substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex()-1);
-//                            MyLog.Set("e", mActivity.getClass(), "strDamage => " + strDamage);
+//                            MyLog.Set("e", PopBoard.class, "strDamage => " + strDamage);
 //
 //                            /*確認損毀文字位置*/
 //                            Pattern dPattern = Pattern.compile(strDamage);
@@ -427,14 +457,14 @@ public class PopBoard {
 //
                             tagsList.remove(i);
 
-                        }else {
+                        } else {
 
-                            MyLog.Set("e", mActivity.getClass(), "名稱還在");
+                            MyLog.Set("e", PopBoard.class, "名稱還在");
 
                             /*重新設置位置*/
 
-                            MyLog.Set("e", mActivity.getClass(), "reset matcher.start() => " + matcher.start());
-                            MyLog.Set("e", mActivity.getClass(), "reset matcher.end() => " + matcher.end());
+                            MyLog.Set("e", PopBoard.class, "reset matcher.start() => " + matcher.start());
+                            MyLog.Set("e", PopBoard.class, "reset matcher.end() => " + matcher.end());
 
                             tagsList.get(i).setStartIndex(matcher.start());
                             tagsList.get(i).setEndIndex(matcher.end());
@@ -445,96 +475,37 @@ public class PopBoard {
                 }
 
 
-
+                /*判斷開頭tag*/
                 if (strInput.length() == 1 && strInput.substring(0, 1).equals("@")) {
                     edText.setText(" @");
                     setSelection();
                 }
 
 
-                String text = "";
+                /*搜尋用戶*/
+                searchUser();
 
-                String beforeCursor = edText.getText().toString().substring(0, edText.getSelectionStart());
-
-                Pattern pattern = Pattern.compile(reg);
-                Matcher matcher = pattern.matcher(beforeCursor);
-                if (matcher.find()) {
-
-                    text = matcher.group(0);
-                    MyLog.Set("e", mActivity.getClass(), "text => " + text);
-
-                    strSendText = text.substring(2);
-
-                    MyLog.Set("e", mActivity.getClass(), "strSendText => " + strSendText);
-
-
-                    if (strSendText.equals("")) {
-                        if (countDownTimer != null) {
-                            countDownTimer.cancel();
-                            MyLog.Set("d", FragmentSearch2.class, "取消倒數");
-                        }
-                    } else {
-
-                        if (countDownTimer != null) {
-                            countDownTimer.cancel();
-                            countDownTimer.start();
-
-                            MyLog.Set("d", FragmentSearch2.class, "重新倒數");
-                        }
-                    }
-
-
-                } else {
-                    MyLog.Set("e", mActivity.getClass(), "text => " + text);
-                    rvTag.setVisibility(View.INVISIBLE);
-                }
-
-
-
-
-
-                /**************************************************************************/
-
-
-//                String reg = "/\\B@(\\w*)$/";
-//                Pattern pattern = Pattern.compile(reg, Pattern.CASE_INSENSITIVE);
-//                Matcher matcher = pattern.matcher(edText.getText());
-//
-//                MyLog.Set("e", mActivity.getClass(), "matcher.toString() => " +      matcher.toString());
-
-//                if(matcher.find()){
-//                    MyLog.Set("e", mActivity.getClass(), "88888");
-//                }else {
-//                    MyLog.Set("e", mActivity.getClass(), "99999");
-//                }
 
             }
-
-
-
-
-
 
 
 
         });
 
 
-
         countDownTimer = new CountDownTimer(1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                MyLog.Set("d", mActivity.getClass(), "timer =>" + (millisUntilFinished / 1000) + "");
+                MyLog.Set("d", PopBoard.class, "timer =>" + (millisUntilFinished / 1000) + "");
             }
 
             @Override
             public void onFinish() {
-                MyLog.Set("d", FragmentSearch2.class, "timer => finish()");
+                MyLog.Set("d", PopBoard.class, "timer => finish()");
                 countDownTimer.cancel();
                 doSearchUser();
             }
         };
-
 
 
     }
@@ -596,13 +567,13 @@ public class PopBoard {
                     Pattern pattern = Pattern.compile(tagsList.get(i).getName());
                     Matcher matcher = pattern.matcher(readySendText);
 
-                    if(matcher.find()){
+                    if (matcher.find()) {
                         readySendText = readySendText.replaceFirst(tagsList.get(i).getName(), tagsList.get(i).getSendType());
                     }
                 }
 
 
-                MyLog.Set("e", mActivity.getClass(), "readySendText => " + readySendText);
+                MyLog.Set("e", PopBoard.class, "readySendText => " + readySendText);
 
 
 //                edText.setText("");
@@ -615,11 +586,11 @@ public class PopBoard {
 
                 for (int i = 0; i < tagsList.size(); i++) {
 
-                    MyLog.Set("e", mActivity.getClass(), tagsList.get(i).getSendType());
+                    MyLog.Set("e", PopBoard.class, tagsList.get(i).getSendType());
 
                 }
 
-                MyLog.Set("e", mActivity.getClass(), edText.getText().length() + "");
+                MyLog.Set("e", PopBoard.class, edText.getText().length() + "");
 
 //                if (ClickUtils.ButtonContinuousClick_4s()) {//1秒內防止連續點擊
 //                    if (showToastBySendTextContinuous) {
@@ -658,7 +629,6 @@ public class PopBoard {
     private void setNoConnect() {
 
         String actName = mActivity.getClass().getSimpleName();
-
 
         if (actName.equals(AlbumInfo2Activity.class.getSimpleName())) {
 
@@ -744,7 +714,7 @@ public class PopBoard {
                             limit)
                     , null);
 
-            MyLog.Set("d", getClass(), "p90strJson => " + strJson);
+            MyLog.Set("d", this.getClass(), "p90strJson => " + strJson);
         } catch (SocketTimeoutException timeout) {
             p90Result = Key.TIMEOUT;
         } catch (Exception e) {
@@ -792,7 +762,7 @@ public class PopBoard {
                         long hour = (l / (60 * 60 * 1000) - day * 24);
                         long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
 //                            long s = (l / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                        String strMessageTime = "";
+                        String strMessageTime;
                         if (day != 0) {
 //                            strMessageTime = day + "天前";
 
@@ -920,7 +890,7 @@ public class PopBoard {
         userListTask.execute();
     }
 
-
+    @SuppressLint("StaticFieldLeak")
     private class GetBoardTask extends AsyncTask<Void, Void, Object> {
 
 
@@ -981,6 +951,7 @@ public class PopBoard {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MoreDataTask extends AsyncTask<Void, Void, Object> {
 
         private int moreFirstPosition;
@@ -1035,6 +1006,7 @@ public class PopBoard {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SendBoardTask extends AsyncTask<Void, Void, Object> {
 
         private String p91Message = "";
@@ -1112,7 +1084,7 @@ public class PopBoard {
                             long hour = (l / (60 * 60 * 1000) - day * 24);
                             long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
 //                            long s = (l / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                            String strMessageTime = "";
+                            String strMessageTime;
                             if (day != 0) {
 
                                 if (day < 2) {
@@ -1207,6 +1179,7 @@ public class PopBoard {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class UserListTask extends AsyncTask<Void, Void, Object> {
 
         private int p41Result = -1;
@@ -1242,7 +1215,7 @@ public class PopBoard {
             try {
                 strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P41_Search,
                         SetMapByProtocol.setParam41_search(id, token, "user", strSendText, "0,8"), null);
-                MyLog.Set("d", mActivity.getClass(), "p41strJson(user) =>" + strJson);
+                MyLog.Set("d", PopBoard.class, "p41strJson(user) =>" + strJson);
             } catch (SocketTimeoutException timeout) {
                 p41Result = Key.TIMEOUT;
             } catch (Exception e) {
@@ -1264,7 +1237,7 @@ public class PopBoard {
                             JSONObject object = new JSONObject(user);
 
                             ItemUser itemUser = new ItemUser();
-                            itemUser.setName( " " + JsonUtility.GetString(object, ProtocolKey.name) + " ");
+                            itemUser.setName(" " + JsonUtility.GetString(object, ProtocolKey.name) + " ");
                             itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
                             itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
 
@@ -1313,7 +1286,7 @@ public class PopBoard {
     }
 
 
-    public void resetBackground() {
+    private void resetBackground() {
         ViewPropertyAnimator alphaTo0 = blurView.animate();
         alphaTo0.setDuration(intAnimDuration)
                 .alpha(0)
@@ -1413,7 +1386,7 @@ public class PopBoard {
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
             if (!sizeMax) {
-                MyLog.Set("e", mActivity.getClass(), "onLoad");
+                MyLog.Set("e", PopBoard.class, "onLoad");
                 doMoreData();
             } else {
 
@@ -1422,7 +1395,7 @@ public class PopBoard {
                     isNoDataToastAppeared = true;
                 }
 
-                MyLog.Set("e", mActivity.getClass(), "sizeMax");
+                MyLog.Set("e", PopBoard.class, "sizeMax");
             }
         }
     };

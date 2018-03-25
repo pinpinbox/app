@@ -69,7 +69,14 @@ public class RecyclerTagUserAdapter extends RecyclerView.Adapter  {
         ViewHolder holder = (ViewHolder) vHolder;
         holder.position = position;
 
-        holder.tvName.setText(itemUserList.get(position).getName());
+        String name = itemUserList.get(position).getName();
+
+        /*消除前後空格*/
+        name = name.substring(1,name.length()-1);
+
+        holder.tvName.setText(name);
+
+//        holder.tvName.setText(itemUserList.get(position).getName());
 
         String url  = itemUserList.get(position).getPicture();
 
