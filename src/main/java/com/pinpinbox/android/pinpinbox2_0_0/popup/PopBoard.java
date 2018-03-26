@@ -584,13 +584,79 @@ public class PopBoard {
             @Override
             public void onClick(View view) {
 
-                for (int i = 0; i < tagsList.size(); i++) {
 
-                    MyLog.Set("e", PopBoard.class, tagsList.get(i).getSendType());
+
+                Pattern pNumeral = Pattern.compile("^[-+]?[0-9]");
+
+
+                String message = "[284:Drummers David]物語，科科不我是台灣人不是人[165:Kawa Lup][256:author003]888";
+
+//                String reg = "\\[";
+                String reg = "\\[";
+//                String reg = "(?i)(?<=\\[)[^\\[]*(?=\\])";
+
+
+                Pattern pattern = Pattern.compile(reg);
+                String strs[] = pattern.split(message);
+
+
+                for (int i = 0; i < strs.length; i++) {
+
+//                    MyLog.Set("e", PopBoard.class, "strs[] => " + strs[i]);
+
+                    if(strs[i].length()>0){
+                        String item = strs[i].substring(0, strs[i].indexOf("]"));
+//                        MyLog.Set("e", PopBoard.class, "item => " + item);
+
+
+                        String sId = item.substring(0, item.indexOf(":"));
+
+                        String sName = item.substring(item.indexOf(":") + 1, item.length());
+
+//                        MyLog.Set("e", PopBoard.class, "sId => " + sId);
+
+//                        MyLog.Set("e", PopBoard.class, "sName => " + sName);
+
+                        Matcher matcher = pNumeral.matcher(sId);
+
+                        if(matcher.find()){
+
+                            ItemTagUser tagUser = new ItemTagUser();
+
+                            tagUser.setName(sName);
+                            tagUser.setUser_id(sId);
+                            tagUser.setSendType("[" + item + "]");
+
+                            Pattern p = Pattern.compile("\\[" + item + "\\]");
+                            Matcher m = p.matcher(message);
+
+                            if (m.find()) {
+                                tagUser.setStartIndex(m.start());
+                                tagUser.setEndIndex(m.end());
+                            }
+
+
+                            MyLog.Set("e", PopBoard.class, "name => " + tagUser.getName());
+                            MyLog.Set("e", PopBoard.class, "user_id => " + tagUser.getUser_id());
+                            MyLog.Set("e", PopBoard.class, "sendType => " + tagUser.getSendType());
+                            MyLog.Set("e", PopBoard.class, "startIndex => " + tagUser.getStartIndex());
+                            MyLog.Set("e", PopBoard.class, "endIndex => " + tagUser.getEndIndex());
+
+                            MyLog.Set("e", PopBoard.class, "--------------------------------------------------------------------------------------------");
+
+                        }
+
+                    }
 
                 }
 
-                MyLog.Set("e", PopBoard.class, edText.getText().length() + "");
+
+
+//                for (int i = 0; i < tagsList.size(); i++) {
+//                    MyLog.Set("e", PopBoard.class, tagsList.get(i).getSendType());
+//                }
+//                MyLog.Set("e", PopBoard.class, edText.getText().length() + "");
+
 
 //                if (ClickUtils.ButtonContinuousClick_4s()) {//1秒內防止連續點擊
 //                    if (showToastBySendTextContinuous) {
@@ -750,7 +816,9 @@ public class PopBoard {
                         itemBoard.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
                         itemBoard.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
 
-                        itemBoard.setText(JsonUtility.GetString(jsonPinpinboard, ProtocolKey.text));
+//                        itemBoard.setText(JsonUtility.GetString(jsonPinpinboard, ProtocolKey.text));
+                        itemBoard.setText("[284:Drummers David]物語，科科不我是台灣人不是人[165:Kawa Lup][256:author003]");
+
 
 //                            itemBoard.setInserttime(JsonUtility.GetString(jsonPinpinboard, ProtocolKey.inserttime));
 
