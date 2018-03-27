@@ -68,7 +68,6 @@ import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -271,6 +270,18 @@ public class PopBoard {
                     return;
                 }
 
+
+                /*判斷是否是自己*/
+                if (tagsList != null && tagsList.size() > 0) {
+                    for (int i = 0; i < tagsList.size(); i++) {
+                        if ((tagsList.get(i).getUser_id()).equals(id)) {
+                            PinPinToast.showErrorToast(mActivity, "不可標記自己");
+                            return;
+                        }
+                    }
+                }
+
+
                 /*判斷是否已經tag*/
                 if (tagsList != null && tagsList.size() > 0) {
                     for (int i = 0; i < tagsList.size(); i++) {
@@ -280,7 +291,6 @@ public class PopBoard {
                         }
                     }
                 }
-
 
                 /*判斷前字符是否為tag*/
                 boolean isTag = false;
@@ -303,7 +313,6 @@ public class PopBoard {
                     MyLog.Set("e", PopBoard.class, "!isTag");
                     edText.setText(edText.getText().toString().replaceFirst(" @" + strSendText, itemUserList.get(position).getName()));
                 }
-
 
                 /*建立tag*/
                 ItemTagUser tags = new ItemTagUser();
@@ -332,13 +341,8 @@ public class PopBoard {
                 SpannableString spanString = new SpannableString(edText.getText());
                 for (int i = 0; i < tagsList.size(); i++) {
 
-
                     RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 8, Color.parseColor(ColorClass.PINK_FRIST));
                     spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
-//                    ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
-//                    spanString.setSpan(span, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                 }
 
@@ -560,23 +564,23 @@ public class PopBoard {
 
 
                 /*模擬送出字串*/
-                String readySendText = edText.getText().toString();
+//                String readySendText = edText.getText().toString();
+//
+//                for (int i = 0; i < tagsList.size(); i++) {
+//
+//                    Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+//                    Matcher matcher = pattern.matcher(readySendText);
+//
+//                    if (matcher.find()) {
+//                        readySendText = readySendText.replaceFirst(tagsList.get(i).getName(), tagsList.get(i).getSendType());
+//                    }
+//                }
+//
+//
+//                MyLog.Set("e", PopBoard.class, "readySendText => " + readySendText);
 
-                for (int i = 0; i < tagsList.size(); i++) {
 
-                    Pattern pattern = Pattern.compile(tagsList.get(i).getName());
-                    Matcher matcher = pattern.matcher(readySendText);
-
-                    if (matcher.find()) {
-                        readySendText = readySendText.replaceFirst(tagsList.get(i).getName(), tagsList.get(i).getSendType());
-                    }
-                }
-
-
-                MyLog.Set("e", PopBoard.class, "readySendText => " + readySendText);
-
-
-//                edText.setText("");
+                edText.setText("");
             }
         });
 
@@ -584,95 +588,21 @@ public class PopBoard {
             @Override
             public void onClick(View view) {
 
-
-
-                Pattern pNumeral = Pattern.compile("^[-+]?[0-9]");
-
-
-                String message = "[284:Drummers David]物語，科科不我是台灣人不是人[165:Kawa Lup][256:author003]888";
-
-//                String reg = "\\[";
-                String reg = "\\[";
-//                String reg = "(?i)(?<=\\[)[^\\[]*(?=\\])";
-
-
-                Pattern pattern = Pattern.compile(reg);
-                String strs[] = pattern.split(message);
-
-
-                for (int i = 0; i < strs.length; i++) {
-
-//                    MyLog.Set("e", PopBoard.class, "strs[] => " + strs[i]);
-
-                    if(strs[i].length()>0){
-                        String item = strs[i].substring(0, strs[i].indexOf("]"));
-//                        MyLog.Set("e", PopBoard.class, "item => " + item);
-
-
-                        String sId = item.substring(0, item.indexOf(":"));
-
-                        String sName = item.substring(item.indexOf(":") + 1, item.length());
-
-//                        MyLog.Set("e", PopBoard.class, "sId => " + sId);
-
-//                        MyLog.Set("e", PopBoard.class, "sName => " + sName);
-
-                        Matcher matcher = pNumeral.matcher(sId);
-
-                        if(matcher.find()){
-
-                            ItemTagUser tagUser = new ItemTagUser();
-
-                            tagUser.setName(sName);
-                            tagUser.setUser_id(sId);
-                            tagUser.setSendType("[" + item + "]");
-
-                            Pattern p = Pattern.compile("\\[" + item + "\\]");
-                            Matcher m = p.matcher(message);
-
-                            if (m.find()) {
-                                tagUser.setStartIndex(m.start());
-                                tagUser.setEndIndex(m.end());
-                            }
-
-
-                            MyLog.Set("e", PopBoard.class, "name => " + tagUser.getName());
-                            MyLog.Set("e", PopBoard.class, "user_id => " + tagUser.getUser_id());
-                            MyLog.Set("e", PopBoard.class, "sendType => " + tagUser.getSendType());
-                            MyLog.Set("e", PopBoard.class, "startIndex => " + tagUser.getStartIndex());
-                            MyLog.Set("e", PopBoard.class, "endIndex => " + tagUser.getEndIndex());
-
-                            MyLog.Set("e", PopBoard.class, "--------------------------------------------------------------------------------------------");
-
-                        }
-
+                if (ClickUtils.ButtonContinuousClick_4s()) {//1秒內防止連續點擊
+                    if (showToastBySendTextContinuous) {
+                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
+                        showToastBySendTextContinuous = false;
                     }
+                    return;
+                }
+                showToastBySendTextContinuous = true;
 
+                if (edText.getText().toString().equals("")) {
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_text_is_not_fill_in);
+                    return;
                 }
 
-
-
-//                for (int i = 0; i < tagsList.size(); i++) {
-//                    MyLog.Set("e", PopBoard.class, tagsList.get(i).getSendType());
-//                }
-//                MyLog.Set("e", PopBoard.class, edText.getText().length() + "");
-
-
-//                if (ClickUtils.ButtonContinuousClick_4s()) {//1秒內防止連續點擊
-//                    if (showToastBySendTextContinuous) {
-//                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
-//                        showToastBySendTextContinuous = false;
-//                    }
-//                    return;
-//                }
-//                showToastBySendTextContinuous = true;
-//
-//                if (edText.getText().toString().equals("")) {
-//                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_text_is_not_fill_in);
-//                    return;
-//                }
-//
-//                doSendText();
+                doSendText();
             }
         });
 
@@ -816,8 +746,8 @@ public class PopBoard {
                         itemBoard.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
                         itemBoard.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
 
-//                        itemBoard.setText(JsonUtility.GetString(jsonPinpinboard, ProtocolKey.text));
-                        itemBoard.setText("[284:Drummers David]物語，科科不我是台灣人不是人[165:Kawa Lup][256:author003]");
+                        itemBoard.setText(JsonUtility.GetString(jsonPinpinboard, ProtocolKey.text));
+//                        itemBoard.setText("[284:Drummers David]物語，科科不我是台灣人不是人[165:Kawa Lup][256:author003]");
 
 
 //                            itemBoard.setInserttime(JsonUtility.GetString(jsonPinpinboard, ProtocolKey.inserttime));
@@ -1096,10 +1026,24 @@ public class PopBoard {
 
             String strJson = "";
 
+
+            String readySendText = edText.getText().toString();
+
+            for (int i = 0; i < tagsList.size(); i++) {
+
+                Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+                Matcher matcher = pattern.matcher(readySendText);
+
+                if (matcher.find()) {
+                    readySendText = readySendText.replaceFirst(tagsList.get(i).getName(), tagsList.get(i).getSendType());
+                }
+            }
+
+
             try {
                 strJson = HttpUtility.uploadSubmit(ProtocolsClass.P91_InsertMessageBoard,
                         SetMapByProtocol.setParam91_insertmessageboard(
-                                id, token, type, type_id, edText.getText().toString(), round + "," + count)
+                                id, token, type, type_id, readySendText, round + "," + count)
                         , null);
 
                 MyLog.Set("d", getClass(), "p90strJson => " + strJson);

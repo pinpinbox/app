@@ -2,15 +2,23 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemBoard;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.RadiusBackgroundSpan;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.TagManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,7 +26,7 @@ import java.util.List;
 /**
  * Created by vmage on 2017/4/7.
  */
-public class RecyclerBoardAdapter  extends RecyclerView.Adapter  {
+public class RecyclerBoardAdapter extends RecyclerView.Adapter {
 
     public interface OnRecyclerViewListener {
         void onItemClick(int position, View v);
@@ -36,11 +44,14 @@ public class RecyclerBoardAdapter  extends RecyclerView.Adapter  {
 
     private List<ItemBoard> itemBoardList;
 
+    private RadiusBackgroundSpan spanBg;
+
 
     public RecyclerBoardAdapter(Activity activity, List<ItemBoard> itemBoardList) {
         this.mActivity = activity;
         this.itemBoardList = itemBoardList;
 
+        spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 8, Color.parseColor(ColorClass.PINK_FRIST));
 
     }
 
@@ -64,19 +75,67 @@ public class RecyclerBoardAdapter  extends RecyclerView.Adapter  {
         holder.position = position;
 
         holder.tvName.setText(itemBoardList.get(position).getName());
-        holder.tvText.setText(itemBoardList.get(position).getText());
+//        holder.tvText.setText(itemBoardList.get(position).getText());
         holder.tvInsertTime.setText(itemBoardList.get(position).getInserttime());
 
-        String url  = itemBoardList.get(position).getPicture();
-        if(url!=null&& !url.equals("")) {
+        String url = itemBoardList.get(position).getPicture();
+        if (url != null && !url.equals("")) {
             Picasso.with(mActivity.getApplicationContext())
                     .load(url)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)
                     .tag(mActivity.getApplicationContext())
                     .into(holder.userImg);
-        }else {
+        } else {
             holder.userImg.setImageResource(R.drawable.member_back_head);
+        }
+
+
+        try {
+            TagManager manager = new TagManager(itemBoardList.get(position).getText());
+
+
+            if (manager.getItemTagUserList().size() > 0) {
+
+                MyLog.Set("d", RecyclerBoardAdapter.class, "有tag");
+                MyLog.Set("d", RecyclerBoardAdapter.class, "message => " + manager.getMessage());
+
+                for (int i = 0; i < manager.getItemTagUserList().size(); i++) {
+                    MyLog.Set("e", RecyclerBoardAdapter.class, "name => " + manager.getItemTagUserList().get(i).getName());
+                    MyLog.Set("e", RecyclerBoardAdapter.class, "user_id => " + manager.getItemTagUserList().get(i).getUser_id());
+                    MyLog.Set("e", RecyclerBoardAdapter.class, "sendType => " + manager.getItemTagUserList().get(i).getSendType());
+                    MyLog.Set("e", RecyclerBoardAdapter.class, "startIndex => " + manager.getItemTagUserList().get(i).getStartIndex());
+                    MyLog.Set("e", RecyclerBoardAdapter.class, "endIndex => " + manager.getItemTagUserList().get(i).getEndIndex());
+                    MyLog.Set("e", RecyclerBoardAdapter.class, "************************************************************************************************");
+                }
+
+                SpannableString spanString = new SpannableString(manager.getMessage());
+
+                for (int i = 0; i < manager.getItemTagUserList().size(); i++) {
+//                    RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_THIRD), 8, Color.parseColor(ColorClass.PINK_FRIST));
+//                    spanString.setSpan(spanBg, manager.getItemTagUserList().get(i).getStartIndex(), manager.getItemTagUserList().get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+//                    BackgroundColorSpan spanBg = new BackgroundColorSpan(Color.parseColor(ColorClass.GREY_THIRD));
+//                    spanString.setSpan(spanBg, manager.getItemTagUserList().get(i).getStartIndex(), manager.getItemTagUserList().get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    ForegroundColorSpan spanBg = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
+                    spanString.setSpan(spanBg, manager.getItemTagUserList().get(i).getStartIndex(), manager.getItemTagUserList().get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                }
+
+                holder.tvText.setText(spanString);
+
+
+            } else {
+                MyLog.Set("e", RecyclerBoardAdapter.class, "無tag");
+                holder.tvText.setText(manager.getMessage());
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
@@ -96,10 +155,10 @@ public class RecyclerBoardAdapter  extends RecyclerView.Adapter  {
             super(itemView);
 
 
-            userImg = (RoundedImageView)itemView.findViewById(R.id.userImg);
-            tvName = (TextView)itemView.findViewById(R.id.tvName);
-            tvText = (TextView)itemView.findViewById(R.id.tvText);
-            tvInsertTime = (TextView)itemView.findViewById(R.id.tvInsertTime);
+            userImg = (RoundedImageView) itemView.findViewById(R.id.userImg);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            tvText = (TextView) itemView.findViewById(R.id.tvText);
+            tvInsertTime = (TextView) itemView.findViewById(R.id.tvInsertTime);
 
 
         }

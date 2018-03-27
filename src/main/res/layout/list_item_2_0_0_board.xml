@@ -60,7 +60,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="4dp"
                 android:letterSpacing="0.1"
-                android:text="4556654"
+                android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                 android:textSize="@dimen/ppb200_common_text_third" />
 
