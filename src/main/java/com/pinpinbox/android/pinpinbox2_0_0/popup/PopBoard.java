@@ -17,6 +17,7 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,6 +136,8 @@ public class PopBoard {
     private boolean isNoDataToastAppeared = false; //判斷無資料訊息是否出現過
     private boolean isShowRecyclerPadding = false;
     private boolean changeToDarkStatus = true;
+    private boolean isClickTagUser = false;
+
 
     public PopBoard(Activity mActivity, int type, String type_id, RelativeLayout rShow, boolean changeToDarkStatus) {
         this.mActivity = mActivity;
@@ -292,61 +295,97 @@ public class PopBoard {
                     }
                 }
 
-                /*判斷前字符是否為tag*/
-                boolean isTag = false;
-                if (tagsList != null && tagsList.size() > 0) {
-                    int cursorIndex = edText.getSelectionStart();
-                    MyLog.Set("e", PopBoard.class, "cursorIndex => " + cursorIndex);
-                    for (int i = 0; i < tagsList.size(); i++) {
-                        if (cursorIndex == tagsList.get(i).getEndIndex() + 2) {
-                            isTag = true;
-                            break;
-                        }
-                    }
-                }
+//                /*判斷前字符是否為tag*/
+//                boolean isTag = false;
+//                if (tagsList != null && tagsList.size() > 0) {
+//                    int cursorIndex = edText.getSelectionStart();
+//                    MyLog.Set("e", PopBoard.class, "cursorIndex => " + cursorIndex);
+//                    for (int i = 0; i < tagsList.size(); i++) {
+//                        if (cursorIndex == tagsList.get(i).getEndIndex() + 2) {
+//                            isTag = true;
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//                if (isTag) {
+//                    //評估是否添加一空格
+//                    MyLog.Set("e", PopBoard.class, "isTag");
+////                    text = input.replace("@" + strSendText,)
+//                    edText.setText(edText.getText().toString().replaceFirst("@" + strSendText, itemUserList.get(position).getName()));
+//                } else {
+//                    MyLog.Set("e", PopBoard.class, "!isTag");
+//                    edText.setText(edText.getText().toString().replaceFirst(" @" + strSendText, itemUserList.get(position).getName()));
+//                }
 
-                if (isTag) {
-                    //評估是否添加一空格
-                    MyLog.Set("e", PopBoard.class, "isTag");
-                    edText.setText(edText.getText().toString().replaceFirst("@" + strSendText, itemUserList.get(position).getName()));
-                } else {
-                    MyLog.Set("e", PopBoard.class, "!isTag");
-                    edText.setText(edText.getText().toString().replaceFirst(" @" + strSendText, itemUserList.get(position).getName()));
-                }
+
+                isClickTagUser = true;
+
+                String id = itemUserList.get(position).getUser_id();
+                String name = itemUserList.get(position).getName();
+                String sendType = String.format("[%s:%s]", id, name);
+
+                /*輸入的用戶轉格式*/
+                edText.setText(edText.getText().toString().replace(" @" + strSendText, sendType));
+
+                /*格式後的字串*/
+                String input = edText.getText().toString();
 
                 /*建立tag*/
                 ItemTagUser tags = new ItemTagUser();
-                tags.setName(itemUserList.get(position).getName());
-                tags.setUser_id(itemUserList.get(position).getUser_id());
+                tags.setName(name);
+                tags.setUser_id(id);
 
                 /*移除name後面空格*/
-                String name = itemUserList.get(position).getName().substring(1, itemUserList.get(position).getName().length() - 1);
-                tags.setSendType("[" + itemUserList.get(position).getUser_id() + ":" + name + "]");
+//                String name = itemUserList.get(position).getName().substring(1, itemUserList.get(position).getName().length() - 1);
+                tags.setSendType(sendType);
 
                 /*該次tag位置*/
-                Pattern pattern = Pattern.compile(itemUserList.get(position).getName());
-                Matcher matcher = pattern.matcher(edText.getText().toString());
+                Pattern pattern = Pattern.compile("\\[" + id + "\\:" + name + "\\]");
+                Matcher matcher = pattern.matcher(input);
 
                 if (matcher.find()) {
                     MyLog.Set("e", PopBoard.class, "matcher.start() => " + matcher.start());
                     MyLog.Set("e", PopBoard.class, "matcher.end() => " + matcher.end());
+
+
                     tags.setStartIndex(matcher.start());
                     tags.setEndIndex(matcher.end());
-                }
+//                    tags.setEndIndex(matcher.end() - id.length() + 3);//雙引號+冒號
 
-                tagsList.add(tags);
+                    MyLog.Set("e", PopBoard.class, "tag getName => " + tags.getName());
+                    MyLog.Set("e", PopBoard.class, "tag getUser_id => " + tags.getUser_id());
+                    MyLog.Set("e", PopBoard.class, "tag getSendType => " + tags.getSendType());
+                    MyLog.Set("e", PopBoard.class, "tag getStartIndex => " + tags.getStartIndex());
+                    MyLog.Set("e", PopBoard.class, "tag getEndIndex => " + tags.getEndIndex());
+
+                    tagsList.add(tags);
+
+
+                    /*獲取正確位置後格式轉為name*/
+//                    edText.setText(input.replace(sendType, name));
+                }
 
 
                 /*設定字串樣式*/
-                SpannableString spanString = new SpannableString(edText.getText());
+                SpannableString spanString = new SpannableString(edText.getText());//重新獲取
                 for (int i = 0; i < tagsList.size(); i++) {
 
-                    RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 8, Color.parseColor(ColorClass.PINK_FRIST));
+
+                    ForegroundColorSpan spanBg = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
                     spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+//                    RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 8, Color.parseColor(ColorClass.PINK_FRIST));
+//                    spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                 }
 
                 edText.setText(spanString);
+
+                isClickTagUser = false;
+
+
                 setSelection();
 
             }
@@ -365,7 +404,7 @@ public class PopBoard {
 
         edText.addTextChangedListener(new TextWatcher() {
 
-//            private boolean isDeleteIng = false;
+            private boolean isDeleteIng = false;
 
             private void searchUser() {
 
@@ -403,7 +442,6 @@ public class PopBoard {
 
 
                 } else {
-                    MyLog.Set("e", PopBoard.class, "text => " + text);
                     rvTag.setVisibility(View.INVISIBLE);
                 }
 
@@ -423,10 +461,63 @@ public class PopBoard {
             @Override
             public void afterTextChanged(Editable s) {
 
-//                if (isDeleteIng) {
-//                    isDeleteIng = false;
-//                    return;
+                if (isDeleteIng) {
+                    isDeleteIng = false;
+                    return;
+                }
+//
+//                String strInput = edText.getText().toString();
+//
+//                MyLog.Set("e", PopBoard.class, "afterTextChanged => strInput" + strInput);
+//
+//                if (tagsList != null && tagsList.size() > 0) {
+//
+//                    for (int i = 0; i < tagsList.size(); i++) {
+//
+//                        /*檢查名稱是否還在字串內*/
+//                        Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+//                        Matcher matcher = pattern.matcher(strInput);
+//
+//                        if (!matcher.find()) {
+//
+//                            MyLog.Set("e", PopBoard.class, "名稱損毀");
+////
+////                            /*或取損毀後的文字*/
+////                            String strDamage= edText.getText().toString().substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex()-1);
+////                            MyLog.Set("e", PopBoard.class, "strDamage => " + strDamage);
+////
+////                            /*確認損毀文字位置*/
+////                            Pattern dPattern = Pattern.compile(strDamage);
+////                            Matcher m = dPattern.matcher(edText.getText().toString());//重新獲取字串
+////                            if(m.find()){
+////                                int dStartIndex = m.start();
+////                                int dEndInedx = m.end();
+////
+////                                isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
+////
+////                                edText.getText().delete(dStartIndex, dEndInedx);
+////
+////                            }
+////
+//                            tagsList.remove(i);
+//
+//                        } else {
+//
+//                            MyLog.Set("e", PopBoard.class, "名稱還在");
+//
+//                            /*重新設置位置*/
+//
+//                            MyLog.Set("e", PopBoard.class, "reset matcher.start() => " + matcher.start());
+//                            MyLog.Set("e", PopBoard.class, "reset matcher.end() => " + matcher.end());
+//
+//                            tagsList.get(i).setStartIndex(matcher.start());
+//                            tagsList.get(i).setEndIndex(matcher.end());
+//                        }
+//
+//                    }
+//
 //                }
+
 
                 String strInput = edText.getText().toString();
 
@@ -434,44 +525,24 @@ public class PopBoard {
 
                     for (int i = 0; i < tagsList.size(); i++) {
 
-                        /*檢查名稱是否還在字串內*/
-                        Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+                        String id = tagsList.get(i).getUser_id();
+                        String name = tagsList.get(i).getName();
+
+                        Pattern pattern = Pattern.compile("\\[" + id + "\\:" + name + "\\]");
                         Matcher matcher = pattern.matcher(strInput);
 
-                        if (!matcher.find()) {
-
-                            MyLog.Set("e", PopBoard.class, "名稱損毀");
-//
-//                            /*或取損毀後的文字*/
-//                            String strDamage= edText.getText().toString().substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex()-1);
-//                            MyLog.Set("e", PopBoard.class, "strDamage => " + strDamage);
-//
-//                            /*確認損毀文字位置*/
-//                            Pattern dPattern = Pattern.compile(strDamage);
-//                            Matcher m = dPattern.matcher(edText.getText().toString());//重新獲取字串
-//                            if(m.find()){
-//                                int dStartIndex = m.start();
-//                                int dEndInedx = m.end();
-//
-//                                isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
-//
-//                                edText.getText().delete(dStartIndex, dEndInedx);
-//
-//                            }
-//
-                            tagsList.remove(i);
-
-                        } else {
-
-                            MyLog.Set("e", PopBoard.class, "名稱還在");
-
-                            /*重新設置位置*/
-
-                            MyLog.Set("e", PopBoard.class, "reset matcher.start() => " + matcher.start());
-                            MyLog.Set("e", PopBoard.class, "reset matcher.end() => " + matcher.end());
-
+                        if (matcher.find()) {
                             tagsList.get(i).setStartIndex(matcher.start());
                             tagsList.get(i).setEndIndex(matcher.end());
+                        } else {
+                            MyLog.Set("e", PopBoard.class, "名稱損毀");
+
+                            isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
+
+                            if (edText.getText().length()>0) {
+                                edText.getText().delete(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() - 1);
+                            }
+                            tagsList.remove(i);
                         }
 
                     }
@@ -486,12 +557,13 @@ public class PopBoard {
                 }
 
 
+                if (!isClickTagUser) {
                 /*搜尋用戶*/
-                searchUser();
+                    searchUser();
+                }
 
 
             }
-
 
 
         });
@@ -581,6 +653,12 @@ public class PopBoard {
 
 
                 edText.setText("");
+
+                if (tagsList != null && tagsList.size() > 0) {
+                    tagsList.clear();
+                }
+
+
             }
         });
 
@@ -588,7 +666,7 @@ public class PopBoard {
             @Override
             public void onClick(View view) {
 
-                if (ClickUtils.ButtonContinuousClick_4s()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick_2s()) {//1秒內防止連續點擊
                     if (showToastBySendTextContinuous) {
                         PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
                         showToastBySendTextContinuous = false;
@@ -1029,15 +1107,15 @@ public class PopBoard {
 
             String readySendText = edText.getText().toString();
 
-            for (int i = 0; i < tagsList.size(); i++) {
-
-                Pattern pattern = Pattern.compile(tagsList.get(i).getName());
-                Matcher matcher = pattern.matcher(readySendText);
-
-                if (matcher.find()) {
-                    readySendText = readySendText.replaceFirst(tagsList.get(i).getName(), tagsList.get(i).getSendType());
-                }
-            }
+//            for (int i = 0; i < tagsList.size(); i++) {
+//
+//                Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+//                Matcher matcher = pattern.matcher(readySendText);
+//
+//                if (matcher.find()) {
+//                    readySendText = readySendText.replaceFirst(tagsList.get(i).getName(), tagsList.get(i).getSendType());
+//                }
+//            }
 
 
             try {
@@ -1157,6 +1235,9 @@ public class PopBoard {
                 PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_send_text_success);
 
                 edText.setText("");
+                if (tagsList != null && tagsList.size() > 0) {
+                    tagsList.clear();
+                }
 
                 round = round + count;
 
@@ -1249,7 +1330,8 @@ public class PopBoard {
                             JSONObject object = new JSONObject(user);
 
                             ItemUser itemUser = new ItemUser();
-                            itemUser.setName(" " + JsonUtility.GetString(object, ProtocolKey.name) + " ");
+//                            itemUser.setName(" " + JsonUtility.GetString(object, ProtocolKey.name) + " ");
+                            itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
                             itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
                             itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
 
