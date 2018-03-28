@@ -195,7 +195,6 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         token = PPBApplication.getInstance().getToken();
     }
 
-
     private void setUserRecycler() {
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

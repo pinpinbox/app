@@ -44,6 +44,17 @@ public class ClickUtils {
             lastClickTime = time;
             return false;
         }
-
     }
+
+    public synchronized static boolean ButtonContinuousClick_2s() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if(timeD<2000){
+            return true;
+        }else {
+            lastClickTime = time;
+            return false;
+        }
+    }
+
 }

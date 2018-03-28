@@ -258,9 +258,7 @@ public class PopBoard {
         tagUserAdapter = new RecyclerTagUserAdapter(mActivity, itemUserList);
         rvTag.setAdapter(tagUserAdapter);
 
-
         tagsList = new ArrayList<>();
-
 
         tagUserAdapter.setOnRecyclerViewListener(new RecyclerTagUserAdapter.OnRecyclerViewListener() {
             @Override

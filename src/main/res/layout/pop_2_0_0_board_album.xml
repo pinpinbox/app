@@ -78,28 +78,21 @@
                 app:riv_oval="true" />
 
 
-
-
-
             <EditText
                 android:id="@+id/edText"
+                style="@style/ppb200_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:layout_toEndOf="@+id/userImg"
                 android:layout_toRightOf="@+id/userImg"
-                android:background="@drawable/border_2_0_0_grey_third_radius"
                 android:hint="@string/pinpinbox_2_0_0_input_hint_board_express"
-                android:letterSpacing="0.1"
-                android:lineSpacingExtra="2dp"
                 android:maxLength="128"
                 android:minHeight="36dp"
                 android:padding="8dp"
                 android:text=""
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textColorHint="@color/pinpinbox_2_0_0_hint_alpha"
-                android:textCursorDrawable="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_third" />
+
 
             <!--<mabbas007.tagsedittext.TagsEditText-->
             <!--android:id="@+id/edText"-->

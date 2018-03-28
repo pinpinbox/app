@@ -112,15 +112,9 @@ public class RecyclerBoardAdapter extends RecyclerView.Adapter {
                 SpannableString spanString = new SpannableString(manager.getMessage());
 
                 for (int i = 0; i < manager.getItemTagUserList().size(); i++) {
-//                    RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_THIRD), 8, Color.parseColor(ColorClass.PINK_FRIST));
-//                    spanString.setSpan(spanBg, manager.getItemTagUserList().get(i).getStartIndex(), manager.getItemTagUserList().get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-//                    BackgroundColorSpan spanBg = new BackgroundColorSpan(Color.parseColor(ColorClass.GREY_THIRD));
-//                    spanString.setSpan(spanBg, manager.getItemTagUserList().get(i).getStartIndex(), manager.getItemTagUserList().get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-                    ForegroundColorSpan spanBg = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
+                    ForegroundColorSpan spanBg = new ForegroundColorSpan(Color.parseColor(ColorClass.MAIN_FIRST));
                     spanString.setSpan(spanBg, manager.getItemTagUserList().get(i).getStartIndex(), manager.getItemTagUserList().get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
 
                 }
 
