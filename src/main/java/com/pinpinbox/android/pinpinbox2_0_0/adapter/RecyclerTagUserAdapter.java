@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ChangeTypeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -117,8 +114,6 @@ public class RecyclerTagUserAdapter extends RecyclerView.Adapter  {
 
             linBackground.setOnClickListener(this);
             linBackground.setOnLongClickListener(this);
-
-
 
         }
 
