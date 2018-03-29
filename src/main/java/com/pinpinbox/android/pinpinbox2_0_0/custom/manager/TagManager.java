@@ -105,7 +105,7 @@ public class TagManager {
              /*位置*/
             itemTagUserList.get(i).setStartIndex(itemTagUserList.get(i).getStartIndex() - len);
 
-            len = len + (itemTagUserList.get(i).getUser_id().length() + 1);//3為兩個引號 + 冒號  -  名字前後空格
+            len = len + (itemTagUserList.get(i).getUser_id().length() + 1);//兩個引號 + 冒號  -  名字前後空格
 
             itemTagUserList.get(i).setEndIndex(itemTagUserList.get(i).getEndIndex() - len);
 

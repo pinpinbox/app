@@ -12,6 +12,8 @@ public class ItemTagUser {
     private String name = "";
     private String sendType = "";
 
+//    private boolean isReTagged = false;
+
     public int getStartIndex() {
         return startIndex;
     }
@@ -51,4 +53,12 @@ public class ItemTagUser {
     public void setSendType(String sendType) {
         this.sendType = sendType;
     }
+
+//    public boolean isReTagged() {
+//        return isReTagged;
+//    }
+//
+//    public void setReTagged(boolean tagged) {
+//        isReTagged = tagged;
+//    }
 }
