@@ -120,7 +120,6 @@ public class RecyclerBoardAdapter extends RecyclerView.Adapter {
 
                 holder.tvText.setText(spanString);
 
-
             } else {
                 MyLog.Set("e", RecyclerBoardAdapter.class, "無tag");
                 holder.tvText.setText(manager.getMessage());

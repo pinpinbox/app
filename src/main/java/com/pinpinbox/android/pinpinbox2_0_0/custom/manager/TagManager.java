@@ -58,7 +58,7 @@ public class TagManager {
 
                     /*建立Tag物件*/
                     ItemTagUser tagUser = new ItemTagUser();
-                    tagUser.setName(" " + name + " ");
+                    tagUser.setName(name);
                     tagUser.setUser_id(id);
                     tagUser.setSendType("[" + part + "]");
 
@@ -105,7 +105,7 @@ public class TagManager {
              /*位置*/
             itemTagUserList.get(i).setStartIndex(itemTagUserList.get(i).getStartIndex() - len);
 
-            len = len + (itemTagUserList.get(i).getUser_id().length() + 1);//兩個引號 + 冒號  -  名字前後空格
+            len = len + (itemTagUserList.get(i).getUser_id().length() + 3);//兩個引號 + 冒號
 
             itemTagUserList.get(i).setEndIndex(itemTagUserList.get(i).getEndIndex() - len);
 
