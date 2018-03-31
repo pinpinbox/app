@@ -1,10 +1,12 @@
 package com.pinpinbox.android.pinpinbox2_0_0.bean;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by kevin9594 on 2018/3/24.
  */
 
-public class ItemTagUser {
+public class ItemTagUser implements Comparable<ItemTagUser> {
 
     private int startIndex = -1;
     private int endIndex = -1;
@@ -52,6 +54,14 @@ public class ItemTagUser {
 
     public void setSendType(String sendType) {
         this.sendType = sendType;
+    }
+
+    @Override
+    public int compareTo(@NonNull ItemTagUser o) {
+
+        int i = this.startIndex - o.startIndex;
+
+        return i;
     }
 
 //    public boolean isReTagged() {
