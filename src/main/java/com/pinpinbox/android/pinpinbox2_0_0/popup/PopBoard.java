@@ -1538,7 +1538,6 @@ public class PopBoard {
 
 
                     isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
-
 //                    if(afterText.length()>0) {
 //
 //                        edText.getText().delete(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() - 1);
