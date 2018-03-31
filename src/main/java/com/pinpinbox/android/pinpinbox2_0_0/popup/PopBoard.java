@@ -17,6 +17,8 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -376,6 +378,10 @@ public class PopBoard {
 
                     RadiusBackgroundSpan spanBg = new RadiusBackgroundSpan(Color.parseColor(ColorClass.GREY_SECOND), 8, Color.parseColor(ColorClass.PINK_FRIST));
                     spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+//                    ForegroundColorSpan spanBg = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
+//                    spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
 
                 }
 
@@ -1521,9 +1527,7 @@ public class PopBoard {
         }
 
 
-
-
-        private void resetIndex(){
+        private void resetIndex() {
             int checkIndex = 0;
             for (int i = 0; i < tagsList.size(); i++) {
                 MyLog.Set("e", PopBoard.class, "重新設定位置 從" + checkIndex + "開始check");
@@ -1533,21 +1537,107 @@ public class PopBoard {
                     tagsList.get(i).setStartIndex(m.start());
                     tagsList.get(i).setEndIndex(m.end());
                     checkIndex = tagsList.get(i).getEndIndex();
-                }else {
+                } else {
                     MyLog.Set("e", PopBoard.class, "名稱損毀 => " + tagsList.get(i).getName());
 
-
                     isDeleteIng = true;//連續刪除字串會重複執行afterTextChanged 在此設定斷點
-//                    if(afterText.length()>0) {
-//
-//                        edText.getText().delete(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() - 1);
-//                    }
 
-                    tagsList.remove(i);
+                    /*針對特殊手機*/
+                    if (afterText.length() > 0) {
 
-//                    resetIndex();
+                        if (i != tagsList.size() - 1) {
+
+                            try {
+
+
+
+                                if (afterText.length() - beforeText.length() == -1) {
+
+                                    String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getName().length() - 1);
+
+                                    MyLog.Set("e", PopBoard.class, "deleteText => " + deleteText);
+
+                                    MyLog.Set("e", PopBoard.class, "減少等於1字");
+
+                                    edText.getText().delete(tagsList.get(i).getStartIndex(), tagsList.get(i).getName().length() - 1);
+
+                                }
+
+                                if(afterText.length() - beforeText.length() == 1){
+
+                                    String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getName().length() + 1);
+
+                                    MyLog.Set("e", PopBoard.class, "deleteText => " + deleteText);
+
+                                    MyLog.Set("e", PopBoard.class, "增加字元1字");
+
+                                    edText.getText().delete(tagsList.get(i).getStartIndex(), tagsList.get(i).getName().length() + 1);
+
+                                }
+
+
+                            } catch (Exception e) {
+
+                                e.printStackTrace();
+
+                            }
+
+                        } else {
+
+
+                            try {
+
+
+
+                                if (afterText.length() - beforeText.length() == -1) {
+
+                                    String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() - 1);
+
+                                    MyLog.Set("e", PopBoard.class, "deleteText 2 => " + deleteText);
+
+                                    MyLog.Set("e", PopBoard.class, "減少字元1字");
+
+                                    edText.getText().delete(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() - 1);
+
+                                }
+
+
+                                if(afterText.length() - beforeText.length() == 1){
+
+                                    String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() + 1);
+
+                                    MyLog.Set("e", PopBoard.class, "deleteText 2 => " + deleteText);
+
+                                    MyLog.Set("e", PopBoard.class, "增加字元1字");
+
+                                    edText.getText().delete(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() + 1);
+
+                                }
+
+
+                            } catch (Exception e) {
+
+                                e.printStackTrace();
+
+                            }
+
+                        }
+
+                    } else {
+
+                        MyLog.Set("e", PopBoard.class, "字串清空");
+
+                    }
+
+                    if (tagsList.size() != 0) {
+
+                        tagsList.remove(i);
+                    }
+
 
                     break;
+
+
                 }
             }
 
