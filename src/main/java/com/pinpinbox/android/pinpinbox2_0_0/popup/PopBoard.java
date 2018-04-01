@@ -479,11 +479,11 @@ public class PopBoard {
 //                MyLog.Set("e", PopBoard.class, "readySendText => " + readySendText);
 
 
-                edText.setText("");
-
                 if (tagsList != null && tagsList.size() > 0) {
                     tagsList.clear();
                 }
+
+                edText.setText("");
 
 
             }
@@ -501,6 +501,50 @@ public class PopBoard {
                     MyLog.Set("e", PopBoard.class, "startIndex => " + tagsList.get(i).getStartIndex());
                     MyLog.Set("e", PopBoard.class, "endIndex => " + tagsList.get(i).getEndIndex());
                     MyLog.Set("e", PopBoard.class, "************************************************************************************************");
+
+                }
+
+
+                String strInput = edText.getText().toString();
+                StringBuilder strSendText = new StringBuilder();
+
+                if (tagsList != null && tagsList.size() > 0) {
+
+                    int startIndex = 0;
+                    for (int i = 0; i < tagsList.size(); i++) {
+                        Pattern pattern = Pattern.compile(tagsList.get(i).getName());
+                        Matcher matcher = pattern.matcher(strInput);
+
+//                        if (matcher.find(tagsList.get(i).getStartIndex())) {
+
+                        if (matcher.find(startIndex)) {
+
+
+                        /*將用戶格式化*/
+                            String user = tagsList.get(i).getSendType();
+
+                        /*添加該tag前的字串*/
+                            strSendText.append(strInput.substring(startIndex, tagsList.get(i).getStartIndex()));
+
+                        /*添加tag格式用戶*/
+                            strSendText.append(user);
+
+                        /*定位下次開始位置於本次tag後*/
+                            startIndex = tagsList.get(i).getEndIndex();
+                        }
+                    }
+
+                    int s = tagsList.get(tagsList.size() - 1).getEndIndex();
+
+                /*後面字段*/
+                    String lastText = strInput.substring(s, strInput.length());
+                    strSendText.append(lastText);
+                    MyLog.Set("e", PopBoard.class, "strSendText => " + strSendText);
+
+                } else {
+
+                    strSendText.append(strInput);
+                    MyLog.Set("e", PopBoard.class, "strSendText2 => " + strSendText);
 
                 }
 
@@ -923,6 +967,8 @@ public class PopBoard {
         private String p91Message = "";
         private int p91Result = -1;
 
+        private StringBuilder strSendText = null;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -932,15 +978,9 @@ public class PopBoard {
             round = 0;
             count = 16;
 
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-            String strJson = "";
 
             String strInput = edText.getText().toString();
-            StringBuilder strSendText = new StringBuilder();
+            strSendText = new StringBuilder();
             int startIndex = 0;
             for (int i = 0; i < tagsList.size(); i++) {
                 Pattern pattern = Pattern.compile(tagsList.get(i).getName());
@@ -967,6 +1007,14 @@ public class PopBoard {
             strSendText.append(lastText);
 
             MyLog.Set("e", PopBoard.class, "strSendText => " + strSendText);
+
+
+        }
+
+        @Override
+        protected Object doInBackground(Void... params) {
+
+            String strJson = "";
 
 
             try {
@@ -1085,10 +1133,13 @@ public class PopBoard {
 
                 PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_send_text_success);
 
-                edText.setText("");
+
                 if (tagsList != null && tagsList.size() > 0) {
                     tagsList.clear();
                 }
+
+                edText.setText("");
+
 
                 round = round + count;
 
@@ -1526,7 +1577,6 @@ public class PopBoard {
 
         }
 
-
         private void resetIndex() {
             int checkIndex = 0;
             for (int i = 0; i < tagsList.size(); i++) {
@@ -1550,7 +1600,6 @@ public class PopBoard {
                             try {
 
 
-
                                 if (afterText.length() - beforeText.length() == -1) {
 
                                     String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getName().length() - 1);
@@ -1563,7 +1612,7 @@ public class PopBoard {
 
                                 }
 
-                                if(afterText.length() - beforeText.length() == 1){
+                                if (afterText.length() - beforeText.length() == 1) {
 
                                     String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getName().length() + 1);
 
@@ -1588,7 +1637,6 @@ public class PopBoard {
                             try {
 
 
-
                                 if (afterText.length() - beforeText.length() == -1) {
 
                                     String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() - 1);
@@ -1602,7 +1650,7 @@ public class PopBoard {
                                 }
 
 
-                                if(afterText.length() - beforeText.length() == 1){
+                                if (afterText.length() - beforeText.length() == 1) {
 
                                     String deleteText = afterText.substring(tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex() + 1);
 
@@ -1633,6 +1681,8 @@ public class PopBoard {
 
                         tagsList.remove(i);
                     }
+
+                    resetIndex();
 
 
                     break;
