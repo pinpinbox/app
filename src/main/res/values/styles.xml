@@ -31,8 +31,8 @@
     <style name="ppb200_staggered_bg_cover">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/image_background_2_0_0_home_item_cover_radius
-        </item>
+        <item name="android:background">@drawable/image_background_2_0_0_home_item_cover_radius</item>
+        <item name="android:transitionName">img_bg</item>
     </style>
 
     <style name="ppb200_staggered_type_linear">

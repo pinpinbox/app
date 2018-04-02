@@ -418,6 +418,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
         (findViewById(R.id.linLikeCount)).setOnClickListener(this);
+        tvMessageCount.setOnClickListener(this);
         backImg.setOnClickListener(this);
 
     }
@@ -2334,6 +2335,23 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             case R.id.linLikeCount:
 
                 toLikesList();
+
+                break;
+
+            case R.id.tvMessageCount:
+
+                if (board == null) {
+
+                    board = new PopBoard(mActivity, PopBoard.TypeAlbum, album_id, (RelativeLayout) findViewById(R.id.rBackground), false);
+                    board.setTvCount(tvMessageCount);
+
+                } else {
+
+                    board.clearList();
+                    board.doGetBoard();
+
+                }
+
 
                 break;
 

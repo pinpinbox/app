@@ -34,15 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp">
 
-                <!--<com.pinpinbox.android.Views.panoramaimageview.PanoramaImageView-->
-                <!--android:id="@+id/coverImg"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--app:piv_enablePanoramaMode="true"-->
-                <!--app:piv_invertScrollDirection="false"-->
-                <!--app:piv_show_scrollbar="false"-->
-                <!--android:tag="cover"/>-->
-
                 <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                     android:id="@+id/coverImg"
                     android:layout_width="match_parent"
@@ -118,12 +109,14 @@
                         android:layout_alignBaseline="@+id/tvViewed"
                         android:layout_alignBottom="@+id/tvViewed"
                         android:layout_gravity="right"
-                        android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                        android:layout_marginRight="12dp"
                         android:layout_toLeftOf="@+id/tvViewed"
                         android:layout_toStartOf="@+id/tvViewed"
+                        android:background="@drawable/click_2_0_0_default"
                         android:gravity="center"
                         android:letterSpacing="0.1"
                         android:text=""
+                        android:padding="@dimen/ppb200_padding_margin_third"
                         android:textColor="@color/white"
                         android:textSize="@dimen/ppb200_common_text_second" />
 

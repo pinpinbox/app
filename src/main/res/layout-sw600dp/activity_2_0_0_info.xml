@@ -31,6 +31,7 @@
             <RelativeLayout
                 android:id="@+id/rImageArea"
                 android:layout_width="match_parent"
+                android:transitionName="img_bg"
                 android:layout_height="560dp">
 
 
@@ -126,6 +127,7 @@
                             android:layout_height="24dp"
                             android:gravity="center"
                             android:letterSpacing="0.1"
+                            android:background="@drawable/click_2_0_0_default"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                             android:textSize="@dimen/ppb200_common_text_second" />

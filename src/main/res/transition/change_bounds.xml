@@ -8,6 +8,7 @@
     <changeBounds android:duration="250" />
 
 
+    <!--android:interpolator="@android:interpolator/overshoot"-->
 
     <!--<changeClipBounds-->
     <!--android:duration="2000" />-->

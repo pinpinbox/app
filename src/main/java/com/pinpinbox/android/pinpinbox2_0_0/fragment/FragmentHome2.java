@@ -423,9 +423,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         RecyclerViewUtils.setHeaderView(rvHome, viewHeader);
 
-
         recyclerHomeAdapter.setOnRecyclerViewListener(new RecyclerHomeAdapter.OnRecyclerViewListener() {
-
 
             @Override
             public void onItemClick(int position, View v) {
@@ -435,7 +433,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 params.put("album id: ", itemAlbumList.get(position).getAlbum_id());
 
                 FlurryUtil.onEventUseMap(FlurryKey.home_click_albuminfo, params);
-
 
                 ActivityIntent.toAlbumInfo(
                         getActivity(),
@@ -447,24 +444,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 );
 
 
-
-
-//                String currentAlbum_id = itemAlbumList.get(position).getAlbum_id() + "";
-//                String cover = itemAlbumList.get(position).getCover();
-//
-//                final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
-//
-//                Bundle bundle = new Bundle();
-//                bundle.putString(Key.album_id, currentAlbum_id);
-//                bundle.putString(Key.cover, cover);
-//                bundle.putInt(Key.image_orientation, itemAlbumList.get(position).getImage_orientation());
-//                Intent intent = new Intent(getActivity(), AlbumInfo2Activity.class).putExtras(bundle);
-//
-//                ActivityOptionsCompat options = ActivityOptionsCompat.
-//                        makeSceneTransitionAnimation(getActivity(),
-//                                img,
-//                                ViewCompat.getTransitionName(img));
-//                startActivity(intent, options.toBundle());
             }
 
             @Override
