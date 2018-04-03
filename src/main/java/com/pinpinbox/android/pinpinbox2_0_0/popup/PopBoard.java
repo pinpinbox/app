@@ -1278,6 +1278,8 @@ public class PopBoard {
 
                 if (itemUserList.size() > 0) {
                     rvTag.setVisibility(View.VISIBLE);
+                }else {
+                    rvTag.setVisibility(View.INVISIBLE);
                 }
 
 
