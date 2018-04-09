@@ -24,7 +24,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -35,7 +34,6 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.listener.VideoControlsButtonListener;
@@ -57,7 +55,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -190,6 +187,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private int lastPosition = 0;
     private int photoTotalCount = 0;
     private int userPoint = 0;
+    private int startPage = 0;
+    private int startPhotoID = -1;
 
 
     private double mLocLat; //緯度
@@ -265,7 +264,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         setListener();
 
         doGetAlbumInfo();
-
 
     }
 
@@ -752,9 +750,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         });
 
 
-        final TextView tvRefreshVideo = (TextView)vPage.findViewById(R.id.tvRefreshVideo);
+        final TextView tvRefreshVideo = (TextView) vPage.findViewById(R.id.tvRefreshVideo);
 
-        try{
+        try {
             Uri uri = null;
             uri = Uri.parse(videoTarget);
             videoView.setVideoURI(uri);
@@ -816,7 +814,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
             });
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             videoView.release();
             photoContentsList.get(position).setVideoView(null);
@@ -862,29 +860,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         final View vPage = vpReader.findViewById(position);
 
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                PinPinToast.ShowToast(mActivity, "重新啟動閱讀器");
-
-//                Bundle bundle = new Bundle();
-//
-//                bundle.putString(Key.album_id, album_id);
-//                bundle.putString(Key.event_id, event_id);
-//                bundle.putString(Key.special, strSpecialUrl);
-//                bundle.putBoolean(Key.isNewCreate, isNewCreate);
-//                bundle.putBoolean(Key.isContribute, isContribute);
-//
-//
-//                startActivity(new Intent(mActivity, Reader2Activity.class).putExtras(bundle));
-//                finish();
-//
-//            }
-//        },3000);
-
-
         if (vPage == null || vpReader == null) {
             DialogV2Custom.BuildUnKnow(mActivity, "setPageDetail error");
+
+            MyLog.Set("e", mActivity.getClass(), "-------------------------------------- 1");
+
             return;
         }
 
@@ -1057,9 +1037,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                             doSlot(vPage, position, linExchange, ga);
                                         }
                                     });
-
-
-
 
 
                         }
@@ -1399,7 +1376,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         tvChange.setClickable(false);
                     }
 
-                    private void expired(){
+                    private void expired() {
                         tvExchangeEnd.setVisibility(View.VISIBLE);
 
                         if (tvExchangeEnd.getAlpha() == 0f) {
@@ -1449,7 +1426,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     }
 
                     @Override
-                    public void IsExpired(){
+                    public void IsExpired() {
                         expired();
                     }
 
@@ -1547,9 +1524,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             linExchange.setAlpha(1f);
                         }
 
-                        if(itemExchange.getName()!=null && !itemExchange.getName().equals("null") && !itemExchange.getName().equals("")){
+                        if (itemExchange.getName() != null && !itemExchange.getName().equals("null") && !itemExchange.getName().equals("")) {
                             tvExchangeName.setText(itemExchange.getName());
-                        }else {
+                        } else {
                             tvExchangeName.setVisibility(View.GONE);
                         }
 
@@ -1557,13 +1534,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         tvExchangeDescription.setText(itemExchange.getDescription());
 
 
-                        if(itemExchange.isUseless_award()){
+                        if (itemExchange.isUseless_award()) {
                             tvChange.setVisibility(View.GONE);
                             rAddToExchangeList.setVisibility(View.GONE);
                             ScrollView svExchange = (ScrollView) vPage.findViewById(R.id.svExchange);
                             svExchange.setPadding(0, 0, 0, 0);
 
-                        }else {
+                        } else {
                             tvChange.setVisibility(View.VISIBLE);
                         }
 
@@ -1691,7 +1668,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         tvChange.setClickable(false);
                     }
 
-                    private void expired(){
+                    private void expired() {
 
                         save();
 
@@ -1706,7 +1683,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     }
 
 
-                    private void save(){
+                    private void save() {
                         try {
                             JSONObject object = new JSONObject();
                             object.put(Key.slot_photo_id, photoContentsList.get(position).getPhoto_id() + "");
@@ -1996,6 +1973,10 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         tvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                startPhotoID = photoContentsList.get(vpReader.getCurrentItem()).getPhoto_id();
+
 
                 if (itemAlbum.getPoint() > 0) {
 
@@ -2888,6 +2869,15 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         private int p08Result = -1;
         private String p08Message = "";
 
+        private void getStartPage() {
+            for (int i = 0; i < photoContentsList.size(); i++) {
+                if (startPhotoID == photoContentsList.get(i).getPhoto_id()) {
+                    startPage = i;
+                    break;
+                }
+            }
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -3042,18 +3032,18 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
             if (p08Result == 1) {
 
-
                 if (photoContentsList.size() < 1) {
-
                     PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_there_are_no_contents_in_the_work);
-
                     return;
                 }
-
 
                 setLike();
 
                 setPageAdapter();
+
+                getStartPage();
+                MyLog.Set("e", mActivity.getClass(), "startPhotoID => " + startPhotoID);
+                MyLog.Set("e", mActivity.getClass(), "startPage => " + startPage);
 
                 photoContentsList.get(0).setSelect(true);
                 recyclerReaderAdapter.notifyDataSetChanged();
@@ -3092,6 +3082,22 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     }
                 }, 500);
+
+
+                if(startPage>0){
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            vpReader.setCurrentItem(startPage, false);
+
+                        }
+                    },800);
+
+                }
+
+
 
 
                 if (!isSaveToRecent) {
