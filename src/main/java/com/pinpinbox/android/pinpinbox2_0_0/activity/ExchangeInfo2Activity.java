@@ -216,7 +216,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
         if (itemExchange.getEndtime() == null || itemExchange.getEndtime().equals("") || itemExchange.getEndtime().equals("null")) {
 
-            tvExchangeTime.setText("無期限");
+            tvExchangeTime.setText(R.string.pinpinbox_2_0_0_other_text_no_time_limit);
             tvExchangeTime.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
         } else {
@@ -232,8 +232,13 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                 long hour = (l / (60 * 60 * 1000) - day * 24);
                 long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
 
-//                tvExchangeTime.setText("剩餘時間:" + (int)(day-1) + "天" + (int)(24-hour - 1) + "小時" + min + "分");
-                tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
+//                tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
+
+                tvExchange.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
+                + day  + getResources().getString(R.string.pinpinbox_2_0_0_time_day)
+                + hour + getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
+                + min  + getResources().getString(R.string.pinpinbox_2_0_0_time_min));
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -420,8 +425,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                     @Override
                     public void Success() {
-
-                        MyLog.Set("d", mActivity.getClass(), "---------成功加入清單---------");
 
                         DialogExchange d = new DialogExchange(mActivity);
                         d.setDismissExcute(new DismissExcute() {

@@ -94,7 +94,7 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
 
             if (exchangeList.get(position).getEndtime() == null || exchangeList.get(position).getEndtime().equals("") || exchangeList.get(position).getEndtime().equals("null")) {
                 //∞
-                mHolder.tvExchangeTime.setText("無期限");
+                mHolder.tvExchangeTime.setText(R.string.pinpinbox_2_0_0_other_text_no_time_limit);
                 mHolder.tvExchangeTime.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
 
@@ -109,7 +109,15 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                     long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
 
                     //改為直向列表後 再優化英文版
-                    mHolder.tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
+//                    mHolder.tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
+
+                    mHolder.tvExchangeTime.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
+                            + day  + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_day)
+                            + hour + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
+                            + min  + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_min));
+
+
+
                     mHolder.tvExchangeTime.setTextColor(Color.parseColor(ColorClass.PINK_FRIST));
 
                     TextUtility.setBold(mHolder.tvExchangeTime,true);

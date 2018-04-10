@@ -13,6 +13,12 @@
     <string name="pinpinbox_2_0_0_time_before_minute">&#160;minutes</string>
     <string name="pinpinbox_2_0_0_time_before_just_now">now</string>
 
+
+    <string name="pinpinbox_2_0_0_time_day">d</string>
+    <string name="pinpinbox_2_0_0_time_hour">h</string>
+    <string name="pinpinbox_2_0_0_time_min">m</string>
+
+
     <string name="pinpinbox_2_0_0_notify_type_album_notice">Notice</string>
     <string name="pinpinbox_2_0_0_notify_type_user_interactive_notice">Interactive</string>
     <string name="pinpinbox_2_0_0_notify_type_cooperation_notice">Invite</string>
@@ -545,6 +551,8 @@
     <string name="pinpinbox_2_0_0_other_text_click_to_lottery">Click</string>
     <string name="pinpinbox_2_0_0_other_text_exchange_end">Exchange end</string>
     <string name="pinpinbox_2_0_0_other_text_not_yet_begun">Not yet begun</string>
+    <string name="pinpinbox_2_0_0_other_text_no_time_limit">No time limit</string>
+    <string name="pinpinbox_2_0_0_other_text_time_limit">Time limit</string>
 
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>
