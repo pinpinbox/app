@@ -14,6 +14,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
+import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
@@ -108,7 +110,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     private JSONArray p40JsonArray;
     private ItemUser itemUser;
 
-    private RelativeLayout rBackgroundParallax;
+    private RelativeLayout rBackgroundParallax, rCreativeName;
     private RecyclerView rvAuthor;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private SmoothProgressBar pbLoadMore;
@@ -289,6 +291,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         rangeCount = 16;
 
         rBackgroundParallax = (RelativeLayout) findViewById(R.id.rBackgroundParallax);
+        rCreativeName = (RelativeLayout)findViewById(R.id.rCreativeName);
 
         backImg = (ImageView) findViewById(R.id.backImg);
         bannerImg = (ImageView) findViewById(R.id.bannerImg);
@@ -297,6 +300,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         shareImg = (ImageView) findViewById(R.id.shareImg);
 
         tvAttention = (TextView) findViewById(R.id.tvAttention);
+        tvCreativeName = (TextView)findViewById(R.id.tvCreativeName);
 
         rvAuthor = (RecyclerView) findViewById(R.id.rvAuthor);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
@@ -324,7 +328,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
         tvViewed = (TextView) viewHeader.findViewById(R.id.tvViewed);
         tvSponsor = (TextView) viewHeader.findViewById(R.id.tvSponsor);
-        tvCreativeName = (TextView) viewHeader.findViewById(R.id.tvCreativeName);
+//        tvCreativeName = (TextView) viewHeader.findViewById(R.id.tvCreativeName);
 
         /*2017.09.08 不讓圖片偏移*/
         tvName.setText(strName);
@@ -483,16 +487,28 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         tvName.setText(itemUser.getName());
 
         if (itemUser.getCreative_name().equals("")) {
-            tvCreativeName.setVisibility(View.GONE);
+            rCreativeName.setVisibility(View.GONE);
         } else {
-
-
-//            if( StringUtils.isTrimEmpty(itemUser.getCreative_name())){..
-//                MyLog.Set("e", getClass(), "isTrimEmpty");
-//            }
-
+            rCreativeName.setVisibility(View.VISIBLE);
             tvCreativeName.setText(itemUser.getCreative_name());
             tvCreativeName.setVisibility(View.VISIBLE);
+            try {
+                if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
+
+                    if (rCreativeName != null) {
+                        rCreativeName.setBackground(
+                                ScrimUtil.makeCubicGradientScrimDrawable(
+                                        Color.parseColor(ColorClass.BLACK_ALPHA),
+                                        8, //渐变层数
+                                        Gravity.BOTTOM)); //起始方向
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
         }
 
 
@@ -507,7 +523,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
         if(intSponsor<1){
 
-            viewHeader.findViewById(R.id.rSponsorList).setVisibility(View.GONE);
+            viewHeader.findViewById(R.id.linSponsorList).setVisibility(View.GONE);
 
         }
 
@@ -920,6 +936,14 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         itemAlbum.setSlot(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.slot));
                         itemAlbum.setVideo(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.video));
                         itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.audio));
+
+                        try {
+                            String creative = JsonUtility.GetString(jsonData, ProtocolKey.creative);
+                            JSONObject jsonCreative = new JSONObject(creative);
+                            itemUser.setInfo_url(JsonUtility.GetString(jsonCreative, ProtocolKey.info_url));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
 
 
                         albumList.add(itemAlbum);
@@ -1788,7 +1812,8 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             case R.id.aboutImg:
 
                 Bundle bundle = new Bundle();
-                bundle.putString(Key.url, UrlClass.shareUserUrl + itemUser.getUser_id() + "&appview=true");
+//                bundle.putString(Key.url, UrlClass.shareUserUrl + itemUser.getUser_id() + "&appview=true");
+                bundle.putString(Key.url, itemUser.getInfo_url());
                 bundle.putString(Key.title, itemUser.getName());
 
                 Intent intent = new Intent(mActivity, WebView2Activity.class);

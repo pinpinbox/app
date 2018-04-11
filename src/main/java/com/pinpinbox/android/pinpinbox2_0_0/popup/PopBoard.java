@@ -35,6 +35,7 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
@@ -98,20 +99,16 @@ public class PopBoard {
 
     /***********************************************/
     private PopupWindow popupWindow;
-    private RelativeLayout rBackground, rShow;
+    private RelativeLayout rBackground, rShow, rTag;
     private BlurView blurView;
     private View v;
-    /***********************************************/
     private RecyclerView rvBoard, rvTag;
     private EditText edText;
-    //    private AutoCompleteEditText edText;
     private SmoothProgressBar pbLoadMore;
     private RoundedImageView userImg;
-    private TextView tvTitle, tvSecondTitle;
+    private TextView tvTitle, tvSecondTitle, tvCount, tvNoUser;
+    private AVLoadingIndicatorView vRefreshTag;
 
-    private TextView tvCount;
-
-    /***********************************************/
 
     private String type;
     private String type_id;
@@ -175,6 +172,8 @@ public class PopBoard {
         LayoutInflater inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.pop_2_0_0_board_album, null);
 
+        rTag = (RelativeLayout) v.findViewById(R.id.rTag);
+        vRefreshTag = (AVLoadingIndicatorView) v.findViewById(R.id.vRefreshTag);
         pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
         rvBoard = (RecyclerView) v.findViewById(R.id.rvBoard);
         rvTag = (RecyclerView) v.findViewById(R.id.rvTag);
@@ -182,6 +181,7 @@ public class PopBoard {
         userImg = (RoundedImageView) v.findViewById(R.id.userImg);
         tvTitle = (TextView) v.findViewById(R.id.tvTitle);
         tvSecondTitle = (TextView) v.findViewById(R.id.tvSecondTitle);
+        tvNoUser = (TextView)v.findViewById(R.id.tvNoUser);
 
 
         popupWindow = new PopupWindow(v, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -277,7 +277,7 @@ public class PopBoard {
                 if (tagsList != null && tagsList.size() > 0) {
                     for (int i = 0; i < tagsList.size(); i++) {
                         if ((tagsList.get(i).getUser_id()).equals(id)) {
-                            PinPinToast.showErrorToast(mActivity, "不可標記自己");
+                            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_tag_can_not_tag_yourself);
                             return;
                         }
                     }
@@ -288,7 +288,7 @@ public class PopBoard {
                 if (tagsList != null && tagsList.size() > 0) {
                     for (int i = 0; i < tagsList.size(); i++) {
                         if ((tagsList.get(i).getUser_id()).equals(itemUserList.get(position).getUser_id())) {
-                            PinPinToast.showErrorToast(mActivity, "不可重複標記");
+                            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_tag_has_been_tagged);
                             return;
                         }
                     }
@@ -380,7 +380,6 @@ public class PopBoard {
 //                    ForegroundColorSpan spanBg = new ForegroundColorSpan(Color.parseColor(ColorClass.PINK_FRIST));
 //                    spanString.setSpan(spanBg, tagsList.get(i).getStartIndex(), tagsList.get(i).getEndIndex(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-
                 }
 
 
@@ -388,7 +387,8 @@ public class PopBoard {
                 isClickTagUser = false;
                 setSelection(tags.getEndIndex() + 1); //加空格
 
-                rvTag.setVisibility(View.INVISIBLE);
+
+                clearUserList();
 
             }
 
@@ -504,7 +504,7 @@ public class PopBoard {
 
 
                 if (ClickUtils.ButtonContinuousClick_2s()) {//1秒內防止連續點擊
-                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
                     return;
                 }
 
@@ -519,7 +519,7 @@ public class PopBoard {
 
     }
 
-    private StringBuilder changeToSendTypeText(){
+    private StringBuilder changeToSendTypeText() {
 
         String strInput = edText.getText().toString();
 
@@ -662,6 +662,23 @@ public class PopBoard {
         }
 
         rvBoard.smoothScrollToPosition(0);
+    }
+
+    private void clearUserList(){
+
+
+
+        if (itemUserList.size() > 0) {
+
+            tagUserAdapter.notifyItemRangeRemoved(0, itemUserList.size());
+
+            for (int i = 0; i < itemUserList.size(); i++) {
+                String strPicture = itemUserList.get(i).getPicture();
+                Picasso.with(mActivity.getApplicationContext()).invalidate(strPicture);
+            }
+            itemUserList.clear();
+        }
+
     }
 
     private void protocol90(String limit) {
@@ -1199,19 +1216,13 @@ public class PopBoard {
             doingType = DoingTypeClass.DoSearchUserList;
 
             /*執行搜尋前全部移除*/
-            tagUserAdapter.notifyItemRangeRemoved(0, itemUserList.size());
+            clearUserList();
 
-            if (itemUserList.size() > 0) {
-                itemUserList.clear();
-            }
+            tvNoUser.setVisibility(View.GONE);
+            vRefreshTag.startAnimation();
+            vRefreshTag.setVisibility(View.VISIBLE);
+            rTag.setVisibility(View.VISIBLE);
 
-            if (itemUserList.size() > 0) {
-                for (int i = 0; i < itemUserList.size(); i++) {
-                    String strPicture = itemUserList.get(i).getPicture();
-                    Picasso.with(mActivity.getApplicationContext()).invalidate(strPicture);
-                }
-                itemUserList.clear();
-            }
 
         }
 
@@ -1272,14 +1283,20 @@ public class PopBoard {
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
 
+            vRefreshTag.setVisibility(View.GONE);
+            vRefreshTag.stopAnimation();
+
+
             if (p41Result == 1) {
 
                 tagUserAdapter.notifyItemRangeInserted(0, itemUserList.size());
 
                 if (itemUserList.size() > 0) {
-                    rvTag.setVisibility(View.VISIBLE);
-                }else {
-                    rvTag.setVisibility(View.INVISIBLE);
+//                    rTag.setVisibility(View.VISIBLE);
+                    tvNoUser.setVisibility(View.GONE);
+                } else {
+//                    rTag.setVisibility(View.INVISIBLE);
+                    tvNoUser.setVisibility(View.VISIBLE);
                 }
 
 
@@ -1290,6 +1307,15 @@ public class PopBoard {
             } else {
                 DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
             }
+
+        }
+
+        @Override
+        protected void onCancelled(){
+            super.onCancelled();
+
+            rTag.setVisibility(View.INVISIBLE);
+            MyLog.Set("e", PopBoard.class, "cancel search task");
 
         }
 
@@ -1475,7 +1501,7 @@ public class PopBoard {
 
 
             } else {
-                rvTag.setVisibility(View.INVISIBLE);
+                rTag.setVisibility(View.INVISIBLE);
             }
 
 
@@ -1510,9 +1536,6 @@ public class PopBoard {
                 isDeleteIng = false;
                 return;
             }
-
-
-
 
 
 //            if (tagsList != null && tagsList.size() > 0) {

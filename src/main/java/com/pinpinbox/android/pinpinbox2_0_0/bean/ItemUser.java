@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by kevin9594 on 2017/3/5.
  */
-public class ItemUser implements Serializable{
+public class ItemUser implements Serializable {
 
     private String user_id = "";
     private String name = "";
@@ -15,7 +15,9 @@ public class ItemUser implements Serializable{
     private String identity = "";
     private String cover = "";
     private String ratio = "";
-    private String company_identity= "identity";
+    private String company_identity = "identity";
+    private String info_url = "";
+
 
     private String facebook = "";
     private String google = "";
@@ -38,6 +40,14 @@ public class ItemUser implements Serializable{
     private boolean invite = false;
     private boolean disscuss = false;
 
+
+    public String getInfo_url() {
+        return info_url;
+    }
+
+    public void setInfo_url(String info_url) {
+        this.info_url = info_url;
+    }
 
     public boolean isDisscuss() {
         return disscuss;

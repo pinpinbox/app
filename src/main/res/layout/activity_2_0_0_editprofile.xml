@@ -105,6 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                    android:maxEms="21"
                     android:text="" />
 
                 <TextView

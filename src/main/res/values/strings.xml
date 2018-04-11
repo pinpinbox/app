@@ -296,6 +296,8 @@
     <string name="pinpinbox_2_0_0_toast_message_board_is_close">該創作人的留言板為關閉</string>
     <string name="pinpinbox_2_0_0_toast_message_update_done">修改完成</string>
     <string name="pinpinbox_2_0_0_toast_message_exchange_success">兌換成功</string>
+    <string name="pinpinbox_2_0_0_toast_message_tag_can_not_tag_yourself">不可標記自己</string>
+    <string name="pinpinbox_2_0_0_toast_message_tag_has_been_tagged">已標記</string>
 
 
 

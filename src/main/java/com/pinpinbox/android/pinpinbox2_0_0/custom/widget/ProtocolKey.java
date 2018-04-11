@@ -111,6 +111,7 @@ public class ProtocolKey {
     public static String image_url = "image_url";
     public static String is_follow = "is_follow";
     public static String is_existing = "is_existing";
+    public static String info_url = "info_url";
 
     //j
 
@@ -168,7 +169,6 @@ public class ProtocolKey {
     public static String photo_video_target = "video_target";
     public static String photo_image_url = "image_url";
     public static String photo_image_url_thumbnail = "image_url_thumbnail";
-
 
 
     //q

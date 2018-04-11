@@ -20,6 +20,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import com.pinpinbox.android.Utility.BitmapUtility;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
+import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
@@ -140,11 +142,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     private SmoothProgressBar pbLoadMore;
     private RoundCornerImageView userImg;
     private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, menuImg, messageImg, aboutImg, shareImg, incomeImg;
-    private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax, rSponsorList;
-    private LinearLayout linLink;
+    private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax;
+    private LinearLayout linLink, linSponsorList;
     private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvLink, tvSponsor, tvUploadBanner;
     private View viewHeader, vRPmenu;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
+    private RelativeLayout rCreativeName;
 
     private String id, token;
     private String p40Result = "", p40Message = "";
@@ -238,6 +241,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         rBackground = ((Main2Activity) getActivity()).getBackground();
         rFragmentBackground = (RelativeLayout) v.findViewById(R.id.rFragmentBackground);
         rBackgroundParallax = (RelativeLayout) v.findViewById(R.id.rBackgroundParallax);
+        rCreativeName = (RelativeLayout) v.findViewById(R.id.rCreativeName);
 
 //        mOnScrollListener.setFloatToolBar(v.findViewById(R.id.rrr), v.findViewById(R.id.vvv));
 
@@ -250,6 +254,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         vRPmenu = v.findViewById(R.id.vRPmenu);
 
 
+        tvCreativeName = (TextView)v.findViewById(R.id.tvCreativeName);
         tvUploadBanner = (TextView) v.findViewById(R.id.tvUploadBanner);
 
         bannerImg = (ImageView) v.findViewById(R.id.bannerImg);
@@ -292,7 +297,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         viewHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_2_0_0_user, null);
         userImg = (RoundCornerImageView) viewHeader.findViewById(R.id.userImg);
 
-        tvCreativeName = (TextView) viewHeader.findViewById(R.id.tvCreativeName);
+//        tvCreativeName = (TextView) viewHeader.findViewById(R.id.tvCreativeName);
         tvName = (TextView) viewHeader.findViewById(R.id.tvName);
 
         tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
@@ -321,7 +326,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         youtubeImg = (ImageView) viewHeader.findViewById(R.id.youtubeImg);
 
 
-        rSponsorList = (RelativeLayout) viewHeader.findViewById(R.id.rSponsorList);
+        linSponsorList = (LinearLayout) viewHeader.findViewById(R.id.linSponsorList);
 
 
         webImg.setOnClickListener(this);
@@ -340,7 +345,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         incomeImg.setOnClickListener(this);
         tvUploadBanner.setOnClickListener(this);
 
-        rSponsorList.setOnClickListener(this);
+        linSponsorList.setOnClickListener(this);
 
 
         return v;
@@ -491,10 +496,26 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         tvName.setText(itemUser.getName());
 
         if (itemUser.getCreative_name().equals("")) {
-            tvCreativeName.setVisibility(View.GONE);
+            rCreativeName.setVisibility(View.GONE);
         } else {
+            rCreativeName.setVisibility(View.VISIBLE);
             tvCreativeName.setText(itemUser.getCreative_name());
             tvCreativeName.setVisibility(View.VISIBLE);
+            try {
+                if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
+
+                    if (rCreativeName != null) {
+                        rCreativeName.setBackground(
+                                ScrimUtil.makeCubicGradientScrimDrawable(
+                                        Color.parseColor(ColorClass.BLACK_ALPHA),
+                                        8, //渐变层数
+                                        Gravity.BOTTOM)); //起始方向
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         int intFollow = itemUser.getCount_from();
@@ -777,6 +798,14 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                     itemUser.setSumofsettlement(JsonUtility.GetInt(jsonSplit, ProtocolKey.sumofsettlement));
                     itemUser.setSumofunsettlement(JsonUtility.GetInt(jsonSplit, ProtocolKey.sumofunsettlement));
                     itemUser.setCompany_identity(JsonUtility.GetString(jsonSplit, ProtocolKey.identity));
+
+                    try {
+                        String creative = JsonUtility.GetString(jsonData, ProtocolKey.creative);
+                        JSONObject jsonCreative = new JSONObject(creative);
+                        itemUser.setInfo_url(JsonUtility.GetString(jsonCreative, ProtocolKey.info_url));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
 
 
                 } else if (p40Result.equals("0")) {
@@ -1788,8 +1817,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
             case R.id.aboutImg:
                 Bundle bundle = new Bundle();
-                bundle.putString(Key.url, UrlClass.shareUserUrl + itemUser.getUser_id() + "&appview=true");
+//                bundle.putString(Key.url, UrlClass.shareUserUrl + itemUser.getUser_id() + "&appview=true");
 
+                bundle.putString(Key.url, itemUser.getInfo_url());
                 bundle.putString(Key.title, itemUser.getName());
 
                 Intent intent = new Intent(getActivity(), WebView2Activity.class);
@@ -1845,7 +1875,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 break;
 
 
-            case R.id.rSponsorList:
+            case R.id.linSponsorList:
 
                 toSponsorList();
 

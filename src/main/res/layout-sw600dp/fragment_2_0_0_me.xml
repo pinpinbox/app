@@ -21,6 +21,24 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
 
+        <RelativeLayout
+            android:id="@+id/rCreativeName"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvCreativeName"
+                style="@style/ppb200_userarea_creativename"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:text=""/>
+
+        </RelativeLayout>
+
 
 
 
