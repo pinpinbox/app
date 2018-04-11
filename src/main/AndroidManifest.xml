@@ -478,7 +478,7 @@
             android:name=".pinpinbox2_0_0.activity.MyFollow2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+            android:theme="@style/sharedElementEnterTransition_by_above_v5"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".pinpinbox2_0_0.activity.MyCollect2Activity"

@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,8 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ChangeTypeListener;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ChangeTypeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -76,15 +75,8 @@ public class RecyclerMyFollowAdapter extends RecyclerView.Adapter {
 
         final String strPicture = itemUserList.get(position).getPicture();
 
-
-
-
         if (SystemUtility.Above_Equal_V5()) {
-
-            ViewCompat.setTransitionName(holder.userImg,
-                    strPicture);
-
-
+            holder.userImg.setTransitionName(strPicture);
         }
 
         if (strPicture == null || strPicture.equals("")) {

@@ -17,6 +17,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -170,17 +171,18 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     };
 
 
-//    private void scheduleStartPostponedTransition(final View sharedElement) {
-//        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-//                new ViewTreeObserver.OnPreDrawListener() {
-//                    @Override
-//                    public boolean onPreDraw() {
-//                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-//                        startPostponedEnterTransition();
-//                        return true;
-//                    }
-//                });
-//    }
+    /*從 myfollow進來 需要用此method*/
+    private void scheduleStartPostponedTransition(final View sharedElement) {
+        sharedElement.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
+                        startPostponedEnterTransition();
+                        return true;
+                    }
+                });
+    }
 
 //    @Override
 //    public void onActivityReenter(int resultCode, Intent data) {
@@ -691,8 +693,8 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 
                             if (SystemUtility.Above_Equal_V5()) {
-//                                scheduleStartPostponedTransition(userImg);
-                                startPostponedEnterTransition();
+                                scheduleStartPostponedTransition(userImg);
+//                                startPostponedEnterTransition();
 
                             }
 
@@ -707,8 +709,8 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 
                             if (SystemUtility.Above_Equal_V5()) {
-//                                scheduleStartPostponedTransition(userImg);
-                                startPostponedEnterTransition();
+                                scheduleStartPostponedTransition(userImg);
+//                                startPostponedEnterTransition();
                             }
 
                             doGetCreative();
@@ -716,9 +718,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     });
         } else {
 
-//            supportStartPostponedEnterTransition();
             if (SystemUtility.Above_Equal_V5()) {
-//                scheduleStartPostponedTransition(userImg);
                 startPostponedEnterTransition();
             }
             doGetCreative();

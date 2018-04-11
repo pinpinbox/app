@@ -142,7 +142,6 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
     }
 
 
-
     private void init() {
 
         mActivity = this;
@@ -176,7 +175,7 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
         rvFollow.addOnScrollListener(mOnScrollListener);
 
         //20171002
-        SmoothProgressBar pbRefresh = (SmoothProgressBar)findViewById(R.id.pbRefresh);
+        SmoothProgressBar pbRefresh = (SmoothProgressBar) findViewById(R.id.pbRefresh);
         pbRefresh.progressiveStop();
         pinPinBoxRefreshLayout.setRefreshView(findViewById(R.id.vRefreshAnim), pbRefresh);
 
@@ -240,7 +239,6 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
 
                 RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
 
-
                 Bundle bundle = new Bundle();
                 bundle.putString(Key.author_id, itemUserList.get(position).getUser_id());
                 bundle.putString(Key.picture, itemUserList.get(position).getPicture());
@@ -248,6 +246,8 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
                 bundle.putInt(Key.changeFollowStatusItem, position);
 
                 if (SystemUtility.Above_Equal_V5()) {
+
+                    userImg.setTransitionName(itemUserList.get(position).getPicture());
 
                     bundle.putBoolean(Key.shareElement, true);
 
@@ -495,6 +495,7 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
             doingType = DoingTypeClass.DoDefault;
             round = 0;
             sizeMax = false;
+            startLoading();
         }
 
         @Override
@@ -508,6 +509,8 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
+
+            dissmissLoading();
 
 
             if (p85Result == 1) {
@@ -790,7 +793,7 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
         clickPosition = position;
 
         final DialogV2Custom d = new DialogV2Custom(mActivity);
-        d.setMessage(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_dialog_message_check_cancel_follow)  + " " + itemUserList.get(position).getName() + "?");
+        d.setMessage(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_dialog_message_check_cancel_follow) + " " + itemUserList.get(position).getName() + "?");
         d.setStyle(DialogStyleClass.CHECK);
         d.setCheckExecute(new CheckExecute() {
             @Override
