@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 

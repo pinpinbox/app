@@ -27,6 +27,14 @@
             android:orientation="vertical">
 
 
+            <!--<android.support.v4.view.ViewPager-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="200dp"-->
+                <!--android:layout_marginTop="@dimen/ppb200_action_bar_height_with_status"-->
+                <!--android:background="@color/pinpinbox_2_0_0_secondary_text"/>-->
+
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +45,7 @@
                     style="@style/ppb200_title_first"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
-                    android:text="" />
+                    android:text="1231231" />
 
                 <TextView
                     android:id="@+id/tvAll"

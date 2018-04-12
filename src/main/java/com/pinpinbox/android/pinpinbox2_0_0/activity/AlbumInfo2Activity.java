@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -193,7 +194,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         setScrollControl();
 
         setShareElementAnim();
-
 
     }
 
@@ -1123,6 +1123,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
 
 
+
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
