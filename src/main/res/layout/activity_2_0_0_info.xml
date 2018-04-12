@@ -473,6 +473,7 @@
         android:translationZ="@dimen/ppb200_translationZ_user">
 
 
+
         <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
             android:id="@+id/userImg"
             android:layout_width="28dp"
