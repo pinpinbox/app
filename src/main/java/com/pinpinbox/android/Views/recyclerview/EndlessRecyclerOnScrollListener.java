@@ -1,15 +1,22 @@
 package com.pinpinbox.android.Views.recyclerview;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 /**
@@ -45,15 +52,12 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     private boolean isTop = false;
     public static boolean TOP = false;
 
-
-    /**
-     * set title show
-     */
     private View vTop = null;
 
     public void setTitleTop(View vTop) {
         this.vTop = vTop;
     }
+
 
     private boolean task = false;
     private TitleShowLintener titleShowListener;
@@ -62,8 +66,9 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         this.titleShowListener = titleShowListener;
     }
 
-
     private int scrolledDistance = 0;
+
+    //    vRefreshAnim
     private float floatAlpha = 0;
     private float floatTranslationY = 0;
 
@@ -72,10 +77,13 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     private View[] views;
 
     public void setBackgroundImage(ImageView bgImg) {
+
         this.bgImg = bgImg;
+
     }
 
     public void setBackgroundParallaxViews(View... views) {
+
         this.views = views;
     }
 
@@ -86,125 +94,115 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
 
     /**
-     * set float toolbar
-     **/
+     *
+     * */
+    private View vFloatToolBar;
+    private View vScaleView;
+    private GradientDrawable gDrawable;
+    private float ScaleSize = 1f;
+    private int defaultColor;
+    private int actionColor;
+    private ValueAnimator colorAnimationToAction, colorAnimationToDefault;
 
-//    private View vFloatToolBar;
-//    private View vScaleView;
-//    private GradientDrawable gDrawable;
-//    private float ScaleSize = 1f;
-//    private int defaultColor;
-//    private int actionColor;
-//    private ValueAnimator colorAnimationToAction, colorAnimationToDefault;
-//
-//    public void setFloatToolBar(View vTool, View vScale) {
-//        this.vFloatToolBar = vTool;
-//        this.vScaleView = vScale;
-//
-//        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "vFloatToolBar => width(dp) => " + SizeUtils.px2dp(SizeUtils.getMeasuredWidth(vFloatToolBar)));
-//
-//        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "w(dp) => " + SizeUtils.px2dp(ScreenUtils.getScreenWidth()));
-//
-//        ScaleSize = ((float) ScreenUtils.getScreenWidth() / (float) SizeUtils.getMeasuredWidth(vFloatToolBar)) + 0.2f;
-//
-//        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "ScaleSize => " + ScaleSize);
-//
-//        vFloatToolBar.setTag(true);
-//
-//
-////        defaultColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_first_main, null);
-//        defaultColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_action_bar_color, null);
-//        actionColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_action_bar_color, null);
-//
-//        gDrawable = (GradientDrawable) vScaleView.getBackground();
-//
-//
-//        colorAnimationToAction = ValueAnimator.ofObject(new ArgbEvaluator(), defaultColor, actionColor);
-//        colorAnimationToAction.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator animator) {
-//                gDrawable.setColor((Integer) animator.getAnimatedValue());
-//            }
-//        });
-//        colorAnimationToAction.setDuration(200);
-//
-//        colorAnimationToDefault = ValueAnimator.ofObject(new ArgbEvaluator(), actionColor, defaultColor);
-//        colorAnimationToDefault.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator animator) {
-//                gDrawable.setColor((Integer) animator.getAnimatedValue());
-//            }
-//        });
-//        colorAnimationToDefault.setDuration(200);
-//
-//
-//    }
-//
-//    private void floatToolBarControl(int distance) {
-//
-//        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY" + vFloatToolBar.getY());
-//
-//        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY(dp)" + SizeUtils.px2dp(vFloatToolBar.getY()));
-//
-//        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getTop" + vFloatToolBar.getTop());//固定
-//
-//        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "status height => " + PPBApplication.getInstance().getStatusBarHeight());
-//
-//
-//        if (distance > vFloatToolBar.getTop() - PPBApplication.getInstance().getStatusBarHeight()) {
-//
-//            MyLog.Set("e", getClass(), "-------------------------------");
-//
-//            vFloatToolBar.setY(PPBApplication.getInstance().getStatusBarHeight() - 1);
-//
-//            if (!(boolean) vFloatToolBar.getTag()) {
-//
-//                ViewPropertyAnimator scaleToMatch = vScaleView.animate();
-//                scaleToMatch.setDuration(200)
-//                        .scaleX(ScaleSize)
-//                        .translationZ(0f)
-//                        .start();
-//                vFloatToolBar.setTag(true);
-//
-////                colorAnimationToAction.start();
-//            }
-//
-//        } else {
-//            vFloatToolBar.setTranslationY(-distance);
-//
-//            if ((boolean) vFloatToolBar.getTag()) {
-//
-//                ViewPropertyAnimator scaleTo1 = vScaleView.animate();
-//                scaleTo1.setDuration(200)
-//                        .scaleX(1.0f)
-//                        .translationZ(32f)
-//                        .start();
-//
-//                vFloatToolBar.setTag(false);
-//
-////                colorAnimationToDefault.start();
-//
-//
-//            }
-//
-//
-//        }
-//
-//
-//    }
+    public void setFloatToolBar(View vTool, View vScale) {
+        this.vFloatToolBar = vTool;
+        this.vScaleView = vScale;
+
+        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "vFloatToolBar => width(dp) => " + SizeUtils.px2dp(SizeUtils.getMeasuredWidth(vFloatToolBar)));
+
+        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "w(dp) => " + SizeUtils.px2dp(ScreenUtils.getScreenWidth()));
+
+        ScaleSize = ((float) ScreenUtils.getScreenWidth() / (float) SizeUtils.getMeasuredWidth(vFloatToolBar)) + 0.2f;
+
+        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "ScaleSize => " + ScaleSize);
+
+        vFloatToolBar.setTag(true);
 
 
-    /**
-     * set scale staggered item
-     **/
-    private View vScaleStaggered;
+//        defaultColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_first_main, null);
+        defaultColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_action_bar_color, null);
+        actionColor = PPBApplication.getInstance().getResources().getColor(R.color.pinpinbox_2_0_0_action_bar_color, null);
 
-    private boolean isTouch = false;
+        gDrawable = (GradientDrawable) vScaleView.getBackground();
 
-    public void setvScaleStaggered(View vScaleStaggered) {
-        this.vScaleStaggered = vScaleStaggered;
-        isTouch = false;
+
+        colorAnimationToAction = ValueAnimator.ofObject(new ArgbEvaluator(), defaultColor, actionColor);
+        colorAnimationToAction.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                gDrawable.setColor((Integer) animator.getAnimatedValue());
+            }
+        });
+        colorAnimationToAction.setDuration(200);
+
+        colorAnimationToDefault = ValueAnimator.ofObject(new ArgbEvaluator(), actionColor, defaultColor);
+        colorAnimationToDefault.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                gDrawable.setColor((Integer) animator.getAnimatedValue());
+            }
+        });
+        colorAnimationToDefault.setDuration(200);
+
+
     }
+
+    private void floatToolBarControl(int distance) {
+
+        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY" + vFloatToolBar.getY());
+
+        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY(dp)" + SizeUtils.px2dp(vFloatToolBar.getY()));
+
+        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getTop" + vFloatToolBar.getTop());//固定
+
+        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "status height => " + PPBApplication.getInstance().getStatusBarHeight());
+
+
+        if (distance > vFloatToolBar.getTop() - PPBApplication.getInstance().getStatusBarHeight()) {
+
+            MyLog.Set("e", getClass(), "-------------------------------");
+
+            vFloatToolBar.setY(PPBApplication.getInstance().getStatusBarHeight() - 1);
+
+            if (!(boolean) vFloatToolBar.getTag()) {
+
+                ViewPropertyAnimator scaleToMatch = vScaleView.animate();
+                scaleToMatch.setDuration(200)
+                        .scaleX(ScaleSize)
+                        .translationZ(0f)
+                        .start();
+                vFloatToolBar.setTag(true);
+
+//                colorAnimationToAction.start();
+            }
+
+        } else {
+            vFloatToolBar.setTranslationY(-distance);
+
+            if ((boolean) vFloatToolBar.getTag()) {
+
+                ViewPropertyAnimator scaleTo1 = vScaleView.animate();
+                scaleTo1.setDuration(200)
+                        .scaleX(1.0f)
+                        .translationZ(32f)
+                        .start();
+
+                vFloatToolBar.setTag(false);
+
+//                colorAnimationToDefault.start();
+
+
+            }
+
+
+        }
+
+
+    }
+
+
+
+
 
 
     @Override
@@ -212,26 +210,13 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         super.onScrolled(recyclerView, dx, dy);
 
 
-        /**
-         * set scale staggered item
-         **/
-        if (vScaleStaggered != null && vScaleStaggered.getScaleX() < 1f && !isTouch) {
-            isTouch = true;
-            vScaleStaggered.animate().translationZ(vScaleStaggered.getContext().getResources().getDimension(R.dimen.ppb200_translationZ_user))
-                    .scaleX(1f)
-                    .scaleY(1f)
-                    .setListener(null)
-                    .setDuration(150)
-                    .start();
-        }
-
-
         scrolledDistance += dy;
+        MyLog.Set("d", EndlessRecyclerOnScrollListener.class, "scrolledDistance => " + scrolledDistance);
 
-        /** set float toolbar **/
-//        if (vFloatToolBar != null) {
-//            floatToolBarControl(scrolledDistance);
-//        }
+
+        if (vFloatToolBar != null) {
+            floatToolBarControl(scrolledDistance);
+        }
 
 
         if (scrolledDistance <= 1000) {
@@ -239,6 +224,9 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
             floatTranslationY = (float) scrolledDistance / 3;
         }
 
+
+        MyLog.Set("d", EndlessRecyclerOnScrollListener.class, " floatAlpha " + floatAlpha);
+        MyLog.Set("d", EndlessRecyclerOnScrollListener.class, " floatTranslationY " + floatTranslationY);
 
         if (views != null && views.length > 0) {
 
@@ -280,7 +268,6 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
                 }
             }
         }
-
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
 
@@ -331,7 +318,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
             onLoadNextPage(recyclerView);
         }
 
-        if (inputMethodManager != null && editText != null) {
+        if(inputMethodManager!=null && editText!=null){
             if (newState == 1) {
                 //在用手指滾動
                 inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);

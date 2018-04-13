@@ -1,7 +1,6 @@
 package com.pinpinbox.android.Test;
 
 import android.animation.Animator;
-import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -16,9 +15,6 @@ public class ScaleTouhListener implements View.OnTouchListener {
 
 
     public interface TouchCallBack {
-
-        void Touch();
-
         void Up();
     }
 
@@ -29,15 +25,13 @@ public class ScaleTouhListener implements View.OnTouchListener {
     }
 
 
-    private final static int duration = 150;
+    private int duration = 150;
 
     private boolean click = false;
 
 
     private float downX = 0, downY = 0;
     private float moveX = 0, moveY = 0;
-
-
 
     /**
      * Called when a touch event is dispatched to a view. This allows listeners to
@@ -48,14 +42,11 @@ public class ScaleTouhListener implements View.OnTouchListener {
      *              the event.
      * @return True if the listener has consumed the event, false otherwise.
      */
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        if (touchCallBack != null){
-            touchCallBack.Touch();
-        }
-
+//        float downX = 0, downY = 0;
+//        float moveX = 0, moveY = 0;
         int safeClickArea = 24;
 
         switch (event.getAction()) {

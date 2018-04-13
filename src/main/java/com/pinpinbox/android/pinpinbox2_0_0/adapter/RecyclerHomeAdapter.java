@@ -17,13 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Test.ScaleTouhListener;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -55,26 +53,6 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
-
-    public interface OnScaleTouchListener{
-        void Touch(int position, View itemView);
-    }
-
-    private OnScaleTouchListener onScaleTouchListener;
-
-    public void setOnScaleTouchListener(OnScaleTouchListener onScaleTouchListener){
-        this.onScaleTouchListener = onScaleTouchListener;
-    }
-
-
-
-
-
-
-
-
     private Activity mActivity;
 
     //    private ArrayList<HashMap<String, Object>> listData;
@@ -91,13 +69,10 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
         return this.isShowTime;
     }
 
-    private EndlessRecyclerOnScrollListener mOnScrollListener;
 
-
-    public RecyclerHomeAdapter(Activity activity, List<ItemAlbum> itemAlbumList, EndlessRecyclerOnScrollListener mOnScrollListener) {
+    public RecyclerHomeAdapter(Activity activity, List<ItemAlbum> itemAlbumList) {
         this.mActivity = activity;
         this.albumList = itemAlbumList;
-        this.mOnScrollListener = mOnScrollListener;
 
     }
 
@@ -369,34 +344,6 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
         });
 
 
-        holder.rItemBg.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
-
-            @Override
-            public void Touch() {
-
-                mOnScrollListener.setvScaleStaggered(holder.rItemBg);
-
-            }
-
-
-            @Override
-            public void Up() {
-
-                if(ClickUtils.ButtonContinuousClick()){
-                    return;
-                }
-
-
-                if(onScaleTouchListener!=null){
-                    onScaleTouchListener.Touch(position, holder.itemView);
-                }
-
-
-            }
-        }));
-
-
-
     }
 
 
@@ -441,8 +388,9 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
             rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
 
-//            itemView.setOnClickListener(this);
-//            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+
 
 
         }

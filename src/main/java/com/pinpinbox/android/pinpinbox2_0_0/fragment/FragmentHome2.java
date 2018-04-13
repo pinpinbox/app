@@ -398,7 +398,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     private void setRecycler() {
 
-        recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList, mOnScrollListener);
+        recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList);
         rvHome.setAdapter(recyclerHomeAdapter);
 
         HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(recyclerHomeAdapter);
@@ -423,39 +423,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         RecyclerViewUtils.setHeaderView(rvHome, viewHeader);
 
-//        recyclerHomeAdapter.setOnRecyclerViewListener(new RecyclerHomeAdapter.OnRecyclerViewListener() {
-//
-//            @Override
-//            public void onItemClick(int position, View v) {
-//
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("album name", itemAlbumList.get(position).getName());
-//                params.put("album id: ", itemAlbumList.get(position).getAlbum_id());
-//
-//                FlurryUtil.onEventUseMap(FlurryKey.home_click_albuminfo, params);
-//
-//                ActivityIntent.toAlbumInfo(
-//                        getActivity(),
-//                        true,
-//                        itemAlbumList.get(position).getAlbum_id(),
-//                        itemAlbumList.get(position).getCover(),
-//                        itemAlbumList.get(position).getImage_orientation(),
-//                        v.findViewById(R.id.coverImg)
-//                );
-//
-//
-//            }
-//
-//            @Override
-//            public boolean onItemLongClick(int position, View v) {
-//                return false;
-//            }
-//        });
+        recyclerHomeAdapter.setOnRecyclerViewListener(new RecyclerHomeAdapter.OnRecyclerViewListener() {
 
-
-        recyclerHomeAdapter.setOnScaleTouchListener(new RecyclerHomeAdapter.OnScaleTouchListener() {
             @Override
-            public void Touch(int position, View itemView) {
+            public void onItemClick(int position, View v) {
 
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("album name", itemAlbumList.get(position).getName());
@@ -469,13 +440,17 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         itemAlbumList.get(position).getAlbum_id(),
                         itemAlbumList.get(position).getCover(),
                         itemAlbumList.get(position).getImage_orientation(),
-                        itemView.findViewById(R.id.coverImg)
+                        v.findViewById(R.id.coverImg)
                 );
 
 
             }
-        });
 
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+        });
 
 
     }
