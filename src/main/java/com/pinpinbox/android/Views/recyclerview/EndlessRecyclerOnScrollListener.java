@@ -93,9 +93,6 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     }
 
 
-    /**
-     *
-     * */
     private View vFloatToolBar;
     private View vScaleView;
     private GradientDrawable gDrawable;
@@ -204,10 +201,32 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
 
 
+    private View vScaleTouchView;
+
+    private boolean isTouch = false;
+
+    public void setvScaleTouchView(View vScaleTouchView) {
+        this.vScaleTouchView = vScaleTouchView;
+        isTouch = false;
+    }
+
+
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
+
+        if (vScaleTouchView != null && vScaleTouchView.getScaleX() < 1f && !isTouch) {
+            isTouch = true;
+            vScaleTouchView.animate().translationZ(vScaleTouchView.getContext().getResources().getDimension(R.dimen.ppb200_translationZ_user))
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setListener(null)
+                    .setDuration(150)
+                    .start();
+        }
+
+
 
 
         scrolledDistance += dy;

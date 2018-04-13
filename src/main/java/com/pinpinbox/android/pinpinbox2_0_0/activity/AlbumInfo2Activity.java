@@ -1366,6 +1366,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                 linAuthor.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
                     @Override
+                    public void Touch() {
+
+                    }
+
+                    @Override
                     public void Up() {
 
                         if(ClickUtils.ButtonContinuousClick()){

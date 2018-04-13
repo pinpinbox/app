@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,14 +18,17 @@ import android.widget.TextView;
 import com.flyco.labelview.LabelView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Test.ScaleTouhListener;
+import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
+import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -65,9 +69,12 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     private List<ItemAlbum> itemAlbumList;
 
-    public RecyclerVoteAdapter(Activity activity, List<ItemAlbum> itemAlbumList) {
+    private EndlessRecyclerOnScrollListener mOnScrollListener;
+
+    public RecyclerVoteAdapter(Activity activity, List<ItemAlbum> itemAlbumList, EndlessRecyclerOnScrollListener mOnScrollListener) {
         this.mActivity = activity;
         this.itemAlbumList = itemAlbumList;
+        this.mOnScrollListener = mOnScrollListener;
     }
 
 
@@ -263,13 +270,35 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         });
     }
 
+
     private void setVoteClick(final ViewHolder holder, final int position) {
 
-        holder.rVote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        holder.rVote.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (ClickUtils.ButtonContinuousClick()) {
+//                    return;
+//                }
+//
+//                if(onVoteListener!=null){
+//                    onVoteListener.onVoteClick(position);
+//                }
+//
+//
+//            }
+//        });
 
-                if (ClickUtils.ButtonContinuousClick()) {
+        holder.rVote.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+            @Override
+            public void Touch() {
+                mOnScrollListener.setvScaleTouchView(holder.rVote);
+            }
+
+            @Override
+            public void Up() {
+
+                if(ClickUtils.ButtonContinuousClick()){
                     return;
                 }
 
@@ -277,9 +306,8 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
                     onVoteListener.onVoteClick(position);
                 }
 
-
             }
-        });
+        }));
 
 
 

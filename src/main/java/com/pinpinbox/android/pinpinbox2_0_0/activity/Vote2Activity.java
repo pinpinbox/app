@@ -192,7 +192,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
     private void setRecycler() {
 
-        voteAdapter = new RecyclerVoteAdapter(mActivity, itemAlbumList);
+        voteAdapter = new RecyclerVoteAdapter(mActivity, itemAlbumList, mOnScrollListener);
         rvVote.setAdapter(voteAdapter);
 
         HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(voteAdapter);

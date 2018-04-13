@@ -15,6 +15,9 @@ public class ScaleTouhListener implements View.OnTouchListener {
 
 
     public interface TouchCallBack {
+
+        void Touch();
+
         void Up();
     }
 
@@ -25,7 +28,7 @@ public class ScaleTouhListener implements View.OnTouchListener {
     }
 
 
-    private int duration = 150;
+    private int duration = 70;
 
     private boolean click = false;
 
@@ -45,8 +48,12 @@ public class ScaleTouhListener implements View.OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-//        float downX = 0, downY = 0;
-//        float moveX = 0, moveY = 0;
+
+        if (touchCallBack != null){
+            touchCallBack.Touch();
+        }
+
+
         int safeClickArea = 24;
 
         switch (event.getAction()) {
