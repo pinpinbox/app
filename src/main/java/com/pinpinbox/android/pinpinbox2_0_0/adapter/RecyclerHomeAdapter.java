@@ -8,24 +8,22 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Test.ScaleTouhListener;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
+import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -57,6 +55,26 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
     }
 
 
+
+
+
+    public interface OnScaleTouchListener{
+        void Touch(int position, View itemView);
+    }
+
+    private OnScaleTouchListener onScaleTouchListener;
+
+    public void setOnScaleTouchListener(OnScaleTouchListener onScaleTouchListener){
+        this.onScaleTouchListener = onScaleTouchListener;
+    }
+
+
+
+
+
+
+
+
     private Activity mActivity;
 
     //    private ArrayList<HashMap<String, Object>> listData;
@@ -73,10 +91,13 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
         return this.isShowTime;
     }
 
+    private EndlessRecyclerOnScrollListener mOnScrollListener;
 
-    public RecyclerHomeAdapter(Activity activity, List<ItemAlbum> itemAlbumList) {
+
+    public RecyclerHomeAdapter(Activity activity, List<ItemAlbum> itemAlbumList, EndlessRecyclerOnScrollListener mOnScrollListener) {
         this.mActivity = activity;
         this.albumList = itemAlbumList;
+        this.mOnScrollListener = mOnScrollListener;
 
     }
 
@@ -347,16 +368,40 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
             }
         });
 
-//        ViewCompat.animate(holder.itemView).scaleX(1.17f).scaleY(1.17f).translationZ(1).start();
+
+        holder.rItemBg.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+
+            @Override
+            public void Touch() {
+
+                mOnScrollListener.setvScaleStaggered(holder.rItemBg);
+
+            }
+
+
+            @Override
+            public void Up() {
+
+                if(ClickUtils.ButtonContinuousClick()){
+                    return;
+                }
+
+
+                if(onScaleTouchListener!=null){
+                    onScaleTouchListener.Touch(position, holder.itemView);
+                }
+
+
+            }
+        }));
+
 
 
     }
 
-    private Animation scaleSmallAnimation;
-    private Animation scaleBigAnimation;
 
     private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-            View.OnLongClickListener, View.OnTouchListener {
+            View.OnLongClickListener {
 
         int position;
 
@@ -396,11 +441,9 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
             rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
 
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
+//            itemView.setOnClickListener(this);
+//            itemView.setOnLongClickListener(this);
 
-
-//            itemView.setOnTouchListener(this);
 
         }
 
@@ -420,49 +463,6 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
             return false;
         }
 
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-
-
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                Log.d("test", "cansal button ---> down");
-                ViewPropertyAnimator scaleTo1_5 = rItemBg.animate();
-                scaleTo1_5.setDuration(200)
-                        .scaleX(0.8f)
-                        .scaleY(0.8f)
-                        .start();
-            }
-
-            if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                Log.d("test", "cansal button ---> move");
-
-                if (rItemBg.getScaleX() == 0.8f && rItemBg.getScaleY() == 0.8f) {
-
-                    ViewPropertyAnimator scaleTo1 = rItemBg.animate();
-                    scaleTo1.setDuration(200)
-                            .scaleX(1f)
-                            .scaleY(1f)
-                            .start();
-                }
-
-            }
-
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                Log.d("test", "cansal button ---> cancel");
-
-                if (rItemBg.getScaleX() == 0.8f && rItemBg.getScaleY() == 0.8f) {
-
-                    ViewPropertyAnimator scaleTo1 = rItemBg.animate();
-                    scaleTo1.setDuration(200)
-                            .scaleX(1f)
-                            .scaleY(1f)
-                            .start();
-                }
-            }
-
-
-            return false;
-        }
     }
 
 
