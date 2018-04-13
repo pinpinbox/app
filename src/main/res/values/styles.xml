@@ -1,5 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="ppb200_divider_list" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/ppb200_divider_height</item>
+        <item name="android:background">@color/pinpinbox_2_0_0_divider</item>
+
+    </style>
 
     <style name="ppb200_userarea_creativename" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_width">match_parent</item>

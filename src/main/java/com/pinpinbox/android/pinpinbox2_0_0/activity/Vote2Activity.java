@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
@@ -32,6 +33,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerVoteAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
@@ -58,7 +60,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 public class Vote2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity;
-    private ExStaggeredGridLayoutManager manager = null;
+    private ExLinearLayoutManager manager = null;
     private CountDownTimer countDownTimer;
     private InputMethodManager inputMethodManager;
 
@@ -126,28 +128,29 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
     private void init() {
 
-        if (SystemUtility.isTablet(getApplicationContext())) {
-            //平版
-            deviceType = SystemType.TABLE;
-            manager = new ExStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        } else {
-            //手機
-            deviceType = SystemType.PHONE;
-            manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        }
+//        if (SystemUtility.isTablet(getApplicationContext())) {
+//            //平版
+//            deviceType = SystemType.TABLE;
+//            manager = new ExStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+//        } else {
+//            //手機
+//            deviceType = SystemType.PHONE;
+//            manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+//        }
+
 
         mActivity = this;
-        inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
 
         itemAlbumList = new ArrayList<>();
 
-        edSearch = (EditText)findViewById(R.id.edSearch);
+        edSearch = (EditText) findViewById(R.id.edSearch);
         tvRemaining = (TextView) findViewById(R.id.tvRemaining);
         backImg = (ImageView) findViewById(R.id.backImg);
-        clearImg = (ImageView)findViewById(R.id.clearImg);
+        clearImg = (ImageView) findViewById(R.id.clearImg);
         rvVote = (RecyclerView) findViewById(R.id.rvVote);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
 
@@ -162,8 +165,6 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
 
         mOnScrollListener.setInputStatus(inputMethodManager, edSearch);
-        rvVote.addItemDecoration(new SpacesItemDecoration(16, deviceType, true));
-        rvVote.setItemAnimator(new DefaultItemAnimator());
         rvVote.addOnScrollListener(mOnScrollListener);
 
 
@@ -197,8 +198,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
         HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(voteAdapter);
         rvVote.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
 
-
-        manager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) rvVote.getAdapter(), manager.getSpanCount()));
+        LinearLayoutManager manager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
         rvVote.setLayoutManager(manager);
 
         RecyclerViewUtils.setHeaderView(rvVote, vHeader);
@@ -216,12 +216,11 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
                 ActivityIntent.toAlbumInfo(
                         mActivity,
-                        true,itemAlbumList.get(position).getAlbum_id(),
+                        true, itemAlbumList.get(position).getAlbum_id(),
                         itemAlbumList.get(position).getCover(),
                         itemAlbumList.get(position).getImage_orientation(),
                         v.findViewById(R.id.coverImg)
                 );
-
 
 
             }
@@ -401,7 +400,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                 });
     }
 
-    private void setSearch(){
+    private void setSearch() {
 
         countDownTimer = new CountDownTimer(1000, 1000) {
             @Override
@@ -475,9 +474,6 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
 
             }
         });
-
-
-
 
 
     }
@@ -559,6 +555,8 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                         tvRemaining.setText(vote_left);
 
                         itemAlbumList.get(position).setHas_voted(true);
+
+                        itemAlbumList.get(position).setEvent_join(itemAlbumList.get(position).getEvent_join() + 1);
 
                         voteAdapter.notifyItemChanged(position);
 

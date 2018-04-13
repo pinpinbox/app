@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.flyco.labelview.LabelView;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Test.ScaleTouhListener;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
@@ -77,7 +78,7 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_vote, null);
+        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_vote2, null);
         return new ViewHolder(view);
     }
 
@@ -96,8 +97,6 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         setAlbumName(holder, position);
 
         setUserPicture(holder, position);
-
-        serUsefor(holder, position);
 
         setUserName(holder, position);
 
@@ -125,19 +124,21 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     }
 
+
     private void setAlbumId(ViewHolder holder, int position) {
         holder.tvAlbumId.setText(itemAlbumList.get(position).getAlbum_id());
     }
 
     private void setEventJoinCount(ViewHolder holder, int position) {
+        TextUtility.setBold(holder.tvVoteCount, true);
         holder.tvVoteCount.setText(itemAlbumList.get(position).getEvent_join() + "");
     }
 
     private void setAlbumCover(final ViewHolder holder, int position) {
 
-        int h = itemAlbumList.get(position).getCover_height();
-        holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h));
-        holder.coverImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        int h = itemAlbumList.get(position).getCover_height();
+//        holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h));
+//        holder.coverImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         String color = itemAlbumList.get(position).getCover_hex();
         final GradientDrawable drawable = (GradientDrawable) holder.rItemBg.getBackground();
@@ -218,35 +219,7 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private void serUsefor(ViewHolder holder, int position) {
 
-        if (itemAlbumList.get(position).isVideo() || itemAlbumList.get(position).isSlot() || itemAlbumList.get(position).isExchange() || itemAlbumList.get(position).isAudio()) {
-            holder.linType.setVisibility(View.VISIBLE);
-
-            if (itemAlbumList.get(position).isAudio()) {
-                holder.audioImg.setVisibility(View.VISIBLE);
-            } else {
-                holder.audioImg.setVisibility(View.GONE);
-            }
-            if (itemAlbumList.get(position).isVideo()) {
-                holder.videoImg.setVisibility(View.VISIBLE);
-            } else {
-                holder.videoImg.setVisibility(View.GONE);
-            }
-            if (itemAlbumList.get(position).isSlot()) {
-                holder.slotImg.setVisibility(View.VISIBLE);
-            } else {
-                holder.slotImg.setVisibility(View.GONE);
-            }
-            if (itemAlbumList.get(position).isExchange()) {
-                holder.slotImg.setVisibility(View.VISIBLE);
-            } else {
-                holder.slotImg.setVisibility(View.GONE);
-            }//歸類於slot
-        } else {
-            holder.linType.setVisibility(View.GONE);
-        }
-    }
 
     private void setUserName(ViewHolder holder, int position) {
         try {
@@ -292,7 +265,7 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     private void setVoteClick(final ViewHolder holder, final int position) {
 
-        holder.voteImg.setOnClickListener(new View.OnClickListener() {
+        holder.rVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -305,12 +278,10 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
                 }
 
 
-//                itemAlbumList.get(position).setEvent_votestatus(true);
-//
-//                notifyItemChanged(position);
-
             }
         });
+
+
 
     }
 
@@ -322,23 +293,13 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         if (isHas_Voted) {
 
 
-
-            holder.tvHasVoted.setVisibility(View.VISIBLE);
-
-            holder.voteImg.setVisibility(View.GONE);
-
-            holder.rImgArea.setAlpha(0.2f);
+            holder.rVote.setVisibility(View.INVISIBLE);
 
 
         } else {
 
+            holder.rVote.setVisibility(View.VISIBLE);
 
-
-            holder.tvHasVoted.setVisibility(View.GONE);
-
-            holder.voteImg.setVisibility(View.VISIBLE);
-
-            holder.rImgArea.setAlpha(1f);
         }
 
 
@@ -350,10 +311,9 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
         private int position;
         private RoundCornerImageView userImg, coverImg;
-        private ImageView audioImg, videoImg, slotImg, voteImg;
-        private TextView tvUserName, tvAlbumName, tvHasVoted, tvVoteCount, tvAlbumId;
-        private LinearLayout linUser, linType;
-        private RelativeLayout rItemBg, rImgArea;
+        private TextView tvUserName, tvAlbumName, tvVoteCount, tvAlbumId;
+        private LinearLayout linUser;
+        private RelativeLayout rItemBg, rVote;
         private LabelView lbRanking;
 
         public ViewHolder(View itemView) {
@@ -365,23 +325,17 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
             coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
             userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
 
-            audioImg = (ImageView) itemView.findViewById(R.id.audioImg);
-            videoImg = (ImageView) itemView.findViewById(R.id.videoImg);
-            slotImg = (ImageView) itemView.findViewById(R.id.slotImg);
-            voteImg = (ImageView) itemView.findViewById(R.id.voteImg);
 
             tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
             tvVoteCount = (TextView) itemView.findViewById(R.id.tvVoteCount);
             tvAlbumId = (TextView) itemView.findViewById(R.id.tvAlbumId);
-            tvHasVoted = (TextView) itemView.findViewById(R.id.tvHasVoted);
 
 
-            linType = (LinearLayout) itemView.findViewById(R.id.linType);
             linUser = (LinearLayout) itemView.findViewById(R.id.linUser);
 
             rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
-            rImgArea = (RelativeLayout) itemView.findViewById(R.id.rImgArea);
+            rVote = (RelativeLayout)itemView.findViewById(R.id.rVote);
 
             lbRanking = (LabelView)itemView.findViewById(R.id.lbRanking);
 
