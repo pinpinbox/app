@@ -228,6 +228,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                 ActivityIntent.toUser(
                         getActivity(),
                         true,
+                        false,
                         (String) currentUserList.get(position).get(Key.user_id),
                         (String) currentUserList.get(position).get(Key.picture),
                         (String) currentUserList.get(position).get(Key.name),

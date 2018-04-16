@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -48,6 +50,12 @@ public class FromService2Activity extends Activity {
                 case "user":
                     d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_go_to_creator_area);
                     break;
+
+                case "user@messageboard":
+
+                    d.setMessage("開啟留言版?");
+                    break;
+
                 case "albumqueue":
                     d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_go_to_album_info);
                     break;
@@ -78,36 +86,66 @@ public class FromService2Activity extends Activity {
 
                 List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
                 int count = activityList.size();
+
+                Activity mainAc = null;
+
                 if (count > 0) {
                     for (int i = 0; i < count; i++) {
                         String actName = activityList.get(i).getClass().getSimpleName();
                         MyLog.Set("d", this.getClass(), "activity simplename => " + actName);
-                        if (!actName.equals("Main2Activity")) {
+                        if (!actName.equals(Main2Activity.class.getSimpleName())) {
                             activityList.get(i).finish();
+                        } else {
+                            mainAc = activityList.get(i);
                         }
                     }
                 }
 
                 if (type != null && !type.equals("")) {
                     switch (type) {
+
                         case "user":
-                            toUserArea();
+                            toUserArea(false);
                             break;
+
+                        case "user@messageboard":
+
+                            if (!type_id.equals("") && type_id != null) {
+                                if (type_id.equals(PPBApplication.getInstance().getId())) {
+                                    //me
+                                    finish();
+
+
+                                    final Activity finalMainAc = mainAc;
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ((Main2Activity) finalMainAc).toMePage(true);
+                                            finish();//再添加一次以防殘留
+                                        }
+                                    },500);
+
+
+                                } else {
+                                    //other user
+                                    MyLog.Set("e", mActivity.getClass(), "至其他用戶留言版");
+                                    toUserArea(true);
+                                }
+                            }
+
+                            break;
+
+
                         case "albumqueue":
                             toAlbumInfo();
                             break;
 
                         case "albumqueue@messageboard":
-
-
                             toAlbumInfoMessageBoard();
-
                             break;
 
                         case "albumcooperation":
-
                             toCooperation();
-
                             break;
 
 
@@ -120,9 +158,10 @@ public class FromService2Activity extends Activity {
     }
 
     //    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    private void toUserArea() {
+    private void toUserArea(boolean openBoard) {
 
-        ActivityIntent.toUser(mActivity, false, type_id, null, null, null);
+        ActivityIntent.toUser(mActivity, false, openBoard, type_id, null, null, null);
+        finish();
 
     }
 

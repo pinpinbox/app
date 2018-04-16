@@ -63,12 +63,13 @@ public class ActivityIntent {
 
     }
 
-    public static void toUser(Activity currentActivity, boolean sharedElement, String user_id, String picture, String name, View userImg) {
+    public static void toUser(Activity currentActivity, boolean sharedElement, boolean openBoard, String user_id, String picture, String name, View userImg) {
 
         Bundle bundle = new Bundle();
 
         bundle.putString(Key.author_id, user_id);
         bundle.putBoolean(Key.shareElement, sharedElement);
+        bundle.putBoolean(Key.pinpinboard, openBoard);
 
         if (SystemUtility.Above_Equal_V5() && sharedElement) {
 
@@ -86,17 +87,12 @@ public class ActivityIntent {
                     new Intent(currentActivity, Author2Activity.class).putExtras(bundle), options.toBundle()
             );
 
-
         } else {
-
             currentActivity.startActivity(
                     new Intent(currentActivity, Author2Activity.class).putExtras(bundle)
             );
             ActivityAnim.StartAnim(currentActivity);
-
-
         }
-
 
     }
 

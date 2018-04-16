@@ -317,19 +317,51 @@ public class FragmentNotify2 extends Fragment {
 
         String type_id = (String) p87arrayList.get(position).get("type_id");
 
-        if (type.equals(Key.user) || type.equals(Key.user_messageboard)) {
+        if (type.equals(Key.user) ) {
 
 
-            ActivityIntent.toUser(
-                    getActivity(),
-                    true,
-                    type_id,
-                    (String) p87arrayList.get(position).get(Key.image),
-                    null,
-                    v.findViewById(R.id.userImg)
-            );
+            if (!type_id.equals("") && type_id != null) {
+                if(type_id.equals(id)){
+                    //me
+                    ((Main2Activity)getActivity()).toMePage(false);
+                }else {
+                    //other user
+                    ActivityIntent.toUser(
+                            getActivity(),
+                            true,
+                            false,
+                            type_id,
+                            (String) p87arrayList.get(position).get(Key.image),
+                            null,
+                            v.findViewById(R.id.userImg)
+                    );
+                }
+            }
 
         }
+
+
+        if(type.equals(Key.user_messageboard)){
+            if (!type_id.equals("") && type_id != null) {
+                if(type_id.equals(id)){
+                    //me
+                    ((Main2Activity)getActivity()).toMePage(true);
+                }else {
+                    //other user
+                    ActivityIntent.toUser(
+                            getActivity(),
+                            true,
+                            true,
+                            type_id,
+                            (String) p87arrayList.get(position).get(Key.image),
+                            null,
+                            v.findViewById(R.id.userImg)
+                    );
+                }
+            }
+        }
+
+
 
         if (type.equals(Key.albumqueue)) {
 

@@ -137,6 +137,7 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                 ActivityIntent.toUser(
                         getActivity(),
                         true,
+                        false,
                         (String) mapUserList.get(position).get(Key.user_id),
                         (String) mapUserList.get(position).get(Key.picture),
                         (String) mapUserList.get(position).get(Key.name),

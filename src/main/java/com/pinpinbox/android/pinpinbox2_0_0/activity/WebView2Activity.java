@@ -153,7 +153,7 @@ public class WebView2Activity extends DraggerActivity {
 
                             String userId = uri.getQueryParameter(Key.user_id);
 
-                            ActivityIntent.toUser(mActivity, false, userId, null, null, null);
+                            ActivityIntent.toUser(mActivity, false, false, userId, null, null, null);
 
                             scrollPosition = w.getScrollY();
 

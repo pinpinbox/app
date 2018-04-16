@@ -193,6 +193,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                 ActivityIntent.toUser(
                         mActivity,
                         true,
+                        false,
                         itemUserList.get(position).getUser_id(),
                         itemUserList.get(position).getPicture(),
                         itemUserList.get(position).getName(),

@@ -194,6 +194,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
                 ActivityIntent.toUser(
                         mActivity,
                         true,
+                        false,
                         itemUserList.get(position).getUser_id(),
                         itemUserList.get(position).getPicture(),
                         itemUserList.get(position).getName(),

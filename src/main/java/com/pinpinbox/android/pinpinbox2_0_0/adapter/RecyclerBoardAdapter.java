@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemBoard;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.RadiusBackgroundSpan;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.TagManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -27,6 +28,18 @@ import java.util.List;
  * Created by vmage on 2017/4/7.
  */
 public class RecyclerBoardAdapter extends RecyclerView.Adapter {
+
+
+    public interface OnUserNameClickListener {
+        void onNameClick(int position);
+    }
+
+    private OnUserNameClickListener onUserNameClickListener;
+
+    public void setOnUserNameClickListener(OnUserNameClickListener onUserNameClickListener) {
+        this.onUserNameClickListener = onUserNameClickListener;
+    }
+
 
     public interface OnRecyclerViewListener {
         void onItemClick(int position, View v);
@@ -130,6 +143,22 @@ public class RecyclerBoardAdapter extends RecyclerView.Adapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
+
+                if (onUserNameClickListener != null) {
+                    onUserNameClickListener.onNameClick(position);
+                }
+
+            }
+        });
 
 
     }

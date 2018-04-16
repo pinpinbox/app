@@ -559,7 +559,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     }
 
     private void toUser(String user_id) {
-        ActivityIntent.toUser(mActivity, false, user_id, null, null, null);
+        ActivityIntent.toUser(mActivity, false, false, user_id, null, null, null);
     }
 
     private void toEvent(String event_id) {

@@ -1042,6 +1042,21 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
     }
 
+    private void showBoard(){
+
+        if (board == null) {
+            board = new PopBoard(getActivity(), PopBoard.TypeUser, itemUser.getUser_id(), rBackground, true);
+        } else {
+            board.clearList();
+            board.doGetBoard();
+        }
+
+        ((Main2Activity)getActivity()).setShowBoard(false);
+
+    }
+
+
+
     private void systemShare() {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -1242,12 +1257,15 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 }
 
 
-//                if (p40JsonArray.length() == 0) {
-//                    sizeMax = true; // 已達最大值
-//                    return;
-//                }
-//
-//                round = round + defaultCount;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(((Main2Activity)getActivity()).getShowBoard()){
+                            showBoard();
+                        }
+                    }
+                },200);
+
 
 
                 if (p40JsonArray.length() == 0) {
@@ -1670,7 +1688,19 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 } else {
                     ((Main2Activity) getActivity()).showGuideCreate(true);
                 }
+
+
+                if(((Main2Activity)getActivity()).getShowBoard()){
+                    showBoard();
+                }
+
+
+
+
+
+
             }
+
         }
     }
 
@@ -1807,12 +1837,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 break;
 
             case R.id.messageImg:
-                if (board == null) {
-                    board = new PopBoard(getActivity(), PopBoard.TypeUser, itemUser.getUser_id(), rBackground, true);
-                } else {
-                    board.clearList();
-                    board.doGetBoard();
-                }
+               showBoard();
                 break;
 
             case R.id.aboutImg:

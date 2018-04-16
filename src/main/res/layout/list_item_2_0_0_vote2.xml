@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:lv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="116dp">
+        android:layout_height="116dp"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
 
         <View style="@style/ppb200_divider_list" />
 
@@ -97,7 +102,6 @@
                 android:id="@+id/linUser"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-
                 android:background="@drawable/click_2_0_0_default"
                 android:gravity="bottom"
                 android:orientation="horizontal">
@@ -150,8 +154,8 @@
         <!--投票按鈕-->
         <RelativeLayout
             android:id="@+id/rVote"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -161,10 +165,10 @@
             android:translationZ="@dimen/ppb200_translationZ_user">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/border_2_0_0_other_circle_main_first"
-                android:padding="16dp"
+                android:padding="12dp"
                 android:src="@drawable/ic200_plus_white" />
 
 
@@ -176,7 +180,7 @@
             android:id="@+id/tvVoteCount"
             fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="36dp"
             android:layout_alignBottom="@+id/rVote"
             android:layout_marginRight="8dp"
             android:layout_toLeftOf="@+id/rVote"

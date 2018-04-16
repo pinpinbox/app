@@ -324,13 +324,14 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
                 if (author_id.equals(PPBApplication.getInstance().getId())) {
 
-                    ((Main2Activity) mActivity).toMePage();
+                    ((Main2Activity) mActivity).toMePage(false);
 
                 } else {
 
                     ActivityIntent.toUser(
                             mActivity,
                             true,
+                            false,
                             author_id,
                             albumList.get(position).getUser_picture(),
                             null,

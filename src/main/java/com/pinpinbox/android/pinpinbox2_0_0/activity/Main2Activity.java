@@ -29,21 +29,20 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.Test.OldMainActivity;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
+import com.pinpinbox.android.Test.OldMainActivity;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
@@ -57,7 +56,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentHome2;
@@ -137,19 +135,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     private boolean fromAwsMessage = false;
     private boolean OtherAreaClikcToHome = false;
     private boolean scanIntent = false;
-
-    private void scheduleStartPostponedTransition(final View sharedElement) {
-        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-                        startPostponedEnterTransition();
-                        return true;
-                    }
-                });
-    }
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -254,18 +239,15 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 ActivityAnim.StartAnim(mActivity);
 
 
-
-
-
             }
         });
 
 
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             testbuttonImg.setVisibility(View.VISIBLE);
-        }else if(BuildConfig.FLAVOR.equals("www_private")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
             testbuttonImg.setVisibility(View.GONE);
-        }else if(BuildConfig.FLAVOR.equals("www_public")){
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
 
             FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             mFirebaseAnalytics.setUserId(id + " , " + getdata.getString(Key.nickname, "---"));
@@ -280,6 +262,65 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
         }, 600);
 
+    }
+
+    @Override
+    public void onResume() {
+
+
+        if (createImg != null) {
+            createImg.setClickable(false);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    createImg.setClickable(true);
+                    MyLog.Set("e", mActivity.getClass(), "可以點擊建立作品了");
+                }
+            }, 1000);
+
+        }
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+
+        if (createImg != null) {
+            createImg.setClickable(false);
+        }
+
+
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+
+        if (fastCreateTask != null && !fastCreateTask.isCancelled()) {
+            fastCreateTask.cancel(true);
+        }
+        fastCreateTask = null;
+
+//        RichText.recycle();
+
+        Glide.get(getApplicationContext()).clearMemory();
+
+        SystemUtility.SysApplication.getInstance().removeActivity(this);
+
+        super.onDestroy();
+    }
+
+    private void scheduleStartPostponedTransition(final View sharedElement) {
+        sharedElement.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
+                        startPostponedEnterTransition();
+                        return true;
+                    }
+                });
     }
 
 
@@ -680,13 +721,26 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 //        ActivityAnim.StartAnim(mActivity);
 //    }
 
-    private void toAuthor(String value) {
+    private void toAuthor(String value, boolean openBoard) {
 
-        ActivityIntent.toUser(mActivity, false, value, null, null, null);
+        ActivityIntent.toUser(mActivity, false, openBoard,value, null, null, null);
 
     }
 
-    public void toMePage() {
+
+    private boolean showBoard = false;
+
+    public boolean getShowBoard(){
+        return this.showBoard;
+    }
+
+    public void setShowBoard(boolean showBoard){
+        this.showBoard = showBoard;
+    }
+    public void toMePage(boolean showBoard) {
+
+        this.showBoard = showBoard;
+
         viewPager.setCurrentItem(2, false);
     }
 
@@ -761,17 +815,38 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         Intent intent = new Intent(mActivity, AlbumInfo2Activity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                       ActivityAnim.StartAnimFromBottom(mActivity);
+                        ActivityAnim.StartAnimFromBottom(mActivity);
 
 
                         break;
 
+                    case "user@messageboard":
+                        if (!type_id.equals("") && type_id != null) {
+                            if(type_id.equals(id)){
+                                //me
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        toMePage(true);
+                                    }
+                                },500);
+
+
+                            }else {
+                                //other user
+                                toAuthor(type_id, true);
+                            }
+                        }
+                        break;
+
+
                     case "user":
-                        toAuthor(type_id);
+                        toAuthor(type_id, false);
                         break;
 
                     case "profile":
-                        toMePage();
+                        toMePage(false);
                         break;
                 }
             }
@@ -819,9 +894,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-
     public void showRP_notify() {
-
 
         vRPnotify.setVisibility(View.VISIBLE);
 
@@ -843,7 +916,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-    public void hideRP_notify(){
+    public void hideRP_notify() {
         vRPnotify.setVisibility(View.GONE);
     }
 
@@ -1074,14 +1147,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-
-//    public void setNoConnect(NoConnect noConnect) {
-//
-//
-//
-//
-//        this.noConnect = noConnect;
-//    }
 
     private void connectInstability() {
 
@@ -1326,9 +1391,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 }
 
 
-                if(url==null || url.equals("")|| url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -1818,13 +1883,13 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             case "creative":
 
                 FlurryUtil.onEvent(FlurryKey.from_web_to_author);
-                toAuthor(value);
+                toAuthor(value, false);
                 break;
 
             case "profile":
 
                 FlurryUtil.onEvent(FlurryKey.from_web_to_myprefecture);
-                toMePage();
+                toMePage(false);
                 break;
 
             case "create":
@@ -2078,54 +2143,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
         }, 200);
 
-    }
-
-    @Override
-    protected void onPause() {
-
-        if (createImg != null){
-            createImg.setClickable(false);
-        }
-
-
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-
-
-        if (createImg != null){
-            createImg.setClickable(false);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    createImg.setClickable(true);
-                    MyLog.Set("e", mActivity.getClass(), "可以點擊建立作品了");
-                }
-            },1000);
-
-        }
-
-        super.onResume();
-    }
-
-
-    @Override
-    public void onDestroy() {
-
-        if (fastCreateTask != null && !fastCreateTask.isCancelled()) {
-            fastCreateTask.cancel(true);
-        }
-        fastCreateTask = null;
-
-//        RichText.recycle();
-
-        Glide.get(getApplicationContext()).clearMemory();
-
-        SystemUtility.SysApplication.getInstance().removeActivity(this);
-
-        super.onDestroy();
     }
 
 

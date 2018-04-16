@@ -350,7 +350,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
                     if (user_id != null && !user_id.equals("")) {
 
-                        ActivityIntent.toUser(mActivity, false, user_id, null, null ,null);
+                        ActivityIntent.toUser(mActivity, false, false, user_id, null, null ,null);
 
                         return;
                     }

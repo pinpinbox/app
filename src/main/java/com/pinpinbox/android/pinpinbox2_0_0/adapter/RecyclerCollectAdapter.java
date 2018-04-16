@@ -223,6 +223,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
                     ActivityIntent.toUser(
                             mActivity,
                             true,
+                            false,
                             (String) listData.get(position).get(Key.user_id),
                             strPicture,
                             (String) listData.get(position).get("username"),

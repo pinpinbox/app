@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -132,6 +133,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     private boolean shareElement = true;
     private boolean showSponsor = false;
     private boolean from_album_info = false;
+
 
 
     private int round; //listview添加前的初始值
@@ -1141,6 +1143,29 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     round = round + rangeCount;
 
                 }
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Bundle bundle = getIntent().getExtras();
+
+                        boolean pinpinboard = bundle.getBoolean(Key.pinpinboard, false);
+
+                        if (pinpinboard) {
+
+                            if (board == null) {
+                                board = new PopBoard(mActivity, PopBoard.TypeUser, itemUser.getUser_id(), (RelativeLayout) findViewById(R.id.rBackground), true);
+                            } else {
+                                board.clearList();
+                                board.doGetBoard();
+                            }
+
+
+                        }
+
+                    }
+                }, 200);
 
 
             } else if (p40Result.equals("0")) {
