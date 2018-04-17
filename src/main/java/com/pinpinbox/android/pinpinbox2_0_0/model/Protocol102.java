@@ -3,6 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.model;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemCategoryBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
@@ -40,7 +41,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Post();
 
-        public abstract void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, String categoryareaName);
+        public abstract void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, List<ItemCategoryBanner> itemCategoryBannerList, String categoryareaName);
 
         public abstract void TimeOut();
     }
@@ -62,7 +63,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
     private List<ItemUser> cgaUserList;
     private List<ItemAlbumExplore> itemAlbumExploreList;
-
+    private List<ItemCategoryBanner> itemCategoryBannerList;
 
 
     public Protocol102(Activity mActivity, String user_id, String token, String categoryarea_id, Protocol102.TaskCallBack callBack) {
@@ -76,6 +77,8 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
         itemAlbumExploreList = new ArrayList<>();
 
+        itemCategoryBannerList = new ArrayList<>();
+
 
         execute();
     }
@@ -86,19 +89,19 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
         callBack.Prepare();
     }
 
-    private void getCGAList(JSONObject jsonData){
+    private void getCGAList(JSONObject jsonData) {
 
-        try{
+        try {
 
             String albumexplore = JsonUtility.GetString(jsonData, ProtocolKey.albumexplore);
 
-           JSONArray jsonArrayAE = new JSONArray(albumexplore);
+            JSONArray jsonArrayAE = new JSONArray(albumexplore);
 
             for (int i = 0; i < jsonArrayAE.length(); i++) {
 
                 ItemAlbumExplore itemAlbumExplore = new ItemAlbumExplore();
 
-                JSONObject jsonAlbumexplore = (JSONObject)jsonArrayAE.get(i);
+                JSONObject jsonAlbumexplore = (JSONObject) jsonArrayAE.get(i);
 
                 String albumList = JsonUtility.GetString(jsonAlbumexplore, ProtocolKey.album);
 
@@ -125,14 +128,12 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
             }
 
 
-
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private List<ItemAlbum> getAlbumList(JSONArray jsonArrayAlbum){
+    private List<ItemAlbum> getAlbumList(JSONArray jsonArrayAlbum) {
 
         List<ItemAlbum> itemAlbumList = new ArrayList<>();
 
@@ -174,11 +175,11 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
                     itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
 
-                    if(width>height){
+                    if (width > height) {
                         itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                    }else if(height>width){
+                    } else if (height > width) {
                         itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                    }else {
+                    } else {
                         itemAlbum.setImage_orientation(0);
                     }
 
@@ -188,10 +189,6 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
                     itemAlbum.setCover_height(PPBApplication.getInstance().getStaggeredWidth());
                     MyLog.Set("e", this.getClass(), "圖片長寬無法讀取");
                 }
-
-
-
-
 
 
                 String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.usefor);
@@ -210,7 +207,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
                 itemAlbumList.add(itemAlbum);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -219,7 +216,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
     }
 
 
-    private void getCGAuserListAndCGAName(JSONObject jsonData){
+    private void getCGAName(JSONObject jsonData) {
 
         try {
 
@@ -228,30 +225,111 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
             JSONObject jsonCGA = new JSONObject(categoryarea);
 
             /*get name*/
-            String categoryareaX = JsonUtility.GetString(jsonCGA, ProtocolKey.categoryarea);
-            JSONObject jsonCGAX = new JSONObject(categoryareaX);
-            name = JsonUtility.GetString(jsonCGAX, ProtocolKey.name);
+            name = JsonUtility.GetString(jsonCGA, ProtocolKey.name);
+
+
+//            String categoryareaX = JsonUtility.GetString(jsonCGA, ProtocolKey.categoryarea);
+//            JSONObject jsonCGAX = new JSONObject(categoryareaX);
+//            name = JsonUtility.GetString(jsonCGAX, ProtocolKey.name);
 
 
             /*get user*/
-            String user = JsonUtility.GetString(jsonCGA, ProtocolKey.user);
+//            String user = JsonUtility.GetString(jsonCGA, ProtocolKey.user);
+//
+//            JSONArray userArray = new JSONArray(user);
+//
+//            for (int i = 0; i < userArray.length(); i++) {
+//
+//                JSONObject jsonUser = (JSONObject) userArray.get(i);
+//
+//                ItemUser itemUser = new ItemUser();
+//
+//                itemUser.setName(JsonUtility.GetString(jsonUser, ProtocolKey.name));
+//                itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
+//                itemUser.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
+//
+//                cgaUserList.add(itemUser);
+//            }
 
-            JSONArray userArray = new JSONArray(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-            for (int i = 0; i < userArray.length(); i++) {
 
-                JSONObject jsonUser = (JSONObject) userArray.get(i);
+    }
 
-                ItemUser itemUser = new ItemUser();
+    private void getCGAstyle(JSONObject jsonData) {
 
-                itemUser.setName(JsonUtility.GetString(jsonUser, ProtocolKey.name));
-                itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
-                itemUser.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
+        try {
 
-                cgaUserList.add(itemUser);
+            String categoryStyle = JsonUtility.GetString(jsonData, ProtocolKey.categoryarea_style);
+
+            JSONArray styleArray = new JSONArray(categoryStyle);
+
+            for (int i = 0; i < styleArray.length(); i++) {
+
+                ItemCategoryBanner itemCategoryBanner = new ItemCategoryBanner();
+
+                JSONObject jsonBanner = (JSONObject) styleArray.get(i);
+
+
+                /*set banner image*/
+                itemCategoryBanner.setImageUrl(JsonUtility.GetString(jsonBanner, ProtocolKey.image));
+
+                /*set banner type*/
+                String bannerType = JsonUtility.GetString(jsonBanner, ProtocolKey.banner_type);
+                itemCategoryBanner.setBannerType(bannerType);
+
+
+                String bannerTypeData = JsonUtility.GetString(jsonBanner, ProtocolKey.banner_type_data);
+
+                  /*banner type is image*/
+                if (bannerType.equals(ItemCategoryBanner.TYPE_IMAGE)) {
+                    JSONObject jsonImage = new JSONObject(bannerTypeData);
+                    itemCategoryBanner.setImageLink(JsonUtility.GetString(jsonImage, ProtocolKey.url));
+                }
+
+                /*banner type is video*/
+                if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
+                    JSONObject jsonVideo = new JSONObject(bannerTypeData);
+                    itemCategoryBanner.setVideoIdByUrl(JsonUtility.GetString(jsonVideo, ProtocolKey.url));
+                    itemCategoryBanner.setImageLink(JsonUtility.GetString(jsonVideo, ProtocolKey.link));
+                    itemCategoryBanner.setVideoAuto(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.auto));
+                    itemCategoryBanner.setVideoMute(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.mute));
+                    itemCategoryBanner.setVideoRepeat(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.repeat));
+                }
+
+                if(!bannerType.equals(ItemCategoryBanner.TYPE_CREATIVE)){
+                    itemCategoryBannerList.add(itemCategoryBanner);
+                }
+
+
+
+
+                /*get user 不添加再banner裡*/
+                if(bannerType.equals(ItemCategoryBanner.TYPE_CREATIVE)){
+
+                    JSONArray creativeArray = new JSONArray(bannerTypeData);
+
+                    for (int j = 0; j < creativeArray.length(); j++) {
+
+                        JSONObject jsonCreative = (JSONObject) creativeArray.get(j);
+
+                        ItemUser itemUser = new ItemUser();
+
+                        itemUser.setName(JsonUtility.GetString(jsonCreative, ProtocolKey.name));
+                        itemUser.setPicture(JsonUtility.GetString(jsonCreative, ProtocolKey.picture));
+                        itemUser.setUser_id(JsonUtility.GetString(jsonCreative, ProtocolKey.user_id));
+
+                        cgaUserList.add(itemUser);
+
+                    }
+
+                }
+
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -289,8 +367,9 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
                     getCGAList(jsonData);
 
-                    getCGAuserListAndCGAName(jsonData);
+                    getCGAName(jsonData);
 
+                    getCGAstyle(jsonData);
 
                 } else {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
@@ -318,7 +397,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
 
             case ResultType.SYSTEM_OK:
 
-                callBack.Success(cgaUserList, itemAlbumExploreList, name);
+                callBack.Success(cgaUserList, itemAlbumExploreList, itemCategoryBannerList, name);
 
                 break;
 

@@ -610,6 +610,15 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
+
+        <activity
+            android:name=".Test.TestPageForYoutubeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="user" />
+
+
+
         <activity
             android:name=".pinpinbox2_0_0.activity.FromSharePhoto2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"

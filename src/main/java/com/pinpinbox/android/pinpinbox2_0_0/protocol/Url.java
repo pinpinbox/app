@@ -36,7 +36,7 @@ public class Url {
 
     public static String P101_SetUserCover = domain + "/index/api/setusercover" + "/2.0";
 
-    public static String P102_GetCategoryArea = domain + "/index/api/getcategoryarea" + "/2.0";
+    public static String P102_GetCategoryArea = domain + "/index/api/getcategoryarea" + "/2.1";
 
     public static String P103_GetThemeArea = domain + "/index/api/getthemearea" + "/2.0";
 

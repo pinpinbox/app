@@ -27,6 +27,7 @@ import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerExploreAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemCategoryBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -188,13 +189,29 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                         }
 
                         @Override
-                        public void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, String categoryareaName) {
+                        public void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, List<ItemCategoryBanner> itemCategoryBannerList,  String categoryareaName) {
 
                             setUserList(cgaUserList);
 
                             setCGAList(itemAlbumExploreList);
 
                             showContents(categoryareaName);
+
+
+                            for (int i = 0; i < itemCategoryBannerList.size(); i++) {
+
+                                MyLog.Set("e", mActivity.getClass(), "getBannerType => " + itemCategoryBannerList.get(i).getBannerType());
+                                MyLog.Set("e", mActivity.getClass(), "getImageUrl => " + itemCategoryBannerList.get(i).getImageUrl());
+                                MyLog.Set("e", mActivity.getClass(), "getImageLink => " + itemCategoryBannerList.get(i).getImageLink());
+                                MyLog.Set("e", mActivity.getClass(), "getVideoIdByUrl => " + itemCategoryBannerList.get(i).getVideoIdByUrl());
+                                MyLog.Set("e", mActivity.getClass(), "getVideoLink => " + itemCategoryBannerList.get(i).getVideoLink());
+                                MyLog.Set("e", mActivity.getClass(), "isVideoAuto => " + itemCategoryBannerList.get(i).isVideoAuto());
+                                MyLog.Set("e", mActivity.getClass(), "isVideoMute => " + itemCategoryBannerList.get(i).isVideoMute());
+                                MyLog.Set("e", mActivity.getClass(), "isVideoRepeat => " + itemCategoryBannerList.get(i).isVideoRepeat());
+
+
+                            }
+
 
                         }
 
@@ -496,12 +513,20 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         RoundCornerImageView userImg = (RoundCornerImageView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_category_user, null);
 
-        Picasso.with(getApplicationContext())
-                .load(cgaUserList.get(position).getPicture())
-                .config(Bitmap.Config.RGB_565)
-                .error(R.drawable.member_back_head)
-                .tag(getApplicationContext())
-                .into(userImg);
+        String picture = cgaUserList.get(position).getPicture();
+
+        if(picture!=null && !picture.equals("null") && !picture.equals("")){
+            Picasso.with(getApplicationContext())
+                    .load(cgaUserList.get(position).getPicture())
+                    .config(Bitmap.Config.RGB_565)
+                    .error(R.drawable.member_back_head)
+                    .tag(getApplicationContext())
+                    .into(userImg);
+        }else {
+            userImg.setImageResource(R.drawable.member_back_head);
+        }
+
+
 
         linUser.addView(userImg);
 

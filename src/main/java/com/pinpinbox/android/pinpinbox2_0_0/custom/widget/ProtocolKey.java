@@ -34,12 +34,15 @@ public class ProtocolKey {
     public static String album_slot = "slot";
     public static String album_video = "video";
     public static String album_audio = "audio";
-
+    public static String auto = "auto";
 
     //b
     public static String besponsored = "besponsored";
     public static String birthday = "birthday";
     public static String bookmark = "bookmark";
+    public static String banner_type  = "banner_type";
+    public static String banner_type_data  = "banner_type_data";
+
 
 
     //c
@@ -61,6 +64,7 @@ public class ProtocolKey {
     public static String cover_hex = "cover_hex";
     public static String colorhex = "colorhex";
     public static String contribution = "contribution";
+    public static String categoryarea_style = "categoryarea_style";
 
 
     //d
@@ -121,12 +125,14 @@ public class ProtocolKey {
     public static String linkedin = "linkedin";
     public static String location = "location";
     public static String likes = "likes";
+    public static String link = "link";
 
     //m
     public static String message = "message";
     public static String modifytime = "modifytime";
     public static String mood = "mood";
     public static String messageboard = "messageboard";
+    public static String mute = "mute";
 
     //n
     public static String name = "name";
@@ -181,6 +187,7 @@ public class ProtocolKey {
     public static String restriction_value = "restriction_value";
     public static String recent_search = "recent_search";
     public static String ratio = "ratio";
+    public static String repeat = "repeat";
 
 
     //s

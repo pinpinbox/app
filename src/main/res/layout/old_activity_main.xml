@@ -155,14 +155,14 @@
             android:id="@+id/button21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="z"
+            android:text="cga banner"
             />
 
         <Button
             android:id="@+id/button22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:text="44"/>
 
         <Button
             android:id="@+id/button23"

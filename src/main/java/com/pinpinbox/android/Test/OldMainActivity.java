@@ -636,12 +636,8 @@ public class OldMainActivity extends FragmentActivity {
             public void onClick(View v) {
 
 
+                startActivity(new Intent(mActivity, TestPageForYoutubeActivity.class));
 
-                ViewPropertyAnimator aaa = button21.animate();
-                aaa.setDuration(1000)
-                        .translationZ(32f)
-
-                        .start();
 
 
             }
