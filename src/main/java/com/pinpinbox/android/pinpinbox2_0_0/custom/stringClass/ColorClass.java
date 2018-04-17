@@ -21,11 +21,11 @@ public class ColorClass {
 //
 //    public static final String TEAL_SECOND = "#96009688";
 
-    public static final String MAIN_FIRST = "#f000acc1";
+    public static final String MAIN_FIRST = "#00acc1";
 
-    public static final String MAIN_SECOND = "#f069cedb";
+    public static final String MAIN_SECOND = "#69cedb";
 
-    public static final String MAIN_THIRD = "#f0cce1e4";
+    public static final String MAIN_THIRD = "#cce1e4";
 
     public static final String GREY_FIRST = "#4d4d4d";
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -270,26 +271,12 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     private void setVoteClick(final ViewHolder holder, final int position) {
 
-//        holder.rVote.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (ClickUtils.ButtonContinuousClick()) {
-//                    return;
-//                }
-//
-//                if(onVoteListener!=null){
-//                    onVoteListener.onVoteClick(position);
-//                }
-//
-//
-//            }
-//        });
 
-        holder.rVote.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+
+        holder.voteImg.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
             @Override
             public void Touch() {
-                mOnScrollListener.setvScaleTouchView(holder.rVote);
+                mOnScrollListener.setvScaleTouchView(holder.voteImg);
             }
 
             @Override
@@ -318,12 +305,12 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         if (isHas_Voted) {
 
 
-            holder.rVote.setVisibility(View.INVISIBLE);
+            holder.voteImg.setVisibility(View.INVISIBLE);
 
 
         } else {
 
-            holder.rVote.setVisibility(View.VISIBLE);
+            holder.voteImg.setVisibility(View.VISIBLE);
 
         }
 
@@ -336,9 +323,10 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
         private int position;
         private RoundCornerImageView userImg, coverImg;
+        private ImageView voteImg;
         private TextView tvUserName, tvAlbumName, tvVoteCount, tvAlbumId;
         private LinearLayout linUser;
-        private RelativeLayout rItemBg, rVote;
+        private RelativeLayout rItemBg;
         private LabelView lbRanking;
 
         public ViewHolder(View itemView) {
@@ -350,6 +338,7 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
             coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
             userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
 
+            voteImg = (ImageView)itemView.findViewById(R.id.voteImg);
 
             tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
@@ -360,7 +349,6 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
             linUser = (LinearLayout) itemView.findViewById(R.id.linUser);
 
             rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
-            rVote = (RelativeLayout)itemView.findViewById(R.id.rVote);
 
             lbRanking = (LabelView)itemView.findViewById(R.id.lbRanking);
 

@@ -64,12 +64,13 @@
     <color name="pinpinbox_2_0_0_third_teal">#5a009688</color>
 
 
+
     <color name="pinpinbox_2_0_0_gradient_dark_main">#0f8399</color>
     <color name="pinpinbox_2_0_0_gradient_light_main">#5cb7c2</color>
-    <color name="pinpinbox_2_0_0_dark_main">#f00f8399</color>
-    <color name="pinpinbox_2_0_0_first_main">#f000acc1</color>
-    <color name="pinpinbox_2_0_0_second_main">#f069cedb</color>
-    <color name="pinpinbox_2_0_0_third_main">#f0cce1e4</color>
+    <color name="pinpinbox_2_0_0_dark_main">#0f8399</color>
+    <color name="pinpinbox_2_0_0_first_main">#00acc1</color>
+    <color name="pinpinbox_2_0_0_second_main">#69cedb</color>
+    <color name="pinpinbox_2_0_0_third_main">#cce1e4</color>
 
     <color name="pinpinbox_2_0_0_gradient_dark_pink">#a61252</color>
     <color name="pinpinbox_2_0_0_gradient_light_pink">#f15187</color>

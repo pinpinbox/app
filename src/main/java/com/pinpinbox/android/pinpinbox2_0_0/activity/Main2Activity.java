@@ -1867,6 +1867,29 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                 }
 
+
+                if(param1!=null && param1.equals("index")){
+
+
+                    String param2 = strPathPrefix1.get(2);
+
+                    if(param2!=null && param2.equals("adjustapp")){
+
+                        HashMap<String, String> map = getValueMap(intent);
+                        String album_id = "";
+                        album_id = map.get(Key.album_id);
+                        toAlbumInfo(album_id);
+
+                        return;
+                    }
+
+
+
+                }
+
+
+
+
                 break;
 
             case "album":

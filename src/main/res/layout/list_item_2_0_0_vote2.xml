@@ -14,12 +14,10 @@
         android:clipChildren="false"
         android:clipToPadding="false">
 
-
         <View style="@style/ppb200_divider_list" />
 
 
         <!--album cover-->
-
         <RelativeLayout
             android:id="@+id/rItemBg"
             android:layout_width="84dp"
@@ -40,6 +38,7 @@
         </RelativeLayout>
 
 
+        <!--detail-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="84dp"
@@ -152,8 +151,8 @@
 
 
         <!--投票按鈕-->
-        <RelativeLayout
-            android:id="@+id/rVote"
+        <ImageView
+            android:id="@+id/voteImg"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_alignParentEnd="true"
@@ -162,17 +161,9 @@
             android:layout_marginBottom="4dp"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:background="@drawable/border_2_0_0_other_circle_main_first"
-            android:translationZ="@dimen/ppb200_translationZ_user">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_2_0_0_other_circle_main_first"
-                android:padding="12dp"
-                android:src="@drawable/ic200_plus_white" />
-
-
-        </RelativeLayout>
+            android:padding="12dp"
+            android:src="@drawable/ic200_plus_white"
+            android:translationZ="@dimen/ppb200_translationZ_user" />
 
 
         <!--票數-->
@@ -181,10 +172,10 @@
             fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_alignBottom="@+id/rVote"
+            android:layout_alignBottom="@+id/voteImg"
             android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@+id/rVote"
-            android:layout_toStartOf="@+id/rVote"
+            android:layout_toLeftOf="@+id/voteImg"
+            android:layout_toStartOf="@+id/voteImg"
             android:gravity="center"
             android:letterSpacing="0.1"
             android:text=""
