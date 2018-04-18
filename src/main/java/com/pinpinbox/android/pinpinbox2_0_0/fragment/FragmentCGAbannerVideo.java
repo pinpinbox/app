@@ -5,16 +5,22 @@ import android.os.Bundle;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ApiKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+
+import static com.google.android.youtube.player.YouTubePlayer.FULLSCREEN_FLAG_ALWAYS_FULLSCREEN_IN_LANDSCAPE;
+import static com.google.android.youtube.player.YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION;
+import static com.google.android.youtube.player.YouTubePlayer.FULLSCREEN_FLAG_CUSTOM_LAYOUT;
+
 
 /**
  * Created by vmage on 2018/4/18.
  */
 
 public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment implements YouTubePlayer.OnInitializedListener {
-
 
 
     private YouTubePlayer mYouTubePlayer;
@@ -28,7 +34,7 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
 
         Bundle bundle = getArguments();
 
-        if(bundle!=null){
+        if (bundle != null) {
 
             youtubeVideoId = bundle.getString(Key.youbuteVideoId, "");
 
@@ -40,21 +46,6 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
     }
 
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//
-//        View v = inflater.inflate(R.layout.fragment_2_0_0_cga_banner_video, container, false);
-//
-//
-//
-//         videoView = (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
-//
-//
-//        return v;
-//    }
-
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -64,18 +55,24 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
 
     }
 
+
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 
         mYouTubePlayer = youTubePlayer;
 
-        youTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
-        youTubePlayer.setPlaybackEventListener(playbackEventListener);
+        mYouTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
+        mYouTubePlayer.setPlaybackEventListener(playbackEventListener);
 
         /** Start buffering **/
         if (!b) {
 
-            mYouTubePlayer.loadVideo(youtubeVideoId);
+            if (!youtubeVideoId.equals("") && !youtubeVideoId.equals("null")) {
+                mYouTubePlayer.loadVideo(youtubeVideoId);
+            } else {
+                PinPinToast.showErrorToast(getActivity(), "影片來源異常");
+            }
+
 
         }
 
@@ -84,7 +81,7 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
+        PinPinToast.showErrorToast(getActivity(), "影片來源異常");
     }
 
 
@@ -100,6 +97,11 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
 
         @Override
         public void onPlaying() {
+
+            MyLog.Set("e", FragmentCGAbannerVideo.class, "onPlaying");
+
+            ((Feature2Activity) getActivity()).hideLargeUserList();
+
         }
 
         @Override
@@ -146,7 +148,6 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
     };
 
 
-
     @Override
     public void onDestroy() {
         if (mYouTubePlayer != null) {
@@ -155,8 +156,6 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
         }
         super.onDestroy();
     }
-
-
 
 
 }

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -80,6 +81,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     private TextView tvTitle;
     private ScrollView svContents;
     private ViewPager vpBanner;
+    private FrameLayout frameUser;
 
     private String strJsonData = "";
 
@@ -151,6 +153,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         backImg = (ImageView) findViewById(R.id.backImg);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         vpBanner = (ViewPager) findViewById(R.id.vpBanner);
+        frameUser = (FrameLayout) findViewById(R.id.frameUser);
 
         TextUtility.setBold(tvTitle, true);
 
@@ -523,6 +526,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
             MyLog.Set("e", mActivity.getClass(), "isVideoMute => " + itemCategoryBannerList.get(i).isVideoMute());
             MyLog.Set("e", mActivity.getClass(), "isVideoRepeat => " + itemCategoryBannerList.get(i).isVideoRepeat());
 
+            MyLog.Set("e", mActivity.getClass(), "--------------------------------------------------------------------------------------");
 
             String bannerType = itemCategoryBannerList.get(i).getBannerType();
 
@@ -534,6 +538,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
                 fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerVideo.class, bundle));
 
+
             }
 
             if (bannerType.equals(ItemCategoryBanner.TYPE_IMAGE)) {
@@ -542,6 +547,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                 bundle.putString(Key.imageLink, itemCategoryBannerList.get(i).getImageLink());
 
                 fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerImage.class, bundle));
+
 
             }
 
@@ -586,6 +592,10 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     private void openUserList() {
 
+
+        frameUser.setVisibility(View.VISIBLE);
+
+
         Animation animation = AnimationUtils.loadAnimation(getApplication(), R.anim.right_exist);
 
         linUser.startAnimation(animation);
@@ -608,6 +618,13 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         } else {
             getSupportFragmentManager().beginTransaction().show(fragmentCategoryUser).commit();
         }
+
+    }
+
+    public void hideLargeUserList() {
+
+
+        frameUser.setVisibility(View.GONE);
 
     }
 
