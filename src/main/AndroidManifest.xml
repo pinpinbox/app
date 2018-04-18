@@ -125,24 +125,6 @@
             android:launchMode="singleTop"
             android:theme="@style/whiteTransparent">
 
-            <!-- <intent-filter> -->
-
-
-            <!-- <data -->
-            <!-- android:host="w3.pinpinbox.com" -->
-            <!-- android:scheme="https" /> -->
-            <!-- <data -->
-            <!-- android:host="www.pinpinbox.com" -->
-            <!-- android:scheme="https" /> -->
-
-
-            <!-- <action android:name="android.intent.action.VIEW" /> -->
-            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
-
-
-            <!-- </intent-filter> -->
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -381,6 +363,7 @@
                     android:host="index"
                     android:pathPrefix="/index"
                     android:scheme="pinpinbox" />
+
                 開啟作品
                 <data
                     android:host="index"
@@ -391,37 +374,43 @@
                     android:host="index"
                     android:pathPrefix="/template/content"
                     android:scheme="pinpinbox" />
+
                 會員專區
                 <!--<data-->
                     <!--android:host="index"-->
                     <!--android:pathPrefix="/creative/content"-->
                     <!--android:scheme="pinpinbox" />-->
+
                 我的專區
                 <data
                     android:host="index"
                     android:pathPrefix="/profile"
                     android:scheme="pinpinbox" />
+
                 快速建立
                 <data
                     android:host="index"
                     android:pathPrefix="/create"
                     android:scheme="pinpinbox" />
+
                 活動
                 <data
                     android:host="index"
                     android:pathPrefix="/event"
                     android:scheme="pinpinbox" />
+
                 作品編輯
                 <data
                     android:host="index"
                     android:pathPrefix="/diy/content"
                     android:scheme="pinpinbox" />
-                <data
-                    android:host="w3.pinpinbox.com"
-                    android:scheme="https" />
-                <data
-                    android:host="www.pinpinbox.com"
-                    android:scheme="https" />
+
+                <!--<data-->
+                    <!--android:host="w3.pinpinbox.com"-->
+                    <!--android:scheme="https" />-->
+                <!--<data-->
+                    <!--android:host="www.pinpinbox.com"-->
+                    <!--android:scheme="https" />-->
 
                 <action android:name="android.intent.action.VIEW" />
 
@@ -447,8 +436,6 @@
             android:windowSoftInputMode="adjustPan|stateHidden" >
 
 
-
-
             <intent-filter>
 
                 會員專區
@@ -457,12 +444,12 @@
                     android:pathPrefix="/creative/content"
                     android:scheme="pinpinbox" />
 
-                <data
-                    android:host="w3.pinpinbox.com"
-                    android:scheme="https" />
-                <data
-                    android:host="www.pinpinbox.com"
-                    android:scheme="https" />
+                <!--<data-->
+                    <!--android:host="w3.pinpinbox.com"-->
+                    <!--android:scheme="https" />-->
+                <!--<data-->
+                    <!--android:host="www.pinpinbox.com"-->
+                    <!--android:scheme="https" />-->
 
                 <action android:name="android.intent.action.VIEW" />
 

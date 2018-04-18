@@ -4,20 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.ScreenUtils;
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemCategoryBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerImage;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerVideo;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102;
 
 import java.util.List;
@@ -26,15 +27,11 @@ import java.util.List;
  * Created by vmage on 2018/4/17.
  */
 
-public class TestPageForYoutubeActivity extends FragmentActivity implements YouTubePlayer.OnInitializedListener {
-
-
-
-    public static final String DEVELOPER_KEY = "AIzaSyATCeohA43aiTn-DkMI0ATpLJMiMWMDhdU";
+public class TestPageForYoutubeActivity extends FragmentActivity{
 
     private Activity mActivity;
 
-    private YouTubePlayer mYouTubePlayer;
+    private FragmentPagerItemAdapter adapter;
 
     private ViewPager viewPager;
 
@@ -96,6 +93,10 @@ public class TestPageForYoutubeActivity extends FragmentActivity implements YouT
                     @Override
                     public void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, List<ItemCategoryBanner> itemCategoryBannerList, String categoryareaName) {
 
+
+                        FragmentPagerItems fragmentPagerItems = new FragmentPagerItems(mActivity);
+
+
                         for (int i = 0; i < itemCategoryBannerList.size(); i++) {
 
                             MyLog.Set("e", mActivity.getClass(), "getBannerType => " + itemCategoryBannerList.get(i).getBannerType());
@@ -107,13 +108,37 @@ public class TestPageForYoutubeActivity extends FragmentActivity implements YouT
                             MyLog.Set("e", mActivity.getClass(), "isVideoMute => " + itemCategoryBannerList.get(i).isVideoMute());
                             MyLog.Set("e", mActivity.getClass(), "isVideoRepeat => " + itemCategoryBannerList.get(i).isVideoRepeat());
 
+                            String bannerType = itemCategoryBannerList.get(i).getBannerType();
+
+                            Bundle bundle = new Bundle();
+
+                            if(bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)){
+
+                                bundle.putString(Key.youbuteVideoId, itemCategoryBannerList.get(i).getVideoIdByUrl());
+
+                                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerVideo.class, bundle));
+
+                            }
+
+                            if(bannerType.equals(ItemCategoryBanner.TYPE_IMAGE)){
+
+                                bundle.putString(Key.image, itemCategoryBannerList.get(i).getImageUrl());
+                                bundle.putString(Key.imageLink, itemCategoryBannerList.get(i).getImageLink());
+
+                                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerImage.class, bundle));
+
+                            }
+
                         }
 
-                        TestPageAdapter testPageAdapter = new TestPageAdapter(mActivity, itemCategoryBannerList);
+                        adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), fragmentPagerItems);
 
-                        viewPager.setAdapter(testPageAdapter);
+                        viewPager.setAdapter(adapter);
 
 
+//                        TestPageAdapter testPageAdapter = new TestPageAdapter(mActivity, itemCategoryBannerList);
+//
+//                        viewPager.setAdapter(testPageAdapter);
 
                     }
 
@@ -133,91 +158,6 @@ public class TestPageForYoutubeActivity extends FragmentActivity implements YouT
     }
 
 
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        mYouTubePlayer = youTubePlayer;
 
-        mYouTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
-        mYouTubePlayer.setPlaybackEventListener(playbackEventListener);
-    }
-
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
-    private YouTubePlayer.PlaybackEventListener playbackEventListener = new YouTubePlayer.PlaybackEventListener() {
-
-        @Override
-        public void onBuffering(boolean arg0) {
-        }
-
-        @Override
-        public void onPaused() {
-        }
-
-        @Override
-        public void onPlaying() {
-        }
-
-        @Override
-        public void onSeekTo(int arg0) {
-        }
-
-        @Override
-        public void onStopped() {
-        }
-
-    };
-
-    private YouTubePlayer.PlayerStateChangeListener playerStateChangeListener = new YouTubePlayer.PlayerStateChangeListener() {
-
-        @Override
-        public void onAdStarted() {
-            MyLog.Set("d", getClass(), "onAdStarted");
-        }
-
-        @Override
-        public void onError(YouTubePlayer.ErrorReason arg0) {
-            MyLog.Set("d", getClass(), "onError");
-        }
-
-        @Override
-        public void onLoaded(String arg0) {
-            MyLog.Set("d", getClass(), "onLoaded");
-        }
-
-        @Override
-        public void onLoading() {
-            MyLog.Set("d", getClass(), "onLoading");
-        }
-
-        @Override
-        public void onVideoEnded() {
-            MyLog.Set("d", getClass(), "onVideoEnded");
-        }
-
-        @Override
-        public void onVideoStarted() {
-            MyLog.Set("d", getClass(), "onVideoStarted");
-        }
-    };
-
-
-
-
-    @Override
-    protected void onDestroy() {
-        if (mYouTubePlayer != null) {
-            mYouTubePlayer.release();
-            mYouTubePlayer = null;
-        }
-        super.onDestroy();
-    }
 
 }

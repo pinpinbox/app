@@ -1,7 +1,5 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
-import com.pinpinbox.android.R;
-
 /**
  * Created by vmage on 2016/5/10.
  */
@@ -107,6 +105,7 @@ public class Key {
     public static String imageView = "imageView";
     public static String image_orientation = "image_orientation";
     public static String identifier = "identifier";
+    public static String imageLink = "imageLink";
 
 
     //j
@@ -231,6 +230,7 @@ public class Key {
     //x
 
     //y
+    public static String youbuteVideoId = "youbuteVideoId";
 
     //z
     public static String zipped = "zipped";

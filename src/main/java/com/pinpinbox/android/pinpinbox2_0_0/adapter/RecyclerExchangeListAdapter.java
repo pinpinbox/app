@@ -154,7 +154,7 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                         .into(mHolder.exchangeImg, new Callback() {
                             @Override
                             public void onSuccess() {
-                                mHolder.exchangeImg.setAlpha(0.8f);
+                                mHolder.exchangeImg.setAlpha(0.9f);
                             }
 
                             @Override

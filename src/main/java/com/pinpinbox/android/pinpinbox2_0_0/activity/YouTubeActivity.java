@@ -5,16 +5,16 @@ import android.support.annotation.NonNull;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ApiKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,8 +23,6 @@ import java.util.regex.Pattern;
  * Created by vmage on 2015/12/28.
  */
 public class YouTubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
-
-    static private final String DEVELOPER_KEY = "AIzaSyATCeohA43aiTn-DkMI0ATpLJMiMWMDhdU";
 
     private YouTubePlayer mYouTubePlayer;
 
@@ -38,7 +36,7 @@ public class YouTubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         SystemUtility.SysApplication.getInstance().addActivity(this);
         YouTubePlayerView youTubeView = (YouTubePlayerView)
                 findViewById(R.id.youtube_view);
-        youTubeView.initialize(DEVELOPER_KEY, this);
+        youTubeView.initialize(ApiKey.YOUTUBE, this);
 
 
     }
@@ -153,8 +151,7 @@ public class YouTubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     protected void onResume() {
 
         if (!HttpUtility.isConnect(this)) {
-            DialogSet d = new DialogSet(this);
-            d.setNoConnect();
+            DialogV2Custom.BuildNoConnect(this);
         }
 
         super.onResume();

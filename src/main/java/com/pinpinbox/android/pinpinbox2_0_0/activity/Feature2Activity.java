@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -40,6 +45,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerImage;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerVideo;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCategoryUser;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102;
 import com.squareup.picasso.Picasso;
@@ -63,6 +70,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     private FragmentCategoryUser fragmentCategoryUser;
     private Protocol102 protocol102;
 
+    private FragmentPagerItemAdapter adapter;
 
     private List<ItemUser> userList;
     private List<ItemAlbumExplore> albumExploreList;
@@ -71,6 +79,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     private ImageView backImg;
     private TextView tvTitle;
     private ScrollView svContents;
+    private ViewPager vpBanner;
 
     private String strJsonData = "";
 
@@ -141,13 +150,17 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         svContents = (ScrollView) findViewById(R.id.svContents);
         backImg = (ImageView) findViewById(R.id.backImg);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
-//        tvAll = (TextView) findViewById(R.id.tvAll);
+        vpBanner = (ViewPager) findViewById(R.id.vpBanner);
 
         TextUtility.setBold(tvTitle, true);
 
         linUser.setOnClickListener(this);
         backImg.setOnClickListener(this);
-//        tvAll.setOnClickListener(this);
+
+        int bannerWidth = ScreenUtils.getScreenWidth();
+        int bannerHeight = (bannerWidth * 540) / 960;
+        vpBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
+
 
     }
 
@@ -189,28 +202,15 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                         }
 
                         @Override
-                        public void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, List<ItemCategoryBanner> itemCategoryBannerList,  String categoryareaName) {
+                        public void Success(List<ItemUser> cgaUserList, List<ItemAlbumExplore> itemAlbumExploreList, List<ItemCategoryBanner> itemCategoryBannerList, String categoryareaName) {
 
                             setUserList(cgaUserList);
 
                             setCGAList(itemAlbumExploreList);
 
+                            setBannerList(itemCategoryBannerList);
+
                             showContents(categoryareaName);
-
-
-                            for (int i = 0; i < itemCategoryBannerList.size(); i++) {
-
-                                MyLog.Set("e", mActivity.getClass(), "getBannerType => " + itemCategoryBannerList.get(i).getBannerType());
-                                MyLog.Set("e", mActivity.getClass(), "getImageUrl => " + itemCategoryBannerList.get(i).getImageUrl());
-                                MyLog.Set("e", mActivity.getClass(), "getImageLink => " + itemCategoryBannerList.get(i).getImageLink());
-                                MyLog.Set("e", mActivity.getClass(), "getVideoIdByUrl => " + itemCategoryBannerList.get(i).getVideoIdByUrl());
-                                MyLog.Set("e", mActivity.getClass(), "getVideoLink => " + itemCategoryBannerList.get(i).getVideoLink());
-                                MyLog.Set("e", mActivity.getClass(), "isVideoAuto => " + itemCategoryBannerList.get(i).isVideoAuto());
-                                MyLog.Set("e", mActivity.getClass(), "isVideoMute => " + itemCategoryBannerList.get(i).isVideoMute());
-                                MyLog.Set("e", mActivity.getClass(), "isVideoRepeat => " + itemCategoryBannerList.get(i).isVideoRepeat());
-
-
-                            }
 
 
                         }
@@ -408,7 +408,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                             return;
                         }
 
-                        if(categoryarea_id!=null && category_id==null){
+                        if (categoryarea_id != null && category_id == null) {
                             MyLog.Set("e", mActivity.getClass(), "categoryarea_id => " + categoryarea_id);
 
                             List<String> list = uri.getPathSegments();
@@ -418,25 +418,22 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                             boolean toContents = true;
 
                             for (int j = 0; j < list.size(); j++) {
-                                if(list.get(j).equals("explore")){
+                                if (list.get(j).equals("explore")) {
                                     toContents = false;
                                     break;
                                 }
                             }
 
-                            if(toContents){
+                            if (toContents) {
                                 toCurrentContents(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
-                            }else {
+                            } else {
                                 toFeature(StringIntMethod.StringToInt(categoryarea_id));
                             }
 
 
-
-
-
                             return;
 
-                        }else {
+                        } else {
                             MyLog.Set("e", mActivity.getClass(), "categoryarea_id==null");
                         }
 
@@ -502,6 +499,63 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
+
+    private void setBannerList(List<ItemCategoryBanner> itemCategoryBannerList) {
+
+
+        if (itemCategoryBannerList == null || itemCategoryBannerList.size() == 0) {
+            MyLog.Set("e", getClass(), "no banner");
+            vpBanner.setVisibility(View.GONE);
+            return;
+        }
+
+
+        FragmentPagerItems fragmentPagerItems = new FragmentPagerItems(mActivity);
+
+        for (int i = 0; i < itemCategoryBannerList.size(); i++) {
+
+            MyLog.Set("e", mActivity.getClass(), "getBannerType => " + itemCategoryBannerList.get(i).getBannerType());
+            MyLog.Set("e", mActivity.getClass(), "getImageUrl => " + itemCategoryBannerList.get(i).getImageUrl());
+            MyLog.Set("e", mActivity.getClass(), "getImageLink => " + itemCategoryBannerList.get(i).getImageLink());
+            MyLog.Set("e", mActivity.getClass(), "getVideoIdByUrl => " + itemCategoryBannerList.get(i).getVideoIdByUrl());
+            MyLog.Set("e", mActivity.getClass(), "getVideoLink => " + itemCategoryBannerList.get(i).getVideoLink());
+            MyLog.Set("e", mActivity.getClass(), "isVideoAuto => " + itemCategoryBannerList.get(i).isVideoAuto());
+            MyLog.Set("e", mActivity.getClass(), "isVideoMute => " + itemCategoryBannerList.get(i).isVideoMute());
+            MyLog.Set("e", mActivity.getClass(), "isVideoRepeat => " + itemCategoryBannerList.get(i).isVideoRepeat());
+
+
+            String bannerType = itemCategoryBannerList.get(i).getBannerType();
+
+            Bundle bundle = new Bundle();
+
+            if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
+
+                bundle.putString(Key.youbuteVideoId, itemCategoryBannerList.get(i).getVideoIdByUrl());
+
+                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerVideo.class, bundle));
+
+            }
+
+            if (bannerType.equals(ItemCategoryBanner.TYPE_IMAGE)) {
+
+                bundle.putString(Key.image, itemCategoryBannerList.get(i).getImageUrl());
+                bundle.putString(Key.imageLink, itemCategoryBannerList.get(i).getImageLink());
+
+                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerImage.class, bundle));
+
+            }
+
+        }
+
+
+        adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), fragmentPagerItems);
+
+        vpBanner.setAdapter(adapter);
+
+
+    }
+
+
     private void showContents(String categoryareaName) {
         tvTitle.setText(categoryareaName);
 
@@ -515,21 +569,18 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         String picture = cgaUserList.get(position).getPicture();
 
-        if(picture!=null && !picture.equals("null") && !picture.equals("")){
+        if (picture != null && !picture.equals("null") && !picture.equals("")) {
             Picasso.with(getApplicationContext())
                     .load(cgaUserList.get(position).getPicture())
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)
                     .tag(getApplicationContext())
                     .into(userImg);
-        }else {
+        } else {
             userImg.setImageResource(R.drawable.member_back_head);
         }
 
-
-
         linUser.addView(userImg);
-
 
     }
 
@@ -602,7 +653,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         intent.putExtras(bundle);
         startActivity(intent);
         ActivityAnim.StartAnim(mActivity);
-
 
     }
 

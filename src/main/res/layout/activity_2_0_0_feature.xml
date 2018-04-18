@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
-        android:scrollbars=""
+        android:paddingTop="@dimen/ppb200_action_bar_height_with_status"
+        android:scrollbars="none"
         android:alpha="0">
 
 
@@ -26,19 +27,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <!--<android.support.v4.view.ViewPager-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_marginTop="@dimen/ppb200_action_bar_height_with_status"-->
-                <!--android:background="@color/pinpinbox_2_0_0_secondary_text"/>-->
-
-
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/pinpinbox_2_0_0_second_grey"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ppb200_title_margin_second">
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first">
+                <!--android:layout_marginTop="@dimen/ppb200_title_margin_second"-->
 
                 <TextView
                     android:id="@+id/tvTitle"

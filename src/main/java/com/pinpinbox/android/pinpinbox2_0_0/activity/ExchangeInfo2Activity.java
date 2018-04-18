@@ -234,7 +234,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
 //                tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
 
-                tvExchange.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
+                tvExchangeTime.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
                 + day  + getResources().getString(R.string.pinpinbox_2_0_0_time_day)
                 + hour + getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
                 + min  + getResources().getString(R.string.pinpinbox_2_0_0_time_min));
