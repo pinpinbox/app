@@ -22,6 +22,7 @@ public class Key {
     public static String albumexplore = "albumexplore";
 
 
+
     //b
     public static String birthday = "birthday";
     public static String businessuser_id = "businessuser_id";
@@ -223,6 +224,7 @@ public class Key {
     public static String viewed = "viewed";
     public static String viewer = "viewer";
     public static String video = "video";
+    public static String videoAutoplayEnable = "videoAutoplayEnable";
 
     //w
 

@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -59,6 +60,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
@@ -76,11 +78,13 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     private List<ItemUser> userList;
     private List<ItemAlbumExplore> albumExploreList;
 
+    private RelativeLayout rBanner;
     private LinearLayout linContents, linUser;
     private ImageView backImg;
     private TextView tvTitle;
     private ScrollView svContents;
     private ViewPager vpBanner;
+    private CircleIndicator indicator;
     private FrameLayout frameUser;
 
     private String strJsonData = "";
@@ -147,12 +151,14 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         userList = new ArrayList<>();
 
+        rBanner = (RelativeLayout) findViewById(R.id.rBanner);
         linContents = (LinearLayout) findViewById(R.id.linContents);
         linUser = (LinearLayout) findViewById(R.id.linUser);
         svContents = (ScrollView) findViewById(R.id.svContents);
         backImg = (ImageView) findViewById(R.id.backImg);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         vpBanner = (ViewPager) findViewById(R.id.vpBanner);
+        indicator = (CircleIndicator) findViewById(R.id.indicator);
         frameUser = (FrameLayout) findViewById(R.id.frameUser);
 
         TextUtility.setBold(tvTitle, true);
@@ -162,7 +168,10 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         int bannerWidth = ScreenUtils.getScreenWidth();
         int bannerHeight = (bannerWidth * 540) / 960;
-        vpBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
+
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight);
+        vpBanner.setLayoutParams(params);
 
 
     }
@@ -176,8 +185,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
 
         if (categoryarea_id == JsonParamTypeClass.NULLCATEGORYID) {
-            linUser.setVisibility(View.GONE);
-//            tvAll.setVisibility(View.GONE);
 
             decodeJsonToSetTheme();
 
@@ -239,6 +246,10 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         List<ItemAlbumExplore> itemAlbumExploreList = new ArrayList<>();
 
+        List<ItemUser> cgaUserList = new ArrayList<>();
+
+        List<ItemCategoryBanner> itemCategoryBannerList = new ArrayList<>();
+
         String strCategoryareaName = "";
 
         try {
@@ -279,11 +290,83 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
             }
 
+
+            String categoryStyle = JsonUtility.GetString(jsonData, ProtocolKey.categoryarea_style);
+
+            JSONArray styleArray = new JSONArray(categoryStyle);
+
+            for (int i = 0; i < styleArray.length(); i++) {
+
+                ItemCategoryBanner itemCategoryBanner = new ItemCategoryBanner();
+
+                JSONObject jsonBanner = (JSONObject) styleArray.get(i);
+
+                /*set banner image*/
+                itemCategoryBanner.setImageUrl(JsonUtility.GetString(jsonBanner, ProtocolKey.image));
+
+                /*set banner type*/
+                String bannerType = JsonUtility.GetString(jsonBanner, ProtocolKey.banner_type);
+                itemCategoryBanner.setBannerType(bannerType);
+
+
+                String bannerTypeData = JsonUtility.GetString(jsonBanner, ProtocolKey.banner_type_data);
+
+                  /*banner type is image*/
+                if (bannerType.equals(ItemCategoryBanner.TYPE_IMAGE)) {
+                    JSONObject jsonImage = new JSONObject(bannerTypeData);
+                    itemCategoryBanner.setImageLink(JsonUtility.GetString(jsonImage, ProtocolKey.url));
+                }
+
+                /*banner type is video*/
+                if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
+                    JSONObject jsonVideo = new JSONObject(bannerTypeData);
+                    itemCategoryBanner.setVideoIdByUrl(JsonUtility.GetString(jsonVideo, ProtocolKey.url));
+                    itemCategoryBanner.setVideoLink(JsonUtility.GetString(jsonVideo, ProtocolKey.link));
+                    itemCategoryBanner.setVideoAuto(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.auto));
+                    itemCategoryBanner.setVideoMute(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.mute));
+                    itemCategoryBanner.setVideoRepeat(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.repeat));
+                }
+
+                if (!bannerType.equals(ItemCategoryBanner.TYPE_CREATIVE)) {
+                    itemCategoryBannerList.add(itemCategoryBanner);
+                }
+
+
+
+
+                /*get user 不添加再banner裡*/
+                if (bannerType.equals(ItemCategoryBanner.TYPE_CREATIVE)) {
+
+                    JSONArray creativeArray = new JSONArray(bannerTypeData);
+
+                    for (int j = 0; j < creativeArray.length(); j++) {
+
+                        JSONObject jsonCreative = (JSONObject) creativeArray.get(j);
+
+                        ItemUser itemUser = new ItemUser();
+
+                        itemUser.setName(JsonUtility.GetString(jsonCreative, ProtocolKey.name));
+                        itemUser.setPicture(JsonUtility.GetString(jsonCreative, ProtocolKey.picture));
+                        itemUser.setUser_id(JsonUtility.GetString(jsonCreative, ProtocolKey.user_id));
+
+                        cgaUserList.add(itemUser);
+
+                    }
+
+                }
+
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        setUserList(cgaUserList);
+
         setCGAList(itemAlbumExploreList);
+
+        setBannerList(itemCategoryBannerList);
 
         showContents(strCategoryareaName);
 
@@ -338,6 +421,11 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     }
 
     private void setUserList(List<ItemUser> cgaUserList) {
+
+        if (cgaUserList == null || cgaUserList.size() == 0) {
+            linUser.setVisibility(View.GONE);
+            return;
+        }
 
 
         if (userList == null) {
@@ -502,14 +590,14 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-
     private void setBannerList(List<ItemCategoryBanner> itemCategoryBannerList) {
-
 
         if (itemCategoryBannerList == null || itemCategoryBannerList.size() == 0) {
             MyLog.Set("e", getClass(), "no banner");
-            vpBanner.setVisibility(View.GONE);
+            rBanner.setVisibility(View.GONE);
             return;
+        } else if (itemCategoryBannerList.size() == 1) {
+            indicator.setVisibility(View.INVISIBLE);
         }
 
 
@@ -517,9 +605,11 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         for (int i = 0; i < itemCategoryBannerList.size(); i++) {
 
+
             MyLog.Set("e", mActivity.getClass(), "getBannerType => " + itemCategoryBannerList.get(i).getBannerType());
             MyLog.Set("e", mActivity.getClass(), "getImageUrl => " + itemCategoryBannerList.get(i).getImageUrl());
             MyLog.Set("e", mActivity.getClass(), "getImageLink => " + itemCategoryBannerList.get(i).getImageLink());
+
             MyLog.Set("e", mActivity.getClass(), "getVideoIdByUrl => " + itemCategoryBannerList.get(i).getVideoIdByUrl());
             MyLog.Set("e", mActivity.getClass(), "getVideoLink => " + itemCategoryBannerList.get(i).getVideoLink());
             MyLog.Set("e", mActivity.getClass(), "isVideoAuto => " + itemCategoryBannerList.get(i).isVideoAuto());
@@ -557,13 +647,20 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), fragmentPagerItems);
 
         vpBanner.setAdapter(adapter);
+        indicator.setViewPager(vpBanner);
 
 
     }
 
-
     private void showContents(String categoryareaName) {
         tvTitle.setText(categoryareaName);
+
+        svContents.post(new Runnable() {
+            @Override
+            public void run() {
+                svContents.scrollTo(0,0);
+            }
+        });
 
         ViewControl.AlphaTo1(svContents);
 

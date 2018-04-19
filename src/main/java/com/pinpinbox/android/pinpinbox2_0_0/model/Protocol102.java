@@ -293,7 +293,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
                 if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
                     JSONObject jsonVideo = new JSONObject(bannerTypeData);
                     itemCategoryBanner.setVideoIdByUrl(JsonUtility.GetString(jsonVideo, ProtocolKey.url));
-                    itemCategoryBanner.setImageLink(JsonUtility.GetString(jsonVideo, ProtocolKey.link));
+                    itemCategoryBanner.setVideoLink(JsonUtility.GetString(jsonVideo, ProtocolKey.link));
                     itemCategoryBanner.setVideoAuto(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.auto));
                     itemCategoryBanner.setVideoMute(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.mute));
                     itemCategoryBanner.setVideoRepeat(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.repeat));

@@ -705,7 +705,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void toMyCollect() {
 
-        SnackManager.showCustomSnack();
+        SnackManager.showCollecttionSnack();
 
         finish();
         ActivityAnim.FinishAnim(mActivity);

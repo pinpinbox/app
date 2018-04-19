@@ -38,7 +38,7 @@ public class Url {
 
     public static String P102_GetCategoryArea = domain + "/index/api/getcategoryarea" + "/2.1";
 
-    public static String P103_GetThemeArea = domain + "/index/api/getthemearea" + "/2.0";
+    public static String P103_GetThemeArea = domain + "/index/api/getthemearea" + "/2.1";
 
     public static String P104_GetSponsorList = domain + "/index/api/getsponsorlist" + "/2.0";
 

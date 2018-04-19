@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:id="@+id/rBackground"
     android:fitsSystemWindows="false">
@@ -27,11 +28,40 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vpBanner"
+            <RelativeLayout
+                android:id="@+id/rBanner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/pinpinbox_2_0_0_second_grey"/>
+                android:layout_height="wrap_content">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vpBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/pinpinbox_2_0_0_second_grey" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:layout_below="@+id/vpBanner"
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:layout_marginTop="8dp"
+                    app:ci_drawable="@drawable/icon_2_0_0_indicator"
+                    app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:background="@drawable/click_2_0_0_circle_grey_hint"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="-12dp"
+                android:layout_gravity="right"
+                android:translationZ="@dimen/ppb200_translationZ_user"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginBottom="-25dp"/>
+
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -44,7 +74,7 @@
                     style="@style/ppb200_title_first"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
-                    android:text="1231231" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/tvAll"

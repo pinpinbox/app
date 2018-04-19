@@ -296,7 +296,7 @@
     <string name="pinpinbox_2_0_0_toast_message_exchange_success">Exchange success</string>
     <string name="pinpinbox_2_0_0_toast_message_tag_can_not_tag_yourself">You can\'t tag yourself</string>
     <string name="pinpinbox_2_0_0_toast_message_tag_has_been_tagged">Has been tagged</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_video_error">Video play is abnormal</string>
 
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
@@ -363,6 +363,7 @@
     <string name="pinpinbox_2_0_0_itemtype_phone">Phone</string>
     <string name="pinpinbox_2_0_0_itemtype_address">Address</string>
     <string name="pinpinbox_2_0_0_itemtype_exchange_list">Exchange List</string>
+    <string name="pinpinbox_2_0_0_itemtype_autoplay_cga_banner_video">Autoplay video (banner)</string>
 
 
     <string name="pinpinbox_2_0_0_title_editprofile">Edit Profile</string>
@@ -556,6 +557,8 @@
     <string name="pinpinbox_2_0_0_other_text_not_yet_begun">Not yet begun</string>
     <string name="pinpinbox_2_0_0_other_text_no_time_limit">No time limit</string>
     <string name="pinpinbox_2_0_0_other_text_time_limit">Time limit</string>
+    <string name="pinpinbox_2_0_0_other_text_set_video_autoplay">Set video autoplay</string>
+
 
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>

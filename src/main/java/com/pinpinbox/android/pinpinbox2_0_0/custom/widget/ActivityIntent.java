@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettings2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
@@ -152,6 +153,16 @@ public class ActivityIntent {
                 new Intent(currentActivity, VideoPlayActivity.class).putExtras(bundle)
         );
         ActivityAnim.StartAnim(currentActivity);
+
+    }
+
+    public static void toSettings(Activity currentActivity){
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, AppSettings2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
 
     }
 

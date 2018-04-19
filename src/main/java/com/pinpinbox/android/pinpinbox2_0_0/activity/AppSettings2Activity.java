@@ -32,10 +32,11 @@ public class AppSettings2Activity extends DraggerActivity implements View.OnClic
 
     private Activity mActivity;
 
-    private TextView tvCleanCache, tvAudioSound, tvNorm, tvAboutUs, tvLogout;
-    private ImageView audioSoundImg, backImg;
+    private TextView tvCleanCache, tvAudioSound, tvCategoryVideoAutoplay, tvNorm, tvAboutUs, tvLogout;
+    private ImageView audioSoundImg, categoryVideoAutoplayImg, backImg;
 
     private boolean soundEnable = true;
+    private boolean videoAutoplayEnable = true;
 
 
     @Override
@@ -48,6 +49,8 @@ public class AppSettings2Activity extends DraggerActivity implements View.OnClic
 
         checkAutoPlayAudioType();
 
+        checkAutoPlayVideoType();
+
     }
 
     private void init() {
@@ -55,19 +58,23 @@ public class AppSettings2Activity extends DraggerActivity implements View.OnClic
         mActivity = this;
 
         soundEnable = PPBApplication.getInstance().getData().getBoolean(Key.soundEnable, true);
+        videoAutoplayEnable = PPBApplication.getInstance().getData().getBoolean(Key.videoAutoplayEnable, true);
 
         tvCleanCache = (TextView) findViewById(R.id.tvCleanCache);
         tvAudioSound = (TextView) findViewById(R.id.tvAudioSound);
+        tvCategoryVideoAutoplay = (TextView) findViewById(R.id.tvCategoryVideoAutoplay);;
         tvNorm = (TextView) findViewById(R.id.tvNorm);
         tvAboutUs = (TextView) findViewById(R.id.tvAboutUs);
         tvLogout = (TextView) findViewById(R.id.tvLogout);
 
         audioSoundImg = (ImageView) findViewById(R.id.audioSoundImg);
+        categoryVideoAutoplayImg = (ImageView) findViewById(R.id.categoryVideoAutoplayImg);
         backImg = (ImageView) findViewById(R.id.backImg);
 
 
         tvCleanCache.setOnClickListener(this);
         tvAudioSound.setOnClickListener(this);
+        tvCategoryVideoAutoplay.setOnClickListener(this);
         tvNorm.setOnClickListener(this);
         tvAboutUs.setOnClickListener(this);
         tvLogout.setOnClickListener(this);
@@ -79,6 +86,7 @@ public class AppSettings2Activity extends DraggerActivity implements View.OnClic
         TextUtility.setBold(tvLogout, true);
         TextUtility.setBold(tvCleanCache, true);
         TextUtility.setBold(tvAudioSound, true);
+        TextUtility.setBold(tvCategoryVideoAutoplay, true);
         TextUtility.setBold(tvNorm, true);
         TextUtility.setBold(tvAboutUs, true);
 
@@ -154,6 +162,35 @@ public class AppSettings2Activity extends DraggerActivity implements View.OnClic
     }
 
 
+    private void checkAutoPlayVideoType(){
+
+        if (videoAutoplayEnable) {
+            categoryVideoAutoplayImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+        } else {
+            categoryVideoAutoplayImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+        }
+
+    }
+
+    private void changeAutoPlayVideoType(){
+
+        if (videoAutoplayEnable) {
+
+            videoAutoplayEnable = false;
+
+            categoryVideoAutoplayImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+        } else {
+
+            videoAutoplayEnable = true;
+
+            categoryVideoAutoplayImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+        }
+
+        PPBApplication.getInstance().getData().edit().putBoolean(Key.videoAutoplayEnable, videoAutoplayEnable).commit();
+
+    }
+
+
     private void back() {
 
         finish();
@@ -183,6 +220,12 @@ public class AppSettings2Activity extends DraggerActivity implements View.OnClic
 
                 changeAutoPlayAudioType();
 
+
+                break;
+
+            case R.id.tvCategoryVideoAutoplay:
+
+                changeAutoPlayVideoType();
 
                 break;
 

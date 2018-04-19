@@ -804,7 +804,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                                 @Override
                                 public void run() {
                                     if (isNewCreate) {
-                                        SnackManager.showCustomSnack();
+                                        SnackManager.showCollecttionSnack();
                                     }
                                     back();
                                 }

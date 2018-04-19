@@ -95,6 +95,42 @@
                 android:background="@color/pinpinbox_2_0_0_divider" />
 
 
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvCategoryVideoAutoplay"
+                    style="@style/ppb200_pop_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ppb200_item_height"
+                    android:background="@drawable/click_2_0_0_list_item_white_alpha"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                    android:text="@string/pinpinbox_2_0_0_itemtype_autoplay_cga_banner_video" />
+
+                <ImageView
+                    android:id="@+id/categoryVideoAutoplayImg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/pinpinbox_2_0_0_divider" />
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"

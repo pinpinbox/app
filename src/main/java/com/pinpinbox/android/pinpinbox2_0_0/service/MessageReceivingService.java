@@ -324,7 +324,7 @@ public class MessageReceivingService extends Service {
 
                     String actName = activityList.get(i).getClass().getSimpleName();
 
-                    if (actName.equals("Main2Activity")) {
+                    if (actName.equals(Main2Activity.class.getSimpleName())) {
                         mActivity = activityList.get(i);
                         break;
                     }

@@ -46,5 +46,7 @@ public class TaskKeyClass {
 
     public static String first_zoom_banner = "first_zoom_banner";
 
+    public static String first_to_set_video_autoplay = "first_to_set_video_autoplay";
+
 
 }

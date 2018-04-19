@@ -1751,15 +1751,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void back() {
 
         if (isNewCreate) {
-//            Intent intent = new Intent(mActivity, MyCollect2Activity.class);
-//            startActivity(intent);
-//            finish();
-//            ActivityAnim.StartAnim(mActivity);
 
-
-
-//            SnackManager.showCollectionSnack();
-            SnackManager.showCustomSnack();
+            SnackManager.showCollecttionSnack();
 
             finish();
             ActivityAnim.FinishAnim(mActivity);
