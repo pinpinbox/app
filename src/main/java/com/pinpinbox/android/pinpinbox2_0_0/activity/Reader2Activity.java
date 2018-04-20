@@ -23,6 +23,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -34,6 +35,7 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.listener.VideoControlsButtonListener;
@@ -168,7 +170,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private RelativeLayout rActionBar, rBottom, rPhoto;
     private ControllableViewPager vpReader;
     private RecyclerView rvReader;
-    private LinearLayout linDescription;
+    private LinearLayout linDescription, linLink;
     private TextView tvPageDescription, tvPage, tvCurrentPoint;
     private EditText edPoint;
     private ImageView backImg, autoplayImg, voiceImg, locationImg, messageImg, likeImg, moreImg;
@@ -340,6 +342,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         vpReader = (ControllableViewPager) findViewById(R.id.vpReader);
         rvReader = (RecyclerView) findViewById(R.id.rvReader);
         linDescription = (LinearLayout) findViewById(R.id.linDescription);
+        linLink = (LinearLayout)findViewById(R.id.linLink);
+        tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
         tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
         tvPage = (TextView) findViewById(R.id.tvPage);
         backImg = (ImageView) findViewById(R.id.backImg);
@@ -579,6 +583,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                 setPage(position);
                 setPageDetail(position);
+                setPageLink(position);
                 setPageDescription(position);
                 setPageLocation(position);
                 setPhotoMode(position);
@@ -2038,7 +2043,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         LinkText.set(mActivity, tvPageDescription, LinkText.inReaderDefaultColor, LinkText.inReaderHighLight, strDescription);
 
-//        tvPageDescription.setText(strDescription);
         if (strDescription.equals("")) {
             linDescription.setVisibility(View.GONE);
         } else {
@@ -2278,6 +2282,67 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             }
         }
     }
+
+
+    private void setPageLink(int position){
+
+        linLink.removeAllViews();
+
+        String link = photoContentsList.get(position).getHyperlink();
+
+        if(link!=null && !link.equals("null") && !link.equals("")){
+
+            linLink.setVisibility(View.VISIBLE);
+
+            try{
+
+                JSONArray linkArray = new JSONArray(link);
+
+                for (int i = 0; i < linkArray.length(); i++) {
+
+                    JSONObject jsonLink = (JSONObject)linkArray.get(i);
+
+                    final String text = JsonUtility.GetString(jsonLink, ProtocolKey.text);
+                    final String url = JsonUtility.GetString(jsonLink, ProtocolKey.url);
+
+                    TextView tvLink = (TextView)LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
+
+                    tvLink.setText(text);
+                    tvLink.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ActivityIntent.toWeb(mActivity, url, text);
+                        }
+                    });
+
+                    linLink.addView(tvLink);
+                    ViewControl.setMargins(tvLink, SizeUtils.dp2px(8),0,0,0);
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+
+
+        }else {
+
+            linLink.setVisibility(View.GONE);
+
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+
 
     private void setLocationOnMap(final String location, final GoogleMap map) {
 
@@ -2983,6 +3048,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                                 itemPhoto.setSelect(false);
 
+                                itemPhoto.setHyperlink(JsonUtility.GetString(obj, ProtocolKey.hyperlink));
+
                                 photoContentsList.add(itemPhoto);
                             }
 
@@ -3066,6 +3133,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                         setPage(0);
                         setPageDetail(0);
+                        setPageLink(0);
                         setPageDescription(0);
                         setPageLocation(0);
                         setPhotoMode(0);

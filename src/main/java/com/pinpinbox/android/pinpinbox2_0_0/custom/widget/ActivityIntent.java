@@ -16,6 +16,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 
 /**
  * Created by vmage on 2018/2/21.
@@ -166,5 +167,17 @@ public class ActivityIntent {
 
     }
 
+    public static void toWeb(Activity currentActivity, String url, String title){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.url, url);
+        bundle.putString(Key.title, title);
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, WebView2Activity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
 
 }

@@ -39,10 +39,19 @@ public class ItemPhoto {
 
 
     /*連結類*/
-//    private String hyperlink_icon; //圖示
-//    private String hyperlink_text; //說明
-//    private String hyperlink_url; //連結
+    private String hyperlink;
+    private String hyperlink_icon; //圖示
+    private String hyperlink_text; //說明
+    private String hyperlink_url; //連結
 
+
+    public String getHyperlink() {
+        return hyperlink;
+    }
+
+    public void setHyperlink(String hyperlink) {
+        this.hyperlink = hyperlink;
+    }
 
     public VideoView getVideoView() {
         return videoView;

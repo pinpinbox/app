@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvLinkA"
+    fontPath="fonts/OpenSans-Bold.ttf"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+    android:background="@drawable/click_2_0_0_circle_main_first"
+    android:gravity="center"
+    android:letterSpacing="0.1"
+    android:paddingBottom="@dimen/ppb200_padding_margin_third"
+    android:paddingLeft="@dimen/ppb200_padding_margin_first"
+    android:paddingRight="@dimen/ppb200_padding_margin_first"
+    android:paddingTop="@dimen/ppb200_padding_margin_third"
+    android:text=""
+    android:textColor="@color/white"
+    android:textSize="@dimen/ppb200_common_text_third"
+    android:textStyle="bold" />

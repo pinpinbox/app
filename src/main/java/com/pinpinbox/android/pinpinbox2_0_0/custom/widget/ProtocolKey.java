@@ -100,6 +100,7 @@ public class ProtocolKey {
     public static String hobby_id = "hobby_id";
     public static String has_voted = "has_voted";
     public static String has_gained = "has_gained";
+    public static String hyperlink = "hyperlink";
 
 
     //i

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
     <!--bottom-->
     <RelativeLayout
         android:id="@+id/rBottom"
@@ -32,34 +33,58 @@
 
             <!--1/5高度-->
             <com.pinpinbox.android.Views.ControlSizeScrollView
+                android:id="@+id/svDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
                 android:layout_marginTop="16dp"
-                android:scrollbars="none"
-                android:id="@+id/svDescription">
+                android:clipToPadding="false"
+                android:scrollbars="none">
 
-                <TextView
-                    android:id="@+id/tvPageDescription"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
-                    android:gravity="left"
-                    android:letterSpacing="0.1"
-                    android:lineSpacingExtra="2dp"
-                    android:padding="4dp"
-                    android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/ppb200_common_text_third"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPageDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_big"
+                        android:gravity="left"
+                        android:letterSpacing="0.1"
+                        android:lineSpacingExtra="2dp"
+                        android:paddingBottom="@dimen/ppb200_padding_margin_third"
+                        android:paddingTop="@dimen/ppb200_padding_margin_third"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_third" />
+
+
+                    <LinearLayout
+                        android:id="@+id/linLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-8dp"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="@dimen/ppb200_padding_margin_big"
+                        android:orientation="horizontal">
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
 
             </com.pinpinbox.android.Views.ControlSizeScrollView>
 
 
         </LinearLayout>
 
-        <!--bottom gallery-->
+
         <RelativeLayout
             android:id="@+id/rPhoto"
             android:layout_width="match_parent"

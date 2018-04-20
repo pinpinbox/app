@@ -59,7 +59,8 @@
                 android:layout_gravity="right"
                 android:translationZ="@dimen/ppb200_translationZ_user"
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:layout_marginBottom="-25dp"/>
+                android:layout_marginBottom="-25dp"
+                android:visibility="invisible"/>
 
 
 
