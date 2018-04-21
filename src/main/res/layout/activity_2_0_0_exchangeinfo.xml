@@ -96,7 +96,7 @@
                 android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_itemtype_real_name"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_first" />
+                android:textSize="@dimen/ppb200_title_third_size" />
 
             <EditText
                 android:id="@+id/edName"
@@ -118,7 +118,7 @@
                     android:letterSpacing="0.1"
                     android:text="@string/pinpinbox_2_0_0_itemtype_phone"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_common_text_first" />
+                    android:textSize="@dimen/ppb200_title_third_size" />
 
                 <TextView
                     android:id="@+id/tvRegisterPhone"
@@ -153,7 +153,7 @@
                 android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_itemtype_address"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_first" />
+                android:textSize="@dimen/ppb200_title_third_size" />
 
             <EditText
                 android:id="@+id/edAddress"
@@ -176,7 +176,6 @@
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
             android:padding="16dp"
             android:src="@drawable/ic200_cancel_dark" />
 

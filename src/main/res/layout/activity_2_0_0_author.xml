@@ -74,9 +74,7 @@
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_arrow_left_dark" />
+            android:layout_alignParentBottom="true"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -89,26 +87,20 @@
 
 
             <ImageView
+                style="@style/ppb200_action_bar_icon"
                 android:id="@+id/messageImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
                 android:padding="10dp"
                 android:src="@drawable/ic200_message_dark" />
 
             <ImageView
                 android:id="@+id/aboutImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
+                style="@style/ppb200_action_bar_icon"
                 android:padding="12dp"
                 android:src="@drawable/ic200_user_about_dark" />
 
             <ImageView
                 android:id="@+id/shareImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
+                style="@style/ppb200_action_bar_icon"
                 android:padding="12dp"
                 android:src="@drawable/ic200_share_dark" />
 
@@ -118,28 +110,20 @@
 
         <TextView
             android:id="@+id/tvAttention"
-            fontPath="fonts/OpenSans-Bold.ttf"
+            style="@style/ppb200_Button_main_small_radius"
             android:layout_width="112dp"
-            android:layout_height="36dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="6dp"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius"
-            android:gravity="center"
-            android:letterSpacing="0.1"
-            android:textSize="@dimen/ppb200_common_text_second" />
+            />
 
 
         <View
             android:id="@+id/vRefreshAnim"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
+            style="@style/ppb200_refresh_anim_default"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/gradient_progress_main"
-            android:scaleX="0"
-            android:visibility="gone" />
+            android:layout_centerHorizontal="true" />
 
         <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
             android:id="@+id/pbRefresh"

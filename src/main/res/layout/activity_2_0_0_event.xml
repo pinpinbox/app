@@ -53,7 +53,7 @@
                         android:paddingRight="@dimen/ppb200_padding_margin_first"
                         android:text="@string/pinpinbox_2_0_0_button_eventexchange"
                         android:textColor="@color/white"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
 
                     <TextView

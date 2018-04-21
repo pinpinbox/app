@@ -101,6 +101,7 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
 
         TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
         TextUtility.setBold((TextView) findViewById(R.id.tv1), true);
+        TextUtility.setBold((TextView) findViewById(R.id.tvSendPhone), true);
         TextUtility.setBold(tvDone, true);
 
         tvCountry.setOnClickListener(this);

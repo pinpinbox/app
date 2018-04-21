@@ -7,8 +7,7 @@
     android:background="@color/white"
     android:fitsSystemWindows="false">
 
-    <RelativeLayout
-        style="@style/ppb200_action_bar_with_status">
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,9 +19,7 @@
             <ImageView
                 android:id="@+id/backImg"
                 style="@style/ppb200_ic_action_back"
-                android:layout_centerVertical="true"
-                android:background="@drawable/click_2_0_0_default"
-                android:src="@drawable/ic200_arrow_left_dark" />
+                android:layout_centerVertical="true" />
 
 
             <LinearLayout
@@ -35,27 +32,21 @@
 
                 <ImageView
                     android:id="@+id/refreshImg"
-                    android:layout_width="@dimen/ppb200_common_icon_side"
-                    android:layout_height="@dimen/ppb200_common_icon_side"
-                    android:background="@drawable/click_2_0_0_default"
+                    style="@style/ppb200_action_bar_icon"
                     android:padding="12dp"
                     android:src="@drawable/ic200_refresh_dark" />
 
                 <ImageView
                     android:id="@+id/addUserImg"
-                    android:layout_width="@dimen/ppb200_common_icon_side"
-                    android:layout_height="@dimen/ppb200_common_icon_side"
-                    android:background="@drawable/click_2_0_0_default"
+                    style="@style/ppb200_action_bar_icon"
                     android:padding="10dp"
                     android:src="@drawable/ic200_cooperation_dark" />
 
 
                 <ImageView
                     android:id="@+id/albumSetImg"
-                    android:layout_width="@dimen/ppb200_common_icon_side"
-                    android:layout_height="@dimen/ppb200_common_icon_side"
+                    style="@style/ppb200_action_bar_icon"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/click_2_0_0_default"
                     android:padding="10dp"
                     android:src="@drawable/ic200_setting_dark" />
 
@@ -90,8 +81,8 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/tvAddDescription"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
-            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:layout_toLeftOf="@+id/rPhotoSettingBar"
             android:layout_toStartOf="@+id/rPhotoSettingBar"
@@ -199,46 +190,20 @@
                 android:visibility="gone" />
 
 
-
-
         </RelativeLayout>
 
-        <!--<com.skyfishjy.library.RippleBackground-->
-            <!--android:id="@+id/rippleRecording"-->
-            <!--android:layout_width="200dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--app:rb_color="#fd7bab"-->
-            <!--app:rb_duration="3000"-->
-            <!--app:rb_radius="24dp"-->
-            <!--app:rb_rippleAmount="6"-->
-            <!--app:rb_scale="4" />-->
 
-        <!--<com.skyfishjy.library.RippleBackground-->
-            <!--android:id="@+id/ripplePlay"-->
-            <!--android:layout_width="200dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--app:rb_color="#00BDC0"-->
-            <!--app:rb_duration="3000"-->
-            <!--app:rb_radius="24dp"-->
-            <!--app:rb_rippleAmount="6"-->
-            <!--app:rb_scale="4" />-->
-
-
-        <!--photo set  bar-->
+        <!--photo set bar-->
         <RelativeLayout
             android:id="@+id/rPhotoSettingBar"
             android:layout_width="36dp"
             android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/rControlArea"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-            android:visibility="invisible"
-            android:layout_alignBottom="@+id/rControlArea"
             android:clipChildren="false"
-            >
+            android:visibility="invisible">
 
             <LinearLayout
                 android:id="@+id/lin"
@@ -267,8 +232,8 @@
                 android:layout_alignStart="@+id/lin"
                 android:layout_below="@+id/lin"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-                android:orientation="vertical"
-                android:clipChildren="false">
+                android:clipChildren="false"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/rAudioRecording"
@@ -297,24 +262,23 @@
                         android:src="@drawable/ic200_micro_white" />
 
 
-
                 </RelativeLayout>
 
                 <!--<ImageView-->
-                    <!--android:id="@+id/audioRecording"-->
-                    <!--android:layout_width="36dp"-->
-                    <!--android:layout_height="36dp"-->
-                    <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
-                    <!--android:padding="6dp"-->
-                    <!--android:src="@drawable/ic200_micro_white"-->
-                    <!--android:visibility="gone" />-->
+                <!--android:id="@+id/audioRecording"-->
+                <!--android:layout_width="36dp"-->
+                <!--android:layout_height="36dp"-->
+                <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
+                <!--android:padding="6dp"-->
+                <!--android:src="@drawable/ic200_micro_white"-->
+                <!--android:visibility="gone" />-->
 
                 <RelativeLayout
                     android:id="@+id/rPlay_Delete"
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:clipChildren="false">
+                    android:clipChildren="false"
+                    android:visibility="gone">
 
                     <View
                         android:layout_width="36dp"
@@ -355,12 +319,12 @@
                     </RelativeLayout>
 
                     <!--<ImageView-->
-                        <!--android:id="@+id/audioPlay"-->
-                        <!--android:layout_width="36dp"-->
-                        <!--android:layout_height="36dp"-->
-                        <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
-                        <!--android:padding="8dp"-->
-                        <!--android:src="@drawable/ic200_audio_play_white" />-->
+                    <!--android:id="@+id/audioPlay"-->
+                    <!--android:layout_width="36dp"-->
+                    <!--android:layout_height="36dp"-->
+                    <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:src="@drawable/ic200_audio_play_white" />-->
 
                     <ImageView
                         android:id="@+id/audioDeleteImg"
@@ -446,14 +410,14 @@
             android:id="@+id/tvAddDescription"
             style="@style/ppb200_Button_grey_small_radius"
             android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-            android:text="@string/pinpinbox_2_0_0_button_add_description"
-            android:visibility="visible"
             android:background="@drawable/click_2_0_0_grey_hint_button_radius"
+            android:text="@string/pinpinbox_2_0_0_button_add_description"
             android:textColor="@color/white"
-            android:layout_alignParentBottom="true"/>
+            android:visibility="visible" />
 
     </RelativeLayout>
 
