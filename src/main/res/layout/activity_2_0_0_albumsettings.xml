@@ -240,14 +240,10 @@
                 <!--地點-->
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ppb200_title_third"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                    android:letterSpacing="0.1"
-                    android:text="@string/pinpinbox_2_0_0_itemtype_album_location"
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_common_text_first" />
+                    android:text="@string/pinpinbox_2_0_0_itemtype_album_location" />
 
                 <EditText
                     android:id="@+id/edLocation"
@@ -264,14 +260,10 @@
                 <!--天氣-->
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ppb200_title_third"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                    android:letterSpacing="0.1"
-                    android:text="@string/pinpinbox_2_0_0_itemtype_album_weather"
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_common_text_first" />
+                    android:text="@string/pinpinbox_2_0_0_itemtype_album_weather"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvWeather"
@@ -284,14 +276,10 @@
                 <!--心情-->
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/ppb200_title_third"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                    android:letterSpacing="0.1"
-                    android:text="@string/pinpinbox_2_0_0_itemtype_album_mood"
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_common_text_first" />
+                    android:text="@string/pinpinbox_2_0_0_itemtype_album_mood" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvMood"
@@ -574,11 +562,8 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color"
-        android:orientation="horizontal">
+        android:id="@+id/rBottom"
+        style="@style/ppb200_bottom_bar">
 
 
         <TextView

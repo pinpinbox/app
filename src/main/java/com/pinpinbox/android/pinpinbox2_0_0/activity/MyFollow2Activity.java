@@ -17,6 +17,10 @@ import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
@@ -165,14 +169,16 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
         pbLoadMore = (SmoothProgressBar) findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
 
-        viewHeader = LayoutInflater.from(this).inflate(R.layout.header_2_0_0_refresh_with_title, null);
+        viewHeader = LayoutInflater.from(this).inflate(R.layout.header_2_0_0_title, null);
 
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvTitle), true);
+        TextView tvTitle = (TextView) viewHeader.findViewById(R.id.tvTitle);
+
+        TextUtility.setBold(tvTitle, true);
+        tvTitle.setText(R.string.pinpinbox_2_0_0_title_myfollow);
+
 
         backImg.setOnClickListener(this);
 
-        rvFollow.setItemAnimator(new DefaultItemAnimator());
-        rvFollow.addOnScrollListener(mOnScrollListener);
 
         //20171002
         SmoothProgressBar pbRefresh = (SmoothProgressBar) findViewById(R.id.pbRefresh);
@@ -212,17 +218,27 @@ public class MyFollow2Activity extends DraggerActivity implements View.OnClickLi
 
         ExStaggeredGridLayoutManager manager = null;
 
+        int deviceType = 0;
+
         if (SystemUtility.isTablet(getApplicationContext())) {
 
             //平版
             manager = new ExStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+            deviceType = SystemType.TABLE;
 
         } else {
 
             //手機
             manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            deviceType = SystemType.PHONE;
 
         }
+
+        rvFollow.addItemDecoration(new SpacesItemDecoration(16, deviceType, true));
+        rvFollow.setItemAnimator(new DefaultItemAnimator());
+        rvFollow.addOnScrollListener(mOnScrollListener);
+
+
 
         manager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) rvFollow.getAdapter(), manager.getSpanCount()));
         rvFollow.setLayoutManager(manager);

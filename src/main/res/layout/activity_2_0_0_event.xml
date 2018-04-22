@@ -123,10 +123,7 @@
 
     <RelativeLayout
         android:id="@+id/rBottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+        style="@style/ppb200_bottom_bar">
 
 
         <TextView
@@ -188,27 +185,6 @@
     </RelativeLayout>
 
 
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/action_bar_with_status_height"-->
-    <!--android:background="@drawable/gradient_black_alpha_up_to_down"-->
-    <!--android:layout_marginTop="24dp"/>-->
 
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/rActionBar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/action_bar_with_status_height">-->
-    <!---->
-    <!---->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/backImg"-->
-    <!--style="@style/ppb200_ic_action_back"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:background="@drawable/click_2_0_0_default"-->
-    <!--android:src="@drawable/ic200_arrow_left_white" />-->
-
-
-    <!--</RelativeLayout>-->
 
 </RelativeLayout>

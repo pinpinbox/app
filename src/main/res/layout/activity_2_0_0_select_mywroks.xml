@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:fitsSystemWindows="false">
 
@@ -11,20 +11,18 @@
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
         android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+        android:clipToPadding="false"
+        android:columnWidth="114dp"
         android:listSelector="@android:color/transparent"
         android:numColumns="auto_fit"
-        android:paddingTop="84dp"
         android:paddingBottom="72dp"
+        android:paddingTop="84dp"
         android:scrollbars="none"
-        android:columnWidth="114dp"
-        tools:listitem="@layout/list_item_2_0_0_contribute"
-         />
+        tools:listitem="@layout/list_item_2_0_0_contribute" />
 
-    <RelativeLayout
-        style="@style/ppb200_action_bar_with_status">
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,9 +33,7 @@
             <ImageView
                 android:id="@+id/backImg"
                 style="@style/ppb200_ic_action_back"
-                android:layout_centerVertical="true"
-                android:background="@drawable/click_2_0_0_default"
-                android:src="@drawable/ic200_arrow_left_dark" />
+                android:layout_centerVertical="true" />
 
 
             <LinearLayout
@@ -49,24 +45,22 @@
 
                 <TextView
                     android:id="@+id/tvTitle"
+                    style="@style/ppb200_title_in_actionbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/pinpinbox_2_0_0_itemtype_select_exist_album"
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_common_text_second"
-                    android:letterSpacing="0.1"
-                    fontPath="fonts/OpenSans-Bold.ttf"/>
+                    android:textSize="@dimen/ppb200_common_text_second" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:gravity="center"
+                    android:letterSpacing="0.1"
                     android:text="@string/pinpinbox_2_0_0_other_text_only_open_albums"
                     android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                    android:textSize="12sp"
-                    android:letterSpacing="0.1"/>
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -75,22 +69,18 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rBottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+        style="@style/ppb200_bottom_bar"
+        android:id="@+id/rBottom">
 
 
         <TextView
             android:id="@+id/tvCreate"
             style="@style/ppb200_Button_main_common_radius"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="@string/pinpinbox_2_0_0_button_create_new_album" />
-
 
 
     </RelativeLayout>

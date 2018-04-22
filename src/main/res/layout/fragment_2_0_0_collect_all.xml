@@ -22,18 +22,14 @@
 
     </com.pinpinbox.android.Views.SuperSwipeRefreshLayout>
 
-
-
-
     <View
         android:id="@+id/vRefreshAnim"
+        style="@style/ppb200_refresh_anim_default"
         android:layout_centerHorizontal="true"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
         android:layout_marginTop="@dimen/ppb200_action_bar_height_with_status"
-        android:background="@drawable/gradient_progress_main"
-        android:scaleX="0"
-        android:visibility="gone"/>
+        />
+
+
 
     <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
         android:id="@+id/pbRefresh"

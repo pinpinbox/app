@@ -48,10 +48,10 @@
             android:textSize="18sp" />
 
         <TextView
-            style="@style/ppb200_Button_main_common_radius"
             android:id="@+id/tvConfirm"
+            style="@style/ppb200_Button_main_common_radius"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-            android:text="@string/pinpinbox_2_0_0_button_ok"/>
+            android:text="@string/pinpinbox_2_0_0_button_ok" />
 
 
     </LinearLayout>
@@ -61,52 +61,28 @@
         android:id="@+id/rvFacebookFriends"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alpha="0"
         android:clipToPadding="false"
         android:paddingBottom="96dp"
-        android:alpha="0"
         android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvGuide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ppb200_guide_no_data"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="96dp"
-        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
-        android:layout_marginRight="@dimen/ppb200_padding_margin_big"
         android:alpha="0"
-        android:background="@drawable/border_2_0_0_bg_guide"
-        android:letterSpacing="0.1"
-        android:lineSpacingExtra="4dp"
-        android:paddingBottom="@dimen/ppb200_padding_margin_big"
-        android:paddingLeft="@dimen/ppb200_padding_margin_big"
-        android:paddingRight="@dimen/ppb200_padding_margin_big"
-        android:paddingTop="@dimen/ppb200_padding_margin_big"
-        android:text="@string/pinpinbox_2_0_0_guide_no_friend_use_pinpinbox"
-        android:textColor="@color/white"
-        android:textSize="@dimen/ppb200_guide"
-        android:visibility="gone" />
+        android:text="@string/pinpinbox_2_0_0_guide_no_friend_use_pinpinbox" />
 
     <RelativeLayout
         android:id="@+id/rBottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_alignParentBottom="true">
+        style="@style/ppb200_bottom_bar">
 
         <TextView
             android:id="@+id/tvBottom"
-            android:layout_width="@dimen/ppb200_common_button_width"
-            android:layout_height="@dimen/ppb200_common_button_height"
+            style="@style/ppb200_Button_grey_common_radius"
             android:layout_centerInParent="true"
-            android:background="@drawable/click_2_0_0_grey_third_radius_big"
-            android:gravity="center"
-            android:letterSpacing="0.1"
-            android:text="@string/pinpinbox_2_0_0_button_skip"
-            android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_buttontext_for_height48"
-            android:textStyle="bold"
-            fontPath="fonts/OpenSans-Bold.ttf"/>
+            android:text="@string/pinpinbox_2_0_0_button_skip" />
 
 
     </RelativeLayout>

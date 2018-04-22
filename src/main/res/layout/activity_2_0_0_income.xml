@@ -22,7 +22,6 @@
     <TextView
         android:id="@+id/tvTitle"
         style="@style/ppb200_title_first"
-        android:layout_marginLeft="12dp"
         android:layout_marginTop="@dimen/ppb200_title_margin_second"
         android:text="@string/pinpinbox_2_0_0_title_Income_statistic" />
 
@@ -62,16 +61,11 @@
                 android:background="@drawable/border_2_0_0_grey_third_radius" />
 
             <TextView
+                style="@style/ppb200_title_third"
                 android:id="@+id/tvAccumulation"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:layout_toRightOf="@+id/vLineAccumulation"
-                android:letterSpacing="0.1"
-                android:text="@string/pinpinbox_2_0_0_itemtype_accumulation_income"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_first" />
+                android:text="@string/pinpinbox_2_0_0_itemtype_accumulation_income" />
 
 
             <TextView
@@ -122,19 +116,14 @@
                 android:background="@drawable/border_2_0_0_grey_third_radius" />
 
             <TextView
+                style="@style/ppb200_title_third"
                 android:id="@+id/tvUnsettlement"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="7dp"
                 android:layout_marginStart="7dp"
                 android:layout_toEndOf="@+id/vLineUnsettlement"
                 android:layout_toRightOf="@+id/vLineUnsettlement"
-                android:letterSpacing="0.1"
-                android:text="@string/pinpinbox_2_0_0_itemtype_month_income"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_first" />
+                android:text="@string/pinpinbox_2_0_0_itemtype_month_income"/>
 
 
             <TextView
@@ -185,16 +174,11 @@
                 android:background="@drawable/border_2_0_0_grey_third_radius" />
 
             <TextView
+                style="@style/ppb200_title_third"
                 android:id="@+id/tvWithdraw"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:layout_toRightOf="@+id/vLineWithdraw"
-                android:letterSpacing="0.1"
-                android:text="@string/pinpinbox_2_0_0_itemtype_redeem"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_first" />
+                android:text="@string/pinpinbox_2_0_0_itemtype_redeem" />
 
 
             <TextView
@@ -225,9 +209,7 @@
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_arrow_left_dark" />
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

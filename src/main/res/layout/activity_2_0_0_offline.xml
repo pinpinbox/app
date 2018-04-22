@@ -20,8 +20,7 @@
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_arrow_left_dark" />
+             />
 
 
         <TextView
@@ -44,20 +43,6 @@
 
     </RelativeLayout>
 
-
-    <!--<GridView-->
-    <!--android:id="@+id/gridView"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_below="@+id/rActionBar"-->
-    <!--android:horizontalSpacing="2dp"-->
-    <!--android:listSelector="@android:color/transparent"-->
-    <!--android:numColumns="2"-->
-    <!--android:scrollbars="none"-->
-    <!--android:verticalSpacing="2dp" />-->
-
-
-    <!--</RelativeLayout>-->
 
 
 </RelativeLayout>

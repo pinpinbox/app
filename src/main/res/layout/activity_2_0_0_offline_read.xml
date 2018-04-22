@@ -6,8 +6,6 @@
     android:background="@color/black">
 
 
-
-
     <com.pinpinbox.android.Views.ControllableViewPager
         android:id="@+id/readViewPager"
         android:layout_height="fill_parent"
@@ -25,7 +23,6 @@
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
             android:src="@drawable/ic200_arrow_left_white" />
 
         <ImageView

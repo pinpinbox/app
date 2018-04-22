@@ -202,10 +202,7 @@
 
     <RelativeLayout
         android:id="@+id/rBottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color">
+        style="@style/ppb200_bottom_bar">
 
 
         <TextView

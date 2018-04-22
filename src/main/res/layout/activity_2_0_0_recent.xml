@@ -18,9 +18,7 @@
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_arrow_left_dark" />
+            android:layout_alignParentBottom="true" />
 
 
     </RelativeLayout>

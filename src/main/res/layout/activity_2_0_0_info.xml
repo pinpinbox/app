@@ -205,56 +205,11 @@
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first" />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    style="@style/ppb200_divider_list"
                     android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
-                    android:layout_marginTop="18dp"
-                    android:background="@color/pinpinbox_2_0_0_divider" />
+                    android:layout_marginTop="18dp" />
                 <!--16修正為18-->
 
-
-                <!--&lt;!&ndash;作者&ndash;&gt;-->
-                <!--<RelativeLayout-->
-                <!--android:id="@+id/rAuthor"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_second"-->
-                <!--android:layout_marginRight="@dimen/ppb200_padding_margin_second"-->
-                <!--android:background="@drawable/click_2_0_0_default"-->
-                <!--android:minHeight="18dp"-->
-                <!--android:padding="@dimen/ppb200_padding_margin_second">-->
-
-
-                <!--<com.pinpinbox.android.Views.CircleView.RoundCornerImageView-->
-                <!--android:id="@+id/userImg"-->
-                <!--android:layout_width="24dp"-->
-                <!--android:layout_height="24dp"-->
-                <!--android:scaleType="centerCrop"-->
-                <!--app:siBorderColor="@color/pinpinbox_2_0_0_divider"-->
-                <!--app:siBorderWidth="0.5dp"-->
-                <!--app:siRadius="24dp" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvAuthor"-->
-                <!--fontPath="fonts/OpenSans-Bold.ttf"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_toEndOf="@+id/userImg"-->
-                <!--android:layout_toRightOf="@+id/userImg"-->
-                <!--android:ellipsize="end"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:includeFontPadding="false"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:lineSpacingExtra="2dp"-->
-                <!--android:maxLines="2"-->
-                <!--android:minHeight="24dp"-->
-                <!--android:paddingLeft="4dp"-->
-                <!--android:text=""-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-                <!--android:textSize="@dimen/ppb200_common_text_first" />-->
-
-
-                <!--</RelativeLayout>-->
 
 
                 <!--地址-->
@@ -365,11 +320,7 @@
 
     <RelativeLayout
         android:id="@+id/rBottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color"
-        android:visibility="visible">
+        style="@style/ppb200_bottom_bar">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -381,7 +332,6 @@
             <ImageView
                 android:id="@+id/backImg"
                 style="@style/ppb200_ic_action_back"
-                android:background="@drawable/click_2_0_0_default"
                 android:src="@drawable/ic200_arrow_2_down_dark" />
 
             <RelativeLayout

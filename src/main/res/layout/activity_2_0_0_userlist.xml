@@ -30,9 +30,7 @@
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_arrow_left_dark" />
+            android:layout_alignParentBottom="true" />
 
         <TextView
             android:id="@+id/tvActionBarTitle"
@@ -49,13 +47,9 @@
 
         <View
             android:id="@+id/vRefreshAnim"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
+            style="@style/ppb200_refresh_anim_default"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/gradient_progress_main"
-            android:scaleX="0"
-            android:visibility="gone" />
+            android:layout_centerHorizontal="true" />
 
         <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
             android:id="@+id/pbRefresh"

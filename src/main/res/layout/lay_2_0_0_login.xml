@@ -12,9 +12,7 @@
         <TextView
             android:id="@+id/tvLoginTitle"
             style="@style/ppb200_title_first"
-            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-            android:letterSpacing="0.1"
             android:text="pinpinbox" />
 
 
@@ -30,6 +28,7 @@
 
 
             <TextView
+                fontPath="fonts/OpenSans-Bold.ttf"
                 android:id="@+id/tvLoginFacebook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +70,7 @@
 
 
             <TextView
+                fontPath="fonts/OpenSans-Bold.ttf"
                 android:id="@+id/tvLoginToRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

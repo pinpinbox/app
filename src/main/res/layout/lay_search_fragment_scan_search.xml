@@ -21,11 +21,8 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_gravity="bottom"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color"
-        android:visibility="visible">
+        style="@style/ppb200_bottom_bar"
+        android:layout_gravity="bottom">
 
 
         <ImageView

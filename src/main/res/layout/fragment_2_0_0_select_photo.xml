@@ -28,26 +28,20 @@
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            android:src="@drawable/ic200_arrow_left_dark" />
+            android:layout_alignParentBottom="true"/>
 
         <ImageView
+            style="@style/ppb200_action_bar_icon"
             android:id="@+id/cameraImg"
-            android:layout_width="@dimen/ppb200_common_icon_side"
-            android:layout_height="@dimen/ppb200_common_icon_side"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="6dp"
-            android:background="@drawable/click_2_0_0_default"
             android:padding="10dp"
             android:src="@drawable/ic200_camera_dark" />
 
         <ImageView
+            style="@style/ppb200_action_bar_icon"
             android:id="@+id/sizeImg"
-            android:layout_width="@dimen/ppb200_common_icon_side"
-            android:layout_height="@dimen/ppb200_common_icon_side"
-            android:background="@drawable/click_2_0_0_default"
             android:padding="12dp"
             android:src="@drawable/ic200_photosize_light"
             android:layout_alignParentBottom="true"
@@ -58,11 +52,8 @@
     </RelativeLayout>
 
     <RelativeLayout
+        style="@style/ppb200_bottom_bar"
         android:id="@+id/rBottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_bottom_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/pinpinbox_2_0_0_action_bar_color"
         android:gravity="center_vertical"
         android:visibility="visible">
 

@@ -25,17 +25,12 @@
     </com.pinpinbox.android.Views.SuperSwipeRefreshLayout>
 
 
-
-
     <View
         android:id="@+id/vRefreshAnim"
-        android:layout_centerHorizontal="true"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
+        style="@style/ppb200_refresh_anim_default"
         android:layout_marginTop="24dp"
-        android:background="@drawable/gradient_progress_main"
-        android:scaleX="0"
-        android:visibility="gone"/>
+        android:layout_centerHorizontal="true" />
+
 
     <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
         android:id="@+id/pbRefresh"
@@ -78,23 +73,10 @@
         app:spb_stroke_width="4dp" />
 
     <TextView
+        style="@style/ppb200_guide_no_data"
         android:id="@+id/tvGuide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
         android:layout_marginTop="192dp"
-        android:background="@drawable/border_2_0_0_bg_guide"
-        android:paddingBottom="32dp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:paddingTop="32dp"
-        android:letterSpacing="0.1"
-        android:text="@string/pinpinbox_2_0_0_guide_no_notification"
-        android:textColor="@color/white"
-        android:textSize="@dimen/ppb200_guide"
-        android:visibility="gone" />
+        android:text="@string/pinpinbox_2_0_0_guide_no_notification" />
 
 
 </RelativeLayout>

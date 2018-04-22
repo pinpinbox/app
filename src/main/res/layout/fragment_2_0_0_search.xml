@@ -16,21 +16,10 @@
         android:paddingBottom="72dp" />
 
     <TextView
+        style="@style/ppb200_guide_no_data"
         android:id="@+id/tvGuideNoAlbum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
         android:layout_marginTop="408dp"
-        android:background="@drawable/border_2_0_0_bg_guide"
-        android:letterSpacing="0.1"
-        android:lineSpacingExtra="4dp"
-        android:padding="32dp"
-        android:text="@string/pinpinbox_2_0_0_guide_no_match_keyword_album"
-        android:textColor="@color/white"
-        android:textSize="@dimen/ppb200_guide"
-        android:visibility="gone" />
+        android:text="@string/pinpinbox_2_0_0_guide_no_match_keyword_album"/>
 
 
     <LinearLayout

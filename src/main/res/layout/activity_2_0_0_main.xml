@@ -22,7 +22,6 @@
             android:layout_height="match_parent" />
 
         <RelativeLayout
-
             android:id="@+id/rActionBar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -144,29 +143,6 @@
 
                     </RelativeLayout>
 
-
-                    <!--<ImageView-->
-                    <!--android:id="@+id/userImg"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/click_2_0_0_default"-->
-                    <!--android:padding="14dp"-->
-                    <!--android:scaleType="centerInside"-->
-                    <!--android:src="@drawable/ic200_user_light"-->
-                    <!--android:visibility="gone"/>-->
-
-
-                    <!--<ImageView-->
-                    <!--android:id="@+id/notifyImg"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/click_2_0_0_default"-->
-                    <!--android:padding="14dp"-->
-                    <!--android:scaleType="centerInside"-->
-                    <!--android:src="@drawable/ic200_notify_light"-->
-                    <!--android:visibility="visible" />-->
 
                     <RelativeLayout
                         android:id="@+id/rNotify"

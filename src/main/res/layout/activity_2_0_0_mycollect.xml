@@ -1,102 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:fitsSystemWindows="false"
-    android:id="@+id/rBackground">
+    android:fitsSystemWindows="false">
 
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
-    <RelativeLayout
-        style="@style/ppb200_action_bar_with_status">
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
 
 
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
-            android:src="@drawable/ic200_arrow_left_dark"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/click_2_0_0_default"
-            />
+            android:layout_alignParentBottom="true" />
 
 
         <!--<com.ogaclejapan.smarttablayout.SmartTabLayout-->
-            <!--android:id="@+id/viewPagerTab"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="@dimen/action_bar_icon_width"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--app:stl_clickable="true"-->
-            <!--app:stl_indicatorColor="@color/transparent"-->
-            <!--app:stl_indicatorThickness="4dp"-->
-            <!--android:layout_marginRight="8dp"/>-->
+        <!--android:id="@+id/viewPagerTab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/action_bar_icon_width"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--app:stl_clickable="true"-->
+        <!--app:stl_indicatorColor="@color/transparent"-->
+        <!--app:stl_indicatorThickness="4dp"-->
+        <!--android:layout_marginRight="8dp"/>-->
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="@dimen/ppb200_common_icon_side"
-            android:orientation="horizontal"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="@dimen/ppb200_padding_margin_second">
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:orientation="horizontal">
 
 
             <TextView
                 android:id="@+id/tvTabMy"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                style="@style/ppb200_action_bar_tab"
                 android:background="@drawable/click_2_0_0_default"
-                android:gravity="center"
-                android:letterSpacing="0.1"
-                android:paddingLeft="@dimen/ppb200_padding_margin_second"
-                android:paddingRight="@dimen/ppb200_padding_margin_second"
-                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                android:textSize="@dimen/ppb200_common_text_third"
-                android:textStyle="bold"
-                android:text="@string/pinpinbox_2_0_0_itemtype_collect_my"/>
+                android:text="@string/pinpinbox_2_0_0_itemtype_collect_my" />
 
             <TextView
                 android:id="@+id/tvTabOther"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/click_2_0_0_default"
-                android:gravity="center"
-                android:letterSpacing="0.1"
-                android:paddingLeft="@dimen/ppb200_padding_margin_second"
-                android:paddingRight="@dimen/ppb200_padding_margin_second"
-                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                android:textSize="@dimen/ppb200_common_text_third"
-                android:textStyle="bold"
-                android:text="@string/pinpinbox_2_0_0_itemtype_collect_other"/>
+                style="@style/ppb200_action_bar_tab"
+                android:text="@string/pinpinbox_2_0_0_itemtype_collect_other" />
 
             <TextView
                 android:id="@+id/tvTabShare"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/click_2_0_0_default"
-                android:gravity="center"
-                android:letterSpacing="0.1"
-                android:paddingLeft="@dimen/ppb200_padding_margin_second"
-                android:paddingRight="@dimen/ppb200_padding_margin_second"
-                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                android:textSize="@dimen/ppb200_common_text_third"
-                android:textStyle="bold"
-                android:text="@string/pinpinbox_2_0_0_itemtype_collect_cooperation"/>
-
-
+                style="@style/ppb200_action_bar_tab"
+                android:text="@string/pinpinbox_2_0_0_itemtype_collect_cooperation" />
 
 
         </LinearLayout>
-
-
 
 
     </RelativeLayout>
