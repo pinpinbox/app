@@ -20,10 +20,8 @@
             android:text="@string/pinpinbox_2_0_0_title_recommend_creator" />
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            style="@style/ppb200_divider_list"
             android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-            android:background="@color/pinpinbox_2_0_0_divider"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/tvSearchUserTitle"
             android:layout_toEndOf="@+id/tvSearchUserTitle"
@@ -81,10 +79,8 @@
 
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            style="@style/ppb200_divider_list"
             android:layout_centerVertical="true"
-            android:background="@color/pinpinbox_2_0_0_divider"
             android:layout_toRightOf="@+id/tvSearchAlbumTitle"
             android:layout_toEndOf="@+id/tvSearchAlbumTitle"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"/>

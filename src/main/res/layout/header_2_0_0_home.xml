@@ -95,11 +95,6 @@
         </LinearLayout>
 
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:background="@color/pinpinbox_2_0_0_divider" />-->
-
 
         <RelativeLayout
             android:layout_width="match_parent"
