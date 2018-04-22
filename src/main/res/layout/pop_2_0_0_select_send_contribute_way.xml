@@ -29,20 +29,12 @@
         <TextView
             android:id="@+id/tvCreate"
             style="@style/ppb200_pop_item"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/ppb200_common_list_item_height"
-            android:background="@drawable/click_2_0_0_list_item"
-            android:gravity="center_vertical"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_itemtype_create_new_album" />
 
         <TextView
             android:id="@+id/tvSelect"
             style="@style/ppb200_pop_item"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/ppb200_common_list_item_height"
-            android:background="@drawable/click_2_0_0_list_item"
-            android:gravity="center_vertical"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_itemtype_select_exist_album" />
 

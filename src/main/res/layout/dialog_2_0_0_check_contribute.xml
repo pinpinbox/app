@@ -100,7 +100,8 @@
                     android:letterSpacing="0.1"
                     android:text="@string/pinpinbox_2_0_0_dialog_be_later"
                     android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                    android:textSize="@dimen/ppb200_common_text_second" />
+                    android:textSize="@dimen/ppb200_common_text_second"
+                    fontPath="fonts/OpenSans-Bold.ttf"/>
 
                 <TextView
                     android:id="@+id/y"

@@ -735,8 +735,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             }
         });
 
-//        View vContentAudio = popCreateAudio.getPopupView().findViewById(R.id.linBackground);
-//        new ClickDragDismissListener(vContentAudio, this);
+
 
 
     }

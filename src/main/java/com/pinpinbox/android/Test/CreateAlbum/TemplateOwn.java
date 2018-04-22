@@ -31,7 +31,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
+
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
@@ -442,9 +442,7 @@ public class TemplateOwn extends Fragment {
             }
         };
 
-        DialogSet d = new DialogSet(getActivity());
-        d.ConnectInstability();
-        d.setConnectInstability(connectInstability);
+
 
     }
 
@@ -584,8 +582,7 @@ public class TemplateOwn extends Fragment {
                 } else if (p36Result.equals("0")) {
 
                 } else {
-                    DialogSet d = new DialogSet(getActivity());
-                    d.DialogUnKnow();
+
                 }
 
 
@@ -642,8 +639,7 @@ public class TemplateOwn extends Fragment {
             }else if(p36Result.equals(Key.timeout)){
                 connectInstability();
             }else {
-                DialogSet d = new DialogSet(getActivity());
-                d.DialogUnKnow();
+
             }
 
         }
@@ -687,8 +683,7 @@ public class TemplateOwn extends Fragment {
             } else if (p36Result.equals(Key.timeout)) {
                 connectInstability();
             } else {
-                DialogSet d = new DialogSet(getActivity());
-                d.DialogUnKnow();
+
             }
 
 

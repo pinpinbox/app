@@ -88,7 +88,8 @@
                 android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_dialog_close_pinpinbox"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_second" />
+                android:textSize="@dimen/ppb200_common_text_second"
+                fontPath="fonts/OpenSans-Bold.ttf"/>
             <!--button L-T-->
             <TextView
                 android:id="@+id/tvCenter"
@@ -100,7 +101,8 @@
                 android:text="button C"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="16sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                fontPath="fonts/OpenSans-Bold.ttf"/>
 
             <TextView
                 android:id="@+id/tvRightOrBottom"

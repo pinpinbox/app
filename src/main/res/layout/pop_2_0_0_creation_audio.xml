@@ -37,6 +37,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:layout_marginTop="10dp"
                 android:id="@+id/selectAudioNoneImg"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
@@ -48,6 +49,7 @@
                 android:id="@+id/tvSelectAudioNone"
                 style="@style/ppb200_pop_item"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:background="@null"
                 android:layout_toRightOf="@+id/selectAudioNoneImg"
                 android:text="@string/pinpinbox_2_0_0_itemtype_no_audio" />
 
@@ -74,6 +76,7 @@
             android:layout_marginTop="@dimen/ppb200_padding_margin_big">
 
             <ImageView
+                android:layout_marginTop="10dp"
                 android:id="@+id/selectAudioPageImg"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
@@ -85,6 +88,7 @@
                 android:id="@+id/tvSelectAudioPage"
                 style="@style/ppb200_pop_item"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:background="@null"
                 android:layout_toRightOf="@+id/selectAudioPageImg"
                 android:text="@string/pinpinbox_2_0_0_itemtype_plural_audio" />
 
@@ -111,6 +115,7 @@
             android:layout_marginTop="@dimen/ppb200_padding_margin_big">
 
             <ImageView
+                android:layout_marginTop="10dp"
                 android:id="@+id/selectAudioBackgroundImg"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
@@ -120,6 +125,7 @@
             <TextView
                 android:id="@+id/tvSelectAudioBackground"
                 style="@style/ppb200_pop_item"
+                android:background="@null"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                 android:text="@string/pinpinbox_2_0_0_itemtype_singular_audio"
                 android:layout_toRightOf="@+id/selectAudioBackgroundImg"

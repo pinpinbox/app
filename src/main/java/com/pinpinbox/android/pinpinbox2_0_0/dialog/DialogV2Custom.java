@@ -90,11 +90,6 @@ public class DialogV2Custom {
     }
 
 
-
-
-
-
-
     public TextView getTvLeftOrTop() {
         return this.tvLeftOrTop;
     }
@@ -263,7 +258,7 @@ public class DialogV2Custom {
 
             try {
                 mDialog.show();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -273,12 +268,11 @@ public class DialogV2Custom {
     }
 
 
-
     public void dismiss() {
         if (mDialog != null)
             try {
                 mDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
     }
@@ -338,55 +332,19 @@ public class DialogV2Custom {
         });
 
 
-
-
         tvLeftOrTop.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
         tvLeftOrTop.setBackgroundResource(R.drawable.click_2_0_0_default);
 
 
-//        if (PPBApplication.getInstance().getId().equals("")) {
-
-
-            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);
-            tvLeftOrTop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dismiss();
-                    mActivity.finish();
-                    SystemUtility.SysApplication.getInstance().exit();
-                }
-            });
-
-//        } else {
-//
-//
-//            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_offline_read);
-//            tvLeftOrTop.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                    PPBApplication.getInstance().getData().edit().putBoolean(Key.clickOffLine, true).apply();
-//
-//                    dismiss();
-//
-//                    List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-//                    for (int i = 0; i < activityList.size(); i++) {
-//                        if (i == activityList.size() - 1) {
-//
-//                            Bundle bundle = new Bundle();
-//                            bundle.putBoolean(Key.exitAPP, true);
-//                            Intent intent = new Intent(mActivity, OffLine2Activity.class);
-//                            intent.putExtras(bundle);
-//                            mActivity.startActivity(intent);
-//                            mActivity.finish();
-//                            break;
-//                        } else {
-//                            activityList.get(i).finish();
-//                        }
-//                    }
-//                }
-//            });
-//        }
+        tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);
+        tvLeftOrTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+                mActivity.finish();
+                SystemUtility.SysApplication.getInstance().exit();
+            }
+        });
 
 
     }
@@ -463,53 +421,13 @@ public class DialogV2Custom {
 
         tvMessage.setText(R.string.pinpinbox_2_0_0_dialog_message_inspection_of_network);
 
+        tvRightOrBottom.setVisibility(View.GONE);
 
-        tvRightOrBottom.setText(R.string.pinpinbox_2_0_0_dialog_offline_read);
-        tvRightOrBottom.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-        tvRightOrBottom.setBackgroundResource(R.drawable.click_2_0_0_default);
-
-
-//        if (PPBApplication.getInstance().getId().equals("")) {
-
-            tvRightOrBottom.setVisibility(View.GONE);
-
-            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);//單行
-
-//        } else {
-//            ViewControl.setMargins(tvLeftOrTop, 0, 0, DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0);
-//            ViewControl.setMargins(tvRightOrBottom, DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0, 0, 0);
-//
-//            tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);//2行
-//
-//        }
+        tvLeftOrTop.setText(R.string.pinpinbox_2_0_0_dialog_close_pinpinbox);//單行
 
 
         tvLeftOrTop.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
         tvLeftOrTop.setBackgroundResource(R.drawable.click_2_0_0_default);
-
-//        tvRightOrBottom.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                PPBApplication.getInstance().getData().edit().putBoolean(Key.clickOffLine, true).apply();
-//
-//
-//                dismiss();
-//
-//                Bundle bundle = new Bundle();
-//                bundle.putBoolean(Key.exitAPP, true);
-//
-//                Intent intent = new Intent(mActivity, OffLine2Activity.class);
-//                intent.putExtras(bundle);
-//                mActivity.startActivity(intent);
-//                mActivity.finish();
-//
-////                dismiss();
-////                mActivity.finish();
-////                SystemUtility.SysApplication.getInstance().exit();
-//
-//            }
-//        });
 
         tvLeftOrTop.setOnClickListener(new View.OnClickListener() {
             @Override

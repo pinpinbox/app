@@ -30,10 +30,6 @@
     <TextView
         android:id="@+id/tvShareFB"
         style="@style/ppb200_pop_item"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_common_list_item_height"
-        android:background="@drawable/click_2_0_0_list_item"
-        android:gravity="center_vertical"
         android:paddingLeft="@dimen/ppb200_padding_margin_first"
         android:text="@string/pinpinbox_2_0_0_itemtype_reward_share"
         />
@@ -41,10 +37,6 @@
     <TextView
         android:id="@+id/tvShare"
         style="@style/ppb200_pop_item"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ppb200_common_list_item_height"
-        android:background="@drawable/click_2_0_0_list_item"
-        android:gravity="center_vertical"
         android:paddingLeft="@dimen/ppb200_padding_margin_first"
         android:text="@string/pinpinbox_2_0_0_itemtype_common_share" />
 

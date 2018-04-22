@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
@@ -389,9 +388,7 @@ public class CreateAlbumActivity extends DraggerActivity {
             }
         };
 
-        DialogSet d = new DialogSet(mActivity);
-        d.ConnectInstability();
-        d.setConnectInstability(connectInstability);
+
 
     }
 
@@ -520,8 +517,7 @@ public class CreateAlbumActivity extends DraggerActivity {
                 connectInstability();
 
             } else {
-                DialogSet d = new DialogSet(mActivity);
-                d.DialogUnKnow();
+
             }
 
 
@@ -607,8 +603,7 @@ public class CreateAlbumActivity extends DraggerActivity {
 
 
             } else {
-                DialogSet d = new DialogSet(mActivity);
-                d.DialogUnKnow();
+
             }
 
             doLoadData();
@@ -713,8 +708,7 @@ public class CreateAlbumActivity extends DraggerActivity {
         super.onRestart();
         if (!HttpUtility.isConnect(mActivity)) {
             if (noConnect == null) {
-                DialogSet d = new DialogSet(this);
-                d.setNoConnect();
+
             }
 
         }

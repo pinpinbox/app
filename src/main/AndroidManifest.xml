@@ -189,11 +189,6 @@
             android:process=":aviarycds" />
         android:windowSoftInputMode="adjustPan|stateHidden"
         <activity
-            android:name=".Test.PointActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/dragger" />
-        <activity
             android:name=".pinpinbox2_0_0.activity.WebView2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="user"

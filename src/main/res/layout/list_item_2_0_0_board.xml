@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:letterSpacing="0.1"
-                android:lineSpacingExtra="2dp"
+                android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_third" />

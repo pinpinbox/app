@@ -22,10 +22,6 @@ public class NoConnect {
         dlgNoConnect = d.getmDialog();
 
 
-//                DialogSet d = new DialogSet(mActivity);
-//                d.setNoConnect();
-//                dlgNoConnect = d.getDialog();
-
 
     }
 

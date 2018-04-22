@@ -27,20 +27,12 @@
         <TextView
             android:id="@+id/tvSort"
             style="@style/ppb200_pop_item"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/ppb200_common_list_item_height"
-            android:background="@drawable/click_2_0_0_list_item"
-            android:gravity="center_vertical"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_itemtype_album_sort" />
 
         <TextView
             android:id="@+id/tvSelectPreview"
             style="@style/ppb200_pop_item"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/ppb200_common_list_item_height"
-            android:background="@drawable/click_2_0_0_list_item"
-            android:gravity="center_vertical"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_itemtype_album_select_preview"
              />
@@ -49,9 +41,6 @@
         <TextView
             android:id="@+id/tvSetAudio"
             style="@style/ppb200_pop_item"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/ppb200_common_list_item_height"
-            android:background="@drawable/click_2_0_0_list_item"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_itemtype_album_set_audio"

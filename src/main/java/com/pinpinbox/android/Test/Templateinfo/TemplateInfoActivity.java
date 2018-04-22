@@ -23,12 +23,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.Test.PointActivity;
 import com.pinpinbox.android.Test.CreateAlbum.CreateAlbumActivity;
 import com.pinpinbox.android.Test.CreateAlbum.TemplateOwn;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
@@ -89,7 +87,7 @@ public class TemplateInfoActivity extends DraggerActivity {
 
     private SharedPreferences getdata;
 
-    private DialogSet dConfirm, dCheckBuyPoint;
+
 
     private String TAG = TagClass.TagTemplateInfoActivity;
     private String id, token;
@@ -326,15 +324,7 @@ public class TemplateInfoActivity extends DraggerActivity {
 
             if (intPoint > 0) {
 
-                dConfirm = new DialogSet(mActivity);
-                dConfirm.setAlbumContents_StringType(getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_buy) + " " + intPoint + " P");
-                dConfirm.getTextView_Y().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //get user points
-                        doGetPoint();
-                    }
-                });
+
 
             } else {
                 doGetPoint();
@@ -347,19 +337,7 @@ public class TemplateInfoActivity extends DraggerActivity {
     }
 
     private void checkBuyPoint() {
-        dCheckBuyPoint = new DialogSet(mActivity);
-//        dCheckBuyPoint.setAlbumContents_Integer(R.string.point_insufficient);
 
-        dCheckBuyPoint.getTextView_Y().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dCheckBuyPoint.getDialog().dismiss();
-                Intent intentBuyPoint = new Intent(TemplateInfoActivity.this, PointActivity.class);
-                startActivity(intentBuyPoint);
-                ActivityAnim.StartAnim(mActivity);
-
-            }
-        });
     }
 
 
@@ -531,9 +509,7 @@ public class TemplateInfoActivity extends DraggerActivity {
                     Log.d(TAG, "p57Result => " + p54Result);
                     Log.d(TAG, "new_album_id => " + new_album_id);
                 }
-                if (dConfirm != null) {
-                    dConfirm.getDialog().dismiss();
-                }
+
 
                 /**2016.08.16 新增刷新已擁有*/
 
@@ -674,9 +650,7 @@ public class TemplateInfoActivity extends DraggerActivity {
             super.onPostExecute(result);
             dissmissLoading();
             if (p23Result.equals("1")) {
-                if (dConfirm != null && dConfirm.getDialog().isShowing()) {
-                    dConfirm.getDialog().dismiss();
-                }
+
                 int up = StringIntMethod.StringToInt(userPoint);
 
                 if (up >= intPoint) {
@@ -691,8 +665,7 @@ public class TemplateInfoActivity extends DraggerActivity {
             } else if (p23Result.equals(Key.timeout)) {
                 connectInstability();
             } else {
-                DialogSet d = new DialogSet(mActivity);
-                d.DialogUnKnow();
+
             }
         }
     }
@@ -761,8 +734,7 @@ public class TemplateInfoActivity extends DraggerActivity {
             } else if (p38Result.equals(Key.timeout)) {
                 connectInstability();
             } else {
-                DialogSet d = new DialogSet(mActivity);
-                d.DialogUnKnow();
+
             }
 
         }
@@ -943,8 +915,7 @@ public class TemplateInfoActivity extends DraggerActivity {
                 connectInstability();
 
             } else {
-                DialogSet d = new DialogSet(mActivity);
-                d.DialogUnKnow();
+
             }
 
         }
@@ -1022,8 +993,7 @@ public class TemplateInfoActivity extends DraggerActivity {
                 connectInstability();
 
             } else {
-                DialogSet d = new DialogSet(mActivity);
-                d.DialogUnKnow();
+
             }
 
 

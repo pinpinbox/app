@@ -29,7 +29,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferences
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogSet;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -64,7 +63,7 @@ public class AlbumDownLoad {
     private SharedPreferences getdata;
     private Activity mActivity;
     private Dialog crdlg;
-    private DialogSet dlgCancelDownload;
+
     private NoConnect noConnect;
     private LoadingAnimation loading;
 
@@ -474,9 +473,7 @@ public class AlbumDownLoad {
             }
         };
 
-        DialogSet d = new DialogSet(mActivity);
-        d.ConnectInstability();
-        d.setConnectInstability(connectInstability);
+
 
     }
 
@@ -695,8 +692,7 @@ public class AlbumDownLoad {
             } else if (p15Result.equals(Key.timeout)) {
                 connectInstability();
             } else {
-                DialogSet d = new DialogSet(mActivity);
-                d.DialogUnKnow();
+
             }
 
 

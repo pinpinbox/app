@@ -4,103 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/ppb200_staggeredgrid_click_padding">
-
-        <RelativeLayout
-            style="@style/ppb200_staggered_bg_cover"
-            android:id="@+id/rItemBg">
 
 
-            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
-                android:id="@+id/coverImg"
-                android:layout_width="match_parent"
-                android:layout_height="234dp"
-                android:layout_centerHorizontal="true"
-                android:scaleType="centerCrop"
-                app:siBorderAlpha="0"
-                app:siRadius="@dimen/ppb200_staggeredgrid_cover_radius" />
+    <include
+        layout="@layout/item_staggered"
+        />
 
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:padding="@dimen/ppb200_padding_margin_second">
-
-                <LinearLayout
-                    style="@style/ppb200_staggered_type_linear"
-                    android:id="@+id/linType"
-                    android:visibility="gone">
-
-                    <ImageView
-                        style="@style/ppb200_staggered_type_icon"
-                        android:id="@+id/audioImg"
-                        android:src="@drawable/ic200_audio_play_dark"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        style="@style/ppb200_staggered_type_icon"
-                        android:id="@+id/videoImg"
-                        android:src="@drawable/ic200_video_border_dark"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        style="@style/ppb200_staggered_type_icon"
-                        android:id="@+id/slotImg"
-                        android:src="@drawable/ic200_gift_dark"
-                        android:visibility="gone" />
-
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-
-        <!--作品名稱-->
-        <TextView
-            android:id="@+id/tvAlbumName"
-            style="@style/ppb200_staggered_album_name"
-            android:layout_marginTop="@dimen/ppb200_staggeredgrid_album_name_margin_top" />
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="4dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:visibility="gone">-->
-
-            <!--<ImageView-->
-                <!--android:layout_width="16dp"-->
-                <!--android:layout_height="16dp"-->
-                <!--android:layout_marginLeft="-2dp"-->
-                <!--android:padding="2dp"-->
-                <!--android:src="@drawable/ic200_user_light" />-->
-
-
-            <!--<TextView-->
-                <!--android:id="@+id/tvUserName"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:text=""-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
-                <!--android:textSize="12sp" />-->
-
-
-        <!--</LinearLayout>-->
-
-
-    </LinearLayout>
 
 
 </RelativeLayout>

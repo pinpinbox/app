@@ -749,20 +749,7 @@ public class HttpUtility {
         }
     }
 
-//    public static void DisconnectionToDialog(final Activity activity) {
-//        if (!HttpUtility.isConnect(activity)) {
-//
-//            Log.d("Http => ", "DisconnectionToDialog");
-//
-//
-//                    DialogSet d = new DialogSet(activity);
-//                    d.setNoConnect();
-//                    return;
-//        }
-//
-//        String aa = "";
-//
-//    }
+
 
 
 }
