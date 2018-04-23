@@ -15,6 +15,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.FollowMe2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.SponsorList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 
@@ -179,5 +181,30 @@ public class ActivityIntent {
         ActivityAnim.StartAnim(currentActivity);
 
     }
+
+
+
+    public static void toFollowMe(Activity currentActivity){
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, FollowMe2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
+
+    public static void toSponsorList(Activity currentActivity){
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, SponsorList2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
+
+
+
+
+
 
 }

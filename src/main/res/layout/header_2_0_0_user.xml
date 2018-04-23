@@ -323,6 +323,8 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:background="@drawable/click_2_0_0_default"
+                        android:id="@+id/linFollowMe"
                         android:layout_width="72dp"
                         android:layout_height="72dp"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_big"

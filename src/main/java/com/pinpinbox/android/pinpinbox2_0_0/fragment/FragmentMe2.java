@@ -57,7 +57,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyFollow2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.RecentAlbum2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.SponsorList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -112,7 +111,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by vmage on 2017/3/24.
  */
-public class FragmentMe2 extends Fragment implements View.OnClickListener, ClickDragDismissListener.ActionUpListener{
+public class FragmentMe2 extends Fragment implements View.OnClickListener, ClickDragDismissListener.ActionUpListener {
 
     private LoadingAnimation loading;
     private ExStaggeredGridLayoutManager manager;
@@ -143,7 +142,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     private RoundCornerImageView userImg;
     private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, menuImg, messageImg, aboutImg, shareImg, incomeImg;
     private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax;
-    private LinearLayout linLink, linSponsorList;
+    private LinearLayout linLink, linSponsorList, linFollowMe;
     private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvLink, tvSponsor, tvUploadBanner;
     private View viewHeader, vRPmenu;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
@@ -254,7 +253,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         vRPmenu = v.findViewById(R.id.vRPmenu);
 
 
-        tvCreativeName = (TextView)v.findViewById(R.id.tvCreativeName);
+        tvCreativeName = (TextView) v.findViewById(R.id.tvCreativeName);
         tvUploadBanner = (TextView) v.findViewById(R.id.tvUploadBanner);
 
         bannerImg = (ImageView) v.findViewById(R.id.bannerImg);
@@ -327,6 +326,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
 
         linSponsorList = (LinearLayout) viewHeader.findViewById(R.id.linSponsorList);
+        linFollowMe = (LinearLayout) viewHeader.findViewById(R.id.linFollowMe);
+
 
 
         webImg.setOnClickListener(this);
@@ -346,6 +347,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         tvUploadBanner.setOnClickListener(this);
 
         linSponsorList.setOnClickListener(this);
+        linFollowMe.setOnClickListener(this);
 
 
         return v;
@@ -420,7 +422,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             public void onItemClick(int position, View v) {
 
 
-                if(ClickUtils.ButtonContinuousClick()){
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 
@@ -433,7 +435,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                         albumList.get(position).getImage_orientation(),
                         v.findViewById(R.id.coverImg)
                 );
-
 
 
             }
@@ -703,7 +704,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
                     String strCreativeName = JsonUtility.GetString(jsonUser, ProtocolKey.creative_name);
 
-                    if(StringUtils.isTrimEmpty(strCreativeName)){
+                    if (StringUtils.isTrimEmpty(strCreativeName)) {
                         strCreativeName = "";
                     }
                     itemUser.setCreative_name(strCreativeName);
@@ -803,7 +804,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                         String creative = JsonUtility.GetString(jsonData, ProtocolKey.creative);
                         JSONObject jsonCreative = new JSONObject(creative);
                         itemUser.setInfo_url(JsonUtility.GetString(jsonCreative, ProtocolKey.info_url));
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -913,7 +914,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         ActivityAnim.StartAnim(getActivity());
     }
 
-    private void toExchangeList(){
+    private void toExchangeList() {
 
         ActivityIntent.toExchangeList(getActivity());
 
@@ -930,10 +931,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     }
 
     private void toSponsorList() {
-        startActivity(new Intent(getActivity(), SponsorList2Activity.class));
-        ActivityAnim.StartAnim(getActivity());
+        ActivityIntent.toSponsorList(getActivity());
     }
 
+    private void toFollowMe() {
+        ActivityIntent.toFollowMe(getActivity());
+    }
 
 
     private View vRPeditProfile, vRPworkManage,
@@ -1031,8 +1034,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
             checkShowRedPoints();
             popMenu.show(((Main2Activity) getActivity()).getBackground());
-//            popMenu.showWithRedPointsCheck(((Main2Activity) getActivity()).getBackground(), vRedPointList, vRPmenu);
-
 
 
         } else {
@@ -1042,7 +1043,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
     }
 
-    private void showBoard(){
+    private void showBoard() {
 
         if (board == null) {
             board = new PopBoard(getActivity(), PopBoard.TypeUser, itemUser.getUser_id(), rBackground, true);
@@ -1051,10 +1052,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             board.doGetBoard();
         }
 
-        ((Main2Activity)getActivity()).setShowBoard(false);
+        ((Main2Activity) getActivity()).setShowBoard(false);
 
     }
-
 
 
     private void systemShare() {
@@ -1260,12 +1260,11 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(((Main2Activity)getActivity()).getShowBoard()){
+                        if (((Main2Activity) getActivity()).getShowBoard()) {
                             showBoard();
                         }
                     }
-                },200);
-
+                }, 200);
 
 
                 if (p40JsonArray.length() == 0) {
@@ -1321,7 +1320,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             if (p40Result.equals("1")) {
 
 
-
 //                if (p40JsonArray.length() == 0) {
 //                    sizeMax = true;
 //                    if (!isNoDataToastAppeared) {
@@ -1332,7 +1330,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 //                }
 //                authorAdapter.notifyItemRangeInserted(albumList.size(), rangeCount);
 //                round = round + rangeCount;
-
 
 
                 if (p40JsonArray.length() == 0) {
@@ -1356,12 +1353,10 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 }
 
 
-
                 if (!sendScrollMore) {
                     FlurryUtil.onEvent(FlurryKey.myprefecture_scroll_more);
                     sendScrollMore = true;
                 }
-
 
 
             } else if (p40Result.equals("0")) {
@@ -1449,8 +1444,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                     round = round + defaultCount;
 
                 }
-
-
 
 
             } else if (p40Result.equals("0")) {
@@ -1599,64 +1592,64 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         return this.albumList;
     }
 
-    private void checkShowRedPoints(){
+    private void checkShowRedPoints() {
 
-        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_editProfile, false)){
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_editProfile, false)) {
             vRPeditProfile.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             vRPeditProfile.setVisibility(View.GONE);
         }
 
 
-        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_workManage, false)){
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_workManage, false)) {
             vRPworkManage.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             vRPworkManage.setVisibility(View.GONE);
         }
 
 
-        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_myFollow, false)){
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_myFollow, false)) {
             vRPmyFollow.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             vRPmyFollow.setVisibility(View.GONE);
         }
 
 
-        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_recent, false)){
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_recent, false)) {
             vRPrecent.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             vRPrecent.setVisibility(View.GONE);
         }
 
 
-        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_butPoint, false)){
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_butPoint, false)) {
             vRPbutPoint.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             vRPbutPoint.setVisibility(View.GONE);
         }
 
 
-        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_exchangeList, false)){
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_exchangeList, false)) {
             vRPexchangeList.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             vRPexchangeList.setVisibility(View.GONE);
         }
 
 
-        if(PPBApplication.getInstance().getData().getBoolean(Key.checkRP_settings, false)){
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_settings, false)) {
             vRPsettings.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             vRPsettings.setVisibility(View.GONE);
         }
 
 
     }
 
-    public void showRP_menu(){
+    public void showRP_menu() {
         vRPmenu.setVisibility(View.VISIBLE);
     }
 
-    public void hide_menu(){
+    public void hide_menu() {
         vRPmenu.setVisibility(View.GONE);
     }
 
@@ -1690,13 +1683,9 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 }
 
 
-                if(((Main2Activity)getActivity()).getShowBoard()){
+                if (((Main2Activity) getActivity()).getShowBoard()) {
                     showBoard();
                 }
-
-
-
-
 
 
             }
@@ -1837,7 +1826,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
                 break;
 
             case R.id.messageImg:
-               showBoard();
+                showBoard();
                 break;
 
             case R.id.aboutImg:
@@ -1906,6 +1895,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
                 break;
 
+            case R.id.linFollowMe:
+
+                //to followme
+
+                break;
+
 
         }
 
@@ -1920,7 +1915,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             return;
         }
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.linToEditProfile:
                 popMenu.dismissWithRedPoint(vRPeditProfile);
                 RedPointManager.showOrHideOnEditProfile(false);
@@ -1983,8 +1978,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     public void OnDismiss() {
         popMenu.dismiss();
     }
-
-
 
 
     @Override

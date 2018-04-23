@@ -43,7 +43,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol104;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol113;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Picasso;
 
@@ -59,10 +59,10 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
- * Created by vmage on 2018/1/2.
+ * Created by vmage on 2018/4/23.
  */
 
-public class SponsorList2Activity extends DraggerActivity implements View.OnClickListener, RecyclerSponsorAdapter.OnUserInterativeListener {
+public class FollowMe2Activity extends DraggerActivity implements View.OnClickListener, RecyclerSponsorAdapter.OnUserInterativeListener {
 
     private Activity mActivity;
     private List<ItemUser> itemUserList;
@@ -70,13 +70,16 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     private FollowTask followTask;
     private AttentionTask attentionTask;
-    private Protocol104 protocol104;
+    private Protocol113 protocol113;
     private PopBoard board;
 
     private RecyclerView rvUser;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private SmoothProgressBar pbLoadMore;
     private ImageView backImg;
+
+
+    private String user_id = "";
 
     private boolean isDoingMore = false;
 
@@ -87,33 +90,21 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         @Override
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
-
-            if ((Object) protocol104.isSizeMax() != null && !protocol104.isSizeMax()) {
+            if ((Object) protocol113.isSizeMax() != null && !protocol113.isSizeMax()) {
                 MyLog.Set("e", mActivity.getClass(), "onLoad");
-
                 if (isDoingMore) {
                     MyLog.Set("e", mActivity.getClass(), "正在讀取更多項目");
                     return;
                 }
-
                 doMoreData();
-
             } else {
-
-                if (!protocol104.isNoDataToastAppeared()) {
-
+                if (!protocol113.isNoDataToastAppeared()) {
                     PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_scroll_max);
-
-                    protocol104.setNoDataToastAppeared(true);
-
+                    protocol113.setNoDataToastAppeared(true);
                 }
-
                 MyLog.Set("e", mActivity.getClass(), "sizeMax");
-
             }
-
         }
-
     };
 
 
@@ -129,13 +120,27 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
         SystemUtility.SysApplication.getInstance().addActivity(this);
 
+        getBundle();
+
         init();
 
         setRecycler();
 
         setProtocol();
 
-        doGetSponsor();
+        doGetLikes();
+
+    }
+
+    private void getBundle() {
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+
+            user_id = bundle.getString(Key.user_id, "");
+
+        }
 
     }
 
@@ -163,7 +168,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         backImg.setOnClickListener(this);
 
         TextView tvAcTitile = (TextView) findViewById(R.id.tvActionBarTitle);
-        tvAcTitile.setText(R.string.pinpinbox_2_0_0_title_your_sponsor);
+        tvAcTitile.setText(R.string.pinpinbox_2_0_0_title_follow_me);
         TextUtility.setBold(tvAcTitile, true);
 
     }
@@ -187,7 +192,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                 }
 
 
-                if(itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())){
+                if (itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())) {
                     return;
                 }
 
@@ -232,14 +237,14 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     }
 
-    private void doGetSponsor() {
+    private void doGetLikes() {
 
         if (!HttpUtility.isConnect(mActivity)) {
             setNoConnect();
             return;
         }
 
-        protocol104.GetList();
+        protocol113.GetList();
 
     }
 
@@ -249,13 +254,13 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
             return;
         }
 
-        if (protocol104 != null && !protocol104.getTask().isCancelled()) {
+        if (protocol113 != null && !protocol113.getTask().isCancelled()) {
 
-            protocol104.getTask().cancel(true);
+            protocol113.getTask().cancel(true);
 
         }
 
-        protocol104.Refresh();
+        protocol113.Refresh();
     }
 
     private void doMoreData() {
@@ -264,7 +269,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
             return;
         }
 
-        protocol104.LoadMore();
+        protocol113.LoadMore();
     }
 
     private void doAttention() {
@@ -303,6 +308,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                         doFollowTask();
                         break;
 
+
                 }
             }
         };
@@ -311,12 +317,12 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     private void setProtocol() {
 
-        protocol104 = new Protocol104(
+        protocol113 = new Protocol113(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemUserList,
-                new Protocol104.TaskCallBack() {
+                new Protocol113.TaskCallBack() {
                     @Override
                     public void Prepare(int doingType) {
                         switch (doingType) {
@@ -397,7 +403,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
                             case DoingTypeClass.DoMoreData:
 
-                                adapter.notifyItemRangeInserted(protocol104.getItemUserList().size(), protocol104.getRangeCount());
+                                adapter.notifyItemRangeInserted(protocol113.getItemUserList().size(), protocol113.getRangeCount());
 
                                 break;
 
@@ -411,7 +417,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
                             case DoingTypeClass.DoDefault:
 
-                                doGetSponsor();
+                                doGetLikes();
 
                                 break;
 
@@ -473,7 +479,6 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
 
     }
-
 
     private class AttentionTask extends AsyncTask<Void, Void, Object> {
 
@@ -550,6 +555,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
 
                 adapter.notifyItemChanged(clickPosition);
+
 
                 if (followstatus == 0) {
 
@@ -703,9 +709,9 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
                 }
 
 
-                if(url==null || url.equals("")|| url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -744,9 +750,13 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
 
     @Override
+    public void onBackPressed() {
+        back();
+    }
+
+
+    @Override
     public void onClick(View v) {
-
-
         if (ClickUtils.ButtonContinuousClick()) {
             return;
         }
@@ -760,31 +770,23 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
     }
 
     @Override
-    public void onBackPressed() {
-        back();
-    }
-
-    @Override
     public void doFollow(int position) {
-
         MyLog.Set("e", getClass(), "doFollow position =>" + position);
 
         clickPosition = position;
 
         doAttention();
-
     }
 
     @Override
     public void doPostMessage(int position) {
         MyLog.Set("e", getClass(), "doPostMessage position =>" + position);
 
-//        if (board == null) {
-
-        if(!itemUserList.get(position).isDisscuss()){
+        if (!itemUserList.get(position).isDisscuss()) {
             PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_board_is_close);
             return;
         }
+
 
         if (board != null) {
             board.dismiss();
@@ -794,11 +796,6 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         board = new PopBoard(mActivity, PopBoard.TypeUser, itemUserList.get(position).getUser_id(), (RelativeLayout) findViewById(R.id.rBackground), true);
         board.setSecondTitle(itemUserList.get(position).getName());
 
-
-//        } else {
-//            board.clearList();
-//            board.doGetBoard();
-//        }
     }
 
     @Override
@@ -808,19 +805,16 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     @Override
     protected void onPause() {
-
         cleanCache();
-
         super.onPause();
-
     }
 
     @Override
     public void onDestroy() {
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
 
-        if (protocol104 != null) {
-            cancelTask(protocol104.getTask());
+        if (protocol113 != null) {
+            cancelTask(protocol113.getTask());
         }
 
         if (attentionTask != null) {
@@ -836,9 +830,9 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
             board = null;
         }
 
-
         MyLog.Set("d", this.getClass(), "onDestroy");
         super.onDestroy();
     }
+
 
 }

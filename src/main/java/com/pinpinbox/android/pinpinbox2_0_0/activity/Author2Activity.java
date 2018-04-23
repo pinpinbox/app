@@ -1144,29 +1144,25 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                 }
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
 
-                        Bundle bundle = getIntent().getExtras();
 
-                        boolean pinpinboard = bundle.getBoolean(Key.pinpinboard, false);
+                Bundle bundle = getIntent().getExtras();
 
-                        if (pinpinboard) {
+                boolean pinpinboard = bundle.getBoolean(Key.pinpinboard, false);
 
+                if(pinpinboard){
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
                             if (board == null) {
                                 board = new PopBoard(mActivity, PopBoard.TypeUser, itemUser.getUser_id(), (RelativeLayout) findViewById(R.id.rBackground), true);
                             } else {
                                 board.clearList();
                                 board.doGetBoard();
                             }
-
-
                         }
-
-                    }
-                }, 200);
-
+                    },200);
+                }
 
             } else if (p40Result.equals("0")) {
 
@@ -1402,7 +1398,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         itemUser.setFollow(false);
                         attenionCancel();
 
-
                         for (int i = 0; i < activityList.size(); i++) {
                             if (activityList.get(i).getClass().getSimpleName().equals(MyFollow2Activity.class.getSimpleName())) {
                                 ((MyFollow2Activity) activityList.get(i)).removeItemById(itemUser.getUser_id());
@@ -1414,21 +1409,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         }
 
 
-                        for (int i = 0; i < activityList.size(); i++) {
-                            if (activityList.get(i).getClass().getSimpleName().equals(SponsorList2Activity.class.getSimpleName())) {
-                                ((SponsorList2Activity) activityList.get(i)).changeUserFollow();
-
-                                break;
-                            }
-                        }
-
-                        for (int i = 0; i < activityList.size(); i++) {
-                            if (activityList.get(i).getClass().getSimpleName().equals(LikeList2Activity.class.getSimpleName())) {
-                                ((LikeList2Activity) activityList.get(i)).changeUserFollow();
-
-                                break;
-                            }
-                        }
+                        changeUserListFollowStatus(activityList);
 
 
                         break;
@@ -1446,12 +1427,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                             }
                         }
 
-                        for (int i = 0; i < activityList.size(); i++) {
-                            if (activityList.get(i).getClass().getSimpleName().equals(SponsorList2Activity.class.getSimpleName())) {
-                                ((SponsorList2Activity) activityList.get(i)).changeUserFollow();
-                                break;
-                            }
-                        }
+                        changeUserListFollowStatus(activityList);
 
 
                         doFollowTask();
@@ -1470,6 +1446,38 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                 DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
             }
         }
+
+
+        private void changeUserListFollowStatus(List<Activity> activityList){
+
+            for (int i = 0; i < activityList.size(); i++) {
+                if (activityList.get(i).getClass().getSimpleName().equals(SponsorList2Activity.class.getSimpleName())) {
+                    ((SponsorList2Activity) activityList.get(i)).changeUserFollow();
+
+                    break;
+                }
+            }
+
+            for (int i = 0; i < activityList.size(); i++) {
+                if (activityList.get(i).getClass().getSimpleName().equals(LikeList2Activity.class.getSimpleName())) {
+                    ((LikeList2Activity) activityList.get(i)).changeUserFollow();
+
+                    break;
+                }
+            }
+
+
+            for (int i = 0; i < activityList.size(); i++) {
+                if (activityList.get(i).getClass().getSimpleName().equals(FollowMe2Activity.class.getSimpleName())) {
+                    ((FollowMe2Activity) activityList.get(i)).changeUserFollow();
+                    break;
+                }
+            }
+
+
+        }
+
+
     }
 
     private class FollowTask extends AsyncTask<Void, Void, Object> {
