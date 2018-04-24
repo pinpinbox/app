@@ -140,6 +140,7 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
         //
         //
+        //
 
         JSONArray bannerArray = null;
 
