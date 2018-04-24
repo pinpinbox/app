@@ -1,15 +1,19 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -20,9 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2017/8/25.
+ * Created by vmage on 2017/9/25.
  */
-public class Protocol96 extends AsyncTask<Void, Void, Object> {
+public class Protocol98_BusinessSubUserFastRegister extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -32,31 +36,49 @@ public class Protocol96 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Success();
 
+        public abstract void UserExists();
+
         public abstract void TimeOut();
+
+        public abstract void DoInBackground();
+
+
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
+
+    private SharedPreferences getData;
+
 
     private TaskCallBack callBack;
 
-    private String user_id;
-    private String album_id;
-    private String index;
+    private String businessuser_id;
+    private String facebook_id;
+    private String timestamp;
+    private String param;
 
     private String result = "";
     private String message = "";
     private String reponse = "";
-    private String token = "";
 
-    public Protocol96(Activity mActivity, String user_id, String token, String index, String album_id, TaskCallBack callBack) {
+    public String getResult() {
+        return this.result;
+    }
+
+    public Protocol98_BusinessSubUserFastRegister(Activity mActivity, String businessuser_id, String facebook_id, String timestamp, String param, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
-        this.user_id = user_id;
-        this.token = token;
-        this.index = index;
-        this.album_id = album_id;
+        this.businessuser_id = businessuser_id;
+        this.facebook_id = facebook_id;
+        this.timestamp = timestamp;
+        this.param = param;
+
+        getData = PPBApplication.getInstance().getData();
+
         execute();
+
     }
 
 
@@ -71,8 +93,8 @@ public class Protocol96 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            reponse = HttpUtility.uploadSubmit(true, Url.P96_InsertAlbumIndex, putMap(), null);
-            MyLog.Set("d", getClass(), "p96reponse => " + reponse);
+            reponse = HttpUtility.uploadSubmit(true, Url.P98_BusinessRegister, putMap(), null);
+            MyLog.Set("d", getClass(), "p98reponse => " + reponse);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -88,16 +110,40 @@ public class Protocol96 extends AsyncTask<Void, Void, Object> {
                 JSONObject jsonObject = new JSONObject(reponse);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
-                if (!result.equals(ResultType.SYSTEM_OK)) {
+                if (result.equals(ResultType.SYSTEM_OK) || result.equals(ResultType.USER_EXISTS)) {
+
+                    String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+
+                    JSONObject dataObject = new JSONObject(data);
+
+                    String token = JsonUtility.GetString(dataObject, ProtocolKey.token);
+
+                    JSONObject tokenObject = new JSONObject(token);
+
+                    String realToken = JsonUtility.GetString(tokenObject, ProtocolKey.token);
+
+                    String user_id = JsonUtility.GetString(tokenObject, ProtocolKey.user_id);
+
+                    MyLog.Set("e", this.getClass(), "user_id => " + user_id);
+                    MyLog.Set("e", this.getClass(), "realToken => " + realToken);
+
+
+                    SharedPreferences.Editor editor = getData.edit();
+                    editor.putString(Key.token, realToken);
+                    editor.putString(Key.id, user_id);
+                    editor.commit();
+
+                    callBack.DoInBackground();
+
+
+                } else {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-
         }
-
 
         return null;
     }
@@ -107,13 +153,17 @@ public class Protocol96 extends AsyncTask<Void, Void, Object> {
         super.onPostExecute(obj);
         callBack.Post();
 
-
         switch (result) {
 
             case ResultType.SYSTEM_OK:
 
                 callBack.Success();
 
+                break;
+
+            case ResultType.USER_EXISTS:
+//                callBack.Success();
+                callBack.UserExists();
                 break;
 
             case ResultType.USER_ERROR:
@@ -148,34 +198,35 @@ public class Protocol96 extends AsyncTask<Void, Void, Object> {
                 break;
 
 
-
         }
 
 
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.album_id, album_id);
-        map.put(Key.index, index);
-        map.put(Key.token, token);
-        map.put(Key.user_id, user_id);
-
-
-//        String sign = IndexSheet.encodePPB(map);
-//        map.put(Key.sign, sign);
-
+        map.put(Key.businessuser_id, businessuser_id);
+        map.put(Key.facebook_id, facebook_id);
+        map.put(Key.timestamp, timestamp);
+        String sign = IndexSheet.encodePPB(map);
+        map.put(Key.sign, sign);
+        map.put(Key.param, param);
 
 
         return map;
     }
 
-
     public AsyncTask getTask() {
         return this;
     }
-
-
 }

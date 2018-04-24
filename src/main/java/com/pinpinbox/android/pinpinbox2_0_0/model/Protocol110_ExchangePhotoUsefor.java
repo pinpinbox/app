@@ -1,15 +1,19 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -20,9 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2017/8/25.
+ * Created by vmage on 2018/2/9.
  */
-public class Protocol97 extends AsyncTask<Void, Void, Object> {
+
+public class Protocol110_ExchangePhotoUsefor extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -30,32 +35,33 @@ public class Protocol97 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Post();
 
-        public abstract void Success();
+        public abstract void Success(int photousefor_user_id);
 
         public abstract void TimeOut();
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
-
     private TaskCallBack callBack;
-
-    private String user_id;
-    private String album_id;
-    private String index;
-
+    private String response;
+    private String user_id, token, photo_id, identifier;
+    private String message;
     private String result = "";
-    private String message = "";
-    private String reponse = "";
-    private String token = "";
 
-    public Protocol97(Activity mActivity, String user_id, String token, String index, String album_id, TaskCallBack callBack) {
+    private static final String TIMEOUT = "timeout";
+
+    private int photousefor_user_id = -1;
+
+
+    public Protocol110_ExchangePhotoUsefor(Activity mActivity, String user_id, String token, String photo_id, String identifier, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
-        this.index = index;
-        this.album_id = album_id;
+        this.photo_id = photo_id;
+        this.identifier = identifier;
+
         execute();
     }
 
@@ -66,31 +72,44 @@ public class Protocol97 extends AsyncTask<Void, Void, Object> {
         callBack.Prepare();
     }
 
+
     @Override
-    public Object doInBackground(Void... voids) {
+    protected Object doInBackground(Void... voids) {
 
         try {
 
-            reponse = HttpUtility.uploadSubmit(true, Url.P97_DeleteAlbumIndex, putMap(), null);
-            MyLog.Set("d", getClass(), "p97reponse => " + reponse);
+            response = HttpUtility.uploadSubmit(true, Url.P110_ExchangePhotoUseFor, putMap(), null);
+
+            MyLog.Set("d", this.getClass(), "p110response => " + response);
+
 
         } catch (SocketTimeoutException t) {
-            result = ResultType.TIMEOUT;
+            result = TIMEOUT;
             t.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        if (reponse != null && !reponse.equals("")) {
+        if (response != null && !response.equals("")) {
 
             try {
-                JSONObject jsonObject = new JSONObject(reponse);
+                JSONObject jsonObject = new JSONObject(response);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
-                if (!result.equals(ResultType.SYSTEM_OK)) {
+                if (result.equals(ResultType.SYSTEM_OK)|| result.equals(ResultType.PHOTOUSEFOR_USER_HAS_GAINED) || result.equals(ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED)) {
+
+                    String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONObject jsonData = new JSONObject(data);
+                    String photousefor_user = JsonUtility.GetString(jsonData, ProtocolKey.photousefor_user);
+
+                    JSONObject jsonPhotouseforUser = new JSONObject(photousefor_user);
+                    photousefor_user_id = JsonUtility.GetInt(jsonPhotouseforUser, ProtocolKey.photousefor_user_id);
+
+                } else {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -102,6 +121,7 @@ public class Protocol97 extends AsyncTask<Void, Void, Object> {
         return null;
     }
 
+
     @Override
     public void onPostExecute(Object obj) {
         super.onPostExecute(obj);
@@ -112,7 +132,24 @@ public class Protocol97 extends AsyncTask<Void, Void, Object> {
 
             case ResultType.SYSTEM_OK:
 
-                callBack.Success();
+                callBack.Success(photousefor_user_id);
+
+                break;
+
+            case ResultType.PHOTOUSEFOR_USER_HAS_GAINED:
+                callBack.Success(photousefor_user_id);
+                break;
+
+            case ResultType.PHOTOUSEFOR_USER_HAS_EXCHANGED:
+                callBack.Success(photousefor_user_id);
+                break;
+
+
+            case ResultType.TOKEN_ERROR:
+
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
+
+                IntentControl.toLogin(mActivity, user_id);
 
                 break;
 
@@ -128,8 +165,7 @@ public class Protocol97 extends AsyncTask<Void, Void, Object> {
 
                 break;
 
-            case ResultType.TIMEOUT:
-
+            case TIMEOUT:
 
                 ConnectInstability connectInstability = new ConnectInstability() {
                     @Override
@@ -140,7 +176,6 @@ public class Protocol97 extends AsyncTask<Void, Void, Object> {
                 };
                 DialogV2Custom.BuildTimeOut(mActivity, connectInstability);
 
-
                 break;
 
             case "":
@@ -148,24 +183,28 @@ public class Protocol97 extends AsyncTask<Void, Void, Object> {
                 break;
 
 
-
         }
 
 
     }
 
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
+    }
+
+
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.album_id, album_id);
-        map.put(Key.index, index);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
-
-
-//        String sign = IndexSheet.encodePPB(map);
-//        map.put(Key.sign, sign);
+        map.put(Key.photo_id, photo_id);
+        map.put(Key.identifier, identifier);
 
 
 

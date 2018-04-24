@@ -1,9 +1,12 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
@@ -11,8 +14,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -23,10 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2018/2/8.
+ * Created by vmage on 2017/9/18.
  */
-
-public class Protocol106 extends AsyncTask<Void, Void, Object> {
+public class Protocol21_UpdateUser extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -39,7 +39,7 @@ public class Protocol106 extends AsyncTask<Void, Void, Object> {
         public abstract void TimeOut();
     }
 
-
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
@@ -47,23 +47,20 @@ public class Protocol106 extends AsyncTask<Void, Void, Object> {
     private String user_id;
     private String token;
     private String param;
-    private int photousefor_user_id;
 
     private String result = "";
     private String message = "";
-    private String response = "";
+    private String reponse = "";
 
 
-    public Protocol106(Activity mActivity, String user_id, String token, int photousefor_user_id, String param, TaskCallBack callBack) {
+    public Protocol21_UpdateUser(Activity mActivity, String user_id, String token, String param, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
-        this.photousefor_user_id = photousefor_user_id;
         this.param = param;
         execute();
     }
-
 
     @Override
     public void onPreExecute() {
@@ -72,13 +69,12 @@ public class Protocol106 extends AsyncTask<Void, Void, Object> {
     }
 
     @Override
-    public Object doInBackground(Void... voids) {
+    protected Object doInBackground(Void... voids) {
 
         try {
 
-            response = HttpUtility.uploadSubmit(true, Url.P106_GainPhotoUseFor, putMap(), null);
-            MyLog.Set("d", getClass(), "p106reponse => " + response);
-
+            reponse = HttpUtility.uploadSubmit(true, Url.P21_UpdateUser, putMap(), null);
+            MyLog.Set("d", getClass(), "p21reponse => " + reponse);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -87,10 +83,10 @@ public class Protocol106 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
-        if (response != null && !response.equals("")) {
+        if (reponse != null && !reponse.equals("")) {
 
             try {
-                JSONObject jsonObject = new JSONObject(response);
+                JSONObject jsonObject = new JSONObject(reponse);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
                 if (!result.equals(ResultType.SYSTEM_OK)) {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
@@ -159,17 +155,24 @@ public class Protocol106 extends AsyncTask<Void, Void, Object> {
                 DialogV2Custom.BuildUnKnow(mActivity, mActivity.getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
                 break;
 
-
-
         }
 
+
+
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.photousefor_user_id, photousefor_user_id + "");
         map.put(Key.param, param);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
@@ -181,6 +184,5 @@ public class Protocol106 extends AsyncTask<Void, Void, Object> {
     public AsyncTask getTask() {
         return this;
     }
-
 
 }

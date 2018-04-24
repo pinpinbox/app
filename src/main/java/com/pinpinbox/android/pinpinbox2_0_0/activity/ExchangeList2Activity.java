@@ -31,7 +31,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentExchangeDone2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentExchangeUnfinished2;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol107;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol107_GetBookmarkList;
 
 import java.io.Serializable;
 import java.util.List;
@@ -48,7 +48,7 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
     private Activity mActivity;
     private FragmentPagerItemAdapter adapter;
 
-    private Protocol107 protocol107;
+    private Protocol107_GetBookmarkList protocol107;
 
     private ViewPager vpExchange;
     private ImageView backImg;
@@ -96,11 +96,11 @@ public class ExchangeList2Activity extends DraggerActivity implements View.OnCli
             return;
         }
 
-        protocol107 = new Protocol107(
+        protocol107 = new Protocol107_GetBookmarkList(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
-                new Protocol107.TaskCallBack() {
+                new Protocol107_GetBookmarkList.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();

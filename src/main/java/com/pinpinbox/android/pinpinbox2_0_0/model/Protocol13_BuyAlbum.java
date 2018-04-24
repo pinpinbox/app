@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -23,10 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2018/2/8.
+ * Created by vmage on 2017/7/12.
  */
-
-public class Protocol43 extends AsyncTask<Void, Void, Object> {
+public class Protocol13_BuyAlbum extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -36,34 +36,39 @@ public class Protocol43 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Success();
 
+        public abstract void IsOwnAlbum();
+
         public abstract void TimeOut();
     }
 
 
-
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
 
     private String user_id;
     private String token;
-    private String param;
-    private int photousefor_user_id;
+    private String album_id;
+    private String platform;
+    private String point;
 
     private String result = "";
     private String message = "";
-    private String response = "";
+    private String reponse = "";
 
-
-    public Protocol43(Activity mActivity, String user_id, String token, int photousefor_user_id, String param, TaskCallBack callBack) {
+    public Protocol13_BuyAlbum(Activity mActivity, String user_id, String token, String album_id, String platform, String point, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
-        this.photousefor_user_id = photousefor_user_id;
-        this.param = param;
+        this.album_id = album_id;
+        this.platform = platform;
+        this.point = point;
         execute();
+
     }
+
 
     @Override
     public void onPreExecute() {
@@ -76,8 +81,11 @@ public class Protocol43 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            response = HttpUtility.uploadSubmit(true, Url.P43_UpdataPhotoUserFor_User, putMap(), null);
-            MyLog.Set("d", getClass(), "p43reponse => " + response);
+            reponse = HttpUtility.uploadSubmit(true, Url.P13_BuyAlbum, putMap(), null);
+
+
+
+            MyLog.Set("d", getClass(), "p13reponse => " + reponse);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -86,10 +94,11 @@ public class Protocol43 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
-        if (response != null && !response.equals("")) {
+
+        if (reponse != null && !reponse.equals("")) {
 
             try {
-                JSONObject jsonObject = new JSONObject(response);
+                JSONObject jsonObject = new JSONObject(reponse);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
                 if (!result.equals(ResultType.SYSTEM_OK)) {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
@@ -162,16 +171,18 @@ public class Protocol43 extends AsyncTask<Void, Void, Object> {
 
         }
 
+
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.photousefor_user_id, photousefor_user_id + "");
-        map.put(Key.param, param);
+        map.put(Key.album_id, album_id);
+        map.put(Key.platform, platform);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
+        map.put(Key.point, point);
 
         return map;
     }
@@ -181,6 +192,11 @@ public class Protocol43 extends AsyncTask<Void, Void, Object> {
         return this;
     }
 
+    @Override
+    protected void onCancelled() {
 
+        mActivity = null;
 
+        super.onCancelled();
+    }
 }

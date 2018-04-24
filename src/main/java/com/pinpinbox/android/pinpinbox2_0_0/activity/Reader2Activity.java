@@ -107,10 +107,10 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol108;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol111;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol108_GetPhotoUsefor;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109_InsertBookmark;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol111_SlotPhotoUsefor;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13_BuyAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Picasso;
@@ -156,10 +156,10 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private ShareTask shareTask;
     private SendLikeTask sendLikeTask;
     private DeleteLikeTask deleteLikeTask;
-    private Protocol13 protocol13;
-    private Protocol108 protocol108;
-    private Protocol109 protocol109;
-    private Protocol111 protocol111;
+    private Protocol13_BuyAlbum protocol13;
+    private Protocol108_GetPhotoUsefor protocol108;
+    private Protocol109_InsertBookmark protocol109;
+    private Protocol111_SlotPhotoUsefor protocol111;
 
     private ItemAlbum itemAlbum;
     private List<ItemPhoto> photoContentsList;
@@ -1188,7 +1188,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     }
 
 
-    private HashMap<Integer, Protocol108> protocol108HashMap;
+    private HashMap<Integer, Protocol108_GetPhotoUsefor> protocol108HashMap;
 
     @SuppressLint("UseSparseArrays")
     private void doGetExchange(final View vPage, final int position, final LinearLayout linExchange) {
@@ -1231,12 +1231,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         }
 
 
-        protocol108 = new Protocol108(
+        protocol108 = new Protocol108_GetPhotoUsefor(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 photoContentsList.get(position).getPhoto_id() + "",
-                new Protocol108.TaskCallBack() {
+                new Protocol108_GetPhotoUsefor.TaskCallBack() {
 
                     private void showContents(ItemExchange itemExchange) {
 
@@ -1317,12 +1317,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                         return;
                                     }
 
-                                    protocol109 = new Protocol109(
+                                    protocol109 = new Protocol109_InsertBookmark(
                                             mActivity,
                                             PPBApplication.getInstance().getId(),
                                             PPBApplication.getInstance().getToken(),
                                             photoContentsList.get(position).getPhoto_id() + "",
-                                            new Protocol109.TaskCallBack() {
+                                            new Protocol109_InsertBookmark.TaskCallBack() {
                                                 @Override
                                                 public void Prepare() {
                                                     startLoading();
@@ -1503,13 +1503,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         TextUtility.setBold(tvExchangeEnd, true);
 
 
-        protocol111 = new Protocol111(
+        protocol111 = new Protocol111_SlotPhotoUsefor(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 photoContentsList.get(position).getPhoto_id() + "",
                 getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
-                new Protocol111.TaskCallBack() {
+                new Protocol111_SlotPhotoUsefor.TaskCallBack() {
 
                     private void showContents(ItemExchange itemExchange) {
 
@@ -1610,12 +1610,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                         return;
                                     }
 
-                                    protocol109 = new Protocol109(
+                                    protocol109 = new Protocol109_InsertBookmark(
                                             mActivity,
                                             PPBApplication.getInstance().getId(),
                                             PPBApplication.getInstance().getToken(),
                                             photoContentsList.get(position).getPhoto_id() + "",
-                                            new Protocol109.TaskCallBack() {
+                                            new Protocol109_InsertBookmark.TaskCallBack() {
                                                 @Override
                                                 public void Prepare() {
                                                     startLoading();
@@ -2786,14 +2786,14 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             return;
         }
 
-        protocol13 = new Protocol13(
+        protocol13 = new Protocol13_BuyAlbum(
                 mActivity,
                 id,
                 token,
                 album_id,
                 "google",
                 comfirmPoint,
-                new Protocol13.TaskCallBack() {
+                new Protocol13_BuyAlbum.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         doingType = DoingTypeClass.DoCollectAlbum;

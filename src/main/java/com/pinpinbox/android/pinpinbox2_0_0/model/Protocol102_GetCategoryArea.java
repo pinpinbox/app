@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Protocol102 extends AsyncTask<Void, Void, Object> {
+public class Protocol102_GetCategoryArea extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -46,9 +47,10 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
         public abstract void TimeOut();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
-    private Protocol102.TaskCallBack callBack;
+    private TaskCallBack callBack;
 
 
     private String user_id;
@@ -66,7 +68,7 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
     private List<ItemCategoryBanner> itemCategoryBannerList;
 
 
-    public Protocol102(Activity mActivity, String user_id, String token, String categoryarea_id, Protocol102.TaskCallBack callBack) {
+    public Protocol102_GetCategoryArea(Activity mActivity, String user_id, String token, String categoryarea_id, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
@@ -443,6 +445,14 @@ public class Protocol102 extends AsyncTask<Void, Void, Object> {
         }
 
 
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 

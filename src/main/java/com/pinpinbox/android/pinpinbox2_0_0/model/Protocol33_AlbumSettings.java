@@ -1,9 +1,12 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
@@ -11,8 +14,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -23,10 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2018/2/8.
+ * Created by vmage on 2017/7/6.
  */
-
-public class Protocol53 extends AsyncTask<Void, Void, Object> {
+public class Protocol33_AlbumSettings extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -40,28 +40,28 @@ public class Protocol53 extends AsyncTask<Void, Void, Object> {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
 
     private String user_id;
     private String token;
-    private String cellphone;
-    private String smspassword;
+    private String album_id;
+    private String settings;
 
 
     private String result = "";
     private String message = "";
-    private String response = "";
+    private String reponse = "";
 
-
-    public Protocol53(Activity mActivity, String user_id, String token, String cellphone, String smspassword, TaskCallBack callBack) {
+    public Protocol33_AlbumSettings(Activity mActivity, String user_id, String token, String album_id, String settings, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
-        this.cellphone = cellphone;
-        this.smspassword = smspassword;
+        this.album_id = album_id;
+        this.settings = settings;
         execute();
     }
 
@@ -77,9 +77,8 @@ public class Protocol53 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            response = HttpUtility.uploadSubmit(true, Url.P53_UpdateCellphone, putMap(), null);
-            MyLog.Set("d", getClass(), "p53reponse => " + response);
-
+            reponse = HttpUtility.uploadSubmit(true, Url.P33_AlbumSettings, putMap(), null);
+            MyLog.Set("d", getClass(), "p33reponse => " + reponse);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -88,10 +87,10 @@ public class Protocol53 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
-        if (response != null && !response.equals("")) {
+        if (reponse != null && !reponse.equals("")) {
 
             try {
-                JSONObject jsonObject = new JSONObject(response);
+                JSONObject jsonObject = new JSONObject(reponse);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
                 if (!result.equals(ResultType.SYSTEM_OK)) {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
@@ -164,16 +163,43 @@ public class Protocol53 extends AsyncTask<Void, Void, Object> {
 
         }
 
+
+//        if (result.equals(ResultType.TIMEOUT)) {
+//            ConnectInstability connectInstability = new ConnectInstability() {
+//                @Override
+//                public void DoingAgain() {
+//                    callBack.TimeOut();
+//                }
+//            };
+//            DialogV2Custom.BuildTimeOut(mActivity, connectInstability);
+//            return;
+//        }
+//
+//        if(result.equals(ResultType.TOKEN_ERROR)){
+//
+//
+//            return;
+//        }
+
+
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.cellphone, cellphone);
+        map.put(Key.album_id, album_id);
+        map.put(Key.settings, settings);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
-        map.put(Key.smspassword, smspassword);
 
         return map;
     }

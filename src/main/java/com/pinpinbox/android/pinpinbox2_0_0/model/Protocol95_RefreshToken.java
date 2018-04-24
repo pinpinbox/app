@@ -1,33 +1,31 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
 import org.json.JSONObject;
 
-import java.io.File;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2017/11/15.
+ * Created by vmage on 2017/7/6.
  */
-
-public class Protocol101 extends AsyncTask<Void, Void, Object> {
+public class Protocol95_RefreshToken extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -35,36 +33,31 @@ public class Protocol101 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Post();
 
-        public abstract void Success(String cover);
+        public abstract void Success();
 
         public abstract void TimeOut();
     }
 
+
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
-    private Protocol101.TaskCallBack callBack;
-
-    private File file;
+    private TaskCallBack callBack;
 
     private String user_id;
-    private String token;
-
-    private String cover = "";
 
     private String result = "";
     private String message = "";
     private String reponse = "";
+    private String token = "";
 
-
-    public Protocol101(Activity mActivity, String user_id, String token, File file, Protocol101.TaskCallBack callBack) {
+    public Protocol95_RefreshToken(Activity mActivity, String user_id, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
-        this.token = token;
-        this.file = file;
-
         execute();
     }
+
 
     @Override
     public void onPreExecute() {
@@ -73,12 +66,12 @@ public class Protocol101 extends AsyncTask<Void, Void, Object> {
     }
 
     @Override
-    protected Object doInBackground(Void... voids) {
+    public Object doInBackground(Void... voids) {
 
         try {
 
-            reponse = HttpUtility.uploadSubmit(true, Url.P101_SetUserCover, putMap(), file);
-            MyLog.Set("d", getClass(), "p101reponse => " + reponse);
+            reponse = HttpUtility.uploadSubmit(true, Url.P95_RefreshToken, putMap(), null);
+            MyLog.Set("d", getClass(), "p95reponse => " + reponse);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -87,30 +80,30 @@ public class Protocol101 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
+
         if (reponse != null && !reponse.equals("")) {
 
             try {
                 JSONObject jsonObject = new JSONObject(reponse);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
-                if (result.equals(ResultType.SYSTEM_OK)) {
-
+                if(result.equals(ResultType.SYSTEM_OK)){
                     String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
 
                     JSONObject jsonData = new JSONObject(data);
 
-                    String user = JsonUtility.GetString(jsonData, ProtocolKey.user);
+                    String jsonToken = JsonUtility.GetString(jsonData, ProtocolKey.token);
 
-                    JSONObject jsonUser = new JSONObject(user);
+                    JSONObject jsonT = new JSONObject(jsonToken);
 
-                    cover = JsonUtility.GetString(jsonUser, ProtocolKey.cover);
+                    token = JsonUtility.GetString(jsonT, ProtocolKey.token);
 
 
-                } else {
-                    message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
 
-
+                if (!result.equals(ResultType.SYSTEM_OK)) {
+                    message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -132,15 +125,10 @@ public class Protocol101 extends AsyncTask<Void, Void, Object> {
 
             case ResultType.SYSTEM_OK:
 
-                callBack.Success(cover);
+                PPBApplication.getInstance().getData().edit().putString(Key.token, token).commit();
+                PPBApplication.getInstance().getData().edit().putBoolean(Key.tokenUpDated, true).commit();
 
-                break;
-
-            case ResultType.TOKEN_ERROR:
-
-                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
-
-                IntentControl.toLogin(mActivity, user_id);
+                callBack.Success();
 
                 break;
 
@@ -175,17 +163,30 @@ public class Protocol101 extends AsyncTask<Void, Void, Object> {
                 DialogV2Custom.BuildUnKnow(mActivity, mActivity.getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
                 break;
 
+
+
         }
 
 
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.token, token);
         map.put(Key.user_id, user_id);
+
+        String sign = IndexSheet.encodePPB(map);
+        map.put(Key.sign, sign);
+
 
 
         return map;

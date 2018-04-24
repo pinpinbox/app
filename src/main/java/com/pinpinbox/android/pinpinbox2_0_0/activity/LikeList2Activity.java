@@ -42,7 +42,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol105;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol105_GetAlbumLikesList;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Picasso;
 
@@ -66,7 +66,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
 //
     private FollowTask followTask;
     private AttentionTask attentionTask;
-    private Protocol105 protocol105;
+    private Protocol105_GetAlbumLikesList protocol105;
     private PopBoard board;
 
     private RecyclerView rvUser;
@@ -310,13 +310,13 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
 
     private void setProtocol() {
 
-        protocol105 = new Protocol105(
+        protocol105 = new Protocol105_GetAlbumLikesList(
                 mActivity,
                 album_id,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemUserList,
-                new Protocol105.TaskCallBack() {
+                new Protocol105_GetAlbumLikesList.TaskCallBack() {
                     @Override
                     public void Prepare(int doingType) {
                         switch (doingType) {

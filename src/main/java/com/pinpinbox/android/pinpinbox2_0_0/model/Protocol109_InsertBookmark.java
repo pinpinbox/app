@@ -1,11 +1,10 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
@@ -13,6 +12,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -23,9 +24,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2017/7/12.
+ * Created by vmage on 2018/2/8.
  */
-public class Protocol13 extends AsyncTask<Void, Void, Object> {
+
+public class Protocol109_InsertBookmark extends AsyncTask<Void, Void, Object> {
+
 
     public static abstract class TaskCallBack {
 
@@ -35,34 +38,30 @@ public class Protocol13 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Success();
 
-        public abstract void IsOwnAlbum();
-
         public abstract void TimeOut();
     }
 
-
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
 
     private String user_id;
     private String token;
-    private String album_id;
-    private String platform;
-    private String point;
+    private String photo_id;
+
 
     private String result = "";
     private String message = "";
-    private String reponse = "";
+    private String response = "";
 
-    public Protocol13(Activity mActivity, String user_id, String token, String album_id, String platform, String point, TaskCallBack callBack) {
+
+    public Protocol109_InsertBookmark(Activity mActivity, String user_id, String token, String photo_id, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
-        this.album_id = album_id;
-        this.platform = platform;
-        this.point = point;
+        this.photo_id = photo_id;
         execute();
     }
 
@@ -78,11 +77,8 @@ public class Protocol13 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            reponse = HttpUtility.uploadSubmit(true, Url.P13_BuyAlbum, putMap(), null);
-
-
-
-            MyLog.Set("d", getClass(), "p13reponse => " + reponse);
+            response = HttpUtility.uploadSubmit(true, Url.P109_InsertBookMark, putMap(), null);
+            MyLog.Set("d", getClass(), "p109reponse => " + response);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -91,11 +87,10 @@ public class Protocol13 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
-
-        if (reponse != null && !reponse.equals("")) {
+        if (response != null && !response.equals("")) {
 
             try {
-                JSONObject jsonObject = new JSONObject(reponse);
+                JSONObject jsonObject = new JSONObject(response);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
                 if (!result.equals(ResultType.SYSTEM_OK)) {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
@@ -168,18 +163,23 @@ public class Protocol13 extends AsyncTask<Void, Void, Object> {
 
         }
 
+    }
 
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.album_id, album_id);
-        map.put(Key.platform, platform);
+        map.put(Key.photo_id, photo_id);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
-        map.put(Key.point, point);
 
         return map;
     }
@@ -188,6 +188,7 @@ public class Protocol13 extends AsyncTask<Void, Void, Object> {
     public AsyncTask getTask() {
         return this;
     }
+
 
 
 }

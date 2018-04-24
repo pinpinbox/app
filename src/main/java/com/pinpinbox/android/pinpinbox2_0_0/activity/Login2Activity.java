@@ -77,8 +77,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch2;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol98;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95_RefreshToken;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol98_BusinessSubUserFastRegister;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -123,8 +123,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
     private CheckEmailTask checkEmailTask;
     private RequestSmsTask requestSmsTask;
     private GetPasswordTask getPasswordTask;
-    private Protocol95 protocol95;
-    private Protocol98 protocol98;
+    private Protocol95_RefreshToken protocol95;
+    private Protocol98_BusinessSubUserFastRegister protocol98;
 
 
     private RelativeLayout rBackground;
@@ -1349,7 +1349,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         } else {
 
 
-            protocol95 = new Protocol95(mActivity, id, new Protocol95.TaskCallBack() {
+            protocol95 = new Protocol95_RefreshToken(mActivity, id, new Protocol95_RefreshToken.TaskCallBack() {
                 @Override
                 public void Prepare() {
                     startLoading();
@@ -1567,13 +1567,13 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         }
 
 
-        protocol98 = new Protocol98(
+        protocol98 = new Protocol98_BusinessSubUserFastRegister(
                 mActivity,
                 businessuser_id,
                 fbData.getString("fid", ""),
                 timestamp + "",
                 param,
-                new Protocol98.TaskCallBack() {
+                new Protocol98_BusinessSubUserFastRegister.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();

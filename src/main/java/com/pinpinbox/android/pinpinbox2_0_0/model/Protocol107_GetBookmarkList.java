@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -32,7 +33,7 @@ import java.util.Map;
  * Created by vmage on 2018/2/8.
  */
 
-public class Protocol107 extends AsyncTask<Void, Void, Object> {
+public class Protocol107_GetBookmarkList extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -46,6 +47,7 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
@@ -60,7 +62,7 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
     private List<ItemExchange> itemExchangeList;
 
 
-    public Protocol107(Activity mActivity, String user_id, String token, TaskCallBack callBack) {
+    public Protocol107_GetBookmarkList(Activity mActivity, String user_id, String token, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
@@ -255,6 +257,14 @@ public class Protocol107 extends AsyncTask<Void, Void, Object> {
         }
 
 
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 

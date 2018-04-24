@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -15,18 +14,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol112;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol53;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol112_RequestSmsPwdForUpdateCellphone;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol53_UpdateCellphone;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
@@ -35,15 +31,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 
-import org.json.JSONObject;
-
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by vmage on 2017/3/6.
@@ -54,8 +44,8 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
     private PopPicker popPicker;
     private CountDownTimer cTimer;
 
-    private Protocol53 protocol53;
-    private Protocol112 protocol112;
+    private Protocol53_UpdateCellphone protocol53;
+    private Protocol112_RequestSmsPwdForUpdateCellphone protocol112;
     //    private RequestSmsTask requestSmsTask;
 //    private UpdateCellphoneTask updateCellphoneTask;
 
@@ -196,12 +186,12 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
         String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
         String strCompletePhone = "+" + strCountryNumber + edPhone.getText().toString();
 
-        protocol112 = new Protocol112(
+        protocol112 = new Protocol112_RequestSmsPwdForUpdateCellphone(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 strCompletePhone,
-                new Protocol112.TaskCallBack() {
+                new Protocol112_RequestSmsPwdForUpdateCellphone.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();
@@ -262,13 +252,13 @@ public class ChangePhone2Activity extends DraggerActivity implements View.OnClic
         String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
         String strCompletePhone = "+" + strCountryNumber + edPhone.getText().toString();
 
-        protocol53 = new Protocol53(
+        protocol53 = new Protocol53_UpdateCellphone(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 strCompletePhone,
                 edCode.getText().toString(),
-                new Protocol53.TaskCallBack() {
+                new Protocol53_UpdateCellphone.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();

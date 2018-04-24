@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -101,6 +102,7 @@ public class Protocol113 {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private class Call extends AsyncTask<Void, Void, Object> {
 
 
@@ -260,6 +262,14 @@ public class Protocol113 {
             }
 
 
+        }
+
+        @Override
+        protected void onCancelled() {
+
+            mActivity = null;
+
+            super.onCancelled();
         }
 
     }

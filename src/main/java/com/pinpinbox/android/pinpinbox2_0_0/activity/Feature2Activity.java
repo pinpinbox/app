@@ -50,7 +50,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerImage;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerVideo;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCategoryUser;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102_GetCategoryArea;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -71,7 +71,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     private Activity mActivity;
     private FragmentCategoryUser fragmentCategoryUser;
-    private Protocol102 protocol102;
+    private Protocol102_GetCategoryArea protocol102;
 
     private FragmentPagerItemAdapter adapter;
 
@@ -191,12 +191,12 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         } else {
 
 
-            protocol102 = new Protocol102(
+            protocol102 = new Protocol102_GetCategoryArea(
                     mActivity,
                     PPBApplication.getInstance().getId(),
                     PPBApplication.getInstance().getToken(),
                     categoryarea_id + "",
-                    new Protocol102.TaskCallBack() {
+                    new Protocol102_GetCategoryArea.TaskCallBack() {
                         @Override
                         public void Prepare() {
 

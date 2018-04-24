@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -26,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Protocol105 {
+public class Protocol105_GetAlbumLikesList {
 
 
     public static abstract class TaskCallBack {
@@ -61,7 +62,7 @@ public class Protocol105 {
     private boolean sizeMax = false;
     private boolean noDataToastAppeared = false;
 
-    public Protocol105(Activity mActivity, String album_id, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
+    public Protocol105_GetAlbumLikesList(Activity mActivity, String album_id, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.album_id = album_id;
@@ -98,6 +99,7 @@ public class Protocol105 {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private class Call extends AsyncTask<Void, Void, Object> {
 
 
@@ -202,8 +204,8 @@ public class Protocol105 {
                         callBack.Success(doingType);
 
 
-                        if(userCount<rangeCount){
-                            MyLog.Set("d", Protocol105.class, "項目少於" + rangeCount);
+                        if (userCount < rangeCount) {
+                            MyLog.Set("d", Protocol105_GetAlbumLikesList.class, "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
                         }
@@ -258,6 +260,16 @@ public class Protocol105 {
 
 
         }
+
+
+        @Override
+        protected void onCancelled() {
+
+            mActivity = null;
+
+            super.onCancelled();
+        }
+
 
     }
 

@@ -1,18 +1,19 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -23,9 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2017/9/25.
+ * Created by vmage on 2018/2/8.
  */
-public class Protocol98 extends AsyncTask<Void, Void, Object> {
+
+public class Protocol112_RequestSmsPwdForUpdateCellphone extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -35,47 +37,32 @@ public class Protocol98 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Success();
 
-        public abstract void UserExists();
-
         public abstract void TimeOut();
-
-        public abstract void DoInBackground();
-
-
     }
 
+
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
-
-    private SharedPreferences getData;
-
 
     private TaskCallBack callBack;
 
-    private String businessuser_id;
-    private String facebook_id;
-    private String timestamp;
-    private String param;
+    private String user_id;
+    private String token;
+    private String cellphone;
+
 
     private String result = "";
     private String message = "";
-    private String reponse = "";
+    private String response = "";
 
-    public String getResult() {
-        return this.result;
-    }
 
-    public Protocol98(Activity mActivity, String businessuser_id, String facebook_id, String timestamp, String param, TaskCallBack callBack) {
+    public Protocol112_RequestSmsPwdForUpdateCellphone(Activity mActivity, String user_id, String token, String cellphone, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
-        this.businessuser_id = businessuser_id;
-        this.facebook_id = facebook_id;
-        this.timestamp = timestamp;
-        this.param = param;
-
-        getData = PPBApplication.getInstance().getData();
-
+        this.user_id = user_id;
+        this.token = token;
+        this.cellphone = cellphone;
         execute();
-
     }
 
 
@@ -90,8 +77,9 @@ public class Protocol98 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            reponse = HttpUtility.uploadSubmit(true, Url.P98_BusinessRegister, putMap(), null);
-            MyLog.Set("d", getClass(), "p98reponse => " + reponse);
+            response = HttpUtility.uploadSubmit(true, Url.P112_RequestSMSForUpdateCellphone, putMap(), null);
+            MyLog.Set("d", getClass(), "p112reponse => " + response);
+
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -100,47 +88,21 @@ public class Protocol98 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
-
-        if (reponse != null && !reponse.equals("")) {
+        if (response != null && !response.equals("")) {
 
             try {
-                JSONObject jsonObject = new JSONObject(reponse);
+                JSONObject jsonObject = new JSONObject(response);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
-
-                if (result.equals(ResultType.SYSTEM_OK) || result.equals(ResultType.USER_EXISTS)) {
-
-                    String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-
-                    JSONObject dataObject = new JSONObject(data);
-
-                    String token = JsonUtility.GetString(dataObject, ProtocolKey.token);
-
-                    JSONObject tokenObject = new JSONObject(token);
-
-                    String realToken = JsonUtility.GetString(tokenObject, ProtocolKey.token);
-
-                    String user_id = JsonUtility.GetString(tokenObject, ProtocolKey.user_id);
-
-                    MyLog.Set("e", this.getClass(), "user_id => " + user_id);
-                    MyLog.Set("e", this.getClass(), "realToken => " + realToken);
-
-
-                    SharedPreferences.Editor editor = getData.edit();
-                    editor.putString(Key.token, realToken);
-                    editor.putString(Key.id, user_id);
-                    editor.commit();
-
-                    callBack.DoInBackground();
-
-
-                } else {
+                if (!result.equals(ResultType.SYSTEM_OK)) {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+
         }
+
 
         return null;
     }
@@ -150,6 +112,7 @@ public class Protocol98 extends AsyncTask<Void, Void, Object> {
         super.onPostExecute(obj);
         callBack.Post();
 
+
         switch (result) {
 
             case ResultType.SYSTEM_OK:
@@ -158,9 +121,12 @@ public class Protocol98 extends AsyncTask<Void, Void, Object> {
 
                 break;
 
-            case ResultType.USER_EXISTS:
-//                callBack.Success();
-                callBack.UserExists();
+            case ResultType.TOKEN_ERROR:
+
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
+
+                IntentControl.toLogin(mActivity, user_id);
+
                 break;
 
             case ResultType.USER_ERROR:
@@ -195,27 +161,34 @@ public class Protocol98 extends AsyncTask<Void, Void, Object> {
                 break;
 
 
+
         }
 
+    }
 
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.businessuser_id, businessuser_id);
-        map.put(Key.facebook_id, facebook_id);
-        map.put(Key.timestamp, timestamp);
-        String sign = IndexSheet.encodePPB(map);
-        map.put(Key.sign, sign);
-        map.put(Key.param, param);
-
+        map.put(Key.cellphone, cellphone);
+        map.put(Key.token, token);
+        map.put(Key.user_id, user_id);
 
         return map;
     }
 
+
     public AsyncTask getTask() {
         return this;
     }
+
+
 }

@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -25,9 +23,7 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
-import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
-import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerVoteAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -36,20 +32,18 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSearch2;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol99;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100_Vote;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol99_GetEventVoteList;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -64,8 +58,8 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
     private CountDownTimer countDownTimer;
     private InputMethodManager inputMethodManager;
 
-    private Protocol99 protocol99;
-    private Protocol100 protocol100;
+    private Protocol99_GetEventVoteList protocol99;
+    private Protocol100_Vote protocol100;
 
     private RecyclerVoteAdapter voteAdapter;
 
@@ -270,14 +264,14 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
     }
 
     private void setProtocol() {
-        protocol99 = new Protocol99(
+        protocol99 = new Protocol99_GetEventVoteList(
                 mActivity,
                 id,
                 token,
                 event_id,
                 strSearch,
                 itemAlbumList,
-                new Protocol99.TaskCallBack() {
+                new Protocol99_GetEventVoteList.TaskCallBack() {
                     @Override
                     public void Prepare(int doingType) {
 
@@ -532,13 +526,13 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
             return;
         }
 
-        protocol100 = new Protocol100(
+        protocol100 = new Protocol100_Vote(
                 mActivity,
                 id,
                 token,
                 event_id,
                 itemAlbumList.get(position).getAlbum_id(),
-                new Protocol100.TaskCallBack() {
+                new Protocol100_Vote.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();
