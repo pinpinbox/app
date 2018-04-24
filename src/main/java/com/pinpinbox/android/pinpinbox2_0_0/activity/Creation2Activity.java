@@ -95,7 +95,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightStartedLis
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33_AlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.util.CheckExternalStorage;
 import com.skyfishjy.library.RippleBackground;
@@ -148,7 +148,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private GetSettingsTask getSettingsTask;
     private SetSettingsTask setSettingsTask;
     private SendAudioTask sendAudioTask;
-    private Protocol33 protocol33;
+    private Protocol33_AlbumSettings protocol33;
 
     private FragmentSelectPhoto2 fragmentSelectPhoto2;
     private FragmentSelectVideo2 fragmentSelectVideo2;
@@ -3544,13 +3544,13 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             String settings = jsonObject.toString();
 
-            protocol33 = new Protocol33(
+            protocol33 = new Protocol33_AlbumSettings(
                     mActivity,
                     id,
                     token,
                     album_id,
                     settings,
-                    new Protocol33.TaskCallBack() {
+                    new Protocol33_AlbumSettings.TaskCallBack() {
 
                         @Override
                         public void Prepare() {

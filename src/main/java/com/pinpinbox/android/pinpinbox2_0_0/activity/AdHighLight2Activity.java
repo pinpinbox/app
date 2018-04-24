@@ -35,7 +35,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
     private String strBannerUrl;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
     }
 
-
     private void setLastActivityBlur() {
 
         blurview = (BlurView) findViewById(R.id.blurview);
@@ -69,7 +67,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
     }
 
-
     private void init() {
 
 
@@ -84,7 +81,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
 
     }
-
 
     private void setShareElementAnim() {
         strBannerUrl = getIntent().getExtras().getString(Key.image, "");
@@ -138,7 +134,8 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
         String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
 
-        //master
+        //test/wip
+
 
         JSONArray bannerArray = null;
 
@@ -204,6 +201,13 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
     @Override
     public void onDestroy() {
+
+        if(strBannerUrl!=null && !strBannerUrl.equals("") && !strBannerUrl.equals("")) {
+            Picasso.with(getApplicationContext()).invalidate(strBannerUrl);
+            bannerImg.setImageBitmap(null);
+            bannerImg.setImageDrawable(null);
+        }
+
         super.onDestroy();
     }
 

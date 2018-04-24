@@ -76,8 +76,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.TouchRange.TouchRange;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100_Vote;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13_BuyAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
@@ -118,8 +118,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private GetPointTask getPointTask;
     private SendLikeTask sendLikeTask;
     private DeleteLikeTask deleteLikeTask;
-    private Protocol13 protocol13;
-    private Protocol100 protocol100;
+    private Protocol13_BuyAlbum protocol13;
+    private Protocol100_Vote protocol100;
 
 //    private GyroscopeObserver gyroscopeObserver;
 
@@ -794,14 +794,14 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             return;
         }
 
-        protocol13 = new Protocol13(
+        protocol13 = new Protocol13_BuyAlbum(
                 mActivity,
                 id,
                 token,
                 album_id,
                 "google",
                 itemAlbum.getPoint() + "",
-                new Protocol13.TaskCallBack() {
+                new Protocol13_BuyAlbum.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         doingType = DoingTypeClass.DoCollectAlbum;
@@ -2786,13 +2786,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             return;
         }
 
-        protocol100 = new Protocol100(
+        protocol100 = new Protocol100_Vote(
                 mActivity,
                 id,
                 token,
                 event_id,
                 album_id,
-                new Protocol100.TaskCallBack() {
+                new Protocol100_Vote.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();

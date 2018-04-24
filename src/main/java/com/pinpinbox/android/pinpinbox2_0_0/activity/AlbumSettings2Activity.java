@@ -65,9 +65,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol96;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol97;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33_AlbumSettings;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol96_InsertAlbumIndex;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol97_DeleteAlbumIndex;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
@@ -98,9 +98,9 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private SetSettingsTask setSettingsTask;
     private GetPhotoCountTask getPhotoCountTask;
     private SendContributeTask sendContributeTask;
-    private Protocol33 protocol33;
-    private Protocol96 protocol96;
-    private Protocol97 protocol97;
+    private Protocol33_AlbumSettings protocol33;
+    private Protocol96_InsertAlbumIndex protocol96;
+    private Protocol97_DeleteAlbumIndex protocol97;
 
     private RecyclerAlbumSettingsAdapter categoryFirstAdapter, categorySecondAdapter, weatherAdapter, moodAdapter;
     private RecyclerBarCodeAdapter barCodeAdapter;
@@ -747,13 +747,13 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             return;
         }
 
-        protocol33 = new Protocol33(
+        protocol33 = new Protocol33_AlbumSettings(
                 mActivity,
                 id,
                 token,
                 album_id,
                 settings,
-                new Protocol33.TaskCallBack() {
+                new Protocol33_AlbumSettings.TaskCallBack() {
 
                     @Override
                     public void Prepare() {
@@ -907,13 +907,13 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             return;
         }
 
-        protocol96 = new Protocol96(
+        protocol96 = new Protocol96_InsertAlbumIndex(
                 mActivity,
                 id,
                 token,
                 edScan.getText().toString(),
                 album_id,
-                new Protocol96.TaskCallBack() {
+                new Protocol96_InsertAlbumIndex.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         doingType = DoingTypeClass.DoInsert;
@@ -954,13 +954,13 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         }
 
 
-        protocol97 = new Protocol97(
+        protocol97 = new Protocol97_DeleteAlbumIndex(
                 mActivity,
                 id,
                 token,
                 albumindexList.get(barCodeItem),
                 album_id,
-                new Protocol97.TaskCallBack() {
+                new Protocol97_DeleteAlbumIndex.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         doingType = DoingTypeClass.DoDelete;

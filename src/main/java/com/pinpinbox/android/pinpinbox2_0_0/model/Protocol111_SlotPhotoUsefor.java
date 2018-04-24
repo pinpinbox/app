@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -26,7 +27,7 @@ import java.util.Map;
  * Created by vmage on 2018/3/1.
  */
 
-public class Protocol111 extends AsyncTask<Void, Void, Object> {
+public class Protocol111_SlotPhotoUsefor extends AsyncTask<Void, Void, Object> {
 
 
 
@@ -53,6 +54,7 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
         public abstract void TimeOut();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
     private TaskCallBack callBack;
     private String response;
@@ -62,7 +64,7 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
 
     private ItemExchange itemExchange;
 
-    public Protocol111(Activity mActivity, String user_id, String token, String photo_id, String identifier, TaskCallBack callBack) {
+    public Protocol111_SlotPhotoUsefor(Activity mActivity, String user_id, String token, String photo_id, String identifier, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
@@ -153,8 +155,6 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
         return null;
     }
 
-
-
     @Override
     public void onPostExecute(Object obj) {
         super.onPostExecute(obj);
@@ -244,6 +244,14 @@ public class Protocol111 extends AsyncTask<Void, Void, Object> {
         }
 
 
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 

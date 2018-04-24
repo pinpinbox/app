@@ -9,7 +9,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95_RefreshToken;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class IntentControl {
 
         //call refresh token protocol
 
-        new Protocol95(currentActivity, user_id, new Protocol95.TaskCallBack() {
+        new Protocol95_RefreshToken(currentActivity, user_id, new Protocol95_RefreshToken.TaskCallBack() {
 
 
             private LoadingAnimation loading;
@@ -70,7 +70,7 @@ public class IntentControl {
 
         //call refresh token protocol
 
-        new Protocol95(currentActivity, user_id, new Protocol95.TaskCallBack() {
+        new Protocol95_RefreshToken(currentActivity, user_id, new Protocol95_RefreshToken.TaskCallBack() {
 
 
             private LoadingAnimation loading;

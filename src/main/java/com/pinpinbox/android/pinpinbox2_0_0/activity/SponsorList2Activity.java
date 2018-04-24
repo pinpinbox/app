@@ -43,7 +43,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol104;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol104_GetSponsorList;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Picasso;
 
@@ -70,7 +70,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     private FollowTask followTask;
     private AttentionTask attentionTask;
-    private Protocol104 protocol104;
+    private Protocol104_GetSponsorList protocol104;
     private PopBoard board;
 
     private RecyclerView rvUser;
@@ -311,12 +311,12 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     private void setProtocol() {
 
-        protocol104 = new Protocol104(
+        protocol104 = new Protocol104_GetSponsorList(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemUserList,
-                new Protocol104.TaskCallBack() {
+                new Protocol104_GetSponsorList.TaskCallBack() {
                     @Override
                     public void Prepare(int doingType) {
                         switch (doingType) {

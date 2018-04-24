@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -26,8 +27,7 @@ import java.util.Map;
  * Created by vmage on 2018/2/8.
  */
 
-public class Protocol109 extends AsyncTask<Void, Void, Object> {
-
+public class Protocol43_UpdatePhotoUseforUser extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -40,29 +40,31 @@ public class Protocol109 extends AsyncTask<Void, Void, Object> {
         public abstract void TimeOut();
     }
 
+
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
 
     private String user_id;
     private String token;
-    private String photo_id;
-
+    private String param;
+    private int photousefor_user_id;
 
     private String result = "";
     private String message = "";
     private String response = "";
 
 
-    public Protocol109(Activity mActivity, String user_id, String token, String photo_id, TaskCallBack callBack) {
+    public Protocol43_UpdatePhotoUseforUser(Activity mActivity, String user_id, String token, int photousefor_user_id, String param, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
-        this.photo_id = photo_id;
+        this.photousefor_user_id = photousefor_user_id;
+        this.param = param;
         execute();
     }
-
 
     @Override
     public void onPreExecute() {
@@ -75,8 +77,8 @@ public class Protocol109 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            response = HttpUtility.uploadSubmit(true, Url.P109_InsertBookMark, putMap(), null);
-            MyLog.Set("d", getClass(), "p109reponse => " + response);
+            response = HttpUtility.uploadSubmit(true, Url.P43_UpdataPhotoUserFor_User, putMap(), null);
+            MyLog.Set("d", getClass(), "p43reponse => " + response);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -163,11 +165,19 @@ public class Protocol109 extends AsyncTask<Void, Void, Object> {
 
     }
 
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
+    }
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.photo_id, photo_id);
+        map.put(Key.photousefor_user_id, photousefor_user_id + "");
+        map.put(Key.param, param);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
 

@@ -88,7 +88,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol101;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol101_SetUserCover;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
@@ -116,7 +116,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     private LoadingAnimation loading;
     private ExStaggeredGridLayoutManager manager;
 
-    private Protocol101 protocol101;
+    private Protocol101_SetUserCover protocol101;
 
     private File fileCover;
 
@@ -1750,12 +1750,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         Bundle extras = data.getExtras();
         if (extras != null) {
 
-            protocol101 = new Protocol101(
+            protocol101 = new Protocol101_SetUserCover(
                     getActivity(),
                     itemUser.getUser_id(),
                     token,
                     fileCover,
-                    new Protocol101.TaskCallBack() {
+                    new Protocol101_SetUserCover.TaskCallBack() {
                         @Override
                         public void Prepare() {
 

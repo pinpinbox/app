@@ -1,16 +1,18 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
@@ -22,9 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2017/7/6.
+ * Created by vmage on 2017/10/13.
  */
-public class Protocol95 extends AsyncTask<Void, Void, Object> {
+
+public class Protocol100_Vote extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -32,30 +35,36 @@ public class Protocol95 extends AsyncTask<Void, Void, Object> {
 
         public abstract void Post();
 
-        public abstract void Success();
+        public abstract void Success(String vote_left);
 
         public abstract void TimeOut();
     }
 
-
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
 
     private String user_id;
+    private String token;
+    private String event_id;
+    private String album_id;
 
     private String result = "";
     private String message = "";
     private String reponse = "";
-    private String token = "";
+    private String vote_left = "";
 
-    public Protocol95(Activity mActivity, String user_id, TaskCallBack callBack) {
+
+    public Protocol100_Vote(Activity mActivity, String user_id, String token, String event_id, String album_id, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
+        this.token = token;
+        this.event_id = event_id;
+        this.album_id = album_id;
         execute();
     }
-
 
     @Override
     public void onPreExecute() {
@@ -64,12 +73,12 @@ public class Protocol95 extends AsyncTask<Void, Void, Object> {
     }
 
     @Override
-    public Object doInBackground(Void... voids) {
+    protected Object doInBackground(Void... voids) {
 
         try {
 
-            reponse = HttpUtility.uploadSubmit(true, Url.P95_RefreshToken, putMap(), null);
-            MyLog.Set("d", getClass(), "p95reponse => " + reponse);
+            reponse = HttpUtility.uploadSubmit(true, Url.P100_Vote, putMap(), null);
+            MyLog.Set("d", getClass(), "p100reponse => " + reponse);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -78,7 +87,6 @@ public class Protocol95 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
-
         if (reponse != null && !reponse.equals("")) {
 
             try {
@@ -86,22 +94,22 @@ public class Protocol95 extends AsyncTask<Void, Void, Object> {
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
                 if(result.equals(ResultType.SYSTEM_OK)){
+
                     String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
 
                     JSONObject jsonData = new JSONObject(data);
 
-                    String jsonToken = JsonUtility.GetString(jsonData, ProtocolKey.token);
+                    String event = JsonUtility.GetString(jsonData, ProtocolKey.event);
 
-                    JSONObject jsonT = new JSONObject(jsonToken);
+                    JSONObject jsonEvent = new JSONObject(event);
 
-                    token = JsonUtility.GetString(jsonT, ProtocolKey.token);
+                    vote_left = JsonUtility.GetString(jsonEvent, ProtocolKey.vote_left);
 
-
-                }
-
-                if (!result.equals(ResultType.SYSTEM_OK)) {
+                }else {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -123,10 +131,15 @@ public class Protocol95 extends AsyncTask<Void, Void, Object> {
 
             case ResultType.SYSTEM_OK:
 
-                PPBApplication.getInstance().getData().edit().putString(Key.token, token).commit();
-                PPBApplication.getInstance().getData().edit().putBoolean(Key.tokenUpDated, true).commit();
+                callBack.Success(vote_left);
 
-                callBack.Success();
+                break;
+
+            case ResultType.TOKEN_ERROR:
+
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
+
+                IntentControl.toLogin(mActivity, user_id);
 
                 break;
 
@@ -161,23 +174,28 @@ public class Protocol95 extends AsyncTask<Void, Void, Object> {
                 DialogV2Custom.BuildUnKnow(mActivity, mActivity.getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
                 break;
 
-
-
         }
 
 
+
+    }
+
+    @Override
+    protected void onCancelled() {
+
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
+        map.put(Key.token, token);
+        map.put(Key.album_id, album_id);
         map.put(Key.user_id, user_id);
-
-        String sign = IndexSheet.encodePPB(map);
-        map.put(Key.sign, sign);
-
-
+        map.put(Key.event_id, event_id);
 
         return map;
     }

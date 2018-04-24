@@ -61,7 +61,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -89,7 +89,7 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
     private SharedPreferences getData;
     private PopupCustom popBirthday;
 
-    private Protocol21 protocol21;
+    private Protocol21_UpdateUser protocol21;
     private UpdatePicTask updatePicTask;
     private FirstEditProfileTask firstEditProfileTask;
     private GetProfileTask profileTask;
@@ -544,7 +544,7 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 
         String param = jsonObject.toString();
 
-        protocol21 = new Protocol21(mActivity, id, token, param, new Protocol21.TaskCallBack() {
+        protocol21 = new Protocol21_UpdateUser(mActivity, id, token, param, new Protocol21_UpdateUser.TaskCallBack() {
             @Override
             public void Prepare() {
                 doingType = DoingTypeClass.DoUpdateProfile;

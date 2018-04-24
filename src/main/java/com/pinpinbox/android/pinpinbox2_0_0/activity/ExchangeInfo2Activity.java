@@ -33,10 +33,10 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DismissExcute;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol106;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol110;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol43;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol106_GainPhotoUseforUser;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109_InsertBookmark;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol110_ExchangePhotoUsefor;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol43_UpdatePhotoUseforUser;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -55,10 +55,10 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private Activity mActivity;
 
-    private Protocol43 protocol43;
-    private Protocol106 protocol106;
-    private Protocol109 protocol109;
-    private Protocol110 protocol110;
+    private Protocol43_UpdatePhotoUseforUser protocol43;
+    private Protocol106_GainPhotoUseforUser protocol106;
+    private Protocol109_InsertBookmark protocol109;
+    private Protocol110_ExchangePhotoUsefor protocol110;
 
     private ImageView backImg;
     private TextView tvExchange, tvExchangeTime, tvName, tvDescription, tvContactTitle, tvRegisterPhone;
@@ -297,14 +297,14 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
                     } else {
 
-                        protocol110 = new Protocol110(
+                        protocol110 = new Protocol110_ExchangePhotoUsefor(
                                 mActivity,
                                 PPBApplication.getInstance().getId(),
                                 PPBApplication.getInstance().getToken(),
                                 itemExchange.getPhoto_id() + "",
                                 getSharedPreferences(SharedPreferencesDataClass.deviceDetail, Activity.MODE_PRIVATE).getString("deviceid", ""),
 
-                                new Protocol110.TaskCallBack() {
+                                new Protocol110_ExchangePhotoUsefor.TaskCallBack() {
                                     @Override
                                     public void Prepare() {
                                         startLoading();
@@ -343,13 +343,13 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private void doExchange() {
 
-        protocol106 = new Protocol106(
+        protocol106 = new Protocol106_GainPhotoUseforUser(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemExchange.getPhotousefor_user_id(),
                 getParam(),
-                new Protocol106.TaskCallBack() {
+                new Protocol106_GainPhotoUseforUser.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();
@@ -407,12 +407,12 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     private void doAddToDoneList() {
 
-        protocol109 = new Protocol109(
+        protocol109 = new Protocol109_InsertBookmark(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemExchange.getPhoto_id() + "",
-                new Protocol109.TaskCallBack() {
+                new Protocol109_InsertBookmark.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();
@@ -451,13 +451,13 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
     private void doUpdate() {
 
 
-        protocol43 = new Protocol43(
+        protocol43 = new Protocol43_UpdatePhotoUseforUser(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemExchange.getPhotousefor_user_id(),
                 getParam(),
-                new Protocol43.TaskCallBack() {
+                new Protocol43_UpdatePhotoUseforUser.TaskCallBack() {
                     @Override
                     public void Prepare() {
                         startLoading();

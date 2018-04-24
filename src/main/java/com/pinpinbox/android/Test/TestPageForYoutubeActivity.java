@@ -19,7 +19,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerImage;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCGAbannerVideo;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol102_GetCategoryArea;
 
 import java.util.List;
 
@@ -70,12 +70,12 @@ public class TestPageForYoutubeActivity extends FragmentActivity{
     private void set(){
 
 
-        Protocol102 protocol102 = new Protocol102(
+        Protocol102_GetCategoryArea protocol102 = new Protocol102_GetCategoryArea(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                  "6",
-                new Protocol102.TaskCallBack() {
+                new Protocol102_GetCategoryArea.TaskCallBack() {
                     @Override
                     public void Prepare() {
 

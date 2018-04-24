@@ -1,17 +1,15 @@
 package com.pinpinbox.android.pinpinbox2_0_0.model;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
@@ -23,9 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by vmage on 2017/7/6.
+ * Created by vmage on 2017/8/25.
  */
-public class Protocol33 extends AsyncTask<Void, Void, Object> {
+public class Protocol96_InsertAlbumIndex extends AsyncTask<Void, Void, Object> {
 
     public static abstract class TaskCallBack {
 
@@ -39,27 +37,27 @@ public class Protocol33 extends AsyncTask<Void, Void, Object> {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private Activity mActivity;
 
     private TaskCallBack callBack;
 
     private String user_id;
-    private String token;
     private String album_id;
-    private String settings;
-
+    private String index;
 
     private String result = "";
     private String message = "";
     private String reponse = "";
+    private String token = "";
 
-    public Protocol33(Activity mActivity, String user_id, String token, String album_id, String settings, TaskCallBack callBack) {
+    public Protocol96_InsertAlbumIndex(Activity mActivity, String user_id, String token, String index, String album_id, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
         this.token = token;
+        this.index = index;
         this.album_id = album_id;
-        this.settings = settings;
         execute();
     }
 
@@ -75,8 +73,8 @@ public class Protocol33 extends AsyncTask<Void, Void, Object> {
 
         try {
 
-            reponse = HttpUtility.uploadSubmit(true, Url.P33_AlbumSettings, putMap(), null);
-            MyLog.Set("d", getClass(), "p33reponse => " + reponse);
+            reponse = HttpUtility.uploadSubmit(true, Url.P96_InsertAlbumIndex, putMap(), null);
+            MyLog.Set("d", getClass(), "p96reponse => " + reponse);
 
         } catch (SocketTimeoutException t) {
             result = ResultType.TIMEOUT;
@@ -85,11 +83,13 @@ public class Protocol33 extends AsyncTask<Void, Void, Object> {
             e.printStackTrace();
         }
 
+
         if (reponse != null && !reponse.equals("")) {
 
             try {
                 JSONObject jsonObject = new JSONObject(reponse);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+
                 if (!result.equals(ResultType.SYSTEM_OK)) {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
@@ -115,14 +115,6 @@ public class Protocol33 extends AsyncTask<Void, Void, Object> {
             case ResultType.SYSTEM_OK:
 
                 callBack.Success();
-
-                break;
-
-            case ResultType.TOKEN_ERROR:
-
-                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
-
-                IntentControl.toLogin(mActivity, user_id);
 
                 break;
 
@@ -162,24 +154,14 @@ public class Protocol33 extends AsyncTask<Void, Void, Object> {
         }
 
 
-//        if (result.equals(ResultType.TIMEOUT)) {
-//            ConnectInstability connectInstability = new ConnectInstability() {
-//                @Override
-//                public void DoingAgain() {
-//                    callBack.TimeOut();
-//                }
-//            };
-//            DialogV2Custom.BuildTimeOut(mActivity, connectInstability);
-//            return;
-//        }
-//
-//        if(result.equals(ResultType.TOKEN_ERROR)){
-//
-//
-//            return;
-//        }
+    }
 
+    @Override
+    protected void onCancelled() {
 
+        mActivity = null;
+
+        super.onCancelled();
     }
 
 
@@ -187,9 +169,15 @@ public class Protocol33 extends AsyncTask<Void, Void, Object> {
 
         Map<String, String> map = new HashMap<>();
         map.put(Key.album_id, album_id);
-        map.put(Key.settings, settings);
+        map.put(Key.index, index);
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
+
+
+//        String sign = IndexSheet.encodePPB(map);
+//        map.put(Key.sign, sign);
+
+
 
         return map;
     }
