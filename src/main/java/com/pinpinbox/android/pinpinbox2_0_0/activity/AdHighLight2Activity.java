@@ -139,6 +139,7 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
         String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
 
         //
+        //
 
         JSONArray bannerArray = null;
 
