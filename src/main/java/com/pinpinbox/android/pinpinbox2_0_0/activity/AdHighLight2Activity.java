@@ -42,7 +42,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_0_0_adfocus);
 
-
         setLastActivityBlur();
 
         init();
@@ -68,7 +67,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
             ViewControl.setBlur(activity, blurview, 4f);
 
         }
-
 
     }
 
