@@ -116,6 +116,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="6dp"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:background="@null"
             />
 
 
