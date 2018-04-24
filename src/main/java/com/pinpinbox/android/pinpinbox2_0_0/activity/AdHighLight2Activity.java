@@ -36,7 +36,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
     private String strBannerUrl;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +138,7 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
         String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
 
+        //
 
         JSONArray bannerArray = null;
 
