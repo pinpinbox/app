@@ -144,7 +144,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
         try {
 
-
             bannerArray = new JSONArray(bannerList);
 
             bannerArray.put(strBannerUrl);
