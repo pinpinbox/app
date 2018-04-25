@@ -277,7 +277,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                     createImg.setClickable(true);
                     MyLog.Set("e", mActivity.getClass(), "可以點擊建立作品了");
                 }
-            }, 1000);
+            }, 300);
 
         }
 

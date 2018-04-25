@@ -19,6 +19,7 @@ import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Process;
@@ -542,6 +543,14 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold(tvCheck, true);
 
 
+        if(SystemUtility.getSystemVersion()<Build.VERSION_CODES.O){
+            aviaryImg.setVisibility(View.VISIBLE);
+        }else {
+            aviaryImg.setVisibility(View.GONE);
+        }
+
+
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -988,7 +997,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     return;
                 }
 
-//                resetRipple(rippleBackgroundRecording);
 
                 if (mp3Recorder == null) {
 
@@ -1017,7 +1025,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         mp3Recorder.stop();
                         mp3Recorder = null;
                         rippleBackgroundRecording.stopRippleAnimation();
-//                        resetRipple(rippleBackgroundRecording);
+                        rippleBackgroundRecording.setVisibility(View.INVISIBLE);
 
                         setClickable(true);
 
@@ -1065,9 +1073,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             mp3Recorder = new MP3Recorder(fMp3);
             mp3Recorder.start();
-//            setRipple(rippleBackgroundRecording, audioRecordingImg);
             audioRecordingImg.setImageResource(R.drawable.ic200_recording_white);
             rippleBackgroundRecording.startRippleAnimation();
+            rippleBackgroundRecording.setVisibility(View.VISIBLE);
+
 
             rPlay_Delete.setVisibility(View.GONE);
 
@@ -1076,7 +1085,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 mp3Recorder.stop();
                 mp3Recorder = null;
                 rippleBackgroundRecording.stopRippleAnimation();
-//                resetRipple(rippleBackgroundRecording);
+                rippleBackgroundRecording.setVisibility(View.INVISIBLE);
             }
             setClickable(true);
             e.printStackTrace();
@@ -1113,13 +1122,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 /*畫面禁止點擊*/
                 setClickable(false);
 
-                /*reset ripple*/
-//                resetRipple(rippleBackgroundPlay);
-
                 if (mPlayer != null && mPlayer.isPlaying()) {
                     cleanMp3();
                     rippleBackgroundPlay.stopRippleAnimation();
-//                    resetRipple(rippleBackgroundPlay);
+                    rippleBackgroundPlay.setVisibility(View.INVISIBLE);
+
                     refreshImg.setClickable(true);
                     setClickable(true);
                     return;
@@ -1127,8 +1134,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 if (mPlayer == null) {
 
-//                    setRipple(rippleBackgroundPlay, audioPlayImg);
+
                     rippleBackgroundPlay.startRippleAnimation();
+                    rippleBackgroundPlay.setVisibility(View.VISIBLE);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -1143,7 +1151,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                                         MyLog.Set("e", this.getClass(), "setOnErrorListener");
                                         cleanMp3();
                                         rippleBackgroundPlay.stopRippleAnimation();
-//                                        resetRipple(rippleBackgroundPlay);
+                                        rippleBackgroundPlay.setVisibility(View.INVISIBLE);
                                         refreshImg.setClickable(true);
                                         setClickable(true);
                                         return false;
@@ -1155,7 +1163,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                                     public void onCompletion(MediaPlayer mp) {
                                         cleanMp3();
                                         rippleBackgroundPlay.stopRippleAnimation();
-//                                        resetRipple(rippleBackgroundPlay);
+                                        rippleBackgroundPlay.setVisibility(View.INVISIBLE);
                                         refreshImg.setClickable(true);
                                         setClickable(true);
                                     }
@@ -1818,50 +1826,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         return location;
     }
 
-//    private void setRipple(RippleBackground ripple, View v) {
-//
-//        int location[] = getViewXY(v);
-//        int x = location[0];
-//        int y = location[1];
-//
-//
-//        /*獲取icon點擊中心*/
-//        int recording_center_x = x + (v.getWidth() / 2);
-//        int recording_center_y = y + (v.getHeight() / 2);
-//
-//        MyLog.Set("d", getClass(), "recording_center_x_y => " + recording_center_x + " , " + recording_center_y);
-//
-//
-//        /*獲取動畫中心*/
-//
-//        int ripLocation[] = getViewXY(ripple);
-//
-//        int rx = ripLocation[0];
-//        int ry = ripLocation[1];
-//        int rippleBackground_center_x = rx + (ripple.getWidth() / 2);
-//        int rippleBackground_center_y = ry + (ripple.getHeight() / 2);
-////        int rippleBackground_center_x = (int) ripple.getX() + (ripple.getWidth() / 2);
-////        int rippleBackground_center_y = (int) ripple.getY() + (ripple.getHeight() / 2);
-//
-//
-//        MyLog.Set("d", getClass(), "rippleBackground_center_x_y => " + rippleBackground_center_x + " , " + rippleBackground_center_y);
-//
-//
-//        /*算出兩中心距離*/
-//        int distanceX = recording_center_x - rippleBackground_center_x;
-//        int distanceY = recording_center_y - rippleBackground_center_y;
-//
-//
-//        /*設置動畫左上位置*/
-//        ripple.setX(distanceX);
-//        ripple.setY(distanceY);
-//
-//    }
-//
-//    private void resetRipple(RippleBackground rippleBackground) {
-//        rippleBackground.setX(0);
-//        rippleBackground.setY(0);
-//    }
+
 
     private void popChangeListener() {
 
@@ -2086,7 +2051,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             /*不為影片*/
 
-            aviaryImg.setVisibility(View.VISIBLE);
+            if(SystemUtility.getSystemVersion()<Build.VERSION_CODES.O) {
+                aviaryImg.setVisibility(View.VISIBLE);
+            }
 
             videoPlayImg.setVisibility(View.GONE);
 
@@ -2111,7 +2078,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 //            audioRecordingImg.setVisibility(View.GONE);
             rAudioRecording.setVisibility(View.GONE);
             rPlay_Delete.setVisibility(View.GONE);
-            aviaryImg.setVisibility(View.GONE);
+            if(SystemUtility.getSystemVersion()<Build.VERSION_CODES.O) {
+                aviaryImg.setVisibility(View.GONE);
+            }
 
             videoPlayImg.setVisibility(View.VISIBLE);
 
