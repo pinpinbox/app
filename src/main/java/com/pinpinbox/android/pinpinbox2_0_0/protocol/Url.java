@@ -58,6 +58,7 @@ public class Url {
 
     public static String P112_RequestSMSForUpdateCellphone = domain + "/index/api/requestsmspwdforupdatecellphone" + "/2.0";
 
+    public static String P113_GetFollowFromList = domain + "/index/api/getfollowfromlist" + "/2.0";
 
 
 }

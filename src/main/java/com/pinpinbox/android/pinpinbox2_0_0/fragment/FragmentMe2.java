@@ -1898,6 +1898,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
             case R.id.linFollowMe:
 
                 //to followme
+                toFollowMe();
 
                 break;
 
