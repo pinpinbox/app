@@ -265,53 +265,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-    @Override
-    public void onResume() {
-
-
-        if (createImg != null) {
-            createImg.setClickable(false);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    createImg.setClickable(true);
-                    MyLog.Set("e", mActivity.getClass(), "可以點擊建立作品了");
-                }
-            }, 300);
-
-        }
-
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-
-        if (createImg != null) {
-            createImg.setClickable(false);
-        }
-
-
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-
-        if (fastCreateTask != null && !fastCreateTask.isCancelled()) {
-            fastCreateTask.cancel(true);
-        }
-        fastCreateTask = null;
-
-//        RichText.recycle();
-
-        Glide.get(getApplicationContext()).clearMemory();
-
-        SystemUtility.SysApplication.getInstance().removeActivity(this);
-
-        super.onDestroy();
-    }
-
     private void scheduleStartPostponedTransition(final View sharedElement) {
         sharedElement.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
@@ -2167,6 +2120,53 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
         }, 200);
 
+    }
+
+    @Override
+    public void onResume() {
+
+
+        if (createImg != null) {
+            createImg.setClickable(false);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    createImg.setClickable(true);
+                    MyLog.Set("e", mActivity.getClass(), "可以點擊建立作品了");
+                }
+            }, 300);
+
+        }
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+
+        if (createImg != null) {
+            createImg.setClickable(false);
+        }
+
+
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+
+        if (fastCreateTask != null && !fastCreateTask.isCancelled()) {
+            fastCreateTask.cancel(true);
+        }
+        fastCreateTask = null;
+
+//        RichText.recycle();
+
+        Glide.get(getApplicationContext()).clearMemory();
+
+        SystemUtility.SysApplication.getInstance().removeActivity(this);
+
+        super.onDestroy();
     }
 
 
