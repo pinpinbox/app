@@ -36,6 +36,7 @@ import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Utility.UrlUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -663,25 +664,25 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         return value;
     }
 
-    private HashMap<String, String> getValueMap(Intent intent) {
-        HashMap<String, String> map = new HashMap<String, String>();
-        try {
-            String dataString = intent.getDataString();
-            String arg = dataString.substring(dataString.indexOf("?") + 1, dataString.length());
-            String[] strs = arg.split("&");
-            for (int x = 0; x < strs.length; x++) {
-                String[] strs2 = strs[x].split("=");
-                if (strs2.length == 2) {
-                    System.out.println(strs2[0] + " , " + strs2[1]);
-                    map.put(strs2[0], strs2[1]);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return map;
-    }
+//    private HashMap<String, String> getValueMap(Intent intent) {
+//        HashMap<String, String> map = new HashMap<String, String>();
+//        try {
+//            String dataString = intent.getDataString();
+//            String arg = dataString.substring(dataString.indexOf("?") + 1, dataString.length());
+//            String[] strs = arg.split("&");
+//            for (int x = 0; x < strs.length; x++) {
+//                String[] strs2 = strs[x].split("=");
+//                if (strs2.length == 2) {
+//                    System.out.println(strs2[0] + " , " + strs2[1]);
+//                    map.put(strs2[0], strs2[1]);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return map;
+//    }
 
 //    private void showLogout() {
 //
@@ -1839,7 +1840,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 MyLog.Set("d", getClass(), "param0 => index");
                 String param1 = strPathPrefix1.get(1);
                 if (param1.equals("highway")) {
-                    HashMap<String, String> map = getValueMap(intent);
+                    HashMap<String, String> map = UrlUtility.UrlToMapGetValue(intent);
                     String type = map.get(Key.type);
                     String is_cooperation = "";
 
@@ -1856,7 +1857,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                 if (param1.equals(Key.album)) {
 
-                    HashMap<String, String> map = getValueMap(intent);
+                    HashMap<String, String> map = UrlUtility.UrlToMapGetValue(intent);
 //                                String type = map.get(Key.type);
                     String album_id = "";
 
@@ -1875,7 +1876,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                     if(param2!=null && param2.equals("adjustapp")){
 
-                        HashMap<String, String> map = getValueMap(intent);
+                        HashMap<String, String> map = UrlUtility.UrlToMapGetValue(intent);
                         String album_id = "";
                         album_id = map.get(Key.album_id);
                         toAlbumInfo(album_id);

@@ -229,6 +229,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private boolean isNewCreate = false;
     private boolean isContribute = false;
+    private boolean doSponsor = false;
 
 
     @Override
@@ -316,6 +317,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         strSpecialUrl = bundle.getString(Key.special, "");
         isNewCreate = bundle.getBoolean(Key.isNewCreate, false);
         isContribute = bundle.getBoolean(Key.isContribute, false);
+        doSponsor = bundle.getBoolean(Key.doSponsor, false);
     }
 
     private void init() {
@@ -342,7 +344,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         vpReader = (ControllableViewPager) findViewById(R.id.vpReader);
         rvReader = (RecyclerView) findViewById(R.id.rvReader);
         linDescription = (LinearLayout) findViewById(R.id.linDescription);
-        linLink = (LinearLayout)findViewById(R.id.linLink);
+        linLink = (LinearLayout) findViewById(R.id.linLink);
         tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
         tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
         tvPage = (TextView) findViewById(R.id.tvPage);
@@ -2283,29 +2285,28 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         }
     }
 
-
-    private void setPageLink(int position){
+    private void setPageLink(int position) {
 
         linLink.removeAllViews();
 
         String link = photoContentsList.get(position).getHyperlink();
 
-        if(link!=null && !link.equals("null") && !link.equals("")){
+        if (link != null && !link.equals("null") && !link.equals("")) {
 
             linLink.setVisibility(View.VISIBLE);
 
-            try{
+            try {
 
                 JSONArray linkArray = new JSONArray(link);
 
                 for (int i = 0; i < linkArray.length(); i++) {
 
-                    JSONObject jsonLink = (JSONObject)linkArray.get(i);
+                    JSONObject jsonLink = (JSONObject) linkArray.get(i);
 
                     final String text = JsonUtility.GetString(jsonLink, ProtocolKey.text);
                     final String url = JsonUtility.GetString(jsonLink, ProtocolKey.url);
 
-                    TextView tvLink = (TextView)LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
+                    TextView tvLink = (TextView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
 
                     tvLink.setText(text);
                     tvLink.setOnClickListener(new View.OnClickListener() {
@@ -2316,33 +2317,22 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     });
 
                     linLink.addView(tvLink);
-                    ViewControl.setMargins(tvLink, SizeUtils.dp2px(8),0,0,0);
+                    ViewControl.setMargins(tvLink, SizeUtils.dp2px(8), 0, 0, 0);
                 }
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
 
-
-
-        }else {
+        } else {
 
             linLink.setVisibility(View.GONE);
 
         }
 
 
-
-
     }
-
-
-
-
-
-
-
 
     private void setLocationOnMap(final String location, final GoogleMap map) {
 
@@ -3149,10 +3139,18 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         lastPosition = 0;
 
                     }
-                }, 500);
+                }, 400);
 
 
-                if(startPage>0){
+                if (doSponsor && !itemAlbum.isOwn()) {
+
+                    startPage = photoContentsList.size();
+
+                    doSponsor = false;
+                }
+
+
+                if (startPage > 0) {
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -3160,12 +3158,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                             vpReader.setCurrentItem(startPage, false);
 
+                            startPage = 0;
+
                         }
-                    },800);
+                    }, 600);
 
                 }
-
-
 
 
                 if (!isSaveToRecent) {

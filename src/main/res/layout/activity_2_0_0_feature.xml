@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:id="@+id/rBackground"
     android:fitsSystemWindows="false">
 
 
@@ -15,11 +15,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:alpha="0"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
         android:paddingTop="@dimen/ppb200_action_bar_height_with_status"
-        android:scrollbars="none"
-        android:alpha="0">
+        android:scrollbars="none">
 
 
         <LinearLayout
@@ -40,10 +40,10 @@
                     android:background="@color/pinpinbox_2_0_0_second_grey" />
 
                 <me.relex.circleindicator.CircleIndicator
-                    android:layout_below="@+id/vpBanner"
                     android:id="@+id/indicator"
                     android:layout_width="match_parent"
                     android:layout_height="12dp"
+                    android:layout_below="@+id/vpBanner"
                     android:layout_marginTop="8dp"
                     app:ci_drawable="@drawable/icon_2_0_0_indicator"
                     app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
@@ -51,17 +51,25 @@
 
             </RelativeLayout>
 
-            <ImageView
-                android:background="@drawable/click_2_0_0_circle_grey_hint"
-                android:layout_width="36dp"
+            <TextView
+                android:id="@+id/tvBannerDestination"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:layout_marginTop="-12dp"
                 android:layout_gravity="right"
-                android:translationZ="@dimen/ppb200_translationZ_user"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                 android:layout_marginBottom="-25dp"
-                android:visibility="invisible"/>
-
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginTop="-12dp"
+                android:background="@drawable/click_2_0_0_circle_main_first"
+                android:gravity="center"
+                android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                android:paddingRight="@dimen/ppb200_padding_margin_first"
+                android:text=""
+                android:letterSpacing="0.1"
+                android:textSize="@dimen/ppb200_common_text_second"
+                android:textColor="@color/white"
+                android:translationZ="@dimen/ppb200_translationZ_user"
+                android:visibility="gone" />
 
 
             <RelativeLayout
@@ -86,13 +94,13 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:letterSpacing="0.1"
                     android:padding="@dimen/ppb200_padding_margin_second"
                     android:text="@string/pinpinbox_2_0_0_button_all"
-                    android:letterSpacing="0.1"
-                    android:background="@drawable/click_2_0_0_default"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="@dimen/ppb200_common_text_first"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
 
             </RelativeLayout>
@@ -104,14 +112,14 @@
     </ScrollView>
 
 
-        <RelativeLayout
-            style="@style/ppb200_action_bar_with_status"
-            android:clipChildren="false">
+    <RelativeLayout
+        style="@style/ppb200_action_bar_with_status"
+        android:clipChildren="false">
 
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_ic_action_back"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true" />
 
         <LinearLayout
             android:id="@+id/linUser"
@@ -121,7 +129,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="6dp"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal" />
 
 
     </RelativeLayout>
@@ -132,7 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="188dp"
         android:layout_below="@+id/rActionBar"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </RelativeLayout>

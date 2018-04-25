@@ -65,6 +65,7 @@ public class Key {
     public static String description = "description";
     public static String download_id = "download_id";
     public static String downloadType = "downloadType";
+    public static String doSponsor = "doSponsor";
 
 
     //e
