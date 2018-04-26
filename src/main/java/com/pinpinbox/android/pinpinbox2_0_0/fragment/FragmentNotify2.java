@@ -502,7 +502,7 @@ public class FragmentNotify2 extends Fragment {
                             JSONObject pushqueueObj = new JSONObject(pushqueue);
                             String message = JsonUtility.GetString(pushqueueObj, ProtocolKey.message);
                             String target2type = JsonUtility.GetString(pushqueueObj, ProtocolKey.target2type);
-                            int target2type_id = JsonUtility.GetInt(pushqueueObj, ProtocolKey.target2type_id);
+                            String target2type_id = JsonUtility.GetString(pushqueueObj, ProtocolKey.target2type_id);
                             String image_url = JsonUtility.GetString(pushqueueObj, ProtocolKey.image_url);
                             String inserttime = JsonUtility.GetString(pushqueueObj, ProtocolKey.inserttime);
                             String url = JsonUtility.GetString(pushqueueObj, ProtocolKey.url);

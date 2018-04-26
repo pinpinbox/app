@@ -46,11 +46,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/tvPageDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
                         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
                         android:gravity="left"
@@ -67,7 +66,6 @@
                         android:id="@+id/linLink"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="-8dp"
                         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
                         android:layout_marginLeft="24dp"
                         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
