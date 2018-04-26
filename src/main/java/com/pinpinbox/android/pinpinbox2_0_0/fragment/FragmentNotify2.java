@@ -45,6 +45,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
@@ -321,11 +322,33 @@ public class FragmentNotify2 extends Fragment {
 
             }
 
-
             return;
         }
 
         String type_id = (String) p87arrayList.get(position).get("type_id");
+
+
+        if (type.equals(Key.categoryarea)) {
+
+            if (!type_id.equals("") && type_id != null && !type.equals("null")) {
+
+                ActivityIntent.toFeature(getActivity(), StringIntMethod.StringToInt(type_id));
+
+            }
+
+        }
+
+
+        if (type.equals(Key.event)) {
+
+            if (!type_id.equals("") && type_id != null && !type.equals("null")) {
+
+                ActivityIntent.toEvent(getActivity(), type_id);
+
+            }
+
+        }
+
 
         if (type.equals(Key.user)) {
 

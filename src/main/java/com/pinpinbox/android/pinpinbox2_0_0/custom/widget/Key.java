@@ -49,6 +49,7 @@ public class Key {
     public static String contact_name = "contact_name";
     public static String contact_address = "contact_address";
     public static String contact_phone = "contact_phone";
+    public static String categoryarea = "categoryarea";
 
     public static String checkRP_menu = "checkRP_menu";
     public static String checkRP_editProfile = "checkRP_editProfile";

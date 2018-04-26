@@ -70,6 +70,7 @@ import com.pinpinbox.android.Views.ControlSizeScrollView;
 import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.PinchImageView;
+import com.pinpinbox.android.Views.WarpLinearLayout;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.PhotoPageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerReaderAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -170,7 +171,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private RelativeLayout rActionBar, rBottom, rPhoto;
     private ControllableViewPager vpReader;
     private RecyclerView rvReader;
-    private LinearLayout linDescription, linLink;
+    private LinearLayout linDescription;
+    private WarpLinearLayout linLink;
     private TextView tvPageDescription, tvPage, tvCurrentPoint;
     private EditText edPoint;
     private ImageView backImg, autoplayImg, voiceImg, locationImg, messageImg, likeImg, moreImg;
@@ -344,7 +346,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         vpReader = (ControllableViewPager) findViewById(R.id.vpReader);
         rvReader = (RecyclerView) findViewById(R.id.rvReader);
         linDescription = (LinearLayout) findViewById(R.id.linDescription);
-        linLink = (LinearLayout) findViewById(R.id.linLink);
+        linLink = (WarpLinearLayout) findViewById(R.id.linLink);
         tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
         tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
         tvPage = (TextView) findViewById(R.id.tvPage);
