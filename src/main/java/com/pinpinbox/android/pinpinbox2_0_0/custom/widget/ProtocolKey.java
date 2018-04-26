@@ -117,6 +117,7 @@ public class ProtocolKey {
     public static String is_follow = "is_follow";
     public static String is_existing = "is_existing";
     public static String info_url = "info_url";
+    public static String icon = "icon";
 
     //j
 
@@ -215,6 +216,8 @@ public class ProtocolKey {
     public static String title = "title";
     public static String text = "text";
     public static String themearea = "themearea";
+    public static String target2type = "target2type";
+    public static String target2type_id = "target2type_id";
 
     //u
     public static String url = "url";

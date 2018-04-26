@@ -2041,15 +2041,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void setPageDescription(int position) {
 
-        String strDescription = photoContentsList.get(position).getDescription();
+        final String strDescription = photoContentsList.get(position).getDescription();
 
         LinkText.set(mActivity, tvPageDescription, LinkText.inReaderDefaultColor, LinkText.inReaderHighLight, strDescription);
-
-        if (strDescription.equals("")) {
-            linDescription.setVisibility(View.GONE);
-        } else {
-            linDescription.setVisibility(View.VISIBLE);
-        }
 
 
         new Handler().post(new Runnable() {
@@ -2063,6 +2057,16 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 } else {
                     tvPageDescription.setGravity(Gravity.LEFT);
                 }
+
+                if (strDescription.equals("")) {
+                    tvPageDescription.setVisibility(View.GONE);
+                    linDescription.setVisibility(View.GONE);
+                } else {
+                    tvPageDescription.setVisibility(View.VISIBLE);
+                    linDescription.setVisibility(View.VISIBLE);
+                }
+
+
 
             }
         });
@@ -2291,9 +2295,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         String link = photoContentsList.get(position).getHyperlink();
 
-        if (link != null && !link.equals("null") && !link.equals("")) {
+        MyLog.Set("e", getClass(), "linklinklink => " + link);
 
-            linLink.setVisibility(View.VISIBLE);
+        if (link != null && !link.equals("null") && !link.equals("")) {
 
             try {
 
@@ -2306,23 +2310,33 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     final String text = JsonUtility.GetString(jsonLink, ProtocolKey.text);
                     final String url = JsonUtility.GetString(jsonLink, ProtocolKey.url);
 
-                    TextView tvLink = (TextView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
+                    if(!text.equals("") && !text.equals("null") && !url.equals("") && !url.equals("null")){
+                        TextView tvLink = (TextView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
+                        tvLink.setText(text);
+                        tvLink.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ActivityIntent.toWeb(mActivity, url, text);
+                            }
+                        });
 
-                    tvLink.setText(text);
-                    tvLink.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            ActivityIntent.toWeb(mActivity, url, text);
-                        }
-                    });
+                        linLink.addView(tvLink);
+                        ViewControl.setMargins(tvLink, SizeUtils.dp2px(8), 0, 0, 0);
+                    }
 
-                    linLink.addView(tvLink);
-                    ViewControl.setMargins(tvLink, SizeUtils.dp2px(8), 0, 0, 0);
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            if(linLink.getChildCount()>0){
+                linLink.setVisibility(View.VISIBLE);
+            }else {
+                linLink.setVisibility(View.GONE);
+            }
+
+
 
 
         } else {

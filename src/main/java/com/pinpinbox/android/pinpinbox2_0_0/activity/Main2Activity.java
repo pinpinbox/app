@@ -751,17 +751,17 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     public void getAwsDetail() {
         if (fromAwsMessage) {
             String type = getAWSDetail.getString("type", "");
-            if (!type.equals("")) {
+
+            if(type!=null && !type.equals("null") && !type.equals("")){
+
                 String type_id = getAWSDetail.getString("type_id", "");
 
                 switch (type) {
                     case "albumqueue":
-
                         toAlbumInfo(type_id);
                         break;
 
                     case "albumqueue@messageboard":
-
                         Bundle bundle = new Bundle();
                         bundle.putString(Key.album_id, type_id);
                         bundle.putBoolean(Key.pinpinboard, true);
@@ -770,30 +770,22 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         intent.putExtras(bundle);
                         startActivity(intent);
                         ActivityAnim.StartAnimFromBottom(mActivity);
-
-
                         break;
 
                     case "user@messageboard":
                         if (!type_id.equals("") && type_id != null) {
                             if(type_id.equals(id)){
-                                //me
-
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
                                         toMePage(true);
                                     }
                                 },500);
-
-
                             }else {
-                                //other user
                                 toAuthor(type_id, true);
                             }
                         }
                         break;
-
 
                     case "user":
                         toAuthor(type_id, false);
@@ -803,7 +795,23 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         toMePage(false);
                         break;
                 }
+
+            }else {
+
+
+                String url = getAWSDetail.getString("url", "");
+
+                if(url!=null && !url.equals("null") && !url.equals("")){
+
+                    ActivityIntent.toWeb(mActivity, url, "");
+
+                }
+
+
             }
+
+
+
             getAWSDetail.edit().clear().commit();
         }
 
@@ -2051,25 +2059,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
 
     }
-
-
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//
-//            MyLog.Set("d", getClass(), "-------------landscape(横)");
-//
-//            ((FragmentHome2) getFragment(FragmentHome2.class.getSimpleName())).landscapeRecyclerView();
-//
-//
-//        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            MyLog.Set("d", getClass(), "-------------portrait(直)");
-//
-//            ((FragmentHome2) getFragment(FragmentHome2.class.getSimpleName())).portraitRecyclerView();
-//
-//        }
-//    }
 
 
     @Override

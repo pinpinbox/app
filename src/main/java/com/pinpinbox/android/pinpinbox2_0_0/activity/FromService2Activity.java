@@ -36,7 +36,17 @@ public class FromService2Activity extends Activity {
         final SharedPreferences awsData = getSharedPreferences(SharedPreferencesDataClass.awsDetail, Activity.MODE_PRIVATE);
         final String type = awsData.getString("type", "");
 
-        if (type == null || type.equals("")) {
+        if (type == null || type.equals("") || type.equals("null")) {
+
+            String url = awsData.getString("url", "");
+
+            if(url!=null && !url.equals("null") && !url.equals("")){
+
+                ActivityIntent.toWeb(mActivity, url, "");
+
+            }
+
+
             finish();
             return;
         }
