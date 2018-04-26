@@ -178,7 +178,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private ImageView backImg, autoplayImg, voiceImg, locationImg, messageImg, likeImg, moreImg;
     private SeekBar seekBar;
 
-
     private String album_id = "";
     private String id, token;
     private String event_id = "";
