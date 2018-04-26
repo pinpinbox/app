@@ -43,7 +43,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol113;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol113_GetFollowFromList;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Picasso;
 
@@ -70,7 +70,7 @@ public class FollowMe2Activity extends DraggerActivity implements View.OnClickLi
 
     private FollowTask followTask;
     private AttentionTask attentionTask;
-    private Protocol113 protocol113;
+    private Protocol113_GetFollowFromList protocol113;
     private PopBoard board;
 
     private RecyclerView rvUser;
@@ -317,12 +317,12 @@ public class FollowMe2Activity extends DraggerActivity implements View.OnClickLi
 
     private void setProtocol() {
 
-        protocol113 = new Protocol113(
+        protocol113 = new Protocol113_GetFollowFromList(
                 mActivity,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemUserList,
-                new Protocol113.TaskCallBack() {
+                new Protocol113_GetFollowFromList.TaskCallBack() {
                     @Override
                     public void Prepare(int doingType) {
                         switch (doingType) {

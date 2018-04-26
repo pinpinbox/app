@@ -23,8 +23,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
-import java.util.List;
-
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 
@@ -137,25 +135,21 @@ public class PopupCustom {
         });
 
         if (vPopup instanceof LinearLayout) {
-
             MyLog.Set("e", getClass(), "getChildCount => " + ((LinearLayout) vPopup).getChildCount());
-
             for (int i = 0; i < ((LinearLayout) vPopup).getChildCount(); i++) {
+                    View v = ((LinearLayout) vPopup).getChildAt(i);
 
-                View v = ((LinearLayout) vPopup).getChildAt(i);
+                    v.setOnTouchListener(new ClickDragDismissListener(vPopup, new ClickDragDismissListener.ActionUpListener() {
+                        @Override
+                        public void OnClick(View v) {
 
-                v.setOnTouchListener(new ClickDragDismissListener(vPopup, new ClickDragDismissListener.ActionUpListener() {
-                    @Override
-                    public void OnClick(View v) {
+                        }
 
-                    }
-
-                    @Override
-                    public void OnDismiss() {
-                        dismiss();
-                    }
-                }));
-
+                        @Override
+                        public void OnDismiss() {
+                            dismiss();
+                        }
+                    }));
             }
 
         }

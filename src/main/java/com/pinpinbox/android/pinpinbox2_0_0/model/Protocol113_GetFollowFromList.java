@@ -31,9 +31,7 @@ import java.util.Map;
  * Created by vmage on 2018/4/23.
  */
 
-public class Protocol113 {
-
-
+public class Protocol113_GetFollowFromList {
 
     public static abstract class TaskCallBack {
 
@@ -45,7 +43,6 @@ public class Protocol113 {
 
         public abstract void TimeOut(int doingType);
     }
-
 
     private Activity mActivity;
     private Call callTask;
@@ -66,7 +63,7 @@ public class Protocol113 {
     private boolean sizeMax = false;
     private boolean noDataToastAppeared = false;
 
-    public Protocol113(Activity mActivity, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
+    public Protocol113_GetFollowFromList(Activity mActivity, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
@@ -125,7 +122,7 @@ public class Protocol113 {
 
             try {
 
-                reponse = HttpUtility.uploadSubmit(true, Url.P105_GetLikesList, putMap(), null);
+                reponse = HttpUtility.uploadSubmit(true, Url.P113_GetFollowFromList, putMap(), null);
                 MyLog.Set("d", getClass(), "p113reponse => " + reponse);
 
             } catch (SocketTimeoutException t) {
@@ -208,7 +205,7 @@ public class Protocol113 {
 
 
                         if(userCount<rangeCount){
-                            MyLog.Set("d", Protocol113.class, "項目少於" + rangeCount);
+                            MyLog.Set("d", Protocol113_GetFollowFromList.class, "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
                         }

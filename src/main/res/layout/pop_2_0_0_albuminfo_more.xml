@@ -22,6 +22,9 @@
         android:paddingBottom="@dimen/ppb200_padding_margin_first"
         android:paddingTop="@dimen/ppb200_padding_margin_first">
 
+
+
+        <!--作品是自己則顯示-->
         <LinearLayout
             android:id="@+id/linEditContent"
             android:layout_width="match_parent"
@@ -79,9 +82,7 @@
 
 
 
-
-
-
+        <!--收藏、贊助-->
         <LinearLayout
             android:id="@+id/linCollect"
             android:layout_width="match_parent"
@@ -99,7 +100,8 @@
             <TextView
                 android:id="@+id/tvCollect"
                 style="@style/ppb200_pop_item"
-                android:text="@string/pinpinbox_2_0_0_itemtype_collect" />
+                android:text="@string/pinpinbox_2_0_0_itemtype_collect"
+                android:layout_width="wrap_content"/>
 
             <TextView
                 android:id="@+id/tvSponsorMore"
@@ -120,6 +122,7 @@
 
         </LinearLayout>
 
+        <!--分享-->
         <LinearLayout
             android:id="@+id/linShare"
             android:layout_width="match_parent"
@@ -141,8 +144,7 @@
 
         </LinearLayout>
 
-
-
+        <!--檢舉-->
         <LinearLayout
             android:id="@+id/linReport"
             android:layout_width="match_parent"

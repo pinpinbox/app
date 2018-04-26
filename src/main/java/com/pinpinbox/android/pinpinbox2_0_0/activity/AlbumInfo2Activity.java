@@ -387,17 +387,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         TextUtility.setBold(tvVote, true);
 
 
-//        try {
-//            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
-//                vGradient.setBackground(
-//                        ScrimUtil.makeCubicGradientScrimDrawable(
-//                                Color.parseColor(ColorClass.WHITE), //颜色
-//                                2, //渐变层数
-//                                Gravity.BOTTOM)); //起始方向
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
 
         try {
@@ -586,7 +575,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         popPicker.show((RelativeLayout) findViewById(R.id.rBackground));
 
     }
-
 
     private void systemShare() {
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -2386,6 +2374,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 break;
 
 
+
         }
 
     }
@@ -2462,6 +2451,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 if (!itemAlbum.isOwn()) {
                     popMore.dismiss();
                     FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
+
+                    MyLog.Set("e", AlbumInfo2Activity.class, "1111111111111111111111111111");
+
                     collectAlbum();
                 }
 
@@ -2505,19 +2497,37 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             doCollectAlbum();
         } else {
 
-            final DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + itemAlbum.getPoint() + "P?");
-            CheckExecute checkExecute = new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    d.dismiss();
-                    doGetPoint();
-                }
-            };
-            d.setCheckExecute(checkExecute);
-            d.show();
 
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    final DialogV2Custom d = new DialogV2Custom(mActivity);
+                    d.setStyle(DialogStyleClass.CHECK);
+                    d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + itemAlbum.getPoint() + "P?");
+                    CheckExecute checkExecute = new CheckExecute() {
+                        @Override
+                        public void DoCheck() {
+                            d.dismiss();
+                            doGetPoint();
+                        }
+                    };
+                    d.setCheckExecute(checkExecute);
+                    d.show();
+                }
+            },500);
+
+//            final DialogV2Custom d = new DialogV2Custom(mActivity);
+//            d.setStyle(DialogStyleClass.CHECK);
+//            d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + itemAlbum.getPoint() + "P?");
+//            CheckExecute checkExecute = new CheckExecute() {
+//                @Override
+//                public void DoCheck() {
+//                    d.dismiss();
+//                    doGetPoint();
+//                }
+//            };
+//            d.setCheckExecute(checkExecute);
+//            d.show();
         }
     }
 
@@ -2548,16 +2558,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     /*click*/
     private void toAuthor() {
-
-
-//        ActivityIntent.toUser(
-//                mActivity,
-//                true,
-//                StringIntMethod.IntToString(itemAlbum.getUser_id()),
-//                itemAlbum.getUser_picture(),
-//                itemAlbum.getUser_name(),
-//                userImg
-//        );
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.author_id, itemAlbum.getUser_id() + "");
@@ -2673,16 +2673,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             linReport.setVisibility(View.GONE);
             linCollect.setVisibility(View.GONE);
-
-            //20171114
             linEditContent.setVisibility(View.VISIBLE);
 
         } else {
 
-            //20171114
             linEditContent.setVisibility(View.GONE);
-
             linReport.setVisibility(View.VISIBLE);
+
             linCollect.setVisibility(View.VISIBLE);
             if (itemAlbum.isOwn()) {
                 tvCollect.setText(R.string.pinpinbox_2_0_0_itemtype_collected);
@@ -2697,16 +2694,23 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     TextView tvSponsorMore = (TextView) v.findViewById(R.id.tvSponsorMore);
                     tvSponsorMore.setVisibility(View.VISIBLE);
                     tvSponsorMore.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View view) {
                             popMore.dismiss();
 
-                            DialogV2Custom d = new DialogV2Custom(mActivity);
-                            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point);
-                            d.setStyle(DialogStyleClass.CHECK);
-                            d.getTvRightOrBottom().setVisibility(View.GONE);
-                            d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_i_know);
-                            d.show();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    DialogV2Custom d = new DialogV2Custom(mActivity);
+                                    d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point);
+                                    d.setStyle(DialogStyleClass.CHECK);
+                                    d.getTvRightOrBottom().setVisibility(View.GONE);
+                                    d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_i_know);
+                                    d.show();
+                                }
+                            },500);
 
                         }
                     });

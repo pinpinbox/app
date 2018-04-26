@@ -1,11 +1,13 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,9 +28,11 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Test.ScaleTouhListener;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.Utility.UrlUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerExploreAdapter;
@@ -58,6 +62,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -67,7 +72,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by vmage on 2017/11/17.
  */
 
-public class Feature2Activity extends DraggerActivity implements View.OnClickListener {
+public class Feature2Activity extends DraggerActivity implements View.OnClickListener{
 
     private Activity mActivity;
     private FragmentCategoryUser fragmentCategoryUser;
@@ -78,10 +83,11 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     private List<ItemUser> userList;
     private List<ItemAlbumExplore> albumExploreList;
 
+
     private RelativeLayout rBanner;
     private LinearLayout linContents, linUser;
     private ImageView backImg;
-    private TextView tvTitle;
+    private TextView tvTitle, tvBannerDestination;
     private ScrollView svContents;
     private ViewPager vpBanner;
     private CircleIndicator indicator;
@@ -157,6 +163,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         svContents = (ScrollView) findViewById(R.id.svContents);
         backImg = (ImageView) findViewById(R.id.backImg);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvBannerDestination = (TextView)findViewById(R.id.tvBannerDestination);
         vpBanner = (ViewPager) findViewById(R.id.vpBanner);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
         frameUser = (FrameLayout) findViewById(R.id.frameUser);
@@ -590,7 +597,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void setBannerList(List<ItemCategoryBanner> itemCategoryBannerList) {
+    private void setBannerList(final List<ItemCategoryBanner> itemCategoryBannerList) {
 
         if (itemCategoryBannerList == null || itemCategoryBannerList.size() == 0) {
             MyLog.Set("e", getClass(), "no banner");
@@ -648,6 +655,39 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         vpBanner.setAdapter(adapter);
         indicator.setViewPager(vpBanner);
+
+
+        vpBanner.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+
+                setBannerUrlDestination(position, itemCategoryBannerList);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+
+        });
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                setBannerUrlDestination(0, itemCategoryBannerList);
+
+            }
+        },500);
+
 
 
     }
@@ -720,10 +760,70 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     public void hideLargeUserList() {
 
-
         frameUser.setVisibility(View.GONE);
 
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setBannerUrlDestination(int position, List<ItemCategoryBanner>itemCategoryBannerList){
+
+
+        final String bannerType = itemCategoryBannerList.get(position).getBannerType();
+
+        if(bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)){
+
+            String link = itemCategoryBannerList.get(position).getVideoLink();
+
+            if(link!=null && !link.equals("null") && !link.equals("")){
+
+                final HashMap<String, String> map = UrlUtility.UrlToMapGetValue(link);
+
+                if(map.get("autobuy")!=null){
+                    tvBannerDestination.setText(R.string.pinpinbox_2_0_0_button_sponsor);
+                    tvBannerDestination.setVisibility(View.VISIBLE);
+
+                    tvBannerDestination.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+                        @Override
+                        public void Touch() {
+
+                        }
+
+                        @Override
+                        public void Up() {
+                            if(ClickUtils.ButtonContinuousClick()){
+                                return;
+                            }
+
+
+                            if(map.get(Key.album_id)!=null){
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString(Key.album_id, map.get(Key.album_id));
+                                bundle.putBoolean(Key.doSponsor, true);
+                                startActivity(new Intent(mActivity, Reader2Activity.class).putExtras(bundle));
+                                ActivityAnim.StartAnim(mActivity);
+                            }
+
+
+
+                        }
+                    }));
+
+                }else {
+                    tvBannerDestination.setVisibility(View.GONE);
+                }
+
+            }
+
+        }else {
+
+            tvBannerDestination.setVisibility(View.GONE);
+
+        }
+
+
+    }
+
 
     private void toCurrentContents(int categoryarea_id, String title) {
 
@@ -822,6 +922,8 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     public void removeFragment() {
         fragmentCategoryUser = null;
     }
+
+
 
     @Override
     public void onClick(View v) {

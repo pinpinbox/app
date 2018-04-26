@@ -178,7 +178,7 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
                                 drawable.setColor(Color.parseColor(ColorClass.GREY_SECOND));
 
-                                holder.coverImg.setAlpha(0.9f);
+                                holder.coverImg.setAlpha(0.85f);
                             }
 
                             @Override
