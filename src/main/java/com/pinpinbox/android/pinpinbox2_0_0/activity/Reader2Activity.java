@@ -207,7 +207,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private boolean isPlayAudio = true;
     private boolean soundEnable = true;
 
-
     private Handler autoScrollHandler = new Handler();
     private Runnable runnable = new Runnable() {
         @Override
@@ -216,7 +215,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         }
     };
     private TimerTask timerTask;
-
 
     /*info*/
     private TextView tvAlbumName, tvAlbumDescription, tvAlbumUser;
