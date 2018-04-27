@@ -10,6 +10,7 @@ import android.view.View;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
@@ -36,10 +37,37 @@ public class FromService2Activity extends Activity {
         final SharedPreferences awsData = getSharedPreferences(SharedPreferencesDataClass.awsDetail, Activity.MODE_PRIVATE);
         final String type = awsData.getString("type", "");
 
-        if (type == null || type.equals("")) {
+        if (type == null || type.equals("") || type.equals("null")) {
+
+            String url = awsData.getString("url", "");
+
+            if(url!=null && !url.equals("null") && !url.equals("")){
+
+                ActivityIntent.toWeb(mActivity, url, "");
+
+            }
+
             finish();
             return;
         }
+
+
+        /*不跳提示 直接前往*/
+        if(type!=null && !type.equals("null") && !type.equals("") && type.equals("categoryarea")){
+
+            type_id = awsData.getString("type_id", "");
+
+            Activity mainAc = removeOtherGetMainAc();
+
+            ActivityIntent.toFeature(mainAc, StringIntMethod.StringToInt(type_id));
+            finish();
+
+
+            return;
+        }
+
+
+
 
         final DialogV2Custom d = new DialogV2Custom(mActivity);
         d.setStyle(DialogStyleClass.CHECK);
@@ -70,6 +98,12 @@ public class FromService2Activity extends Activity {
 
                     break;
 
+                case "event":
+
+                    d.setMessage("前往活動頁?");
+
+                    break;
+
             }
         }
         d.getBlurView().setOnClickListener(new View.OnClickListener() {
@@ -84,22 +118,7 @@ public class FromService2Activity extends Activity {
             public void onClick(View view) {
                 d.dismiss();
 
-                List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-                int count = activityList.size();
-
-                Activity mainAc = null;
-
-                if (count > 0) {
-                    for (int i = 0; i < count; i++) {
-                        String actName = activityList.get(i).getClass().getSimpleName();
-                        MyLog.Set("d", this.getClass(), "activity simplename => " + actName);
-                        if (!actName.equals(Main2Activity.class.getSimpleName())) {
-                            activityList.get(i).finish();
-                        } else {
-                            mainAc = activityList.get(i);
-                        }
-                    }
-                }
+                Activity mainAc = removeOtherGetMainAc();
 
                 if (type != null && !type.equals("")) {
                     switch (type) {
@@ -148,6 +167,12 @@ public class FromService2Activity extends Activity {
                             toCooperation();
                             break;
 
+                        case "event":
+
+                            ActivityIntent.toEvent(mainAc, type_id);
+
+                            break;
+
 
                     }
                 }
@@ -155,6 +180,29 @@ public class FromService2Activity extends Activity {
             }
         });
         d.show();
+    }
+
+
+    private Activity removeOtherGetMainAc(){
+
+        List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
+        int count = activityList.size();
+
+        Activity mActivity = null;
+
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                String actName = activityList.get(i).getClass().getSimpleName();
+                MyLog.Set("d", this.getClass(), "activity simplename => " + actName);
+                if (!actName.equals(Main2Activity.class.getSimpleName())) {
+                    activityList.get(i).finish();
+                } else {
+                    mActivity = activityList.get(i);
+                }
+            }
+        }
+
+        return mActivity;
     }
 
     //    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -204,6 +252,5 @@ public class FromService2Activity extends Activity {
 
 
     }
-
 
 }

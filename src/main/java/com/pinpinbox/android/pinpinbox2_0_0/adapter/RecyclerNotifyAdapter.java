@@ -91,6 +91,14 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
                 type = TYPE_USER;
                 break;
 
+            case "event":
+                type = TYPE_SYSTEM;
+                break;
+
+            case "categoryarea":
+                type = TYPE_SYSTEM;
+                break;
+
             case "":
                 type = TYPE_SYSTEM;
                 break;
@@ -265,7 +273,7 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
             }
 
 
-        } else if (type.equals("")) {
+        } else if (type.equals("") || type.equals("event") || type.equals("categoryarea")) {
 
             ViewSystemHolder holder = (ViewSystemHolder) vHolder;
             holder.position = position;

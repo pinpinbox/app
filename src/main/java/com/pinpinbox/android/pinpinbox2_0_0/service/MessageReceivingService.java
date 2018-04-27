@@ -128,6 +128,7 @@ public class MessageReceivingService extends Service {
         String title = (String) map.get("title");
         String icon = (String) map.get("icon");
         String pinpinboard = (String) map.get("pinpinboard");
+        String url = (String) map.get("url");
 
         if (LOG.isLogMode) {
             Log.e("----", "type =>" + type);
@@ -136,6 +137,7 @@ public class MessageReceivingService extends Service {
             Log.e("----", "title =>" + title);
             Log.e("----", "icon =>" + icon);
             Log.e("----", "pinpinboard =>" + pinpinboard);
+            Log.e("----", "url =>" + url);
         }
 
 
@@ -159,6 +161,10 @@ public class MessageReceivingService extends Service {
 
         if (detail != null && !detail.equals("")) {
             getawsdata.edit().putString("detail", detail).apply();
+        }
+
+        if (url != null && !url.equals("")) {
+            getawsdata.edit().putString("url", url).apply();
         }
 
 

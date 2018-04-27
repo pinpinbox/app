@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,7 +50,7 @@
                         android:id="@+id/tvPageDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
                         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
                         android:gravity="left"
@@ -62,18 +63,21 @@
                         android:textSize="@dimen/ppb200_common_text_third" />
 
 
-                    <LinearLayout
+
+                    <com.pinpinbox.android.Views.WarpLinearLayout
                         android:id="@+id/linLink"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="-8dp"
                         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
-                        android:layout_marginLeft="24dp"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
                         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
-                        android:orientation="horizontal">
+                        app:horizontal_Space="8dp"
+                        app:vertical_Space="8dp"
+                        app:grivate="left"
+                        app:isFull="false"/>
 
 
-                    </LinearLayout>
+
 
 
                 </LinearLayout>

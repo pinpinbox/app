@@ -43,7 +43,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
@@ -284,7 +286,6 @@ public class FragmentNotify2 extends Fragment {
         }
     }
 
-
     public void scrollToTop() {
 
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) rvNotify.getLayoutManager();
@@ -311,20 +312,52 @@ public class FragmentNotify2 extends Fragment {
 
         String type = (String) p87arrayList.get(position).get("type");
 
-        if (type.equals("") || type == null) {
+        if (type == null || type.equals("") || type.equals("null")) {
+
+            String url = (String) p87arrayList.get(position).get(Key.url);
+
+            if (url != null && !url.equals("null") && !url.equals("")) {
+
+                ActivityIntent.toWeb(getActivity(), url, "");
+
+            }
+
             return;
         }
 
         String type_id = (String) p87arrayList.get(position).get("type_id");
 
-        if (type.equals(Key.user) ) {
+
+        if (type.equals(Key.categoryarea)) {
+
+            if (!type_id.equals("") && type_id != null && !type.equals("null")) {
+
+                ActivityIntent.toFeature(getActivity(), StringIntMethod.StringToInt(type_id));
+
+            }
+
+        }
+
+
+        if (type.equals(Key.event)) {
+
+            if (!type_id.equals("") && type_id != null && !type.equals("null")) {
+
+                ActivityIntent.toEvent(getActivity(), type_id);
+
+            }
+
+        }
+
+
+        if (type.equals(Key.user)) {
 
 
             if (!type_id.equals("") && type_id != null) {
-                if(type_id.equals(id)){
+                if (type_id.equals(id)) {
                     //me
-                    ((Main2Activity)getActivity()).toMePage(false);
-                }else {
+                    ((Main2Activity) getActivity()).toMePage(false);
+                } else {
                     //other user
                     ActivityIntent.toUser(
                             getActivity(),
@@ -341,12 +374,12 @@ public class FragmentNotify2 extends Fragment {
         }
 
 
-        if(type.equals(Key.user_messageboard)){
+        if (type.equals(Key.user_messageboard)) {
             if (!type_id.equals("") && type_id != null) {
-                if(type_id.equals(id)){
+                if (type_id.equals(id)) {
                     //me
-                    ((Main2Activity)getActivity()).toMePage(true);
-                }else {
+                    ((Main2Activity) getActivity()).toMePage(true);
+                } else {
                     //other user
                     ActivityIntent.toUser(
                             getActivity(),
@@ -360,7 +393,6 @@ public class FragmentNotify2 extends Fragment {
                 }
             }
         }
-
 
 
         if (type.equals(Key.albumqueue)) {
@@ -457,7 +489,7 @@ public class FragmentNotify2 extends Fragment {
                 JSONObject jsonObject = new JSONObject(strJson);
                 p87Result = jsonObject.getString(Key.result);
                 if (p87Result.equals("1")) {
-                    String jsonData = JsonUtility.GetString(jsonObject, Key.data);
+                    String jsonData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
 
                     Logger.json(jsonData);
 
@@ -472,31 +504,31 @@ public class FragmentNotify2 extends Fragment {
                             JSONObject object = (JSONObject) jsonArray.get(i);
 
                             /*get template_id*/
-                            String template = JsonUtility.GetString(object, Key.template);
-                            String template_id = "";
+                            String template = JsonUtility.GetString(object, ProtocolKey.template);
+                            int template_id = -1;
                             if (template != null && !template.equals("")) {
                                 JSONObject templateObj = new JSONObject(template);
-                                template_id = JsonUtility.GetString(templateObj, Key.template_id);
+                                template_id = JsonUtility.GetInt(templateObj, ProtocolKey.template_id);
                             }
 
                             /*get identity*/
-                            String cooperation = JsonUtility.GetString(object, Key.cooperation);
+                            String cooperation = JsonUtility.GetString(object, ProtocolKey.cooperation);
                             String identity = "";
                             if (cooperation != null && !cooperation.equals("")) {
                                 JSONObject cooperationObj = new JSONObject(cooperation);
-                                identity = JsonUtility.GetString(cooperationObj, Key.identity);
+                                identity = JsonUtility.GetString(cooperationObj, ProtocolKey.identity);
                             }
 
 
-
                             /*get notify detail*/
-                            String pushqueue = JsonUtility.GetString(object, Key.pushqueue);
+                            String pushqueue = JsonUtility.GetString(object, ProtocolKey.pushqueue);
                             JSONObject pushqueueObj = new JSONObject(pushqueue);
-                            String message = JsonUtility.GetString(pushqueueObj, MapKey.message);
-                            String target2type = JsonUtility.GetString(pushqueueObj, MapKey.target2type);
-                            String target2type_id = JsonUtility.GetString(pushqueueObj, MapKey.target2type_id);
-                            String image_url = JsonUtility.GetString(pushqueueObj, MapKey.image_url);
-                            String inserttime = JsonUtility.GetString(pushqueueObj, MapKey.inserttime);
+                            String message = JsonUtility.GetString(pushqueueObj, ProtocolKey.message);
+                            String target2type = JsonUtility.GetString(pushqueueObj, ProtocolKey.target2type);
+                            String target2type_id = JsonUtility.GetString(pushqueueObj, ProtocolKey.target2type_id);
+                            String image_url = JsonUtility.GetString(pushqueueObj, ProtocolKey.image_url);
+                            String inserttime = JsonUtility.GetString(pushqueueObj, ProtocolKey.inserttime);
+                            String url = JsonUtility.GetString(pushqueueObj, ProtocolKey.url);
 
 
                             Date currentTime = df.parse(strCurrentTime);
@@ -540,10 +572,6 @@ public class FragmentNotify2 extends Fragment {
                             }
 
 
-//                            if (target2type == null || target2type.equals("")) {
-//                                target2type = "albumqueue";
-//                            }
-
                             String strNewDate = inserttime.substring(0, 10);
 
                             /*檢查今日有無訊息*/
@@ -574,6 +602,16 @@ public class FragmentNotify2 extends Fragment {
                             }
 
 
+//                            ItemNotify itemNotify = new ItemNotify();
+//                            itemNotify.setTemplate_id(template_id);
+//                            itemNotify.setIdentity(identity);
+//                            itemNotify.setImage_url(image_url);
+//                            itemNotify.setMessage(message);
+//                            itemNotify.setTarget2type(target2type);
+//                            itemNotify.setTarget2type_id(target2type_id);
+//                            itemNotify.setInserttime(strMessageTime);
+//                            itemNotify.setUrl(url);
+
                             HashMap<String, Object> mp = new HashMap<>();
                             mp.put(Key.template_id, template_id);
                             mp.put(Key.identity, identity);
@@ -582,6 +620,7 @@ public class FragmentNotify2 extends Fragment {
                             mp.put("type", target2type);
                             mp.put("type_id", target2type_id);
                             mp.put("messageTime", strMessageTime);
+                            mp.put(Key.url, url);
                             p87arrayList.add(mp);
 
                         }
