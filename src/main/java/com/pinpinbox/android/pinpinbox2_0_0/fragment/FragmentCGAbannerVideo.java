@@ -75,7 +75,6 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
 
         }
 
-
     }
 
     @Override
