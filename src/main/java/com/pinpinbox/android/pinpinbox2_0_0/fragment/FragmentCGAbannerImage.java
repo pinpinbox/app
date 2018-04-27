@@ -29,6 +29,19 @@ public class FragmentCGAbannerImage extends Fragment implements View.OnClickList
     private String imageUrl;
     private String imageLink;
 
+    public static FragmentCGAbannerImage newInstance(String imageUrl, String imageLink) {
+
+        FragmentCGAbannerImage fragmentCGAbannerImage = new FragmentCGAbannerImage();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.image, imageUrl);
+        bundle.putString(Key.imageLink, imageLink);
+
+        fragmentCGAbannerImage.setArguments(bundle);
+
+        return fragmentCGAbannerImage;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

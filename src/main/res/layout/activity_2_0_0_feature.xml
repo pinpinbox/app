@@ -81,8 +81,8 @@
                 <TextView
                     android:id="@+id/tvTitle"
                     style="@style/ppb200_title_first"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="@dimen/ppb200_title_margin_left"
+                    android:layout_marginRight="@dimen/ppb200_title_margin_left"
                     android:text="" />
 
                 <TextView

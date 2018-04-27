@@ -234,7 +234,7 @@ public class Key {
     //x
 
     //y
-    public static String youbuteVideoId = "youbuteVideoId";
+    public static String youtubeVideoId = "youbuteVideoId";
 
     //z
     public static String zipped = "zipped";

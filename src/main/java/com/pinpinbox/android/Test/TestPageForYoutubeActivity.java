@@ -114,7 +114,7 @@ public class TestPageForYoutubeActivity extends FragmentActivity{
 
                             if(bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)){
 
-                                bundle.putString(Key.youbuteVideoId, itemCategoryBannerList.get(i).getVideoIdByUrl());
+                                bundle.putString(Key.youtubeVideoId, itemCategoryBannerList.get(i).getVideoIdByUrl());
 
                                 fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerVideo.class, bundle));
 

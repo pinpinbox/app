@@ -20,13 +20,87 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
  * Created by vmage on 2018/4/18.
  */
 
-public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment implements YouTubePlayer.OnInitializedListener {
+public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment{
 
 
     private YouTubePlayer mYouTubePlayer;
 
     private String youtubeVideoId;
 
+    private boolean isVisibleToUser = false;
+
+    public static FragmentCGAbannerVideo newInstance(String youtubeVideoId) {
+
+        FragmentCGAbannerVideo fragmentCGAbannerVideo = new FragmentCGAbannerVideo();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.youtubeVideoId, youtubeVideoId);
+
+        fragmentCGAbannerVideo.setArguments(bundle);
+
+        return fragmentCGAbannerVideo;
+    }
+
+
+    /*onCreate前執行*/
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        this.isVisibleToUser = isVisibleToUser;
+
+        MyLog.Set("e", getClass(), "userVisible => " + isVisibleToUser);
+
+        if(isVisibleToUser){
+
+            if(mYouTubePlayer==null){
+                setYouTube();
+            }
+
+        }else {
+            if(mYouTubePlayer!=null) {
+                mYouTubePlayer.release();
+                mYouTubePlayer = null;
+            }
+        }
+
+
+    }
+
+    private void setYouTube(){
+
+        initialize(ApiKey.YOUTUBE, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                MyLog.Set("e", getClass(), "onInitializationSuccess");
+
+                mYouTubePlayer = youTubePlayer;
+
+                mYouTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
+                mYouTubePlayer.setPlaybackEventListener(playbackEventListener);
+
+                /** Start buffering **/
+                if (!b) {
+
+                    if (!youtubeVideoId.equals("") && !youtubeVideoId.equals("null")) {
+                        mYouTubePlayer.loadVideo(youtubeVideoId);
+                    } else {
+                        PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_video_error);
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                MyLog.Set("e", getClass(), "onInitializationFailure");
+
+                PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_video_error);
+            }
+        });
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +110,7 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
 
         if (bundle != null) {
 
-            youtubeVideoId = bundle.getString(Key.youbuteVideoId, "");
+            youtubeVideoId = bundle.getString(Key.youtubeVideoId, "");
 
             MyLog.Set("e", getClass(), "youtubeVideoId => " + youtubeVideoId);
 
@@ -49,38 +123,48 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initialize(ApiKey.YOUTUBE, this);
 
-    }
-
-
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-
-        mYouTubePlayer = youTubePlayer;
-
-        mYouTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
-        mYouTubePlayer.setPlaybackEventListener(playbackEventListener);
-
-
-        /** Start buffering **/
-        if (!b) {
-
-            if (!youtubeVideoId.equals("") && !youtubeVideoId.equals("null")) {
-                mYouTubePlayer.loadVideo(youtubeVideoId);
-            } else {
-                PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_video_error);
-            }
-
-
+        if (isVisibleToUser) {
+            setYouTube();
         }
 
     }
 
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_video_error);
-    }
+
+//    @Override
+//    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+//
+//        MyLog.Set("e", getClass(), "onInitializationSuccess");
+//
+//
+//        mYouTubePlayer = youTubePlayer;
+//
+//        mYouTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
+//        mYouTubePlayer.setPlaybackEventListener(playbackEventListener);
+//
+//
+//        /** Start buffering **/
+//        if (!b) {
+//
+//            if (!youtubeVideoId.equals("") && !youtubeVideoId.equals("null")) {
+//                mYouTubePlayer.loadVideo(youtubeVideoId);
+//            } else {
+//                PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_video_error);
+//            }
+//
+//
+//        }
+//
+//    }
+
+//    @Override
+//    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+//
+//        MyLog.Set("e", getClass(), "onInitializationFailure");
+//
+//
+//        PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_video_error);
+//    }
 
 
     private YouTubePlayer.PlaybackEventListener playbackEventListener = new YouTubePlayer.PlaybackEventListener() {
@@ -104,7 +188,7 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
 
             ((Feature2Activity) getActivity()).hideLargeUserList();
 
-            if(!PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.first_to_set_video_autoplay, false)){
+            if (!PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.first_to_set_video_autoplay, false)) {
 
                 SnackManager.showSettingsSnack(getActivity(), false);
                 PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.first_to_set_video_autoplay, true).commit();
@@ -112,18 +196,16 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment impleme
             }
 
 
-            if(isFirstPlay){
+            if (isFirstPlay) {
 
                 isFirstPlay = false;
 
-                if(!PPBApplication.getInstance().getData().getBoolean(Key.videoAutoplayEnable, true)){
+                if (!PPBApplication.getInstance().getData().getBoolean(Key.videoAutoplayEnable, true)) {
                     mYouTubePlayer.pause();
                     MyLog.Set("e", FragmentCGAbannerVideo.class, "不自動播放");
                 }
 
             }
-
-
 
 
         }

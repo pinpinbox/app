@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,9 +25,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Test.ScaleTouhListener;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -36,6 +35,7 @@ import com.pinpinbox.android.Utility.UrlUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerExploreAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.VideoPagerAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemCategoryBanner;
@@ -72,7 +72,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by vmage on 2017/11/17.
  */
 
-public class Feature2Activity extends DraggerActivity implements View.OnClickListener{
+public class Feature2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity;
     private FragmentCategoryUser fragmentCategoryUser;
@@ -163,7 +163,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         svContents = (ScrollView) findViewById(R.id.svContents);
         backImg = (ImageView) findViewById(R.id.backImg);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvBannerDestination = (TextView)findViewById(R.id.tvBannerDestination);
+        tvBannerDestination = (TextView) findViewById(R.id.tvBannerDestination);
         vpBanner = (ViewPager) findViewById(R.id.vpBanner);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
         frameUser = (FrameLayout) findViewById(R.id.frameUser);
@@ -597,6 +597,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
+
+    private List<Fragment> fragmentList;
+
     private void setBannerList(final List<ItemCategoryBanner> itemCategoryBannerList) {
 
         if (itemCategoryBannerList == null || itemCategoryBannerList.size() == 0) {
@@ -607,8 +610,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
             indicator.setVisibility(View.INVISIBLE);
         }
 
+        fragmentList = new ArrayList<>();
 
-        FragmentPagerItems fragmentPagerItems = new FragmentPagerItems(mActivity);
+//        FragmentPagerItems fragmentPagerItems = new FragmentPagerItems(mActivity);
 
         for (int i = 0; i < itemCategoryBannerList.size(); i++) {
 
@@ -631,27 +635,38 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
             if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
 
-                bundle.putString(Key.youbuteVideoId, itemCategoryBannerList.get(i).getVideoIdByUrl());
+//                bundle.putString(Key.youbuteVideoId, itemCategoryBannerList.get(i).getVideoIdByUrl());
+//
+//                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerVideo.class, bundle));
 
-                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerVideo.class, bundle));
+
+                FragmentCGAbannerVideo fragmentCGAbannerVideo = FragmentCGAbannerVideo.newInstance(itemCategoryBannerList.get(i).getVideoIdByUrl());
+
+                fragmentList.add(fragmentCGAbannerVideo);
 
 
             }
 
             if (bannerType.equals(ItemCategoryBanner.TYPE_IMAGE)) {
 
-                bundle.putString(Key.image, itemCategoryBannerList.get(i).getImageUrl());
-                bundle.putString(Key.imageLink, itemCategoryBannerList.get(i).getImageLink());
+//                bundle.putString(Key.image, itemCategoryBannerList.get(i).getImageUrl());
+//                bundle.putString(Key.imageLink, itemCategoryBannerList.get(i).getImageLink());
+//
+//                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerImage.class, bundle));
 
-                fragmentPagerItems.add(FragmentPagerItem.of("", FragmentCGAbannerImage.class, bundle));
 
+                FragmentCGAbannerImage fragmentCGAbannerImage = FragmentCGAbannerImage.newInstance(itemCategoryBannerList.get(i).getImageUrl(), itemCategoryBannerList.get(i).getImageLink());
+
+                fragmentList.add(fragmentCGAbannerImage);
 
             }
 
         }
 
 
-        adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), fragmentPagerItems);
+//        adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), fragmentPagerItems);
+
+        VideoPagerAdapter adapter = new VideoPagerAdapter(getSupportFragmentManager(), fragmentList);
 
         vpBanner.setAdapter(adapter);
         indicator.setViewPager(vpBanner);
@@ -686,8 +701,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                 setBannerUrlDestination(0, itemCategoryBannerList);
 
             }
-        },500);
-
+        }, 500);
 
 
     }
@@ -698,7 +712,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         svContents.post(new Runnable() {
             @Override
             public void run() {
-                svContents.scrollTo(0,0);
+                svContents.scrollTo(0, 0);
             }
         });
 
@@ -765,20 +779,23 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void setBannerUrlDestination(int position, List<ItemCategoryBanner>itemCategoryBannerList){
+    private void setBannerUrlDestination(int position, List<ItemCategoryBanner> itemCategoryBannerList) {
 
 
         final String bannerType = itemCategoryBannerList.get(position).getBannerType();
 
-        if(bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)){
+        if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
 
             String link = itemCategoryBannerList.get(position).getVideoLink();
 
-            if(link!=null && !link.equals("null") && !link.equals("")){
+
+            MyLog.Set("e", getClass(), "linklinklink => " + link);
+
+            if (link != null && !link.equals("null") && !link.equals("")) {
 
                 final HashMap<String, String> map = UrlUtility.UrlToMapGetValue(link);
 
-                if(map.get("autobuy")!=null){
+                if (map.get("autobuy") != null) {
                     tvBannerDestination.setText(R.string.pinpinbox_2_0_0_button_sponsor);
                     tvBannerDestination.setVisibility(View.VISIBLE);
 
@@ -790,12 +807,12 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
                         @Override
                         public void Up() {
-                            if(ClickUtils.ButtonContinuousClick()){
+                            if (ClickUtils.ButtonContinuousClick()) {
                                 return;
                             }
 
 
-                            if(map.get(Key.album_id)!=null){
+                            if (map.get(Key.album_id) != null) {
 
                                 Bundle bundle = new Bundle();
                                 bundle.putString(Key.album_id, map.get(Key.album_id));
@@ -805,17 +822,18 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                             }
 
 
-
                         }
                     }));
 
-                }else {
+                } else {
                     tvBannerDestination.setVisibility(View.GONE);
                 }
 
+            } else {
+                tvBannerDestination.setVisibility(View.GONE);
             }
 
-        }else {
+        } else {
 
             tvBannerDestination.setVisibility(View.GONE);
 
@@ -922,7 +940,6 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     public void removeFragment() {
         fragmentCategoryUser = null;
     }
-
 
 
     @Override
