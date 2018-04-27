@@ -58,7 +58,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
         Activity activity = SystemUtility.getActivity(Main2Activity.class.getSimpleName());
 
-
         if (activity != null) {
 
             ViewControl.setBlur(activity, blurview, 4f);
