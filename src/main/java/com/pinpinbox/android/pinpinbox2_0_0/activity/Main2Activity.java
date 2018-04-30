@@ -30,7 +30,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Test.OldMainActivity;
+import com.pinpinbox.android.SampleTest.OldMainActivity;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;

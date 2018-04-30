@@ -232,7 +232,7 @@
 
 
         <activity
-            android:name=".Test.OldMainActivity"
+            android:name=".SampleTest.OldMainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"
@@ -246,7 +246,7 @@
 
         </activity>
         <activity
-            android:name=".Test.CaptureActivity"
+            android:name=".SampleTest.CaptureActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -266,7 +266,7 @@
             tools:ignore="ManifestResource" />
 
         <activity
-            android:name=".Test.MapsActivity"
+            android:name=".SampleTest.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".pinpinbox2_0_0.activity.YouTubeActivity"
@@ -292,13 +292,13 @@
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".Test.CreateAlbum.CreateAlbumActivity"
+            android:name=".SampleTest.CreateAlbum.CreateAlbumActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".Test.Templateinfo.TemplateInfoActivity"
+            android:name=".SampleTest.Templateinfo.TemplateInfoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"
@@ -534,7 +534,7 @@
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".Test.Category2Activity"
+            android:name=".SampleTest.Category2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"
@@ -573,20 +573,20 @@
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".Test.TextTestActivity"
+            android:name=".SampleTest.TextTestActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name=".Test.TestStatusActivity"
+            android:name=".SampleTest.TestStatusActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name=".Test.TestGalleryActivity"
+            android:name=".SampleTest.TestGalleryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -594,7 +594,7 @@
 
 
         <activity
-            android:name=".Test.TestPageForYoutubeActivity"
+            android:name=".SampleTest.TestPageForYoutubeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="true"
             android:screenOrientation="user" />
@@ -647,7 +647,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name=".Test.PieChartActivity"
+            android:name=".SampleTest.PieChartActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/dragger"

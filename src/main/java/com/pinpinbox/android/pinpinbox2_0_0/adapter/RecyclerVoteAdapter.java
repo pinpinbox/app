@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.flyco.labelview.LabelView;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Test.ScaleTouhListener;
+import com.pinpinbox.android.SampleTest.ScaleTouhListener;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
