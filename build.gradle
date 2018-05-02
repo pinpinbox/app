@@ -191,6 +191,7 @@ dependencies {
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.github.mabbas007:TagsEditText:1.0.5'
 
+    testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'
 

@@ -238,9 +238,9 @@ public class PopBoard {
                   /*留言數*/
                     if (count > 9999) {
                         String strMessageboard = StringUtil.ThousandToK(count);
-                        tvCount.setText(strMessageboard + "K" + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_message));
+                        tvCount.setText(strMessageboard + "K");
                     } else {
-                        tvCount.setText(count + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_message));
+                        tvCount.setText(count + "");
                     }
                 }
             }

@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,7 +36,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.ScaleTouhListener;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
-import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
@@ -123,10 +121,10 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 //    private GyroscopeObserver gyroscopeObserver;
 
-    private RelativeLayout rLocation, rDetail;
-    private LinearLayout linEvent, linType, linAuthor;
+    private RelativeLayout rLocation;
+    private LinearLayout linEvent, linType, linAuthor, linDetail, linLike, linMessage, linViewed, linSponsor;
 
-    private TextView tvAlbumName, tvAlbumAuthor, tvViewed, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvVote;
+    private TextView tvAlbumName, tvAlbumAuthor, tvViewedCount, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvSponsorCount, tvVote;
     private TextView tvRead;
     private RoundCornerImageView coverImg;
     private ImageView backImg, messageImg, likeImg, moreImg;
@@ -307,13 +305,14 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     private void setScrollControl() {
 
-        rDetail = (RelativeLayout) findViewById(R.id.rDetail);
+//        rDetail = (RelativeLayout) findViewById(R.id.rDetail);
+        linDetail = (LinearLayout)findViewById(R.id.linDetail);
 
         ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
 
         parallaxScrollView.setScrollDismissView(findViewById(R.id.linContents));
 
-        parallaxScrollView.setAlphaView(findViewById(R.id.linAlpha), rDetail);
+        parallaxScrollView.setAlphaView(findViewById(R.id.linAlpha), linDetail);
 
         parallaxScrollView.setActivity(this);
 
@@ -351,25 +350,33 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         strReportList = new ArrayList<>();
 
         rLocation = (RelativeLayout) findViewById(R.id.rLocation);
-//        rAuthor = (RelativeLayout) findViewById(R.id.rAuthor);
-        linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
 
+        linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
         linEvent = (LinearLayout) findViewById(R.id.linEvent);
         linType = (LinearLayout) findViewById(R.id.linType);
+
+        linLike = (LinearLayout) findViewById(R.id.linLike);
+        linMessage = (LinearLayout) findViewById(R.id.linMessage);
+        linSponsor = (LinearLayout) findViewById(R.id.linSponsor);
+        linViewed = (LinearLayout) findViewById(R.id.linViewed);
 
 
         tvAlbumName = (TextView) findViewById(R.id.tvName);
         tvAlbumAuthor = (TextView) findViewById(R.id.tvAuthor);
         tvAlbumDescription = (TextView) findViewById(R.id.tvDescription);
-        tvViewed = (TextView) findViewById(R.id.tvViewed);
+
         tvLocation = (TextView) findViewById(R.id.tvLocation);
         tvRead = (TextView) findViewById(R.id.tvRead);
         tvEvent = (TextView) findViewById(R.id.tvEvent);
+        tvVote = (TextView) findViewById(R.id.tvVote);
         tvMessageCount = (TextView) findViewById(R.id.tvMessageCount);
         tvLikeCount = (TextView) findViewById(R.id.tvLikeCount);
-        tvVote = (TextView) findViewById(R.id.tvVote);
+        tvViewedCount = (TextView) findViewById(R.id.tvViewedCount);
+        tvSponsorCount = (TextView) findViewById(R.id.tvSponsorCount);
 
-//        coverImg = (ImageView) findViewById(R.id.coverImg);
+
+
+
         userImg = (RoundCornerImageView) findViewById(R.id.userImg);
         signalVideoImg = (ImageView) findViewById(R.id.signalVideoImg);
         signalSlotImg = (ImageView) findViewById(R.id.signalSlotImg);
@@ -389,25 +396,23 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
 
-        try {
-            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
+//        try {
+//            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
+//
+//                if (rDetail != null) {
+//                    rDetail.setBackground(
+//                            ScrimUtil.makeCubicGradientScrimDrawable(
+//                                    Color.parseColor(ColorClass.BLACK_ALPHA),
+//                                    8, //渐变层数
+//                                    Gravity.BOTTOM)); //起始方向
+//
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-                if (rDetail != null) {
-                    rDetail.setBackground(
-                            ScrimUtil.makeCubicGradientScrimDrawable(
-                                    Color.parseColor(ColorClass.BLACK_ALPHA),
-                                    8, //渐变层数
-                                    Gravity.BOTTOM)); //起始方向
 
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        (findViewById(R.id.linLikeCount)).setOnClickListener(this);
-        tvMessageCount.setOnClickListener(this);
         backImg.setOnClickListener(this);
 
     }
@@ -1165,15 +1170,15 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 }
 
 
-                try {
 
+                try {
                      /*瀏覽數*/
                     if (itemAlbum.getViewed() > 9999) {
                         String strViewed = StringUtil.ThousandToK(itemAlbum.getViewed());
-                        tvViewed.setText(strViewed + "K" + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
+                        tvViewedCount.setText(strViewed + "K");
                     } else {
 
-                        tvViewed.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
+                        tvViewedCount.setText(itemAlbum.getViewed() + "");
 
                     }
 
@@ -1188,9 +1193,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                      /*留言數*/
                     if (itemAlbum.getMessageboard() > 9999) {
                         String strMessageboard = StringUtil.ThousandToK(itemAlbum.getMessageboard());
-                        tvMessageCount.setText(strMessageboard + "K" + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_message));
+                        tvMessageCount.setText(strMessageboard + "K");
                     } else {
-                        tvMessageCount.setText(itemAlbum.getMessageboard() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_message));
+                        tvMessageCount.setText(itemAlbum.getMessageboard() + "");
                     }
 
 
@@ -1322,8 +1327,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                 ViewControl.AlphaTo1(findViewById(R.id.linAlpha), 200);
 
-                if (rDetail != null) {
-                    ViewControl.AlphaTo1(rDetail, 200);
+                if (linDetail != null) {
+                    ViewControl.AlphaTo1(linDetail, 200);
                 }
 
                 new Handler().postDelayed(new Runnable() {
@@ -1377,9 +1382,79 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     }
                 }));
 
+                linLike.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+                    @Override
+                    public void Touch() {
+
+                    }
+
+                    @Override
+                    public void Up() {
+
+                        if(ClickUtils.ButtonContinuousClick()){
+                            return;
+                        }
+
+                        toLikesList();
+
+                    }
+                }));
+
+                linMessage.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+                    @Override
+                    public void Touch() {
+
+                    }
+
+                    @Override
+                    public void Up() {
+
+                        if(ClickUtils.ButtonContinuousClick()){
+                            return;
+                        }
+
+                        if (board == null) {
+
+                            board = new PopBoard(mActivity, PopBoard.TypeAlbum, album_id, (RelativeLayout) findViewById(R.id.rBackground), false);
+                            board.setTvCount(tvMessageCount);
+
+                        } else {
+
+                            board.clearList();
+                            board.doGetBoard();
+
+                        }
+
+                    }
+                }));
+
+                linSponsor.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+                    @Override
+                    public void Touch() {
+
+                    }
+
+                    @Override
+                    public void Up() {
+                        if(ClickUtils.ButtonContinuousClick()){
+                            return;
+                        }
+                    }
+                }));
+
+
+
+
+
+
+
+
+
+
+
+
 
                 tvRead.setOnClickListener(AlbumInfo2Activity.this);
-//                linAuthor.setOnClickListener(AlbumInfo2Activity.this);
                 linEvent.setOnClickListener(AlbumInfo2Activity.this);
                 coverImg.setOnClickListener(AlbumInfo2Activity.this);
                 messageImg.setOnClickListener(AlbumInfo2Activity.this);
@@ -2327,28 +2402,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                 break;
 
-            case R.id.linLikeCount:
-
-                toLikesList();
-
-                break;
-
-            case R.id.tvMessageCount:
-
-                if (board == null) {
-
-                    board = new PopBoard(mActivity, PopBoard.TypeAlbum, album_id, (RelativeLayout) findViewById(R.id.rBackground), false);
-                    board.setTvCount(tvMessageCount);
-
-                } else {
-
-                    board.clearList();
-                    board.doGetBoard();
-
-                }
-
-
-                break;
 
             case R.id.tvVote:
 
