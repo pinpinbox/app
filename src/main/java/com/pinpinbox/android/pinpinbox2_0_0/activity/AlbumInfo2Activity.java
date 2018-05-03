@@ -306,7 +306,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private void setScrollControl() {
 
 //        rDetail = (RelativeLayout) findViewById(R.id.rDetail);
-        linDetail = (LinearLayout)findViewById(R.id.linDetail);
+        linDetail = (LinearLayout) findViewById(R.id.linDetail);
 
         ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
 
@@ -375,8 +375,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         tvSponsorCount = (TextView) findViewById(R.id.tvSponsorCount);
 
 
-
-
         userImg = (RoundCornerImageView) findViewById(R.id.userImg);
         signalVideoImg = (ImageView) findViewById(R.id.signalVideoImg);
         signalSlotImg = (ImageView) findViewById(R.id.signalSlotImg);
@@ -387,13 +385,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         moreImg = (ImageView) findViewById(R.id.moreImg);
 
 
-        TextUtility.setBold(tvAlbumName, true);
-        TextUtility.setBold(tvAlbumAuthor, true);
-        TextUtility.setBold(tvRead, true);
-        TextUtility.setBold(tvEvent, true);
-        TextUtility.setBold(tvVote, true);
-
-
+        TextUtility.setBold(tvAlbumName, tvAlbumAuthor, tvRead, tvEvent, tvVote, tvLikeCount, tvMessageCount, tvSponsorCount);
 
 
 //        try {
@@ -1116,7 +1108,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
 
 
-
         @SuppressLint("ClickableViewAccessibility")
         @Override
         protected void onPostExecute(Object result) {
@@ -1170,18 +1161,16 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 }
 
 
-
                 try {
-                     /*瀏覽數*/
+                   /*瀏覽數*/
                     if (itemAlbum.getViewed() > 9999) {
                         String strViewed = StringUtil.ThousandToK(itemAlbum.getViewed());
-                        tvViewedCount.setText(strViewed + "K");
+                        tvViewedCount.setText(strViewed + "K" + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
                     } else {
 
-                        tvViewedCount.setText(itemAlbum.getViewed() + "");
+                        tvViewedCount.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
 
                     }
-
                         /*讚數*/
                     if (itemAlbum.getLikes() > 9999) {
                         String strLikes = StringUtil.ThousandToK(itemAlbum.getLikes());
@@ -1366,7 +1355,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     @Override
                     public void Up() {
 
-                        if(ClickUtils.ButtonContinuousClick()){
+                        if (ClickUtils.ButtonContinuousClick()) {
                             return;
                         }
 
@@ -1391,7 +1380,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     @Override
                     public void Up() {
 
-                        if(ClickUtils.ButtonContinuousClick()){
+                        if (ClickUtils.ButtonContinuousClick()) {
                             return;
                         }
 
@@ -1409,7 +1398,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     @Override
                     public void Up() {
 
-                        if(ClickUtils.ButtonContinuousClick()){
+                        if (ClickUtils.ButtonContinuousClick()) {
                             return;
                         }
 
@@ -1436,22 +1425,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                     @Override
                     public void Up() {
-                        if(ClickUtils.ButtonContinuousClick()){
+                        if (ClickUtils.ButtonContinuousClick()) {
                             return;
                         }
                     }
                 }));
-
-
-
-
-
-
-
-
-
-
-
 
 
                 tvRead.setOnClickListener(AlbumInfo2Activity.this);
@@ -2427,7 +2405,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 break;
 
 
-
         }
 
     }
@@ -2567,7 +2544,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     d.setCheckExecute(checkExecute);
                     d.show();
                 }
-            },500);
+            }, 500);
 
 //            final DialogV2Custom d = new DialogV2Custom(mActivity);
 //            d.setStyle(DialogStyleClass.CHECK);
@@ -2624,7 +2601,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             bundle.putBoolean(Key.from_album_info, true);
 
             userImg.setTransitionName(itemAlbum.getUser_picture());
-
 
 
             Pair<View, String> pImg = Pair.create(findViewById(R.id.userImg), itemAlbum.getUser_picture());
@@ -2763,7 +2739,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                                     d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_i_know);
                                     d.show();
                                 }
-                            },500);
+                            }, 500);
 
                         }
                     });

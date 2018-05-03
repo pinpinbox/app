@@ -13,5 +13,18 @@ public class TextUtility {
         tp.setFakeBoldText(bold);
     }
 
+    public static void setBold(TextView... tvs){
+
+        if(tvs.length!=0){
+
+            for (TextView tv : tvs) {
+                TextPaint tp = tv.getPaint();
+                tp.setFakeBoldText(true);
+            }
+
+        }
+
+    }
+
 
 }

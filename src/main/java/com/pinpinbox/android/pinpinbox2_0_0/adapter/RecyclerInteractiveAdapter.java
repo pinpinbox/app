@@ -29,16 +29,16 @@ import java.util.List;
  * Created by vmage on 2018/1/2.
  */
 
-public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
+public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
 
     private Activity mActivity;
 
     private List<ItemUser> itemUserList;
 
-    private RecyclerSponsorAdapter.OnRecyclerViewListener onRecyclerViewListener;
-    private RecyclerSponsorAdapter.OnUserInterativeListener onUserInterativeListener;
+    private RecyclerInteractiveAdapter.OnRecyclerViewListener onRecyclerViewListener;
+    private RecyclerInteractiveAdapter.OnUserInterativeListener onUserInterativeListener;
 
-    public RecyclerSponsorAdapter(Activity activity, List<ItemUser> itemUserList) {
+    public RecyclerInteractiveAdapter(Activity activity, List<ItemUser> itemUserList) {
         this.mActivity = activity;
         this.itemUserList = itemUserList;
     }
@@ -50,7 +50,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         boolean onItemLongClick(int position, View v);
     }
 
-    public void setOnRecyclerViewListener(RecyclerSponsorAdapter.OnRecyclerViewListener onRecyclerViewListener) {
+    public void setOnRecyclerViewListener(RecyclerInteractiveAdapter.OnRecyclerViewListener onRecyclerViewListener) {
         this.onRecyclerViewListener = onRecyclerViewListener;
     }
 
@@ -62,7 +62,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
         void doPostMessage(int position);
     }
 
-    public void setOnUserInterativeListener(RecyclerSponsorAdapter.OnUserInterativeListener onUserInterativeListener) {
+    public void setOnUserInterativeListener(RecyclerInteractiveAdapter.OnUserInterativeListener onUserInterativeListener) {
         this.onUserInterativeListener = onUserInterativeListener;
     }
 
@@ -70,7 +70,7 @@ public class RecyclerSponsorAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_sponsor, null);
-        return new RecyclerSponsorAdapter.ViewHolder(view);
+        return new RecyclerInteractiveAdapter.ViewHolder(view);
     }
 
     @Override

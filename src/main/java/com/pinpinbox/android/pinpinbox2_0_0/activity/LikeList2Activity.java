@@ -20,7 +20,7 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSponsorAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerInteractiveAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
@@ -57,12 +57,12 @@ import java.util.Map;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class LikeList2Activity extends DraggerActivity implements View.OnClickListener, RecyclerSponsorAdapter.OnUserInterativeListener {
+public class LikeList2Activity extends DraggerActivity implements View.OnClickListener, RecyclerInteractiveAdapter.OnUserInterativeListener {
 
 
     private Activity mActivity;
     private List<ItemUser> itemUserList;
-    private RecyclerSponsorAdapter adapter;
+    private RecyclerInteractiveAdapter adapter;
 //
     private FollowTask followTask;
     private AttentionTask attentionTask;
@@ -168,7 +168,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
 
     private void setRecycler() {
 
-        adapter = new RecyclerSponsorAdapter(mActivity, itemUserList);
+        adapter = new RecyclerInteractiveAdapter(mActivity, itemUserList);
         rvUser.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
@@ -176,7 +176,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
         LinearLayoutManager manager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
         rvUser.setLayoutManager(manager);
 
-        adapter.setOnRecyclerViewListener(new RecyclerSponsorAdapter.OnRecyclerViewListener() {
+        adapter.setOnRecyclerViewListener(new RecyclerInteractiveAdapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
 
