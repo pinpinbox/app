@@ -204,12 +204,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     }
 
     private void setShareElementAnim() {
+
         coverUrl = getIntent().getExtras().getString(Key.cover, "");
         coverImg = (RoundCornerImageView) findViewById(R.id.coverImg);
 
-
         int orientation = getIntent().getExtras().getInt(Key.image_orientation, 0);
-
 
         if (orientation == ItemAlbum.LANDSCAPE) {
 
@@ -271,15 +270,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                             MyLog.Set("d", AlbumInfo2Activity.class, "onSuccess !coverurl => " + coverUrl);
 
                             supportStartPostponedEnterTransition();
-
-
-//                            Picasso
-//                                    .with(getApplicationContext())
-//                                    .load(R.drawable.ic200_act_close_dark)
-//                                    .noFade()
-//                                    .noPlaceholder()
-//                                    .into(coverImg);
-
 
                             doing();
 
@@ -1119,7 +1109,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
                 /*作品名稱*/
-                tvAlbumName.setText(itemAlbum.getName());
+                tvAlbumName.setText(itemAlbum.getName().trim());
 
                 /*作者*/
                 if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {

@@ -443,10 +443,10 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
     private void setdata() {
         if (itemUser.isFollow()) {
-            /**已關注*/
+            /*已關注*/
             attenionSuccess();
         } else {
-            /**未關注*/
+            /*未關注*/
             attenionCancel();
         }
 
@@ -488,13 +488,13 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         }
 
 
-        tvName.setText(itemUser.getName());
+        tvName.setText(itemUser.getName().trim());
 
         if (itemUser.getCreative_name().equals("")) {
             rCreativeName.setVisibility(View.GONE);
         } else {
             rCreativeName.setVisibility(View.VISIBLE);
-            tvCreativeName.setText(itemUser.getCreative_name());
+            tvCreativeName.setText(itemUser.getCreative_name().trim());
             tvCreativeName.setVisibility(View.VISIBLE);
             try {
                 if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
