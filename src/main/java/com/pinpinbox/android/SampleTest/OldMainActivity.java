@@ -18,6 +18,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -55,6 +56,10 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Rotate3d;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.service.DownLoadService;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -67,6 +72,12 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import jp.wasabeef.richeditor.RichEditor;
 
 //import com.pinpinbox.android.Test.PieChartActivity;
@@ -409,42 +420,61 @@ public class OldMainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-//                startActivity(new Intent(OldMainActivity.this, TextTestActivity.class));
+                final ItemUser itemUser = new ItemUser();
+
+                Observable.create(new ObservableOnSubscribe<ItemUser>() {
+                    @Override
+                    public void subscribe(final ObservableEmitter<ItemUser> emitter) throws Exception {
+
+                        final OkHttpClient okHttpClient = new OkHttpClient();
+                        final Request request = new Request.Builder()
+                                .url("https://www.google.com.tw/")
+                                .build();
+
+                        okHttpClient.newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(final Request request, final IOException ioe) {
+                                System.out.println("onFailure");
+                                emitter.onError(ioe);
+                            }
+
+                            @Override
+                            public void onResponse(final Response r) throws IOException {
+                                itemUser.setName(r.body().string());
+                                emitter.onNext(itemUser);
+                                emitter.onComplete();
+
+                            }
+                        });
 
 
-//                final OkHttpClient okHttpClient = new OkHttpClient();
-//                final Request request = new Request.Builder()
-//                        .url("https://www.google.com.tw/")
-//                        .build();
-//
-//                Observable.create(new ObservableOnSubscribe<String>() {
-//                    @Override
-//                    public void subscribe(final ObservableEmitter<String> e) throws Exception {
-//
-//
-//                        okHttpClient.newCall(request).enqueue(new Callback() {
-//                            @Override
-//                            public void onFailure(final Request request, final IOException ioe) {
-//                                System.out.println("onFailure");
-//                                e.onError(ioe);
-//                            }
-//
-//                            @Override
-//                            public void onResponse(final Response r) throws IOException {
-//
-//                                String ss = r.body().string();
-//                                System.out.println(ss);
-//
-//                                e.onNext(r.body().string());
-//                                e.onComplete();
-//
-//                            }
-//                        });
-//
-//
-//
-//                    }
-//                });
+                    }
+                })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<ItemUser>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                System.out.println("onSubscribe");
+                            }
+
+                            @Override
+                            public void onNext(ItemUser itemUser) {
+
+                                System.out.println("onNext => " + itemUser.getName());
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                System.out.println("onError");
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                System.out.println("onComplete");
+                            }
+                        });
 
 
             }
