@@ -42,6 +42,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.OffLine2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.TypeFacebookFriend2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
@@ -64,6 +65,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
 import jp.wasabeef.richeditor.RichEditor;
 
 //import com.pinpinbox.android.Test.PieChartActivity;
@@ -406,7 +409,43 @@ public class OldMainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(OldMainActivity.this, TextTestActivity.class));
+//                startActivity(new Intent(OldMainActivity.this, TextTestActivity.class));
+
+
+//                final OkHttpClient okHttpClient = new OkHttpClient();
+//                final Request request = new Request.Builder()
+//                        .url("https://www.google.com.tw/")
+//                        .build();
+//
+//                Observable.create(new ObservableOnSubscribe<String>() {
+//                    @Override
+//                    public void subscribe(final ObservableEmitter<String> e) throws Exception {
+//
+//
+//                        okHttpClient.newCall(request).enqueue(new Callback() {
+//                            @Override
+//                            public void onFailure(final Request request, final IOException ioe) {
+//                                System.out.println("onFailure");
+//                                e.onError(ioe);
+//                            }
+//
+//                            @Override
+//                            public void onResponse(final Response r) throws IOException {
+//
+//                                String ss = r.body().string();
+//                                System.out.println(ss);
+//
+//                                e.onNext(r.body().string());
+//                                e.onComplete();
+//
+//                            }
+//                        });
+//
+//
+//
+//                    }
+//                });
+
 
             }
         });
@@ -638,7 +677,6 @@ public class OldMainActivity extends FragmentActivity {
                 startActivity(new Intent(mActivity, TestPageForYoutubeActivity.class));
 
 
-
             }
         });
 
@@ -690,7 +728,7 @@ public class OldMainActivity extends FragmentActivity {
             public void onClick(View v) {
 
 
-              startActivity(  new Intent(OldMainActivity.this, TestGalleryActivity.class));
+                startActivity(new Intent(OldMainActivity.this, TestGalleryActivity.class));
 
 
             }
@@ -1197,5 +1235,12 @@ public class OldMainActivity extends FragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    interface UserManager {
+        Observable<ItemUser> getUser();
+
+        Completable setTitle(String name);
+
+        Completable setAge(int age);
+    }
 
 }
