@@ -791,7 +791,10 @@ public class PopBoard {
                             limit)
                     , null);
 
-            MyLog.Set("d", this.getClass(), "p90strJson => " + strJson);
+//            MyLog.Set("d", this.getClass(), "p90strJson => " + strJson);
+
+            com.orhanobut.logger.Logger.json(strJson);
+
         } catch (SocketTimeoutException timeout) {
             p90Result = Key.TIMEOUT;
         } catch (Exception e) {

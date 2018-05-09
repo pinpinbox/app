@@ -37,6 +37,10 @@ public class TagManager {
         /*已 [ 分割字段*/
         Pattern p = Pattern.compile(sectionReg);
         String parts[] = p.split(message);
+
+        int checkIndex = 0;
+
+
         for (int i = 0; i < parts.length; i++) {
             if (parts[i].length() > 0) {
 
@@ -60,23 +64,21 @@ public class TagManager {
                     ItemTagUser tagUser = new ItemTagUser();
                     tagUser.setName(name);
                     tagUser.setUser_id(id);
-                    tagUser.setSendType("[" + part + "]");
+
+                    /*組合送出字串*/
+                    String send = "[" + part + "]";
+                    tagUser.setSendType(send);
 
                     /*設置字段位置*/
                     Pattern pIndex = Pattern.compile("\\[" + part + "\\]");
                     Matcher mIndex = pIndex.matcher(message);
-                    if (mIndex.find()) {
+                    if (mIndex.find(checkIndex)) {
                         tagUser.setStartIndex(mIndex.start());
                         tagUser.setEndIndex(mIndex.end());
+
+                        checkIndex = mIndex.end();
                     }
 
-//                    MyLog.Set("e", TagManager.class, "name => " + tagUser.getName());
-//                    MyLog.Set("e", TagManager.class, "user_id => " + tagUser.getUser_id());
-//                    MyLog.Set("e", TagManager.class, "sendType => " + tagUser.getSendType());
-//                    MyLog.Set("e", TagManager.class, "startIndex => " + tagUser.getStartIndex());
-//                    MyLog.Set("e", TagManager.class, "endIndex => " + tagUser.getEndIndex());
-//
-//                    MyLog.Set("e", TagManager.class, "--------------------------------------------------------------------------------------------");
 
                     itemTagUserList.add(tagUser);
 
