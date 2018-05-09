@@ -224,32 +224,12 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         checkNewDay();
 
 
-        ImageView testbuttonImg = (ImageView) findViewById(R.id.testbutton);//src
-        testbuttonImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-//                RedPointManager.showOrHideOnSettings(true);
-//                RedPointManager.showOrHideOnRecent(true);
-
-
-                Intent intent = new Intent(mActivity, OldMainActivity.class);
-                startActivity(intent);
-                finish();
-                ActivityAnim.StartAnim(mActivity);
-
-
-            }
-        });
-
 
         if (BuildConfig.FLAVOR.equals("w3_private")) {
-            testbuttonImg.setVisibility(View.VISIBLE);
+            testSet();
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
-            testbuttonImg.setVisibility(View.GONE);
+            testSet();
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
-
             FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             mFirebaseAnalytics.setUserId(id + " , " + getdata.getString(Key.nickname, "---"));
             testbuttonImg.setVisibility(View.GONE);
@@ -263,7 +243,46 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             }
         }, 600);
 
+
     }
+
+    private ImageView testbuttonImg;
+    private void testSet(){
+
+        testbuttonImg = (ImageView) findViewById(R.id.testbutton);
+
+        testbuttonImg.setVisibility(View.VISIBLE);
+
+        testbuttonImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(mActivity, OldMainActivity.class);
+                startActivity(intent);
+                finish();
+                ActivityAnim.StartAnim(mActivity);
+
+
+            }
+        });
+
+        createImg.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                FragmentHome2 fragmentHome2 = (FragmentHome2) getFragment(FragmentHome2.class.getSimpleName());
+                if (testbuttonImg.getVisibility() == View.VISIBLE) {
+                    testbuttonImg.setVisibility(View.GONE);
+                    fragmentHome2.hideShowTime(false);
+                } else {
+                    testbuttonImg.setVisibility(View.VISIBLE);
+                    fragmentHome2.hideShowTime(true);
+                }
+                return true;
+            }
+        });
+
+    }
+
 
     private void scheduleStartPostponedTransition(final View sharedElement) {
         sharedElement.getViewTreeObserver().addOnPreDrawListener(
@@ -677,20 +696,21 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     private void toAuthor(String value, boolean openBoard) {
 
-        ActivityIntent.toUser(mActivity, false, openBoard,value, null, null, null);
+        ActivityIntent.toUser(mActivity, false, openBoard, value, null, null, null);
 
     }
 
 
     private boolean showBoard = false;
 
-    public boolean getShowBoard(){
+    public boolean getShowBoard() {
         return this.showBoard;
     }
 
-    public void setShowBoard(boolean showBoard){
+    public void setShowBoard(boolean showBoard) {
         this.showBoard = showBoard;
     }
+
     public void toMePage(boolean showBoard) {
 
         this.showBoard = showBoard;
@@ -752,7 +772,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         if (fromAwsMessage) {
             String type = getAWSDetail.getString("type", "");
 
-            if(type!=null && !type.equals("null") && !type.equals("")){
+            if (type != null && !type.equals("null") && !type.equals("")) {
 
                 String type_id = getAWSDetail.getString("type_id", "");
 
@@ -774,14 +794,14 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                     case "user@messageboard":
                         if (!type_id.equals("") && type_id != null) {
-                            if(type_id.equals(id)){
+                            if (type_id.equals(id)) {
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
                                         toMePage(true);
                                     }
-                                },500);
-                            }else {
+                                }, 500);
+                            } else {
                                 toAuthor(type_id, true);
                             }
                         }
@@ -796,12 +816,12 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         break;
                 }
 
-            }else {
+            } else {
 
 
                 String url = getAWSDetail.getString("url", "");
 
-                if(url!=null && !url.equals("null") && !url.equals("")){
+                if (url != null && !url.equals("null") && !url.equals("")) {
 
                     ActivityIntent.toWeb(mActivity, url, "");
 
@@ -809,7 +829,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
 
             }
-
 
 
             getAWSDetail.edit().clear().commit();
@@ -1830,12 +1849,12 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 }
 
 
-                if(param1!=null && param1.equals("index")){
+                if (param1 != null && param1.equals("index")) {
 
 
                     String param2 = strPathPrefix1.get(2);
 
-                    if(param2!=null && param2.equals("adjustapp")){
+                    if (param2 != null && param2.equals("adjustapp")) {
 
                         HashMap<String, String> map = UrlUtility.UrlToMapGetValue(intent);
                         String album_id = "";
@@ -1846,10 +1865,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                     }
 
 
-
                 }
-
-
 
 
                 break;

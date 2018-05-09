@@ -1,22 +1,14 @@
-import android.util.Log;
-
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 
 import org.junit.Test;
 
-import java.util.logging.Handler;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -100,8 +92,8 @@ public class UnitTestSample {
     }
 
 
+    /*該測試要連結裝置*/
     private void test2() {
-
 
         final ItemUser itemUser = new ItemUser();
 

@@ -116,7 +116,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private String p103Result = "";
     private String p103Message = "";
     private String strRank;
-//    private String albumexplore;
+    //    private String albumexplore;
     private String strJsonData = "";
 
 
@@ -190,8 +190,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         pbLoadMore.progressiveStop();
 
 
-
-
         viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_home, null);
         vpBanner = (ViewPager) viewHeader.findViewById(R.id.vpBanner);
         indicator = (CircleIndicator) viewHeader.findViewById(R.id.indicator);
@@ -233,85 +231,48 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
         //20171128
-        TextView tvShowTime = (TextView) v.findViewById(R.id.tvShowTime);
-
-        //mode = false 正式環境
-//        if (!TestMode.TESTMODE) {
-//
-//            //正式
-//            tvShowTime.setVisibility(View.GONE);
-//
-//        } else {
-//
-//            //測試
-//            tvShowTime.setVisibility(View.VISIBLE);
-//            tvShowTime.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    if (recyclerHomeAdapter != null) {
-//
-//                        if (!recyclerHomeAdapter.isShowTime()) {
-//                            recyclerHomeAdapter.setShowTime(true);
-//                        } else {
-//                            recyclerHomeAdapter.setShowTime(false);
-//                        }
-//
-//                        recyclerHomeAdapter.notifyDataSetChanged();
-//
-//                    }
-//                }
-//            });
-//
-//        }
-
-        if (BuildConfig.FLAVOR.equals("w3_private")) {
-            tvShowTime.setVisibility(View.VISIBLE);
-            tvShowTime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (recyclerHomeAdapter != null) {
-
-                        if (!recyclerHomeAdapter.isShowTime()) {
-                            recyclerHomeAdapter.setShowTime(true);
-                        } else {
-                            recyclerHomeAdapter.setShowTime(false);
-                        }
-
-                        recyclerHomeAdapter.notifyDataSetChanged();
-
-                    }
-                }
-            });
-        } else if (BuildConfig.FLAVOR.equals("www_private")) {
-
-            tvShowTime.setVisibility(View.VISIBLE);
-            tvShowTime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (recyclerHomeAdapter != null) {
-
-                        if (!recyclerHomeAdapter.isShowTime()) {
-                            recyclerHomeAdapter.setShowTime(true);
-                        } else {
-                            recyclerHomeAdapter.setShowTime(false);
-                        }
-
-                        recyclerHomeAdapter.notifyDataSetChanged();
-
-                    }
-                }
-            });
-
-
+        tvShowTime = (TextView) v.findViewById(R.id.tvShowTime);
+        if (BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private")) {
+            testSet();
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
             tvShowTime.setVisibility(View.GONE);
         }
 
 
         return v;
+    }
+
+    /*test version*/
+    private TextView tvShowTime;
+
+    public void hideShowTime(boolean b) {
+
+        if (b) {
+            tvShowTime.setVisibility(View.VISIBLE);
+        } else {
+            tvShowTime.setVisibility(View.GONE);
+        }
+    }
+
+    private void testSet() {
+        tvShowTime.setVisibility(View.VISIBLE);
+        tvShowTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (recyclerHomeAdapter != null) {
+
+                    if (!recyclerHomeAdapter.isShowTime()) {
+                        recyclerHomeAdapter.setShowTime(true);
+                    } else {
+                        recyclerHomeAdapter.setShowTime(false);
+                    }
+
+                    recyclerHomeAdapter.notifyDataSetChanged();
+
+                }
+            }
+        });
     }
 
 
