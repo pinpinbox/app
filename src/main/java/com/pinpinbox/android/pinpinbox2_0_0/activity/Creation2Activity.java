@@ -43,6 +43,7 @@ import com.aviary.android.feather.sdk.AviaryIntent;
 import com.aviary.android.feather.sdk.internal.Constants;
 import com.aviary.android.feather.sdk.internal.headless.utils.MegaPixels;
 import com.czt.mp3recorder.MP3Recorder;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.SampleTest.CreateAlbum.ChangeItemAdapter;
 import com.pinpinbox.android.SampleTest.CreateAlbum.SelectPreviewAdapter;
 import com.pinpinbox.android.R;
@@ -546,7 +547,15 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         if(SystemUtility.getSystemVersion()<Build.VERSION_CODES.O){
             aviaryImg.setVisibility(View.VISIBLE);
         }else {
-            aviaryImg.setVisibility(View.GONE);
+
+            if (BuildConfig.FLAVOR.equals("w3_private")) {
+                aviaryImg.setVisibility(View.VISIBLE);
+            }else {
+                aviaryImg.setVisibility(View.GONE);
+            }
+
+
+
         }
 
 
