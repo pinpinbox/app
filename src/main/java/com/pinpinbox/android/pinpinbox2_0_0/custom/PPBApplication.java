@@ -9,11 +9,11 @@ import com.aviary.android.feather.sdk.IAviaryClientCredentials;
 import com.blankj.utilcode.util.Utils;
 import com.flurry.android.FlurryAgent;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -21,8 +21,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * Created by vmage on 2015/10/27
  */
 public class PPBApplication extends MultiDexApplication implements IAviaryClientCredentials {
-    private static final String CREATIVE_SDK_SAMPLE_CLIENT_SECRET = "1dc7e6b7-ad87-4cd2-b81c-9c29c86435c0";
-    private static final String CREATIVE_SDK_SAMPLE_CLIENT_ID = "ec6b76ad3d2246d38cb06dc39fdaa22e";
+
 
     private int staggeredWidth;
 
@@ -111,7 +110,7 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
     }
 
     private void setFont() {
-        /**2016.09.25*/
+        /*2016.09.25*/
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                         .setDefaultFontPath("fonts/NotoSans-Regular.ttf")
 //                        .setDefaultFontPath("fonts/OpenSans-Bold.ttf")
@@ -123,7 +122,7 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
 
     private void setFlurryAgent() {
 
-        /**2016.09.13新增*/
+        /*2016.09.13新增*/
         // 是否打印本地的Flurry Log
 
         if (LOG.isLogMode) {
@@ -133,45 +132,23 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
         }
 
 
-
         // 打印Log的级别
         FlurryAgent.setLogLevel(Log.DEBUG);
 
-        // test B3N3F93Q9CFTRYMN9VZS
-        //test2 MG8X6J2Z5VX8QCZX4XTX
 
-
-//        if (!TestMode.TESTMODE && !LOG.isLogMode) {
-//            FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
-//        } else {
-//            FlurryAgent.init(this, "5PYSZ533JSG4GTYJ5SJZ");//w3 2.0.0
-//        }
 
         if(BuildConfig.FLAVOR.equals("w3_private")){
-            FlurryAgent.init(this, "5PYSZ533JSG4GTYJ5SJZ");//w3 2.0.0
+            FlurryAgent.init(this, Keys_Flurry.w3);//w3 2.0.0
         }else if(BuildConfig.FLAVOR.equals("www_private")){
-            FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
+            FlurryAgent.init(this, Keys_Flurry.www);//www 2.1.9
             return;
         }else if(BuildConfig.FLAVOR.equals("www_public")){
-            FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
+            FlurryAgent.init(this, Keys_Flurry.www);//www 2.1.9
             return;
         }
 
 
 
-
-//        if (TestMode.TESTMODE) {
-//            FlurryAgent.init(this, "5PYSZ533JSG4GTYJ5SJZ");//w3 2.0.0
-////            FlurryAgent.init(this, "657JPGZ82VWQS8ZB3JJR");//w3 1.1.0
-////            FlurryAgent.init(this, "MG8X6J2Z5VX8QCZX4XTX");//w3 1.0.0
-//        } else {
-//
-//              FlurryAgent.init(this, "6R6SZQVX235W4YXJR8MM");//www 2.1.9
-//              FlurryAgent.init(this, "KTXRNZGVCJ3TG4YVGGDR");//www 2.0.0
-////            FlurryAgent.init(this, "4QW2DPZ28BQWPPG5BBVY");//www 1.2.0
-////            FlurryAgent.init(this, "F4J75J6D54FT9DG7F4FF");//www 1.1.0
-////            FlurryAgent.init(this, "2P79F9VGZ6TSXYD36WD8");//www
-//        }
 
 
         MyLog.Set("d", getClass(), "啟動Flurry");
@@ -207,12 +184,12 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
 
     @Override
     public String getClientID() {
-        return CREATIVE_SDK_SAMPLE_CLIENT_ID;
+        return Keys_Adobe.CREATIVE_SDK_CLIENT_ID;
     }
 
     @Override
     public String getClientSecret() {
-        return CREATIVE_SDK_SAMPLE_CLIENT_SECRET;
+        return Keys_Adobe.CREATIVE_SDK_CLIENT_SECRET;
     }
 
 
