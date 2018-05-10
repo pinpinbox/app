@@ -138,12 +138,12 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
 
 
         if(BuildConfig.FLAVOR.equals("w3_private")){
-            FlurryAgent.init(this, Keys_Flurry.w3);//w3 2.0.0
+            FlurryAgent.init(this, KeysForSKD.FLURRY_W3);//w3 2.0.0
         }else if(BuildConfig.FLAVOR.equals("www_private")){
-            FlurryAgent.init(this, Keys_Flurry.www);//www 2.1.9
+            FlurryAgent.init(this, KeysForSKD.FLURRY_WWW);//www 2.1.9
             return;
         }else if(BuildConfig.FLAVOR.equals("www_public")){
-            FlurryAgent.init(this, Keys_Flurry.www);//www 2.1.9
+            FlurryAgent.init(this, KeysForSKD.FLURRY_WWW);//www 2.1.9
             return;
         }
 
@@ -184,12 +184,12 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
 
     @Override
     public String getClientID() {
-        return Keys_Adobe.CREATIVE_SDK_CLIENT_ID;
+        return KeysForSKD.ADOBE_CREATIVE_SDK_CLIENT_ID;
     }
 
     @Override
     public String getClientSecret() {
-        return Keys_Adobe.CREATIVE_SDK_CLIENT_SECRET;
+        return KeysForSKD.ADOBE_CREATIVE_SDK_CLIENT_SECRET;
     }
 
 
