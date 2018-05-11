@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.pinpinbox.android"
-    android:installLocation="auto">
+    android:installLocation="auto"
+    tools:ignore="ExtraText">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -182,11 +183,7 @@
             android:value="@string/facebook_app_id"
             tools:ignore="ManifestResource" />
         <!-- android:value="472973216191275" -->
-        <provider
-            android:name="com.aviary.android.feather.sdk.internal.cds.AviaryCdsProvider"
-            android:authorities="${applicationId}.AviaryCdsProvider"
-            android:exported="false"
-            android:process=":aviarycds" />
+
         android:windowSoftInputMode="adjustPan|stateHidden"
         <activity
             android:name=".pinpinbox2_0_0.activity.WebView2Activity"

@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
-import com.aviary.android.feather.sdk.IAviaryClientCredentials;
+
+import com.adobe.creativesdk.foundation.AdobeCSDKFoundation;
+import com.adobe.creativesdk.foundation.auth.IAdobeAuthClientCredentials;
 import com.blankj.utilcode.util.Utils;
 import com.flurry.android.FlurryAgent;
 import com.pinpinbox.android.BuildConfig;
@@ -20,7 +22,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 /**
  * Created by vmage on 2015/10/27
  */
-public class PPBApplication extends MultiDexApplication implements IAviaryClientCredentials {
+public class PPBApplication extends MultiDexApplication implements IAdobeAuthClientCredentials {
 
 
     private int staggeredWidth;
@@ -97,6 +99,8 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
         instance = this;
 
         getData = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
+
+        AdobeCSDKFoundation.initializeCSDKFoundation(getApplicationContext());
 
 //        RichText.initCacheDir(this);
 
@@ -177,10 +181,10 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
         this.statusBarHeight = statusBarHeight;
     }
 
-    @Override
-    public String getBillingKey() {
-        return "";
-    }
+//    @Override
+//    public String getBillingKey() {
+//        return "";
+//    }
 
     @Override
     public String getClientID() {
@@ -192,7 +196,15 @@ public class PPBApplication extends MultiDexApplication implements IAviaryClient
         return KeysForSKD.ADOBE_CREATIVE_SDK_CLIENT_SECRET;
     }
 
+    @Override
+    public String[] getAdditionalScopesList() {
+        return new String[0];
+    }
 
+    @Override
+    public String getRedirectURI() {
+        return null;
+    }
 
 
 }

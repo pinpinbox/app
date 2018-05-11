@@ -38,22 +38,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.aviary.android.feather.sdk.AviaryIntent;
-import com.aviary.android.feather.sdk.internal.Constants;
-import com.aviary.android.feather.sdk.internal.headless.utils.MegaPixels;
+import com.adobe.creativesdk.aviary.AdobeImageIntent;
+import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.CreateDir;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.BitmapUtility;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -66,6 +53,18 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationTemplate2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.LocalPhotoAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.CreateDir;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
@@ -1389,7 +1388,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
         }
 
 //         uri = Uri.parse(picPath);
-        Intent newIntent = new AviaryIntent.Builder(getActivity()).setData(Uri.parse(picPath))
+        Intent newIntent = new AdobeImageIntent.Builder(getActivity()).setData(Uri.parse(picPath))
                 .withOutput(Uri.parse(DirClass.sdPath + myDir + "aviary_edit/" + (new File(picPath).getName())))//修改完成會存放的路徑
                 .withOutputFormat(Bitmap.CompressFormat.JPEG)
                 .withOutputSize(MegaPixels.Mp5).withNoExitConfirmation(true)
@@ -2017,7 +2016,8 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                     if (data != null) {
                     /*取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意*/
-                        Uri mImageCaptureUri = data.getData();
+//                        Uri mImageCaptureUri = data.getData();
+                        Uri mImageCaptureUri = data.getParcelableExtra(AdobeImageIntent.EXTRA_OUTPUT_URI);
 
                    /* 返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取*/
                         if (mImageCaptureUri != null) {
@@ -2060,7 +2060,8 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                         Bundle extra = data.getExtras();
                         if (null != extra) {
 
-                            changed = extra.getBoolean(Constants.EXTRA_OUT_BITMAP_CHANGED);
+//                            changed = extra.getBoolean(Constants.EXTRA_OUT_BITMAP_CHANGED);
+                            changed = extra.getBoolean(AdobeImageIntent.EXTRA_OUT_BITMAP_CHANGED);
 
                             ImageView img = ((CreationTemplate2Activity) getActivity()).getToFragmentImg();
                             RelativeLayout relativeLayout = ((CreationTemplate2Activity) getActivity()).getToFragmentRelativeLayout();

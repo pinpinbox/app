@@ -39,25 +39,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aviary.android.feather.sdk.AviaryIntent;
-import com.aviary.android.feather.sdk.internal.Constants;
-import com.aviary.android.feather.sdk.internal.headless.utils.MegaPixels;
+import com.adobe.creativesdk.aviary.AdobeImageIntent;
+import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
 import com.czt.mp3recorder.MP3Recorder;
 import com.pinpinbox.android.BuildConfig;
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.CreateAlbum.ChangeItemAdapter;
 import com.pinpinbox.android.SampleTest.CreateAlbum.SelectPreviewAdapter;
-import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -70,8 +58,19 @@ import com.pinpinbox.android.Views.PinchImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
@@ -544,20 +543,18 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold(tvCheck, true);
 
 
-        if(SystemUtility.getSystemVersion()<Build.VERSION_CODES.O){
+        if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
             aviaryImg.setVisibility(View.VISIBLE);
-        }else {
+        } else {
 
             if (BuildConfig.FLAVOR.equals("w3_private")) {
                 aviaryImg.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 aviaryImg.setVisibility(View.GONE);
             }
 
 
-
         }
-
 
 
     }
@@ -752,8 +749,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 mpBackground = null;
             }
         });
-
-
 
 
     }
@@ -1836,7 +1831,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
 
-
     private void popChangeListener() {
 
         popCreateSort.setDissmissWorks(new PopupCustom.DissmissWorks() {
@@ -2060,7 +2054,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             /*不為影片*/
 
-            if(SystemUtility.getSystemVersion()<Build.VERSION_CODES.O) {
+            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
                 aviaryImg.setVisibility(View.VISIBLE);
             }
 
@@ -2087,7 +2081,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 //            audioRecordingImg.setVisibility(View.GONE);
             rAudioRecording.setVisibility(View.GONE);
             rPlay_Delete.setVisibility(View.GONE);
-            if(SystemUtility.getSystemVersion()<Build.VERSION_CODES.O) {
+            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
                 aviaryImg.setVisibility(View.GONE);
             }
 
@@ -2263,14 +2257,20 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         Uri fromUri = Uri.fromFile(uploadFile);
 
-        Intent newIntent = new AviaryIntent.Builder(this).setData(fromUri)
+//        Intent newIntent = new AviaryIntent.Builder(this).setData(fromUri)
+//                .withOutput(fromUri)
+//                .withOutputFormat(Bitmap.CompressFormat.JPEG)
+//                .withOutputSize(MegaPixel.Mp5).withNoExitConfirmation(true)
+//                .saveWithNoChanges(false).withPreviewSize(1024)
+//                .build();
+
+
+        Intent newIntent = new AdobeImageIntent.Builder(this).setData(fromUri)
                 .withOutput(fromUri)
                 .withOutputFormat(Bitmap.CompressFormat.JPEG)
                 .withOutputSize(MegaPixels.Mp5).withNoExitConfirmation(true)
                 .saveWithNoChanges(false).withPreviewSize(1024)
                 .build();
-
-//        isFromAviary = true;
 
 
         if (fragmentSelectPhoto2 != null) {
@@ -2523,9 +2523,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 //                        new Handler().postDelayed(new Runnable() {
 //                            @Override
 //                            public void run() {
-                                addPicImg.setClickable(true);
-                                addUserImg.setClickable(true);
-                                albumSetImg.setClickable(true);
+                        addPicImg.setClickable(true);
+                        addUserImg.setClickable(true);
+                        albumSetImg.setClickable(true);
 //                            }
 //                        }, 300);
 
@@ -4440,9 +4440,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-                if(url==null || url.equals("")|| url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -4799,11 +4799,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     @Override
     public void OnClick(View v) {
 
-        if(ClickUtils.ButtonContinuousClick()){
+        if (ClickUtils.ButtonContinuousClick()) {
             return;
         }
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
              /*pop  add*/
             case R.id.linAddPhoto:
@@ -4837,10 +4837,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 break;
 
 
-
-
-
-
         }
 
     }
@@ -4848,30 +4844,29 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     @Override
     public void OnDismiss() {
 
-        if(popCreateAdd!=null && popCreateAdd.getPopupWindow().isShowing()){
+        if (popCreateAdd != null && popCreateAdd.getPopupWindow().isShowing()) {
 
             popCreateAdd.dismiss();
         }
 
-        if(popCreationSet!=null && popCreationSet.getPopupWindow().isShowing()){
+        if (popCreationSet != null && popCreationSet.getPopupWindow().isShowing()) {
             popCreationSet.dismiss();
         }
 
 
-        if(popCreatePreview!=null && popCreatePreview.getPopupWindow().isShowing()){
+        if (popCreatePreview != null && popCreatePreview.getPopupWindow().isShowing()) {
             popCreatePreview.dismiss();
         }
 
-        if(popCreateSort!=null && popCreateSort.getPopupWindow().isShowing()){
+        if (popCreateSort != null && popCreateSort.getPopupWindow().isShowing()) {
             popCreateSort.dismiss();
         }
 
-        if(popCreateAudio!=null && popCreateAudio.getPopupWindow().isShowing()){
+        if (popCreateAudio != null && popCreateAudio.getPopupWindow().isShowing()) {
             popCreateAudio.dismiss();
         }
 
     }
-
 
 
     public String getAlbum_id() {
@@ -4945,9 +4940,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                     if (null != extra) {
                         // image was changed by the user?
-                        changed = extra.getBoolean(Constants.EXTRA_OUT_BITMAP_CHANGED);
+//                        changed = extra.getBoolean(Constants.EXTRA_OUT_BITMAP_CHANGED);
 
-                        MyLog.Set("d", getClass(), "ready do AfterAviaryTask()");
+                        changed = extra.getBoolean(AdobeImageIntent.EXTRA_OUT_BITMAP_CHANGED);
+
 
                         doAfterAviary();
 
