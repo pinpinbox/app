@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
-import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
@@ -31,7 +30,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
@@ -547,51 +545,51 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
                     round = round + count;
                 }
 
-                switch (strCategoryName) {
-
-
-                    case "拼旅遊":
-                        FlurryUtil.onEvent(FlurryKey.category_travel);
-                        break;
-
-                    case "拼攝影":
-                        FlurryUtil.onEvent(FlurryKey.category_photography);
-                        break;
-
-                    case "拼藝術":
-                        FlurryUtil.onEvent(FlurryKey.category_art);
-                        break;
-
-                    case "拼美食":
-                        FlurryUtil.onEvent(FlurryKey.category_food);
-                        break;
-
-                    case "拼生活":
-                        FlurryUtil.onEvent(FlurryKey.category_life);
-                        break;
-
-                    case "拼享知":
-                        FlurryUtil.onEvent(FlurryKey.category_knowledge);
-                        break;
-
-                    case "拼寵物":
-                        FlurryUtil.onEvent(FlurryKey.category_pet);
-                        break;
-
-                    case "拼時尚":
-                        FlurryUtil.onEvent(FlurryKey.category_fashion);
-                        break;
-
-                    case "拼寶貝":
-                        FlurryUtil.onEvent(FlurryKey.category_model);
-                        break;
-
-                    case "拼其他":
-                        FlurryUtil.onEvent(FlurryKey.category_other);
-                        break;
-
-
-                }
+//                switch (strCategoryName) {
+//
+//
+//                    case "拼旅遊":
+//                        FlurryUtil.onEvent(FlurryKey.category_travel);
+//                        break;
+//
+//                    case "拼攝影":
+//                        FlurryUtil.onEvent(FlurryKey.category_photography);
+//                        break;
+//
+//                    case "拼藝術":
+//                        FlurryUtil.onEvent(FlurryKey.category_art);
+//                        break;
+//
+//                    case "拼美食":
+//                        FlurryUtil.onEvent(FlurryKey.category_food);
+//                        break;
+//
+//                    case "拼生活":
+//                        FlurryUtil.onEvent(FlurryKey.category_life);
+//                        break;
+//
+//                    case "拼享知":
+//                        FlurryUtil.onEvent(FlurryKey.category_knowledge);
+//                        break;
+//
+//                    case "拼寵物":
+//                        FlurryUtil.onEvent(FlurryKey.category_pet);
+//                        break;
+//
+//                    case "拼時尚":
+//                        FlurryUtil.onEvent(FlurryKey.category_fashion);
+//                        break;
+//
+//                    case "拼寶貝":
+//                        FlurryUtil.onEvent(FlurryKey.category_model);
+//                        break;
+//
+//                    case "拼其他":
+//                        FlurryUtil.onEvent(FlurryKey.category_other);
+//                        break;
+//
+//
+//                }
 
 
             } else if (p10Result == 0) {

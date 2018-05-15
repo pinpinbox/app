@@ -321,6 +321,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 //        }
 //    };
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -3973,6 +3974,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     setChangeProject();
                     lastPosition = thisPosition;
 
+                    FlurryUtil.onEvent(FlurryKey.creation_use_adobe);
 
                 } else if (p59Result.equals("0")) {
                     DialogV2Custom.BuildError(mActivity, p59Message);

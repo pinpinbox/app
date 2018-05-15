@@ -347,7 +347,7 @@
     <string name="pinpinbox_2_0_0_itemtype_collect_my">我的作品</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_other">其他收藏</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">群組作品</string>
-    <string name="pinpinbox_2_0_0_itemtype_autoplay_audio">自動播放音效</string>
+    <string name="pinpinbox_2_0_0_itemtype_autoplay_audio">自動播放音效(作品)</string>
     <string name="pinpinbox_2_0_0_itemtype_work_manager">作品管理</string>
     <string name="pinpinbox_2_0_0_itemtype_logout">登出</string>
     <string name="pinpinbox_2_0_0_itemtype_accumulation_income">累積總積分</string>
@@ -370,7 +370,7 @@
     <string name="pinpinbox_2_0_0_itemtype_phone">電話</string>
     <string name="pinpinbox_2_0_0_itemtype_address">地址</string>
     <string name="pinpinbox_2_0_0_itemtype_exchange_list">兌換清單</string>
-    <string name="pinpinbox_2_0_0_itemtype_autoplay_cga_banner_video">自動播放影片(輪播)</string>
+    <string name="pinpinbox_2_0_0_itemtype_autoplay_cga_banner_video">自動播放影片(分類輪播)</string>
 
 
 

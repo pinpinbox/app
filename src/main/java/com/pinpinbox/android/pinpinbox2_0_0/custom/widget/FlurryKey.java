@@ -38,18 +38,17 @@ public class FlurryKey {
     public static final String creation_adduser_success = "編輯器成功邀請其他用戶";//v2
     public static final String creation_into_adduser_view = "編輯器進入邀請用戶畫面";//v2
     public static final String creation_save_by_newcreate = "成功保存作品";//v2
-    public static final String creation_settings_to_creation = "編輯作品資訊點擊左下方返回編輯器";//v2
+    public static final String creation_use_adobe = "編輯器內使用濾鏡";//v2
 
 
     /*活動*/
     public static final String event_click_to_web_contants = "活動頁面點擊活動詳情";//v2
-    public static final String event_select_create_new_work = "活動頁面選擇建立新作品";//v2
     public static final String event_select_choose_own_work = "活動頁面選擇現有作品";//v2
     public static final String event_create_from_contribute_finish = "依活動流程完成作品並投稿";//v2
 
 
     /*閱讀作品(預覽)*/
-    public static final String preview_photo_scroll_last_page = "閱讀作品(預覽)至最後一頁顯示收藏訊息";
+
 
     /*閱讀作品*/
     public static final String reader_collect_success = "閱讀器內成功收藏";//v2

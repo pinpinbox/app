@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.FileUtility;
-import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
@@ -44,7 +43,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.HashMapKeyControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -1894,8 +1892,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
 
             case R.id.tvToCreation:
-
-                FlurryUtil.onEvent(FlurryKey.creation_settings_to_creation);
 
                 checkModify();
 
