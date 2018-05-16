@@ -40,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
+import com.adobe.creativesdk.aviary.internal.filters.ToolsFactory;
 import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
 import com.czt.mp3recorder.MP3Recorder;
 import com.pinpinbox.android.BuildConfig;
@@ -2265,8 +2266,28 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 //                .saveWithNoChanges(false).withPreviewSize(1024)
 //                .build();
 
+        ToolsFactory.Tools[] tools = {
+                ToolsFactory.Tools.ENHANCE,
+                ToolsFactory.Tools.CROP,
+                ToolsFactory.Tools.ADJUST,
+                ToolsFactory.Tools.SHARPNESS,
+                ToolsFactory.Tools.FOCUS,
+                ToolsFactory.Tools.VIGNETTE,
+                ToolsFactory.Tools.ORIENTATION,
+                //沒有Transform選項
+                ToolsFactory.Tools.SPLASH,
+                ToolsFactory.Tools.DRAW,
+                ToolsFactory.Tools.TEXT,
+                ToolsFactory.Tools.MEME,
+                ToolsFactory.Tools.BLEMISH,
+                ToolsFactory.Tools.BLUR,
+                ToolsFactory.Tools.REDEYE,
+                ToolsFactory.Tools.WHITEN
+        };
 
         Intent newIntent = new AdobeImageIntent.Builder(this).setData(fromUri)
+                .withToolList(tools)
+                .disableUserLogin()
                 .withOutput(fromUri)
                 .withOutputFormat(Bitmap.CompressFormat.JPEG)
                 .withOutputSize(MegaPixels.Mp5).withNoExitConfirmation(true)
