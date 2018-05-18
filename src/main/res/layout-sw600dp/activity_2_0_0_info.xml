@@ -525,13 +525,12 @@
         android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
         android:background="@drawable/click_2_0_0_toolbar"
-        android:elevation="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/ppb200_padding_margin_first"
-        android:paddingRight="@dimen/ppb200_padding_margin_first"
+        android:paddingLeft="@dimen/ppb200_padding_margin_big"
+        android:paddingRight="@dimen/ppb200_padding_margin_big"
         android:transitionName="bg_user"
-        android:translationZ="12dp">
+        android:translationZ="@dimen/ppb200_translationZ_user">
 
 
         <com.pinpinbox.android.Views.CircleView.RoundCornerImageView

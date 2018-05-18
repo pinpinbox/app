@@ -24,7 +24,7 @@ android {
             disable 'MissingTranslation'
         }
 
-        manifestPlaceholders = [appPackageName: "${applicationId}"]
+//        manifestPlaceholders = [appPackageName: "${applicationId}"]
 
 
     }
@@ -38,6 +38,7 @@ android {
             resValue "string", "pinpinbox_app_name", "w3"
             buildConfigField "String", "initAPI", "\"https://w3.pinpinbox.com\""
             dimension "default"
+            manifestPlaceholders = [appPackageName: "${applicationId}"]
         }
 
         www_private {
@@ -45,6 +46,7 @@ android {
             resValue "string", "pinpinbox_app_name", "www"
             buildConfigField "String", "initAPI", "\"https://www.pinpinbox.com\""
             dimension "default"
+            manifestPlaceholders = [appPackageName: "${applicationId}"]
 
         }
 
@@ -53,6 +55,7 @@ android {
             resValue "string", "pinpinbox_app_name", "pinpinbox"
             buildConfigField "String", "initAPI", "\"https://www.pinpinbox.com\""
             dimension "default"
+            manifestPlaceholders = [appPackageName: "${applicationId}"]
         }
 
 
@@ -69,8 +72,9 @@ android {
 
 
     buildTypes {
-        release {
 
+
+        release {
             //減少apk大小 移除用不到的程式碼與資源
 //            minifyEnabled true
 //            shrinkResources true

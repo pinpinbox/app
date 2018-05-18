@@ -2,9 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/test_login_bg">
+    android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/bgImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg200_login"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
 
 
     <TextView
@@ -13,8 +19,6 @@
         android:layout_marginTop="@dimen/ppb200_padding_margin_big"
         android:textColor="@color/white"
         android:text="pinpinbox" />
-
-
 
 
     <LinearLayout
@@ -89,7 +93,7 @@
                 android:background="@color/white"
                 android:paddingLeft="@dimen/ppb200_padding_margin_first"
                 android:paddingRight="@dimen/ppb200_padding_margin_first"
-                android:text="或"
+                android:text="@string/pinpinbox_2_0_0_other_text_or"
                 android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                 android:textSize="@dimen/ppb200_common_text_second" />
 
@@ -213,6 +217,99 @@
 
 
     </LinearLayout>
+
+
+    <HorizontalScrollView
+        android:id="@+id/svHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--android:stretchColumns="7"-->
+
+
+
+
+            <Button
+                android:id="@+id/btMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="menu"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btTest01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="test01"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btC1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="c1"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btC2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="c2"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btC3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="c3"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btC4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="c4"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btC5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="c5"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btC6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="c6"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </RelativeLayout>

@@ -1165,7 +1165,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     if (itemAlbum.getLikes() > 9999) {
                         String strLikes = StringUtil.ThousandToK(itemAlbum.getLikes());
                         tvLikeCount.setText(strLikes + "K");
-                    } else {
+                    } else if (itemAlbum.getLikes()<0){
+                        tvLikeCount.setText(0 + "");
+                    }else {
                         tvLikeCount.setText(itemAlbum.getLikes() + "");
                     }
 
@@ -1173,7 +1175,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     if (itemAlbum.getMessageboard() > 9999) {
                         String strMessageboard = StringUtil.ThousandToK(itemAlbum.getMessageboard());
                         tvMessageCount.setText(strMessageboard + "K");
-                    } else {
+                    } else if(itemAlbum.getMessageboard()<0){
+                        tvMessageCount.setText(0 + "");
+                    }else {
                         tvMessageCount.setText(itemAlbum.getMessageboard() + "");
                     }
 

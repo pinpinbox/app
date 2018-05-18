@@ -32,6 +32,7 @@
 
     <dimen name="ppb200_edittext_min_height">48dp</dimen>
 
+    <dimen name="ppb200_padding_margin_large">64dp</dimen>
     <dimen name="ppb200_padding_margin_big">32dp</dimen>
     <dimen name="ppb200_padding_margin_first">16dp</dimen>
     <dimen name="ppb200_padding_margin_second">8dp</dimen>

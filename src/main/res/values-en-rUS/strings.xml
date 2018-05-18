@@ -56,7 +56,7 @@
     <string name="pinpinbox_2_0_0_button_profile_edit">Edit</string>
     <string name="pinpinbox_2_0_0_button_register_done">Done</string>
     <string name="pinpinbox_2_0_0_button_facebook_login">Facebook\nLogin</string>
-    <string name="pinpinbox_2_0_0_button_create_account">Create\nAccount</string>
+    <string name="pinpinbox_2_0_0_button_create_account">Sign up</string>
     <string name="pinpinbox_2_0_0_button_login">Login</string>
     <string name="pinpinbox_2_0_0_button_about">About</string>
     <string name="pinpinbox_2_0_0_button_about_us">About pinpinbox</string>
@@ -559,6 +559,7 @@
     <string name="pinpinbox_2_0_0_other_text_no_time_limit">No time limit</string>
     <string name="pinpinbox_2_0_0_other_text_time_limit">Time limit</string>
     <string name="pinpinbox_2_0_0_other_text_set_video_autoplay">Set video autoplay</string>
+    <string name="pinpinbox_2_0_0_other_text_or">or</string>
 
 
     <string name="crop__saving">相片儲存中</string>

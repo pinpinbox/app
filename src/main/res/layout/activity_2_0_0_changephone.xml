@@ -167,7 +167,7 @@
         <!--finish-->
         <TextView
             android:id="@+id/tvDone"
-            style="@style/ppb200_Button_main_common_radius"
+            style="@style/ppb200_Button_main_common_bottom_radius"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_button_done" />

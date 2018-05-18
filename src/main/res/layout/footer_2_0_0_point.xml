@@ -2,32 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pinpinbox_2_0_0_other_text_sum"
+        android:layout_marginTop="24dp"
         android:letterSpacing="0.1"
-        android:textSize="@dimen/ppb200_common_text_first"
+        android:text="@string/pinpinbox_2_0_0_other_text_sum"
         android:textColor="@color/pinpinbox_2_0_0_first_text"
-        android:layout_marginTop="24dp"/>
+        android:textSize="@dimen/ppb200_common_text_first" />
 
     <TextView
         android:id="@+id/tvSum"
         style="@style/ppb200_title_first"
-        android:text="NT"
         android:layout_marginLeft="-4dp"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="4dp"
+        android:text="NT" />
 
 
     <TextView
-        style="@style/ppb200_Button_main_common_radius"
         android:id="@+id/tvConfirm"
-        android:text="@string/pinpinbox_2_0_0_button_buy"
+        style="@style/ppb200_Button_main_common_bottom_radius"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/ppb200_padding_margin_first"/>
+        android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+        android:text="@string/pinpinbox_2_0_0_button_buy" />
 
 
 </LinearLayout>

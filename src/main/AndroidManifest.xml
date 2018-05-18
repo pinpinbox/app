@@ -143,12 +143,14 @@
                 <category android:name="com.pinpinbox.android" />
             </intent-filter>
         </service>
+
         <service android:name=".pinpinbox2_0_0.service.RegistraAWSService">
             <intent-filter>
                 <category android:name="com.pinpinbox.android" />
                 <!-- <action android:name="${project.rootDir}.pinpinbox2_0_0.service.RegistraAWSService"/> -->
             </intent-filter>
         </service>
+
         <service android:name=".pinpinbox2_0_0.service.DownLoadService">
             <intent-filter>
                 <category android:name="com.pinpinbox.android" />
@@ -166,6 +168,7 @@
                 <category android:name="com.pinpinbox.android" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name=".pinpinbox2_0_0.custom.MyInstalledReceiver"
             android:label="@string/app_name">
@@ -183,6 +186,16 @@
             android:value="@string/facebook_app_id"
             tools:ignore="ManifestResource" />
         <!-- android:value="472973216191275" -->
+
+
+        <!--<provider-->
+            <!--android:name="com.adobe.creativesdk.aviary.internal.cds.CdsProvider"-->
+            <!--android:authorities="${applicationId}.CdsProvider"-->
+            <!--android:exported="false"-->
+            <!--android:process=":aviarycds"/>-->
+
+
+
 
         android:windowSoftInputMode="adjustPan|stateHidden"
         <activity

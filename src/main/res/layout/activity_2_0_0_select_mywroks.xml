@@ -69,17 +69,16 @@
     </RelativeLayout>
 
     <RelativeLayout
-        style="@style/ppb200_bottom_bar"
-        android:id="@+id/rBottom">
+        android:id="@+id/rBottom"
+        style="@style/ppb200_bottom_bar">
 
 
         <TextView
             android:id="@+id/tvCreate"
-            style="@style/ppb200_Button_main_common_radius"
-            android:layout_width="wrap_content"
+            style="@style/ppb200_Button_main_common_bottom_radius"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_centerInParent="true"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:text="@string/pinpinbox_2_0_0_button_create_new_album" />
 
 

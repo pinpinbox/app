@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/tvVerTitle"
         style="@style/ppb200_title_first"
-        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
         android:layout_marginTop="@dimen/ppb200_title_margin_second"
         android:text="@string/pinpinbox_2_0_0_title_verification_sms" />
 
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvVerTitle"
-        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
         android:layout_marginTop="-4dp"
         android:background="@drawable/click_2_0_0_default"
         android:orientation="horizontal"
@@ -49,143 +49,155 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/img1"
-                android:layout_width="116dp"
-                android:layout_height="30dp"
-                android:layout_gravity="right"
-                android:alpha="0.5"
-                android:src="@drawable/pinpin_logo" />
 
-
-            <!--enter phone-->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_large"
+                android:orientation="vertical">
 
-
-                <TextView
-                    android:id="@+id/tvVerCountry"
-                    android:layout_width="112dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/click_2_0_0_grey_third_radius"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:letterSpacing="0.1"
-                    android:maxLines="2"
-                    android:paddingBottom="4dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="4dp"
-                    android:text="台灣+886"
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="14sp" />
-
-
-                <EditText
-                    android:id="@+id/edVerPhone"
-                    style="@style/ppb200_EditText"
-                    android:layout_width="352dp"
+                <!--enter phone-->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:hint="@string/pinpinbox_2_0_0_input_hint_phone_number"
-                    android:inputType="phone"
-                    android:singleLine="true" />
+                    android:orientation="horizontal">
 
+
+                    <TextView
+                        android:id="@+id/tvVerCountry"
+                        android:layout_width="112dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/click_2_0_0_grey_third_radius"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:letterSpacing="0.1"
+                        android:maxLines="2"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:paddingTop="4dp"
+                        android:text="台灣+886"
+                        android:textColor="@color/pinpinbox_2_0_0_first_text"
+                        android:textSize="14sp" />
+
+
+                    <EditText
+                        android:id="@+id/edVerPhone"
+                        style="@style/ppb200_EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="@string/pinpinbox_2_0_0_input_hint_phone_number"
+                        android:inputType="phone"
+                        android:singleLine="true" />
+
+
+                </LinearLayout>
+
+                <!--send phone number-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp">
+
+                    <TextView
+                        android:id="@+id/tvVerSendPhone"
+                        style="@style/ppb200_Button_main_common_bottom_radius"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/pinpinbox_2_0_0_button_send" />
+
+                    <TextView
+                        android:id="@+id/tvVerTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvVerSendPhone"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="4dp"
+                        android:letterSpacing="0.1"
+                        android:textColor="@color/pinpinbox_2_0_0_second_pink"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+
+                </RelativeLayout>
 
             </LinearLayout>
 
 
-            <!--send phone number-->
-            <RelativeLayout
-                android:layout_width="480dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp">
-
-                <TextView
-                    android:id="@+id/tvVerSendPhone"
-                    style="@style/ppb200_Button_main_common_radius"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/pinpinbox_2_0_0_button_send" />
-
-                <TextView
-                    android:id="@+id/tvVerTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvVerSendPhone"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="4dp"
-                    android:letterSpacing="0.1"
-                    android:text=""
-                    android:textColor="@color/pinpinbox_2_0_0_second_pink"
-                    android:textSize="14sp"
-                    android:visibility="gone" />
+            <View
+                style="@style/ppb200_divider_list"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_large"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big" />
 
 
-            </RelativeLayout>
-
-
-            <!--enter verification code-->
-            <RelativeLayout
-                android:id="@+id/rVerCode"
-                android:layout_width="480dp"
-                android:layout_height="48dp"
-
-                android:background="@drawable/border_2_0_0_grey_third_radius">
-
-                <ImageView
-                    android:id="@+id/img2"
-                    android:layout_width="@dimen/ppb200_common_icon_side"
-                    android:layout_height="@dimen/ppb200_common_icon_side"
-                    android:padding="12dp"
-                    android:src="@drawable/ic200_sms_dark" />
-
-
-                <EditText
-                    android:id="@+id/edVerCode"
-                    style="@style/ppb200_EditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toRightOf="@+id/img2"
-                    android:background="@null"
-                    android:hint="@string/pinpinbox_2_0_0_input_hint_input_verification_code"
-                    android:maxLength="12"
-                    android:paddingLeft="0dp"
-                    android:singleLine="true" />
-
-
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="480dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-                android:letterSpacing="0.1"
-                android:text="@string/pinpinbox_2_0_0_other_text_wait_verification_code_description"
-                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                android:textSize="@dimen/ppb200_common_text_second" />
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_large"
+                android:orientation="vertical">
 
-            <!--finish-->
-            <TextView
-                android:id="@+id/tvVerFinish"
-                style="@style/ppb200_Button_main_common_radius"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                android:text="@string/pinpinbox_2_0_0_button_register_done" />
+                <!--enter verification code-->
+                <RelativeLayout
+                    android:id="@+id/rVerCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+
+                    android:background="@drawable/border_2_0_0_grey_third_radius">
+
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="@dimen/ppb200_common_icon_side"
+                        android:layout_height="@dimen/ppb200_common_icon_side"
+                        android:padding="12dp"
+                        android:src="@drawable/ic200_sms_dark" />
+
+
+                    <EditText
+                        android:id="@+id/edVerCode"
+                        style="@style/ppb200_EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@+id/img2"
+                        android:background="@null"
+                        android:hint="@string/pinpinbox_2_0_0_input_hint_input_verification_code"
+                        android:maxLength="12"
+                        android:paddingLeft="0dp"
+                        android:singleLine="true" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                    android:letterSpacing="0.1"
+                    android:text="@string/pinpinbox_2_0_0_other_text_wait_verification_code_description"
+                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                    android:textSize="@dimen/ppb200_common_text_second" />
+
+                <!--finish-->
+                <TextView
+                    android:id="@+id/tvVerFinish"
+                    style="@style/ppb200_Button_main_common_bottom_radius"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                    android:text="@string/pinpinbox_2_0_0_button_register_done" />
+
+            </LinearLayout>
 
 
         </LinearLayout>

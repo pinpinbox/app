@@ -479,7 +479,9 @@
 
         <TextView
             android:id="@+id/tvConfirm"
-            style="@style/ppb200_Button_main_common_radius"
+            style="@style/ppb200_Button_main_common_bottom_radius"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_centerInParent="true"
             android:text="@string/pinpinbox_2_0_0_button_save" />
 

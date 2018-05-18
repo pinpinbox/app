@@ -29,15 +29,6 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/scanImg"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="left"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
-            android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
-            android:src="@drawable/ic200_scancamera_light" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -198,7 +189,8 @@
         <!--login button-->
         <TextView
             android:id="@+id/tvLoginLogin"
-            style="@style/ppb200_Button_main_common_bottom_radius"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
             android:layout_marginRight="@dimen/ppb200_padding_margin_large"
             android:layout_marginTop="@dimen/ppb200_padding_margin_big"
@@ -230,7 +222,6 @@
         android:id="@+id/svHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:scrollbars="none"
         android:visibility="gone">
 
@@ -241,6 +232,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <!--android:stretchColumns="7"-->
+
+
 
 
             <Button
@@ -319,106 +312,3 @@
 
 
 </RelativeLayout>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>--><!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:id="@+id/rLogin"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:alpha="1">-->
-
-    <!--<RelativeLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_alignParentTop="true"--><!--android:layout_alignParentLeft="true"--><!--android:layout_alignParentStart="true">-->
-
-    <!--<TextView--><!--android:id="@+id/tvLoginTitle"--><!--style="@style/ppb200_title_first"--><!--android:layout_marginLeft="@dimen/ppb200_padding_margin_big"--><!--android:layout_marginTop="@dimen/ppb200_title_margin_second"--><!--android:letterSpacing="0.1"--><!--android:text="pinpinbox" />-->
-
-
-    <!--<RelativeLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_below="@+id/tvLoginTitle"--><!--android:gravity="center_vertical"--><!--android:layout_alignParentLeft="true"--><!--android:layout_alignParentStart="true">-->
-
-
-    <!--&lt;!&ndash;facebook login&ndash;&gt;--><!--<RelativeLayout--><!--android:id="@+id/r2"--><!--android:layout_width="320dp"--><!--android:layout_height="320dp"--><!--android:background="@drawable/bg200_login_facebook"--><!--android:layout_above="@+id/r1"--><!--android:layout_toLeftOf="@+id/r3"--><!--android:layout_toStartOf="@+id/r3"--><!--android:layout_marginBottom="@dimen/ppb200_padding_margin_big">-->
-
-
-    <!--<TextView--><!--android:id="@+id/tvLoginFacebook"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:layout_centerInParent="true"--><!--android:gravity="center"--><!--android:letterSpacing="0.1"--><!--android:text="@string/pinpinbox_2_0_0_button_facebook_login"--><!--android:textColor="@color/white"--><!--android:textSize="@dimen/ppb200_title_second_size"--><!--android:textStyle="bold" />-->
-
-
-    <!--</RelativeLayout>-->
-
-    <!--<ImageView--><!--android:id="@+id/scanImg"--><!--android:layout_width="72dp"--><!--android:layout_height="72dp"--><!--android:background="@drawable/bg200_login_facebook"--><!--android:src="@drawable/ic200_scancamera_white"--><!--android:paddingBottom="24dp"--><!--android:paddingTop="16dp"--><!--android:visibility="visible"--><!--android:layout_above="@+id/r1"--><!--android:layout_alignLeft="@+id/r2"--><!--android:layout_alignStart="@+id/r2" />-->
-
-    <!--&lt;!&ndash;register&ndash;&gt;--><!--<RelativeLayout--><!--android:id="@+id/r3"--><!--android:layout_width="192dp"--><!--android:layout_height="192dp"--><!--android:background="@drawable/bg200_login_registra"--><!--android:layout_above="@+id/r1"--><!--android:layout_alignRight="@+id/r1"--><!--android:layout_alignEnd="@+id/r1">-->
-
-
-    <!--<TextView--><!--android:id="@+id/tvLoginToRegister"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:gravity="center"--><!--android:letterSpacing="0.1"--><!--android:text="@string/pinpinbox_2_0_0_button_create_account"--><!--android:textColor="@color/pinpinbox_2_0_0_first_text"--><!--android:textSize="18sp"--><!--android:textStyle="bold"--><!--android:layout_alignParentTop="true"--><!--android:layout_alignParentLeft="true"--><!--android:layout_alignParentStart="true" />-->
-
-
-    <!--</RelativeLayout>-->
-
-    <!--&lt;!&ndash;login&ndash;&gt;--><!--<RelativeLayout--><!--android:id="@+id/r1"--><!--android:layout_width="480dp"--><!--android:layout_height="480dp"--><!--android:background="@drawable/bg200_login_login"--><!--android:layout_above="@+id/tvAboutUs"--><!--android:layout_centerHorizontal="true">-->
-
-    <!--<LinearLayout--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_centerInParent="true"--><!--android:gravity="center"--><!--android:orientation="vertical">-->
-
-
-    <!--&lt;!&ndash;enter email&ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="328dp"--><!--android:layout_height="48dp"--><!--android:orientation="horizontal">-->
-
-    <!--<ImageView--><!--android:id="@+id/img1"--><!--android:layout_width="@dimen/ppb200_common_icon_side"--><!--android:layout_height="@dimen/ppb200_common_icon_side"--><!--android:padding="12dp"--><!--android:src="@drawable/ic200_mail_white" />-->
-
-    <!--<EditText--><!--android:id="@+id/edLoginMail"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="@null"--><!--android:hint="@string/pinpinbox_2_0_0_input_hint_mail"--><!--android:inputType="textEmailAddress"--><!--android:letterSpacing="0.1"--><!--android:singleLine="true"--><!--android:textColor="@color/white"--><!--android:textColorHint="@color/pinpinbox_2_0_0_album_type_background_in_item"--><!--android:textCursorDrawable="@drawable/bg200_cursor_white"--><!--android:textSize="16sp" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<View--><!--android:layout_width="328dp"--><!--android:layout_height="1dp"--><!--android:background="@color/white" />-->
-
-
-    <!--&lt;!&ndash;enter password&ndash;&gt;--><!--<LinearLayout--><!--android:layout_width="328dp"--><!--android:layout_height="48dp"--><!--android:layout_marginTop="32dp"--><!--android:orientation="horizontal">-->
-
-    <!--<ImageView--><!--android:id="@+id/img2"--><!--android:layout_width="@dimen/ppb200_common_icon_side"--><!--android:layout_height="@dimen/ppb200_common_icon_side"--><!--android:padding="12dp"--><!--android:src="@drawable/ic200_password_normal_white" />-->
-
-    <!--<EditText--><!--android:id="@+id/edLoginPassword"--><!--android:layout_width="230dp"--><!--android:layout_height="match_parent"--><!--android:background="@null"--><!--android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"--><!--android:hint="@string/pinpinbox_2_0_0_input_hint_password"--><!--android:letterSpacing="0.1"--><!--android:password="true"--><!--android:singleLine="true"--><!--android:textColor="@color/white"--><!--android:textColorHint="@color/pinpinbox_2_0_0_album_type_background_in_item"--><!--android:textCursorDrawable="@drawable/bg200_cursor_white"--><!--android:textSize="16sp" />-->
-
-    <!--<ImageView--><!--android:id="@+id/loginGetPasswordImg"--><!--android:layout_width="@dimen/ppb200_common_icon_side"--><!--android:layout_height="@dimen/ppb200_common_icon_side"--><!--android:background="@drawable/click_2_0_0_default"--><!--android:padding="12dp"--><!--android:src="@drawable/ic200_ask_white" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--<View--><!--android:layout_width="328dp"--><!--android:layout_height="1dp"--><!--android:background="@color/white" />-->
-
-
-    <!--&lt;!&ndash;login button&ndash;&gt;--><!--<TextView--><!--android:id="@+id/tvLoginLogin"--><!--fontPath="fonts/OpenSans-Bold.ttf"--><!--android:layout_width="@dimen/ppb200_common_button_width"--><!--android:layout_height="@dimen/ppb200_common_button_height"--><!--android:layout_gravity="center_horizontal"--><!--android:layout_marginTop="64dp"--><!--android:background="@drawable/click_2_0_0_main_button_frame_white_radius"--><!--android:gravity="center"--><!--android:letterSpacing="0.1"--><!--android:text="@string/pinpinbox_2_0_0_button_login"--><!--android:textColor="@color/pinpinbox_2_0_0_first_text"--><!--android:textSize="@dimen/ppb200_common_text_first"--><!--android:textStyle="bold"--><!--android:transitionName="login_to_tabbar" />-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--</RelativeLayout>-->
-
-
-    <!--<TextView--><!--android:id="@+id/tvAboutUs"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:background="@drawable/click_2_0_0_default"--><!--android:letterSpacing="0.1"--><!--android:padding="@dimen/ppb200_padding_margin_second"--><!--android:text="@string/pinpinbox_2_0_0_button_about_us"--><!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"--><!--android:textSize="@dimen/ppb200_common_text_second"--><!--android:layout_alignParentBottom="true"--><!--android:layout_centerHorizontal="true" />-->
-
-    <!--</RelativeLayout>-->
-
-
-    <!--</RelativeLayout>-->
-
-
-    <!--<HorizontalScrollView--><!--android:id="@+id/svHorizontal"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:scrollbars="none"--><!--android:visibility="gone">-->
-
-
-    <!--<LinearLayout--><!--android:id="@+id/linear"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">--><!--&lt;!&ndash;android:stretchColumns="7"&ndash;&gt;-->
-
-
-    <!--<Button--><!--android:id="@+id/btMenu"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="menu"--><!--android:visibility="visible" />-->
-
-    <!--<Button--><!--android:id="@+id/btTest01"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="test01"--><!--android:visibility="visible" />-->
-
-    <!--<Button--><!--android:id="@+id/btC1"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="c1"--><!--android:visibility="visible" />-->
-
-    <!--<Button--><!--android:id="@+id/btC2"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="c2"--><!--android:visibility="visible" />-->
-
-    <!--<Button--><!--android:id="@+id/btC3"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="c3"--><!--android:visibility="visible" />-->
-
-    <!--<Button--><!--android:id="@+id/btC4"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="c4"--><!--android:visibility="visible" />-->
-
-    <!--<Button--><!--android:id="@+id/btC5"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="c5"--><!--android:visibility="visible" />-->
-
-    <!--<Button--><!--android:id="@+id/btC6"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:gravity="center"--><!--android:text="c6"--><!--android:visibility="visible" />-->
-
-
-    <!--</LinearLayout>--><!--</HorizontalScrollView>-->
-
-    <!--&lt;!&ndash;<FrameLayout&ndash;&gt;--><!--&lt;!&ndash;android:id="@+id/frame"&ndash;&gt;--><!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;--><!--&lt;!&ndash;android:layout_height="match_parent" />&ndash;&gt;-->
-
-
-    <!--</RelativeLayout>-->

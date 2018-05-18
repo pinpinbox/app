@@ -212,6 +212,20 @@
         <item name="android:src">@drawable/ic200_arrow_left_dark</item>
     </style>
 
+
+    <style name="ppb200_Button_main_common_bottom_radius" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/ppb200_common_button_height</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_first</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/click_2_0_0_main_button_radius</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+
     <style name="ppb200_Button_main_common_radius" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_width">@dimen/ppb200_common_button_width</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_height</item>

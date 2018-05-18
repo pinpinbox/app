@@ -210,6 +210,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
         init();
 
+        setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
+
     }
 
     public void testButton() {
@@ -2891,27 +2893,27 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         protocol98 = null;
 
 
-        Recycle.VIEW(vLogin.findViewById(R.id.r1));
-        Recycle.VIEW(vLogin.findViewById(R.id.r2));
-        Recycle.VIEW(vLogin.findViewById(R.id.r3));
+//        Recycle.VIEW(vLogin.findViewById(R.id.r1));
+//        Recycle.VIEW(vLogin.findViewById(R.id.r2));
+//        Recycle.VIEW(vLogin.findViewById(R.id.r3));
 
-        Recycle.IMG((ImageView) vLogin.findViewById(R.id.img1));
+        Recycle.IMG((ImageView) vLogin.findViewById(R.id.bgImg));
         Recycle.IMG((ImageView) vLogin.findViewById(R.id.img2));
         Recycle.IMG(loginGetPasswordImg);
 
 
-        Recycle.IMG((ImageView) vRegister.findViewById(R.id.img1));
+
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.img2));
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.img3));
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.img4));
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.img5));
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.backImg));
 
-        Recycle.IMG((ImageView) vVerificationCode.findViewById(R.id.img1));
+
         Recycle.IMG((ImageView) vVerificationCode.findViewById(R.id.img2));
         Recycle.IMG((ImageView) vVerificationCode.findViewById(R.id.backImg));
 
-        Recycle.IMG((ImageView) vGetPassword.findViewById(R.id.img1));
+ 
         Recycle.IMG((ImageView) vGetPassword.findViewById(R.id.img2));
         Recycle.IMG((ImageView) vGetPassword.findViewById(R.id.backImg));
 
