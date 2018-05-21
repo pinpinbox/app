@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="false">
+
+
+    <in.srain.cube.views.GridViewWithHeaderAndFooter
+        android:id="@+id/gvHobby"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:columnWidth="120dp"
+        android:gravity="center"
+        android:listSelector="@color/transparent"
+        android:numColumns="auto_fit"
+        android:paddingBottom="96dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth" />
+
+
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_ic_action_back"
+            android:layout_alignParentBottom="true" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        style="@style/ppb200_bottom_bar"
+        android:visibility="gone">
+
+
+        <TextView
+            android:id="@+id/tvConfirm"
+            style="@style/ppb200_Button_main_common_bottom_radius"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_large"
+            android:text="@string/pinpinbox_2_0_0_other_text_select_done_start_use_pinpinbox" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
