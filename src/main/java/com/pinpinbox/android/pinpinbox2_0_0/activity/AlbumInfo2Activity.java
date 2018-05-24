@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -45,6 +46,7 @@ import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemReport;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
@@ -77,8 +79,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100_Vote;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13_BuyAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupList;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.ReportListAdapter;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -100,9 +103,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickListener, ClickDragDismissListener.ActionUpListener {
 
     private Activity mActivity;
-    //
+
+    private PopupList popupList;
     private PopupCustom popSelectShare, popMore;
-    private PopPicker popPicker;
     private PopBoard board;
     private ItemAlbum itemAlbum;
 
@@ -132,8 +135,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private RoundCornerImageView userImg;
 //    private View vGradient;
 
-    private ArrayList<HashMap<String, Object>> reportList;
-    private List<String> strReportList;
+
+    private List<ItemReport> itemReportList;
 
 
     private String id, token, album_id;
@@ -146,10 +149,12 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     private String p90Message = "";
     private String coverUrl;
     private String strReportSelect;
-    private String report_id;
+
     private String event, event_id, strEventName, strEventUrl;
     private String strJsonPhoto;
     private String strPicture;
+
+    private int report_id = -1;
 
     private int p90Result = -1;
     private int round = 0, count = 0;
@@ -336,8 +341,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         token = PPBApplication.getInstance().getToken();
         myDir = PPBApplication.getInstance().getMyDir();
 
-        reportList = new ArrayList<>();
-        strReportList = new ArrayList<>();
+
+        itemReportList = new ArrayList<>();
 
         rLocation = (RelativeLayout) findViewById(R.id.rLocation);
 
@@ -514,52 +519,89 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         /*default select*/
 
-        MyLog.Set("d", mActivity.getClass(), "strReportSelect => " + strReportSelect);
-        popPicker = new PopPicker(mActivity);
-        popPicker.setPopup();
-        popPicker.setTitle(R.string.pinpinbox_2_0_0_pop_title_what_to_report);
-        popPicker.setPickerData(strReportList);
+        if (popupList == null) {
 
-        popPicker.getTvConfirm().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            popupList = new PopupList(mActivity);
+            popupList.setPopup();
+            popupList.setTitle(R.string.pinpinbox_2_0_0_pop_title_what_to_report);
 
-                strReportSelect = popPicker.getStrSelect();
+            popupList.getListView().setAdapter(new ReportListAdapter(mActivity, itemReportList));
 
-                if (strReportSelect == null || strReportSelect.equals("null") || strReportSelect.equals("")) {
-                    strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
+            popupList.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    popupList.dismiss();
+
+                    report_id = itemReportList.get(position).getReportintent_id();
+
+
+                    doSendReport();
+
+
                 }
+            });
 
-                MyLog.Set("d", mActivity.getClass(), "strReportSelect => " + strReportSelect);
+            popupList.setDissmissWorks(new PopupCustom.DissmissWorks() {
+                @Override
+                public void excute() {
+                    linAuthor.animate().translationZ(getResources().getDimension(R.dimen.ppb200_translationZ_user))
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .setListener(null)
+                            .setDuration(70)
+                            .start();
 
-                int count = reportList.size();
-
-                for (int i = 0; i < count; i++) {
-                    String name = (String) reportList.get(i).get("name");
-                    if (strReportSelect.equals(name)) {
-                        report_id = (String) reportList.get(i).get("reportintent_id");
-                        break;
-                    }
                 }
+            });
 
-                MyLog.Set("d", mActivity.getClass(), "reportintent_id => " + report_id);
-
-                doSendReport();
-
-            }
-        });
-
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                popPicker.getPickerView().setSelected(reportList.size()/2);
-//                strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
-//                MyLog.Set("d", mActivity.getClass(), "strReportSelect =========> " + strReportSelect);
-//            }
-//        },500);
+        }
 
 
-        popPicker.show((RelativeLayout) findViewById(R.id.rBackground));
+        linAuthor.animate().translationZ(0f)
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .setListener(null)
+                .setDuration(70)
+                .start();
+
+        popupList.show((RelativeLayout) findViewById(R.id.rBackground));
+
+
+//        MyLog.Set("d", mActivity.getClass(), "strReportSelect => " + strReportSelect);
+//        if (popPicker == null) {
+//            popPicker = new PopPicker(mActivity);
+//            popPicker.setPopup();
+//            popPicker.setTitle(R.string.pinpinbox_2_0_0_pop_title_what_to_report);
+//            popPicker.setPickerData(strReportList);
+//            popPicker.getTvConfirm().setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    strReportSelect = popPicker.getStrSelect();
+//
+//                    if (strReportSelect == null || strReportSelect.equals("null") || strReportSelect.equals("")) {
+//                        strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
+//                    }
+//
+//                    MyLog.Set("d", mActivity.getClass(), "strReportSelect => " + strReportSelect);
+//
+//                    int count = reportList.size();
+//
+//                    for (int i = 0; i < count; i++) {
+//                        String name = (String) reportList.get(i).get("name");
+//                        if (strReportSelect.equals(name)) {
+//                            report_id = (String) reportList.get(i).get("reportintent_id");
+//                            break;
+//                        }
+//                    }
+//                    MyLog.Set("d", mActivity.getClass(), "reportintent_id => " + report_id);
+//                    doSendReport();
+//                }
+//            });
+//        }
+//        popPicker.show((RelativeLayout) findViewById(R.id.rBackground));
+
 
     }
 
@@ -1165,9 +1207,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     if (itemAlbum.getLikes() > 9999) {
                         String strLikes = StringUtil.ThousandToK(itemAlbum.getLikes());
                         tvLikeCount.setText(strLikes + "K");
-                    } else if (itemAlbum.getLikes()<0){
+                    } else if (itemAlbum.getLikes() < 0) {
                         tvLikeCount.setText(0 + "");
-                    }else {
+                    } else {
                         tvLikeCount.setText(itemAlbum.getLikes() + "");
                     }
 
@@ -1175,9 +1217,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     if (itemAlbum.getMessageboard() > 9999) {
                         String strMessageboard = StringUtil.ThousandToK(itemAlbum.getMessageboard());
                         tvMessageCount.setText(strMessageboard + "K");
-                    } else if(itemAlbum.getMessageboard()<0){
+                    } else if (itemAlbum.getMessageboard() < 0) {
                         tvMessageCount.setText(0 + "");
-                    }else {
+                    } else {
                         tvMessageCount.setText(itemAlbum.getMessageboard() + "");
                     }
 
@@ -1999,6 +2041,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetReportTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -2025,22 +2068,34 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             if (strJson != null && !strJson.equals("")) {
                 try {
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p69Result = jsonObject.getString(Key.result);
+
+                    p69Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+
                     if (p69Result.equals("1")) {
 
-                        String jdata = jsonObject.getString(Key.data);
-                        JSONArray jsonArray = new JSONArray(jdata);
-                        int array = jsonArray.length();
-                        for (int i = 0; i < array; i++) {
-                            JSONObject obj = (JSONObject) jsonArray.get(i);
-                            String reportintent_id = obj.getString("reportintent_id");
-                            String name = obj.getString("name");
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("reportintent_id", reportintent_id);
-                            map.put("name", name);
-                            reportList.add(map);
-                            strReportList.add(name);
+//                        for (int i = 0; i < array; i++) {
+//                            JSONObject obj = (JSONObject) jsonArray.get(i);
+//                            String reportintent_id = obj.getString("reportintent_id");
+//                            String name = obj.getString("name");
+//                            HashMap<String, Object> map = new HashMap<>();
+//                            map.put("reportintent_id", reportintent_id);
+//                            map.put("name", name);
+//                            reportList.add(map);
+//                            strReportList.add(name);
+//                        }
+
+
+                        String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                        JSONArray array = new JSONArray(data);
+
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject obj = (JSONObject) array.get(i);
+                            ItemReport itemReport = new ItemReport();
+                            itemReport.setReportintent_id(JsonUtility.GetInt(obj, ProtocolKey.reportintent_id));
+                            itemReport.setName(JsonUtility.GetString(obj, ProtocolKey.name));
+                            itemReportList.add(itemReport);
                         }
+
 
                     } else if (p69Result.equals("0")) {
                         p69Message = jsonObject.getString(Key.message);
@@ -2094,7 +2149,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             try {
                 strJson = HttpUtility.uploadSubmit(ProtocolsClass.P70_InsertReport,
-                        SetMapByProtocol.setParam70_insertreport(id, token, report_id, "album", album_id), null);
+                        SetMapByProtocol.setParam70_insertreport(id, token, StringIntMethod.IntToString(report_id), "album", album_id), null);
 
                 MyLog.Set("d", getClass(), "p70strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
@@ -2130,7 +2185,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             dissmissLoading();
             if (p70Result.equals("1")) {
 
-                popPicker.dismiss();
+                popupList.dismiss();
 
                 PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_send_report_success);
 
@@ -2491,7 +2546,15 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             case R.id.linReport:
                 popMore.dismiss();
-                report();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        report();
+                    }
+                }, 300);
+
+
                 break;
 
 
@@ -2906,6 +2969,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         if (board != null && board.getPopupWindow().isShowing()) {
             board.dismiss();
+        }
+
+        if (popupList != null) {
+            popupList.clearReference();
+            popupList = null;
         }
 
         Recycle.IMG(backImg);

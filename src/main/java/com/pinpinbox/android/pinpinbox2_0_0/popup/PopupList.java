@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,16 @@ import eightbitlab.com.blurview.RenderScriptBlur;
  * Created by vmage on 2017/1/18.
  */
 public class PopupList {
+
+    public interface DissmissWorks {
+        void excute();
+    }
+
+    public void setDissmissWorks(PopupCustom.DissmissWorks dissmissWorks) {
+        this.dissmissWorks = dissmissWorks;
+    }
+
+    private PopupCustom.DissmissWorks dissmissWorks;
 
     private Activity mActivity;
 
@@ -87,6 +98,11 @@ public class PopupList {
 
                 ((DraggerActivity)mActivity).setCurrentActivityStatusMode();
 
+                //20171214
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mActivity.getWindow().setStatusBarColor(acStatusColor);
+                }
+
                 /*恢復背景*/
                 ViewPropertyAnimator alphaTo0 = blurView.animate();
                 alphaTo0.setDuration(intAnimDuration)
@@ -104,6 +120,11 @@ public class PopupList {
                                  /*移除模糊背景*/
                                 rBackground.removeView(blurView);
                                 blurView = null;
+
+                                if (dissmissWorks != null) {
+                                    dissmissWorks.excute();
+                                }
+
                             }
 
                             @Override
@@ -127,16 +148,17 @@ public class PopupList {
         TextUtility.setBold(tvTitle, true);
 
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            mActivity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//            mActivity.getWindow().setStatusBarColor(Color.parseColor(ColorClass.TRANSPARENT));
-//        }
 
     }
 
+    private int acStatusColor = 0;
+
     public void show(RelativeLayout rBackground) {
 
-        ((DraggerActivity)mActivity).setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            acStatusColor = mActivity.getWindow().getStatusBarColor();
+        }
+        ((DraggerActivity) mActivity).setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
 
         /*彈出時 設定background*/
         this.rBackground = rBackground;
@@ -191,5 +213,9 @@ public class PopupList {
     }
 
 
+    public void clearReference(){
+        mActivity = null;
+        rBackground = null;
+    }
 
 }

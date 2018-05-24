@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.popup;
 
 import android.app.Activity;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,33 +8,33 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
+import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemReport;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by vmage on 2017/1/18.
  */
-public class PopListAdapter extends BaseAdapter {
+public class ReportListAdapter extends BaseAdapter {
 
     private Activity mActivity;
 
-    private ArrayList<HashMap<String,Object>> listData;
+    private List<ItemReport> itemReportList;
 
-    public PopListAdapter(Activity mActivity, ArrayList<HashMap<String,Object>>listData){
+    public ReportListAdapter(Activity mActivity, List<ItemReport> itemReportList){
         this.mActivity = mActivity;
-        this.listData = listData;
+        this.itemReportList = itemReportList;
     }
 
     @Override
     public int getCount() {
-        return listData.size();
+        return itemReportList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listData.get(position);
+        return itemReportList.get(position);
     }
 
     @Override
@@ -58,14 +57,9 @@ public class PopListAdapter extends BaseAdapter {
 
         convertView.setBackgroundResource(R.drawable.click_2_0_0_list_item);
 
-        TextPaint tp = holder.textView.getPaint();
-        tp.setFakeBoldText(true);
+        TextUtility.setBold(holder.textView);
 
-        String strName = (String)listData.get(position).get(MapKey.name);
-
-        holder.textView.setText(strName);
-
-
+        holder.textView.setText(itemReportList.get(position).getName());
 
         return convertView;
     }

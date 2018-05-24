@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,31 +24,30 @@ import android.widget.TextView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopListAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupList;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentTemFree2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentTemHot2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentTemOwn2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentTemSponsored2;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupList;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.json.JSONArray;
@@ -296,27 +294,27 @@ public class CreateAlbum2Activity extends DraggerActivity implements SmartTabLay
 
         if (popupList == null) {
 
-            popupList = new PopupList(mActivity);
-            popupList.setPopup();
-            popupList.setTitle(R.string.pinpinbox_2_0_0_pop_title_choose_category);
-
-            popupList.getListView().setAdapter(new PopListAdapter(mActivity, subList));
-
-            popupList.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    popupList.dismiss();
-
-                    MyLog.Set("d", mActivity.getClass(), (String) subList.get(position).get(Key.name));
-
-                    tvSubList.setText((String) subList.get(position).get(Key.name));
-
-                    style_id = (String) subList.get(position).get(Key.style_id);
-
-                    refreshFragment();
-                }
-            });
+//            popupList = new PopupList(mActivity);
+//            popupList.setPopup();
+//            popupList.setTitle(R.string.pinpinbox_2_0_0_pop_title_choose_category);
+//
+//            popupList.getListView().setAdapter(new ReportListAdapter(mActivity, subList));
+//
+//            popupList.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                    popupList.dismiss();
+//
+//                    MyLog.Set("d", mActivity.getClass(), (String) subList.get(position).get(Key.name));
+//
+//                    tvSubList.setText((String) subList.get(position).get(Key.name));
+//
+//                    style_id = (String) subList.get(position).get(Key.style_id);
+//
+//                    refreshFragment();
+//                }
+//            });
 
         }
 

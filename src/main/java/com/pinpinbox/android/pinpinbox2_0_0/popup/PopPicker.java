@@ -230,5 +230,9 @@ public class PopPicker {
 
     }
 
+    public void clearReference(){
+        mActivity = null;
+        rBackground = null;
+    }
 
 }

@@ -190,6 +190,7 @@ public class ProtocolKey {
     public static String recent_search = "recent_search";
     public static String ratio = "ratio";
     public static String repeat = "repeat";
+    public static String reportintent_id = "reportintent_id";
 
 
     //s

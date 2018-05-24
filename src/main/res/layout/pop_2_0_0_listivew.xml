@@ -22,6 +22,7 @@
         android:layout_height="192dp"
         android:listSelector="@color/transparent"
         android:divider="@color/transparent"
+        android:scrollbars="none"
         android:background="@color/white"/>
 
 
