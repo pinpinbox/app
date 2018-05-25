@@ -103,6 +103,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickListener, ClickDragDismissListener.ActionUpListener {
 
     private Activity mActivity;
+    private Handler mHandler;
 
     private PopupList popupList;
     private PopupCustom popSelectShare, popMore;
@@ -337,6 +338,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         mActivity = this;
 
+        mHandler = new Handler();
+
+
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
         myDir = PPBApplication.getInstance().getMyDir();
@@ -515,7 +519,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     }
 
-    private void showPop() {
+    private void setReport() {
 
         /*default select*/
 
@@ -558,6 +562,14 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
 
 
+        showReport();
+
+
+    }
+
+
+    private void showReport() {
+
         linAuthor.animate().translationZ(0f)
                 .scaleX(0.9f)
                 .scaleY(0.9f)
@@ -566,42 +578,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 .start();
 
         popupList.show((RelativeLayout) findViewById(R.id.rBackground));
-
-
-//        MyLog.Set("d", mActivity.getClass(), "strReportSelect => " + strReportSelect);
-//        if (popPicker == null) {
-//            popPicker = new PopPicker(mActivity);
-//            popPicker.setPopup();
-//            popPicker.setTitle(R.string.pinpinbox_2_0_0_pop_title_what_to_report);
-//            popPicker.setPickerData(strReportList);
-//            popPicker.getTvConfirm().setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    strReportSelect = popPicker.getStrSelect();
-//
-//                    if (strReportSelect == null || strReportSelect.equals("null") || strReportSelect.equals("")) {
-//                        strReportSelect = (String) reportList.get(reportList.size() / 2).get("name");
-//                    }
-//
-//                    MyLog.Set("d", mActivity.getClass(), "strReportSelect => " + strReportSelect);
-//
-//                    int count = reportList.size();
-//
-//                    for (int i = 0; i < count; i++) {
-//                        String name = (String) reportList.get(i).get("name");
-//                        if (strReportSelect.equals(name)) {
-//                            report_id = (String) reportList.get(i).get("reportintent_id");
-//                            break;
-//                        }
-//                    }
-//                    MyLog.Set("d", mActivity.getClass(), "reportintent_id => " + report_id);
-//                    doSendReport();
-//                }
-//            });
-//        }
-//        popPicker.show((RelativeLayout) findViewById(R.id.rBackground));
-
 
     }
 
@@ -1356,7 +1332,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     ViewControl.AlphaTo1(linDetail, 200);
                 }
 
-                new Handler().postDelayed(new Runnable() {
+                mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
 
@@ -2073,18 +2049,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                     if (p69Result.equals("1")) {
 
-//                        for (int i = 0; i < array; i++) {
-//                            JSONObject obj = (JSONObject) jsonArray.get(i);
-//                            String reportintent_id = obj.getString("reportintent_id");
-//                            String name = obj.getString("name");
-//                            HashMap<String, Object> map = new HashMap<>();
-//                            map.put("reportintent_id", reportintent_id);
-//                            map.put("name", name);
-//                            reportList.add(map);
-//                            strReportList.add(name);
-//                        }
-
-
                         String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
                         JSONArray array = new JSONArray(data);
 
@@ -2120,7 +2084,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
             if (p69Result.equals("1")) {
-                showPop();
+                setReport();
             } else if (p69Result.equals("0")) {
                 DialogV2Custom.BuildError(mActivity, p69Message);
             } else if (p69Result.equals(Key.timeout)) {
@@ -2531,8 +2495,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     popMore.dismiss();
                     FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
 
-                    MyLog.Set("e", AlbumInfo2Activity.class, "1111111111111111111111111111");
-
                     collectAlbum();
                 }
 
@@ -2547,12 +2509,18 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             case R.id.linReport:
                 popMore.dismiss();
 
-                new Handler().postDelayed(new Runnable() {
+                mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        report();
+
+                        if (popupList == null) {
+                            report();
+                        } else {
+                           showReport();
+                        }
+
                     }
-                }, 300);
+                }, 200);
 
 
                 break;
@@ -2561,6 +2529,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
 
     }
+
 
     @Override
     public void OnDismiss() {
@@ -2584,8 +2553,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             doCollectAlbum();
         } else {
 
-
-            new Handler().postDelayed(new Runnable() {
+            mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     final DialogV2Custom d = new DialogV2Custom(mActivity);
@@ -2603,18 +2571,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 }
             }, 500);
 
-//            final DialogV2Custom d = new DialogV2Custom(mActivity);
-//            d.setStyle(DialogStyleClass.CHECK);
-//            d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + itemAlbum.getPoint() + "P?");
-//            CheckExecute checkExecute = new CheckExecute() {
-//                @Override
-//                public void DoCheck() {
-//                    d.dismiss();
-//                    doGetPoint();
-//                }
-//            };
-//            d.setCheckExecute(checkExecute);
-//            d.show();
         }
     }
 
@@ -2959,6 +2915,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     @Override
     public void onDestroy() {
+
+
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        }
 
 
         try {

@@ -396,13 +396,20 @@ public class SwipeBackLayout extends FrameLayout {
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
         final boolean drawContent = child == contentView;
 
-        boolean ret = super.drawChild(canvas, child, drawingTime);
-        if (scrimOpacity > 0 && drawContent
-                && dragHelper.getViewDragState() != ViewDragHelper.STATE_IDLE) {
-            drawShadow(canvas, child);
-            drawScrim(canvas, child);
-        }
-        return ret;
+//        try{
+            boolean ret = super.drawChild(canvas, child, drawingTime);
+            if (scrimOpacity > 0 && drawContent
+                    && dragHelper.getViewDragState() != ViewDragHelper.STATE_IDLE) {
+                drawShadow(canvas, child);
+                drawScrim(canvas, child);
+            }
+            return ret;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return true;
+//        }
+
+
     }
 
     private void drawScrim(Canvas canvas, View child) {

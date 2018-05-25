@@ -384,7 +384,8 @@
         <item name="android:windowBackground">@color/transparent</item>
         <!--<item name="android:windowTranslucentStatus">true</item>  狀態條會無法沉浸-->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:fitsSystemWindows">false</item>
         <item name="android:windowContentTransitions">true</item>
 
@@ -394,7 +395,8 @@
     <style name="Main2Activity" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowSharedElementEnterTransition">
             @transition/change_bounds_login_to_main
@@ -409,7 +411,8 @@
     <style name="myTransparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
         <item name="android:fitsSystemWindows">false</item>
@@ -418,11 +421,11 @@
 
 
     只需要邊緣切畫效果的activity
-
     <style name="dragger" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
         <item name="android:fitsSystemWindows">false</item>
@@ -435,6 +438,7 @@
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
         //true => sharedelement動畫時背景會黑
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
@@ -460,7 +464,8 @@
     <style name="whiteTransparent">
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:fitsSystemWindows">false</item>
         <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
     </style>
