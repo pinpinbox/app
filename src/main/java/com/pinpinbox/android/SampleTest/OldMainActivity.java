@@ -18,7 +18,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
-import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -55,6 +54,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Rotate3d;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMenu;
 import com.pinpinbox.android.pinpinbox2_0_0.service.DownLoadService;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -679,24 +679,45 @@ public class OldMainActivity extends FragmentActivity {
         });
 
 
-        final FragmentPhotoCrop fragmentPhotoCrop = new FragmentPhotoCrop();
+//        final FragmentPhotoCrop fragmentPhotoCrop = new FragmentPhotoCrop();
+//        Button button20 = (Button) findViewById(R.id.button20);
+//        button20.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (!fragmentPhotoCrop.isAdded()) {
+//                    getSupportFragmentManager().beginTransaction()
+//                            .add(R.id.frame, fragmentPhotoCrop, TagClass.TagFragmentPhotoCrop).commit();
+//
+//                    getSupportFragmentManager().beginTransaction().show(fragmentPhotoCrop);
+//
+//                } else {
+//                    getSupportFragmentManager().beginTransaction().show(fragmentPhotoCrop);
+//                }
+//
+//            }
+//        });
+
+        final FragmentMenu fragmentMenu = new FragmentMenu();
         Button button20 = (Button) findViewById(R.id.button20);
         button20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (!fragmentPhotoCrop.isAdded()) {
+                if (!fragmentMenu.isAdded()) {
                     getSupportFragmentManager().beginTransaction()
-                            .add(R.id.frame, fragmentPhotoCrop, TagClass.TagFragmentPhotoCrop).commit();
+                            .add(R.id.frame, fragmentMenu, TagClass.TagFragmentPhotoCrop).commit();
 
-                    getSupportFragmentManager().beginTransaction().show(fragmentPhotoCrop);
+                    getSupportFragmentManager().beginTransaction().show(fragmentMenu);
 
                 } else {
-                    getSupportFragmentManager().beginTransaction().show(fragmentPhotoCrop);
+                    getSupportFragmentManager().beginTransaction().show(fragmentMenu);
                 }
 
             }
         });
+
+
 
         final Button button21 = (Button) findViewById(R.id.button21);
         button21.setOnClickListener(new View.OnClickListener() {

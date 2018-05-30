@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportHeight="200"
+    android:viewportWidth="200">
+
+    <group
+        android:pivotX="16"
+        android:pivotY="6.25">
+
+
+    <path
+        android:name="top"
+        android:fillColor="@color/pinpinbox_2_0_0_second_grey"
+        android:pathData="M156.209,67.991c0,0.55-0.45,1-1,1H44.828c-0.55,0-1-0.45-1-1V51.715 c0-0.55,0.45-1,1-1h110.381c0.55,0,1,0.45,1,1V67.991z" />
+    <path
+        android:name="center"
+        android:fillColor="@color/pinpinbox_2_0_0_second_grey"
+        android:pathData="M44.803,108.973c-0.55,0-1-0.45-1-1V91.961c0-0.55,0.45-1,1-1h110.621 c0.55,0,1,0.45,1,1v16.011c0,0.55-0.45,1-1,1H44.803z" />
+    <path
+        android:name="bottom"
+        android:fillColor="@color/pinpinbox_2_0_0_second_grey"
+        android:pathData="M44.569,149.285c-0.55,0-1-0.45-1-1v-15.824c0-0.55,0.45-1,1-1h110.861 c0.55,0,1,0.45,1,1v15.824c0,0.55-0.45,1-1,1H44.569z" />
+
+    </group>
+</vector>
+
+

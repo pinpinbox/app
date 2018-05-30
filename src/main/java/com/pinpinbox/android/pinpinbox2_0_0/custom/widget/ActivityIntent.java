@@ -11,11 +11,16 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettings2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.BuyPoint2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.EditProfile2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.FollowMe2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MyFollow2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.RecentAlbum2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.SponsorList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
@@ -27,7 +32,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 public class ActivityIntent {
 
 
-    public static void toAlbumInfo(Activity currentActivity, boolean sharedElement, String album_id, String coverUrl, int imageOrientation, View coverImg){
+    public static void toAlbumInfo(Activity currentActivity, boolean sharedElement, String album_id, String coverUrl, int imageOrientation, View coverImg) {
 
 
         Bundle bundle = new Bundle();
@@ -54,7 +59,7 @@ public class ActivityIntent {
             );
 
 
-        }else {
+        } else {
 
             currentActivity.startActivity(
                     new Intent(currentActivity, AlbumInfo2Activity.class).putExtras(bundle)
@@ -100,7 +105,7 @@ public class ActivityIntent {
 
     }
 
-    public static void toEvent(Activity currentActivity, String event_id){
+    public static void toEvent(Activity currentActivity, String event_id) {
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.event_id, event_id);
@@ -112,7 +117,7 @@ public class ActivityIntent {
 
     }
 
-    public static void toExchangeList(Activity currentActivity){
+    public static void toExchangeList(Activity currentActivity) {
 
 
         currentActivity.startActivity(
@@ -147,7 +152,7 @@ public class ActivityIntent {
 
     }
 
-    public static void toVideoPlay(Activity currentActivity, String path_or_url){
+    public static void toVideoPlay(Activity currentActivity, String path_or_url) {
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.path_or_url, path_or_url);
@@ -159,7 +164,7 @@ public class ActivityIntent {
 
     }
 
-    public static void toSettings(Activity currentActivity){
+    public static void toSettings(Activity currentActivity) {
 
         currentActivity.startActivity(
                 new Intent(currentActivity, AppSettings2Activity.class)
@@ -169,7 +174,7 @@ public class ActivityIntent {
 
     }
 
-    public static void toWeb(Activity currentActivity, String url, String title){
+    public static void toWeb(Activity currentActivity, String url, String title) {
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.url, url);
@@ -183,8 +188,7 @@ public class ActivityIntent {
     }
 
 
-
-    public static void toFollowMe(Activity currentActivity){
+    public static void toFollowMe(Activity currentActivity) {
 
         currentActivity.startActivity(
                 new Intent(currentActivity, FollowMe2Activity.class)
@@ -193,7 +197,7 @@ public class ActivityIntent {
 
     }
 
-    public static void toSponsorList(Activity currentActivity){
+    public static void toSponsorList(Activity currentActivity) {
 
         currentActivity.startActivity(
                 new Intent(currentActivity, SponsorList2Activity.class)
@@ -203,8 +207,46 @@ public class ActivityIntent {
     }
 
 
+    public static void toEditProfile(Activity currentActivity) {
+        currentActivity.startActivity(
+                new Intent(currentActivity, EditProfile2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+    }
+
+    public static void toWorkManage(Activity currentActivity) {
+        currentActivity.startActivity(
+                new Intent(currentActivity, MyCollect2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+    }
+
+    public static void toMyFollow(Activity currentActivity) {
+        currentActivity.startActivity(
+                new Intent(currentActivity, MyFollow2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+    }
+
+    public static void toRecent(Activity currentActivity) {
+        currentActivity.startActivity(
+                new Intent(currentActivity, RecentAlbum2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+    }
+
+    public static void toBuyPoint(Activity currentActivity) {
+        currentActivity.startActivity(
+                new Intent(currentActivity, BuyPoint2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+    }
 
 
+    public static void toAppSetting(Activity currentActivity) {
+        currentActivity.startActivity(new Intent(currentActivity, AppSettings2Activity.class));
+        ActivityAnim.StartAnim(currentActivity);
+    }
 
 
 }

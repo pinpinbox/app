@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/ppb200_title_second"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+            android:text="@string/pinpinbox_2_0_0_pop_title_where_to_go" />
+
+
+        <LinearLayout
+            android:id="@+id/linToEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_third"-->
+            <!--android:padding="15dp"-->
+            <!--android:src="@drawable/ic200_edit_dark" />-->
+
+            <TextView
+                android:id="@+id/tvToEditProfile"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_weight="1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_edit_profile" />
+
+            <View
+                android:id="@+id/vRPeditProfile"
+                style="@style/ppb200_red_point"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linToWorkManage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_third"-->
+            <!--android:padding="15dp"-->
+            <!--android:src="@drawable/ic200_manage_dark" />-->
+
+            <TextView
+                android:id="@+id/tvToWorkManage"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_weight="1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_work_manager" />
+
+            <View
+                android:id="@+id/vRPworkManage"
+                style="@style/ppb200_red_point"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linToMyFollow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_third"-->
+            <!--android:padding="15dp"-->
+            <!--android:src="@drawable/ic200_myattention_dark" />-->
+
+            <TextView
+                android:id="@+id/tvToMyFollow"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_weight="1"
+                android:text="@string/pinpinbox_2_0_0_title_myfollow" />
+
+            <View
+                android:id="@+id/vRPmyFollow"
+                style="@style/ppb200_red_point"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linToRecent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_third"-->
+            <!--android:padding="14dp"-->
+            <!--android:src="@drawable/ic200_recent_dark" />-->
+
+            <TextView
+                android:id="@+id/tvToRecent"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_weight="1"
+                android:text="@string/pinpinbox_2_0_0_title_recent" />
+
+            <View
+                android:id="@+id/vRPrecent"
+                style="@style/ppb200_red_point"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linToBuyPoint"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_third"-->
+            <!--android:padding="14dp"-->
+            <!--android:src="@drawable/ic200_buypoint_dark" />-->
+
+            <TextView
+                android:id="@+id/tvToBuyPoint"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_weight="1"
+                android:text="@string/pinpinbox_2_0_0_title_buypoint" />
+
+            <View
+                android:id="@+id/vRPbutPoint"
+                style="@style/ppb200_red_point"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linToExchangeList"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_third"-->
+            <!--android:padding="14dp"-->
+            <!--android:src="@drawable/ic200_gift_dark" />-->
+
+            <TextView
+                android:id="@+id/tvToExchangeList"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_weight="1"
+                android:text="@string/pinpinbox_2_0_0_itemtype_exchange_list" />
+
+            <View
+                android:id="@+id/vRPexchangeList"
+                style="@style/ppb200_red_point"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linSettings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_height="@dimen/ppb200_common_icon_side"-->
+            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_third"-->
+            <!--android:padding="15dp"-->
+            <!--android:src="@drawable/ic200_setting_dark" />-->
+
+            <TextView
+                android:id="@+id/tvSettings"
+                style="@style/ppb200_pop_item"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_weight="1"
+                android:text="@string/pinpinbox_2_0_0_title_app_settings" />
+
+            <View
+                android:id="@+id/vRPsettings"
+                style="@style/ppb200_red_point"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/r1"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="8dp">
+
+                <com.richpath.RichPathView
+                    android:id="@+id/svgMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:visibility="visible"
+                    app:vector="@drawable/svg_menu" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/r2"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="8dp"
+                android:background="@color/color_1">
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/r3"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="8dp"
+                android:background="@color/color_7">
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/r4"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="8dp"
+                android:background="@color/color_5">
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+        <com.richpath.RichPathView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/click_2_0_0_default"
+            android:visibility="visible"
+            app:vector="@drawable/svg_notification" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
