@@ -48,7 +48,10 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
 
     private RichPathView svgMenu;
-    private RelativeLayout r1,r2,r3,r4;
+
+
+    private TextView reset;
+    private RelativeLayout r1, r2, r3, r4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,8 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         r2 = (RelativeLayout) v.findViewById(R.id.r2);
         r3 = (RelativeLayout) v.findViewById(R.id.r3);
         r4 = (RelativeLayout) v.findViewById(R.id.r4);
+        reset = (TextView) v.findViewById(R.id.reset);
+
 
         setRPlist(v);
 
@@ -135,6 +140,11 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         final RichPath menuBottom = svgMenu.findRichPathByName("bottom");
 
 
+        menuTop.setPivotToCenter(true);
+        menuCenter.setPivotToCenter(true);
+        menuBottom.setPivotToCenter(true);
+
+
         r1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,22 +153,22 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
                 RichPathAnimator
                         .animate(menuTop)
                         .interpolator(new DecelerateInterpolator())
-                        .translationX(0,10,-10,10,-10,0)
+                        .translationX(0, 5, -5, 5, -5, 0)
                         .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(500)
+                        .duration(300)
 
                         .andAnimate(menuCenter)
                         .interpolator(new DecelerateInterpolator())
-                        .translationX(0,10,-10,10,-10,0)
+                        .translationX(0, 5, -5, 5, -5, 0)
                         .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(500)
+                        .duration(300)
                         .startDelay(200)
 
                         .andAnimate(menuBottom)
                         .interpolator(new DecelerateInterpolator())
-                        .translationX(0,10,-10,10,-10,0)
+                        .translationX(0, 5, -5, 5, -5, 0)
                         .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(500)
+                        .duration(300)
                         .startDelay(400)
 
 
@@ -177,17 +187,21 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
                 RichPathAnimator
                         .animate(menuTop)
                         .interpolator(new DecelerateInterpolator())
-                        .translationY(0,10,0)
+                        .translationY(0, 8, 0)
                         .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(500)
+                        .duration(300)
+
+                        .andAnimate(menuCenter)
+                        .interpolator(new DecelerateInterpolator())
+                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+                        .duration(300)
 
 
                         .andAnimate(menuBottom)
                         .interpolator(new DecelerateInterpolator())
-                        .translationY(0,-10,0)
+                        .translationY(0, -8, 0)
                         .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(500)
-
+                        .duration(300)
 
 
                         .start();
@@ -200,6 +214,33 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
 
+
+
+                RichPathAnimator
+                        .animate(menuTop)
+                        .interpolator(new DecelerateInterpolator())
+                        .scaleX(0.2f, 1f)
+                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+                        .duration(300)
+
+                        .andAnimate(menuCenter)
+                        .interpolator(new DecelerateInterpolator())
+                        .scaleX(0.2f, 1f)
+                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+                        .duration(300)
+                        .startDelay(200)
+
+
+                        .andAnimate(menuBottom)
+                        .interpolator(new DecelerateInterpolator())
+                        .scaleX(0.2f, 1f)
+                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+                        .duration(300)
+                        .startDelay(400)
+
+                        .start();
+
+
             }
         });
 
@@ -207,11 +248,35 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
 
+
+
+
             }
         });
 
 
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                menuTop.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
+                menuCenter.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
+                menuBottom.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
+
+                menuTop.setScaleX(1f);
+                menuCenter.setScaleX(1f);
+                menuBottom.setScaleX(1f);
+
+
+
+
+
+
+
+
+
+            }
+        });
 
 
     }

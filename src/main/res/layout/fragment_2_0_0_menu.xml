@@ -289,6 +289,14 @@
             </RelativeLayout>
 
 
+            <TextView
+                android:id="@+id/reset"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:text="R"
+                android:gravity="center"/>
+
+
         </LinearLayout>
 
 
