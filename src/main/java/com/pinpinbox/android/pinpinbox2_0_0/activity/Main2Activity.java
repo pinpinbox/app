@@ -16,7 +16,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
@@ -61,9 +60,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentHome2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMenu;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentNotify2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch2;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSearch2;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.service.RegistraAWSService;
 import com.richpath.RichPath;
@@ -91,35 +90,30 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     private Activity mActivity;
     private NoConnect noConnect;
 
-    private ViewGroup.LayoutParams tabParams;
-
     private SharedPreferences getdata, getAWSDetail;
-
 
     private FastCreateTask fastCreateTask;
     private FirstLoginTask firstLoginTask;
     private JoinCooperationTask joinCooperationTask;
 
-    private FragmentHome2 fragmentHome2;
-    private FragmentSearch2 fragmentSearch2;
-    private FragmentMe2 fragmentMe2;
-    private FragmentNotify2 fragmentNotify2;
     private FragmentScanSearch2 fragmentScanSearch2;
 
     private RichPath userTop, userBottom;
     private RichPath notifyTop, notifyBottom;
     private RichPath searchInSide, searchOutSide, searchReflective;
     private RichPath insideLeft, insideCenter, insideRight, fillLarge, fillSmall;
+    private RichPath menuTop, menuCenter, menuBottom;
+
 
     private List<ImageView> icons;
 
     private FragmentPagerItemAdapter adapter;
 
     private ViewPager viewPager;
-    private RelativeLayout rGudieCreate, rNotify, rUser, rSearch, rHome;
-    private ImageView homeImg, searchImg, createImg;
-    private RichPathView svgNotify, svgUser, svgSearch, svgHome;
-    private View vRPnotify;
+    private RelativeLayout rGudieCreate, rNotify, rUser, rSearch, rHome, rMenu;
+    private ImageView createImg;
+    private RichPathView svgNotify, svgUser, svgSearch, svgHome, svgMenu;
+    private View vRPnotify, vRPmenu;
 
 
     private String strCooperationAlbumId = "";
@@ -144,8 +138,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         setSwipeBackEnable(false);
 
         getdata = PPBApplication.getInstance().getData();
-
-        checkClickOffLine();
 
         checkMainExist();
 
@@ -224,7 +216,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         checkNewDay();
 
 
-
         if (BuildConfig.FLAVOR.equals("w3_private")) {
             testSet();
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
@@ -247,7 +238,8 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
     private ImageView testbuttonImg;
-    private void testSet(){
+
+    private void testSet() {
 
         testbuttonImg = (ImageView) findViewById(R.id.testbutton);
 
@@ -297,16 +289,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
 
-    private void checkClickOffLine() {
-
-        boolean isClickOffLine = getdata.getBoolean(Key.clickOffLine, false);
-        if (isClickOffLine) {
-            FlurryUtil.onEvent(FlurryKey.click_off_line);
-            getdata.edit().putBoolean(Key.clickOffLine, false).commit();
-        }
-
-    }
-
     private void checkMainExist() {
 
         List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
@@ -354,35 +336,36 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         showDistance = outMetrics.heightPixels / 9;
         hideDistance = outMetrics.heightPixels / 53;
 
-
-//        loading = new LoadingAnimation(this);
-
         icons = new ArrayList<>();
 
-        homeImg = (ImageView) findViewById(R.id.homeImg);
-        searchImg = (ImageView) findViewById(R.id.searchImg);
         createImg = (ImageView) findViewById(R.id.createImg);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         rGudieCreate = (RelativeLayout) findViewById(R.id.rGudieCreate);
+
         rNotify = (RelativeLayout) findViewById(R.id.rNotify);
         rUser = (RelativeLayout) findViewById(R.id.rUser);
-        rSearch = (RelativeLayout) findViewById(R.id.rSearch);
+//        rSearch = (RelativeLayout) findViewById(R.id.rSearch);
         rHome = (RelativeLayout) findViewById(R.id.rHome);
+        rMenu = (RelativeLayout) findViewById(R.id.rMenu);
+
         svgNotify = (RichPathView) findViewById(R.id.svgNotify);
         svgUser = (RichPathView) findViewById(R.id.svgUser);
-        svgSearch = (RichPathView) findViewById(R.id.svgSearch);
+//        svgSearch = (RichPathView) findViewById(R.id.svgSearch);
         svgHome = (RichPathView) findViewById(R.id.svgHome);
-        vRPnotify = findViewById(R.id.vRPnotify);
+        svgMenu = (RichPathView) findViewById(R.id.svgMenu);
 
+        vRPnotify = findViewById(R.id.vRPnotify);
+        vRPmenu = findViewById(R.id.vRPmenu);
 
         viewPager.setOffscreenPageLimit(3);
 
-        homeImg.setOnClickListener(this);
-        searchImg.setOnClickListener(this);
+
         rUser.setOnClickListener(this);
         rNotify.setOnClickListener(this);
-        rSearch.setOnClickListener(this);
+//        rSearch.setOnClickListener(this);
         rHome.setOnClickListener(this);
+        rMenu.setOnClickListener(this);
+
         createImg.setOnClickListener(this);
 
 
@@ -392,9 +375,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         userTop = svgUser.findRichPathByName("top");
         userBottom = svgUser.findRichPathByName("bottom");
 
-        searchInSide = svgSearch.findRichPathByName("inside");
-        searchOutSide = svgSearch.findRichPathByName("outside");
-        searchReflective = svgSearch.findRichPathByName("reflective");
+//        searchInSide = svgSearch.findRichPathByName("inside");
+//        searchOutSide = svgSearch.findRichPathByName("outside");
+//        searchReflective = svgSearch.findRichPathByName("reflective");
 
 
         insideLeft = svgHome.findRichPathByName("insideLeft");
@@ -403,25 +386,13 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         fillLarge = svgHome.findRichPathByName("fillLarge");
         fillSmall = svgHome.findRichPathByName("fillSmall");
 
+        menuTop = svgMenu.findRichPathByName("top");
+        menuCenter = svgMenu.findRichPathByName("center");
+        menuBottom = svgMenu.findRichPathByName("bottom");
 
-//        if (SystemUtility.isTablet(getApplicationContext())) {
-//            MyLog.Set("d", getClass(), "isTablet");
-//
-//            svgUser.setScaleX(0.75f);
-//            svgUser.setScaleY(0.75f);
-//
-//            svgNotify.setScaleX(0.75f);
-//            svgNotify.setScaleY(0.75f);
-//
-//
-//        }else {
-//            svgUser.setScaleX(1f);
-//            svgUser.setScaleY(1f);
-//
-//            svgNotify.setScaleX(1f);
-//            svgNotify.setScaleY(1f);
-//        }
-
+        menuTop.setPivotToCenter(true);
+        menuCenter.setPivotToCenter(true);
+        menuBottom.setPivotToCenter(true);
 
     }
 
@@ -430,9 +401,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(mActivity)
                 .add("", FragmentHome2.class)
-                .add("", FragmentSearch2.class)
                 .add("", FragmentMe2.class)
                 .add("", FragmentNotify2.class)
+                .add("", FragmentMenu.class)
                 .create());
 
         viewPager.setAdapter(adapter);
@@ -477,7 +448,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             public void onPageSelected(int position) {
 
 
-                if (position == 2) {
+//                if (position == 1) {
 
 //                    Fragment fragment = getFragment(FragmentMe2.class.getSimpleName());
 //
@@ -485,60 +456,50 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 //                        showGuideCreate(true);
 //                    }
 
-                } else {
+//                } else {
 
                     if (isShowGuideCreate) {
                         showGuideCreate(false);
                     }
 
-                }
+//                }
 
 
                 switch (position) {
                     case 0://home
-//                        homeImg.setImageResource(R.drawable.pinpin_192);
-//                        searchImg.setImageResource(R.drawable.ic200_search_light);
-//                        userImg.setImageResource(R.drawable.ic200_user_light);
-//                        notifyImg.setImageResource(R.drawable.ic200_notify_light);
+
                         homePressed();
-                        searchNormal();
                         userNormal();
                         notifyNormal();
+                        menuNormal();
                         break;
 
 
                     case 1://search
-//                        homeImg.setImageResource(R.drawable.pinpin_192_alpha);
-//                        searchImg.setImageResource(R.drawable.ic200_search_dark);
-//                        userImg.setImageResource(R.drawable.ic200_user_light);
-//                        notifyImg.setImageResource(R.drawable.ic200_notify_light);
+
+//                        homeNormal();
+//                        searchPressed();
+//                        userNormal();
+//                        notifyNormal();
+
                         homeNormal();
-                        searchPressed();
-                        userNormal();
+                        userPressed();
                         notifyNormal();
+                        menuNormal();
+
                         break;
 
                     case 2://user
-//                        homeImg.setImageResource(R.drawable.pinpin_192_alpha);
-//                        searchImg.setImageResource(R.drawable.ic200_search_light);
-//                        userImg.setImageResource(R.drawable.ic200_user_dark);
-//                        notifyImg.setImageResource(R.drawable.ic200_notify_light);
-                        homeNormal();
-                        searchNormal();
-                        userPressed();
-                        notifyNormal();
 
-                        break;
+//                        homeNormal();
+//                        searchNormal();
+//                        userPressed();
+//                        notifyNormal();
 
-                    case 3://notify
-//                        homeImg.setImageResource(R.drawable.pinpin_192_alpha);
-//                        searchImg.setImageResource(R.drawable.ic200_search_light);
-////                        userImg.setImageResource(R.drawable.ic200_user_light);
-////                        notifyImg.setImageResource(R.drawable.ic200_notify_dark);
                         homeNormal();
-                        searchNormal();
                         userNormal();
                         notifyPressed();
+                        menuNormal();
 
                         if (vRPnotify.getVisibility() == View.VISIBLE) {
                             Fragment fragment = getFragment(FragmentNotify2.class.getSimpleName());
@@ -552,6 +513,31 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                         }
 
+                        break;
+
+                    case 3://notify
+
+//                        homeNormal();
+//                        searchNormal();
+//                        userNormal();
+//                        notifyPressed();
+//
+//                        if (vRPnotify.getVisibility() == View.VISIBLE) {
+//                            Fragment fragment = getFragment(FragmentNotify2.class.getSimpleName());
+//
+//                            if (((FragmentNotify2) fragment).isGetPushQueue()) {
+//                                ((FragmentNotify2) fragment).doRefresh(false);
+//                                vRPnotify.setVisibility(View.GONE);
+//                            } else {
+//                                vRPnotify.setVisibility(View.GONE);
+//                            }
+//
+//                        }
+
+                        homeNormal();
+                        userNormal();
+                        notifyNormal();
+                        menuPressed();
 
                         break;
                 }
@@ -715,7 +701,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         this.showBoard = showBoard;
 
-        viewPager.setCurrentItem(2, false);
+        viewPager.setCurrentItem(1, false);
     }
 
     private void toEvent(String value) {
@@ -879,26 +865,67 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         vRPnotify.setVisibility(View.VISIBLE);
 
-        RichPath top = svgNotify.findRichPathByName("top");
-        RichPath bottom = svgNotify.findRichPathByName("bottom");
-        RichPathAnimator
-                .animate(top)
-                .interpolator(new DecelerateInterpolator())
-                .rotation(0, 20, -20, 10, -10, 5, -5, 2, -2, 0)
-                .duration(3000)
-
-                .andAnimate(bottom)
-                .interpolator(new DecelerateInterpolator())
-                .rotation(0, 10, -10, 5, -5, 2, -2, 0)
-                .duration(3000)
-                .startDelay(50)
-                .start();
+        notifyAnim();
 
 
     }
 
     public void hideRP_notify() {
         vRPnotify.setVisibility(View.GONE);
+    }
+
+
+
+    public void showRP_menu() {
+        vRPmenu.setVisibility(View.VISIBLE);
+
+    }
+
+    public void hide_menu() {
+        vRPmenu.setVisibility(View.GONE);
+    }
+
+
+    private void menuNormal(){
+
+        menuTop.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
+        menuCenter.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
+        menuBottom.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
+
+    }
+
+    private void menuPressed(){
+
+        menuTop.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
+        menuCenter.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
+        menuBottom.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
+
+    }
+
+    private void menuAnim(){
+
+        RichPathAnimator
+                .animate(menuTop)
+                .interpolator(new DecelerateInterpolator())
+                .translationY(0, 8, 0)
+                .fillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey))
+                .duration(300)
+
+                .andAnimate(menuCenter)
+                .interpolator(new DecelerateInterpolator())
+                .fillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey))
+                .duration(300)
+
+
+                .andAnimate(menuBottom)
+                .interpolator(new DecelerateInterpolator())
+                .translationY(0, -8, 0)
+                .fillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey))
+                .duration(300)
+
+
+                .start();
+
     }
 
 
@@ -941,6 +968,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 .startDelay(50)
 
                 .start();
+
     }
 
     /*user icon*/
@@ -984,20 +1012,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                 .start();
 
-
-//        RichPathAnimator
-//                .animate(userTop)
-//                .interpolator(new DecelerateInterpolator())
-//                .scale(1.3f)
-//                .duration(200)
-//
-//                .andAnimate(userBottom)
-//                .interpolator(new DecelerateInterpolator())
-//                .scale(0.7f)
-//                .translationY(14f)
-//                .duration(200)
-//
-//                .start();
 
     }
 
@@ -1380,12 +1394,8 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         @Override
                         public void onClick(View v) {
 
-                            Bundle bundle = new Bundle();
-                            bundle.putString("url", url);
-                            Intent intent = new Intent(mActivity, WebView2Activity.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                            ActivityAnim.StartAnim(mActivity);
+                            ActivityIntent.toWeb(mActivity, url, null);
+
                         }
                     });
                 }
@@ -1448,10 +1458,10 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         @Override
         protected Object doInBackground(Void... params) {
 
-            /**加入共用(權限為預覽者)*/
+            /*加入共用(權限為預覽者)*/
             protocol46();
 
-            /**獲取zipped*/
+            /*獲取zipped*/
             if (p46Result.equals("1")) {
                 protocol17();
             }
@@ -1462,7 +1472,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 //            }
 
 
-            /**權限改成共用者並進入編輯器*/
+            /*權限改成共用者並進入編輯器*/
 //            if (p46Result.equals("1")) {
 //                protocol63();
 //            }
@@ -1497,7 +1507,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 }
 
 
-                /**儲存封面*/
+                /*儲存封面*/
 
                 Intent intent = new Intent(mActivity, Reader2Activity.class);
                 Bundle bundle = new Bundle();
@@ -1735,9 +1745,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     private boolean isShowGuideCreate = false;
 
-//    public LoadingAnimation getLoading() {
-//        return this.loading;
-//    }
 
     public int getPage() {
         return this.viewPager.getCurrentItem();
@@ -1777,32 +1784,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-//    public void showCollectionSnack(){
-//        Snackbar snackbar = Snackbar.make(getBackground(), R.string.pinpinbox_2_0_0_toast_message_save_album_done, 4000).setAction(R.string.pinpinbox_2_0_0_itemtype_work_manager, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(mActivity, MyCollect2Activity.class));
-//                ActivityAnim.StartAnim(mActivity);
-//            }
-//        });
-//
-//        View view = snackbar.getView();
-//
-//        view.setBackgroundColor(Color.parseColor(ColorClass.MAIN_FIRST));
-//
-//
-//        TextView tvMessage = (TextView) view.findViewById(R.id.snackbar_text);
-//        Button btAction = (Button) view.findViewById(R.id.snackbar_action);
-//
-//
-//        TextUtility.setBold(btAction, true);
-//
-//        tvMessage.setTextColor(Color.parseColor(ColorClass.WHITE));
-//        btAction.setTextColor(Color.parseColor(ColorClass.WHITE));
-//
-//
-//        snackbar.show();
-//    }
 
     private void uriControl(Intent intent, Uri uri) {
 
@@ -1966,43 +1947,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         switch (view.getId()) {
 
-//            case R.id.homeImg:
-//
-//
-//                if (viewPager.getCurrentItem() == 0) {
-//                    ((FragmentHome2) getFragment(FragmentHome2.class.getSimpleName())).scrollToTop();
-//                    return;
-//                }
-//                viewPager.setCurrentItem(0, false);
-//
-//                break;
-
-//            case R.id.searchImg:
-//
-//
-//                if (viewPager.getCurrentItem() == 1) {
-//                    ((FragmentSearch2) getFragment(FragmentSearch2.class.getSimpleName())).scrollToTop();
-//                    return;
-//                }
-//                viewPager.setCurrentItem(1, false);
-//
-//                break;
-
-//            case R.id.userImg:
-//
-//                Fragment fragment = getFragment(FragmentMe2.class.getSimpleName());
-//
-//                if (viewPager.getCurrentItem() == 2) {
-//                    ((FragmentMe2) fragment).scrollToTop();
-//                    return;
-//                }
-//
-//
-//                viewPager.setCurrentItem(2, false);
-//
-//
-//                break;
-
             case R.id.rHome:
 
                 if (viewPager.getCurrentItem() != 0) {
@@ -2019,12 +1963,26 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 viewPager.setCurrentItem(0, false);
                 break;
 
-            case R.id.rSearch:
+//            case R.id.rSearch:
+//
+//                searchAnim();
+//
+//                if (viewPager.getCurrentItem() == 1) {
+//                    ((FragmentSearch2) getFragment(FragmentSearch2.class.getSimpleName())).scrollToTop();
+//                    return;
+//                }
+//
+//
+//                viewPager.setCurrentItem(1, false);
+//
+//                break;
 
-                searchAnim();
+            case R.id.rUser:
+
+                Fragment fragment = getFragment(FragmentMe2.class.getSimpleName());
 
                 if (viewPager.getCurrentItem() == 1) {
-                    ((FragmentSearch2) getFragment(FragmentSearch2.class.getSimpleName())).scrollToTop();
+                    ((FragmentMe2) fragment).scrollToTop();
                     return;
                 }
 
@@ -2033,32 +1991,26 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                 break;
 
-            case R.id.rUser:
-
-                Fragment fragment = getFragment(FragmentMe2.class.getSimpleName());
-
-                if (viewPager.getCurrentItem() == 2) {
-                    ((FragmentMe2) fragment).scrollToTop();
-                    return;
-                }
-
-
-                viewPager.setCurrentItem(2, false);
-
-                break;
-
             case R.id.rNotify:
 
 
                 notifyAnim();
 
-                if (viewPager.getCurrentItem() == 3) {
+                if (viewPager.getCurrentItem() == 2) {
                     ((FragmentNotify2) getFragment(FragmentNotify2.class.getSimpleName())).scrollToTop();
                     return;
                 }
 
-                viewPager.setCurrentItem(3, false);
+                viewPager.setCurrentItem(2, false);
 
+
+                break;
+
+            case R.id.rMenu:
+
+                menuAnim();
+
+                viewPager.setCurrentItem(3, false);
 
                 break;
 

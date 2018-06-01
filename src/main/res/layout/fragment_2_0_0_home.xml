@@ -26,32 +26,107 @@
 
     </com.pinpinbox.android.Views.SuperSwipeRefreshLayout>
 
-    <View
-        android:id="@+id/vRefreshAnim"
-        style="@style/ppb200_refresh_anim_default"
-        android:layout_marginTop="24dp"
-        android:layout_centerHorizontal="true" />
 
-
-
-    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-        android:id="@+id/pbRefresh"
+    <FrameLayout
+        android:id="@+id/frameSearch"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="24dp"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:spb_colors="@array/loadmore"
-        app:spb_gradients="true"
-        app:spb_mirror_mode="true"
-        app:spb_progressiveStart_activated="true"
-        app:spb_progressiveStart_speed="3"
-        app:spb_progressiveStop_speed="6"
-        app:spb_reversed="true"
-        app:spb_sections_count="8"
-        app:spb_speed="3"
-        app:spb_stroke_separator_length="0dp"
-        app:spb_stroke_width="4dp" />
+        android:layout_height="match_parent"/>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_action_bar_height_with_status"
+        android:background="@color/pinpinbox_2_0_0_action_bar_color"
+        android:gravity="bottom"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:focusable="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@+id/scanImg"
+                android:background="@drawable/border_2_0_0_grey_third_radius">
+
+                <ImageView
+                    android:id="@+id/imageView17"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentLeft="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic200_search_dark" />
+
+                <EditText
+                    android:id="@+id/edSearch"
+                    style="@style/ppb200_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="36dp"
+                    android:layout_toLeftOf="@+id/clearImg"
+                    android:layout_toStartOf="@+id/clearImg"
+                    android:background="@null"
+                    android:hint=""
+                    android:paddingLeft="0dp"
+                    android:singleLine="true"
+                    android:text="" />
+
+
+            </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/scanImg"
+                style="@style/ppb200_Button_grey_small_radius"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="9dp"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:src="@drawable/ic200_scancamera_dark"
+                />
+
+            <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                android:id="@+id/pbRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_alignParentBottom="true"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:spb_colors="@array/loadmore"
+                app:spb_gradients="true"
+                app:spb_mirror_mode="true"
+                app:spb_progressiveStart_activated="true"
+                app:spb_progressiveStart_speed="3"
+                app:spb_progressiveStop_speed="6"
+                app:spb_reversed="true"
+                app:spb_sections_count="8"
+                app:spb_speed="3"
+                app:spb_stroke_separator_length="0dp"
+                app:spb_stroke_width="4dp" />
+
+            <View
+                android:id="@+id/vRefreshAnim"
+                style="@style/ppb200_refresh_anim_default"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
     <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
         android:id="@+id/pbLoadMore"

@@ -1,15 +1,11 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +18,6 @@ import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
@@ -44,7 +39,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
@@ -55,13 +49,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,7 +66,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by kevin9594 on 2017/3/4.
  */
-public class FragmentSearch2 extends Fragment implements View.OnClickListener {
+public class FragmentSearch2 extends Fragment{
 
 
     private NoConnect noConnect;
@@ -84,23 +74,17 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
     private LoadingAnimation loading;
     private InputMethodManager inputMethodManager;
 
-    private GetDefaultDataTask getDefaultDataTask;
+
     private UserListTask userListTask;
     private AlbumListTask albumListTask;
 
     private RecyclerSearchUserAdapter userAdapter;
     private RecyclerSearchAlbumAdapter albumAdapter;
 
-    private ArrayList<HashMap<String, Object>> currentUserList;
-//    private ArrayList<HashMap<String, Object>> currentAlbumList;
 
-    private ArrayList<HashMap<String, Object>> defaultUserList;
-    //    private ArrayList<HashMap<String, Object>> defaultAlbumList;
     private ArrayList<HashMap<String, Object>> searchUserList;
-//    private ArrayList<HashMap<String, Object>> searchAlbumList;
 
-
-    private ArrayList<ItemAlbum> currentAlbumList, defaultAlbumList, searchAlbumList;
+    private ArrayList<ItemAlbum>  searchAlbumList;
 
 
     private String id, token;
@@ -109,14 +93,13 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
     private static final int REQUEST_CODE_CAMERA = 104;
     private int doingType;
 
-    private boolean isLoading = false;
 
     private View vHeader;
     private RecyclerView rvSearch;
     private EditText edSearch;
-    private ImageView clearImg, scanImg;
+
     private TextView tvGuideNoAlbum;
-//            , tvScanSearch;
+
     private SmoothProgressBar pbRefresh;
 
     /*header*/
@@ -137,14 +120,18 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_2_0_0_search, container, false);
 
         rvSearch = (RecyclerView) v.findViewById(R.id.rvSearch);
-        edSearch = (EditText) v.findViewById(R.id.edSearch);
-        clearImg = (ImageView) v.findViewById(R.id.clearImg);
-        tvGuideNoAlbum = (TextView) v.findViewById(R.id.tvGuideNoAlbum);
-//        tvScanSearch = (TextView) v.findViewById(R.id.tvScanSearch);
-        scanImg = (ImageView)v.findViewById(R.id.scanImg);
 
-        pbRefresh = (SmoothProgressBar) v.findViewById(R.id.pbRefresh);
-        pbRefresh.progressiveStop();
+
+        tvGuideNoAlbum = (TextView) v.findViewById(R.id.tvGuideNoAlbum);
+
+        if(getActivity()!=null){
+            FragmentHome2 fragmentHome2 = (FragmentHome2) (((Main2Activity)getActivity()).getFragment(FragmentHome2.class.getSimpleName()));
+            if(fragmentHome2!=null){
+                pbRefresh = fragmentHome2.getPbRefresh();
+                edSearch = fragmentHome2.getEdSearch();
+            }
+        }
+
 
 
         vHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_2_0_0_search, null);
@@ -153,13 +140,10 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         tvSearchAlbumTitle = (TextView) vHeader.findViewById(R.id.tvSearchAlbumTitle);
         tvGuideNoUser = (TextView) vHeader.findViewById(R.id.tvGuideNoUser);
 
-//        TextUtility.setBold(tvScanSearch, true);
+
         TextUtility.setBold(tvSearchUserTitle, true);
         TextUtility.setBold(tvSearchAlbumTitle, true);
 
-        clearImg.setOnClickListener(this);
-        scanImg.setOnClickListener(this);
-//        tvScanSearch.setOnClickListener(this);
 
         return v;
     }
@@ -169,11 +153,10 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        init();
-//        setUserRecycler();
-//        setAlbumRecycler();
-//        doGetDefaultData();
-//        setSearch();
+        init();
+        setUserRecycler();
+        setAlbumRecycler();
+        setSearch();
 
 
     }
@@ -183,11 +166,6 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         loading = ((Main2Activity) getActivity()).getLoading();
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        currentUserList = new ArrayList<>();
-        currentAlbumList = new ArrayList<>();
-
-        defaultUserList = new ArrayList<>();
-        defaultAlbumList = new ArrayList<>();
         searchUserList = new ArrayList<>();
         searchAlbumList = new ArrayList<>();
 
@@ -199,7 +177,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvUser.setLayoutManager(layoutManager);
-        userAdapter = new RecyclerSearchUserAdapter(getActivity(), currentUserList);
+        userAdapter = new RecyclerSearchUserAdapter(getActivity(), searchUserList);
         rvUser.setAdapter(userAdapter);
 
         userAdapter.setOnRecyclerViewListener(new RecyclerSearchUserAdapter.OnRecyclerViewListener() {
@@ -211,7 +189,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                 }
 
 
-                if(currentUserList==null || currentUserList.size()<1){
+                if(searchUserList==null || searchUserList.size()<1){
                     return;
                 }
 
@@ -229,9 +207,9 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                         getActivity(),
                         true,
                         false,
-                        (String) currentUserList.get(position).get(Key.user_id),
-                        (String) currentUserList.get(position).get(Key.picture),
-                        (String) currentUserList.get(position).get(Key.name),
+                        (String) searchUserList.get(position).get(Key.user_id),
+                        (String) searchUserList.get(position).get(Key.picture),
+                        (String) searchUserList.get(position).get(Key.name),
                         v.findViewById(R.id.userImg)
                 );
 
@@ -250,7 +228,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
 
         rvSearch.addItemDecoration(new SpacesItemDecoration(16));
 
-        albumAdapter = new RecyclerSearchAlbumAdapter(getActivity(), currentAlbumList);
+        albumAdapter = new RecyclerSearchAlbumAdapter(getActivity(), searchAlbumList);
         rvSearch.setAdapter(albumAdapter);
 
         HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(albumAdapter);
@@ -286,7 +264,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                     return;
                 }
 
-                if(currentAlbumList==null || currentAlbumList.size()<1){
+                if(searchAlbumList==null || searchAlbumList.size()<1){
                     return;
                 }
 
@@ -301,9 +279,9 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                 ActivityIntent.toAlbumInfo(
                         getActivity(),
                         true,
-                        currentAlbumList.get(position).getAlbum_id(),
-                        currentAlbumList.get(position).getCover(),
-                        currentAlbumList.get(position).getImage_orientation(),
+                        searchAlbumList.get(position).getAlbum_id(),
+                        searchAlbumList.get(position).getCover(),
+                        searchAlbumList.get(position).getImage_orientation(),
                         v.findViewById(R.id.coverImg)
                 );
 
@@ -328,6 +306,48 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
 
     }
 
+
+    public void setOnFinish(){
+        if (edSearch.getText().toString().equals(strSearch)) {
+
+            MyLog.Set("d", FragmentSearch2.class, "字串沒變更");
+
+        } else {
+
+            strSearch = edSearch.getText().toString();
+
+            loadDataBegin();
+            doSearchUser();
+            doSearchAlbum();
+
+        }
+    }
+
+    public void setAfterTextChanged(Editable s){
+
+        if (s.toString().equals("")) {
+
+            if (countDownTimer != null) {
+                countDownTimer.cancel();
+            }
+
+
+
+        } else {
+
+            if (countDownTimer != null) {
+                countDownTimer.cancel();
+                countDownTimer.start();
+
+                MyLog.Set("d", FragmentSearch2.class, "重新倒數");
+            }
+
+
+
+        }
+
+    }
+
     private void setSearch() {
 
         countDownTimer = new CountDownTimer(1000, 1000) {
@@ -341,19 +361,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                 MyLog.Set("d", FragmentSearch2.class, "timer => finish()");
                 countDownTimer.cancel();
 
-                if (edSearch.getText().toString().equals(strSearch)) {
-
-                    MyLog.Set("d", FragmentSearch2.class, "字串沒變更");
-
-                } else {
-
-                    strSearch = edSearch.getText().toString();
-
-                    loadDataBegin();
-                    doSearchUser();
-                    doSearchAlbum();
-
-                }
+               setOnFinish();
 
 
             }
@@ -376,29 +384,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
                 MyLog.Set("d", FragmentSearch2.class, "afterTextChanged");
 
 
-                if (s.toString().equals("")) {
-
-                    if (countDownTimer != null) {
-                        countDownTimer.cancel();
-                    }
-
-                    setDefaultData();
-
-                    clearImg.setVisibility(View.GONE);
-
-                } else {
-
-                    if (countDownTimer != null) {
-                        countDownTimer.cancel();
-                        countDownTimer.start();
-
-                        MyLog.Set("d", FragmentSearch2.class, "重新倒數");
-                    }
-
-                    clearImg.setVisibility(View.VISIBLE);
-
-
-                }
+                setAfterTextChanged(s);
 
 
             }
@@ -410,72 +396,39 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
     private void loadDataBegin() {
         pbRefresh.setVisibility(View.VISIBLE);
         pbRefresh.progressiveStart();
-        isLoading = true;
+
     }
 
     private void loadDataEnd() {
         pbRefresh.progressiveStop();
         pbRefresh.setVisibility(View.GONE);
-        isLoading = false;
-    }
-
-    private void setDefaultData() {
-
-        /*回復標題*/
-        tvSearchUserTitle.setText(R.string.pinpinbox_2_0_0_title_recommend_creator);
-        tvSearchAlbumTitle.setText(R.string.pinpinbox_2_0_0_title_popular_album);
-
-
-        /*移除搜尋提示*/
-        tvGuideNoAlbum.setVisibility(View.GONE);
-        tvGuideNoUser.setVisibility(View.GONE);
-
-        /*清除當前所有資料*/
-        currentUserList.clear();
-        currentAlbumList.clear();
-
-        /*加入預設資料*/
-        for (int i = 0; i < defaultUserList.size(); i++) {
-            currentUserList.add(defaultUserList.get(i));
-        }
-        for (int i = 0; i < defaultAlbumList.size(); i++) {
-            currentAlbumList.add(defaultAlbumList.get(i));
-        }
-        userAdapter.notifyItemRangeChanged(0, currentUserList.size());
-        albumAdapter.notifyItemRangeChanged(0, currentAlbumList.size());
 
     }
 
     private void setSearchUserData() {
 
-        for (int i = 0; i < searchUserList.size(); i++) {
-            currentUserList.add(searchUserList.get(i));
-        }
 
-        if (currentUserList.size() < 1) {
+        if (searchUserList.size() < 1) {
             tvGuideNoUser.setVisibility(View.VISIBLE);
         } else {
             tvGuideNoUser.setVisibility(View.GONE);
         }
 
-        userAdapter.notifyItemRangeInserted(0, currentUserList.size());
+        userAdapter.notifyItemRangeInserted(0, searchUserList.size());
 
     }
 
     private void setSearchAlbumData() {
 
-        for (int i = 0; i < searchAlbumList.size(); i++) {
-            currentAlbumList.add(searchAlbumList.get(i));
-        }
 
 
-        if (currentAlbumList.size() < 1) {
+        if (searchAlbumList.size() < 1) {
             tvGuideNoAlbum.setVisibility(View.VISIBLE);
         } else {
             tvGuideNoAlbum.setVisibility(View.GONE);
         }
 
-        albumAdapter.notifyItemRangeInserted(0, currentAlbumList.size());
+        albumAdapter.notifyItemRangeInserted(0, searchAlbumList.size());
 
     }
 
@@ -501,38 +454,22 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
 
     private void cleanPicasso() {
 
-        if (currentUserList != null && currentUserList.size() > 0) {
-            for (int i = 0; i < currentUserList.size(); i++) {
-                String strPicture = (String) currentUserList.get(i).get(Key.picture);
+        if (searchUserList != null && searchUserList.size() > 0) {
+            for (int i = 0; i < searchUserList.size(); i++) {
+                String strPicture = (String) searchUserList.get(i).get(Key.picture);
                 Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
             }
-            currentUserList.clear();
+            searchUserList.clear();
         }
 
-        if (currentAlbumList != null && currentAlbumList.size() > 0) {
-            for (int i = 0; i < currentAlbumList.size(); i++) {
-                String cover = currentAlbumList.get(i).getCover();
+        if (searchAlbumList != null && searchAlbumList.size() > 0) {
+            for (int i = 0; i < searchAlbumList.size(); i++) {
+                String cover = searchAlbumList.get(i).getCover();
                 Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
             }
-            currentAlbumList.clear();
+            searchAlbumList.clear();
         }
 
-
-        if (defaultUserList != null && defaultUserList.size() > 0) {
-            for (int i = 0; i < defaultUserList.size(); i++) {
-                String strPicture = (String) defaultUserList.get(i).get(Key.picture);
-                Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
-            }
-            defaultUserList.clear();
-        }
-
-        if (defaultAlbumList != null && defaultAlbumList.size() > 0) {
-            for (int i = 0; i < defaultAlbumList.size(); i++) {
-                String cover = defaultAlbumList.get(i).getCover();
-                Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
-            }
-            defaultAlbumList.clear();
-        }
 
     }
 
@@ -543,7 +480,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
             public void DoingAgain() {
                 switch (doingType) {
                     case DoingTypeClass.DoGetSearchDefaultData:
-                        doGetDefaultData();
+//                        doGetDefaultData();
                         break;
                 }
             }
@@ -552,15 +489,7 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         DialogV2Custom.BuildTimeOut(getActivity(), connectInstability);
     }
 
-    private void doGetDefaultData() {
 
-        if (checkConnect()) {
-            getDefaultDataTask = new GetDefaultDataTask();
-            getDefaultDataTask.execute();
-        }
-
-
-    }
 
     private void doSearchUser() {
         if (checkConnect()) {
@@ -588,216 +517,6 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class GetDefaultDataTask extends AsyncTask<Void, Void, Object> {
-
-        private int p86ResultByUser = -1, p86ResultByAlbum = -1;
-        private String p86Message = "";
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoGetSearchDefaultData;
-            loading.show();
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-            protocol86ToGetUser();
-
-            if (p86ResultByUser == 1) {
-                protocol86ToGetAlbum();
-            }
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-
-            loading.dismiss();
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    ViewPropertyAnimator alphaTo1 = rvSearch.animate();
-                    alphaTo1.setDuration(400)
-                            .alpha(1)
-                            .start();
-                }
-            }, 200);
-
-            if (p86ResultByUser == 1 && p86ResultByAlbum == 1) {
-
-                setDefaultData();
-
-                return;
-            }
-
-
-            if (p86ResultByUser == Key.TIMEOUT || p86ResultByAlbum == Key.TIMEOUT) {
-
-                defaultUserList.clear();
-                defaultAlbumList.clear();
-                connectInstability();
-                return;
-            }
-
-
-            if (p86ResultByUser == 0 || p86ResultByAlbum == 0) {
-                DialogV2Custom.BuildError(getActivity(), p86Message);
-                return;
-            }
-
-            DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-        }
-
-        private void protocol86ToGetUser() {
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.p86_GetRecommendedList,
-                        SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.user, "0,16"), null);
-                MyLog.Set("d", getClass(), "p86strJson(user) => " + strJson);
-            } catch (SocketTimeoutException timeout) {
-                p86ResultByUser = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p86ResultByUser = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                    if (p86ResultByUser == 1) {
-
-                        String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                        JSONArray jsonArray = new JSONArray(jdata);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject j = (JSONObject) jsonArray.get(i);
-
-
-                            String user = JsonUtility.GetString(j, ProtocolKey.user);
-                            JSONObject object = new JSONObject(user);
-
-                            String name = JsonUtility.GetString(object, ProtocolKey.name);
-                            String picture = JsonUtility.GetString(object, ProtocolKey.picture);
-                            String user_id = JsonUtility.GetString(object, ProtocolKey.user_id);
-
-
-                            HashMap<String, Object> map = new HashMap<String, Object>();
-                            map.put(Key.name, name);
-                            map.put(Key.user_id, user_id);
-                            map.put(Key.picture, picture);
-
-                            if (!user_id.equals(id)) {
-                                defaultUserList.add(map);
-                            }
-                        }
-
-                    } else if (p86ResultByUser == 0) {
-                        p86Message = jsonObject.getString(ProtocolKey.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        private void protocol86ToGetAlbum() {
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.p86_GetRecommendedList,
-                        SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.album, "0,16"), null);
-                MyLog.Set("d", getClass(), "p86strJson(album) => " + strJson);
-            } catch (SocketTimeoutException timeout) {
-                p86ResultByAlbum = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p86ResultByAlbum = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                    if (p86ResultByAlbum == 1) {
-
-                        String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                        JSONArray jsonArray = new JSONArray(jdata);
-                        int minHeight = DensityUtility.dip2px(getActivity().getApplicationContext(), 72);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject j = (JSONObject) jsonArray.get(i);
-
-                            ItemAlbum itemAlbum = new ItemAlbum();
-
-
-                            String album = JsonUtility.GetString(j, ProtocolKey.album);
-                            JSONObject jsonAlbum = new JSONObject(album);
-
-                            itemAlbum.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
-                            itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.name));
-
-                            String cover = JsonUtility.GetString(jsonAlbum, ProtocolKey.cover);
-                            itemAlbum.setCover(cover);
-
-                            try {
-                                int width = jsonAlbum.getInt(ProtocolKey.cover_width);
-                                int height = jsonAlbum.getInt(ProtocolKey.cover_height);
-                                int image_height = StaggeredHeight.setImageHeight(width, height);
-
-                                if (image_height < minHeight) {
-                                    image_height = minHeight;
-                                }
-
-                                itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
-                                itemAlbum.setCover_height(image_height);
-                                itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
-
-                                if(width>height){
-                                    itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                                }else if(height>width){
-                                    itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                                }else {
-                                    itemAlbum.setImage_orientation(0);
-                                }
-
-                            } catch (Exception e) {
-                                itemAlbum.setCover_hex("");
-                                itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
-                                itemAlbum.setCover_height(PPBApplication.getInstance().getStaggeredWidth());
-                                MyLog.Set("e", this.getClass(), "圖片長寬無法讀取");
-                            }
-
-                            String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.usefor);
-                            JSONObject jsonUsefor = new JSONObject(usefor);
-                            itemAlbum.setExchange(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.exchange));
-                            itemAlbum.setSlot(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.slot));
-                            itemAlbum.setVideo(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.video));
-                            itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.audio));
-
-
-                            String user = JsonUtility.GetString(j, ProtocolKey.user);
-                            JSONObject jsonUser = new JSONObject(user);
-                            itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
-
-                            defaultAlbumList.add(itemAlbum);
-                        }
-
-                    } else if (p86ResultByAlbum == 0) {
-                        p86Message = JsonUtility.GetString(jsonObject, Key.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-
-    }
 
     private class UserListTask extends AsyncTask<Void, Void, Object> {
 
@@ -810,18 +529,15 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
             doingType = DoingTypeClass.DoSearchUserList;
 
             /*執行搜尋前全部移除*/
-            userAdapter.notifyItemRangeRemoved(0, currentUserList.size());
+            userAdapter.notifyItemRangeRemoved(0, searchUserList.size());
+
 
             if (searchUserList.size() > 0) {
-                searchUserList.clear();
-            }
-
-            if (currentUserList.size() > 0) {
-                for (int i = 0; i < currentUserList.size(); i++) {
-                    String strPicture = (String) currentUserList.get(i).get(Key.picture);
+                for (int i = 0; i < searchUserList.size(); i++) {
+                    String strPicture = (String) searchUserList.get(i).get(Key.picture);
                     Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
                 }
-                currentUserList.clear();
+                searchUserList.clear();
             }
 
         }
@@ -936,18 +652,16 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
             doingType = DoingTypeClass.DoSearchAlbumList;
 
                    /*執行搜尋前全部移除*/
-            albumAdapter.notifyItemRangeRemoved(0, currentAlbumList.size());
+            albumAdapter.notifyItemRangeRemoved(0, searchAlbumList.size());
+
+
 
             if (searchAlbumList.size() > 0) {
-                searchAlbumList.clear();
-            }
-
-            if (currentAlbumList.size() > 0) {
-                for (int i = 0; i < currentAlbumList.size(); i++) {
-                    String cover = currentAlbumList.get(i).getCover();
+                for (int i = 0; i < searchAlbumList.size(); i++) {
+                    String cover = searchAlbumList.get(i).getCover();
                     Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
                 }
-                currentAlbumList.clear();
+                searchAlbumList.clear();
             }
 
 
@@ -1104,177 +818,23 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onClick(View v) {
 
-        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-            return;
-        }
-
-        switch (v.getId()) {
-
-            case R.id.clearImg:
-                edSearch.setText("");
-                break;
-
-            case R.id.scanImg:
-
-                switch (checkPermission(getActivity(), Manifest.permission.CAMERA)) {
-
-                    case SUCCESS:
-                        ((Main2Activity) getActivity()).toScan();
-                        break;
-                    case REFUSE:
-                        MPermissions.requestPermissions(FragmentSearch2.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-                        break;
-
-//                    case REFUSE_NO_ASK:
-//                        MPermissions.requestPermissions(FragmentSearch2.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-//                        PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_open_permission_camera);
-//                        SystemUtility.getAppDetailSettingIntent(getActivity());
-//                        break;
-                }
-
-//                ((Main2Activity)getActivity()).toScan();
-
-                break;
-
-
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-//        for (int i = 0; i < grantResults.length; i++) {
-//            MyLog.Set("d", getClass(), "grantResults => " + grantResults[i]);
-////            PackageManager.PERMISSION_GRANTED = 0; 接受
-////            PackageManager.PERMISSION_DENIED = -1; 拒絕 & 拒絕(勾選不再問)
-//        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-
-            MyLog.Set("d", getClass(), "已授權");
-
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-//
-//                MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale = true");
-
-            doingType = REFUSE;
-
-//            }else {
-//
-//                MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale = false");
-//
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-    @PermissionGrant(REQUEST_CODE_CAMERA)
-    public void requestCameraSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ((Main2Activity) getActivity()).toScan();
-            }
-        }, 500);
-
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_CAMERA)
-    public void requestCameraFailed() {
-
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(getActivity());
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(getActivity());
-                }
-            });
-            d.show();
-
-        } else {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-
-
-    }
-
-
-    private boolean isVisible;
-    private boolean dowork = false;
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        isVisible = isVisibleToUser;
-        // Make sure that fragment is currently visible
-        if (!isVisible && isResumed()) {
-            // 调用Fragment隐藏的代码段
-
-//            MyLog.Set("e", getClass(), "目前看不到 FragmentSearch2");
-
-
-        } else if (isVisible && isResumed()) {
-            // 调用Fragment显示的代码段
-
-//            MyLog.Set("e", getClass(), "可看見 FragmentSearch2");
-
-            if (!dowork) {
-                init();
-                setUserRecycler();
-                setAlbumRecycler();
-                doGetDefaultData();
-                setSearch();
-                dowork = true;
-            }
-        }
-    }
 
     @Override
     public void onPause() {
 
-        if (currentUserList != null && currentAlbumList != null) {
+        if (searchUserList != null && searchAlbumList != null) {
 
-            if (currentUserList.size() > 0) {
-                for (int i = 0; i < currentUserList.size(); i++) {
-                    String strPicture = (String) currentUserList.get(i).get(Key.picture);
+            if (searchUserList.size() > 0) {
+                for (int i = 0; i < searchUserList.size(); i++) {
+                    String strPicture = (String) searchUserList.get(i).get(Key.picture);
                     Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
                 }
             }
 
-            if (currentAlbumList.size() > 0) {
-                for (int i = 0; i < currentAlbumList.size(); i++) {
-                    String cover = currentAlbumList.get(i).getCover();
+            if (searchAlbumList.size() > 0) {
+                for (int i = 0; i < searchAlbumList.size(); i++) {
+                    String cover = searchAlbumList.get(i).getCover();
                     Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
                 }
             }
@@ -1288,11 +848,6 @@ public class FragmentSearch2 extends Fragment implements View.OnClickListener {
 
     @Override
     public void onDestroy() {
-
-        if (getDefaultDataTask != null && !getDefaultDataTask.isCancelled()) {
-            getDefaultDataTask.cancel(true);
-        }
-        getDefaultDataTask = null;
 
         if (userListTask != null && !userListTask.isCancelled()) {
             userListTask.cancel(true);

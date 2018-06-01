@@ -45,7 +45,7 @@
             fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="獎項資訊已保存在\n個人專區 > 選單 > 兌換清單"
+            android:text="獎項資訊已保存在\n首頁 > 選單 > 兌換清單"
             android:letterSpacing="0.1"
             android:gravity="center"
             android:textSize="@dimen/ppb200_common_text_first"

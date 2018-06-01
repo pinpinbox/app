@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/tvSearchUserTitle"
             style="@style/ppb200_title_second"
-            android:text="@string/pinpinbox_2_0_0_title_recommend_creator" />
+            android:text="@string/pinpinbox_2_0_0_title_find_creator" />
 
         <View
             style="@style/ppb200_divider_list"
@@ -75,7 +75,7 @@
         <TextView
             android:id="@+id/tvSearchAlbumTitle"
             style="@style/ppb200_title_second"
-            android:text="@string/pinpinbox_2_0_0_title_popular_album" />
+            android:text="@string/pinpinbox_2_0_0_title_find_album" />
 
 
         <View

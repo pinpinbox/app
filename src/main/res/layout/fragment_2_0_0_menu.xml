@@ -17,7 +17,7 @@
             style="@style/ppb200_title_second"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+            android:layout_marginTop="56dp"
             android:text="@string/pinpinbox_2_0_0_pop_title_where_to_go" />
 
 
@@ -236,76 +236,71 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
 
-            <RelativeLayout
-                android:id="@+id/r1"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginLeft="8dp">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/r1"-->
+                <!--android:layout_width="34dp"-->
+                <!--android:layout_height="34dp"-->
+                <!--android:layout_marginLeft="8dp">-->
 
-                <com.richpath.RichPathView
-                    android:id="@+id/svgMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:visibility="visible"
-                    app:vector="@drawable/svg_menu" />
+                <!--<com.richpath.RichPathView-->
+                    <!--android:id="@+id/svgMenu"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:background="@drawable/click_2_0_0_default"-->
+                    <!--android:visibility="visible"-->
+                    <!--app:vector="@drawable/svg_menu" />-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:id="@+id/r2"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginLeft="8dp"
-                android:background="@color/color_1">
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/r3"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginLeft="8dp"
-                android:background="@color/color_7">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/r2"-->
+                <!--android:layout_width="34dp"-->
+                <!--android:layout_height="34dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:background="@color/color_1">-->
 
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:id="@+id/r4"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginLeft="8dp"
-                android:background="@color/color_5">
-
-
-            </RelativeLayout>
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/r3"-->
+                <!--android:layout_width="34dp"-->
+                <!--android:layout_height="34dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:background="@color/color_7">-->
 
 
-            <TextView
-                android:id="@+id/reset"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:text="R"
-                android:gravity="center"/>
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/r4"-->
+                <!--android:layout_width="34dp"-->
+                <!--android:layout_height="34dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:background="@color/color_5">-->
 
 
-        </LinearLayout>
+            <!--</RelativeLayout>-->
 
 
-        <com.richpath.RichPathView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/click_2_0_0_default"
-            android:visibility="visible"
-            app:vector="@drawable/svg_notification" />
+            <!--<TextView-->
+                <!--android:id="@+id/reset"-->
+                <!--android:layout_width="34dp"-->
+                <!--android:layout_height="34dp"-->
+                <!--android:text="R"-->
+                <!--android:gravity="center"/>-->
+
+
+        <!--</LinearLayout>-->
+
+
+
 
 
     </LinearLayout>

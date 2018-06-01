@@ -81,6 +81,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GiftAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
@@ -1659,6 +1660,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         tvAddToExchangeList.setText(R.string.pinpinbox_2_0_0_other_text_is_in_exchange_list);
                         tvAddToExchangeList.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                         rAddToExchangeList.setClickable(false);
+                        RedPointManager.showOrHideOnExchangeList(true);
                     }
 
                     private void gained() {

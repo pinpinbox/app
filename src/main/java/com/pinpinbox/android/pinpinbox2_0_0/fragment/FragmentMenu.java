@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,16 +17,17 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.richpath.RichPath;
 import com.richpath.RichPathView;
-import com.richpathanimator.RichPathAnimator;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
@@ -65,15 +64,6 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_2_0_0_menu, container, false);
-
-        svgMenu = (RichPathView) v.findViewById(R.id.svgMenu);
-
-        r1 = (RelativeLayout) v.findViewById(R.id.r1);
-        r2 = (RelativeLayout) v.findViewById(R.id.r2);
-        r3 = (RelativeLayout) v.findViewById(R.id.r3);
-        r4 = (RelativeLayout) v.findViewById(R.id.r4);
-        reset = (TextView) v.findViewById(R.id.reset);
-
 
         setRPlist(v);
 
@@ -135,148 +125,148 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         init();
 
 
-        final RichPath menuTop = svgMenu.findRichPathByName("top");
-        final RichPath menuCenter = svgMenu.findRichPathByName("center");
-        final RichPath menuBottom = svgMenu.findRichPathByName("bottom");
-
-
-        menuTop.setPivotToCenter(true);
-        menuCenter.setPivotToCenter(true);
-        menuBottom.setPivotToCenter(true);
-
-
-        r1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                RichPathAnimator
-                        .animate(menuTop)
-                        .interpolator(new DecelerateInterpolator())
-                        .translationX(0, 5, -5, 5, -5, 0)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-
-                        .andAnimate(menuCenter)
-                        .interpolator(new DecelerateInterpolator())
-                        .translationX(0, 5, -5, 5, -5, 0)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-                        .startDelay(200)
-
-                        .andAnimate(menuBottom)
-                        .interpolator(new DecelerateInterpolator())
-                        .translationX(0, 5, -5, 5, -5, 0)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-                        .startDelay(400)
-
-
-                        .start();
-
-
-            }
-        });
-
-
-        r2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                RichPathAnimator
-                        .animate(menuTop)
-                        .interpolator(new DecelerateInterpolator())
-                        .translationY(0, 8, 0)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-
-                        .andAnimate(menuCenter)
-                        .interpolator(new DecelerateInterpolator())
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-
-
-                        .andAnimate(menuBottom)
-                        .interpolator(new DecelerateInterpolator())
-                        .translationY(0, -8, 0)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-
-
-                        .start();
-
-
-            }
-        });
-
-        r3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-                RichPathAnimator
-                        .animate(menuTop)
-                        .interpolator(new DecelerateInterpolator())
-                        .scaleX(0.2f, 1f)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-
-                        .andAnimate(menuCenter)
-                        .interpolator(new DecelerateInterpolator())
-                        .scaleX(0.2f, 1f)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-                        .startDelay(200)
-
-
-                        .andAnimate(menuBottom)
-                        .interpolator(new DecelerateInterpolator())
-                        .scaleX(0.2f, 1f)
-                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-                        .duration(300)
-                        .startDelay(400)
-
-                        .start();
-
-
-            }
-        });
-
-        r4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-
-            }
-        });
-
-
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                menuTop.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
-                menuCenter.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
-                menuBottom.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
-
-                menuTop.setScaleX(1f);
-                menuCenter.setScaleX(1f);
-                menuBottom.setScaleX(1f);
-
-
-
-
-
-
-
-
-
-            }
-        });
+//        final RichPath menuTop = svgMenu.findRichPathByName("top");
+//        final RichPath menuCenter = svgMenu.findRichPathByName("center");
+//        final RichPath menuBottom = svgMenu.findRichPathByName("bottom");
+//
+//
+//        menuTop.setPivotToCenter(true);
+//        menuCenter.setPivotToCenter(true);
+//        menuBottom.setPivotToCenter(true);
+//
+//
+//        r1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                RichPathAnimator
+//                        .animate(menuTop)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .translationX(0, 5, -5, 5, -5, 0)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//
+//                        .andAnimate(menuCenter)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .translationX(0, 5, -5, 5, -5, 0)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//                        .startDelay(200)
+//
+//                        .andAnimate(menuBottom)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .translationX(0, 5, -5, 5, -5, 0)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//                        .startDelay(400)
+//
+//
+//                        .start();
+//
+//
+//            }
+//        });
+//
+//
+//        r2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                RichPathAnimator
+//                        .animate(menuTop)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .translationY(0, 8, 0)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//
+//                        .andAnimate(menuCenter)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//
+//
+//                        .andAnimate(menuBottom)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .translationY(0, -8, 0)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//
+//
+//                        .start();
+//
+//
+//            }
+//        });
+//
+//        r3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//
+//                RichPathAnimator
+//                        .animate(menuTop)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .scaleX(0.2f, 1f)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//
+//                        .andAnimate(menuCenter)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .scaleX(0.2f, 1f)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//                        .startDelay(200)
+//
+//
+//                        .andAnimate(menuBottom)
+//                        .interpolator(new DecelerateInterpolator())
+//                        .scaleX(0.2f, 1f)
+//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
+//                        .duration(300)
+//                        .startDelay(400)
+//
+//                        .start();
+//
+//
+//            }
+//        });
+//
+//        r4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//
+//
+//            }
+//        });
+//
+//
+//        reset.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                menuTop.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
+//                menuCenter.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
+//                menuBottom.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
+//
+//                menuTop.setScaleX(1f);
+//                menuCenter.setScaleX(1f);
+//                menuBottom.setScaleX(1f);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//            }
+//        });
 
 
     }
@@ -359,7 +349,6 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         }
     }
 
-
     private void toCheckPermission() {
         switch (checkPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
             case SUCCESS:
@@ -371,6 +360,84 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
                 MPermissions.requestPermissions(FragmentMenu.this, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
                 break;
         }
+    }
+
+    private void checkHideMenuRP() {
+
+        boolean isRPexist = false;
+        if (vRedPointList != null && vRedPointList.size() > 0) {
+            for (int i = 0; i < vRedPointList.size(); i++) {
+                if (vRedPointList.get(i).getVisibility() == View.VISIBLE) {
+                    isRPexist = true;
+                    break;
+                }
+            }
+        } else {
+            isRPexist = false;
+        }
+
+
+        Activity mActivity = SystemUtility.getActivity(Main2Activity.class.getSimpleName());
+        if (mActivity != null) {
+            if (!isRPexist) {
+                ((Main2Activity) mActivity).hide_menu();
+            }
+        }
+
+
+    }
+
+    private void checkShowRedPoints() {
+
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_editProfile, false)) {
+            vRPeditProfile.setVisibility(View.VISIBLE);
+        } else {
+            vRPeditProfile.setVisibility(View.GONE);
+        }
+
+
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_workManage, false)) {
+            vRPworkManage.setVisibility(View.VISIBLE);
+        } else {
+            vRPworkManage.setVisibility(View.GONE);
+        }
+
+
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_myFollow, false)) {
+            vRPmyFollow.setVisibility(View.VISIBLE);
+        } else {
+            vRPmyFollow.setVisibility(View.GONE);
+        }
+
+
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_recent, false)) {
+            vRPrecent.setVisibility(View.VISIBLE);
+        } else {
+            vRPrecent.setVisibility(View.GONE);
+        }
+
+
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_butPoint, false)) {
+            vRPbutPoint.setVisibility(View.VISIBLE);
+        } else {
+            vRPbutPoint.setVisibility(View.GONE);
+        }
+
+
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_exchangeList, false)) {
+            vRPexchangeList.setVisibility(View.VISIBLE);
+        } else {
+            vRPexchangeList.setVisibility(View.GONE);
+        }
+
+
+        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_settings, false)) {
+            vRPsettings.setVisibility(View.VISIBLE);
+        } else {
+            vRPsettings.setVisibility(View.GONE);
+        }
+
+
     }
 
     @Override
@@ -387,6 +454,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
                 removeRedPoint(vRPeditProfile);
                 RedPointManager.showOrHideOnEditProfile(false);
+                checkHideMenuRP();
                 ActivityIntent.toEditProfile(getActivity());
 
                 break;
@@ -395,6 +463,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
                 removeRedPoint(vRPworkManage);
                 RedPointManager.showOrHideOnWorkManage(false);
+                checkHideMenuRP();
                 toCheckPermission();
 
                 break;
@@ -403,6 +472,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
                 removeRedPoint(vRPmyFollow);
                 RedPointManager.showOrHideOnMyFollow(false);
+                checkHideMenuRP();
                 ActivityIntent.toMyFollow(getActivity());
 
 
@@ -412,6 +482,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
                 removeRedPoint(vRPrecent);
                 RedPointManager.showOrHideOnRecent(false);
+                checkHideMenuRP();
                 ActivityIntent.toRecent(getActivity());
 
                 break;
@@ -420,6 +491,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
                 removeRedPoint(vRPbutPoint);
                 RedPointManager.showOrHideOnBuyPoint(false);
+                checkHideMenuRP();
                 ActivityIntent.toBuyPoint(getActivity());
 
                 break;
@@ -428,6 +500,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
                 removeRedPoint(vRPexchangeList);
                 RedPointManager.showOrHideOnExchangeList(false);
+                checkHideMenuRP();
                 ActivityIntent.toExchangeList(getActivity());
 
                 break;
@@ -436,6 +509,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
                 removeRedPoint(vRPsettings);
                 RedPointManager.showOrHideOnSettings(false);
+                checkHideMenuRP();
                 ActivityIntent.toSettings(getActivity());
 
                 break;
@@ -447,4 +521,34 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     }
 
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        // Make sure that fragment is currently visible
+        if (!isVisibleToUser && isResumed()) {
+            // 调用Fragment隐藏的代码段
+
+            MyLog.Set("e", getClass(), "目前看不到 FragmentMenu");
+
+
+        } else if (isVisibleToUser && isResumed()) {
+            // 调用Fragment显示的代码段
+
+            MyLog.Set("e", getClass(), "可看見 FragmentMenu");
+            checkShowRedPoints();
+
+
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        checkShowRedPoints();
+
+
+
+    }
 }

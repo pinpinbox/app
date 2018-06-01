@@ -34,7 +34,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.RoundTransform;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 
 import org.json.JSONArray;
@@ -101,7 +100,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
 
         opts = new RequestOptions()
-                .transform(new RoundTransform(mActivity, radius))
+//                .transform(new RoundTransform(mActivity, radius))
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.bg_2_0_0_no_image);
 

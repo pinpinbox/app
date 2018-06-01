@@ -1,19 +1,31 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -50,6 +62,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.AutoPageScrollManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
@@ -65,11 +78,15 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 import com.squareup.picasso.Picasso;
+import com.zhy.m.permission.MPermissions;
+import com.zhy.m.permission.PermissionDenied;
+import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -91,6 +108,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private NoConnect noConnect;
     private LoadingAnimation loading;
     private AutoPageScrollManager autoPageScrollManager;
+    private InputMethodManager inputMethodManager;
+    private CountDownTimer countDownTimer;
+
+    private FragmentSearch2 fragmentSearch2;
 
     private AttentionTask attentionTask;
     private MoreDataTask moreDataTask;
@@ -125,7 +146,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     private int round; //listview添加前的初始值
     private int count; //listview每次添加的數量
-    private int first;
     private int p20total = 0;
     private int reCreateCount = 0;
 
@@ -139,22 +159,21 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private static final int TABLE = 10002;
 
 
-    private float scale = 0;
-
     private boolean sizeMax = false;
-    private boolean mainIsExist = false; //確認main是否以建立
-    private boolean fromAwsMessage = false;
     private boolean isNoDataToastAppeared = false; //判斷無資料訊息是否出現過
     private boolean isDoingMore = false;
     private boolean isDoingRefreshBanner = true;
+    private boolean isSearch = false;
 
     private RecyclerView rvHome, rvCategory;
-    private SmoothProgressBar pbLoadMore;
+    private SmoothProgressBar pbLoadMore, pbRefresh;
     private View viewHeader;
     private ViewPager vpBanner;
     private CircleIndicator indicator;
     private LinearLayout linBanner;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
+    private EditText edSearch;
+    private ImageView  scanImg;
 
 
     private LinearLayout linHobby, linFollow;
@@ -185,46 +204,12 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_2_0_0_home, container, false);
-        rvHome = (RecyclerView) v.findViewById(R.id.rvHome);
-        pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
-        pbLoadMore.progressiveStop();
+
+        initView(v);
 
 
-        viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_home, null);
-        vpBanner = (ViewPager) viewHeader.findViewById(R.id.vpBanner);
-        indicator = (CircleIndicator) viewHeader.findViewById(R.id.indicator);
-        linBanner = (LinearLayout) viewHeader.findViewById(R.id.linBanner);
-        rvCategory = (RecyclerView) viewHeader.findViewById(R.id.rvCategory);
+        initHeaderView();
 
-        linHobby = (LinearLayout) viewHeader.findViewById(R.id.linHobby);
-        linFollow = (LinearLayout) viewHeader.findViewById(R.id.linFollow);
-        tvNew = (TextView) viewHeader.findViewById(R.id.tvNew);
-        tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
-        vHobby = viewHeader.findViewById(R.id.vHobby);
-        vFollow = viewHeader.findViewById(R.id.vFollow);
-
-
-        linHobby.setOnClickListener(this);
-        linFollow.setOnClickListener(this);
-
-
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvNewsFeed), true);
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvExplore), true);
-
-
-        rvHome.addItemDecoration(new SpacesItemDecoration(16));
-
-        rvHome.setItemAnimator(new DefaultItemAnimator());
-        rvHome.addOnScrollListener(mOnScrollListener);
-
-        pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.pinPinBoxRefreshLayout);
-        pinPinBoxRefreshLayout.setOnPullRefreshListener(this);
-
-
-        //20171002
-        SmoothProgressBar pbRefresh = (SmoothProgressBar) v.findViewById(R.id.pbRefresh);
-        pbRefresh.progressiveStop();
-        pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);
 
         //20171123
         setScrollListener();
@@ -241,6 +226,60 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         return v;
     }
+
+
+    private void initView(View v) {
+
+        pbRefresh = (SmoothProgressBar) v.findViewById(R.id.pbRefresh);
+        rvHome = (RecyclerView) v.findViewById(R.id.rvHome);
+        pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
+        pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.pinPinBoxRefreshLayout);
+        edSearch = (EditText) v.findViewById(R.id.edSearch);
+        scanImg = (ImageView) v.findViewById(R.id.scanImg);
+
+        pbLoadMore.progressiveStop();
+        pbRefresh.progressiveStop();
+
+        rvHome.addItemDecoration(new SpacesItemDecoration(16));
+        rvHome.setItemAnimator(new DefaultItemAnimator());
+        rvHome.addOnScrollListener(mOnScrollListener);
+
+
+        pinPinBoxRefreshLayout.setOnPullRefreshListener(this);
+        pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);
+
+
+        scanImg.setOnClickListener(this);
+
+
+
+    }
+
+
+    private void initHeaderView() {
+
+        viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_home, null);
+        vpBanner = (ViewPager) viewHeader.findViewById(R.id.vpBanner);
+        indicator = (CircleIndicator) viewHeader.findViewById(R.id.indicator);
+        linBanner = (LinearLayout) viewHeader.findViewById(R.id.linBanner);
+        linHobby = (LinearLayout) viewHeader.findViewById(R.id.linHobby);
+        linFollow = (LinearLayout) viewHeader.findViewById(R.id.linFollow);
+        rvCategory = (RecyclerView) viewHeader.findViewById(R.id.rvCategory);
+        tvNew = (TextView) viewHeader.findViewById(R.id.tvNew);
+        tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
+        vHobby = viewHeader.findViewById(R.id.vHobby);
+        vFollow = viewHeader.findViewById(R.id.vFollow);
+
+
+        linHobby.setOnClickListener(this);
+        linFollow.setOnClickListener(this);
+
+
+        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvNewsFeed), true);
+        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvExplore), true);
+
+    }
+
 
     /*test version*/
     private TextView tvShowTime;
@@ -281,6 +320,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         super.onActivityCreated(savedInstanceState);
 
         init();
+        setSearch();
         setRecycler();
         setCategoryRecycler();
         doAttention();
@@ -288,6 +328,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     }
 
     private void init() {
+
+        inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         loading = ((Main2Activity) getActivity()).getLoading();
 
@@ -306,56 +348,133 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
+    private void setSearch() {
 
-//    private List<ItemAlbum> itemAlbumList2 = new ArrayList<>();
-//
-//    /*橫向*/
-//    public void landscapeRecyclerView() {
-//
-//        for (int i = 0; i < itemAlbumList.size(); i++) {
-//            itemAlbumList2.add(itemAlbumList.get(i));
-//        }
-//
-//        itemAlbumList.clear();
-//        rvHome.setLayoutManager(null);
-//        recyclerHomeAdapter.notifyDataSetChanged();
-//
-//
-//        StaggeredGridLayoutManager manager = null;
-//
-//        manager = new ExStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-//
-//        rvHome.setLayoutManager(manager);
-//
-//
-//        recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList2);
-//        rvHome.setAdapter(recyclerHomeAdapter);
-//
-//
-//    }
-//
-//    /*縱向*/
-//    public void portraitRecyclerView() {
-//
-//        for (int i = 0; i < itemAlbumList2.size(); i++) {
-//            itemAlbumList.add(itemAlbumList2.get(i));
-//        }
-//
-//        itemAlbumList2.clear();
-//        rvHome.setLayoutManager(null);
-//        recyclerHomeAdapter.notifyDataSetChanged();
-//
-//
-//        StaggeredGridLayoutManager manager = null;
-//
-//        manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-//
-//        rvHome.setLayoutManager(manager);
-//
-//        recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList);
-//        rvHome.setAdapter(recyclerHomeAdapter);
-//
-//    }
+
+        edSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if (hasFocus) {
+                    // 此处为得到焦点时的处理内容
+                    MyLog.Set("e", FragmentHome2.this.getClass(), "監聽輸入框");
+
+                    showSearch();
+
+                } else {
+                    // 此处为失去焦点时的处理内容
+                    MyLog.Set("e", FragmentHome2.this.getClass(), "取消監聽");
+
+
+                }
+
+
+            }
+        });
+
+
+
+
+
+        countDownTimer = new CountDownTimer(1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                countDownTimer.cancel();
+
+                if(fragmentSearch2!=null && fragmentSearch2.isAdded()){
+
+                    fragmentSearch2.setOnFinish();
+
+                }
+
+
+            }
+        };
+
+        edSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                MyLog.Set("d", FragmentSearch2.class, "afterTextChanged");
+
+
+                if (s.toString().equals("")) {
+
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel();
+                    }
+
+                    if(fragmentSearch2!=null && fragmentSearch2.isAdded()){
+
+                        fragmentSearch2.setOnFinish();
+
+                    }
+
+
+                } else {
+
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel();
+                        countDownTimer.start();
+
+                        MyLog.Set("d", FragmentSearch2.class, "重新倒數");
+                    }
+
+
+
+
+                }
+
+
+            }
+        });
+
+
+    }
+
+    private void showSearch() {
+        if (fragmentSearch2 == null) {
+            fragmentSearch2 = new FragmentSearch2();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .add(R.id.frameSearch, fragmentSearch2).commit();
+        } else {
+
+            if (fragmentSearch2.isHidden()) {
+                getActivity().getSupportFragmentManager().beginTransaction().show(fragmentSearch2).commit();
+            }
+
+        }
+
+        isSearch = true;
+        scanImg.setImageResource(R.drawable.ic200_cancel_dark);
+
+    }
+
+    private void hideSearch() {
+        if (fragmentSearch2 != null) {
+            getActivity().getSupportFragmentManager().beginTransaction().hide(fragmentSearch2).commit();
+        }
+
+        isSearch = false;
+        scanImg.setImageResource(R.drawable.ic200_scancamera_dark);
+    }
 
     private void setRecycler() {
 
@@ -882,7 +1001,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         bannerViewList = new ArrayList<>();
 
 
-        int bannerWidth = ScreenUtils.getScreenWidth() - DensityUtility.dip2px(getActivity().getApplicationContext(), 32);
+        int bannerWidth = ScreenUtils.getScreenWidth();
 
         int bannerHeight = (bannerWidth * 380) / 960;
 
@@ -892,10 +1011,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         for (int i = 0; i < p75arraylist.size(); i++) {
             View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.page_2_0_0_banner_image, null);
 
-            ImageView bannerImg = (ImageView) view.findViewById(R.id.bannerImg);
-
-            bannerImg.setLayoutParams(layoutParams);
-            bannerImg.setX(DensityUtility.dip2px(getActivity().getApplicationContext(), 16));
             bannerViewList.add(view);
 
         }
@@ -1248,6 +1363,14 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         System.gc();
 
+    }
+
+    public SmoothProgressBar getPbRefresh(){
+        return this.pbRefresh;
+    }
+
+    public EditText getEdSearch(){
+        return this.edSearch;
     }
 
     private void connectInstability() {
@@ -1666,13 +1789,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
         switch (view.getId()) {
-//            case R.id.tvCategory:
-//
-//                Intent intent = new Intent(getActivity(), Category2Activity.class);
-//                startActivity(intent);
-//                ActivityAnim.StartAnim(getActivity());
-//
-//                break;
 
 
             case R.id.linHobby:
@@ -1698,6 +1814,37 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 FlurryUtil.onEvent(FlurryKey.home_click_follow);
 
                 doRefresh();
+
+                break;
+
+
+            case R.id.scanImg:
+
+
+                if(isSearch){
+                    edSearch.setText("");
+                    edSearch.clearFocus();
+                    inputMethodManager.hideSoftInputFromWindow(edSearch.getWindowToken(), 0);
+                    hideSearch();
+                }else {
+
+                    switch (checkPermission(getActivity(), Manifest.permission.CAMERA)) {
+
+                        case SUCCESS:
+                            ((Main2Activity) getActivity()).toScan();
+                            break;
+                        case REFUSE:
+                            MPermissions.requestPermissions(FragmentHome2.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
+                            break;
+
+                    }
+
+
+                }
+
+
+
+
 
                 break;
 
@@ -1783,8 +1930,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         doRefresh();
     }
 
-    private float floatScaleX = 0;
-
     @Override
     public void onPullDistance(int distance) {
 
@@ -1861,16 +2006,79 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             }
 
 
-            // Add top margin only for the first item to avoid double space between items
-//            if (parent.getChildAdapterPosition(view) == 0) {
-//                outRect.top = 32;
-//                outRect.right = 32;
-//            }
         }
     }
 
-    public List<ItemAlbumCategory> getItemAlbumCategoryList() {
-        return this.itemAlbumCategoryList;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private final int SUCCESS = 0;
+    private final int REFUSE = -1;
+    private static final int REQUEST_CODE_CAMERA = 104;
+
+    private int checkPermission(Activity ac, String permission) {
+
+        int doingType = 0;
+
+        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
+            //已授權
+            doingType = SUCCESS;
+
+            MyLog.Set("d", getClass(), "已授權");
+
+        } else {
+            //未授權 判斷是否彈出詢問框 true => 彈出
+
+            doingType = REFUSE;
+
+        }
+        return doingType;
+
+    }
+
+    @PermissionGrant(REQUEST_CODE_CAMERA)
+    public void requestCameraSuccess() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((Main2Activity) getActivity()).toScan();
+            }
+        }, 500);
+
+
+    }
+
+    @PermissionDenied(REQUEST_CODE_CAMERA)
+    public void requestCameraFailed() {
+
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
+
+            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
+
+            DialogV2Custom d = new DialogV2Custom(getActivity());
+            d.setStyle(DialogStyleClass.CHECK);
+            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
+            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
+            d.setCheckExecute(new CheckExecute() {
+                @Override
+                public void DoCheck() {
+                    SystemUtility.getAppDetailSettingIntent(getActivity());
+                }
+            });
+            d.show();
+
+        } else {
+
+            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
+
+        }
+
+
     }
 
 

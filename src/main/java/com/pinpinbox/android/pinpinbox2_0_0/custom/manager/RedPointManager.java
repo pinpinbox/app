@@ -1,13 +1,11 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.manager;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 
 /**
  * Created by kevin9594 on 2018/3/17.
@@ -15,16 +13,15 @@ import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 
 public class RedPointManager {
 
-    public static void showOrHideOnMenu(boolean showOrHide){
+    private static void showOrHideOnMenu(boolean showOrHide){
         PPBApplication.getInstance().getData().edit().putBoolean(Key.checkRP_menu, showOrHide).commit();
 
         if(showOrHide){
             Activity mActivity = SystemUtility.getActivity(Main2Activity.class.getSimpleName());
             if(mActivity!=null){
-                Fragment fragment = ((Main2Activity)mActivity).getFragment(FragmentMe2.class.getSimpleName());
-                if(fragment!=null){
-                    ((FragmentMe2)fragment).showRP_menu();
-                }
+
+                ((Main2Activity)mActivity).showRP_menu();
+
             }
         }
     }

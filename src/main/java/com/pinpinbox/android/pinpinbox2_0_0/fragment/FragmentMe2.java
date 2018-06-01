@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,11 +60,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
@@ -90,7 +87,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol101_SetUserCover;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
@@ -111,7 +107,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by vmage on 2017/3/24.
  */
-public class FragmentMe2 extends Fragment implements View.OnClickListener, ClickDragDismissListener.ActionUpListener {
+public class FragmentMe2 extends Fragment implements View.OnClickListener{
 
     private LoadingAnimation loading;
     private ExStaggeredGridLayoutManager manager;
@@ -120,7 +116,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
     private File fileCover;
 
-    private PopupCustom popMenu;
+//    private PopupCustom popMenu;
     private PopBoard board;
 
     private GetCreativeTask getCreativeTask;
@@ -140,11 +136,11 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     private RecyclerView rvAuthor;
     private SmoothProgressBar pbLoadMore;
     private RoundCornerImageView userImg;
-    private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, menuImg, messageImg, aboutImg, shareImg, incomeImg;
+    private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, messageImg, aboutImg, shareImg, incomeImg;
     private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax;
     private LinearLayout linLink, linSponsorList, linFollowMe;
     private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvLink, tvSponsor, tvUploadBanner;
-    private View viewHeader, vRPmenu;
+    private View viewHeader;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private RelativeLayout rCreativeName;
 
@@ -244,14 +240,11 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
 
 //        mOnScrollListener.setFloatToolBar(v.findViewById(R.id.rrr), v.findViewById(R.id.vvv));
 
-        menuImg = (ImageView) v.findViewById(R.id.menuImg);
+
         messageImg = (ImageView) v.findViewById(R.id.messageImg);
         aboutImg = (ImageView) v.findViewById(R.id.aboutImg);
         shareImg = (ImageView) v.findViewById(R.id.shareImg);
         incomeImg = (ImageView) v.findViewById(R.id.incomeImg);
-
-        vRPmenu = v.findViewById(R.id.vRPmenu);
-
 
         tvCreativeName = (TextView) v.findViewById(R.id.tvCreativeName);
         tvUploadBanner = (TextView) v.findViewById(R.id.tvUploadBanner);
@@ -339,7 +332,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         twitterImg.setOnClickListener(this);
         youtubeImg.setOnClickListener(this);
 
-        menuImg.setOnClickListener(this);
         messageImg.setOnClickListener(this);
         aboutImg.setOnClickListener(this);
         shareImg.setOnClickListener(this);
@@ -942,106 +934,106 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     private View vRPeditProfile, vRPworkManage,
             vRPmyFollow, vRPrecent, vRPbutPoint, vRPexchangeList, vRPsettings;
 
-    @SuppressLint("ClickableViewAccessibility")
-    private void showMenu() {
 
-        if (popMenu == null) {
-
-            popMenu = new PopupCustom(getActivity());
-            popMenu.setPopup(R.layout.pop_2_0_0_me_menu, R.style.pinpinbox_popupAnimation_bottom);
-
-
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvTitle), true);
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToEditProfile), true);
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToWorkManage), true);
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToMyFollow), true);
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToRecent), true);
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToBuyPoint), true);
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToExchangeList), true);
-            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvSettings), true);
-
-
-            vRPeditProfile = popMenu.getPopupView().findViewById(R.id.vRPeditProfile);
-            vRPworkManage = popMenu.getPopupView().findViewById(R.id.vRPworkManage);
-            vRPmyFollow = popMenu.getPopupView().findViewById(R.id.vRPmyFollow);
-            vRPrecent = popMenu.getPopupView().findViewById(R.id.vRPrecent);
-            vRPbutPoint = popMenu.getPopupView().findViewById(R.id.vRPbutPoint);
-            vRPexchangeList = popMenu.getPopupView().findViewById(R.id.vRPexchangeList);
-            vRPsettings = popMenu.getPopupView().findViewById(R.id.vRPsettings);
-
-            final List<View> vRedPointList = new ArrayList<>();
-            vRedPointList.add(vRPeditProfile);
-            vRedPointList.add(vRPworkManage);
-            vRedPointList.add(vRPmyFollow);
-            vRedPointList.add(vRPrecent);
-            vRedPointList.add(vRPbutPoint);
-            vRedPointList.add(vRPexchangeList);
-            vRedPointList.add(vRPsettings);
-
-
-            LinearLayout linToEditProfile = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToEditProfile);
-            LinearLayout linToWorkManage = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToWorkManage);
-            LinearLayout linToMyFollow = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToMyFollow);
-            LinearLayout linToRecent = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToRecent);
-            LinearLayout linToBuyPoint = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToBuyPoint);
-            LinearLayout linToExchangeList = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToExchangeList);
-            LinearLayout linSettings = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linSettings);
-
-            View vContent = popMenu.getPopupView().findViewById(R.id.linBackground);
-
-            linToEditProfile.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-            linToWorkManage.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-            linToMyFollow.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-            linToRecent.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-            linToBuyPoint.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-            linToExchangeList.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-            linSettings.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-
-
-            popMenu.setDissmissWorks(new PopupCustom.DissmissWorks() {
-                @Override
-                public void excute() {
-
-                    if (vRedPointList != null && vRedPointList.size() > 0) {
-
-                        if (vRPmenu != null) {
-
-                            boolean allclear = true;
-
-                            for (int i = 0; i < vRedPointList.size(); i++) {
-
-                                if (vRedPointList.get(i).getVisibility() == View.VISIBLE) {
-                                    allclear = false;
-                                    break;
-                                }
-
-                            }
-
-                            if (allclear) {
-                                vRPmenu.setVisibility(View.GONE);
-                            } else {
-                                vRPmenu.setVisibility(View.VISIBLE);
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            });
-
-
-            checkShowRedPoints();
-            popMenu.show(((Main2Activity) getActivity()).getBackground());
-
-
-        } else {
-            checkShowRedPoints();
-            popMenu.show(((Main2Activity) getActivity()).getBackground());
-        }
-
-    }
+//    private void showMenu() {
+//
+//        if (popMenu == null) {
+//
+//            popMenu = new PopupCustom(getActivity());
+//            popMenu.setPopup(R.layout.pop_2_0_0_me_menu, R.style.pinpinbox_popupAnimation_bottom);
+//
+//
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvTitle), true);
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToEditProfile), true);
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToWorkManage), true);
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToMyFollow), true);
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToRecent), true);
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToBuyPoint), true);
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToExchangeList), true);
+//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvSettings), true);
+//
+//
+//            vRPeditProfile = popMenu.getPopupView().findViewById(R.id.vRPeditProfile);
+//            vRPworkManage = popMenu.getPopupView().findViewById(R.id.vRPworkManage);
+//            vRPmyFollow = popMenu.getPopupView().findViewById(R.id.vRPmyFollow);
+//            vRPrecent = popMenu.getPopupView().findViewById(R.id.vRPrecent);
+//            vRPbutPoint = popMenu.getPopupView().findViewById(R.id.vRPbutPoint);
+//            vRPexchangeList = popMenu.getPopupView().findViewById(R.id.vRPexchangeList);
+//            vRPsettings = popMenu.getPopupView().findViewById(R.id.vRPsettings);
+//
+//            final List<View> vRedPointList = new ArrayList<>();
+//            vRedPointList.add(vRPeditProfile);
+//            vRedPointList.add(vRPworkManage);
+//            vRedPointList.add(vRPmyFollow);
+//            vRedPointList.add(vRPrecent);
+//            vRedPointList.add(vRPbutPoint);
+//            vRedPointList.add(vRPexchangeList);
+//            vRedPointList.add(vRPsettings);
+//
+//
+//            LinearLayout linToEditProfile = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToEditProfile);
+//            LinearLayout linToWorkManage = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToWorkManage);
+//            LinearLayout linToMyFollow = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToMyFollow);
+//            LinearLayout linToRecent = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToRecent);
+//            LinearLayout linToBuyPoint = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToBuyPoint);
+//            LinearLayout linToExchangeList = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToExchangeList);
+//            LinearLayout linSettings = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linSettings);
+//
+//            View vContent = popMenu.getPopupView().findViewById(R.id.linBackground);
+//
+//            linToEditProfile.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+//            linToWorkManage.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+//            linToMyFollow.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+//            linToRecent.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+//            linToBuyPoint.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+//            linToExchangeList.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+//            linSettings.setOnTouchListener(new ClickDragDismissListener(vContent, this));
+//
+//
+//            popMenu.setDissmissWorks(new PopupCustom.DissmissWorks() {
+//                @Override
+//                public void excute() {
+//
+//                    if (vRedPointList != null && vRedPointList.size() > 0) {
+//
+//                        if (vRPmenu != null) {
+//
+//                            boolean allclear = true;
+//
+//                            for (int i = 0; i < vRedPointList.size(); i++) {
+//
+//                                if (vRedPointList.get(i).getVisibility() == View.VISIBLE) {
+//                                    allclear = false;
+//                                    break;
+//                                }
+//
+//                            }
+//
+//                            if (allclear) {
+//                                vRPmenu.setVisibility(View.GONE);
+//                            } else {
+//                                vRPmenu.setVisibility(View.VISIBLE);
+//                            }
+//
+//                        }
+//
+//                    }
+//
+//                }
+//
+//            });
+//
+//
+//            checkShowRedPoints();
+//            popMenu.show(((Main2Activity) getActivity()).getBackground());
+//
+//
+//        } else {
+//            checkShowRedPoints();
+//            popMenu.show(((Main2Activity) getActivity()).getBackground());
+//        }
+//
+//    }
 
     private void showBoard() {
 
@@ -1592,66 +1584,59 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         return this.albumList;
     }
 
-    private void checkShowRedPoints() {
+//    private void checkShowRedPoints() {
+//
+//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_editProfile, false)) {
+//            vRPeditProfile.setVisibility(View.VISIBLE);
+//        } else {
+//            vRPeditProfile.setVisibility(View.GONE);
+//        }
+//
+//
+//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_workManage, false)) {
+//            vRPworkManage.setVisibility(View.VISIBLE);
+//        } else {
+//            vRPworkManage.setVisibility(View.GONE);
+//        }
+//
+//
+//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_myFollow, false)) {
+//            vRPmyFollow.setVisibility(View.VISIBLE);
+//        } else {
+//            vRPmyFollow.setVisibility(View.GONE);
+//        }
+//
+//
+//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_recent, false)) {
+//            vRPrecent.setVisibility(View.VISIBLE);
+//        } else {
+//            vRPrecent.setVisibility(View.GONE);
+//        }
+//
+//
+//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_butPoint, false)) {
+//            vRPbutPoint.setVisibility(View.VISIBLE);
+//        } else {
+//            vRPbutPoint.setVisibility(View.GONE);
+//        }
+//
+//
+//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_exchangeList, false)) {
+//            vRPexchangeList.setVisibility(View.VISIBLE);
+//        } else {
+//            vRPexchangeList.setVisibility(View.GONE);
+//        }
+//
+//
+//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_settings, false)) {
+//            vRPsettings.setVisibility(View.VISIBLE);
+//        } else {
+//            vRPsettings.setVisibility(View.GONE);
+//        }
+//
+//
+//    }
 
-        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_editProfile, false)) {
-            vRPeditProfile.setVisibility(View.VISIBLE);
-        } else {
-            vRPeditProfile.setVisibility(View.GONE);
-        }
-
-
-        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_workManage, false)) {
-            vRPworkManage.setVisibility(View.VISIBLE);
-        } else {
-            vRPworkManage.setVisibility(View.GONE);
-        }
-
-
-        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_myFollow, false)) {
-            vRPmyFollow.setVisibility(View.VISIBLE);
-        } else {
-            vRPmyFollow.setVisibility(View.GONE);
-        }
-
-
-        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_recent, false)) {
-            vRPrecent.setVisibility(View.VISIBLE);
-        } else {
-            vRPrecent.setVisibility(View.GONE);
-        }
-
-
-        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_butPoint, false)) {
-            vRPbutPoint.setVisibility(View.VISIBLE);
-        } else {
-            vRPbutPoint.setVisibility(View.GONE);
-        }
-
-
-        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_exchangeList, false)) {
-            vRPexchangeList.setVisibility(View.VISIBLE);
-        } else {
-            vRPexchangeList.setVisibility(View.GONE);
-        }
-
-
-        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_settings, false)) {
-            vRPsettings.setVisibility(View.VISIBLE);
-        } else {
-            vRPsettings.setVisibility(View.GONE);
-        }
-
-
-    }
-
-    public void showRP_menu() {
-        vRPmenu.setVisibility(View.VISIBLE);
-    }
-
-    public void hide_menu() {
-        vRPmenu.setVisibility(View.GONE);
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -1821,10 +1806,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
         switch (view.getId()) {
 
 
-            case R.id.menuImg:
-                showMenu();
-                break;
-
             case R.id.messageImg:
                 showBoard();
                 break;
@@ -1909,76 +1890,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener, Click
     }
 
 
-    @Override
-    public void OnClick(View v) {
-
-        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-            return;
-        }
-
-        switch (v.getId()) {
-            case R.id.linToEditProfile:
-                popMenu.dismissWithRedPoint(vRPeditProfile);
-                RedPointManager.showOrHideOnEditProfile(false);
-
-                FlurryUtil.onEvent(FlurryKey.myprefecture_click_edit_profile);
-                toEditProfile();
-                break;
-
-            case R.id.linToWorkManage:
-                popMenu.dismissWithRedPoint(vRPworkManage);
-                RedPointManager.showOrHideOnWorkManage(false);
-
-                FlurryUtil.onEvent(FlurryKey.myprefecture_click_work_manage);
-                afterCheckPermissionType = toWorkManager;
-                toCheckPermission(toWorkManager);
-                break;
-
-            case R.id.linToMyFollow:
-                popMenu.dismissWithRedPoint(vRPmyFollow);
-                RedPointManager.showOrHideOnMyFollow(false);
-
-                FlurryUtil.onEvent(FlurryKey.myprefecture_click_myattentionlist);
-                toMyFollow();
-                break;
-
-            case R.id.linToRecent:
-                popMenu.dismissWithRedPoint(vRPrecent);
-                RedPointManager.showOrHideOnRecent(false);
-
-                FlurryUtil.onEvent(FlurryKey.myprefecture_click_recent);
-                toRecent();
-                break;
-
-            case R.id.linToBuyPoint:
-                popMenu.dismissWithRedPoint(vRPbutPoint);
-                RedPointManager.showOrHideOnBuyPoint(false);
-
-                toBuyPoint();
-                break;
-
-            case R.id.linToExchangeList:
-                popMenu.dismissWithRedPoint(vRPexchangeList);
-                RedPointManager.showOrHideOnExchangeList(false);
-
-                toExchangeList();
-                break;
-
-            case R.id.linSettings:
-                popMenu.dismissWithRedPoint(vRPsettings);
-                RedPointManager.showOrHideOnSettings(false);
-
-                FlurryUtil.onEvent(FlurryKey.myprefecture_click_settings);
-                toAppSetting();
-                break;
-        }
-
-    }
-
-    @Override
-    public void OnDismiss() {
-        popMenu.dismiss();
-    }
 
 
     @Override

@@ -57,17 +57,6 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="64dp">
 
-                <ImageView
-                    android:id="@+id/homeImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:padding="14dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/pinpin_192"
-                    android:visibility="gone"/>
-
 
                 <RelativeLayout
                     android:id="@+id/rHome"
@@ -90,47 +79,6 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/rSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:layout_weight="1">
-
-
-                    <com.richpath.RichPathView
-                        android:id="@+id/svgSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/click_2_0_0_default"
-                        app:vector="@drawable/svg_search"
-                        />
-
-                </RelativeLayout>
-
-
-
-                <ImageView
-                    android:id="@+id/searchImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:padding="14dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic200_search_light"
-                    android:visibility="gone"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="56dp"
-                android:layout_marginRight="64dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RelativeLayout
                     android:id="@+id/rUser"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -145,40 +93,33 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/click_2_0_0_default"
                         app:vector="@drawable/svg_user"
-                       />
+                        />
 
                 </RelativeLayout>
 
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/userImg"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/click_2_0_0_default"-->
-                    <!--android:padding="14dp"-->
-                    <!--android:scaleType="centerInside"-->
-                    <!--android:src="@drawable/ic200_user_light"-->
-                    <!--android:visibility="gone"/>-->
 
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/notifyImg"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/click_2_0_0_default"-->
-                    <!--android:padding="14dp"-->
-                    <!--android:scaleType="centerInside"-->
-                    <!--android:src="@drawable/ic200_notify_light"-->
-                    <!--android:visibility="visible" />-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="56dp"
+                android:layout_marginRight="64dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+
+
+
 
                 <RelativeLayout
                     android:id="@+id/rNotify"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="@drawable/click_2_0_0_default">
 
 
                     <com.richpath.RichPathView
@@ -187,8 +128,49 @@
                         android:layout_height="24dp"
                         android:layout_centerInParent="true"
                         android:background="@drawable/click_2_0_0_default"
-                        app:vector="@drawable/svg_notification"
-                        android:visibility="visible"/>
+                        android:visibility="visible"
+                        app:vector="@drawable/svg_notification" />
+
+
+                    <View
+                        android:id="@+id/vRPnotify"
+                        style="@style/ppb200_red_point"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="36dp"
+                        android:layout_marginRight="18dp"
+                        android:visibility="gone" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/click_2_0_0_default">
+
+
+                    <com.richpath.RichPathView
+                        android:id="@+id/svgMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/click_2_0_0_default"
+                        app:vector="@drawable/svg_menu" />
+
+
+                    <View
+                        android:id="@+id/vRPmenu"
+                        style="@style/ppb200_red_point"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="36dp"
+                        android:layout_marginRight="18dp"
+                        android:visibility="gone" />
+
 
                 </RelativeLayout>
 
