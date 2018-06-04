@@ -1,24 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="9.6dp"
-    android:height="9.6dp"
-    android:viewportHeight="32.0"
-    android:viewportWidth="32.0">
-
-
-    <group
-        android:pivotX="16"
-        android:pivotY="6.25">
-        <path
-            android:name="top"
-            android:fillColor="@color/pinpinbox_2_0_0_second_grey"
-            android:pathData="M22,19.8v-5c0-3.1-1.6-5.6-4.5-6.3V7.8c0-0.8-0.7-1.5-1.5-1.5s-1.5,0.7-1.5,1.5v0.7c-2.9,0.7-4.5,3.2-4.5,6.3v5l-2,2v1h16v-1L22,19.8z" />
-            <!--android:pathData="M22,19.8v-5c0-3.1-1.6-5.6-4.5-6.3V7.8c0-0.8-0.7-1.5-1.5-1.5s-1.5,0.7-1.5,1.5v0.7c-2.9,0.7-4.5,3.2-4.5,6.3v5l-2,2v1h16v-1L22,19.8z" />-->
-
-        <path
-            android:name="bottom"
-            android:fillColor="@color/pinpinbox_2_0_0_second_grey"
-            android:pathData="M16,25.8c1.1,0,2-0.9,2-2h-4C14,24.9,14.9,25.8,16,25.8z" />
-            <!--android:pathData="M16,25.8c1.1,0,2-0.9,2-2h-4C14,24.9,14.9,25.8,16,25.8z" />-->
-    </group>
-
+    android:viewportWidth="1024"
+    android:viewportHeight="1024"
+    android:width="12dp"
+    android:height="12dp">
+    <path
+	    android:name="top"
+        android:pathData="M720.11418 644.22337l0 -175.63828c0 -108.89574 -56.12734 -196.71488 -157.85813 -221.30424l0 -24.58936C562.25605 194.58936 537.70034 170 509.63667 170c-28.06367 0 -52.61938 24.58936 -52.61938 52.69149l0 24.58936c-101.7308 24.58936 -157.85813 112.4085 -157.85813 221.30424l0 175.63828 -70.15917 70.25531 0 35.12766 561.27336 0 0 -35.12766 -70.15917 -70.25531z"
+         android:fillColor="@color/pinpinbox_2_0_0_second_grey" />
+    <path
+	android:name="bottom"
+        android:pathData="M509.63667 854.98931c38.58754 0 70.15917 -31.61489 70.15917 -70.25531l-140.31834 0c0 38.64042 31.57162 70.25531 70.15917 70.25531z"
+        android:fillColor="@color/pinpinbox_2_0_0_second_grey" />
 </vector>

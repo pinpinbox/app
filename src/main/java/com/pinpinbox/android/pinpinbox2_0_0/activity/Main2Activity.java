@@ -394,6 +394,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         menuCenter.setPivotToCenter(true);
         menuBottom.setPivotToCenter(true);
 
+
+
+
     }
 
     private void setFragment() {
