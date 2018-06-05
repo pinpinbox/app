@@ -28,7 +28,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
@@ -1005,8 +1004,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         int bannerHeight = (bannerWidth * 380) / 960;
 
-        /*banner width = 960 , height = 380*/
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(bannerWidth, bannerHeight);
+//        /*banner width = 960 , height = 380*/
+//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(bannerWidth, bannerHeight);
 
         for (int i = 0; i < p75arraylist.size(); i++) {
             View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.page_2_0_0_banner_image, null);

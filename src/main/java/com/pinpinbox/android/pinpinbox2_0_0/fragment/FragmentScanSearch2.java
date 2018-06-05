@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -155,6 +156,8 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
         }
 
 
+
+
         if (resultString.equals("")) {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_dialog_message_scan_error);
 
@@ -168,8 +171,10 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
             }, 2000);
 
 
-           return;
         } else {
+
+
+
 
             MyLog.Set("d", getClass(), "resultString => " + resultString);
 
@@ -262,6 +267,38 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
             if (s.toString().equals("QR_CODE")) {
 
                 String a = result.getText();
+
+                if(a!=null && a.length()!=0){
+                    Uri uri = Uri.parse(a);
+                    if(uri!=null){
+
+//                        MyLog.Set("e", FragmentScanSearch2.class, "uri.getHost() => " + uri.getHost());
+
+
+
+                        if(!uri.getHost().equals(Uri.parse(BuildConfig.initAPI).getHost())){
+
+
+                            Intent intent = new Intent();
+                            intent.setAction("android.intent.action.VIEW");
+                            intent.setData(uri);
+                            startActivity(intent);
+
+                            return;
+
+                        }
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
 
                 String arg = a.substring(a.indexOf("?") + 1, a.length());
                 String[] strs = arg.split("&");
