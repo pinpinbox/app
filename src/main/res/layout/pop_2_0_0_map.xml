@@ -33,7 +33,7 @@
             android:layout_marginTop="@dimen/ppb200_padding_margin_third"
             android:background="@drawable/click_2_0_0_default"
             android:padding="@dimen/ppb200_padding_margin_first"
-            android:src="@drawable/ic200_arrow_2_down_light" />
+            android:src="@drawable/ic200_arrow_down_light" />
 
 
     </LinearLayout>

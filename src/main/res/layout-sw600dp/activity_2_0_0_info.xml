@@ -236,7 +236,7 @@
                         android:layout_height="16dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
-                        android:src="@drawable/ic200_video_border_light"
+                        android:src="@drawable/ic200_video_with_circle_light"
                         android:visibility="gone" />
 
 
@@ -444,7 +444,7 @@
                 android:id="@+id/backImg"
                 style="@style/ppb200_ic_action_back"
                 android:background="@drawable/click_2_0_0_default"
-                android:src="@drawable/ic200_arrow_2_down_dark" />
+                android:src="@drawable/ic200_arrow_down_dark" />
 
             <RelativeLayout
                 android:layout_width="@dimen/ppb200_common_icon_side"

@@ -42,7 +42,7 @@
                 <ImageView
                     android:id="@+id/videoImg"
                     style="@style/ppb200_staggered_type_icon"
-                    android:src="@drawable/ic200_video_border_dark"
+                    android:src="@drawable/ic200_video_with_circle_dark"
                     android:visibility="gone" />
 
                 <ImageView

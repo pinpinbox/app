@@ -25,6 +25,11 @@ public class UrlClass {
 
     public static final String platform = TestMode.domain()  + "/index/index/terms/";//平台規範
 
+    public static final String about = TestMode.domain()  + "/index/about/";//了解
+
+
+
+
 
 
 }

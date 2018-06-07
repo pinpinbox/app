@@ -111,7 +111,7 @@ public class BottomAdapter extends BaseAdapter {
                 holder.typeImg.setVisibility(View.GONE);
             } else {
                 holder.typeImg.setVisibility(View.VISIBLE);
-                holder.typeImg.setImageResource(R.drawable.ic200_video_border_white);
+                holder.typeImg.setImageResource(R.drawable.ic200_video_with_circle_white);
             }
 
 

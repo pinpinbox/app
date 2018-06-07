@@ -22,6 +22,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -44,7 +45,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     private List<View> vRedPointList;
 
     private View vRPeditProfile, vRPworkManage, vRPmyFollow, vRPrecent, vRPbutPoint, vRPexchangeList, vRPsettings;
-
+    private TextView tvLearnNow;
 
     private RichPathView svgMenu;
 
@@ -65,6 +66,8 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
         View v = inflater.inflate(R.layout.fragment_2_0_0_menu, container, false);
 
+        initView(v);
+
         setRPlist(v);
 
         setBold(v);
@@ -74,7 +77,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         return v;
     }
 
-    private void setRPlist(View v) {
+    private void initView(View v){
 
         vRPeditProfile = v.findViewById(R.id.vRPeditProfile);
         vRPworkManage = v.findViewById(R.id.vRPworkManage);
@@ -83,6 +86,13 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         vRPbutPoint = v.findViewById(R.id.vRPbutPoint);
         vRPexchangeList = v.findViewById(R.id.vRPexchangeList);
         vRPsettings = v.findViewById(R.id.vRPsettings);
+
+
+        tvLearnNow = v.findViewById(R.id.tvLearnNow);
+
+    }
+
+    private void setRPlist(View v) {
 
         vRedPointList = new ArrayList<>();
         vRedPointList.add(vRPeditProfile);
@@ -104,6 +114,9 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         TextUtility.setBold((TextView) v.findViewById(R.id.tvToBuyPoint), true);
         TextUtility.setBold((TextView) v.findViewById(R.id.tvToExchangeList), true);
         TextUtility.setBold((TextView) v.findViewById(R.id.tvSettings), true);
+
+        TextUtility.setBold(tvLearnNow, true);
+
     }
 
     private void setClick(View v) {
@@ -115,6 +128,8 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         ((LinearLayout) v.findViewById(R.id.linToBuyPoint)).setOnClickListener(this);
         ((LinearLayout) v.findViewById(R.id.linToExchangeList)).setOnClickListener(this);
         ((LinearLayout) v.findViewById(R.id.linSettings)).setOnClickListener(this);
+
+        tvLearnNow.setOnClickListener(this);
 
     }
 
@@ -511,6 +526,13 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
                 RedPointManager.showOrHideOnSettings(false);
                 checkHideMenuRP();
                 ActivityIntent.toSettings(getActivity());
+
+                break;
+
+
+            case R.id.tvLearnNow:
+
+                ActivityIntent.toWeb(getActivity(), UrlClass.about, null);
 
                 break;
 
