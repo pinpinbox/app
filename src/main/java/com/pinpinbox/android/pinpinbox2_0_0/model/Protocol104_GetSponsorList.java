@@ -66,7 +66,7 @@ public class Protocol104_GetSponsorList {
     private boolean noDataToastAppeared = false;
 
 
-    public Protocol104_GetSponsorList(Activity mActivity, String user_id, String token, List<ItemUser> itemUserList, Protocol104_GetSponsorList.TaskCallBack callBack) {
+    public Protocol104_GetSponsorList(Activity mActivity, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;

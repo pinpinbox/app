@@ -124,7 +124,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/linSponsor"
                         android:translationZ="@dimen/ppb200_translationZ_user"
                         android:layout_width="128dp"

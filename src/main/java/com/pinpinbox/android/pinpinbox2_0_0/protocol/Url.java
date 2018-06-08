@@ -60,5 +60,6 @@ public class Url {
 
     public static String P113_GetFollowFromList = domain + "/index/api/getfollowfromlist" + "/2.0";
 
+    public static String P114_GetAlbumSponsorList = domain + "/index/api/getalbumsponsorlist" + "/2.1";
 
 }

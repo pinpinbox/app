@@ -735,6 +735,13 @@
             android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
+        <activity
+            android:name=".pinpinbox2_0_0.activity.AlbumSponsorList2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dragger"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
 
     </application>
 

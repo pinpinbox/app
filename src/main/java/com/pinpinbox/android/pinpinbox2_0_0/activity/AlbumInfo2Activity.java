@@ -1396,7 +1396,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                             return;
                         }
 
-                        toLikesList();
+                       ActivityIntent.toLikesList(mActivity, album_id);
 
                     }
                 }));
@@ -1440,6 +1440,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         if (ClickUtils.ButtonContinuousClick()) {
                             return;
                         }
+
+                        ActivityIntent.toAlbumSponsorList(mActivity, album_id);
+
                     }
                 }));
 

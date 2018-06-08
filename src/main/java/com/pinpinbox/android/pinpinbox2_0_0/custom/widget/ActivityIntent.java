@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumSponsorList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettings2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.BuyPoint2Activity;
@@ -18,6 +19,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.FollowMe2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.LikeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyFollow2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.RecentAlbum2Activity;
@@ -201,6 +203,30 @@ public class ActivityIntent {
 
         currentActivity.startActivity(
                 new Intent(currentActivity, SponsorList2Activity.class)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
+
+    public static void toAlbumSponsorList(Activity currentActivity, String album_id) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, album_id);
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, AlbumSponsorList2Activity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+    }
+
+    public static void toLikesList(Activity currentActivity, String album_id) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, album_id);
+
+        currentActivity.startActivity(
+                new Intent(currentActivity, LikeList2Activity.class).putExtras(bundle)
         );
         ActivityAnim.StartAnim(currentActivity);
 

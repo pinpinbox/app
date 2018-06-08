@@ -44,7 +44,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol104_GetSponsorList;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol114_GetAlbumSponsorList;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Picasso;
 
@@ -60,10 +60,11 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
- * Created by vmage on 2018/1/2.
+ * Created by vmage on 2018/6/8.
  */
 
-public class SponsorList2Activity extends DraggerActivity implements View.OnClickListener, RecyclerInteractiveAdapter.OnUserInterativeListener {
+public class AlbumSponsorList2Activity extends DraggerActivity implements View.OnClickListener, RecyclerInteractiveAdapter.OnUserInterativeListener {
+
 
     private Activity mActivity;
     private List<ItemUser> itemUserList;
@@ -71,13 +72,15 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     private FollowTask followTask;
     private AttentionTask attentionTask;
-    private Protocol104_GetSponsorList protocol104;
+    private Protocol114_GetAlbumSponsorList protocol114;
     private PopBoard board;
 
     private RecyclerView rvUser;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private SmoothProgressBar pbLoadMore;
     private ImageView backImg;
+
+    private String album_id;
 
     private boolean isDoingMore = false;
 
@@ -89,7 +92,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
 
-            if ((Object) protocol104.isSizeMax() != null && !protocol104.isSizeMax()) {
+            if ((Object) protocol114.isSizeMax() != null && !protocol114.isSizeMax()) {
                 MyLog.Set("e", mActivity.getClass(), "onLoad");
 
                 if (isDoingMore) {
@@ -101,11 +104,11 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
             } else {
 
-                if (!protocol104.isNoDataToastAppeared()) {
+                if (!protocol114.isNoDataToastAppeared()) {
 
                     PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_scroll_max);
 
-                    protocol104.setNoDataToastAppeared(true);
+                    protocol114.setNoDataToastAppeared(true);
 
                 }
 
@@ -130,6 +133,8 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
         SystemUtility.SysApplication.getInstance().addActivity(this);
 
+        getBundle();
+
         init();
 
         setRecycler();
@@ -137,6 +142,20 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         setProtocol();
 
         doGetSponsor();
+
+    }
+
+    private void getBundle() {
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle!=null){
+
+
+            album_id = bundle.getString(Key.album_id, "");
+
+        }
+
 
     }
 
@@ -164,7 +183,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         backImg.setOnClickListener(this);
 
         TextView tvAcTitile = (TextView) findViewById(R.id.tvActionBarTitle);
-        tvAcTitile.setText(R.string.pinpinbox_2_0_0_title_your_sponsor);
+        tvAcTitile.setText(R.string.pinpinbox_2_0_0_title_who_sponsor_this_work);
         TextUtility.setBold(tvAcTitile, true);
 
     }
@@ -183,7 +202,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
             @Override
             public void onItemClick(int position, View v) {
 
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 
@@ -240,7 +259,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
             return;
         }
 
-        protocol104.GetList();
+        protocol114.GetList();
 
     }
 
@@ -250,13 +269,13 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
             return;
         }
 
-        if (protocol104 != null && !protocol104.getTask().isCancelled()) {
+        if (protocol114 != null && !protocol114.getTask().isCancelled()) {
 
-            protocol104.getTask().cancel(true);
+            protocol114.getTask().cancel(true);
 
         }
 
-        protocol104.Refresh();
+        protocol114.Refresh();
     }
 
     private void doMoreData() {
@@ -265,7 +284,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
             return;
         }
 
-        protocol104.LoadMore();
+        protocol114.LoadMore();
     }
 
     private void doAttention() {
@@ -312,12 +331,13 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
     private void setProtocol() {
 
-        protocol104 = new Protocol104_GetSponsorList(
+        protocol114 = new Protocol114_GetAlbumSponsorList(
                 mActivity,
+                album_id,
                 PPBApplication.getInstance().getId(),
                 PPBApplication.getInstance().getToken(),
                 itemUserList,
-                new Protocol104_GetSponsorList.TaskCallBack() {
+                new Protocol114_GetAlbumSponsorList.TaskCallBack() {
                     @Override
                     public void Prepare(int doingType) {
                         switch (doingType) {
@@ -398,7 +418,7 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
 
                             case DoingTypeClass.DoMoreData:
 
-                                adapter.notifyItemRangeInserted(protocol104.getItemUserList().size(), protocol104.getRangeCount());
+                                adapter.notifyItemRangeInserted(protocol114.getItemUserList().size(), protocol114.getRangeCount());
 
                                 break;
 
@@ -816,8 +836,8 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
     public void onDestroy() {
         SystemUtility.SysApplication.getInstance().removeActivity(mActivity);
 
-        if (protocol104 != null) {
-            cancelTask(protocol104.getTask());
+        if (protocol114 != null) {
+            cancelTask(protocol114.getTask());
         }
 
         if (attentionTask != null) {
@@ -841,5 +861,6 @@ public class SponsorList2Activity extends DraggerActivity implements View.OnClic
         MyLog.Set("d", this.getClass(), "onDestroy");
         super.onDestroy();
     }
+
 
 }

@@ -31,7 +31,7 @@ import java.util.Map;
  * Created by vmage on 2018/5/3.
  */
 
-public class Protocol114 {
+public class Protocol114_GetAlbumSponsorList {
 
 
 
@@ -49,8 +49,8 @@ public class Protocol114 {
 
 
     private Activity mActivity;
-    private Protocol114.Call callTask;
-    private Protocol114.TaskCallBack callBack;
+    private Call callTask;
+    private TaskCallBack callBack;
 
 
     private List<ItemUser> itemUserList;
@@ -69,7 +69,7 @@ public class Protocol114 {
     private boolean noDataToastAppeared = false;
 
 
-    public Protocol114(Activity mActivity, String album_id, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
+    public Protocol114_GetAlbumSponsorList(Activity mActivity, String album_id, String user_id, String token, List<ItemUser> itemUserList, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.album_id = album_id;
@@ -86,7 +86,7 @@ public class Protocol114 {
 
     public void GetList() {
         doingType = DoingTypeClass.DoDefault;
-        callTask = new Protocol114.Call();
+        callTask = new Protocol114_GetAlbumSponsorList.Call();
         callTask.execute();
     }
 
@@ -95,13 +95,13 @@ public class Protocol114 {
         doingType = DoingTypeClass.DoRefresh;
 
 
-        callTask = new Protocol114.Call();
+        callTask = new Protocol114_GetAlbumSponsorList.Call();
         callTask.execute();
     }
 
     public void LoadMore() {
         doingType = DoingTypeClass.DoMoreData;
-        callTask = new Protocol114.Call();
+        callTask = new Protocol114_GetAlbumSponsorList.Call();
         callTask.execute();
     }
 
@@ -128,7 +128,7 @@ public class Protocol114 {
 
             try {
 
-                reponse = HttpUtility.uploadSubmit(true, Url.P104_GetSponsorList, putMap(), null);
+                reponse = HttpUtility.uploadSubmit(true, Url.P114_GetAlbumSponsorList, putMap(), null);
                 MyLog.Set("d", getClass(), "p114reponse => " + reponse);
 
             } catch (SocketTimeoutException t) {
@@ -211,7 +211,7 @@ public class Protocol114 {
                         callBack.Success(doingType);
 
                         if(userCount<rangeCount){
-                            MyLog.Set("d", Protocol114.class, "項目少於" + rangeCount);
+                            MyLog.Set("d", Protocol114_GetAlbumSponsorList.class, "項目少於" + rangeCount);
                             sizeMax = true;
                             return;
                         }
