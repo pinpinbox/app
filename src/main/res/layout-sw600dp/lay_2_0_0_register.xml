@@ -72,7 +72,7 @@
                     android:layout_width="@dimen/ppb200_common_icon_side"
                     android:layout_height="@dimen/ppb200_common_icon_side"
                     android:padding="12dp"
-                    android:src="@drawable/ic200_user_hollow_dark" />
+                    android:src="@drawable/ic200_user_dark" />
 
 
                 <EditText

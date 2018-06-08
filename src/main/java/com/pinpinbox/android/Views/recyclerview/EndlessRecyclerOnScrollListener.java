@@ -66,6 +66,19 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         this.titleShowListener = titleShowListener;
     }
 
+
+    private View vActionBar;
+    private boolean acbIsHide = false;
+//    private ActionBarControlListener actionBarControlListener;
+//    public void setActionBarControlListener(ActionBarControlListener actionBarControlListener) {
+//        this.actionBarControlListener = actionBarControlListener;
+//    }
+
+    public void setvActionBar(View vActionBar) {
+        this.vActionBar = vActionBar;
+    }
+
+
     private int scrolledDistance = 0;
 
     //    vRefreshAnim
@@ -188,28 +201,20 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
 //                colorAnimationToDefault.start();
 
-
             }
 
-
         }
-
 
     }
 
 
-
-
-
     private View vScaleTouchView;
-
     private boolean isTouch = false;
 
     public void setvScaleTouchView(View vScaleTouchView) {
         this.vScaleTouchView = vScaleTouchView;
         isTouch = false;
     }
-
 
 
     @Override
@@ -225,8 +230,6 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
                     .setDuration(150)
                     .start();
         }
-
-
 
 
         scrolledDistance += dy;
@@ -248,15 +251,10 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         MyLog.Set("d", EndlessRecyclerOnScrollListener.class, " floatTranslationY " + floatTranslationY);
 
         if (views != null && views.length > 0) {
-
             for (int i = 0; i < views.length; i++) {
-
                 views[i].setAlpha(1 - floatAlpha);
                 views[i].setTranslationY(0 - floatTranslationY);
-
             }
-
-
         }
 
 
@@ -268,6 +266,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 //        }
 
 
+       /*顯示標題*/
         if (vTop != null && titleShowListener != null) {
 
             /*actionbar + statusbar*/
@@ -287,6 +286,36 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
                 }
             }
         }
+
+
+
+        /*set actionbarcontrol  判斷上下滑*/
+        if (vActionBar != null) {
+
+            if (scrolledDistance > 100) {
+
+                if(!acbIsHide){
+                    acbIsHide = true;
+                    vActionBar.animate()
+                            .translationYBy(-200)
+                            .setDuration(150)
+                            .start();
+                }
+
+            } else {
+
+                if (acbIsHide) {
+                    acbIsHide = false;
+                    vActionBar.animate()
+                            .translationY(0)
+                            .setDuration(150)
+                            .start();
+                }
+
+            }
+
+        }
+
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
 
@@ -337,7 +366,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
             onLoadNextPage(recyclerView);
         }
 
-        if(inputMethodManager!=null && editText!=null){
+        if (inputMethodManager != null && editText != null) {
             if (newState == 1) {
                 //在用手指滾動
                 inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);

@@ -63,7 +63,6 @@
                         android:textSize="@dimen/ppb200_common_text_third" />
 
 
-
                     <com.pinpinbox.android.Views.WarpLinearLayout
                         android:id="@+id/linLink"
                         android:layout_width="match_parent"
@@ -71,13 +70,10 @@
                         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
                         android:layout_marginRight="@dimen/ppb200_padding_margin_big"
-                        app:horizontal_Space="8dp"
-                        app:vertical_Space="8dp"
                         app:grivate="left"
-                        app:isFull="false"/>
-
-
-
+                        app:horizontal_Space="8dp"
+                        app:isFull="false"
+                        app:vertical_Space="8dp" />
 
 
                 </LinearLayout>
@@ -164,10 +160,10 @@
 
             <ImageView
                 android:id="@+id/backImg"
-                style="@style/ppb200_ic_action_back"
+                style="@style/ppb200_action_bar_icon"
                 android:layout_alignParentBottom="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/click_2_0_0_default_light"
+                android:background="@drawable/click_2_0_0_default"
                 android:src="@drawable/ic200_arrow_left_white" />
 
             <TextView
@@ -186,15 +182,14 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/ppb200_action_bar_icon"
+                android:layout_height="@dimen/ppb200_action_bar_icon_height"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:orientation="horizontal">
 
                 <ImageView
-                    style="@style/ppb200_action_bar_icon"
                     android:id="@+id/locationImg"
-                    android:padding="12dp"
+                    style="@style/ppb200_action_bar_icon"
                     android:src="@drawable/ic200_location_white"
                     android:visibility="gone" />
 
@@ -202,7 +197,6 @@
                 <ImageView
                     android:id="@+id/voiceImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:padding="12dp"
                     android:src="@drawable/ic200_audio_play_white"
                     android:visibility="gone" />
 
@@ -210,20 +204,17 @@
                 <ImageView
                     android:id="@+id/messageImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:padding="10dp"
                     android:src="@drawable/ic200_message_white" />
 
                 <ImageView
                     android:id="@+id/likeImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:padding="12dp"
                     android:src="@drawable/ic200_like_white" />
 
 
                 <ImageView
                     android:id="@+id/moreImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:padding="14dp"
                     android:src="@drawable/ic200_more_white" />
 
 

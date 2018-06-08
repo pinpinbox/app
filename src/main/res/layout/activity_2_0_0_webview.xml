@@ -28,7 +28,7 @@
             android:id="@+id/tvBack"
             android:background="@drawable/click_2_0_0_default"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/ppb200_action_bar_icon"
+            android:layout_height="@dimen/ppb200_action_bar_icon_height"
             android:layout_alignParentBottom="true"
             android:text="@string/pinpinbox_2_0_0_button_exit"
             android:textColor="@color/pinpinbox_2_0_0_first_text"

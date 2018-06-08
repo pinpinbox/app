@@ -40,10 +40,8 @@
 
             <ImageView
                 android:id="@+id/searchImg"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                style="@style/ppb200_search_bar_icon"
                 android:layout_alignParentLeft="true"
-                android:padding="8dp"
                 android:src="@drawable/ic200_search_dark" />
 
             <EditText
@@ -113,7 +111,8 @@
 
         <ImageView
             android:id="@+id/backImg"
-            style="@style/ppb200_ic_action_back"
+            style="@style/ppb200_action_bar_icon"
+            android:src="@drawable/ic200_arrow_left_dark"
             android:layout_alignParentBottom="true" />
 
         <LinearLayout

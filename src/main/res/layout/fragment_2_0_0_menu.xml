@@ -43,7 +43,6 @@
 
         <View
             style="@style/ppb200_divider_list"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first" />
 
 
@@ -89,6 +88,8 @@
 
         </LinearLayout>
 
+        <View style="@style/ppb200_divider_list" />
+
         <LinearLayout
             android:id="@+id/linToWorkManage"
             android:layout_width="match_parent"
@@ -118,6 +119,8 @@
                 android:visibility="gone" />
 
         </LinearLayout>
+
+        <View style="@style/ppb200_divider_list" />
 
         <LinearLayout
             android:id="@+id/linToMyFollow"
@@ -150,6 +153,8 @@
 
         </LinearLayout>
 
+        <View style="@style/ppb200_divider_list" />
+
         <LinearLayout
             android:id="@+id/linToRecent"
             android:layout_width="match_parent"
@@ -180,6 +185,8 @@
 
 
         </LinearLayout>
+
+        <View style="@style/ppb200_divider_list" />
 
         <LinearLayout
             android:id="@+id/linToBuyPoint"
@@ -212,6 +219,8 @@
 
         </LinearLayout>
 
+        <View style="@style/ppb200_divider_list" />
+
         <LinearLayout
             android:id="@+id/linToExchangeList"
             android:layout_width="match_parent"
@@ -243,6 +252,8 @@
 
         </LinearLayout>
 
+        <View style="@style/ppb200_divider_list" />
+
         <LinearLayout
             android:id="@+id/linSettings"
             android:layout_width="match_parent"
@@ -273,6 +284,8 @@
 
 
         </LinearLayout>
+
+        <View style="@style/ppb200_divider_list" />
 
         <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->

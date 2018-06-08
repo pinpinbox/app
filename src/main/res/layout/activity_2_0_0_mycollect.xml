@@ -18,7 +18,8 @@
 
         <ImageView
             android:id="@+id/backImg"
-            style="@style/ppb200_ic_action_back"
+            style="@style/ppb200_action_bar_icon"
+            android:src="@drawable/ic200_arrow_left_dark"
             android:layout_alignParentBottom="true" />
 
 

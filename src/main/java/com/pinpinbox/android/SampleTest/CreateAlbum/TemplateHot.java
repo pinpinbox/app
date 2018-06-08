@@ -91,7 +91,7 @@ public class TemplateHot extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.lay_createalbum_template, container, false);
+        View v = inflater.inflate(R.layout.test_createalbum_template, container, false);
         r = (RelativeLayout) v.findViewById(R.id.rCreate_album_sublistview);
         temListView = (ListView) v.findViewById(R.id.template_listview);
         subListView = (ListView) v.findViewById(R.id.create_album_sublistview);

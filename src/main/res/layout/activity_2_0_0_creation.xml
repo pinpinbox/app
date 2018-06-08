@@ -18,7 +18,8 @@
 
             <ImageView
                 android:id="@+id/backImg"
-                style="@style/ppb200_ic_action_back"
+                style="@style/ppb200_action_bar_icon"
+                android:src="@drawable/ic200_arrow_left_dark"
                 android:layout_centerVertical="true" />
 
 
@@ -33,13 +34,11 @@
                 <ImageView
                     android:id="@+id/refreshImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:padding="12dp"
                     android:src="@drawable/ic200_refresh_dark" />
 
                 <ImageView
                     android:id="@+id/addUserImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:padding="10dp"
                     android:src="@drawable/ic200_cooperation_dark" />
 
 
@@ -47,7 +46,6 @@
                     android:id="@+id/albumSetImg"
                     style="@style/ppb200_action_bar_icon"
                     android:layout_marginRight="10dp"
-                    android:padding="10dp"
                     android:src="@drawable/ic200_setting_dark" />
 
 

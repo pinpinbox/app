@@ -663,7 +663,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         /**2016.08.27新增*/
         list_addImg.clear();
 
-        rControl_view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.lay_controlpic, null);//單一格
+        rControl_view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.test_controlpic, null);//單一格
         final RelativeLayout controlR = (RelativeLayout) rControl_view.findViewById(R.id.relativeLayout_control);
 
         ImageView addImg = (ImageView) controlR.findViewById(R.id.plus);

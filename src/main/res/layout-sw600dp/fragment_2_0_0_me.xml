@@ -19,7 +19,7 @@
             android:id="@+id/bannerImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:id="@+id/rCreativeName"
@@ -35,16 +35,12 @@
                 android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:text=""/>
+                android:text="" />
 
         </RelativeLayout>
 
 
-
-
-
     </RelativeLayout>
-
 
 
     <com.pinpinbox.android.Views.SuperSwipeRefreshLayout
@@ -81,18 +77,7 @@
         android:textSize="@dimen/ppb200_common_text_third" />
 
 
-    <RelativeLayout
-        style="@style/ppb200_action_bar_with_status">
-
-
-        <ImageView
-            android:id="@+id/menuImg"
-            android:layout_width="@dimen/ppb200_common_icon_side"
-            android:layout_height="@dimen/ppb200_common_icon_side"
-            android:background="@drawable/click_2_0_0_default"
-            android:padding="15dp"
-            android:src="@drawable/ic200_menu_dark"
-            android:layout_alignParentBottom="true"/>
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
 
 
         <LinearLayout
@@ -103,42 +88,29 @@
             android:orientation="horizontal">
 
 
-
-
             <ImageView
+
                 android:id="@+id/messageImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="10dp"
+                style="@style/ppb200_action_bar_icon"
                 android:src="@drawable/ic200_message_dark" />
 
             <ImageView
                 android:id="@+id/aboutImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="12dp"
+                style="@style/ppb200_action_bar_icon"
                 android:src="@drawable/ic200_user_about_dark" />
 
 
             <ImageView
                 android:id="@+id/incomeImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
+                style="@style/ppb200_action_bar_icon"
                 android:src="@drawable/ic200_chart_dark"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="12dp"
-                android:visibility="visible"/>
+                android:visibility="visible" />
 
             <ImageView
                 android:id="@+id/shareImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="12dp"
-                android:src="@drawable/ic200_share_dark"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_third"/>
+                style="@style/ppb200_action_bar_icon"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_third"
+                android:src="@drawable/ic200_share_dark" />
 
 
         </LinearLayout>
@@ -146,13 +118,13 @@
 
         <View
             android:id="@+id/vRefreshAnim"
-            android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/gradient_progress_main"
             android:scaleX="0"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
             android:id="@+id/pbRefresh"
@@ -175,10 +147,6 @@
 
 
     </RelativeLayout>
-
-
-
-
 
 
     <fr.castorflex.android.smoothprogressbar.SmoothProgressBar

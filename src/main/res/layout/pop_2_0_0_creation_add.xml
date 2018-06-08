@@ -32,10 +32,7 @@
 
             <ImageView
                 android:id="@+id/photo_or_templateImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                android:padding="11dp"
+                style="@style/ppb200_list_item_icon"
                 android:src="@drawable/ic200_camera_dark" />
 
             <TextView
@@ -54,10 +51,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                android:padding="12dp"
+                style="@style/ppb200_list_item_icon"
                 android:src="@drawable/ic200_videomake_dark" />
 
             <TextView

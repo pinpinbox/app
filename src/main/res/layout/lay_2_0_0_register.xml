@@ -67,10 +67,8 @@
 
             <ImageView
                 android:id="@+id/img2"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:padding="12dp"
-                android:src="@drawable/ic200_user_hollow_dark" />
+                style="@style/ppb200_edittext_icon"
+                android:src="@drawable/ic200_user_dark" />
 
 
             <EditText
@@ -100,9 +98,7 @@
 
             <ImageView
                 android:id="@+id/img3"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:padding="12dp"
+                style="@style/ppb200_edittext_icon"
                 android:src="@drawable/ic200_mail_dark" />
 
             <TextView
@@ -150,9 +146,7 @@
 
             <ImageView
                 android:id="@+id/img4"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:padding="12dp"
+                style="@style/ppb200_edittext_icon"
                 android:src="@drawable/ic200_password_normal_dark" />
 
             <TextView
@@ -200,9 +194,7 @@
 
             <ImageView
                 android:id="@+id/img5"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
-                android:padding="12dp"
+                style="@style/ppb200_edittext_icon"
                 android:src="@drawable/ic200_password_confirm_dark" />
 
             <TextView

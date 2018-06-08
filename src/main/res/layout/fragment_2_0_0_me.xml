@@ -91,20 +91,17 @@
             <ImageView
                 style="@style/ppb200_action_bar_icon"
                 android:id="@+id/messageImg"
-                android:padding="10dp"
                 android:src="@drawable/ic200_message_dark" />
 
             <ImageView
                 style="@style/ppb200_action_bar_icon"
                 android:id="@+id/aboutImg"
-                android:padding="12dp"
                 android:src="@drawable/ic200_user_about_dark" />
 
 
             <ImageView
                 style="@style/ppb200_action_bar_icon"
                 android:id="@+id/incomeImg"
-                android:padding="12dp"
                 android:src="@drawable/ic200_chart_dark"
                 android:visibility="visible" />
 
@@ -112,7 +109,6 @@
                 style="@style/ppb200_action_bar_icon"
                 android:id="@+id/shareImg"
                 android:layout_marginRight="@dimen/ppb200_padding_margin_third"
-                android:padding="12dp"
                 android:src="@drawable/ic200_share_dark" />
 
 

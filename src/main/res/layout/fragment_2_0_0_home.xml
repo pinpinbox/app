@@ -30,19 +30,18 @@
     <FrameLayout
         android:id="@+id/frameSearch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
+        android:layout_height="match_parent" />
 
 
     <LinearLayout
+        android:id="@+id/linActionBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ppb200_action_bar_height_with_status"
         android:background="@color/pinpinbox_2_0_0_action_bar_color"
-        android:gravity="bottom"
         android:clickable="true"
-        android:orientation="horizontal"
-        android:focusable="true">
+        android:focusable="true"
+        android:gravity="bottom"
+        android:orientation="horizontal">
 
 
         <RelativeLayout
@@ -61,10 +60,9 @@
 
                 <ImageView
                     android:id="@+id/imageView17"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    style="@style/ppb200_search_bar_icon"
                     android:layout_alignParentLeft="true"
-                    android:padding="8dp"
+
                     android:src="@drawable/ic200_search_dark" />
 
                 <EditText
@@ -92,10 +90,9 @@
                 android:layout_height="36dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:padding="9dp"
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:src="@drawable/ic200_scancamera_dark"
-                />
+                android:padding="10dp"
+                android:src="@drawable/ic200_scancamera_dark" />
 
             <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
                 android:id="@+id/pbRefresh"

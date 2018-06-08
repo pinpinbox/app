@@ -27,7 +27,8 @@
 
         <ImageView
             android:id="@+id/backImg"
-            style="@style/ppb200_ic_action_back"
+            style="@style/ppb200_action_bar_icon"
+            android:src="@drawable/ic200_arrow_left_dark"
             android:layout_alignParentBottom="true"/>
 
         <ImageView
@@ -35,14 +36,12 @@
             android:id="@+id/cameraImg"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="6dp"
-            android:padding="10dp"
             android:src="@drawable/ic200_camera_dark" />
 
         <ImageView
             style="@style/ppb200_action_bar_icon"
             android:id="@+id/sizeImg"
-            android:padding="12dp"
+            android:padding="14dp"
             android:src="@drawable/ic200_photosize_light"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/cameraImg"

@@ -91,11 +91,8 @@
 
             <ImageView
                 android:id="@+id/closeImg"
-                android:layout_width="@dimen/ppb200_common_icon_side"
-                android:layout_height="@dimen/ppb200_common_icon_side"
+                style="@style/ppb200_action_bar_icon"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/click_2_0_0_default"
-                android:padding="@dimen/ppb200_padding_margin_first"
                 android:src="@drawable/ic200_cancel_dark" />
 
 

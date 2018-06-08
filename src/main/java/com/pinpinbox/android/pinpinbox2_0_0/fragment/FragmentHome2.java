@@ -243,6 +243,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         rvHome.setItemAnimator(new DefaultItemAnimator());
         rvHome.addOnScrollListener(mOnScrollListener);
 
+        mOnScrollListener.setvActionBar((LinearLayout)v.findViewById(R.id.linActionBar));
+
 
         pinPinBoxRefreshLayout.setOnPullRefreshListener(this);
         pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);

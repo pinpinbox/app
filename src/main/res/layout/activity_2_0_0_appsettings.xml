@@ -142,8 +142,7 @@
                 android:text="@string/pinpinbox_2_0_0_itemtype_logout" />
 
             <View
-                style="@style/ppb200_divider_list"
-                android:background="@color/pinpinbox_2_0_0_divider"/>
+                style="@style/ppb200_divider_list" />
 
 
         </LinearLayout>
@@ -157,7 +156,8 @@
 
         <ImageView
             android:id="@+id/backImg"
-            style="@style/ppb200_ic_action_back"
+            style="@style/ppb200_action_bar_icon"
+            android:src="@drawable/ic200_arrow_left_dark"
             android:layout_alignParentBottom="true" />
 
 

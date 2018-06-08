@@ -329,13 +329,6 @@
                         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                         android:textSize="@dimen/ppb200_common_text_first" />
 
-                    <!--<ImageView-->
-                    <!--android:id="@+id/qPointImg"-->
-                    <!--android:layout_width="36dp"-->
-                    <!--android:layout_height="36dp"-->
-                    <!--android:background="@drawable/click_2_0_0_default"-->
-                    <!--android:padding="9dp"-->
-                    <!--android:src="@drawable/ic200_ask_light" />-->
 
                 </LinearLayout>
 
@@ -443,8 +436,8 @@
 
                     <ImageView
                         android:id="@+id/scanImg"
-                        android:layout_width="@dimen/ppb200_action_bar_icon"
-                        android:layout_height="@dimen/ppb200_action_bar_icon"
+                        android:layout_width="@dimen/ppb200_action_bar_icon_height"
+                        android:layout_height="@dimen/ppb200_action_bar_icon_height"
                         android:padding="8dp"
                         android:src="@drawable/click_2_0_0_barcode_scan" />
 
@@ -508,7 +501,7 @@
 
         <ImageView
             android:id="@+id/backImg"
-            style="@style/ppb200_ic_action_back"
+            style="@style/ppb200_action_bar_icon"
             android:layout_alignParentBottom="true"
             android:src="@drawable/ic200_arrow_left_dark" />
 
@@ -516,7 +509,7 @@
         <TextView
             android:id="@+id/tvAct"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/ppb200_action_bar_icon"
+            android:layout_height="@dimen/ppb200_action_bar_icon_height"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="@dimen/ppb200_padding_margin_second"
             android:layout_toLeftOf="@+id/actImg"

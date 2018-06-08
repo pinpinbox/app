@@ -181,14 +181,14 @@
                         android:id="@+id/linEdit"
                         android:layout_width="64dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default_light"
+                        android:background="@drawable/click_2_0_0_default"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/ppb200_common_icon_side"
                             android:layout_height="@dimen/ppb200_common_icon_side"
-                            android:padding="9dp"
+                            android:padding="10dp"
                             android:src="@drawable/ic200_edit_white" />
 
                         <TextView
@@ -206,14 +206,14 @@
                         android:id="@+id/linCooperation"
                         android:layout_width="64dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default_light"
+                        android:background="@drawable/click_2_0_0_default"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/ppb200_common_icon_side"
                             android:layout_height="@dimen/ppb200_common_icon_side"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             android:src="@drawable/ic200_cooperation_white" />
 
                         <TextView
@@ -238,7 +238,7 @@
                         <ImageView
                             android:layout_width="@dimen/ppb200_common_icon_side"
                             android:layout_height="@dimen/ppb200_common_icon_side"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             android:src="@drawable/ic200_share_white" />
 
                         <TextView
@@ -256,14 +256,14 @@
                         android:id="@+id/linDelete"
                         android:layout_width="64dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default_light"
+                        android:background="@drawable/click_2_0_0_default"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/ppb200_common_icon_side"
                             android:layout_height="@dimen/ppb200_common_icon_side"
-                            android:padding="8dp"
+                            android:padding="10dp"
                             android:src="@drawable/ic200_delete_white" />
 
                         <TextView
@@ -281,7 +281,7 @@
                         android:id="@+id/linDownload"
                         android:layout_width="64dp"
                         android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default_light"
+                        android:background="@drawable/click_2_0_0_default"
                         android:gravity="center"
                         android:visibility="gone"
                         android:orientation="vertical">
@@ -294,7 +294,7 @@
                                 android:id="@+id/downloadImg"
                                 android:layout_width="@dimen/ppb200_common_icon_side"
                                 android:layout_height="@dimen/ppb200_common_icon_side"
-                                android:padding="8dp"
+                                android:padding="10dp"
                                 android:src="@drawable/ic200_download_white" />
 
                             <com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView

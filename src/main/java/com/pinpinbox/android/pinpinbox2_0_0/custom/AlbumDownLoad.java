@@ -225,7 +225,7 @@ public class AlbumDownLoad {
         crdlg = new Dialog(mActivity, R.style.myDialog);
         Window crosswin = crdlg.getWindow();
         crosswin.setWindowAnimations(R.style.dialog_enter_exit);
-        crosswin.setContentView(R.layout.lay_download_album);
+        crosswin.setContentView(R.layout.test_download_album);
         crdlg.show();
 
 

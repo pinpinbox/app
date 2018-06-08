@@ -70,7 +70,9 @@
 
     <dimen name="ppb200_action_bar_height">56dp</dimen>
     <dimen name="ppb200_action_bar_height_with_status">76dp</dimen>
-    <dimen name="ppb200_action_bar_icon">48dp</dimen>
+    <dimen name="ppb200_action_bar_icon_width">48dp</dimen>
+    <dimen name="ppb200_action_bar_icon_height">48dp</dimen>
+
 
 
     <dimen name="ppb200_radius_big">16dp</dimen>
@@ -83,6 +85,6 @@
     <dimen name="ppb200_staggeredgrid_cover_radius">@dimen/ppb200_radius_general</dimen>
     <dimen name="ppb200_staggeredgrid_click_padding">@dimen/ppb200_padding_margin_second</dimen>
     <dimen name="ppb200_staggeredgrid_type_image_w_h">18dp</dimen>
-    <dimen name="ppb200_staggeredgrid_type_image_padding">@dimen/ppb200_padding_margin_small</dimen>
+    <dimen name="ppb200_staggeredgrid_type_image_padding">@dimen/ppb200_padding_margin_third</dimen>
 
 </resources>

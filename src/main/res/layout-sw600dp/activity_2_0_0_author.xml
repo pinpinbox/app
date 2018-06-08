@@ -75,9 +75,8 @@
 
             <ImageView
                 android:id="@+id/backImg"
-                style="@style/ppb200_ic_action_back"
+                style="@style/ppb200_action_bar_icon"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/click_2_0_0_default"
                 android:src="@drawable/ic200_arrow_left_dark" />
 
             <LinearLayout
@@ -92,26 +91,17 @@
 
                 <ImageView
                     android:id="@+id/messageImg"
-                    android:layout_width="@dimen/ppb200_common_icon_side"
-                    android:layout_height="@dimen/ppb200_common_icon_side"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:padding="10dp"
+                    style="@style/ppb200_action_bar_icon"
                     android:src="@drawable/ic200_message_dark" />
 
                 <ImageView
                     android:id="@+id/aboutImg"
-                    android:layout_width="@dimen/ppb200_common_icon_side"
-                    android:layout_height="@dimen/ppb200_common_icon_side"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:padding="12dp"
+                    style="@style/ppb200_action_bar_icon"
                     android:src="@drawable/ic200_user_about_dark" />
 
                 <ImageView
                     android:id="@+id/shareImg"
-                    android:layout_width="@dimen/ppb200_common_icon_side"
-                    android:layout_height="@dimen/ppb200_common_icon_side"
-                    android:background="@drawable/click_2_0_0_default"
-                    android:padding="12dp"
+                    style="@style/ppb200_action_bar_icon"
                     android:src="@drawable/ic200_share_dark" />
 
 

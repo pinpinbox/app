@@ -93,7 +93,7 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.lay_search_fragment_scan_search, container, false);
+        v = inflater.inflate(R.layout.lay_2_0_0_scan_search, container, false);
         CameraManager.init(getActivity());
         viewfinderView = (ViewfinderView) v
                 .findViewById(R.id.viewfinder_view);

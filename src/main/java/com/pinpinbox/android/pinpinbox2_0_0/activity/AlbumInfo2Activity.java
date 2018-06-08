@@ -126,7 +126,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 //    private GyroscopeObserver gyroscopeObserver;
 
     private RelativeLayout rLocation;
-    private LinearLayout linEvent, linType, linAuthor, linDetail, linLike, linMessage, linViewed, linSponsor;
+    private LinearLayout linEvent, linType, linAuthor, linDetail, linLike, linMessage, linSponsor;
 
     private TextView tvAlbumName, tvAlbumAuthor, tvViewedCount, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvSponsorCount, tvVote;
     private TextView tvRead;
@@ -357,7 +357,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         linLike = (LinearLayout) findViewById(R.id.linLike);
         linMessage = (LinearLayout) findViewById(R.id.linMessage);
         linSponsor = (LinearLayout) findViewById(R.id.linSponsor);
-        linViewed = (LinearLayout) findViewById(R.id.linViewed);
+
 
 
         tvAlbumName = (TextView) findViewById(R.id.tvName);
