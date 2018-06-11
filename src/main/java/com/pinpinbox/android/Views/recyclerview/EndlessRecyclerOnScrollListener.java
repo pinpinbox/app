@@ -157,55 +157,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
     }
 
-    private void floatToolBarControl(int distance) {
 
-        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY" + vFloatToolBar.getY());
-
-        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY(dp)" + SizeUtils.px2dp(vFloatToolBar.getY()));
-
-        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getTop" + vFloatToolBar.getTop());//固定
-
-        MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "status height => " + PPBApplication.getInstance().getStatusBarHeight());
-
-
-        if (distance > vFloatToolBar.getTop() - PPBApplication.getInstance().getStatusBarHeight()) {
-
-            MyLog.Set("e", getClass(), "-------------------------------");
-
-            vFloatToolBar.setY(PPBApplication.getInstance().getStatusBarHeight() - 1);
-
-            if (!(boolean) vFloatToolBar.getTag()) {
-
-                ViewPropertyAnimator scaleToMatch = vScaleView.animate();
-                scaleToMatch.setDuration(200)
-                        .scaleX(ScaleSize)
-                        .translationZ(0f)
-                        .start();
-                vFloatToolBar.setTag(true);
-
-//                colorAnimationToAction.start();
-            }
-
-        } else {
-            vFloatToolBar.setTranslationY(-distance);
-
-            if ((boolean) vFloatToolBar.getTag()) {
-
-                ViewPropertyAnimator scaleTo1 = vScaleView.animate();
-                scaleTo1.setDuration(200)
-                        .scaleX(1.0f)
-                        .translationZ(32f)
-                        .start();
-
-                vFloatToolBar.setTag(false);
-
-//                colorAnimationToDefault.start();
-
-            }
-
-        }
-
-    }
 
 
     private View vScaleTouchView;
@@ -221,100 +173,24 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
-        if (vScaleTouchView != null && vScaleTouchView.getScaleX() < 1f && !isTouch) {
-            isTouch = true;
-            vScaleTouchView.animate().translationZ(vScaleTouchView.getContext().getResources().getDimension(R.dimen.ppb200_translationZ_user))
-                    .scaleX(1f)
-                    .scaleY(1f)
-                    .setListener(null)
-                    .setDuration(150)
-                    .start();
-        }
-
+        scaleViewControl();
 
         scrolledDistance += dy;
         MyLog.Set("d", EndlessRecyclerOnScrollListener.class, "scrolledDistance => " + scrolledDistance);
 
 
-        if (vFloatToolBar != null) {
-            floatToolBarControl(scrolledDistance);
-        }
 
+        /*懸浮工具*/
+        floatToolBarControl();
 
-        if (scrolledDistance <= 1000) {
-            floatAlpha = (float) scrolledDistance / 200;
-            floatTranslationY = (float) scrolledDistance / 3;
-        }
-
-
-        MyLog.Set("d", EndlessRecyclerOnScrollListener.class, " floatAlpha " + floatAlpha);
-        MyLog.Set("d", EndlessRecyclerOnScrollListener.class, " floatTranslationY " + floatTranslationY);
-
-        if (views != null && views.length > 0) {
-            for (int i = 0; i < views.length; i++) {
-                views[i].setAlpha(1 - floatAlpha);
-                views[i].setTranslationY(0 - floatTranslationY);
-            }
-        }
-
-
-//        if (bgImg != null) {
-//
-//            bgImg.setAlpha(1 - floatAlpha);
-//            bgImg.setTranslationY(0 - floatTranslationY);
-//
-//        }
-
+        /*parallax*/
+        parallaxControl();
 
        /*顯示標題*/
-        if (vTop != null && titleShowListener != null) {
-
-            /*actionbar + statusbar*/
-            if (scrolledDistance > vTop.getTop() + 152) {
-
-                if (!task) {
-                    titleShowListener.show();
-                    task = true;
-                    MyLog.Set("d", EndlessRecyclerOnScrollListener.class, "出現title");
-                }
-
-            } else {
-                if (task) {
-                    titleShowListener.hide();
-                    task = false;
-                    MyLog.Set("d", EndlessRecyclerOnScrollListener.class, "隱藏title");
-                }
-            }
-        }
-
-
+        titleControl();
 
         /*set actionbarcontrol  判斷上下滑*/
-        if (vActionBar != null) {
-
-            if (scrolledDistance > 100) {
-
-                if(!acbIsHide){
-                    acbIsHide = true;
-                    vActionBar.animate()
-                            .translationYBy(-200)
-                            .setDuration(150)
-                            .start();
-                }
-
-            } else {
-
-                if (acbIsHide) {
-                    acbIsHide = false;
-                    vActionBar.animate()
-                            .translationY(0)
-                            .setDuration(150)
-                            .start();
-                }
-
-            }
-
-        }
+        actionBarVisibilityControl(dy);
 
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -352,8 +228,158 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
                 break;
         }
 
+    }
+
+    private void scaleViewControl(){
+
+        if (vScaleTouchView != null && vScaleTouchView.getScaleX() < 1f && !isTouch) {
+            isTouch = true;
+            vScaleTouchView.animate().translationZ(vScaleTouchView.getContext().getResources().getDimension(R.dimen.ppb200_translationZ_user))
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setListener(null)
+                    .setDuration(150)
+                    .start();
+        }
 
     }
+
+    private void floatToolBarControl() {
+
+
+        if (vFloatToolBar != null) {
+
+
+            MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY" + vFloatToolBar.getY());
+
+            MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getY(dp)" + SizeUtils.px2dp(vFloatToolBar.getY()));
+
+            MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "tool => getTop" + vFloatToolBar.getTop());//固定
+
+            MyLog.Set("e", EndlessRecyclerOnScrollListener.class, "status height => " + PPBApplication.getInstance().getStatusBarHeight());
+
+
+            if (scrolledDistance > vFloatToolBar.getTop() - PPBApplication.getInstance().getStatusBarHeight()) {
+
+                MyLog.Set("e", getClass(), "-------------------------------");
+
+                vFloatToolBar.setY(PPBApplication.getInstance().getStatusBarHeight() - 1);
+
+                if (!(boolean) vFloatToolBar.getTag()) {
+
+                    ViewPropertyAnimator scaleToMatch = vScaleView.animate();
+                    scaleToMatch.setDuration(200)
+                            .scaleX(ScaleSize)
+                            .translationZ(0f)
+                            .start();
+                    vFloatToolBar.setTag(true);
+
+//                colorAnimationToAction.start();
+                }
+
+            } else {
+                vFloatToolBar.setTranslationY(-scrolledDistance);
+
+                if ((boolean) vFloatToolBar.getTag()) {
+
+                    ViewPropertyAnimator scaleTo1 = vScaleView.animate();
+                    scaleTo1.setDuration(200)
+                            .scaleX(1.0f)
+                            .translationZ(32f)
+                            .start();
+
+                    vFloatToolBar.setTag(false);
+
+//                colorAnimationToDefault.start();
+
+                }
+
+            }
+
+
+        }
+
+
+    }
+
+    private void titleControl() {
+        if (vTop != null && titleShowListener != null) {
+
+            /*actionbar + statusbar*/
+            if (scrolledDistance > vTop.getTop() + 152) {
+
+                if (!task) {
+                    titleShowListener.show();
+                    task = true;
+                    MyLog.Set("d", EndlessRecyclerOnScrollListener.class, "出現title");
+                }
+
+            } else {
+                if (task) {
+                    titleShowListener.hide();
+                    task = false;
+                    MyLog.Set("d", EndlessRecyclerOnScrollListener.class, "隱藏title");
+                }
+            }
+        }
+
+    }
+
+    private void parallaxControl() {
+
+        if (scrolledDistance <= 1000) {
+            floatAlpha = (float) scrolledDistance / 200;
+            floatTranslationY = (float) scrolledDistance / 3;
+        }
+
+        MyLog.Set("d", EndlessRecyclerOnScrollListener.class, " floatAlpha " + floatAlpha);
+        MyLog.Set("d", EndlessRecyclerOnScrollListener.class, " floatTranslationY " + floatTranslationY);
+
+        if (views != null && views.length > 0) {
+            for (View view : views) {
+                view.setAlpha(1 - floatAlpha);
+                view.setTranslationY(0 - floatTranslationY);
+            }
+        }
+
+    }
+
+    private void actionBarVisibilityControl(int dy) {
+
+
+        if (vActionBar != null) {
+
+
+            if (dy > 0) {
+                //往上滾
+                if (!acbIsHide) {
+                    acbIsHide = true;
+                    vActionBar.animate()
+                            .translationY(-PPBApplication.getInstance().getResources().getDimension(R.dimen.ppb200_action_bar_height_with_status))
+                            .alpha(0f)
+                            .setDuration(400)
+                            .start();
+                }
+
+            } else if (dy < 0) {
+                //往下滾
+                if (acbIsHide) {
+                    acbIsHide = false;
+                    vActionBar.animate()
+                            .translationY(0)
+                            .alpha(1f)
+                            .setDuration(400)
+                            .start();
+                }
+
+
+            }
+
+        }
+
+
+    }
+
 
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

@@ -33,7 +33,7 @@
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_marginTop="56dp"
-            android:text="創造內容價值 獲得贊助回饋" />
+            android:text="@string/pinpinbox_2_0_0_other_text_slogan_a" />
 
         <TextView
             android:id="@+id/tvLearnNow"

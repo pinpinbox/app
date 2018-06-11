@@ -31,7 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -155,7 +155,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private FragmentSelectPhoto2 fragmentSelectPhoto2;
     private FragmentSelectVideo2 fragmentSelectVideo2;
 
-    private PopupCustom popCreationSet, popCreatePreview, popCreateSort, popCreateAdd, popCreateAudio;
+    private PopupCustom popCreationSet, popCreateSort, popCreateAdd, popCreateAudio;
+//   popCreatePreview
+
 
     private DialogCreationLocation dlgCreationLocation;
 
@@ -167,7 +169,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private ScrollLinearLayoutManager linearLayoutManager;
 
 
-    private ArrayList<HashMap<String, Object>> selectingList;
+    //    private ArrayList<HashMap<String, Object>> selectingList;
     private ArrayList<HashMap<String, Object>> photoList;
     private List<ItemAlbumSettings> audioList;
 
@@ -206,6 +208,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private String event_id;
     private String audioUrl, videoUrl, strDescription, strLocation;
+
+    private int sendPreviewCount;
 
     private static final int REQUEST_CODE_SDCARD = 105;
     private static final int REQUEST_CODE_RECORD = 106;
@@ -270,6 +274,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground;
 
+    private EditText edPreviewPageStart;
 
     private PinchImageView photoImg;
     private TextView tvPicCount, tvCheck, tvDescription, tvLocation, tvSelect_Photo_or_Template, tvAddDescription;
@@ -565,22 +570,21 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void setAllPop() {
 
         /**/
-        popCreatePreview = new PopupCustom(mActivity);
-        popCreatePreview.setPopup(R.layout.pop_2_0_0_creation_preview, R.style.pinpinbox_popupAnimation_bottom);
-        gvPreview = (GridView) popCreatePreview.getPopupView().findViewById(R.id.gvPreview);
-        TextView tvPreviewConfirm = (TextView) popCreatePreview.getPopupView().findViewById(R.id.tvPreviewConfirm);
-        tvPreviewConfirm.setOnClickListener(this);
-        TextUtility.setBold((TextView) popCreatePreview.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvPreviewConfirm, true);
+//        popCreatePreview = new PopupCustom(mActivity);
+//        popCreatePreview.setPopup(R.layout.pop_2_0_0_creation_preview, R.style.pinpinbox_popupAnimation_bottom);
+//        gvPreview = (GridView) popCreatePreview.getPopupView().findViewById(R.id.gvPreview);
+//        TextView tvPreviewConfirm = (TextView) popCreatePreview.getPopupView().findViewById(R.id.tvPreviewConfirm);
+//        tvPreviewConfirm.setOnClickListener(this);
+//        TextUtility.setBold((TextView) popCreatePreview.getPopupView().findViewById(R.id.tvTitle), true);
+//        TextUtility.setBold(tvPreviewConfirm, true);
+//
+//        popCreatePreview.getPopupView().findViewById(R.id.linBackground).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popCreatePreview.dismiss();
+//            }
+//        });
 
-        popCreatePreview.getPopupView().findViewById(R.id.linBackground).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popCreatePreview.dismiss();
-            }
-        });
-//        View vContentPreview = popCreatePreview.getPopupView().findViewById(R.id.linBackground);
-//        new ClickDragDismissListener(vContentPreview, this);
 
         /**/
         popCreateSort = new PopupCustom(mActivity);
@@ -597,27 +601,33 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 popCreateSort.dismiss();
             }
         });
-//        View vContentSort = popCreatePreview.getPopupView().findViewById(R.id.linBackground);
-//        new ClickDragDismissListener(vContentSort, this);
+
 
         /**/
         popCreationSet = new PopupCustom(mActivity);
         popCreationSet.setPopup(R.layout.pop_2_0_0_creation_set, R.style.pinpinbox_popupAnimation_bottom);
         TextView tvSort = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSort);
-        TextView tvSelectPreview = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSelectPreview);
         TextView tvSetAudio = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSetAudio);
+        TextView tvConfirmHideItem = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvConfirmHideItem);
 
-        TextUtility.setBold((TextView) popCreationSet.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvSort, true);
-        TextUtility.setBold(tvSelectPreview, true);
-        TextUtility.setBold(tvSetAudio, true);
+        TextUtility.setBold(
+                tvSort,
+                tvSetAudio,
+                tvConfirmHideItem,
+                (TextView) popCreationSet.getPopupView().findViewById(R.id.tvTitle),
+                (TextView) popCreationSet.getPopupView().findViewById(R.id.tv1),
+                (TextView) popCreationSet.getPopupView().findViewById(R.id.tv2)
+        );
 
 
         View vContentSet = popCreationSet.getPopupView().findViewById(R.id.linBackground);
-
         tvSort.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
-        tvSelectPreview.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
         tvSetAudio.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        tvConfirmHideItem.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        ((RelativeLayout) popCreationSet.getPopupView().findViewById(R.id.rPreview)).setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+
+
+        edPreviewPageStart = (EditText) popCreationSet.getPopupView().findViewById(R.id.edPreviewPageStart);
 
 
 
@@ -1615,87 +1625,114 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         popCreateSort.show(rBackground);
     }
 
-    private void selectPreviewClick() {
+
+    private void confirmPreviewClick() {
 
         if (photoList != null && photoList.size() == 0) {
             PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_album_content_is_null);
             return;
         }
 
-        /*將當下list帶入選擇畫面的list供選擇用*/
-        selectingList = photoList;
 
-        HashMap<String, Object> map = new HashMap<>();
+        if (edPreviewPageStart.getText().toString() == null || edPreviewPageStart.getText().toString().equals("")) {
 
-        map.put("photo_id", selectingList.get(0).get("photo_id"));
-        map.put("image_url", selectingList.get(0).get("image_url"));
-        map.put("image_url_thumbnail", selectingList.get(0).get("image_url_thumbnail"));
-        map.put("image_url_operate", selectingList.get(0).get("image_url_operate"));
-        map.put("select", selectingList.get(0).get("select"));
-        map.put("name", selectingList.get(0).get("name"));
-        map.put("audio_url", selectingList.get(0).get("audio_url"));
-        map.put("video_url", selectingList.get(0).get("video_url"));
-        map.put(Key.description, selectingList.get(0).get(Key.description));
-        map.put(Key.location, selectingList.get(0).get(Key.location));
-        map.put(Key.is_preview, true);
+            PinPinToast.showErrorToast(mActivity, "請輸入需要隱藏的內容起始頁");
+            return;
+        }
 
-        //20171018
-        map.put(Key.user_id, selectingList.get(0).get(Key.user_id));
 
-        photoList.set(0, map);
+        sendPreviewCount = StringIntMethod.StringToInt(edPreviewPageStart.getText().toString());
 
-        if (selectPreviewAdapter != null) {
-            selectPreviewAdapter.notifyDataSetChanged();
+        if (sendPreviewCount < 1) {
+
+            PinPinToast.showErrorToast(mActivity, "至少1頁");
+
+        } else if (sendPreviewCount > photoList.size()) {
+
+            PinPinToast.showErrorToast(mActivity, "不可大於作品總張數");
+
         } else {
 
-            MyLog.Set("d", mActivity.getClass(), "selectPreviewAdapter => null");
-            selectPreviewAdapter = new SelectPreviewAdapter(mActivity, selectingList);
-            gvPreview.setAdapter(selectPreviewAdapter);
 
-            gvPreview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    if (position == 0) {
-                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_cover_can_not_remove);
-                        return;
-                    }
-
-                    photoPreviewType = true;
-
-
-                    HashMap<String, Object> map = new HashMap<>();
-
-                    map.put("photo_id", selectingList.get(position).get("photo_id"));
-                    map.put("image_url", selectingList.get(position).get("image_url"));
-                    map.put("image_url_thumbnail", selectingList.get(position).get("image_url_thumbnail"));
-                    map.put("image_url_operate", selectingList.get(position).get("image_url_operate"));
-                    map.put("select", selectingList.get(position).get("select"));
-                    map.put("name", selectingList.get(position).get("name"));
-                    map.put("audio_url", selectingList.get(position).get("audio_url"));
-                    map.put("video_url", selectingList.get(position).get("video_url"));
-                    map.put(Key.description, selectingList.get(position).get(Key.description));
-                    map.put(Key.location, selectingList.get(position).get(Key.location));
-                    boolean b = (boolean) selectingList.get(position).get("is_preview");
-
-                    if (b) {
-                        map.put(Key.is_preview, false);
-                    } else {
-                        map.put(Key.is_preview, true);
-                    }
-
-                    //20171018
-                    map.put(Key.user_id, selectingList.get(position).get(Key.user_id));
-
-                    photoList.set(position, map);
-                    selectPreviewAdapter.notifyDataSetChanged();
-
-                }
-            });
+            doSendPreview();
 
         }
 
-        popCreatePreview.show(rBackground);
+
+//        /*將當下list帶入選擇畫面的list供選擇用*/
+//        selectingList = photoList;
+//
+//        HashMap<String, Object> map = new HashMap<>();
+//
+//        map.put("photo_id", selectingList.get(0).get("photo_id"));
+//        map.put("image_url", selectingList.get(0).get("image_url"));
+//        map.put("image_url_thumbnail", selectingList.get(0).get("image_url_thumbnail"));
+//        map.put("image_url_operate", selectingList.get(0).get("image_url_operate"));
+//        map.put("select", selectingList.get(0).get("select"));
+//        map.put("name", selectingList.get(0).get("name"));
+//        map.put("audio_url", selectingList.get(0).get("audio_url"));
+//        map.put("video_url", selectingList.get(0).get("video_url"));
+//        map.put(Key.description, selectingList.get(0).get(Key.description));
+//        map.put(Key.location, selectingList.get(0).get(Key.location));
+//        map.put(Key.is_preview, true);
+//
+//        //20171018
+//        map.put(Key.user_id, selectingList.get(0).get(Key.user_id));
+//
+//        photoList.set(0, map);
+//
+//        if (selectPreviewAdapter != null) {
+//            selectPreviewAdapter.notifyDataSetChanged();
+//        } else {
+//
+//            MyLog.Set("d", mActivity.getClass(), "selectPreviewAdapter => null");
+//            selectPreviewAdapter = new SelectPreviewAdapter(mActivity, selectingList);
+//            gvPreview.setAdapter(selectPreviewAdapter);
+//
+//            gvPreview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                    if (position == 0) {
+//                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_cover_can_not_remove);
+//                        return;
+//                    }
+//
+//                    photoPreviewType = true;
+//
+//
+//                    HashMap<String, Object> map = new HashMap<>();
+//
+//                    map.put("photo_id", selectingList.get(position).get("photo_id"));
+//                    map.put("image_url", selectingList.get(position).get("image_url"));
+//                    map.put("image_url_thumbnail", selectingList.get(position).get("image_url_thumbnail"));
+//                    map.put("image_url_operate", selectingList.get(position).get("image_url_operate"));
+//                    map.put("select", selectingList.get(position).get("select"));
+//                    map.put("name", selectingList.get(position).get("name"));
+//                    map.put("audio_url", selectingList.get(position).get("audio_url"));
+//                    map.put("video_url", selectingList.get(position).get("video_url"));
+//                    map.put(Key.description, selectingList.get(position).get(Key.description));
+//                    map.put(Key.location, selectingList.get(position).get(Key.location));
+//                    boolean b = (boolean) selectingList.get(position).get("is_preview");
+//
+//                    if (b) {
+//                        map.put(Key.is_preview, false);
+//                    } else {
+//                        map.put(Key.is_preview, true);
+//                    }
+//
+//                    //20171018
+//                    map.put(Key.user_id, selectingList.get(position).get(Key.user_id));
+//
+//                    photoList.set(position, map);
+//                    selectPreviewAdapter.notifyDataSetChanged();
+//
+//                }
+//            });
+//
+//        }
+
+//        popCreatePreview.show(rBackground);
 
 
     }
@@ -1851,27 +1888,19 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             }
         });
 
-//        popCreateSort.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//
-//                popCreateSort.resetBackground();
-//
-//
-//            }
-//        });
+
     }
 
     private void popConfirmPreviewListener() {
 
-        popCreatePreview.setDissmissWorks(new PopupCustom.DissmissWorks() {
-            @Override
-            public void excute() {
-                if (photoPreviewType) {
-                    doSendPreview();
-                }
-            }
-        });
+//        popCreatePreview.setDissmissWorks(new PopupCustom.DissmissWorks() {
+//            @Override
+//            public void excute() {
+//                if (photoPreviewType) {
+//                    doSendPreview();
+//                }
+//            }
+//        });
 
 //        popCreatePreview.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
 //            @Override
@@ -3038,27 +3067,22 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         @Override
         protected Object doInBackground(Void... params) {
 
-            String strJson = "";
-
-            ArrayList<String> photoIdList = new ArrayList<>();
-
-            for (int i = 0; i < selectingList.size(); i++) {
-
-                boolean b = (boolean) selectingList.get(i).get(Key.is_preview);
-                if (b) {
-                    photoIdList.add((String) selectingList.get(i).get("photo_id"));
-                }
-            }
-
 
             String str = "";
 
-            for (int i = 0; i < photoIdList.size(); i++) {
-                if (i == 0) {
-                    str = photoIdList.get(i);
-                } else {
-                    str = str + "," + photoIdList.get(i);
+            for (int i = 0; i < sendPreviewCount; i++) {
+
+                if (i < sendPreviewCount) {
+
+                    if (i == 0) {
+                        str = photoList.get(i).get(Key.photo_id) + "";
+                    } else {
+                        str = str + "," + photoList.get(i).get(Key.photo_id);
+                    }
+
+
                 }
+
             }
 
 
@@ -3072,7 +3096,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             MyLog.Set("d", mActivity.getClass(), " obj.toString() => " + obj.toString());
 
-
+            String strJson = "";
             try {
                 strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P33_AlbumSettings, SetMapByProtocol.setParam33_albumsettings(id, token, album_id, obj.toString()), null);
                 MyLog.Set("d", getClass(), "p33strJson => " + strJson);
@@ -3109,7 +3133,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
             dissmissLoading();
-            popCreatePreview.dismiss();
+//            popCreatePreview.dismiss();
 
             if (p33Result.equals("1")) {
 
@@ -3119,8 +3143,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_edit_finish);
 
-                /*將選擇的動作帶入作品list做更新*/
-                photoList = selectingList;
 
             } else if (p33Result.equals("0")) {
 
@@ -3207,7 +3229,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
             dissmissLoading();
-            popCreatePreview.dismiss();
 
             if (p33Result.equals("1")) {
 
@@ -4806,9 +4827,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
             /*pop creation preview*/
-            case R.id.tvPreviewConfirm:
-                popCreatePreview.dismiss();
-                break;
+//            case R.id.tvPreviewConfirm:
+//                popCreatePreview.dismiss();
+//                break;
 
             /*pop creation sort*/
             case R.id.tvSortConfirm:
@@ -4845,10 +4866,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 changeItemClick();
                 break;
 
-            case R.id.tvSelectPreview:
-                popCreationSet.dismiss();
-                selectPreviewClick();
-                break;
 
             case R.id.tvSetAudio:
                 popCreationSet.dismiss();
@@ -4860,6 +4877,13 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 break;
 
 
+            case R.id.tvConfirmHideItem:
+
+                confirmPreviewClick();
+
+                break;
+
+
         }
 
     }
@@ -4868,7 +4892,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     public void OnDismiss() {
 
         if (popCreateAdd != null && popCreateAdd.getPopupWindow().isShowing()) {
-
             popCreateAdd.dismiss();
         }
 
@@ -4876,10 +4899,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             popCreationSet.dismiss();
         }
 
-
-        if (popCreatePreview != null && popCreatePreview.getPopupWindow().isShowing()) {
-            popCreatePreview.dismiss();
-        }
 
         if (popCreateSort != null && popCreateSort.getPopupWindow().isShowing()) {
             popCreateSort.dismiss();

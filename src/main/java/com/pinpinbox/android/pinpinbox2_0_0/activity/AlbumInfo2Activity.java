@@ -1060,6 +1060,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         itemAlbum.setViewed(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.viewed));
                         itemAlbum.setLikes(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.likes));
                         itemAlbum.setMessageboard(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.messageboard));
+                        itemAlbum.setSponsorCount(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.exchange));
+
+
 
                     /*photo*/
                         try {
@@ -1198,6 +1201,26 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     } else {
                         tvMessageCount.setText(itemAlbum.getMessageboard() + "");
                     }
+
+
+                     /*贊助數*/
+                    if(itemAlbum.getUser_id()== StringIntMethod.StringToInt(id)){
+                        linSponsor.setVisibility(View.VISIBLE);
+                        if (itemAlbum.getSponsorCount() > 9999) {
+                            String strSponsorCount = StringUtil.ThousandToK(itemAlbum.getSponsorCount());
+                            tvSponsorCount.setText(strSponsorCount + "K");
+                        } else if (itemAlbum.getSponsorCount() < 0) {
+                            tvSponsorCount.setText(0 + "");
+                        } else {
+                            tvSponsorCount.setText(itemAlbum.getSponsorCount() + "");
+                        }
+                    }else {
+                        linSponsor.setVisibility(View.GONE);
+                    }
+
+
+
+
 
 
                 } catch (Exception e) {
@@ -2814,18 +2837,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     }
 
-    /*click*/
-    private void toLikesList() {
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.album_id, album_id);
-
-        Intent intent = new Intent(mActivity, LikeList2Activity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        ActivityAnim.StartAnim(mActivity);
-
-    }
 
     /*click*/
     private void doVote(final int position) {

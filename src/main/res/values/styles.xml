@@ -301,6 +301,22 @@
         <item name="android:letterSpacing">0.1</item>
     </style>
 
+    <style name="ppb200_EditText_small">
+        <item name="android:background">@drawable/border_2_0_0_grey_third_radius</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:paddingTop">@dimen/ppb200_padding_margin_third</item>
+        <item name="android:paddingBottom">@dimen/ppb200_padding_margin_third</item>
+        <item name="android:paddingLeft">@dimen/ppb200_padding_margin_second</item>
+        <item name="android:paddingRight">@dimen/ppb200_padding_margin_second</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_second</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:textColorHint">@color/pinpinbox_2_0_0_hint_alpha</item>
+        <item name="android:textCursorDrawable">@drawable/bg200_cursor</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+
     <style name="ppb200_bottom_bar">
         <item name="android:id">@id/rBottom</item>
         <item name="android:background">@color/pinpinbox_2_0_0_action_bar_color</item>

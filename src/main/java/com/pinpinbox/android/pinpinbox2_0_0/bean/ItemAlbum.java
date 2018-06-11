@@ -27,6 +27,7 @@ public class ItemAlbum {
     private int cover_width; //封面寬
     private int cover_height; //封面高
     private int color;
+    private int sponsorCount = 0;
 
     private int image_orientation = 0;
     public static final int PORTRAIT = 1; //直
@@ -61,6 +62,14 @@ public class ItemAlbum {
     private String user_name; //作者名稱
     private String user_picture;
 
+
+    public int getSponsorCount() {
+        return sponsorCount;
+    }
+
+    public void setSponsorCount(int sponsorCount) {
+        this.sponsorCount = sponsorCount;
+    }
 
     public boolean isContributionstatus() {
         return contributionstatus;

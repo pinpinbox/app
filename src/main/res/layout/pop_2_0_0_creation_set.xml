@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/linBackground"
     android:orientation="vertical">
 
 
@@ -30,21 +30,77 @@
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_itemtype_album_sort" />
 
-        <TextView
-            android:id="@+id/tvSelectPreview"
-            style="@style/ppb200_pop_item"
-            android:paddingLeft="@dimen/ppb200_padding_margin_first"
-            android:text="@string/pinpinbox_2_0_0_itemtype_album_select_preview"
-             />
-
 
         <TextView
             android:id="@+id/tvSetAudio"
             style="@style/ppb200_pop_item"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
-            android:text="@string/pinpinbox_2_0_0_itemtype_album_set_audio"
-            />
+            android:text="@string/pinpinbox_2_0_0_itemtype_album_set_audio" />
+
+
+        <RelativeLayout
+            android:id="@+id/rPreview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/ppb200_padding_margin_first">
+
+
+            <TextView
+                android:id="@+id/tv1"
+                style="@style/ppb200_pop_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:text="開放前" />
+
+            <EditText
+                android:id="@+id/edPreviewPageStart"
+                style="@style/ppb200_EditText_small"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_third"
+                android:layout_toEndOf="@+id/tv1"
+                android:layout_toRightOf="@+id/tv1"
+                android:maxLength="3"
+                android:singleLine="true"
+                android:text=""
+                android:digits="1234567890"
+                android:inputType="number"/>
+
+            <TextView
+                android:id="@+id/tv2"
+                style="@style/ppb200_pop_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/edPreviewPageStart"
+                android:layout_toRightOf="@+id/edPreviewPageStart"
+                android:background="@null"
+                android:text="頁為預覽頁" />
+
+            <TextView
+                android:id="@+id/tvConfirmHideItem"
+                style="@style/ppb200_Button_main_small_radius"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:text="@string/pinpinbox_2_0_0_pop_check" />
+
+
+        </RelativeLayout>
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/tvSelectPreview"-->
+        <!--style="@style/ppb200_pop_item"-->
+        <!--android:paddingLeft="@dimen/ppb200_padding_margin_first"-->
+        <!--android:text="@string/pinpinbox_2_0_0_itemtype_album_select_preview"-->
+        <!--/>-->
 
 
     </LinearLayout>
