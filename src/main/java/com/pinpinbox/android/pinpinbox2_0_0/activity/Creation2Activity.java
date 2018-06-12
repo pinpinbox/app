@@ -210,6 +210,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private String audioUrl, videoUrl, strDescription, strLocation;
 
     private int sendPreviewCount;
+    private int preview_page_num;
 
     private static final int REQUEST_CODE_SDCARD = 105;
     private static final int REQUEST_CODE_RECORD = 106;
@@ -227,6 +228,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private int thisPosition = 0;//選擇的位置(當前)
     private int intUserGrade = 22;//預設最大張數
     private int intAudio = -1;
+    private int previewMode = -1;
 
 
     private int doingType;
@@ -248,6 +250,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private static final String SINGULAR = "singular"; //單首
     private static final String PLURAL = "plural"; //多首
 
+    private static final int PREVIEW_ALL = 99;
+    private static final int PREVIEW_PAGE = 98;
 
     private String mySelectAudioMode = NONE;
     private String currentAudioMode = NONE;
@@ -265,11 +269,14 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private boolean isSendFlurry = false;
     private boolean isShowAudioGuide = false;
 
+
     private RelativeLayout rPlay_Delete, rBackground, rLocationDelete, rPhotoSettingBar, rAudioRecording;
 
 
     private ImageView addPicImg, addUserImg, refreshImg, backImg, videoPlayImg, albumSetImg,
             selectAudioNoneImg, selectAudioPageImg, selectAudioBackgroundImg, photo_or_templateImg;
+    private ImageView selectPreviewPage, selectPreviewAll;
+
     private ImageView locationImg, audioRecordingImg, audioPlayImg, deleteImg, aviaryImg, locationDeleteImg, audioDeleteImg;
 
     private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground;
@@ -280,7 +287,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private TextView tvPicCount, tvCheck, tvDescription, tvLocation, tvSelect_Photo_or_Template, tvAddDescription;
     private RecyclerView rvPhoto;
 
-    private LinearLayout linDetail, linDetailDescription, linDetailLocation;
+    private LinearLayout linDetail, linDetailDescription, linDetailLocation, linPreviewAll, linPreviewPage;
 
     private RippleBackground rippleBackgroundRecording, rippleBackgroundPlay;
 
@@ -608,28 +615,39 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         popCreationSet.setPopup(R.layout.pop_2_0_0_creation_set, R.style.pinpinbox_popupAnimation_bottom);
         TextView tvSort = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSort);
         TextView tvSetAudio = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSetAudio);
-        TextView tvConfirmHideItem = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvConfirmHideItem);
 
         TextUtility.setBold(
                 tvSort,
                 tvSetAudio,
-                tvConfirmHideItem,
                 (TextView) popCreationSet.getPopupView().findViewById(R.id.tvTitle),
+                (TextView) popCreationSet.getPopupView().findViewById(R.id.tvPreview),
+                (TextView) popCreationSet.getPopupView().findViewById(R.id.tvPreviewAll),
                 (TextView) popCreationSet.getPopupView().findViewById(R.id.tv1),
                 (TextView) popCreationSet.getPopupView().findViewById(R.id.tv2)
         );
 
 
+        selectPreviewPage = (ImageView) popCreationSet.getPopupView().findViewById(R.id.selectPreviewPage);
+        selectPreviewAll = (ImageView) popCreationSet.getPopupView().findViewById(R.id.selectPreviewAll);
+        linPreviewPage = (LinearLayout) popCreationSet.getPopupView().findViewById(R.id.linPreviewPage);
+        linPreviewAll = (LinearLayout) popCreationSet.getPopupView().findViewById(R.id.linPreviewAll);
+
+
         View vContentSet = popCreationSet.getPopupView().findViewById(R.id.linBackground);
         tvSort.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
         tvSetAudio.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
-        tvConfirmHideItem.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
-        ((RelativeLayout) popCreationSet.getPopupView().findViewById(R.id.rPreview)).setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        linPreviewPage.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        linPreviewAll.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        ((LinearLayout) popCreationSet.getPopupView().findViewById(R.id.lin1)).setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+
+
+
+        selectPreviewPage.setOnClickListener(this);
+        selectPreviewAll.setOnClickListener(this);
 
 
         edPreviewPageStart = (EditText) popCreationSet.getPopupView().findViewById(R.id.edPreviewPageStart);
-
-
+        edPreviewPageStart.setText(preview_page_num + "");
 
         /**/
         popCreateAdd = new PopupCustom(mActivity);
@@ -3622,6 +3640,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             try {
                 strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P57_GetAlbumOfDiy, SetMapByProtocol.setParam57_getalbumofdiy(id, token, album_id), null);
+
                 MyLog.Set("d", mActivity.getClass(), "p57strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p57Result = Key.timeout;
@@ -3642,6 +3661,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         String album = JsonUtility.GetString(jsonData, ProtocolKey.album);
                         JSONObject jsonAlbum = new JSONObject(album);
                         currentAudioMode = JsonUtility.GetString(jsonAlbum, ProtocolKey.album_audio_mode);
+                        preview_page_num = JsonUtility.GetInt(jsonAlbum, ProtocolKey.preview_page_num);
 
                         if (intFirstCallP57) {
 
@@ -4826,15 +4846,42 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 break;
 
 
-            /*pop creation preview*/
-//            case R.id.tvPreviewConfirm:
-//                popCreatePreview.dismiss();
-//                break;
-
             /*pop creation sort*/
             case R.id.tvSortConfirm:
                 popCreateSort.dismiss();
                 break;
+
+
+
+            case R.id.selectPreviewPage:
+
+                previewMode = PREVIEW_PAGE;
+
+                selectPreviewPage.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+                selectPreviewAll.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                linPreviewAll.setAlpha(0.2f);
+                linPreviewPage.setAlpha(1f);
+                edPreviewPageStart.setEnabled(true);
+
+
+                break;
+
+            case R.id.selectPreviewAll:
+
+                previewMode = PREVIEW_ALL;
+
+                selectPreviewPage.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                selectPreviewAll.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+                linPreviewAll.setAlpha(1f);
+                linPreviewPage.setAlpha(0.2f);
+                edPreviewPageStart.setEnabled(false);
+
+                break;
+
+
+
+
+
 
         }
 
@@ -4877,11 +4924,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 break;
 
 
-            case R.id.tvConfirmHideItem:
-
-                confirmPreviewClick();
-
-                break;
+//            case R.id.tvConfirmHideItem:
+//
+//                confirmPreviewClick();
+//
+//                break;
 
 
         }

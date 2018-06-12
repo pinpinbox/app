@@ -10,12 +10,12 @@
     <TextView
         android:id="@+id/tvTitle"
         style="@style/ppb200_title_pop_second"
-        android:text="@string/pinpinbox_2_0_0_pop_title_select_album_preview"
+
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"
         android:layout_marginTop="92dp"/>
-
+    <!--android:text="@string/pinpinbox_2_0_0_pop_title_select_album_preview"-->
 
 
     <LinearLayout

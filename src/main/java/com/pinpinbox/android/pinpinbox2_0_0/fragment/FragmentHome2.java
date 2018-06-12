@@ -1004,9 +1004,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         int bannerWidth = ScreenUtils.getScreenWidth();
 
-        int bannerHeight = (bannerWidth * 380) / 960;
+        int bannerHeight = (bannerWidth * 540) / 960;
 
-//        /*banner width = 960 , height = 380*/
+//        /*banner width = 960 , height = 540*/
 //        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(bannerWidth, bannerHeight);
 
         for (int i = 0; i < p75arraylist.size(); i++) {

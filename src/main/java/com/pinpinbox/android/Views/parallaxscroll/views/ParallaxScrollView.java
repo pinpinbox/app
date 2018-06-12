@@ -120,16 +120,25 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                     }
 
                     if (freeScroll) {
+
                         vDismiss.setTranslationY((getTranslationY() + scrollY) - 36);
                         vDismiss.setTranslationX(getTranslationX() + scrollX);
 
+
+//                        if (!isTranslucent) {
+//                            isTranslucent = true;
+//                            SwipeBackActivityHelper.convertActivityToTranslucent(mActivity);//translucent = true
+//                        }
+//                        float windowalpha = 1 - scrollY / 3000;
+//                        if (windowalpha >= 0f && windowalpha <= 1f) {
+//                            wParams.alpha = (windowalpha);
+//                            mActivity.getWindow().setAttributes(wParams);
+//                        }
+
+
                         if (!isAlpha) {
                             isAlpha = true;
-
-
                             if (viewsAlpha.length > 0) {
-
-
                                 for (int i = 0; i < viewsAlpha.length; i++) {
 
                                     if (viewsAlpha[i] != null) {
@@ -151,18 +160,6 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                                 }
 
                             }
-
-
-//                            ViewPropertyAnimator alphaTo0 = vAlpha.animate();
-//                            alphaTo0.setDuration(150)
-//                                    .alpha(0)
-//                                    .start();
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                   vAlpha.setVisibility(GONE);
-//                                }
-//                            },200);
 
                         }
 
@@ -191,8 +188,13 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
     }
 
 
-    public void setActivity(Activity mActivity){
+    //背景透明相關
+//    private WindowManager.LayoutParams wParams;
+//    private boolean isTranslucent = false;
+
+    public void setActivity(Activity mActivity) {
         this.mActivity = mActivity;
+//        wParams = mActivity.getWindow().getAttributes();
     }
 
 
@@ -218,33 +220,22 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                     float fixedAlpha = (t <= 0) ? 1 : (100 / ((float) t * alpha));
 
 
-
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                        if(fixedAlpha<0.3){
-                            mActivity.getWindow().setStatusBarColor(Color.argb(245,255,255,255));
-                        }else if(fixedAlpha>=1) {
-                            mActivity.getWindow().setStatusBarColor(Color.argb(0,255,255,255));
-                        }else {
-                            float a = fixedAlpha*255;
-                            mActivity.getWindow().setStatusBarColor(Color.argb(255-(int)a,255,255,255));
+                        if (fixedAlpha < 0.3) {
+                            mActivity.getWindow().setStatusBarColor(Color.argb(245, 255, 255, 255));
+                        } else if (fixedAlpha >= 1) {
+                            mActivity.getWindow().setStatusBarColor(Color.argb(0, 255, 255, 255));
+                        } else {
+                            float a = fixedAlpha * 255;
+                            mActivity.getWindow().setStatusBarColor(Color.argb(255 - (int) a, 255, 255, 255));
 
                         }
 
 
                     }
 
-
                     parallaxedView.setAlpha(fixedAlpha);
-
-//                    MyLog.Set("d", ParallaxScrollView.class, "(float)t = > " + (float) t);
-//                    MyLog.Set("d", ParallaxScrollView.class, "fixedAlpha = > " + fixedAlpha);
-
-//                    if (fixedAlpha < 0.16) {
-//                        rActionBar.setAlpha(0.95f);
-//                    } else {
-//                        rActionBar.setAlpha(1 - fixedAlpha);
-//                    }
 
                     alpha /= alphaFactor;
                 }
@@ -293,22 +284,14 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
     private boolean isAlpha = false;
 
     private View vDismiss;
-    //    private View vAlpha;
     private View[] viewsAlpha;
 
     public void setScrollDismissView(View vDismiss) {
         this.vDismiss = vDismiss;
     }
 
-//    public void setAlphaView(View vAlpha){
-//        this.vAlpha = vAlpha;
-//    }
-
     public void setAlphaView(View... viewsAlpha) {
-
         this.viewsAlpha = viewsAlpha;
-
-
     }
 
 
@@ -351,12 +334,14 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
 
             if (onScroll) {
 
-
                 if (closeActivity) {
                     MyLog.Set("e", ParallaxScrollView.class, "關閉Activity");
                     closeActivity = false;
 
                     if (closeActivityListener != null) {
+
+//                        SwipeBackActivityHelper.convertActivityFromTranslucent(mActivity);//translucent = false
+
                         closeActivityListener.close();
                     }
 
@@ -383,14 +368,6 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
 
                             }
 
-
-//                                vAlpha.setVisibility(VISIBLE);
-//                                ViewPropertyAnimator alphaTo1 = vAlpha.animate();
-//                                alphaTo1.setDuration(150)
-//                                        .alpha(1)
-//                                        .start();
-
-
                         }
                     }, 200);
 
@@ -401,6 +378,12 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                     isAlpha = false;
                     onScroll = false;
                     freeScroll = false;
+
+
+//                    wParams.alpha = 1f;
+//                    mActivity.getWindow().setAttributes(wParams);
+//                    isTranslucent = false;
+
                 }
 
 

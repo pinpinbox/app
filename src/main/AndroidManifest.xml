@@ -118,13 +118,12 @@
         android:allowBackup="true"
         android:icon="@drawable/pinpin_192"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/ppb200_common_white">
 
         <activity
             android:name=".pinpinbox2_0_0.activity.FirstInstallActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:theme="@style/whiteTransparent">
+            android:launchMode="singleTop">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -201,8 +200,7 @@
         <activity
             android:name=".pinpinbox2_0_0.activity.WebView2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="user"
-            android:theme="@style/dragger" />
+            android:screenOrientation="user" />
 
         <!-- 閱讀作品 -->
         <!-- android:configChanges="keyboardHidden|orientation|screenSize" => 横竖屏切换的时候会直接调用onCreate方法中的onConfigurationChanged方法，而不会重新执行onCreate方法 -->
@@ -237,17 +235,16 @@
         <activity
             android:name=".pinpinbox2_0_0.activity.BeginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/dragger"
             android:screenOrientation="portrait" />
-
+        
 
         <activity
             android:name=".SampleTest.OldMainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
-            android:windowSoftInputMode="adjustPan|stateHidden">
 
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            
             <!-- <intent-filter > -->
             <!-- <action android:name="android.intent.action.SEND" /> -->
             <!-- <category android:name="android.intent.category.DEFAULT" /> -->
@@ -287,7 +284,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="true"
             android:screenOrientation="user" />
-        <!--android:theme="@style/dragger"-->
+        
 
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
@@ -299,44 +296,55 @@
             android:name=".pinpinbox2_0_0.activity.OfflineRead2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".SampleTest.CreateAlbum.CreateAlbumActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".SampleTest.Templateinfo.TemplateInfoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
+
         <activity
             android:name=".pinpinbox2_0_0.activity.CreationTemplate2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.TemList2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.OffLine2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
+
         <activity
             android:name=".pinpinbox2_0_0.activity.Event2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden">
+            
+
 
         </activity>
 
@@ -345,8 +353,8 @@
             android:name=".pinpinbox2_0_0.activity.SelectMyWorks2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
 
         <activity
             android:name="com.jmolsmobile.landscapevideocapture.VideoCaptureActivity"
@@ -358,9 +366,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/Main2Activity"
+
             android:windowSoftInputMode="adjustPan|stateHidden">
             <!--singleTask => 改為 single top 才能執行setResult()函式-->
+            <!--android:theme="@style/Main2Activity"-->
 
             <intent-filter>
                 首頁
@@ -429,17 +438,15 @@
         <activity
             android:name=".pinpinbox2_0_0.activity.Login2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/dragger"
             android:screenOrientation="portrait" />
-
+        
 
         <activity
             android:name=".pinpinbox2_0_0.activity.Author2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/sharedElementEnterTransition_by_above_v5"
             android:windowSoftInputMode="adjustPan|stateHidden" >
-
+            <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
 
             <intent-filter>
 
@@ -470,28 +477,36 @@
             android:name=".pinpinbox2_0_0.activity.MyFollow2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/sharedElementEnterTransition_by_above_v5"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
+
         <activity
             android:name=".pinpinbox2_0_0.activity.MyCollect2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        
+
         <!-- stateHidden -->
 
         <activity
             android:name=".pinpinbox2_0_0.activity.CreateAlbum2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.Search2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.Reader2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -503,52 +518,66 @@
             android:name=".pinpinbox2_0_0.activity.EditProfile2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.ChangePassword2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.ChangePhone2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.BuyPoint2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.Hobby2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+           
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+        
         <activity
             android:name=".pinpinbox2_0_0.activity.Creation2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <!-- android:process=":creation" -->
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.TypeFacebookFriend2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".SampleTest.Category2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity android:name=".pinpinbox2_0_0.libs.crop.CropImageActivity" />
 
@@ -556,38 +585,44 @@
             android:name=".pinpinbox2_0_0.activity.AlbumGroup2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.AlbumSettings2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.RecentAlbum2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.GuidePage2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".pinpinbox2_0_0.activity.AppSettings2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
         <activity
             android:name=".SampleTest.TextTestActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".SampleTest.TestStatusActivity"
@@ -615,8 +650,10 @@
             android:name=".pinpinbox2_0_0.activity.FromSharePhoto2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/myTransparent"
+            android:theme="@style/ppb200_common_transparent"
             android:windowSoftInputMode="adjustPan|stateHidden">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
@@ -636,7 +673,7 @@
             android:name=".pinpinbox2_0_0.activity.FromService2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/myTransparent"
+            android:theme="@style/ppb200_common_transparent"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name="com.soundcloud.android.crop.CropImageActivity"
@@ -653,94 +690,107 @@
             android:name=".pinpinbox2_0_0.activity.Vote2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
 
         <activity
             android:name=".SampleTest.PieChartActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
+
             android:windowSoftInputMode="adjustPan|stateHidden"/>
+        
 
         <activity
             android:name=".pinpinbox2_0_0.activity.Income2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.Feature2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.AlbumInfo2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/sharedElementEnterTransition_by_above_v5"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
+
 
 
         <activity
             android:name=".pinpinbox2_0_0.activity.AdHighLight2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/myTransparent"
+            android:theme="@style/ppb200_common_transparent"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.CategoryContents2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.SponsorList2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.LikeList2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.ExchangeList2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.ExchangeInfo2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/sharedElementEnterTransition_by_above_v5"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
+
 
 
         <activity
             android:name=".pinpinbox2_0_0.activity.FollowMe2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
         <activity
             android:name=".pinpinbox2_0_0.activity.AlbumSponsorList2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/dragger"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        
+
 
 
     </application>
