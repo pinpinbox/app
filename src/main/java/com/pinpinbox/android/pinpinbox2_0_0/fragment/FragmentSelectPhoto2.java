@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +25,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -1232,14 +1234,28 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
     private void dispatchTakePictureIntent() {
 
+
+        //fix android.os.FileUriExposedException
+//        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//        builder.detectFileUriExposure();
+//        StrictMode.setVmPolicy(builder.build());
+
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (createMode == 0) {
 
             Date dt = new Date();
             Long time = dt.getTime();
-            cameraUri = Uri.fromFile(new File(DirClass.pathCamera + time + ".jpg"));
+
+
+            if(SystemUtility.getSystemVersion()>= Build.VERSION_CODES.N){
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                cameraUri = FileProvider.getUriForFile(getActivity(), "com.pinpinbox.android" + ".provider", new File(DirClass.pathCamera + time + ".jpg"));
+            }else {
+                cameraUri = Uri.fromFile(new File(DirClass.pathCamera + time + ".jpg"));
+            }
+
+
             intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
 
             fragment.startActivityForResult(intent, REQUEST_CODE_CAMERA);

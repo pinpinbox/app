@@ -2,9 +2,9 @@ package com.pinpinbox.android.pinpinbox2_0_0.custom;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.os.StrictMode;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
+
 
 import com.adobe.creativesdk.foundation.AdobeCSDKFoundation;
 import com.adobe.creativesdk.foundation.auth.IAdobeAuthClientCredentials;
@@ -109,15 +109,6 @@ public class PPBApplication extends MultiDexApplication implements IAdobeAuthCli
         setFlurryAgent();
 
         setUtils();
-
-
-        //fix android.os.FileUriExposedException
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        builder.detectFileUriExposure();
-        StrictMode.setVmPolicy(builder.build());
-
-
-
 
 
     }
