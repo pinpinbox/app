@@ -2,6 +2,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +41,7 @@ import android.widget.TextView;
 
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
 import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
+import com.bumptech.glide.Glide;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.BitmapUtility;
 import com.pinpinbox.android.Utility.FileUtility;
@@ -83,7 +85,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.util.CheckExternalStorage;
-import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
@@ -317,7 +318,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                             @Override
                             protected Object doInBackground(Void... voids) {
-                                cleanPicasso();
+                                clearCache();
                                 return null;
                             }
                         };
@@ -521,43 +522,6 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                 getPhotoContent(cursor);
                 isFirstLoad = false;//相片獲取完畢再轉值，否則影響排序
 
-            } else {
-
-//                if (!isFromPPBCamera) {
-//                    MyLog.Set("d", FragmentSelectPhoto2.class, "isFromPPBCamera => false");
-//
-//
-//
-//                    if (currentCount != cursor.getCount()) {
-//
-//                        if (dialogRefreshPhoto == null) {
-//                            dialogRefreshPhoto = new DialogV2Custom(getActivity());
-//                            dialogRefreshPhoto.setStyle(DialogStyleClass.CHECK);
-//                            dialogRefreshPhoto.setMessage(R.string.pinpinbox_2_0_0_dialog_message_data_photo_change_to_refrest);
-//                            dialogRefreshPhoto.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_ok);
-//                            dialogRefreshPhoto.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_be_later);
-//                            dialogRefreshPhoto.setCheckExecute(new CheckExecute() {
-//                                @Override
-//                                public void DoCheck() {
-//                                    resetPhoto();
-//                                    getPhotoContent(cursor);
-//                                    currentCount = cursor.getCount();
-//
-//                                }
-//                            });
-//                            dialogRefreshPhoto.show();
-//                        } else if (dialogRefreshPhoto != null && !dialogRefreshPhoto.getmDialog().isShowing()) {
-//                            dialogRefreshPhoto.show();
-//                        }
-//                    }
-//
-//
-//                } else {
-//                    MyLog.Set("d", FragmentSelectPhoto2.class, "isFromPPBCamera => true, 將轉為false");
-//                    isFromPPBCamera = false;
-//
-//                }
-
             }
         }
 
@@ -566,29 +530,11 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
             MyLog.Set("d", FragmentSelectPhoto2.class, "onLoaderReset");
         }
 
-        private void resetPhoto() {
-
-            nonHeaderIdList.clear();
-            hasHeaderIdList.clear();
-            if (booleanList != null && booleanList.size() > 0) {
-                booleanList.clear();
-            }
-            if (sendList != null && sendList.size() > 0) {
-                sendList.clear();
-            }
-
-
-            intSelectCount = 0;
-            setItemCount(intSelectCount);
-
-        }
 
         private void getPhotoContent(Cursor cursor) {
 
             if (!isGetPosition) {
                 totalPhotoCount = cursor.getCount();
-//                loadPhotoPosition =  cursor.getCount();
-//                lavePhotoCount =  cursor.getCount();
                 isGetPosition = true;
             }
 
@@ -629,25 +575,6 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                             /*旋轉角度*/
                         int orientation = cursor.getInt(cursor.getColumnIndex(projection[2]));
                         item.setDegree(orientation);
-
-                            /*縮圖*/
-//                            thumbCursor = getActivity().getContentResolver().query(
-//                                    MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
-//                                    thumProjection,
-//                                    MediaStore.Images.Thumbnails.IMAGE_ID + "=" + _id,
-//                                    null,
-//                                    null
-//                            );
-//
-//                            String thumPath = "";
-//                            if (thumbCursor != null) {
-//                                if (thumbCursor.moveToFirst()) {
-//                                    thumPath = thumbCursor.getString(thumbCursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails.DATA));
-//                                    thumbCursor.close();
-//                                }
-//                            }
-//
-//                            item.setThumbnailsPath(thumPath);
 
                         MyLog.Set("e", FragmentSelectPhoto2.class, "path => " + path);
                         MyLog.Set("e", FragmentSelectPhoto2.class, "_id => " + _id);
@@ -774,31 +701,6 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
     private void guideSize() {
 
-//        final MaterialTapTargetPrompt.Builder builder = new MaterialTapTargetPrompt.Builder(getActivity());
-//        builder.setAnimationInterpolator(new FastOutSlowInInterpolator());
-//        builder.setCaptureTouchEventOutsidePrompt(true);
-//        builder.setPrimaryText("");
-//        builder.setFocalRadius(20f);
-//        builder.setBackgroundColourFromRes(R.color.pinpinbox_2_0_0_first_main);
-//        builder.setFocalColourFromRes(R.color.pinpinbox_2_0_0_first_main);
-//        builder.setSecondaryTextColourFromRes(R.color.white);
-//        builder.setTarget(sizeImg)
-//                .setSecondaryText(R.string.pinpinbox_2_0_0_other_text_teach_select_original_size_photo)
-//                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener() {
-//                    @Override
-//                    public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onHidePromptComplete() {
-//
-//
-//                        PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.first_to_select_photo, true).commit();
-//
-//
-//                    }
-//                }).show();
 
         SimpleTarget firstTarget = new SimpleTarget.Builder(getActivity())
                 .setPoint(sizeImg)
@@ -837,12 +739,6 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                     switch (msg.what) {
 
-                        //20171016
-//                        case 0:
-//
-//                            tvStartUpLoad.setText(getResources().getString(R.string.pinpinbox_2_0_0_button_uploaded) + upCount);
-//
-//                            break;
 
                         case 1:
 
@@ -904,7 +800,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                 transaction.hide(fragment);
                 transaction.commit();
                 resetAll();
-                cleanPicasso();
+                clearCache();
             }
 
             @Override
@@ -1106,10 +1002,10 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
 
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
-            int count = nonHeaderIdList.size();
-            for (int i = 0; i < count; i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(nonHeaderIdList.get(i).getPath());
-            }
+
+
+            clearCache();
+
             System.gc();
         }
 
@@ -1297,7 +1193,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                 JSONObject uj = new JSONObject(usergrade);
                 intMaxCount = JsonUtility.GetInt(uj, "photo_limit_of_album"); //2016.05.04
 
-                String photo = JsonUtility.GetString(j, "photo");
+                String photo = JsonUtility.GetString(j, ProtocolKey.photo);
                 JSONArray jsonArray = new JSONArray(photo);
 
                 intAlbumCount = jsonArray.length();
@@ -1331,12 +1227,21 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
     }
 
+
+    private Uri cameraUri;
+
     private void dispatchTakePictureIntent() {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (createMode == 0) {
+
+            Date dt = new Date();
+            Long time = dt.getTime();
+            cameraUri = Uri.fromFile(new File(DirClass.pathCamera + time + ".jpg"));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
+
             fragment.startActivityForResult(intent, REQUEST_CODE_CAMERA);
         } else {
             fragment.startActivityForResult(intent, 1);
@@ -1347,9 +1252,8 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
     private void back() {
 
         getActivity().getSupportFragmentManager().beginTransaction().hide(this).commit();
-        cleanPicasso();
+        clearCache();
     }
-
 
     private void upLoadStart() {
 
@@ -1531,13 +1435,25 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
         getAlbumContentTask.execute();
     }
 
-    private void cleanPicasso() {
+    @SuppressLint("StaticFieldLeak")
+    private void clearCache() {
 
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
-            int count = nonHeaderIdList.size();
-            for (int i = 0; i < count; i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(nonHeaderIdList.get(i).getPath());
-            }
+
+            new AsyncTask<Object, Object, Object>() {
+                @Override
+                protected Object doInBackground(Object... objects) {
+
+                    Glide.get(getActivity()).clearDiskCache();
+
+
+                    return null;
+                }
+            }.execute();
+
+
+            Glide.get(getActivity()).clearMemory();
+
             System.gc();
         }
 
@@ -1788,7 +1704,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                 transaction.commit();
 
                 resetAll();
-                cleanPicasso();
+                clearCache();
 
 
             } else if (p58Result == 0) {
@@ -1929,6 +1845,47 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 //    }
 
 
+    private void cameraPhotoToList(Uri uri) {
+
+        String path = FileUtility.getImageAbsolutePath(getActivity(), uri);
+        MyLog.Set("d", getClass(), "onActivityResult => path => " + path);
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM");
+        String time = sdf.format(new java.util.Date());
+
+        int degree = BitmapUtility.getExifOrientation(path);
+
+        GridItem gridItem = new GridItem();
+        gridItem.setPath(path);
+        gridItem.setTime(time);
+
+        if (intAlbumCount + intSelectCount < intMaxCount) {
+            intSelectCount++;
+            gridItem.setSelect(true);
+        } else {
+            gridItem.setSelect(false);
+            MyLog.Set("d", FragmentSelectPhoto2.class, "張數已滿");
+        }
+
+
+        gridItem.setMedia_id(0);
+        gridItem.setDegree(degree);
+        nonHeaderIdList.add(0, gridItem);
+
+
+        hasHeaderIdList = generateHeaderId(nonHeaderIdList);
+
+        Collections.sort(hasHeaderIdList, new YMDComparator());
+
+        adapter.notifyDataSetChanged();
+
+        setItemCount(intSelectCount);
+
+
+    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -1946,66 +1903,35 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                     isFromPPBCamera = true;
 
+                    Uri mImageCaptureUri = null;
 
-                    if (data != null) {
+
+                    if (data != null && data.getData() != null) {
 
                         MyLog.Set("d", getClass(), "data 存在");
 
-                    /*取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意*/
-                        Uri mImageCaptureUri = data.getData();
-
-
-                   /* 返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取*/
-                        if (mImageCaptureUri != null) {
-
-                            String path = FileUtility.getImageAbsolutePath(getActivity(), mImageCaptureUri);
-                            MyLog.Set("d", getClass(), "onActivityResult => path => " + path);
-
-
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM");
-                            String time = sdf.format(new java.util.Date());
-
-                            int degree = BitmapUtility.getExifOrientation(path);
-
-                            GridItem gridItem = new GridItem();
-                            gridItem.setPath(path);
-                            gridItem.setTime(time);
-
-                            if (intAlbumCount + intSelectCount < intMaxCount) {
-                                intSelectCount++;
-                                gridItem.setSelect(true);
-                            } else {
-                                gridItem.setSelect(false);
-                                MyLog.Set("d", FragmentSelectPhoto2.class, "張數已滿");
-                            }
-
-
-                            gridItem.setMedia_id(0);
-                            gridItem.setDegree(degree);
-                            nonHeaderIdList.add(0, gridItem);
-
-
-                            hasHeaderIdList = generateHeaderId(nonHeaderIdList);
-
-                            Collections.sort(hasHeaderIdList, new YMDComparator());
-
-                            adapter.notifyDataSetChanged();
-
-                            setItemCount(intSelectCount);
-                        } else {
-
-                            MyLog.Set("d", getClass(), "mImageCaptureUri == null");
-
-
-                        }
-
-
+                        mImageCaptureUri = data.getData();
                     } else {
 
                         MyLog.Set("d", getClass(), "data == null");
 
+                    }
+
+
+                    if (mImageCaptureUri == null) {
+                        if (cameraUri != null) {
+                            mImageCaptureUri = cameraUri;
+                        }
+                    }
+
+
+                    if(mImageCaptureUri==null){
+
+                        MyLog.Set("d", getClass(), "mImageCaptureUri==null");
 
                     }
+
+                    cameraPhotoToList(mImageCaptureUri);
 
 
                     break;
@@ -2016,13 +1942,13 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                     if (data != null) {
                     /*取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意*/
-//                        Uri mImageCaptureUri = data.getData();
-                        Uri mImageCaptureUri = data.getParcelableExtra(AdobeImageIntent.EXTRA_OUTPUT_URI);
+//                        Uri nImageCaptureUri = data.getData();
+                        Uri nImageCaptureUri = data.getParcelableExtra(AdobeImageIntent.EXTRA_OUTPUT_URI);
 
                    /* 返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取*/
-                        if (mImageCaptureUri != null) {
+                        if (nImageCaptureUri != null) {
 
-                            String path = FileUtility.getImageAbsolutePath(getActivity(), mImageCaptureUri);
+                            String path = FileUtility.getImageAbsolutePath(getActivity(), nImageCaptureUri);
                             MyLog.Set("d", getClass(), "onActivityResult => path => " + path);
 
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy / MM");
@@ -2221,7 +2147,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
     @Override
     public void onPause() {
-        cleanPicasso();
+        clearCache();
         super.onPause();
     }
 
@@ -2244,10 +2170,9 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
         sendPhotoTask = null;
 
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
-            int count = nonHeaderIdList.size();
-            for (int i = 0; i < count; i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(nonHeaderIdList.get(i).getPath());
-            }
+
+            Glide.get(getActivity()).clearMemory();
+
             nonHeaderIdList.clear();
             nonHeaderIdList = null;
         }

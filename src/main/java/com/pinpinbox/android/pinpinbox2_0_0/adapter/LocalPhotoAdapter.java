@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersSimpleAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -30,11 +28,17 @@ public class LocalPhotoAdapter extends BaseAdapter implements
     private List<GridItem> hasHeaderIdList;
     private LayoutInflater mInflater;
 
+    private RequestOptions opts;
 
     public LocalPhotoAdapter(Activity mActivity, List<GridItem> hasHeaderIdList) {
         mInflater = LayoutInflater.from(mActivity);
         this.mActivity = mActivity;
         this.hasHeaderIdList = hasHeaderIdList;
+
+        opts = new RequestOptions()
+                .centerCrop()
+                .error(R.drawable.bg_2_0_0_no_image);
+
 
     }
 
@@ -74,35 +78,11 @@ public class LocalPhotoAdapter extends BaseAdapter implements
 
 
         if (path != null && !path.equals("")) {
-//            mViewHolder.mImageView.setTag(path);
             final File file = new File(path);
-            Picasso.with(mActivity.getApplicationContext())
+            Glide.with(mActivity.getApplicationContext())
                     .load(file)
-                    .config(Bitmap.Config.RGB_565)
-                    .fit()
-                    .error(R.drawable.bg_2_0_0_no_image)
-                    .tag(mActivity.getApplicationContext())
-                    .centerCrop()
-                    .into(mViewHolder.mImageView, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                            MyLog.Set("e", LocalPhotoAdapter.class, "photo => onSuccess");
-
-                        }
-
-                        @Override
-                        public void onError() {
-                            MyLog.Set("e", LocalPhotoAdapter.class, "photo => onError");
-
-                            Picasso.with(mActivity.getApplicationContext())
-                                    .load(file)
-                                    .config(Bitmap.Config.RGB_565)
-                                    .fit()
-                                    .error(R.drawable.bg_2_0_0_no_image)
-                                    .tag(mActivity.getApplicationContext())
-                                    .centerCrop()
-                                    .into(mViewHolder.mImageView);
+                    .apply(opts)
+                    .into(mViewHolder.mImageView);
 
 
 
@@ -110,8 +90,9 @@ public class LocalPhotoAdapter extends BaseAdapter implements
 
 
 
-                        }
-                    });
+
+
+
 
 
 

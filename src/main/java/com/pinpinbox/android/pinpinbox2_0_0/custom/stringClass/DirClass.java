@@ -26,6 +26,8 @@ public class DirClass {
 
     public static final String pathUserBanner = sdPath + pathName_UserBanner;
 
+    public static final String pathCamera = sdPath + dirCamera;
+
     public static final String test = sdPath + "aaaaaaaaaaaaaaaaaaaaaaaaaaa" +pathName_UserBanner;
 
 }

@@ -48,14 +48,10 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettings2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.BuyPoint2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.EditProfile2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Income2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.MyFollow2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.RecentAlbum2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -896,31 +892,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void toMyFollow() {
-        startActivity(new Intent(getActivity(), MyFollow2Activity.class));
-        ActivityAnim.StartAnim(getActivity());
-    }
 
-    private void toBuyPoint() {
-        startActivity(new Intent(getActivity(), BuyPoint2Activity.class));
-        ActivityAnim.StartAnim(getActivity());
-    }
 
-    private void toExchangeList() {
-
-        ActivityIntent.toExchangeList(getActivity());
-
-    }
-
-    private void toRecent() {
-        startActivity(new Intent(getActivity(), RecentAlbum2Activity.class));
-        ActivityAnim.StartAnim(getActivity());
-    }
-
-    private void toAppSetting() {
-        startActivity(new Intent(getActivity(), AppSettings2Activity.class));
-        ActivityAnim.StartAnim(getActivity());
-    }
 
     private void toSponsorList() {
         ActivityIntent.toSponsorList(getActivity());
@@ -929,111 +902,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
     private void toFollowMe() {
         ActivityIntent.toFollowMe(getActivity());
     }
-
-
-    private View vRPeditProfile, vRPworkManage,
-            vRPmyFollow, vRPrecent, vRPbutPoint, vRPexchangeList, vRPsettings;
-
-
-//    private void showMenu() {
-//
-//        if (popMenu == null) {
-//
-//            popMenu = new PopupCustom(getActivity());
-//            popMenu.setPopup(R.layout.pop_2_0_0_me_menu, R.style.pinpinbox_popupAnimation_bottom);
-//
-//
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvTitle), true);
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToEditProfile), true);
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToWorkManage), true);
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToMyFollow), true);
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToRecent), true);
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToBuyPoint), true);
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvToExchangeList), true);
-//            TextUtility.setBold((TextView) popMenu.getPopupView().findViewById(R.id.tvSettings), true);
-//
-//
-//            vRPeditProfile = popMenu.getPopupView().findViewById(R.id.vRPeditProfile);
-//            vRPworkManage = popMenu.getPopupView().findViewById(R.id.vRPworkManage);
-//            vRPmyFollow = popMenu.getPopupView().findViewById(R.id.vRPmyFollow);
-//            vRPrecent = popMenu.getPopupView().findViewById(R.id.vRPrecent);
-//            vRPbutPoint = popMenu.getPopupView().findViewById(R.id.vRPbutPoint);
-//            vRPexchangeList = popMenu.getPopupView().findViewById(R.id.vRPexchangeList);
-//            vRPsettings = popMenu.getPopupView().findViewById(R.id.vRPsettings);
-//
-//            final List<View> vRedPointList = new ArrayList<>();
-//            vRedPointList.add(vRPeditProfile);
-//            vRedPointList.add(vRPworkManage);
-//            vRedPointList.add(vRPmyFollow);
-//            vRedPointList.add(vRPrecent);
-//            vRedPointList.add(vRPbutPoint);
-//            vRedPointList.add(vRPexchangeList);
-//            vRedPointList.add(vRPsettings);
-//
-//
-//            LinearLayout linToEditProfile = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToEditProfile);
-//            LinearLayout linToWorkManage = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToWorkManage);
-//            LinearLayout linToMyFollow = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToMyFollow);
-//            LinearLayout linToRecent = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToRecent);
-//            LinearLayout linToBuyPoint = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToBuyPoint);
-//            LinearLayout linToExchangeList = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linToExchangeList);
-//            LinearLayout linSettings = (LinearLayout) popMenu.getPopupView().findViewById(R.id.linSettings);
-//
-//            View vContent = popMenu.getPopupView().findViewById(R.id.linBackground);
-//
-//            linToEditProfile.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-//            linToWorkManage.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-//            linToMyFollow.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-//            linToRecent.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-//            linToBuyPoint.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-//            linToExchangeList.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-//            linSettings.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-//
-//
-//            popMenu.setDissmissWorks(new PopupCustom.DissmissWorks() {
-//                @Override
-//                public void excute() {
-//
-//                    if (vRedPointList != null && vRedPointList.size() > 0) {
-//
-//                        if (vRPmenu != null) {
-//
-//                            boolean allclear = true;
-//
-//                            for (int i = 0; i < vRedPointList.size(); i++) {
-//
-//                                if (vRedPointList.get(i).getVisibility() == View.VISIBLE) {
-//                                    allclear = false;
-//                                    break;
-//                                }
-//
-//                            }
-//
-//                            if (allclear) {
-//                                vRPmenu.setVisibility(View.GONE);
-//                            } else {
-//                                vRPmenu.setVisibility(View.VISIBLE);
-//                            }
-//
-//                        }
-//
-//                    }
-//
-//                }
-//
-//            });
-//
-//
-//            checkShowRedPoints();
-//            popMenu.show(((Main2Activity) getActivity()).getBackground());
-//
-//
-//        } else {
-//            checkShowRedPoints();
-//            popMenu.show(((Main2Activity) getActivity()).getBackground());
-//        }
-//
-//    }
 
     private void showBoard() {
 
@@ -1584,59 +1452,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         return this.albumList;
     }
 
-//    private void checkShowRedPoints() {
-//
-//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_editProfile, false)) {
-//            vRPeditProfile.setVisibility(View.VISIBLE);
-//        } else {
-//            vRPeditProfile.setVisibility(View.GONE);
-//        }
-//
-//
-//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_workManage, false)) {
-//            vRPworkManage.setVisibility(View.VISIBLE);
-//        } else {
-//            vRPworkManage.setVisibility(View.GONE);
-//        }
-//
-//
-//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_myFollow, false)) {
-//            vRPmyFollow.setVisibility(View.VISIBLE);
-//        } else {
-//            vRPmyFollow.setVisibility(View.GONE);
-//        }
-//
-//
-//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_recent, false)) {
-//            vRPrecent.setVisibility(View.VISIBLE);
-//        } else {
-//            vRPrecent.setVisibility(View.GONE);
-//        }
-//
-//
-//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_butPoint, false)) {
-//            vRPbutPoint.setVisibility(View.VISIBLE);
-//        } else {
-//            vRPbutPoint.setVisibility(View.GONE);
-//        }
-//
-//
-//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_exchangeList, false)) {
-//            vRPexchangeList.setVisibility(View.VISIBLE);
-//        } else {
-//            vRPexchangeList.setVisibility(View.GONE);
-//        }
-//
-//
-//        if (PPBApplication.getInstance().getData().getBoolean(Key.checkRP_settings, false)) {
-//            vRPsettings.setVisibility(View.VISIBLE);
-//        } else {
-//            vRPsettings.setVisibility(View.GONE);
-//        }
-//
-//
-//    }
-
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -1910,27 +1725,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
             }
 
             switch (requestCode) {
-//                case PHOTO_GRAPH:
-//
-//
-//                    MyLog.Set("e", getClass(), "PHOTO_GRAPH");
-//
-//
-//
-////                    Crop.of(data.getData(), Uri.fromFile(fileCover))
-////                            .asSquare()
-////                            .withAspect(960,450)
-////                            .start(getActivity());
-//
-//
-//                    break;
 
                 case PHOTO_FILES:
 
                     MyLog.Set("e", getClass(), "PHOTO_FILES");
 
                     Crop.of(data.getData(), Uri.fromFile(fileCover))
-//                            .asSquare()
                             .withAspect(960, 450)
                             .start(getActivity(), FragmentMe2.this);
 
