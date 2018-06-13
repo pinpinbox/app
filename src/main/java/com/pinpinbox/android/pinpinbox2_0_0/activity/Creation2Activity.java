@@ -27,6 +27,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -279,7 +281,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private ImageView locationImg, audioRecordingImg, audioPlayImg, deleteImg, aviaryImg, locationDeleteImg, audioDeleteImg;
 
-    private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground;
+    private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSendPreview;
 
     private EditText edPreviewPageStart;
 
@@ -638,16 +640,43 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         tvSetAudio.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
         linPreviewPage.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
         linPreviewAll.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
-        ((LinearLayout) popCreationSet.getPopupView().findViewById(R.id.lin1)).setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        ((RelativeLayout) popCreationSet.getPopupView().findViewById(R.id.r1)).setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
 
 
-
-        selectPreviewPage.setOnClickListener(this);
-        selectPreviewAll.setOnClickListener(this);
-
+        tvSendPreview = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSendPreview);
+        tvSendPreview.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
 
         edPreviewPageStart = (EditText) popCreationSet.getPopupView().findViewById(R.id.edPreviewPageStart);
-        edPreviewPageStart.setText(preview_page_num + "");
+        edPreviewPageStart.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                tvSendPreview.setVisibility(View.VISIBLE);
+
+            }
+        });
+        if (isNewCreate) {
+            selectPreviewAll();
+        } else {
+            if (preview_page_num != 0) {
+                edPreviewPageStart.setText(preview_page_num + "");
+                selectPreviewPage();
+            }
+        }
+
+
+
+
+
 
         /**/
         popCreateAdd = new PopupCustom(mActivity);
@@ -1646,33 +1675,40 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private void confirmPreviewClick() {
 
-        if (photoList != null && photoList.size() == 0) {
-            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_album_content_is_null);
-            return;
-        }
 
+        if (previewMode == PREVIEW_ALL) {
 
-        if (edPreviewPageStart.getText().toString() == null || edPreviewPageStart.getText().toString().equals("")) {
-
-            PinPinToast.showErrorToast(mActivity, "請輸入需要隱藏的內容起始頁");
-            return;
-        }
-
-
-        sendPreviewCount = StringIntMethod.StringToInt(edPreviewPageStart.getText().toString());
-
-        if (sendPreviewCount < 1) {
-
-            PinPinToast.showErrorToast(mActivity, "至少1頁");
-
-        } else if (sendPreviewCount > photoList.size()) {
-
-            PinPinToast.showErrorToast(mActivity, "不可大於作品總張數");
+            doSendPreview();
 
         } else {
 
 
-            doSendPreview();
+            if (photoList != null && photoList.size() == 0) {
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_album_content_is_null);
+                return;
+            }
+
+            if (edPreviewPageStart.getText().toString() == null || edPreviewPageStart.getText().toString().equals("")) {
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_type_the_number_you_want_to_be_visible);
+                return;
+            }
+
+
+            sendPreviewCount = StringIntMethod.StringToInt(edPreviewPageStart.getText().toString());
+
+            if (sendPreviewCount < 1) {
+
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_at_least_1_page);
+
+            } else if (sendPreviewCount > photoList.size()) {
+
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total);
+
+            } else {
+
+                doSendPreview();
+
+            }
 
         }
 
@@ -3088,20 +3124,34 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             String str = "";
 
-            for (int i = 0; i < sendPreviewCount; i++) {
 
-                if (i < sendPreviewCount) {
+            if (previewMode == PREVIEW_ALL) {
 
-                    if (i == 0) {
-                        str = photoList.get(i).get(Key.photo_id) + "";
-                    } else {
-                        str = str + "," + photoList.get(i).get(Key.photo_id);
-                    }
+                for (int i = 0; i < photoList.size(); i++) {
+                        if (i == 0) {
+                            str = photoList.get(i).get(Key.photo_id) + "";
+                        } else {
+                            str = str + "," + photoList.get(i).get(Key.photo_id);
+                        }
+                }
 
 
+            }else {
+
+                for (int i = 0; i < sendPreviewCount; i++) {
+//                    if (i < sendPreviewCount) {
+                        if (i == 0) {
+                            str = photoList.get(i).get(Key.photo_id) + "";
+                        } else {
+                            str = str + "," + photoList.get(i).get(Key.photo_id);
+                        }
+//                    }
                 }
 
             }
+
+
+
 
 
             JSONObject obj = new JSONObject();
@@ -3160,6 +3210,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 photoPreviewType = false;
 
                 PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_edit_finish);
+
+                tvSendPreview.setVisibility(View.GONE);
 
 
             } else if (p33Result.equals("0")) {
@@ -4851,41 +4903,35 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 popCreateSort.dismiss();
                 break;
 
-
-
-            case R.id.selectPreviewPage:
-
-                previewMode = PREVIEW_PAGE;
-
-                selectPreviewPage.setImageResource(R.drawable.border_2_0_0_click_default_radius);
-                selectPreviewAll.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
-                linPreviewAll.setAlpha(0.2f);
-                linPreviewPage.setAlpha(1f);
-                edPreviewPageStart.setEnabled(true);
-
-
-                break;
-
-            case R.id.selectPreviewAll:
-
-                previewMode = PREVIEW_ALL;
-
-                selectPreviewPage.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
-                selectPreviewAll.setImageResource(R.drawable.border_2_0_0_click_default_radius);
-                linPreviewAll.setAlpha(1f);
-                linPreviewPage.setAlpha(0.2f);
-                edPreviewPageStart.setEnabled(false);
-
-                break;
-
-
-
-
-
-
         }
 
     }
+
+
+    private void selectPreviewPage() {
+        previewMode = PREVIEW_PAGE;
+        selectPreviewPage.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+        selectPreviewAll.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+        linPreviewAll.setAlpha(0.2f);
+        linPreviewPage.setAlpha(1f);
+        edPreviewPageStart.setEnabled(true);
+
+        if (edPreviewPageStart.getText().toString().equals("0")) {
+            edPreviewPageStart.setText("1");
+        }
+
+    }
+
+    private void selectPreviewAll() {
+        previewMode = PREVIEW_ALL;
+        selectPreviewPage.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+        selectPreviewAll.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+        linPreviewAll.setAlpha(1f);
+        linPreviewPage.setAlpha(0.2f);
+        edPreviewPageStart.setEnabled(false);
+
+    }
+
 
     @Override
     public void OnClick(View v) {
@@ -4923,12 +4969,28 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 }
                 break;
 
+            case R.id.linPreviewPage:
 
-//            case R.id.tvConfirmHideItem:
-//
-//                confirmPreviewClick();
-//
-//                break;
+                selectPreviewPage();
+
+                tvSendPreview.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.linPreviewAll:
+
+                selectPreviewAll();
+
+                tvSendPreview.setVisibility(View.VISIBLE);
+
+                break;
+
+
+            case R.id.tvSendPreview:
+
+                confirmPreviewClick();
+
+                break;
 
 
         }

@@ -300,7 +300,9 @@
     <string name="pinpinbox_2_0_0_toast_message_tag_can_not_tag_yourself">不可標記自己</string>
     <string name="pinpinbox_2_0_0_toast_message_tag_has_been_tagged">已標記</string>
     <string name="pinpinbox_2_0_0_toast_message_video_error">影片播放異常</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_type_the_number_you_want_to_be_visible">請輸入開放頁數</string>
+    <string name="pinpinbox_2_0_0_toast_message_at_least_1_page">至少1頁</string>
+    <string name="pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total">不可大於作品總張數</string>
 
 
 
@@ -372,8 +374,11 @@
     <string name="pinpinbox_2_0_0_itemtype_address">地址</string>
     <string name="pinpinbox_2_0_0_itemtype_exchange_list">兌換清單</string>
     <string name="pinpinbox_2_0_0_itemtype_autoplay_cga_banner_video">自動播放影片(分類輪播)</string>
+    <string name="pinpinbox_2_0_0_itemtype_all">全部</string>
 
-
+    <!--特殊-->
+    <string name="pinpinbox_2_0_0_itemtype_visible_page_before">開放前</string>
+    <string name="pinpinbox_2_0_0_itemtype_visible_page_after">頁</string>
 
     <string name="pinpinbox_2_0_0_title_editprofile">編輯資訊</string>
     <string name="pinpinbox_2_0_0_title_changepassword">變更密碼</string>

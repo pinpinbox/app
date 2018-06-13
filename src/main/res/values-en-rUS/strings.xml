@@ -297,7 +297,9 @@
     <string name="pinpinbox_2_0_0_toast_message_tag_can_not_tag_yourself">You can\'t tag yourself</string>
     <string name="pinpinbox_2_0_0_toast_message_tag_has_been_tagged">Has been tagged</string>
     <string name="pinpinbox_2_0_0_toast_message_video_error">Video play is abnormal</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_type_the_number_you_want_to_be_visible">Type the number you want to be visible</string>
+    <string name="pinpinbox_2_0_0_toast_message_at_least_1_page">Least 1 page</string>
+    <string name="pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total">Can't be larger than the total</string>
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
     <string name="pinpinbox_2_0_0_size_original">Original(Long time)</string>
@@ -364,6 +366,12 @@
     <string name="pinpinbox_2_0_0_itemtype_address">Address</string>
     <string name="pinpinbox_2_0_0_itemtype_exchange_list">Exchange List</string>
     <string name="pinpinbox_2_0_0_itemtype_autoplay_cga_banner_video">Autoplay video (banner)</string>
+    <string name="pinpinbox_2_0_0_itemtype_all">All</string>
+
+
+    <!--特殊-->
+    <string name="pinpinbox_2_0_0_itemtype_visible_page_before">First</string>
+    <string name="pinpinbox_2_0_0_itemtype_visible_page_after">pages to be visible</string>
 
 
     <string name="pinpinbox_2_0_0_title_editprofile">Edit Profile</string>
@@ -469,7 +477,7 @@
     <string name="pinpinbox_2_0_0_other_text_can_redownload">Reload</string>
     <string name="pinpinbox_2_0_0_other_text_back_to_settings">App Settings</string>
     <string name="pinpinbox_2_0_0_other_text_only_read_photo_description">Only browse photos and descriptions</string>
-    <string name="pinpinbox_2_0_0_other_text_click_left_icon_or_input">Enter number code</string>
+    <string name="pinpinbox_2_0_0_other_text_click_left_icon_or_input">Type number code</string>
     <string name="pinpinbox_2_0_0_other_text_member_level_profession">(Lv:profession)</string>
     <string name="pinpinbox_2_0_0_other_text_collect_byrequired_point">Sponsor of points:</string>
     <string name="pinpinbox_2_0_0_other_text_least_3p">(Min. 3p)</string>

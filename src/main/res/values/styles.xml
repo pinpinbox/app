@@ -27,7 +27,7 @@
     </style>
 
 
-    <style name="ppb200_divider_list" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_divider_list">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/ppb200_divider_height</item>
         <item name="android:background">@color/pinpinbox_2_0_0_divider</item>
