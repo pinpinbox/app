@@ -76,6 +76,14 @@ public class FileUtility {
 
     // 在XD卡上創建目錄
 
+    public static File CreateSDDir(String dirName){
+        File dir = new File(Environment.getExternalStorageDirectory() + "/" + dirName);
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        return dir;
+    }
+
     public File createSDDir(String dirName) {
         File dir = new File(SDPATH + dirName);
         if(!dir.exists()){
@@ -723,6 +731,9 @@ public class FileUtility {
             if (cursor != null)
                 cursor.close();
         }
+
+
+
         return null;
     }
 

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-path path="Android/data/com.pinpinbox.android" name="files_root" />
-    <external-path path="." name="external_storage_root" />
+    <!--<external-path path="Android/data/com.pinpinbox.android/DCIM" name="photo_root" />-->
+    <!--<external-path path="Android/data/com.pinpinbox.android/ppb_camera" name="files_root" />-->
+    <!--<external-path path="." name="external_storage_root" />-->
+
+    <external-path name="external_files" path="."/>
+
 </paths>

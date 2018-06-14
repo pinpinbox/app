@@ -368,22 +368,28 @@ public class BannerPageAdapter extends PagerAdapter {
 
                             Uri uri = Uri.parse(url);
 
-                            String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
+                            String lastPath = uri.getLastPathSegment();
 
-                            if (categoryareaId != null && !categoryareaId.equals("")) {
+                            if(lastPath.equals("point")){
+                                ActivityIntent.toBuyPoint(mActivity);
+                            }else {
 
-                                ActivityIntent.toFeature(mActivity, StringIntMethod.StringToInt(categoryareaId));
 
+                                String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
+                                if (categoryareaId != null && !categoryareaId.equals("")) {
+                                    ActivityIntent.toFeature(mActivity, StringIntMethod.StringToInt(categoryareaId));
+                                } else {
+                                    bundle.putString("url", url);
+                                    intent.putExtras(bundle);
+                                    intent.setClass(mActivity, WebView2Activity.class);
+                                    mActivity.startActivity(intent);
+                                    ActivityAnim.StartAnim(mActivity);
+                                }
 
-                            } else {
-
-                                bundle.putString("url", url);
-                                intent.putExtras(bundle);
-                                intent.setClass(mActivity, WebView2Activity.class);
-                                mActivity.startActivity(intent);
-                                ActivityAnim.StartAnim(mActivity);
 
                             }
+
+
 
 
                         }

@@ -44,6 +44,7 @@ import android.widget.TextView;
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
 import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
 import com.bumptech.glide.Glide;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.BitmapUtility;
 import com.pinpinbox.android.Utility.FileUtility;
@@ -1232,6 +1233,9 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
     private Uri cameraUri;
 
+    private File camFile;
+
+
     private void dispatchTakePictureIntent() {
 
 
@@ -1244,15 +1248,28 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
         if (createMode == 0) {
 
+
             Date dt = new Date();
             Long time = dt.getTime();
 
 
-            if(SystemUtility.getSystemVersion()>= Build.VERSION_CODES.N){
+            try {
+
+                FileUtility.CreateSDDir(DirClass.dirCamera);
+
+                FileUtility.createSDFile(DirClass.pathCamera + time + ".jpg");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            camFile = new File(DirClass.pathCamera + time + ".jpg");
+
+
+            if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                cameraUri = FileProvider.getUriForFile(getActivity(), "com.pinpinbox.android" + ".provider", new File(DirClass.pathCamera + time + ".jpg"));
-            }else {
-                cameraUri = Uri.fromFile(new File(DirClass.pathCamera + time + ".jpg"));
+                cameraUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", camFile);
+            } else {
+                cameraUri = Uri.fromFile(camFile);
             }
 
 
@@ -1856,14 +1873,18 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
         isUploading = uploading;
     }
 
-//    public LoadingAnimation getLoading() {
-//        return this.loading;
-//    }
-
 
     private void cameraPhotoToList(Uri uri) {
 
-        String path = FileUtility.getImageAbsolutePath(getActivity(), uri);
+
+        String path = "";
+
+        if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
+            path = camFile.getAbsolutePath();
+        } else {
+            path = FileUtility.getImageAbsolutePath(getActivity(), uri);
+        }
+
         MyLog.Set("d", getClass(), "onActivityResult => path => " + path);
 
 
@@ -1910,7 +1931,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
         MyLog.Set("d", getClass(), "resultCode => " + resultCode);
         MyLog.Set("d", getClass(), "requestCode => " + requestCode);
 
-        if (resultCode == -1) {
+        if (resultCode == -1 || resultCode == 0) {
 
 
             switch (requestCode) {
@@ -1941,9 +1962,8 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                     }
 
 
-                    if(mImageCaptureUri==null){
-
-                        MyLog.Set("d", getClass(), "mImageCaptureUri==null");
+                    if (mImageCaptureUri == null) {
+                        return;
 
                     }
 
