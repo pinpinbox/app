@@ -242,7 +242,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     private void testSet() {
 
 
-
         testbuttonImg.setVisibility(View.VISIBLE);
 
         testbuttonImg.setOnClickListener(new View.OnClickListener() {
