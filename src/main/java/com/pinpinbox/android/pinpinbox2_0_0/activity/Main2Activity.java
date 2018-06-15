@@ -215,7 +215,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         checkNewDay();
 
-
+        testbuttonImg = (ImageView) findViewById(R.id.testbutton);
         if (BuildConfig.FLAVOR.equals("w3_private")) {
             testSet();
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
@@ -241,7 +241,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     private void testSet() {
 
-        testbuttonImg = (ImageView) findViewById(R.id.testbutton);
+
 
         testbuttonImg.setVisibility(View.VISIBLE);
 
