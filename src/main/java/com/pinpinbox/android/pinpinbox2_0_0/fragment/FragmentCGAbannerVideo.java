@@ -7,10 +7,10 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ApiKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
@@ -69,7 +69,7 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment{
 
     private void setYouTube(){
 
-        initialize(ApiKey.YOUTUBE, new YouTubePlayer.OnInitializedListener() {
+        initialize(KeysForSKD.YouTube, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 MyLog.Set("e", getClass(), "onInitializationSuccess");

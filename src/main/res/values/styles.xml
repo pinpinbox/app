@@ -442,51 +442,12 @@
 
 
 
-    album info2 style
-
-    <style name="sharedElementEnterTransition_by_above_v5" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
-        <item name="android:fitsSystemWindows">false</item>
-        <item name="android:windowContentTransitions">true</item>
-        <!--windowContentTransitions => true => sharedelement動畫時背景會黑-->
-        <!--A 跳转到 B时，使B中的View进入场景的transition-->
-        <!--<item name="android:windowSharedElementExitTransition">@transition/change_bounds</item>&lt;!&ndash;A 跳转到 B时，使A中的View退出场景的transition&ndash;&gt;-->
-        <!--<item name="android:windowReenterTransition">@transition/change_bounds</item>&lt;!&ndash;B 返回到 A时，使A中的View进入场景的transition&ndash;&gt;-->
-        <!--<item name="android:windowReturnTransition">@transition/change_bounds</item>&lt;!&ndash;B 返回到 A时，使B中的View退出场景的transition&ndash;&gt;-->
-    </style>
-
-
     reader
-
     <style name="reader" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/black</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">false</item>
     </style>
-
-
-    <!--first style-->
-    <style name="whiteTransparent">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:fitsSystemWindows">false</item>
-        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
-    </style>
-
-
-
-
-
-
-
-
-
 
 
 

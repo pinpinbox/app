@@ -205,20 +205,18 @@ public class FirstInstallActivity extends DraggerActivity {
                             @Override
                             public void onResponse(final Response response) throws IOException {
 
-
                                 MyLog.Set("e", mActivity.getClass(), "88888");
+
+                                String htmlStr = response.body().string();
+                                Pattern pattern = Pattern.compile(SystemUtility.getVersionName(mActivity));
+                                Matcher matcher = pattern.matcher(htmlStr);
 
 
 //                                String htmlStr = response.body().string();
-//                                Pattern pattern = Pattern.compile(SystemUtility.getVersionName(mActivity));
+//                                Pattern pattern = Pattern.compile("\"softwareVersion\"\\W*([\\d\\.]+)");
 //                                Matcher matcher = pattern.matcher(htmlStr);
 
 
-
-
-                                String htmlStr = response.body().string();
-                                Pattern pattern = Pattern.compile("\"softwareVersion\"\\W*([\\d\\.]+)");
-                                Matcher matcher = pattern.matcher(htmlStr);
                                 if (matcher.find()) {
 
                                     runOnUiThread(new Runnable() {
@@ -228,18 +226,19 @@ public class FirstInstallActivity extends DraggerActivity {
                                         }
                                     });
 
-                                    if (!SystemUtility.getVersionName(mActivity).equals(matcher.group(1))) {
-                                        MyLog.Set("e", FirstInstallActivity.class, "------------------------- 版本不一樣 可更新 -------------------------");
 
-                                        SharedPreferences getdata = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
-                                        getdata.edit().putBoolean(Key.update, true).commit();
-
-                                        Message msg = new Message();
-                                        msg.what = 1;
-                                        mHandler.sendMessage(msg);
-
-
-                                    } else {
+//                                    if (!SystemUtility.getVersionName(mActivity).equals(matcher.group())) {
+//                                        MyLog.Set("e", FirstInstallActivity.class, "------------------------- 版本不一樣 可更新 -------------------------");
+//
+//                                        SharedPreferences getdata = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
+//                                        getdata.edit().putBoolean(Key.update, true).commit();
+//
+//                                        Message msg = new Message();
+//                                        msg.what = 1;
+//                                        mHandler.sendMessage(msg);
+//
+//
+//                                    } else {
                                         MyLog.Set("e", FirstInstallActivity.class, "------------------------- 版本相符 繼續執行 -------------------------");
 
 
@@ -250,25 +249,22 @@ public class FirstInstallActivity extends DraggerActivity {
                                         msg.what = 2;
                                         mHandler.sendMessage(msg);
 
-                                    }
+//                                    }
 
-                                } else { //有可能Google Play的網頁內容變動，但仍需讓使用者可以進到下一頁面
+                                } else {
 
-                                    MyLog.Set("e", mActivity.getClass(), "99999");
+                                    MyLog.Set("e", FirstInstallActivity.class, "------------------------- 找不到版本號 -------------------------");
 
 
-//                                    runOnUiThread(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            startLoading();
-//                                        }
-//                                    });
-//
-//                                    Message msg = new Message();
-//                                    msg.what = 0;
-//                                    mHandler.sendMessageDelayed(msg,1500);
+                                    SharedPreferences getdata = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
+                                    getdata.edit().putBoolean(Key.update, true).commit();
 
-                                    dowork();
+                                    Message msg = new Message();
+                                    msg.what = 1;
+                                    mHandler.sendMessage(msg);
+
+
+//                                    dowork();
 
                                 }
                             }
@@ -304,14 +300,7 @@ public class FirstInstallActivity extends DraggerActivity {
                         d.setCheckExecute(new CheckExecute() {
                             @Override
                             public void DoCheck() {
-                                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                                try {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                                    MyLog.Set("d", mActivity.getClass(), "open google play app");
-                                } catch (android.content.ActivityNotFoundException anfe) {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                                    MyLog.Set("d", mActivity.getClass(), "open google play web");
-                                }
+                            toGooglePlay();
                             }
                         });
                         d.show();
@@ -405,20 +394,13 @@ public class FirstInstallActivity extends DraggerActivity {
                 d.setCheckExecute(new CheckExecute() {
                     @Override
                     public void DoCheck() {
-                        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                        try {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                            MyLog.Set("d", mActivity.getClass(), "open google play app");
-                        } catch (android.content.ActivityNotFoundException anfe) {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                            MyLog.Set("d", mActivity.getClass(), "open google play web");
-                        }
+                        toGooglePlay();
                     }
                 });
                 d.show();
 
 
-            } else if (p88Result == 2) {
+            } else if (p88Result == 2 || p88Result == 3) {
 
                 //先判斷有沒有新版本
 
@@ -445,6 +427,19 @@ public class FirstInstallActivity extends DraggerActivity {
 
                 dowork();
             }
+        }
+
+    }
+
+    private void toGooglePlay(){
+
+        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            MyLog.Set("d", mActivity.getClass(), "open google play app");
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            MyLog.Set("d", mActivity.getClass(), "open google play web");
         }
 
     }

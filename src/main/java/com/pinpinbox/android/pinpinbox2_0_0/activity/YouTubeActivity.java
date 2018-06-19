@@ -12,7 +12,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ApiKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 
@@ -36,7 +36,7 @@ public class YouTubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         SystemUtility.SysApplication.getInstance().addActivity(this);
         YouTubePlayerView youTubeView = (YouTubePlayerView)
                 findViewById(R.id.youtube_view);
-        youTubeView.initialize(ApiKey.YOUTUBE, this);
+        youTubeView.initialize(KeysForSKD.YouTube, this);
 
 
     }

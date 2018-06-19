@@ -187,6 +187,7 @@ dependencies {
     implementation 'com.blankj:utilcode:1.9.8'
     implementation 'com.flyco.labelview:FlycoLabelView_Lib:1.0.2@aar'
     implementation 'com.google.firebase:firebase-analytics:11.8.0'
+    implementation 'com.google.firebase:firebase-config:11.8.0'
 
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.github.mabbas007:TagsEditText:1.0.5'
@@ -200,8 +201,10 @@ dependencies {
 //    implementation 'com.adobe.creativesdk:image:4.0.0' //IInAppBillingService
 //    implementation 'com.android.support:cardview-v7:22.2.0'
 //    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
+//    implementation 'com.github.javiersantos:AppUpdater:2.6.5' can't use
     implementation "com.localytics.android:library:4.0.1"
+
+
 
     testCompile 'junit:junit:4.12'
 }

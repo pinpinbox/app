@@ -464,7 +464,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" >
-            <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
 
             <intent-filter>
 
@@ -497,7 +496,6 @@
             android:screenOrientation="portrait"
 
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
 
         <activity
             android:name=".pinpinbox2_0_0.activity.MyCollect2Activity"
@@ -740,7 +738,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
 
 
 
@@ -790,7 +787,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <!--android:theme="@style/sharedElementEnterTransition_by_above_v5"-->
 
 
 

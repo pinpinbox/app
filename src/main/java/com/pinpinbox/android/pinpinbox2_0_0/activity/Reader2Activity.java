@@ -564,6 +564,15 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     return;
                 }
 
+                MyLog.Set("e", mActivity.getClass(), "photoContentsList.get(position).getPhoto_id() => " + photoContentsList.get(position).getPhoto_id());
+
+                if(photoContentsList.get(position).getPhoto_id()!=0){
+                    startPhotoID = photoContentsList.get(position).getPhoto_id();
+                }
+
+
+                MyLog.Set("e", mActivity.getClass(), "startPhotoID => " +startPhotoID);
+
 
                 page = position;
 
@@ -1961,7 +1970,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void isNoOwnShowCollectType(View parent) {
 
-//        vType.setVisibility(View.VISIBLE);
         LinearLayout linCollect = (LinearLayout) parent.findViewById(R.id.linCollect);
         linCollect.setVisibility(View.VISIBLE);
         TextView tvCollect = (TextView) parent.findViewById(R.id.tvCollect);
@@ -1969,8 +1977,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         if (itemAlbum.getPoint() > 0) {
 
-
-//          tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_button_sponsor) + itemAlbum.getPoint() + "P");
             tvCollect.setText(R.string.pinpinbox_2_0_0_button_sponsor);
 
         } else {
@@ -1983,7 +1989,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             public void onClick(View view) {
 
 
-                startPhotoID = photoContentsList.get(vpReader.getCurrentItem()).getPhoto_id();
+//                startPhotoID = photoContentsList.get(vpReader.getCurrentItem()).getPhoto_id();
 
 
                 if (itemAlbum.getPoint() > 0) {
@@ -2870,8 +2876,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         itemAlbum.setOwn(true);
 
                         if (itemAlbum.getPoint() > 0) {
-//                            PinPinToast.showSuccessToast(mActivity, itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor));
-
 
                             PinPinToast.showSponsorToast(
                                     mActivity.getApplicationContext(),
@@ -2897,6 +2901,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 break;
                             }
                         }
+
+
+                        //如果不是從抽獎兌換頁執行 則再獲取photo_id
+//                        if(startPhotoID==-1){
+//                            startPhotoID = photoContentsList.get(vpReader.getCurrentItem()).getPhoto_id();
+//                        }
+
 
                         doGetAlbumInfo();
 

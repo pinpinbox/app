@@ -17,6 +17,8 @@ public class ItemCategoryBanner {
 
     private String videoIdByUrl = "";
     private String videoLink = "";
+    private String videoText = "";
+    private String btnText = "";
     private boolean videoAuto;
     private boolean videoMute;
     private boolean videoRepeat;
@@ -60,6 +62,22 @@ public class ItemCategoryBanner {
 
     public void setVideoLink(String videoLink) {
         this.videoLink = videoLink;
+    }
+
+    public String getVideoText() {
+        return videoText;
+    }
+
+    public void setVideoText(String videoText) {
+        this.videoText = videoText;
+    }
+
+    public String getBtnText() {
+        return btnText;
+    }
+
+    public void setBtnText(String btnText) {
+        this.btnText = btnText;
     }
 
     public boolean isVideoAuto() {

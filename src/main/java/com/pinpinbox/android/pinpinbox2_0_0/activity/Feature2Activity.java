@@ -329,9 +329,12 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                     JSONObject jsonVideo = new JSONObject(bannerTypeData);
                     itemCategoryBanner.setVideoIdByUrl(JsonUtility.GetString(jsonVideo, ProtocolKey.url));
                     itemCategoryBanner.setVideoLink(JsonUtility.GetString(jsonVideo, ProtocolKey.link));
+                    itemCategoryBanner.setVideoText(JsonUtility.GetString(jsonVideo, ProtocolKey.videotext));
+                    itemCategoryBanner.setBtnText(JsonUtility.GetString(jsonVideo, ProtocolKey.btntext));
                     itemCategoryBanner.setVideoAuto(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.auto));
                     itemCategoryBanner.setVideoMute(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.mute));
                     itemCategoryBanner.setVideoRepeat(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.repeat));
+
                 }
 
                 if (!bannerType.equals(ItemCategoryBanner.TYPE_CREATIVE)) {
@@ -796,7 +799,8 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                 final HashMap<String, String> map = UrlUtility.UrlToMapGetValue(link);
 
                 if (map.get("autobuy") != null) {
-                    tvBannerDestination.setText(R.string.pinpinbox_2_0_0_button_sponsor);
+//                    tvBannerDestination.setText(R.string.pinpinbox_2_0_0_button_sponsor);
+                    tvBannerDestination.setText(itemCategoryBannerList.get(position).getBtnText());
                     tvBannerDestination.setVisibility(View.VISIBLE);
 
                     tvBannerDestination.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {

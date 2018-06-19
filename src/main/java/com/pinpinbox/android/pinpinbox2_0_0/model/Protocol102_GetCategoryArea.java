@@ -296,9 +296,14 @@ public class Protocol102_GetCategoryArea extends AsyncTask<Void, Void, Object> {
                     JSONObject jsonVideo = new JSONObject(bannerTypeData);
                     itemCategoryBanner.setVideoIdByUrl(JsonUtility.GetString(jsonVideo, ProtocolKey.url));
                     itemCategoryBanner.setVideoLink(JsonUtility.GetString(jsonVideo, ProtocolKey.link));
+                    itemCategoryBanner.setVideoText(JsonUtility.GetString(jsonVideo, ProtocolKey.videotext));
+                    itemCategoryBanner.setBtnText(JsonUtility.GetString(jsonVideo, ProtocolKey.btntext));
                     itemCategoryBanner.setVideoAuto(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.auto));
                     itemCategoryBanner.setVideoMute(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.mute));
                     itemCategoryBanner.setVideoRepeat(JsonUtility.GetBoolean(jsonVideo, ProtocolKey.repeat));
+
+
+
                 }
 
                 if(!bannerType.equals(ItemCategoryBanner.TYPE_CREATIVE)){

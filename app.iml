@@ -180,6 +180,7 @@
     <orderEntry type="library" name="__local_aars__:D.\pinpinbox\PinPinBox\app\libs\renderscript-v8.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="pl.droidsonroids.gif:android-gif-drawable-1.2.8" level="project" />
     <orderEntry type="library" name="com.google.android.exoplayer:exoplayer-hls-2.6.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="com.android.support:multidex-instrumentation-1.0.2" level="project" />
     <orderEntry type="library" name="com.squareup.picasso:picasso:2.5.2@jar" level="project" />
     <orderEntry type="library" name="it.sephiroth.android.library.imagezoom:imagezoom-2.2.5" level="project" />
     <orderEntry type="library" name="io.reactivex.rxjava2:rxjava:2.1.14-RC1@jar" level="project" />
@@ -263,6 +264,7 @@
     <orderEntry type="library" name="com.infstory:proguard-annotations-1.0.2" level="project" />
     <orderEntry type="library" name="__local_aars__:D.\pinpinbox\PinPinBox\app\libs\core-2.3.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.dailymotion.dailymotion-sdk-android:sdk-0.1.12" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-config-11.8.0" level="project" />
     <orderEntry type="library" name="com.flurry.android:analytics:6.2.0@jar" level="project" />
     <orderEntry type="library" name="com.google.code.findbugs:jsr305:3.0.1@jar" level="project" />
     <orderEntry type="library" name="com.ctrlplusz.anytextview:library-1.2" level="project" />
@@ -270,6 +272,7 @@
     <orderEntry type="library" name="com.czt.mp3recorder:library-1.0.3" level="project" />
     <orderEntry type="library" name="com.github.serchinastico:coolswitch-1.0.1" level="project" />
     <orderEntry type="library" name="com.ogaclejapan.smarttablayout:library-1.6.1" level="project" />
+    <orderEntry type="library" name="com.google.firebase:firebase-config-license-11.8.0" level="project" />
     <orderEntry type="library" name="com.squareup.okhttp:okhttp:2.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-26.0.1" level="project" />
     <orderEntry type="library" name="com.github.florent37:picassopalette-2.0.0" level="project" />
@@ -301,6 +304,5 @@
     <orderEntry type="library" name="com.adobe.creativesdk.android.shared.common:common-ui-1.1.8" level="project" />
     <orderEntry type="library" name="com.google.android.exoplayer:exoplayer-core-2.6.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-tasks-license-11.8.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="com.android.support:multidex-instrumentation-1.0.2" level="project" />
   </component>
 </module>

@@ -235,6 +235,50 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         }, 600);
 
 
+//        if (FirebaseApp.getApps(mActivity).isEmpty()) {
+//            FirebaseApp.initializeApp(mActivity, FirebaseOptions.fromResource(mActivity));
+//        }
+//
+//        final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
+//        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+//                .setDeveloperModeEnabled(BuildConfig.DEBUG)
+//                .build();
+//        config.setConfigSettings(configSettings);
+//
+//        config.fetch(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if(task.isSuccessful()){
+//
+//                    config.activateFetched();
+//
+//                    String playStoreVersionCode = config.getString(
+//                            "android_latest_version_code");
+//                    MyLog.Set("e", mActivity.getClass(), "playStoreVersionCode => " + playStoreVersionCode);
+//
+//                }
+//
+//
+//                PackageInfo pInfo = null;
+//                try {
+//                    pInfo = mActivity.getPackageManager().getPackageInfo(getPackageName(), 0);
+//                } catch (PackageManager.NameNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                int currentAppVersionCode = pInfo.versionCode;
+//
+//
+//
+//                MyLog.Set("e", mActivity.getClass(), "currentAppVersionCode => " + currentAppVersionCode);
+//                MyLog.Set("e", mActivity.getClass(), "pInfo.versionName => " + pInfo.versionName);
+//
+//
+//            }
+//        });
+
+
+
+
     }
 
     private ImageView testbuttonImg;

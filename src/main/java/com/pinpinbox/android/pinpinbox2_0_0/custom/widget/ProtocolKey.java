@@ -40,9 +40,9 @@ public class ProtocolKey {
     public static String besponsored = "besponsored";
     public static String birthday = "birthday";
     public static String bookmark = "bookmark";
-    public static String banner_type  = "banner_type";
-    public static String banner_type_data  = "banner_type_data";
-
+    public static String banner_type = "banner_type";
+    public static String banner_type_data = "banner_type_data";
+    public static String btntext = "btntext";
 
 
     //c
@@ -238,6 +238,7 @@ public class ProtocolKey {
     public static String viewer = "viewer";
     public static String video = "video";
     public static String vote_left = "vote_left";
+    public static String videotext = "videotext";
 
     //w
     public static String web = "web";
