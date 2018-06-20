@@ -789,7 +789,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
 
-            String link = itemCategoryBannerList.get(position).getVideoLink();
+            final String link = itemCategoryBannerList.get(position).getVideoLink();
 
 
             MyLog.Set("e", getClass(), "linklinklink => " + link);
@@ -798,40 +798,42 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
                 final HashMap<String, String> map = UrlUtility.UrlToMapGetValue(link);
 
-                if (map.get("autobuy") != null) {
-//                    tvBannerDestination.setText(R.string.pinpinbox_2_0_0_button_sponsor);
-                    tvBannerDestination.setText(itemCategoryBannerList.get(position).getBtnText());
-                    tvBannerDestination.setVisibility(View.VISIBLE);
+                tvBannerDestination.setText(itemCategoryBannerList.get(position).getBtnText());
+                tvBannerDestination.setVisibility(View.VISIBLE);
 
-                    tvBannerDestination.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
-                        @Override
-                        public void Touch() {
+                tvBannerDestination.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
+                    @Override
+                    public void Touch() {
 
+                    }
+
+                    @Override
+                    public void Up() {
+                        if (ClickUtils.ButtonContinuousClick()) {
+                            return;
                         }
 
-                        @Override
-                        public void Up() {
-                            if (ClickUtils.ButtonContinuousClick()) {
-                                return;
-                            }
 
+                        if (map.get(Key.album_id) != null) {
 
-                            if (map.get(Key.album_id) != null) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString(Key.album_id, map.get(Key.album_id));
 
-                                Bundle bundle = new Bundle();
-                                bundle.putString(Key.album_id, map.get(Key.album_id));
+                            if (map.get("autobuy") != null) {
                                 bundle.putBoolean(Key.doSponsor, true);
-                                startActivity(new Intent(mActivity, Reader2Activity.class).putExtras(bundle));
-                                ActivityAnim.StartAnim(mActivity);
                             }
-
-
+                            
+                            startActivity(new Intent(mActivity, Reader2Activity.class).putExtras(bundle));
+                            ActivityAnim.StartAnim(mActivity);
+                            return;
                         }
-                    }));
 
-                } else {
-                    tvBannerDestination.setVisibility(View.GONE);
-                }
+                        toWeb(link, "");
+
+
+                    }
+                }));
+
 
             } else {
                 tvBannerDestination.setVisibility(View.GONE);

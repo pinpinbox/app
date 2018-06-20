@@ -74,15 +74,6 @@
 
             </RelativeLayout>
 
-            <!--<TextView-->
-            <!--android:id="@+id/tvExplore"-->
-            <!--style="@style/ppb200_title_second"-->
-            <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-            <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-            <!--android:text="@string/pinpinbox_2_0_0_title_explore" />-->
-            <!--ppb200_padding_margin_second 8dp 移至 recyclerview-->
-
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvCategory"
                 android:layout_width="match_parent"
@@ -93,10 +84,19 @@
         </LinearLayout>
 
 
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0.5dp"-->
-        <!--android:background="@color/pinpinbox_2_0_0_divider" />-->
+        <!--創作人-->
+        <include
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            layout="@layout/lay_2_0_0_recommend_user"/>
+
+        <!--精選-->
+        <include
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            layout="@layout/lay_2_0_0_popular_album"/>
 
 
         <RelativeLayout

@@ -52,8 +52,12 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.BannerPageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryNameAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerPopularAlbumAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
@@ -122,26 +126,33 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private RecyclerHomeAdapter recyclerHomeAdapter;
     private BannerPageAdapter bannerPageAdapter;
     private RecyclerCategoryNameAdapter categoryNameAdapter;
+    private RecyclerSearchUserAdapter userAdapter;
+    private RecyclerPopularAlbumAdapter popularAlbumAdapter;
 
     private List<ItemAlbumCategory> itemAlbumCategoryList;
     private List<ItemAlbum> itemAlbumList;
+    private List<ItemHomeBanner> itemHomeBannerList;
+    private List<ItemUser> itemUserList;
+    private List<ItemAlbum> itemAlbumPopularList;
     private List<View> bannerViewList;
-    private ArrayList<HashMap<String, Object>> p75arraylist;
     private List<String> albumIdList;
 
     private String id, token;
     private String p09Message = "";
     private String p20Result, p20Message;
+    private String p86MessageUser = "";
+    private String p86MessageAlbum = "";
     private String p75Message = "";
     private String p103Result = "";
     private String p103Message = "";
     private String strRank;
-    //    private String albumexplore;
     private String strJsonData = "";
-
 
     private int p09Result = -1;
     private int p75Result = -1;
+    private int p86ResultUser = -1;
+    private int p86ResultAlbum = -1;
+
 
     private int round; //listview添加前的初始值
     private int count; //listview每次添加的數量
@@ -164,7 +175,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private boolean isDoingRefreshBanner = true;
     private boolean isSearch = false;
 
-    private RecyclerView rvHome, rvCategory;
+    private RecyclerView rvHome, rvCategory, rvRecommendUser, rvPopularAlbum;
     private SmoothProgressBar pbLoadMore, pbRefresh;
     private View viewHeader;
     private ViewPager vpBanner;
@@ -172,7 +183,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private LinearLayout linBanner;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private EditText edSearch;
-    private ImageView  scanImg;
+    private ImageView scanImg;
 
 
     private LinearLayout linHobby, linFollow;
@@ -243,16 +254,12 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         rvHome.setItemAnimator(new DefaultItemAnimator());
         rvHome.addOnScrollListener(mOnScrollListener);
 
-        mOnScrollListener.setvActionBar((LinearLayout)v.findViewById(R.id.linActionBar));
-
+        mOnScrollListener.setvActionBar((LinearLayout) v.findViewById(R.id.linActionBar));
 
         pinPinBoxRefreshLayout.setOnPullRefreshListener(this);
         pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);
 
-
         scanImg.setOnClickListener(this);
-
-
 
     }
 
@@ -266,18 +273,20 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         linHobby = (LinearLayout) viewHeader.findViewById(R.id.linHobby);
         linFollow = (LinearLayout) viewHeader.findViewById(R.id.linFollow);
         rvCategory = (RecyclerView) viewHeader.findViewById(R.id.rvCategory);
+        rvRecommendUser = (RecyclerView) viewHeader.findViewById(R.id.rvRecommendUser);
+        rvPopularAlbum = (RecyclerView) viewHeader.findViewById(R.id.rvPopularAlbum);
         tvNew = (TextView) viewHeader.findViewById(R.id.tvNew);
         tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
         vHobby = viewHeader.findViewById(R.id.vHobby);
         vFollow = viewHeader.findViewById(R.id.vFollow);
 
-
         linHobby.setOnClickListener(this);
         linFollow.setOnClickListener(this);
 
-
         TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvNewsFeed), true);
         TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvExplore), true);
+        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvRecommend), true);
+        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvPopularity), true);
 
     }
 
@@ -324,6 +333,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         setSearch();
         setRecycler();
         setCategoryRecycler();
+        setUserRecycler();
+        setPopularRecycler();
         doAttention();
 
     }
@@ -342,9 +353,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         count = 16;
 
         itemAlbumList = new ArrayList<>();
-        p75arraylist = new ArrayList<>();
+        itemHomeBannerList = new ArrayList<>();
         albumIdList = new ArrayList<>();
         itemAlbumCategoryList = new ArrayList<>();
+        itemUserList = new ArrayList<>();
+        itemAlbumPopularList = new ArrayList<>();
 
 
     }
@@ -374,9 +387,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         });
 
 
-
-
-
         countDownTimer = new CountDownTimer(1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -388,7 +398,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 countDownTimer.cancel();
 
-                if(fragmentSearch2!=null && fragmentSearch2.isAdded()){
+                if (fragmentSearch2 != null && fragmentSearch2.isAdded()) {
 
                     fragmentSearch2.setOnFinish();
 
@@ -421,7 +431,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         countDownTimer.cancel();
                     }
 
-                    if(fragmentSearch2!=null && fragmentSearch2.isAdded()){
+                    if (fragmentSearch2 != null && fragmentSearch2.isAdded()) {
 
                         fragmentSearch2.setOnFinish();
 
@@ -436,8 +446,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                         MyLog.Set("d", FragmentSearch2.class, "重新倒數");
                     }
-
-
 
 
                 }
@@ -475,6 +483,29 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         isSearch = false;
         scanImg.setImageResource(R.drawable.ic200_scancamera_dark);
+    }
+
+    public void scrollToTop() {
+
+        ExStaggeredGridLayoutManager linearLayoutManager = (ExStaggeredGridLayoutManager) rvHome.getLayoutManager();
+
+        if (linearLayoutManager != null && rvHome != null) {
+
+            try {
+
+                int[] firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPositions(null);
+
+                if (firstVisibleItemPosition[0] > 10) {
+                    rvHome.scrollToPosition(10);
+                    MyLog.Set("d", getClass(), "先移動至第10項目");
+                }
+                rvHome.smoothScrollToPosition(0);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     private void setRecycler() {
@@ -578,7 +609,89 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-    private void setP20ArrayList(String limit) {
+    private void setUserRecycler() {
+
+        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvRecommendUser.setLayoutManager(layoutManager);
+        userAdapter = new RecyclerSearchUserAdapter(getActivity(), itemUserList);
+        rvRecommendUser.setAdapter(userAdapter);
+
+        userAdapter.setOnRecyclerViewListener(new RecyclerSearchUserAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
+
+                if (itemUserList.get(position).getUser_id().equals(id)) {
+
+                    ((Main2Activity) getActivity()).toMePage(false);
+
+                    return;
+                }
+
+
+                ActivityIntent.toUser(
+                        getActivity(),
+                        true,
+                        false,
+                        itemUserList.get(position).getUser_id(),
+                        itemUserList.get(position).getPicture(),
+                        itemUserList.get(position).getName(),
+                        v.findViewById(R.id.userImg)
+                );
+
+            }
+
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+        });
+
+    }
+
+    private void setPopularRecycler() {
+
+        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvPopularAlbum.setLayoutManager(layoutManager);
+        popularAlbumAdapter = new RecyclerPopularAlbumAdapter(getActivity(), itemAlbumPopularList);
+        rvPopularAlbum.setAdapter(popularAlbumAdapter);
+
+        popularAlbumAdapter.setOnRecyclerViewListener(new RecyclerPopularAlbumAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
+
+                ActivityIntent.toAlbumInfo(
+                        getActivity(),
+                        true,
+                        itemAlbumPopularList.get(position).getAlbum_id(),
+                        itemAlbumPopularList.get(position).getCover(),
+                        itemAlbumPopularList.get(position).getImage_orientation(),
+                        v.findViewById(R.id.coverImg)
+                );
+
+            }
+
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+        });
+
+
+    }
+
+
+    private void getUpdateList(String limit) {
 
         Map<String, String> data = new HashMap<String, String>();
         data.put("id", id);
@@ -834,17 +947,17 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-    private void setP75ArrayList() {
+    private void getBannerList() {
 
-        if (p75arraylist != null && p75arraylist.size() > 0) {
+        if (itemHomeBannerList != null && itemHomeBannerList.size() > 0) {
 
 
-            for (int i = 0; i < p75arraylist.size(); i++) {
-                String url = (String) p75arraylist.get(i).get("image");
-                Picasso.with(getActivity().getApplicationContext()).invalidate(url);
+            for (int i = 0; i < itemHomeBannerList.size(); i++) {
+                String image = itemHomeBannerList.get(i).getImage();
+                Picasso.with(getActivity().getApplicationContext()).invalidate(image);
             }
 
-            p75arraylist.clear();
+            itemHomeBannerList.clear();
         }
 
 
@@ -868,24 +981,17 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                     if (jsonArray.length() != 0) {
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            HashMap<String, Object> map = new HashMap<>();
 
                             JSONObject object = (JSONObject) jsonArray.get(i);
-
+                            ItemHomeBanner itemHomeBanner = new ItemHomeBanner();
 
                             try {
                                 String event = JsonUtility.GetString(object, ProtocolKey.event);
                                 if (event != null) {
-                                    if (!event.equals("null") && !event.equals("")) {
-                                        JSONObject jsonEvent = new JSONObject(event);
-                                        String event_id = JsonUtility.GetString(jsonEvent, ProtocolKey.event_id);
-                                        map.put(Key.event_id, event_id);
-                                    } else {
-                                        map.put(Key.event_id, "");
-                                    }
+                                    JSONObject jsonEvent = new JSONObject(event);
+                                    itemHomeBanner.setEvent_id(JsonUtility.GetString(jsonEvent, ProtocolKey.event_id));
                                 }
                             } catch (Exception e) {
-                                map.put(Key.event_id, "");
                                 e.printStackTrace();
                             }
 
@@ -893,20 +999,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                             try {
                                 String ad = JsonUtility.GetString(object, ProtocolKey.ad);
                                 if (ad != null) {
-                                    if (!ad.equals("null") && !ad.equals("")) {
-                                        JSONObject obj = new JSONObject(ad);
-                                        String image = JsonUtility.GetString(obj, ProtocolKey.image);
-                                        String url = JsonUtility.GetString(obj, ProtocolKey.url);
-                                        map.put(Key.image, image);
-                                        map.put(Key.url, url);
-                                    } else {
-                                        map.put(Key.image, "");
-                                        map.put(Key.url, "");
-                                    }
+                                    JSONObject jsonAd = new JSONObject(ad);
+                                    itemHomeBanner.setImage(JsonUtility.GetString(jsonAd, ProtocolKey.image));
+                                    itemHomeBanner.setUrl(JsonUtility.GetString(jsonAd, ProtocolKey.url));
                                 }
                             } catch (Exception e) {
-                                map.put(Key.image, "");
-                                map.put(Key.url, "");
                                 e.printStackTrace();
                             }
 
@@ -914,52 +1011,35 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                             try {
                                 String album = JsonUtility.GetString(object, ProtocolKey.album);
                                 if (album != null) {
-                                    if (!album.equals("null") && !album.equals("")) {
-                                        JSONObject jsonAlbum = new JSONObject(album);
-                                        String album_id = JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id);
-                                        map.put(Key.album_id, album_id);
-                                    } else {
-                                        map.put(Key.album_id, "");
-                                    }
+                                    JSONObject jsonAlbum = new JSONObject(album);
+                                    itemHomeBanner.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
                                 }
                             } catch (Exception e) {
-                                map.put(Key.album_id, "");
                                 e.printStackTrace();
                             }
 
                             try {
                                 String template = JsonUtility.GetString(object, ProtocolKey.template);
                                 if (template != null) {
-                                    if (!template.equals("null") && !template.equals("")) {
-                                        JSONObject jsonTemplate = new JSONObject(template);
-                                        String template_id = JsonUtility.GetString(jsonTemplate, ProtocolKey.template_id);
-                                        map.put(Key.template_id, template_id);
-                                    } else {
-                                        map.put(Key.template_id, "");
-                                    }
+                                    JSONObject jsonTemplate = new JSONObject(template);
+                                    itemHomeBanner.setTemplate_id(JsonUtility.GetString(jsonTemplate, ProtocolKey.template_id));
                                 }
                             } catch (Exception e) {
-                                map.put(Key.template_id, "");
                                 e.printStackTrace();
                             }
 
                             try {
                                 String user = JsonUtility.GetString(object, ProtocolKey.user);
                                 if (user != null) {
-                                    if (!user.equals("null") && !user.equals("")) {
-                                        JSONObject jsonUser = new JSONObject(user);
-                                        String user_id = JsonUtility.GetString(jsonUser, ProtocolKey.user_id);
-                                        map.put(Key.user_id, user_id);
-                                    } else {
-                                        map.put(Key.user_id, "");
-                                    }
+                                    JSONObject jsonUser = new JSONObject(user);
+                                    itemHomeBanner.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
+
                                 }
                             } catch (Exception e) {
-                                map.put(Key.user_id, "");
                                 e.printStackTrace();
                             }
 
-                            p75arraylist.add(map);
+                            itemHomeBannerList.add(itemHomeBanner);
 
                         }
                     }
@@ -969,112 +1049,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-
-
-    }
-
-    public void scrollToTop() {
-
-        ExStaggeredGridLayoutManager linearLayoutManager = (ExStaggeredGridLayoutManager) rvHome.getLayoutManager();
-
-        if (linearLayoutManager != null && rvHome != null) {
-
-            try {
-
-                int[] firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPositions(null);
-
-                if (firstVisibleItemPosition[0] > 10) {
-                    rvHome.scrollToPosition(10);
-                    MyLog.Set("d", getClass(), "先移動至第10項目");
-                }
-                rvHome.smoothScrollToPosition(0);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private void setBanner() {
-
-        bannerViewList = new ArrayList<>();
-
-
-        int bannerWidth = ScreenUtils.getScreenWidth();
-
-        int bannerHeight = (bannerWidth * 540) / 960;
-
-//        /*banner width = 960 , height = 540*/
-//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(bannerWidth, bannerHeight);
-
-        for (int i = 0; i < p75arraylist.size(); i++) {
-            View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.page_2_0_0_banner_image, null);
-
-            bannerViewList.add(view);
-
-        }
-
-        vpBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
-
-        if (bannerPageAdapter != null) {
-            bannerPageAdapter = null;
-        }
-
-        bannerPageAdapter = new BannerPageAdapter(getActivity(), bannerViewList, p75arraylist, this);
-        vpBanner.setAdapter(bannerPageAdapter);
-        indicator.setViewPager(vpBanner);
-
-
-        if (p75arraylist.size() > 1) {
-            autoPageScrollManager = new AutoPageScrollManager(vpBanner, 5, p75arraylist.size());
-        }
-
-        Glide.get(getActivity().getApplicationContext()).clearMemory();
-
-
-        //判斷是否是活動
-        String event_id = (String) p75arraylist.get(0).get(Key.event_id);
-
-
-        if (event_id != null && !event_id.equals("") && !event_id.equals("null")) {
-
-            /*當前為活動*/
-
-            //判斷image是否曾經顯示過
-            boolean isUrlExist = false;
-            String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
-            try {
-                JSONArray bannerArray = new JSONArray(bannerList);
-                for (int i = 0; i < bannerArray.length(); i++) {
-                    String strOldImageUrl = (String) bannerArray.get(i);
-                    if (strOldImageUrl.equals((String) p75arraylist.get(0).get(Key.image))) {
-                        isUrlExist = true;
-                        break;
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-//            if (isUrlExist) {
-//                if (autoPageScrollManager != null) {
-//
-//                    autoPageScrollManager.post();
-//                }
-//            }
-
-        } else {
-
-
-            /*不為活動 直接自動播放*/
-//            if (autoPageScrollManager != null) {
-//
-//                autoPageScrollManager.post();
-//            }
-
-
         }
 
 
@@ -1185,6 +1159,232 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
+    private void getUserList() {
+
+
+        String strJson = "";
+
+        try {
+            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
+                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.user, "0,16"), null);
+            MyLog.Set("d", getClass(), "p86strJson(user) =>" + strJson);
+        } catch (SocketTimeoutException timeout) {
+            p86ResultUser = Key.TIMEOUT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (strJson != null && !strJson.equals("")) {
+            try {
+                JSONObject jsonObject = new JSONObject(strJson);
+                p86ResultUser = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                if (p86ResultUser == 1) {
+
+                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONArray jsonArray = new JSONArray(jdata);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject j = (JSONObject) jsonArray.get(i);
+
+
+                        String user = JsonUtility.GetString(j, ProtocolKey.user);
+                        JSONObject object = new JSONObject(user);
+
+
+                        ItemUser itemUser = new ItemUser();
+                        itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
+                        itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+                        itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
+                        itemUserList.add(itemUser);
+
+
+                    }
+
+
+                } else if (p86ResultUser == 0) {
+                    p86MessageUser = jsonObject.getString(Key.message);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
+    private void getPopularList() {
+
+        String strJson = "";
+
+        try {
+            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
+                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.album, "0,16"), null);
+            MyLog.Set("d", getClass(), "p86strJson(album) => " + strJson);
+        } catch (SocketTimeoutException timeout) {
+            p86ResultAlbum = Key.TIMEOUT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (strJson != null && !strJson.equals("")) {
+            try {
+                JSONObject jsonObject = new JSONObject(strJson);
+                p86ResultAlbum = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                if (p86ResultAlbum == 1) {
+
+                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONArray jsonArray = new JSONArray(jdata);
+                    int minHeight = DensityUtility.dip2px(getActivity().getApplicationContext(), 72);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject j = (JSONObject) jsonArray.get(i);
+
+                        ItemAlbum itemAlbum = new ItemAlbum();
+
+
+                        String album = JsonUtility.GetString(j, ProtocolKey.album);
+                        JSONObject jsonAlbum = new JSONObject(album);
+
+                        itemAlbum.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
+                        itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.name));
+
+                        String cover = JsonUtility.GetString(jsonAlbum, ProtocolKey.cover);
+                        itemAlbum.setCover(cover);
+
+                        try {
+                            int width = jsonAlbum.getInt(ProtocolKey.cover_width);
+                            int height = jsonAlbum.getInt(ProtocolKey.cover_height);
+                            int image_height = StaggeredHeight.setImageHeight(width, height);
+
+                            if (image_height < minHeight) {
+                                image_height = minHeight;
+                            }
+
+                            itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
+                            itemAlbum.setCover_height(image_height);
+                            itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
+
+                            if (width > height) {
+                                itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
+                            } else if (height > width) {
+                                itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
+                            } else {
+                                itemAlbum.setImage_orientation(0);
+                            }
+
+                        } catch (Exception e) {
+                            itemAlbum.setCover_hex("");
+                            itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
+                            itemAlbum.setCover_height(PPBApplication.getInstance().getStaggeredWidth());
+                            MyLog.Set("e", this.getClass(), "圖片長寬無法讀取");
+                        }
+
+                        String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.usefor);
+                        JSONObject jsonUsefor = new JSONObject(usefor);
+                        itemAlbum.setExchange(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.exchange));
+                        itemAlbum.setSlot(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.slot));
+                        itemAlbum.setVideo(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.video));
+                        itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.audio));
+
+
+                        String user = JsonUtility.GetString(j, ProtocolKey.user);
+                        JSONObject jsonUser = new JSONObject(user);
+                        itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
+
+                        itemAlbumPopularList.add(itemAlbum);
+                    }
+
+                } else if (p86ResultAlbum == 0) {
+                    p86MessageAlbum = JsonUtility.GetString(jsonObject, Key.message);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void setBanner() {
+
+        bannerViewList = new ArrayList<>();
+
+
+        int bannerWidth = ScreenUtils.getScreenWidth();
+
+        int bannerHeight = (bannerWidth * 540) / 960;
+
+//        /*banner width = 960 , height = 540*/
+//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(bannerWidth, bannerHeight);
+
+        for (int i = 0; i < itemHomeBannerList.size(); i++) {
+            View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.page_2_0_0_banner_image, null);
+
+            bannerViewList.add(view);
+
+        }
+
+        vpBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
+
+        if (bannerPageAdapter != null) {
+            bannerPageAdapter = null;
+        }
+
+        bannerPageAdapter = new BannerPageAdapter(getActivity(), bannerViewList, itemHomeBannerList, this);
+        vpBanner.setAdapter(bannerPageAdapter);
+        indicator.setViewPager(vpBanner);
+
+
+        if (itemHomeBannerList.size() > 1) {
+            autoPageScrollManager = new AutoPageScrollManager(vpBanner, 5, itemHomeBannerList.size());
+        }
+
+        Glide.get(getActivity().getApplicationContext()).clearMemory();
+
+
+        //判斷是否是活動
+        String event_id = itemHomeBannerList.get(0).getEvent_id();
+
+
+        if (event_id != null && !event_id.equals("") && !event_id.equals("null")) {
+
+            /*當前為活動*/
+
+            //判斷image是否曾經顯示過
+            boolean isUrlExist = false;
+            String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
+            try {
+                JSONArray bannerArray = new JSONArray(bannerList);
+                for (int i = 0; i < bannerArray.length(); i++) {
+                    String strOldImageUrl = (String) bannerArray.get(i);
+                    if (strOldImageUrl.equals(itemHomeBannerList.get(0).getImage())) {
+                        isUrlExist = true;
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+//            if (isUrlExist) {
+//                if (autoPageScrollManager != null) {
+//
+//                    autoPageScrollManager.post();
+//                }
+//            }
+
+        } else {
+
+
+            /*不為活動 直接自動播放*/
+//            if (autoPageScrollManager != null) {
+//
+//                autoPageScrollManager.post();
+//            }
+
+
+        }
+
+
+    }
+
     private void setScrollListener() {
 
         rvCategory.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -1221,33 +1421,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         vpBanner.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-//                MyLog.Set("d", FragmentHome2.class, "position => " + position);
-//                MyLog.Set("d", FragmentHome2.class, "positionOffset => " + positionOffset);
-//                MyLog.Set("d", FragmentHome2.class, "positionOffsetPixels => " + positionOffsetPixels);
-
             }
 
             @Override
             public void onPageSelected(int position) {
-
-
-//                String url = (String) p75arraylist.get(position).get("image");
-//                if(url!=null && !url.equals("") && !url.equals("null")) {
-//                    String end = url.substring(url.lastIndexOf(".") + 1, url.length()).toLowerCase();
-//                    if (end.equals("gif")) {
-//
-//                        GifDrawable gifResource = gifResourceList.get(position);
-//
-//                        if(gifResource.isRunning()){
-//                            MyLog.Set("d", this.getClass(), "gifResource.isRunning() => " + true);
-//                        }else {
-//                            gifResource.stop();
-//                        }
-//                    }
-//                }
-
-
             }
 
             @Override
@@ -1255,32 +1432,19 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 switch (state) {
                     case 1://正在滑動
 
-                        MyLog.Set("e", FragmentHome2.class, "正在滑動");
-
-
                         if (autoPageScrollManager != null) {
                             autoPageScrollManager.removeRunnable();
-
-
                             pinPinBoxRefreshLayout.setPullRefresh(false);
-
-
                         }
-
 
                         break;
 
                     case 2://滑動完畢
 
-                        MyLog.Set("e", FragmentHome2.class, "滑動完畢");
-
                         if (autoPageScrollManager != null) {
-
                             pinPinBoxRefreshLayout.setPullRefresh(true);
-
                             autoPageScrollManager.post();
                         }
-
 
                         break;
 
@@ -1347,13 +1511,39 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
 
 
-        if (p75arraylist != null && p75arraylist.size() > 0) {
+        if (itemHomeBannerList != null && itemHomeBannerList.size() > 0) {
 
-            for (int i = 0; i < p75arraylist.size(); i++) {
+            for (int i = 0; i < itemHomeBannerList.size(); i++) {
 
-                String image = (String) p75arraylist.get(i).get(Key.image);
+                String image = itemHomeBannerList.get(i).getImage();
                 if (image != null && !image.equals("")) {
                     Picasso.with(getActivity().getApplicationContext()).invalidate(image);
+                }
+            }
+
+        }
+
+
+        if (itemAlbumPopularList != null && itemAlbumPopularList.size() > 0) {
+
+            for (int i = 0; i < itemAlbumPopularList.size(); i++) {
+
+                String cover = itemAlbumPopularList.get(i).getCover();
+                if (cover != null && !cover.equals("")) {
+                    Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
+                }
+            }
+
+        }
+
+
+        if (itemUserList != null && itemUserList.size() > 0) {
+
+            for (int i = 0; i < itemUserList.size(); i++) {
+
+                String picture = itemUserList.get(i).getPicture();
+                if (picture != null && !picture.equals("")) {
+                    Picasso.with(getActivity().getApplicationContext()).invalidate(picture);
                 }
             }
 
@@ -1366,11 +1556,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-    public SmoothProgressBar getPbRefresh(){
+    public SmoothProgressBar getPbRefresh() {
         return this.pbRefresh;
     }
 
-    public EditText getEdSearch(){
+    public EditText getEdSearch() {
         return this.edSearch;
     }
 
@@ -1420,7 +1610,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     private void doAttention() {
         if (!HttpUtility.isConnect(getActivity())) {
-//            noConnect = new NoConnect(getActivity());
             ((Main2Activity) getActivity()).setNoConnect();
             return;
         }
@@ -1430,7 +1619,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     private void doMoreData() {
         if (!HttpUtility.isConnect(getActivity())) {
-//            noConnect = new NoConnect(getActivity());
             ((Main2Activity) getActivity()).setNoConnect();
             return;
         }
@@ -1440,7 +1628,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     private void doRefresh() {
         if (!HttpUtility.isConnect(getActivity())) {
-//            noConnect = new NoConnect(getActivity());
             ((Main2Activity) getActivity()).setNoConnect();
             return;
         }
@@ -1458,12 +1645,16 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         albumIdList.clear();
         itemAlbumList.clear();
         itemAlbumCategoryList.clear();
+        itemUserList.clear();
+        itemAlbumPopularList.clear();
 
         p20total = 0;
         round = 0;
 
         recyclerHomeAdapter.notifyDataSetChanged();
         categoryNameAdapter.notifyDataSetChanged();
+        userAdapter.notifyDataSetChanged();
+        popularAlbumAdapter.notifyDataSetChanged();
 
         if (autoPageScrollManager != null) {
             autoPageScrollManager.recycler();
@@ -1509,7 +1700,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
             getCategoryList();
 
-            setP20ArrayList(round + "," + count);
+            getUserList();
+
+            getPopularList();
+
+            getUpdateList(round + "," + count);
 
 
             return null;
@@ -1595,7 +1790,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         @Override
         protected Object doInBackground(Void... params) {
-            setP20ArrayList(round + "," + count);
+            getUpdateList(round + "," + count);
             return null;
         }
 
@@ -1656,10 +1851,14 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
             getCategoryList();
 
-            setP20ArrayList(round + "," + count);
+            getUserList();
+
+            getPopularList();
+
+            getUpdateList(round + "," + count);
 
             if (isDoingRefreshBanner) {
-                setP75ArrayList();
+                getBannerList();
             }
             return null;
         }
@@ -1692,6 +1891,45 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 e.printStackTrace();
             }
 
+            try {
+
+                if (p86ResultUser == 1) {
+                    userAdapter.notifyDataSetChanged();
+                } else if (p86ResultUser == 0) {
+                    DialogV2Custom.BuildError(getActivity(), p86MessageUser);
+                    return;
+                } else if (p86ResultUser == Key.TIMEOUT) {
+                    connectInstability();
+                    return;
+                } else {
+                    DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            try {
+
+                if (p86ResultAlbum == 1) {
+                    popularAlbumAdapter.notifyDataSetChanged();
+                } else if (p86ResultAlbum == 0) {
+                    DialogV2Custom.BuildError(getActivity(), p86MessageAlbum);
+                    return;
+                } else if (p86ResultAlbum == Key.TIMEOUT) {
+                    connectInstability();
+                    return;
+                } else {
+                    DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
             if (p20Result.equals("1")) {
                 recyclerHomeAdapter.notifyDataSetChanged();
@@ -1700,7 +1938,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 if (isDoingRefreshBanner) {
 
                     if (p75Result == 1) {
-                        if (p75arraylist.size() == 0) {
+                        if (itemHomeBannerList.size() == 0) {
                             linBanner.setVisibility(View.GONE);
                         } else {
                             setBanner();
@@ -1740,7 +1978,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         @Override
         protected Object doInBackground(Void... params) {
 
-            setP75ArrayList();
+            getBannerList();
 
             return null;
         }
@@ -1755,7 +1993,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
             if (p75Result == 1) {
-                if (p75arraylist.size() == 0) {
+                if (itemHomeBannerList.size() == 0) {
                     linBanner.setVisibility(View.GONE);
                 } else {
 
@@ -1765,6 +2003,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
                 recyclerHomeAdapter.notifyDataSetChanged();
+
+                userAdapter.notifyDataSetChanged();
+
+                popularAlbumAdapter.notifyDataSetChanged();
 
                 round = round + count;
 
@@ -1822,12 +2064,12 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             case R.id.scanImg:
 
 
-                if(isSearch){
+                if (isSearch) {
                     edSearch.setText("");
                     edSearch.clearFocus();
                     inputMethodManager.hideSoftInputFromWindow(edSearch.getWindowToken(), 0);
                     hideSearch();
-                }else {
+                } else {
 
                     switch (checkPermission(getActivity(), Manifest.permission.CAMERA)) {
 
@@ -1842,9 +2084,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
                 }
-
-
-
 
 
                 break;

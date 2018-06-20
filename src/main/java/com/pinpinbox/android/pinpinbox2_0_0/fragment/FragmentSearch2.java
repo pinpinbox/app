@@ -35,6 +35,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchAlbumAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -58,7 +59,7 @@ import org.json.JSONObject;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
@@ -82,7 +83,8 @@ public class FragmentSearch2 extends Fragment{
     private RecyclerSearchAlbumAdapter albumAdapter;
 
 
-    private ArrayList<HashMap<String, Object>> searchUserList;
+
+    private List<ItemUser>itemUserList;
 
     private ArrayList<ItemAlbum>  searchAlbumList;
 
@@ -166,7 +168,7 @@ public class FragmentSearch2 extends Fragment{
         loading = ((Main2Activity) getActivity()).getLoading();
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        searchUserList = new ArrayList<>();
+        itemUserList = new ArrayList<>();
         searchAlbumList = new ArrayList<>();
 
         id = PPBApplication.getInstance().getId();
@@ -177,7 +179,7 @@ public class FragmentSearch2 extends Fragment{
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvUser.setLayoutManager(layoutManager);
-        userAdapter = new RecyclerSearchUserAdapter(getActivity(), searchUserList);
+        userAdapter = new RecyclerSearchUserAdapter(getActivity(), itemUserList);
         rvUser.setAdapter(userAdapter);
 
         userAdapter.setOnRecyclerViewListener(new RecyclerSearchUserAdapter.OnRecyclerViewListener() {
@@ -189,7 +191,7 @@ public class FragmentSearch2 extends Fragment{
                 }
 
 
-                if(searchUserList==null || searchUserList.size()<1){
+                if(itemUserList==null || itemUserList.size()<1){
                     return;
                 }
 
@@ -207,9 +209,9 @@ public class FragmentSearch2 extends Fragment{
                         getActivity(),
                         true,
                         false,
-                        (String) searchUserList.get(position).get(Key.user_id),
-                        (String) searchUserList.get(position).get(Key.picture),
-                        (String) searchUserList.get(position).get(Key.name),
+                        itemUserList.get(position).getUser_id(),
+                        itemUserList.get(position).getPicture(),
+                        itemUserList.get(position).getName(),
                         v.findViewById(R.id.userImg)
                 );
 
@@ -408,13 +410,13 @@ public class FragmentSearch2 extends Fragment{
     private void setSearchUserData() {
 
 
-        if (searchUserList.size() < 1) {
+        if (itemUserList.size() < 1) {
             tvGuideNoUser.setVisibility(View.VISIBLE);
         } else {
             tvGuideNoUser.setVisibility(View.GONE);
         }
 
-        userAdapter.notifyItemRangeInserted(0, searchUserList.size());
+        userAdapter.notifyItemRangeInserted(0, itemUserList.size());
 
     }
 
@@ -454,12 +456,12 @@ public class FragmentSearch2 extends Fragment{
 
     private void cleanPicasso() {
 
-        if (searchUserList != null && searchUserList.size() > 0) {
-            for (int i = 0; i < searchUserList.size(); i++) {
-                String strPicture = (String) searchUserList.get(i).get(Key.picture);
+        if (itemUserList != null && itemUserList.size() > 0) {
+            for (int i = 0; i < itemUserList.size(); i++) {
+                String strPicture = itemUserList.get(i).getPicture();
                 Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
             }
-            searchUserList.clear();
+            itemUserList.clear();
         }
 
         if (searchAlbumList != null && searchAlbumList.size() > 0) {
@@ -529,15 +531,15 @@ public class FragmentSearch2 extends Fragment{
             doingType = DoingTypeClass.DoSearchUserList;
 
             /*執行搜尋前全部移除*/
-            userAdapter.notifyItemRangeRemoved(0, searchUserList.size());
+            userAdapter.notifyItemRangeRemoved(0, itemUserList.size());
 
 
-            if (searchUserList.size() > 0) {
-                for (int i = 0; i < searchUserList.size(); i++) {
-                    String strPicture = (String) searchUserList.get(i).get(Key.picture);
+            if (itemUserList.size() > 0) {
+                for (int i = 0; i < itemUserList.size(); i++) {
+                    String strPicture = itemUserList.get(i).getPicture();
                     Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
                 }
-                searchUserList.clear();
+                itemUserList.clear();
             }
 
         }
@@ -563,7 +565,6 @@ public class FragmentSearch2 extends Fragment{
                     p41Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
                     if (p41Result == 1) {
 
-
                         String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
                         JSONArray jsonArray = new JSONArray(jdata);
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -573,18 +574,17 @@ public class FragmentSearch2 extends Fragment{
                             String user = JsonUtility.GetString(j, ProtocolKey.user);
                             JSONObject object = new JSONObject(user);
 
-                            String name = JsonUtility.GetString(object, ProtocolKey.name);
-                            String picture = JsonUtility.GetString(object, ProtocolKey.picture);
+
+                            ItemUser itemUser = new ItemUser();
+                            itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
+                            itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+
                             String user_id = JsonUtility.GetString(object, ProtocolKey.user_id);
-
-                            HashMap<String, Object> map = new HashMap<String, Object>();
-                            map.put(Key.name, name);
-                            map.put(Key.user_id, user_id);
-                            map.put(Key.picture, picture);
-
+                            itemUser.setUser_id(user_id);
                             if (!user_id.equals(id)) {
-                                searchUserList.add(map);
+                                itemUserList.add(itemUser);
                             }
+
                         }
 
 
@@ -823,11 +823,11 @@ public class FragmentSearch2 extends Fragment{
     @Override
     public void onPause() {
 
-        if (searchUserList != null && searchAlbumList != null) {
+        if (itemUserList != null && searchAlbumList != null) {
 
-            if (searchUserList.size() > 0) {
-                for (int i = 0; i < searchUserList.size(); i++) {
-                    String strPicture = (String) searchUserList.get(i).get(Key.picture);
+            if (itemUserList.size() > 0) {
+                for (int i = 0; i < itemUserList.size(); i++) {
+                    String strPicture = itemUserList.get(i).getPicture();
                     Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
                 }
             }

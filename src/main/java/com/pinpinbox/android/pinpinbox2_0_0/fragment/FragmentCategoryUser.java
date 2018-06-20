@@ -20,10 +20,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,9 +34,9 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
     private RecyclerView rvUser;
     private TextView tvClose, tvTitle;
 
-    private List<ItemUser> userList;
 
-    private ArrayList<HashMap<String, Object>> mapUserList;
+
+    private List<ItemUser>itemUserList;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,24 +45,7 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
         Bundle bundle = getArguments();
 
         if (bundle != null) {
-            userList = (List<ItemUser>) bundle.getSerializable("userList");
-
-
-            mapUserList = new ArrayList<>();
-
-            for (int i = 0; i < userList.size(); i++) {
-
-                HashMap<String, Object> map = new HashMap<>();
-
-                map.put(Key.picture, userList.get(i).getPicture());
-                map.put(Key.name, userList.get(i).getName());
-                map.put(Key.user_id, userList.get(i).getUser_id() + "");
-
-                mapUserList.add(map);
-
-            }
-
-
+            itemUserList = (List<ItemUser>) bundle.getSerializable("userList");
         }
 
 
@@ -119,7 +99,7 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvUser.setLayoutManager(layoutManager);
-        RecyclerSearchUserAdapter userAdapter = new RecyclerSearchUserAdapter(getActivity(), mapUserList);
+        RecyclerSearchUserAdapter userAdapter = new RecyclerSearchUserAdapter(getActivity(), itemUserList);
         rvUser.setAdapter(userAdapter);
 
         userAdapter.setOnRecyclerViewListener(new RecyclerSearchUserAdapter.OnRecyclerViewListener() {
@@ -130,7 +110,7 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                     return;
                 }
 
-                if (mapUserList == null || mapUserList.size() < 1) {
+                if (itemUserList == null || itemUserList.size() < 1) {
                     return;
                 }
 
@@ -138,38 +118,11 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                         getActivity(),
                         true,
                         false,
-                        (String) mapUserList.get(position).get(Key.user_id),
-                        (String) mapUserList.get(position).get(Key.picture),
-                        (String) mapUserList.get(position).get(Key.name),
+                        itemUserList.get(position).getUser_id(),
+                        itemUserList.get(position).getPicture(),
+                        itemUserList.get(position).getName(),
                         v.findViewById(R.id.userImg)
                 );
-
-
-//                Bundle bundle = new Bundle();
-//                bundle.putString(Key.author_id, (String) mapUserList.get(position).get(Key.user_id));
-//                bundle.putString(Key.picture, (String) mapUserList.get(position).get(Key.picture));
-//                bundle.putString(Key.name, (String) mapUserList.get(position).get(Key.name));
-//
-//
-//                if (SystemUtility.Above_Equal_V5()) {
-//
-//                    Intent intent = new Intent(getActivity(), Author2Activity.class).putExtras(bundle);
-//                    RoundCornerImageView userImg = (RoundCornerImageView) v.findViewById(R.id.userImg);
-//                    ActivityOptionsCompat options = ActivityOptionsCompat.
-//                            makeSceneTransitionAnimation(getActivity(),
-//                                    userImg,
-//                                    ViewCompat.getTransitionName(userImg));
-//                    startActivity(intent, options.toBundle());
-//
-//
-//                } else {
-//
-//                    Intent intent = new Intent(getActivity(), Author2Activity.class);
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-//                    ActivityAnim.StartAnim(getActivity());
-//
-//                }
 
 
             }

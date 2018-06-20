@@ -12,11 +12,10 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by vmage on 2017/2/2.
@@ -39,12 +38,12 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
 
     private Activity mActivity;
 
-    private ArrayList<HashMap<String, Object>> listData;
+    private List<ItemUser> itemUserList;
 
 
-    public RecyclerSearchUserAdapter(Activity activity, ArrayList<HashMap<String, Object>> listData) {
+    public RecyclerSearchUserAdapter(Activity activity,List<ItemUser> itemUserList) {
         this.mActivity = activity;
-        this.listData = listData;
+        this.itemUserList = itemUserList;
 
 
     }
@@ -52,7 +51,7 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return listData.size();
+        return itemUserList.size();
     }
 
     @Override
@@ -68,8 +67,8 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
         ViewHolder holder = (ViewHolder) vHolder;
         holder.position = position;
 
-        String strPicture = (String)listData.get(position).get(Key.picture);
-        String strName = (String)listData.get(position).get(Key.name);
+        String strPicture = itemUserList.get(position).getPicture();
+        String strName = itemUserList.get(position).getName();
 
         holder.tvName.setText(strName);
 
@@ -139,18 +138,18 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
     }
 
 
-    public void addData(int position, HashMap<String, Object> map) {
-        listData.add(position, map);
+    public void addData(int position, ItemUser itemUser) {
+        itemUserList.add(position, itemUser);
         notifyItemInserted(position);
     }
 
-    public void setData(int position, HashMap<String, Object> map) {
-        listData.set(position, map);
+    public void setData(int position, ItemUser itemUser) {
+        itemUserList.set(position, itemUser);
         notifyItemChanged(position);
     }
 
     public void removeData(int position) {
-        listData.remove(position);
+        itemUserList.remove(position);
         notifyItemRemoved(position);
     }
 

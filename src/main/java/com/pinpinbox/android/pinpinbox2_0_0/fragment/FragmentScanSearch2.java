@@ -236,11 +236,9 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                         }
 
 
-
                     }else {
 
                         PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_dialog_message_scan_invalid);
-
 
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -253,13 +251,8 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 
                     }
 
-
-
                     return;
                 }
-
-
-
 
             }
 
@@ -270,34 +263,16 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 
                 if(a!=null && a.length()!=0){
                     Uri uri = Uri.parse(a);
-                    if(uri!=null){
-
-//                        MyLog.Set("e", FragmentScanSearch2.class, "uri.getHost() => " + uri.getHost());
-
-
-
+                    if(uri!=null && uri.getScheme()!=null){
                         if(!uri.getHost().equals(Uri.parse(BuildConfig.initAPI).getHost())){
-
-
                             Intent intent = new Intent();
                             intent.setAction("android.intent.action.VIEW");
                             intent.setData(uri);
                             startActivity(intent);
-
                             return;
-
                         }
                     }
                 }
-
-
-
-
-
-
-
-
-
 
 
                 String arg = a.substring(a.indexOf("?") + 1, a.length());
@@ -306,26 +281,17 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                 for (int x = 0; x < strs.length; x++) {
                     String[] strs2 = strs[x].split("=");
                     if (strs2.length == 2) {
-
                         MyLog.Set("d", getClass(), strs2[0] + "  " + strs2[1]);
-
                         map.put(strs2[0], strs2[1]);
                     }
                 }
 
-
                 try {
                     String type = map.get(MapKey.type);
-
                     String is_cooperation = "";
-//                                String type_id = "";
-//                                String is_follow = "";
-
                     if (type != null && !type.equals("") && type.equals(Value.album)) {
                         strCooperationAlbumId = map.get(MapKey.type_id);
                         is_cooperation = map.get(MapKey.is_cooperation);
-//                                    is_follow = map.get(MapKey.is_follow);
-
                         if (is_cooperation.equals("1")) {
                             doJoinCooperation();
                             return;

@@ -249,7 +249,7 @@ public class ProtocolsClass {
 
     public static String p85_GetFollowToList = domain + "/index/api/getfollowtolist" + "/1.3";
 
-    public static String p86_GetRecommendedList = domain + "/index/api/getrecommendedlist" + "/1.3";
+    public static String P86_GetRecommendedList = domain + "/index/api/getrecommendedlist" + "/1.3";
 
     public static String p87_GetPushQueue = domain + "/index/api/getpushqueue" + "/1.0";
 

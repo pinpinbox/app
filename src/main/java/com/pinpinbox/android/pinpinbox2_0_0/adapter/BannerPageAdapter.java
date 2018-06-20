@@ -25,6 +25,7 @@ import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
@@ -57,7 +58,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
     private Activity mActivity;
     private List<View> viewList;
-    private ArrayList<HashMap<String, Object>> arrayList;
+    private List<ItemHomeBanner> itemHomeBannerList;
     private RequestOptions opts;
 
 
@@ -77,11 +78,11 @@ public class BannerPageAdapter extends PagerAdapter {
 
     private List<HashMap<String, Object>> gifList;
 
-    public BannerPageAdapter(Activity mActivity, List<View> viewList, ArrayList<HashMap<String, Object>> arrayList, Fragment fragment) {
+    public BannerPageAdapter(Activity mActivity, List<View> viewList, List<ItemHomeBanner> itemHomeBannerList, Fragment fragment) {
 
         this.mActivity = mActivity;
         this.viewList = viewList;
-        this.arrayList = arrayList;
+        this.itemHomeBannerList = itemHomeBannerList;
         this.fragment = fragment;
 
 
@@ -131,7 +132,7 @@ public class BannerPageAdapter extends PagerAdapter {
 //        final RoundCornerImageView gifImg = (RoundCornerImageView)v.findViewById(R.id.gifImg);
 
         /*20171102*/
-        if (arrayList == null || arrayList.size() < 1) {
+        if (itemHomeBannerList == null || itemHomeBannerList.size() < 1) {
 
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
             img.setImageResource(R.drawable.bg_2_0_0_no_image);
@@ -141,7 +142,7 @@ public class BannerPageAdapter extends PagerAdapter {
         }
 
 
-        final String imageUrl = (String) arrayList.get(position).get(Key.image);
+        final String imageUrl = itemHomeBannerList.get(position).getImage();
 
         if (SystemUtility.Above_Equal_V5()) {
 
@@ -189,22 +190,7 @@ public class BannerPageAdapter extends PagerAdapter {
                 }
 
 
-//                img.setVisibility(View.GONE);
-//                gifImg.setVisibility(View.VISIBLE);
-
-//                LoadGifTask task = new LoadGifTask(gifImg, position);
-//                task.execute();
-
-
             } else {
-
-//                img.setVisibility(View.VISIBLE);
-//                gifImg.setVisibility(View.GONE);
-
-//                Glide.with(mActivity.getApplicationContext())
-//                        .load(url)
-//                        .apply(opts)
-//                        .into(img);
 
 
                 Glide.with(mActivity.getApplicationContext())
@@ -224,7 +210,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
 
                                     //判斷是否是活動
-                                    String event_id = (String) arrayList.get(position).get(Key.event_id);
+                                    String event_id = itemHomeBannerList.get(position).getEvent_id();
                                     if (!event_id.equals("")) {
 
                                         //判斷image是否曾經顯示過
@@ -243,35 +229,20 @@ public class BannerPageAdapter extends PagerAdapter {
                                             e.printStackTrace();
                                         }
 
-//                                        List<Object> bannerImageUrlList = null;
-//
-//                                        if (!bannerList.equals("")) {
-//
-//                                            bannerImageUrlList = StringUtil.StringToList(bannerList);
-//                                            for (int i = 0; i < bannerImageUrlList.size(); i++) {
-//                                                String strOldImageUrl = (String) bannerImageUrlList.get(i);
-//                                                if (strOldImageUrl.equals(imageUrl)) {
-//                                                    isUrlExist = true;
-//                                                    break;
-//                                                }
-//                                            }
-//
-//                                        }
 
                                         if (!isUrlExist) {
 
                                             MyLog.Set("e", BannerPageAdapter.class, "活動還沒顯示過");
 
                                             Bundle bundle = new Bundle();
-                                            bundle.putString(Key.image, (String) arrayList.get(position).get(Key.image));
-                                            bundle.putString(Key.event_id, (String) arrayList.get(position).get(Key.event_id));
+                                            bundle.putString(Key.image, itemHomeBannerList.get(position).getImage());
+                                            bundle.putString(Key.event_id, itemHomeBannerList.get(position).getEvent_id());
                                             Intent intent = new Intent(mActivity, AdHighLight2Activity.class).putExtras(bundle);
 
                                             ActivityOptionsCompat options = ActivityOptionsCompat.
                                                     makeSceneTransitionAnimation(mActivity,
                                                             img,
                                                             ViewCompat.getTransitionName(img));
-//                                            mActivity.startActivity(intent, options.toBundle());
 
                                             fragment.startActivityForResult(intent, RequestCodeClass.CloseHighLight, options.toBundle());
 
@@ -314,7 +285,7 @@ public class BannerPageAdapter extends PagerAdapter {
                 }
 
 
-                if (arrayList != null && arrayList.size() > 0) {
+                if (itemHomeBannerList != null && itemHomeBannerList.size() > 0) {
 
                     FlurryUtil.onEvent(FlurryKey.home_click_event);
 
@@ -322,12 +293,12 @@ public class BannerPageAdapter extends PagerAdapter {
 
                     Intent intent = new Intent();
 
-                    String url = (String) arrayList.get(position).get(Key.url);
+                    String url = itemHomeBannerList.get(position).getUrl();
 
-                    String event_id = (String) arrayList.get(position).get(Key.event_id);
-                    String album_id = (String) arrayList.get(position).get(Key.album_id);
-                    String template_id = (String) arrayList.get(position).get(Key.template_id);
-                    String user_id = (String) arrayList.get(position).get(Key.user_id);
+                    String event_id = itemHomeBannerList.get(position).getEvent_id();
+                    String album_id =itemHomeBannerList.get(position).getAlbum_id();
+                    String template_id = itemHomeBannerList.get(position).getTemplate_id();
+                    String user_id = itemHomeBannerList.get(position).getUser_id();
 
 
                     if (album_id != null && !album_id.equals("")) {
@@ -349,7 +320,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
                     if (user_id != null && !user_id.equals("")) {
 
-                        ActivityIntent.toUser(mActivity, false, false, user_id, null, null ,null);
+                        ActivityIntent.toUser(mActivity, false, false, user_id, null, null, null);
 
                         return;
                     }
@@ -370,9 +341,9 @@ public class BannerPageAdapter extends PagerAdapter {
 
                             String lastPath = uri.getLastPathSegment();
 
-                            if(lastPath.equals("point")){
+                            if (lastPath.equals("point")) {
                                 ActivityIntent.toBuyPoint(mActivity);
-                            }else {
+                            } else {
 
 
                                 String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
@@ -388,8 +359,6 @@ public class BannerPageAdapter extends PagerAdapter {
 
 
                             }
-
-
 
 
                         }
@@ -454,9 +423,9 @@ public class BannerPageAdapter extends PagerAdapter {
 
             try {
 
-                String url = (String) arrayList.get(position).get(Key.image);
+                String image = itemHomeBannerList.get(position).getImage();
 
-                URLConnection urlConnection = new URL(url).openConnection();
+                URLConnection urlConnection = new URL(image).openConnection();
                 urlConnection.connect();
 
                 int contentLength = urlConnection.getContentLength();
