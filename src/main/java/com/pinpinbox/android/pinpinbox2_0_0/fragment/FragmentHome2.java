@@ -52,8 +52,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.BannerPageAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryNameAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerPopularAlbumAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
@@ -126,7 +126,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private RecyclerHomeAdapter recyclerHomeAdapter;
     private BannerPageAdapter bannerPageAdapter;
     private RecyclerCategoryNameAdapter categoryNameAdapter;
-    private RecyclerSearchUserAdapter userAdapter;
+    private RecyclerHomeUserAdapter userAdapter;
     private RecyclerPopularAlbumAdapter popularAlbumAdapter;
 
     private List<ItemAlbumCategory> itemAlbumCategoryList;
@@ -614,10 +614,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvRecommendUser.setLayoutManager(layoutManager);
-        userAdapter = new RecyclerSearchUserAdapter(getActivity(), itemUserList);
+        userAdapter = new RecyclerHomeUserAdapter(getActivity(), itemUserList);
         rvRecommendUser.setAdapter(userAdapter);
 
-        userAdapter.setOnRecyclerViewListener(new RecyclerSearchUserAdapter.OnRecyclerViewListener() {
+        userAdapter.setOnRecyclerViewListener(new RecyclerHomeUserAdapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
                 if (ClickUtils.ButtonContinuousClick()) {
@@ -1090,6 +1090,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                     itemAlbumCategory.setCategoryarea_id(JsonParamTypeClass.NULLCATEGORYID);
                     itemAlbumCategory.setName(JsonUtility.GetString(jsonThemeArea, ProtocolKey.name));
                     itemAlbumCategory.setColorhex(JsonUtility.GetString(jsonThemeArea, ProtocolKey.colorhex));
+                    itemAlbumCategory.setImage_360x360(JsonUtility.GetString(jsonThemeArea, ProtocolKey.image_360x360));
 
                     itemAlbumCategoryList.add(itemAlbumCategory);
 
@@ -1115,7 +1116,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P09_RetrieveCategoryList,
                     SetMapByProtocol.setParam09_retrievecatgeorylist(id, token),
                     null);
-            MyLog.Set("d", getClass(), "p09strJson => " + strJson);
+            MyLog.Set("json", getClass(), strJson);
         } catch (SocketTimeoutException timeout) {
             p09Result = Key.TIMEOUT;
         } catch (Exception e) {
@@ -1144,6 +1145,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         itemAlbumCategory.setCategoryarea_id(JsonUtility.GetInt(jsonCategoryarea, ProtocolKey.categoryarea_id));
                         itemAlbumCategory.setName(JsonUtility.GetString(jsonCategoryarea, ProtocolKey.name));
                         itemAlbumCategory.setColorhex(JsonUtility.GetString(jsonCategoryarea, ProtocolKey.colorhex));
+                        itemAlbumCategory.setImage_360x360(JsonUtility.GetString(jsonCategoryarea, ProtocolKey.image_360x360));
 
                         itemAlbumCategoryList.add(itemAlbumCategory);
                     }
@@ -1363,21 +1365,21 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 e.printStackTrace();
             }
 
-//            if (isUrlExist) {
-//                if (autoPageScrollManager != null) {
-//
-//                    autoPageScrollManager.post();
-//                }
-//            }
+            if (isUrlExist) {
+                if (autoPageScrollManager != null) {
+
+                    autoPageScrollManager.post();
+                }
+            }
 
         } else {
 
 
             /*不為活動 直接自動播放*/
-//            if (autoPageScrollManager != null) {
-//
-//                autoPageScrollManager.post();
-//            }
+            if (autoPageScrollManager != null) {
+
+                autoPageScrollManager.post();
+            }
 
 
         }

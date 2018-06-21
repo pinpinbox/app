@@ -1,9 +1,8 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
-import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -73,117 +71,41 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
         TextUtility.setBold(holder.tvName, true);
         holder.tvName.setText(itemAlbumCategoryList.get(position).getName());
 
-//        String name = itemAlbumCategoryList.get(position).getName();
-//        switch (name){
-//            case "拚星聞":
-//
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_new)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼旅遊":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_travel)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼開運":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_luck)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼美食":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_food)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼藝文":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_art)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼知識":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_knowledge)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼寵物":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_dog)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼時尚":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_fashion)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼寶貝":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_baby)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//
-//            case "拼好康":
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(R.drawable.test_gift)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.bg_2_0_0_no_image)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.img);
-//                break;
-//        }
+
+
+        String image = itemAlbumCategoryList.get(position).getImage_360x360();
+        if(image!=null && !image.equals("null") && !image.equals("")){
+
+            Picasso.with(mActivity.getApplicationContext())
+                    .load(image)
+                    .config(Bitmap.Config.RGB_565)
+                    .error(R.drawable.bg_2_0_0_no_image)
+                    .tag(mActivity.getApplicationContext())
+                    .into(holder.img);
+
+        }else {
+
+            holder.img.setImageResource(R.drawable.bg_2_0_0_no_image);
+
+        }
 
 
 
         /*set gradient*/
-        String color = itemAlbumCategoryList.get(position).getColorhex();
-
-        try {
-            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
-                holder.tvName.setBackground(
-                        ScrimUtil.setButtonGradient(
-                                Color.parseColor(color), //颜色
-                                2, //渐变层数 (偶數)
-                                Gravity.BOTTOM,//起始方向
-                                8)); //圓角
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        String color = itemAlbumCategoryList.get(position).getColorhex();
+//
+//        try {
+//            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
+//                holder.tvName.setBackground(
+//                        ScrimUtil.setButtonGradient(
+//                                Color.parseColor(color), //颜色
+//                                2, //渐变层数 (偶數)
+//                                Gravity.BOTTOM,//起始方向
+//                                8)); //圓角
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
     }
@@ -201,19 +123,18 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
         private RoundCornerImageView img;
 
 
-
         public ViewHolder(View itemView) {
             super(itemView);
 
 
-            tvName = (TextView)itemView.findViewById(R.id.tvName);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
 
-//            rBackground = (RelativeLayout)itemView.findViewById(R.id.rBackground);
-//
-//            img = (RoundCornerImageView)itemView.findViewById(R.id.img);
+            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
 
-            tvName.setOnClickListener(this);
-            tvName.setOnLongClickListener(this);
+            img = (RoundCornerImageView) itemView.findViewById(R.id.img);
+
+            rBackground.setOnClickListener(this);
+            rBackground.setOnLongClickListener(this);
 
         }
 

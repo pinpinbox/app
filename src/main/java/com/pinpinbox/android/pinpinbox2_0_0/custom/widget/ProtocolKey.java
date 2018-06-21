@@ -118,6 +118,7 @@ public class ProtocolKey {
     public static String is_existing = "is_existing";
     public static String info_url = "info_url";
     public static String icon = "icon";
+    public static String image_360x360 = "image_360x360";
 
     //j
 

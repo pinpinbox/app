@@ -11,33 +11,27 @@
         android:paddingRight="@dimen/ppb200_padding_margin_first">
 
         <TextView
-            android:id="@+id/tvPopularity"
+            android:id="@+id/tvRecommend"
             style="@style/ppb200_title_second"
-            android:text="@string/pinpinbox_2_0_0_title_popular_album" />
+            android:text="@string/pinpinbox_2_0_0_title_follow" />
 
         <View
             style="@style/ppb200_divider_list"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"/>
 
+
+
     </LinearLayout>
-
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="168dp"
-        android:layout_marginTop="@dimen/ppb200_padding_margin_second">
+        android:layout_height="144dp">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvPopularAlbum"
+            android:id="@+id/rvRecommendUser"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="8dp"
-            android:clipToPadding="false"/>
-
-
+            android:layout_height="match_parent" />
 
 
     </RelativeLayout>
@@ -45,6 +39,3 @@
 
 
 </LinearLayout>
-
-
-

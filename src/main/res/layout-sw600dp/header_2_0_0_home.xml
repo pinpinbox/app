@@ -43,62 +43,29 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!--探索-->
+        <include
+            layout="@layout/lay_2_0_0_home_explore"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="8dp">
-            <!--16 => 8dp 移至 recyclerview-->
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_second" />
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_first">
-
-                <TextView
-                    android:id="@+id/tvExplore"
-                    style="@style/ppb200_title_second"
-                    android:text="@string/pinpinbox_2_0_0_title_explore" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                    android:layout_toEndOf="@+id/tvExplore"
-                    android:layout_toRightOf="@+id/tvExplore"
-                    android:background="@color/pinpinbox_2_0_0_divider" />
-
-
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvCategory"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:scrollbars="none" />
-
-
-        </LinearLayout>
-
-
-        <!--創作人-->
+        <!--釘關注-->
         <include
             android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            layout="@layout/lay_2_0_0_recommend_user"/>
+            layout="@layout/lay_2_0_0_home_recommend_user"/>
 
-        <!--精選-->
+        <!--釘創作-->
         <include
             android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            layout="@layout/lay_2_0_0_popular_album"/>
+            layout="@layout/lay_2_0_0_home_popular_album"/>
 
-
+        <!--推薦-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +77,7 @@
             <TextView
                 android:id="@+id/tvNewsFeed"
                 style="@style/ppb200_title_second"
-                android:text="@string/pinpinbox_2_0_0_title_for_you" />
+                android:text="@string/pinpinbox_2_0_0_title_recommend" />
 
 
             <View
