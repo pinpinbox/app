@@ -185,7 +185,7 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
 
         }else {
 
-            mHolder.tvFollow.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
+            mHolder.tvFollow.setBackgroundResource(R.drawable.click_2_0_0_pink_button_radius);
             mHolder.tvFollow.setTextColor(Color.parseColor(ColorClass.WHITE)); //pinpinbox_2_0_0_first_pink
             mHolder.tvFollow.setText(R.string.pinpinbox_2_0_0_button_follow);
 

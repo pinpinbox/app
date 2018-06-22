@@ -3265,9 +3265,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         private void setLike() {
 
             if (itemAlbum.is_likes()) {
-                likeImg.setImageResource(R.drawable.ic200_like_main);
+                likeImg.setImageResource(R.drawable.ic200_ding_pink);
             } else {
-                likeImg.setImageResource(R.drawable.ic200_like_white);
+                likeImg.setImageResource(R.drawable.ic200_ding_white);
             }
 
         }
@@ -4172,7 +4172,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             if (result == 1) {
 
 
-                likeImg.setImageResource(R.drawable.ic200_like_main);
+                likeImg.setImageResource(R.drawable.ic200_ding_pink);
                 itemAlbum.setIs_likes(true);
 
 
@@ -4254,7 +4254,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //                int count = StringIntMethod.StringToInt(tvLikeCount.getText().toString());
 //                tvLikeCount.setText((count - 1) + "");
 
-                likeImg.setImageResource(R.drawable.ic200_like_white);
+                likeImg.setImageResource(R.drawable.ic200_ding_white);
                 itemAlbum.setIs_likes(false);
 
                 List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();

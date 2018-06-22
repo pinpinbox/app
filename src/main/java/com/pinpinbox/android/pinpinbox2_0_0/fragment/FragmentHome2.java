@@ -1219,7 +1219,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         try {
             strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
-                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.album, "0,16"), null);
+                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.album, "0,8"), null);
             MyLog.Set("d", getClass(), "p86strJson(album) => " + strJson);
         } catch (SocketTimeoutException timeout) {
             p86ResultAlbum = Key.TIMEOUT;

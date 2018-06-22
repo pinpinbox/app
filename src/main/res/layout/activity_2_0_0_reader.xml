@@ -209,7 +209,7 @@
                 <ImageView
                     android:id="@+id/likeImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:src="@drawable/ic200_like_white" />
+                    android:src="@drawable/ic200_ding_white" />
 
 
                 <ImageView

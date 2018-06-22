@@ -1231,10 +1231,10 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 /*是否讚過*/
                 if (itemAlbum.is_likes()) {
 
-                    likeImg.setImageResource(R.drawable.ic200_like_main);
+                    likeImg.setImageResource(R.drawable.ic200_ding_pink);
 
                 } else {
-                    likeImg.setImageResource(R.drawable.ic200_like_dark);
+                    likeImg.setImageResource(R.drawable.ic200_ding_dark);
                 }
 
 
@@ -2894,14 +2894,14 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
     public void setIsLike() {
         int count = StringIntMethod.StringToInt(tvLikeCount.getText().toString());
         tvLikeCount.setText((count + 1) + "");
-        likeImg.setImageResource(R.drawable.ic200_like_main);
+        likeImg.setImageResource(R.drawable.ic200_ding_pink);
         itemAlbum.setIs_likes(true);
     }
 
     public void setDeleteLike() {
         int count = StringIntMethod.StringToInt(tvLikeCount.getText().toString());
         tvLikeCount.setText((count - 1) + "");
-        likeImg.setImageResource(R.drawable.ic200_like_dark);
+        likeImg.setImageResource(R.drawable.ic200_ding_dark);
         itemAlbum.setIs_likes(false);
     }
 

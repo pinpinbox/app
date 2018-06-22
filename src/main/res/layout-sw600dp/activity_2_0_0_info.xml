@@ -78,7 +78,7 @@
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
-                            android:src="@drawable/ic200_like_light" />
+                            android:src="@drawable/ic200_ding_light" />
 
                         <TextView
                             android:id="@+id/tvLikeCount"
@@ -437,7 +437,7 @@
                 <ImageView
                     android:id="@+id/likeImg"
                     style="@style/ppb200_action_bar_icon"
-                    android:src="@drawable/ic200_like_dark" />
+                    android:src="@drawable/ic200_ding_dark" />
 
 
 

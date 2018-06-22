@@ -736,7 +736,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     }
 
     private void attenionCancel() {
-        tvAttention.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
+        tvAttention.setBackgroundResource(R.drawable.click_2_0_0_pink_button_radius);
         tvAttention.setTextColor(Color.parseColor(ColorClass.WHITE)); //pinpinbox_2_0_0_first_pink
         tvAttention.setText(R.string.pinpinbox_2_0_0_button_follow);
     }
