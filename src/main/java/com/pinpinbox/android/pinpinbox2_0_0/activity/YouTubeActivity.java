@@ -36,7 +36,7 @@ public class YouTubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         SystemUtility.SysApplication.getInstance().addActivity(this);
         YouTubePlayerView youTubeView = (YouTubePlayerView)
                 findViewById(R.id.youtube_view);
-        youTubeView.initialize(KeysForSKD.YouTube, this);
+        youTubeView.initialize(KeysForSKD.YOUTUBE, this);
 
 
     }

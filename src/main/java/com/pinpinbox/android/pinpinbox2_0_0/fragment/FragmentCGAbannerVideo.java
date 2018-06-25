@@ -69,7 +69,7 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment{
 
     private void setYouTube(){
 
-        initialize(KeysForSKD.YouTube, new YouTubePlayer.OnInitializedListener() {
+        initialize(KeysForSKD.YOUTUBE, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 MyLog.Set("e", getClass(), "onInitializationSuccess");
