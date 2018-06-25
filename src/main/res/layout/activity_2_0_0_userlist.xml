@@ -95,4 +95,16 @@
         app:spb_stroke_separator_length="0dp"
         app:spb_stroke_width="4dp" />
 
+
+
+
+    <TextView
+        style="@style/ppb200_guide_no_data"
+        android:id="@+id/tvGuide"
+        android:layout_centerInParent="true"
+        android:text="" />
+
+
+
+
 </RelativeLayout>

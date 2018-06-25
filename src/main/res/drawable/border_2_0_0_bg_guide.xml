@@ -6,7 +6,7 @@
 
     <corners android:radius="@dimen/ppb200_guide_bg_radius" />
 
-    <solid android:color="@color/pinpinbox_2_0_0_second_grey"/>
+    <solid android:color="@color/pinpinbox_2_0_0_third_grey"/>
 
 
 </shape>

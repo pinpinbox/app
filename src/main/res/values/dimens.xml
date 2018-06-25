@@ -22,7 +22,7 @@
 
     <dimen name="ppb200_userarea_name">24sp</dimen>
 
-    <dimen name="ppb200_guide">20sp</dimen>
+    <dimen name="ppb200_guide">18sp</dimen>
     <dimen name="ppb200_guide_bg_radius">16dp</dimen>
 
     <dimen name="ppb200_worksname">28sp</dimen>

@@ -63,7 +63,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
     private Activity mActivity;
     private List<ItemUser> itemUserList;
     private RecyclerInteractiveAdapter adapter;
-//
+    //
     private FollowTask followTask;
     private AttentionTask attentionTask;
     private Protocol105_GetAlbumLikesList protocol105;
@@ -73,6 +73,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private SmoothProgressBar pbLoadMore;
     private ImageView backImg;
+    private TextView tvGuide;
 
     private String album_id;
 
@@ -148,6 +149,8 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
         rvUser = (RecyclerView) findViewById(R.id.rvUser);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
         backImg = (ImageView) findViewById(R.id.backImg);
+        tvGuide = (TextView) findViewById(R.id.tvGuide);
+        tvGuide.setText(R.string.pinpinbox_2_0_0_guide_likelist_empty);
 
 
         pbLoadMore = (SmoothProgressBar) findViewById(R.id.pbLoadMore);
@@ -185,7 +188,7 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-                if(itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())){
+                if (itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())) {
                     return;
                 }
 
@@ -319,6 +322,10 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
                 new Protocol105_GetAlbumLikesList.TaskCallBack() {
                     @Override
                     public void Prepare(int doingType) {
+
+                        tvGuide.setVisibility(View.GONE);
+
+
                         switch (doingType) {
 
                             case DoingTypeClass.DoDefault:
@@ -348,6 +355,14 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
                     @Override
                     public void Post(int doingType) {
 
+
+                        if (itemUserList.size() > 0) {
+                            tvGuide.setVisibility(View.GONE);
+                        } else {
+                            tvGuide.setVisibility(View.VISIBLE);
+                        }
+
+
                         switch (doingType) {
 
                             case DoingTypeClass.DoDefault:
@@ -355,10 +370,6 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
                                 dissmissLoading();
 
                                 ViewControl.AlphaTo1(pinPinBoxRefreshLayout);
-
-
-                                MyLog.Set("e", mActivity.getClass(), "public void Post");
-
 
                                 break;
 
@@ -381,6 +392,8 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
 
                     @Override
                     public void Success(int doingType) {
+
+
                         switch (doingType) {
 
                             case DoingTypeClass.DoDefault:
@@ -558,9 +571,6 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-
-
-
             } else if (p12Result == 0) {
                 DialogV2Custom.BuildError(mActivity, p12Message);
 
@@ -706,9 +716,9 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-                if(url==null || url.equals("")|| url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -779,12 +789,10 @@ public class LikeList2Activity extends DraggerActivity implements View.OnClickLi
     public void doPostMessage(int position) {
         MyLog.Set("e", getClass(), "doPostMessage position =>" + position);
 
-        if(!itemUserList.get(position).isDisscuss()){
+        if (!itemUserList.get(position).isDisscuss()) {
             PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_board_is_close);
             return;
         }
-
-
 
 
         if (board != null) {

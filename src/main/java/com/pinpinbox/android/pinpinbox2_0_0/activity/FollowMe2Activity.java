@@ -77,6 +77,7 @@ public class FollowMe2Activity extends DraggerActivity implements View.OnClickLi
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private SmoothProgressBar pbLoadMore;
     private ImageView backImg;
+    private TextView tvGuide;
 
 
     private String user_id = "";
@@ -153,7 +154,8 @@ public class FollowMe2Activity extends DraggerActivity implements View.OnClickLi
         rvUser = (RecyclerView) findViewById(R.id.rvUser);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
         backImg = (ImageView) findViewById(R.id.backImg);
-
+        tvGuide = (TextView) findViewById(R.id.tvGuide);
+        tvGuide.setText(R.string.pinpinbox_2_0_0_guide_followmelist_empty);
 
         pbLoadMore = (SmoothProgressBar) findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
@@ -354,6 +356,14 @@ public class FollowMe2Activity extends DraggerActivity implements View.OnClickLi
                     @Override
                     public void Post(int doingType) {
 
+
+                        if (itemUserList.size() > 0) {
+                            tvGuide.setVisibility(View.GONE);
+                        } else {
+                            tvGuide.setVisibility(View.VISIBLE);
+                        }
+
+
                         switch (doingType) {
 
                             case DoingTypeClass.DoDefault:
@@ -361,10 +371,6 @@ public class FollowMe2Activity extends DraggerActivity implements View.OnClickLi
                                 dissmissLoading();
 
                                 ViewControl.AlphaTo1(pinPinBoxRefreshLayout);
-
-
-                                MyLog.Set("e", mActivity.getClass(), "public void Post");
-
 
                                 break;
 
