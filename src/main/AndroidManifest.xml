@@ -665,7 +665,6 @@
         <activity
             android:name=".pinpinbox2_0_0.activity.FromSharePhoto2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
             android:theme="@style/ppb200_common_transparent"
             android:windowSoftInputMode="adjustPan|stateHidden">
 

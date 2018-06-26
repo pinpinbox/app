@@ -30,4 +30,10 @@ public class DirClass {
 
     public static final String test = sdPath + "aaaaaaaaaaaaaaaaaaaaaaaaaaa" +pathName_UserBanner;
 
+    public static final String getMyDir(String id){
+
+        return "PinPinBox" + id + "/";
+
+    }
+
 }

@@ -100,6 +100,7 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
             }
 
 
+
             //监听拖动的手势
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {

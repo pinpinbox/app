@@ -58,7 +58,7 @@
         <TextView
             android:id="@+id/tvName"
             style="@style/ppb200_title_second"
-            android:maxWidth="192dp"
+            android:maxWidth="384dp"
             android:text="" />
 
         <View

@@ -53,6 +53,8 @@
     <dimen name="ppb200_common_button_height">48dp</dimen>
     <dimen name="ppb200_common_button_small_width">88dp</dimen>
     <dimen name="ppb200_common_button_small_height">36dp</dimen>
+    <dimen name="ppb200_common_button_mini_width">64dp</dimen>
+    <dimen name="ppb200_common_button_mini_height">24dp</dimen>
     <dimen name="ppb200_common_button_radius">@dimen/ppb200_radius_general</dimen>
 
     <dimen name="ppb200_common_icon_side">48dp</dimen>

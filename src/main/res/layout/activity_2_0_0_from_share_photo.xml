@@ -152,4 +152,18 @@
     </RelativeLayout>
 
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pinpinbox_2_0_0_other_text_go_to_editor_upload_video"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_below="@+id/rSelect"
+        android:layout_alignLeft="@+id/rSelect"
+        android:layout_alignRight="@+id/rSelect"
+        android:letterSpacing="0.1"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_second"/>
+
+
 </RelativeLayout>

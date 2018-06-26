@@ -282,7 +282,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     }
 
     private void work() {
+
         setContentView(R.layout.activity_2_0_0_from_share_photo);
+
         init();
 
         getPhoto();
@@ -297,22 +299,12 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 .alpha(1)
                 .start();
 
-
     }
 
     private void getPhoto() {
 
-        intMaxCount = StringIntMethod.StringToInt(
-                UserGradeChange.PicCountByUserGrade(
-                        (getdata.getString(Key.usergrade, "22"))
-                )
-        );
-
 
         try {
-//            List<GridItem> list = SystemUtility.getFromShareListPicPath(this);
-
-//            photoList = new ArrayList<>();
 
             photoList = SystemUtility.getFromShareListPicPath(this);
 
@@ -339,12 +331,11 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
         onceCount = 10;
         total = 0;
-        round = 0;//
+        round = 0;
         totalRound = 0;
         lastRound = 0;
 
-        myDir = "PinPinBox" + id + "/";
-
+        myDir = DirClass.getMyDir(id);
 
         linLoad = (LinearLayout) findViewById(R.id.linLoad);
         rSelect = (RelativeLayout) findViewById(R.id.rSelect);
@@ -361,6 +352,13 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         backImg.setOnClickListener(this);
         tvCommonSize.setOnClickListener(this);
         tvOriginalSize.setOnClickListener(this);
+
+
+        intMaxCount = StringIntMethod.StringToInt(
+                UserGradeChange.PicCountByUserGrade(
+                        (getdata.getString(Key.usergrade, "22"))
+                )
+        );
 
     }
 
@@ -468,15 +466,6 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
-
-//                Bundle bundle = new Bundle();
-//                bundle.putString(Key.album_id, newAlbum_id);
-//                bundle.putString(Key.identity, "admin");
-//                bundle.putInt("create_mode", 0);
-//                Intent intent = new Intent(mActivity, Creation2Activity.class);
-//                intent.putExtras(bundle);
-//                startActivity(intent);
-//                finish();
 
             }
 

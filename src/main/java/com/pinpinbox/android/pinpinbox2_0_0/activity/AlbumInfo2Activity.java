@@ -301,7 +301,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     private void setScrollControl() {
 
-//        rDetail = (RelativeLayout) findViewById(R.id.rDetail);
         linDetail = (LinearLayout) findViewById(R.id.linDetail);
 
         ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
@@ -566,7 +565,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
     }
-
 
     private void showReport() {
 
