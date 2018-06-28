@@ -303,11 +303,13 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         linDetail = (LinearLayout) findViewById(R.id.linDetail);
 
+        linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
+
         ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
 
-        parallaxScrollView.setScrollDismissView(findViewById(R.id.linContents));
+        parallaxScrollView.setScrollDismissTouchRangeView(findViewById(R.id.linContents));
 
-        parallaxScrollView.setAlphaView(findViewById(R.id.linAlpha), linDetail);
+        parallaxScrollView.setAlphaView(findViewById(R.id.linAlpha), linDetail, linAuthor);
 
         parallaxScrollView.setActivity(this);
 
@@ -349,7 +351,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         rLocation = (RelativeLayout) findViewById(R.id.rLocation);
 
-        linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
         linEvent = (LinearLayout) findViewById(R.id.linEvent);
         linType = (LinearLayout) findViewById(R.id.linType);
 
@@ -2646,16 +2647,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
             ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, pImg, pBg, pName);
-
-//            ActivityOptionsCompat ccc = ActivityOptionsCompat
-//                    .makeScaleUpAnimation(
-//                            linAuthor,
-//                            (int)linAuthor.getX(),
-//                            (int)linAuthor.getY(),
-//                            0,
-//                            0);
-//
-//            ccc.update(compat);
 
 
             Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);

@@ -60,19 +60,6 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
 
 
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-            //监听双击手势
-//            @Override
-//            public boolean onDoubleTap(MotionEvent e) {
-//                Log.d("data", "点击了两次按钮！ ");
-//                return true;
-//            }
-
-            //监听滑动手势
-//            @Override
-//            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//
-//                return super.onFling(e1, e2, velocityX, velocityY);
-//            }
 
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
@@ -99,13 +86,8 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                 return false;
             }
 
-
-
-            //监听拖动的手势
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                //设置控件跟随手势移动
-
 
                 if (top == 0 && e1 != null && e2 != null) {
 
@@ -122,20 +104,8 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
 
                     if (freeScroll) {
 
-                        vDismiss.setTranslationY((getTranslationY() + scrollY) - 36);
-                        vDismiss.setTranslationX(getTranslationX() + scrollX);
-
-
-//                        if (!isTranslucent) {
-//                            isTranslucent = true;
-//                            SwipeBackActivityHelper.convertActivityToTranslucent(mActivity);//translucent = true
-//                        }
-//                        float windowalpha = 1 - scrollY / 3000;
-//                        if (windowalpha >= 0f && windowalpha <= 1f) {
-//                            wParams.alpha = (windowalpha);
-//                            mActivity.getWindow().setAttributes(wParams);
-//                        }
-
+                        vTouchRange.setTranslationY((getTranslationY() + scrollY) - 36);
+                        vTouchRange.setTranslationX(getTranslationX() + scrollX);
 
                         if (!isAlpha) {
                             isAlpha = true;
@@ -148,13 +118,6 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                                         alphaTo0.setDuration(150)
                                                 .alpha(0)
                                                 .start();
-                                        final int finalI = i;
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                viewsAlpha[finalI].setVisibility(GONE);
-                                            }
-                                        }, 200);
 
                                     }
 
@@ -187,11 +150,6 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
         super.onFinishInflate();
         makeViewsParallax();
     }
-
-
-    //背景透明相關
-//    private WindowManager.LayoutParams wParams;
-//    private boolean isTranslucent = false;
 
     public void setActivity(Activity mActivity) {
         this.mActivity = mActivity;
@@ -284,11 +242,11 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
     private boolean closeActivity = false;
     private boolean isAlpha = false;
 
-    private View vDismiss;
+    private View vTouchRange;
     private View[] viewsAlpha;
 
-    public void setScrollDismissView(View vDismiss) {
-        this.vDismiss = vDismiss;
+    public void setScrollDismissTouchRangeView(View vTouchRange) {
+        this.vTouchRange = vTouchRange;
     }
 
     public void setAlphaView(View... viewsAlpha) {
@@ -336,13 +294,9 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
             if (onScroll) {
 
                 if (closeActivity) {
-                    MyLog.Set("e", ParallaxScrollView.class, "關閉Activity");
                     closeActivity = false;
 
                     if (closeActivityListener != null) {
-
-//                        SwipeBackActivityHelper.convertActivityFromTranslucent(mActivity);//translucent = false
-
                         closeActivityListener.close();
                     }
 
@@ -358,7 +312,6 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                                 for (int i = 0; i < viewsAlpha.length; i++) {
 
                                     if (viewsAlpha[i] != null) {
-                                        viewsAlpha[i].setVisibility(VISIBLE);
                                         ViewPropertyAnimator alphaTo1 = viewsAlpha[i].animate();
                                         alphaTo1.setDuration(150)
                                                 .alpha(1)
@@ -372,18 +325,16 @@ public class ParallaxScrollView extends ScrollView implements View.OnTouchListen
                         }
                     }, 200);
 
-                    vDismiss.setTranslationX(0);
-                    vDismiss.setTranslationY(0);
+
+
+
+                    vTouchRange.setTranslationX(0);
+                    vTouchRange.setTranslationY(0);
 
 
                     isAlpha = false;
                     onScroll = false;
                     freeScroll = false;
-
-
-//                    wParams.alpha = 1f;
-//                    mActivity.getWindow().setAttributes(wParams);
-//                    isTranslucent = false;
 
                 }
 
