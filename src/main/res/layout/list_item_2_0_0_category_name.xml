@@ -29,22 +29,21 @@
             android:id="@+id/vGradient"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_black_alpha_down_to_up_radius" />
+            android:background="@drawable/gradient_black_updownalpha" />
 
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
             android:layout_marginBottom="4dp"
             android:layout_marginRight="8dp"
             android:gravity="center"
             android:letterSpacing="0.1"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="@dimen/ppb200_common_text_third"
+            android:textSize="@dimen/ppb200_common_text_first"
             android:textStyle="bold"
             fontPath="fonts/OpenSans-Bold.ttf"/>
 
