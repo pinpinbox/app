@@ -765,7 +765,12 @@ public class FragmentSelectVideo2 extends Fragment implements View.OnClickListen
 
             }
 
-            tvStartUpLoad.setClickable(true);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvStartUpLoad.setClickable(true);
+                }
+            });
 
 
         }
