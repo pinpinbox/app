@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="144dp">
+        android:layout_height="160dp">
 
         <LinearLayout
             android:id="@+id/linBackground"

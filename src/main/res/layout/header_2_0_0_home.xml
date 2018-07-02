@@ -65,7 +65,6 @@
             layout="@layout/lay_2_0_0_home_popular_album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_first" />
 
 
