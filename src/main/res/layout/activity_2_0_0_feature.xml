@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:alpha="0"
+        android:alpha="1"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
         android:paddingTop="@dimen/ppb200_action_bar_height_with_status"
@@ -28,10 +28,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rBanner"
+
+            <LinearLayout
+                android:id="@+id/linBanner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/vpBanner"
@@ -39,37 +41,54 @@
                     android:layout_height="wrap_content"
                     android:background="@color/pinpinbox_2_0_0_second_grey" />
 
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/indicator"
+                <RelativeLayout
+                    android:id="@+id/rBannerDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="12dp"
-                    android:layout_below="@+id/vpBanner"
-                    android:layout_marginTop="8dp"
-                    app:ci_drawable="@drawable/icon_2_0_0_indicator"
-                    app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
+                    android:layout_height="36dp"
+                    android:orientation="horizontal"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/tvBannerDestination"
+                        fontPath="fonts/OpenSans-Bold.ttf"
+                        android:layout_width="299dp"
+                        android:layout_height="36dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/tvButtonText"
+                        android:layout_toStartOf="@+id/tvButtonText"
+                        android:background="@drawable/click_2_0_0_default"
+                        android:gravity="center_vertical"
+                        android:letterSpacing="0.1"
+                        android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                        android:text=""
+                        android:textColor="@color/pinpinbox_2_0_0_first_grey"
+                        android:textSize="@dimen/ppb200_common_text_third"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvButtonText"
+                        fontPath="fonts/OpenSans-Bold.ttf"
+                        android:layout_width="112dp"
+                        android:layout_height="36dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/click_2_0_0_right_angle_main"
+                        android:gravity="center"
+                        android:letterSpacing="0.1"
+                        android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                        android:paddingRight="@dimen/ppb200_padding_margin_first"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_third"
+                        android:visibility="visible" />
+
+                    <View
+                        style="@style/ppb200_divider_list"
+                        android:layout_alignParentBottom="true" />
+
+                </RelativeLayout>
 
 
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tvBannerDestination"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_gravity="right"
-                android:layout_marginBottom="-25dp"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                android:layout_marginTop="-12dp"
-                android:background="@drawable/click_2_0_0_circle_main_first"
-                android:gravity="center"
-                android:paddingLeft="@dimen/ppb200_padding_margin_first"
-                android:paddingRight="@dimen/ppb200_padding_margin_first"
-                android:text=""
-                android:letterSpacing="0.1"
-                android:textSize="@dimen/ppb200_common_text_second"
-                android:textColor="@color/white"
-                android:translationZ="@dimen/ppb200_translationZ_user"
-                android:visibility="gone" />
+            </LinearLayout>
 
 
             <RelativeLayout
@@ -119,8 +138,8 @@
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_action_bar_icon"
-            android:src="@drawable/ic200_arrow_left_dark"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic200_arrow_left_dark" />
 
         <LinearLayout
             android:id="@+id/linUser"
@@ -131,6 +150,15 @@
             android:layout_marginBottom="6dp"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:orientation="horizontal" />
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+
+            android:layout_alignParentBottom="true"
+            app:ci_drawable="@drawable/icon_2_0_0_indicator"
+            app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
 
 
     </RelativeLayout>
