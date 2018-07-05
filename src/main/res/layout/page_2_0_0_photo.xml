@@ -61,19 +61,17 @@
             android:id="@+id/vModeChange"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="200dp"/>
+            android:layout_marginBottom="200dp" />
 
         <TextView
             android:id="@+id/tvRefreshVideo"
             style="@style/ppb200_Button_grey_common_radius"
-            android:text="@string/pinpinbox_2_0_0_button_refresh_video"
-            android:visibility="gone"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:layout_width="wrap_content"
             android:layout_centerInParent="true"
-            />
-
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/pinpinbox_2_0_0_button_refresh_video"
+            android:visibility="gone" />
 
 
     </RelativeLayout>
@@ -194,6 +192,7 @@
         <RelativeLayout
             android:layout_width="288dp"
             android:layout_height="336dp"
+            android:layout_weight="1"
             android:background="@drawable/border_2_0_0_white_radius">
 
 
@@ -216,16 +215,16 @@
 
 
                     <TextView
-                        fontPath="fonts/OpenSans-Bold.ttf"
                         android:id="@+id/tvExchangeName"
+                        fontPath="fonts/OpenSans-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:letterSpacing="0.1"
                         android:text=""
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
                         android:textSize="@dimen/ppb200_common_text_first"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
+                        android:textStyle="bold" />
 
 
                     <RelativeLayout
