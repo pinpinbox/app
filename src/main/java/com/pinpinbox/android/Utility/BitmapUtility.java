@@ -9,7 +9,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -215,12 +214,17 @@ public class BitmapUtility {
      *            保存的图片
      * @return 图片路径
      */
-    public static String saveToLocal(Bitmap bm, String newPicPath, int size) {
+    public static void saveToLocal(Bitmap bm, String newPicPath, int size) {
         FileOutputStream fileOutputStream = null;
         File f = new File(newPicPath);
         if (!f.exists()) {
             try {
+
+
                 f.createNewFile();
+
+                Log.d("BitmapUtility", "newPicPath => " +  newPicPath + " => 已建立");
+
                 fileOutputStream = new FileOutputStream(newPicPath);
                 bm.compress(Bitmap.CompressFormat.JPEG, size, fileOutputStream);
 
@@ -230,18 +234,15 @@ public class BitmapUtility {
 
 
             } catch (IOException e) {
-                return null;
+
+                e.printStackTrace();
+
             }
-//            finally {
-//                try {
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//            }
+        }else {
+
+            Log.d("BitmapUtility", "newPicPath => 已存在");
+
         }
-        return newPicPath;
     }
 
     private static Bitmap bitMatrix(Bitmap bitmap, float x, float y) {

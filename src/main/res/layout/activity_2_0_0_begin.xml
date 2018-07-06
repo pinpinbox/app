@@ -8,11 +8,11 @@
 
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="375dp"
         android:id="@+id/begin_anim"
         android:layout_centerInParent="true"
-        android:src="@drawable/icon_begin_logo"/>
+        android:src="@drawable/logo_2_0_0"/>
 
 
 </RelativeLayout>
