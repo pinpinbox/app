@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
@@ -44,7 +45,7 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
     }
 
     private Activity mActivity;
-    
+
     private List<ItemAlbum> albumList;
 
 
@@ -78,7 +79,26 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
 //        int h = albumList.get(position).getCover_height();
 //        holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h));
 
-        holder.coverImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        int w = albumList.get(position).getCover_width();
+        int h = albumList.get(position).getCover_height();
+
+        if(h>160 || h<160){
+            h=160;
+        }
+
+        if (albumList.get(position).getImage_orientation() == ItemAlbum.LANDSCAPE){
+
+            holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams((160*w)/h, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        }else {
+
+            holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams(SizeUtils.dp2px(128), ViewGroup.LayoutParams.MATCH_PARENT));
+
+        }
+
+
+            holder.coverImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         String color = albumList.get(position).getCover_hex();
         final GradientDrawable drawable = (GradientDrawable) holder.rItemBg.getBackground();
@@ -100,9 +120,6 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
 
 
 //        /*set username*/
@@ -202,9 +219,9 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
                 holder.slotImg.setVisibility(View.VISIBLE);
             } else {
 
-                if(albumList.get(position).isExchange()){
+                if (albumList.get(position).isExchange()) {
                     holder.slotImg.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     holder.slotImg.setVisibility(View.GONE);
                 }
 
@@ -217,8 +234,8 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         } else {
             holder.linType.setVisibility(View.GONE);
         }
-        
-        
+
+
         /*click user*/
 //        holder.linUser.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -276,11 +293,8 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
-
     private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-            View.OnLongClickListener{
+            View.OnLongClickListener {
 
         int position;
 
@@ -292,10 +306,8 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         private RelativeLayout rItemBg, rClickArea;
 
 
-
         public ViewHolder(final View itemView) {
             super(itemView);
-
 
 
 //            itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
@@ -319,7 +331,6 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
             rClickArea.setOnLongClickListener(this);
 
         }
-
 
 
         @Override
@@ -354,5 +365,5 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         albumList.remove(position);
         notifyItemRemoved(position);
     }
-    
+
 }

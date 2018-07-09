@@ -4,23 +4,22 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemCategoryBanner;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemCategoryBanner;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 
@@ -166,14 +165,10 @@ public class Protocol102_GetCategoryArea extends AsyncTask<Void, Void, Object> {
                 try {
                     int width = jsonAlbum.getInt(ProtocolKey.cover_width);
                     int height = jsonAlbum.getInt(ProtocolKey.cover_height);
-                    int image_height = StaggeredHeight.setImageHeight(width, height);
 
-                    if (image_height < minHeight) {
-                        image_height = minHeight;
-                    }
 
-                    itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
-                    itemAlbum.setCover_height(image_height);
+                    itemAlbum.setCover_width(width);
+                    itemAlbum.setCover_height(height);
 
                     itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
 

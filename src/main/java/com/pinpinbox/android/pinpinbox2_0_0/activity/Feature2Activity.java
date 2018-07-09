@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.TextUtility;
@@ -387,6 +388,8 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         try {
 
+            int minHeight = DensityUtility.dip2px(mActivity.getApplicationContext(), 72);
+
             for (int i = 0; i < jsonArrayAlbum.length(); i++) {
 
                 JSONObject jsonItem = (JSONObject) jsonArrayAlbum.get(i);
@@ -417,6 +420,32 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                 itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
                 itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
                 itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
+
+                try {
+                    int width = jsonAlbum.getInt(ProtocolKey.cover_width);
+                    int height = jsonAlbum.getInt(ProtocolKey.cover_height);
+
+
+                    itemAlbum.setCover_width(width);
+                    itemAlbum.setCover_height(height);
+
+                    itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
+
+                    if (width > height) {
+                        itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
+                    } else if (height > width) {
+                        itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
+                    } else {
+                        itemAlbum.setImage_orientation(0);
+                    }
+
+                } catch (Exception e) {
+                    itemAlbum.setCover_hex("");
+                    itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
+                    itemAlbum.setCover_height(PPBApplication.getInstance().getStaggeredWidth());
+                    MyLog.Set("e", this.getClass(), "圖片長寬無法讀取");
+                }
+
 
                 itemAlbumList.add(itemAlbum);
             }
