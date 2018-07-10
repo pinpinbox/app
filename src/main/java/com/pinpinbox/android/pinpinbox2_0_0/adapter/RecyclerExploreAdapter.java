@@ -48,10 +48,14 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
 
     private List<ItemAlbum> albumList;
 
+    private int fixHeight;
+
 
     public RecyclerExploreAdapter(Activity activity, List<ItemAlbum> itemAlbumList) {
         this.mActivity = activity;
         this.albumList = itemAlbumList;
+
+        fixHeight = SizeUtils.dp2px(160);
 
     }
 
@@ -83,13 +87,12 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         int w = albumList.get(position).getCover_width();
         int h = albumList.get(position).getCover_height();
 
-        if(h>160 || h<160){
-            h=160;
-        }
+
+
 
         if (albumList.get(position).getImage_orientation() == ItemAlbum.LANDSCAPE){
 
-            holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams((160*w)/h, ViewGroup.LayoutParams.MATCH_PARENT));
+            holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams((fixHeight*w)/h, ViewGroup.LayoutParams.MATCH_PARENT));
 
         }else {
 

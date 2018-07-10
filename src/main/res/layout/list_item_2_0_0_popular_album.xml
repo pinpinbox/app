@@ -12,7 +12,7 @@
         android:background="@drawable/click_2_0_0_staggeredgrid_item">
 
         <LinearLayout
-            android:layout_width="128dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/ppb200_staggeredgrid_click_padding"
             android:orientation="vertical">
@@ -22,7 +22,7 @@
             <!--android:translationZ="12dp"-->
             <RelativeLayout
                 android:id="@+id/rItemBg"
-                android:layout_width="128dp"
+                android:layout_width="wrap_content"
                 android:layout_height="128dp"
                 android:background="@drawable/image_background_2_0_0_home_item_cover_radius">
 
@@ -30,7 +30,7 @@
                 <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                     android:id="@+id/coverImg"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="128dp"
                     android:layout_centerHorizontal="true"
                     android:scaleType="centerCrop"
                     app:siBorderAlpha="0"

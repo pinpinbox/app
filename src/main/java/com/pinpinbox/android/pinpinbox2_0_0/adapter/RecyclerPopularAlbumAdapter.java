@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
@@ -47,10 +48,14 @@ public interface OnRecyclerViewListener {
 
     private List<ItemAlbum> albumList;
 
+    private int fixHeight;
+
 
     public RecyclerPopularAlbumAdapter(Activity activity, List<ItemAlbum> itemAlbumList) {
         this.mActivity = activity;
         this.albumList = itemAlbumList;
+
+        fixHeight = SizeUtils.dp2px(128);
 
     }
 
@@ -73,6 +78,20 @@ public interface OnRecyclerViewListener {
 
         final ViewHolder holder = (ViewHolder) vHolder;
         holder.position = position;
+
+        int w = albumList.get(position).getCover_width();
+        int h = albumList.get(position).getCover_height();
+
+
+        if (albumList.get(position).getImage_orientation() == ItemAlbum.LANDSCAPE){
+
+            holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams((fixHeight*w)/h, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        }else {
+
+            holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams(SizeUtils.dp2px(102), ViewGroup.LayoutParams.MATCH_PARENT));
+
+        }
 
         holder.coverImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
 

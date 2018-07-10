@@ -1254,14 +1254,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         try {
                             int width = jsonAlbum.getInt(ProtocolKey.cover_width);
                             int height = jsonAlbum.getInt(ProtocolKey.cover_height);
-                            int image_height = StaggeredHeight.setImageHeight(width, height);
 
-                            if (image_height < minHeight) {
-                                image_height = minHeight;
-                            }
-
-                            itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
-                            itemAlbum.setCover_height(image_height);
+                            itemAlbum.setCover_width(width);
+                            itemAlbum.setCover_height(height);
                             itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
 
                             if (width > height) {
