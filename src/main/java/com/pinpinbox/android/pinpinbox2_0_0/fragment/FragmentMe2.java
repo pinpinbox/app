@@ -1101,9 +1101,11 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
 
                 setdata();
 
-                LinearLayout linContents = (LinearLayout) viewHeader.findViewById(R.id.linContents);
+                ViewControl.AlphaTo1((LinearLayout) viewHeader.findViewById(R.id.linContents));
 
-                ViewControl.AlphaTo1(linContents);
+                ViewControl.AlphaTo1((LinearLayout) viewHeader.findViewById(R.id.linData));
+
+                ViewControl.AlphaTo1(tvName);
 
                 mOnScrollListener.setBackgroundParallaxViews(rBackgroundParallax, tvUploadBanner);
 

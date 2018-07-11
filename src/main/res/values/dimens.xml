@@ -20,7 +20,10 @@
     <dimen name="ppb200_title_second_size">22sp</dimen>
     <dimen name="ppb200_title_third_size">18sp</dimen>
 
-    <dimen name="ppb200_userarea_name">24sp</dimen>
+    <dimen name="ppb200_userarea_name">42sp</dimen>
+    <dimen name="ppb200_userarea_creativename">22sp</dimen>
+
+    <dimen name="ppb200_detail_name">22sp</dimen>
 
     <dimen name="ppb200_guide">18sp</dimen>
     <dimen name="ppb200_guide_bg_radius">16dp</dimen>

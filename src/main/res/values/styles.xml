@@ -38,7 +38,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:letterSpacing">0.1</item>
-        <item name="android:textSize">@dimen/ppb200_userarea_name</item>
+        <item name="android:textSize">@dimen/ppb200_userarea_creativename</item>
         <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
@@ -145,7 +145,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
-        <item name="android:textSize">@dimen/ppb200_userarea_name</item>
+        <item name="android:textSize">@dimen/ppb200_detail_name</item>
         <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>

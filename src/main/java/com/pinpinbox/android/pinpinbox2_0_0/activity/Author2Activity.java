@@ -527,7 +527,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
         if(intSponsor<1){
 
-            viewHeader.findViewById(R.id.linSponsorList).setVisibility(View.GONE);
+            viewHeader.findViewById(R.id.linSponsorList).setVisibility(View.INVISIBLE);
 
         }
 
@@ -1119,9 +1119,12 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                 setdata();
 
-                LinearLayout linContents = (LinearLayout) viewHeader.findViewById(R.id.linContents);
+                ViewControl.AlphaTo1((LinearLayout) viewHeader.findViewById(R.id.linContents));
 
-                ViewControl.AlphaTo1(linContents);
+                ViewControl.AlphaTo1((LinearLayout) viewHeader.findViewById(R.id.linData));
+
+                ViewControl.AlphaTo1(tvName);
+
 
                 /*header bg 動畫*/
                 mOnScrollListener.setBackgroundParallaxViews(rBackgroundParallax);

@@ -14,12 +14,8 @@
         android:clipChildren="false"
         android:orientation="vertical">
 
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="36dp"-->
-        <!--android:background="@drawable/bg200_tilt_up_right_white_2" />-->
 
-
+        <!--36不能移除-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,46 +24,161 @@
             android:orientation="vertical">
 
 
-            <!--user name-->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                 android:background="@drawable/click_2_0_0_default"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="@dimen/ppb200_padding_margin_second">
+                android:orientation="horizontal">
 
                 <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                     android:id="@+id/userImg"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     app:siBorderColor="@color/pinpinbox_2_0_0_divider"
                     app:siBorderWidth="0.5dp"
                     app:siRadius="96dp" />
 
-                <TextView
-                    android:id="@+id/tvName"
-                    fontPath="fonts/OpenSans-Bold.ttf"
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:id="@+id/linData"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                    android:gravity="left"
-                    android:includeFontPadding="false"
-                    android:letterSpacing="0.1"
-                    android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"
-                    android:text=""
-                    android:textColor="@color/pinpinbox_2_0_0_first_text"
-                    android:textSize="@dimen/ppb200_common_text_first"
-                    android:transitionName="bg_user_name" />
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:gravity="center"
+                    android:alpha="0"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/tvViewed"
+                            fontPath="fonts/OpenSans-Bold.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                            android:letterSpacing="0.1"
+                            android:text=""
+                            android:textColor="@color/pinpinbox_2_0_0_first_text"
+                            android:textSize="@dimen/ppb200_title_second_size" />
+
+                        <TextView
+                            android:id="@+id/tvV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                            android:gravity="center"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_other_text_people_browsing"
+                            android:textColor="@color/pinpinbox_2_0_0_first_text"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linFollowMe"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:background="@drawable/click_2_0_0_default"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/tvFollow"
+                            fontPath="fonts/OpenSans-Bold.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                            android:letterSpacing="0.1"
+                            android:text=""
+                            android:textColor="@color/pinpinbox_2_0_0_first_text"
+                            android:textSize="@dimen/ppb200_title_second_size" />
+
+                        <TextView
+                            android:id="@+id/tvF"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                            android:gravity="center"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_other_text_people_follow"
+                            android:textColor="@color/pinpinbox_2_0_0_first_text"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linSponsorList"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:background="@drawable/click_2_0_0_default"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/tvSponsor"
+                            fontPath="fonts/OpenSans-Bold.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                            android:letterSpacing="0.1"
+                            android:text=""
+                            android:textColor="@color/pinpinbox_2_0_0_first_text"
+                            android:textSize="@dimen/ppb200_title_second_size" />
+
+                        <TextView
+                            android:id="@+id/tvS"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                            android:gravity="center"
+                            android:letterSpacing="0.1"
+                            android:text="@string/pinpinbox_2_0_0_other_text_people_sponsor"
+                            android:textColor="@color/pinpinbox_2_0_0_first_text"
+                            android:textSize="@dimen/ppb200_common_text_small" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvName"
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:gravity="left"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_userarea_name"
+                android:transitionName="bg_user_name"
+                android:alpha="0"/>
+
 
 
             <LinearLayout
@@ -75,9 +186,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                 android:alpha="0"
                 android:orientation="vertical">
+
 
 
                 <!--sponsor message-->
@@ -116,294 +228,6 @@
 
                 </RelativeLayout>
 
-
-                <!--creative name-->
-                <!--<TextView-->
-                <!--android:id="@+id/tvCreativeName"-->
-                <!--style="@style/ppb200_detail_name"-->
-                <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_first"-->
-                <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-                <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-                <!--android:text="" />-->
-
-
-                <!--browsers follwersdata-->
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_first"-->
-                <!--android:layout_marginLeft="8dp"-->
-                <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:paddingLeft="8dp"-->
-                <!--android:paddingTop="8dp">-->
-
-                <!--<View-->
-                <!--android:layout_width="36dp"-->
-                <!--android:layout_height="8dp"-->
-                <!--android:background="@drawable/border_2_0_0_grey_third_radius" />-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="72dp"-->
-                <!--android:layout_height="72dp"-->
-                <!--android:layout_marginTop="4dp"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="vertical">-->
-
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvViewed"-->
-                <!--fontPath="fonts/OpenSans-Bold.ttf"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:text=""-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-                <!--android:textSize="@dimen/ppb200_title_second_size" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvV"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_third"-->
-                <!--android:gravity="center"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:text="@string/pinpinbox_2_0_0_other_text_people_browsing"-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-                <!--android:textSize="@dimen/ppb200_common_text_small" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--</RelativeLayout>-->
-
-
-                <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="24dp"-->
-                <!--android:paddingLeft="8dp"-->
-                <!--android:paddingTop="8dp">-->
-
-                <!--<View-->
-                <!--android:layout_width="36dp"-->
-                <!--android:layout_height="8dp"-->
-                <!--android:background="@drawable/border_2_0_0_grey_third_radius" />-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="72dp"-->
-                <!--android:layout_height="72dp"-->
-                <!--android:layout_marginTop="4dp"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvFollow"-->
-                <!--fontPath="fonts/OpenSans-Bold.ttf"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:text=""-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-                <!--android:textSize="@dimen/ppb200_title_second_size" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvF"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_third"-->
-                <!--android:gravity="center"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:text="@string/pinpinbox_2_0_0_other_text_people_follow"-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-                <!--android:textSize="@dimen/ppb200_common_text_small" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--</RelativeLayout>-->
-
-
-                <!--<RelativeLayout-->
-                <!--android:id="@+id/rSponsorList"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="24dp"-->
-                <!--android:background="@drawable/click_2_0_0_default"-->
-                <!--android:paddingLeft="8dp"-->
-                <!--android:paddingTop="8dp">-->
-
-                <!--<View-->
-                <!--android:layout_width="36dp"-->
-                <!--android:layout_height="8dp"-->
-                <!--android:background="@drawable/border_2_0_0_grey_third_radius" />-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="72dp"-->
-                <!--android:layout_height="72dp"-->
-                <!--android:layout_marginTop="4dp"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="vertical">-->
-
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvSponsor"-->
-                <!--fontPath="fonts/OpenSans-Bold.ttf"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:text=""-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-                <!--android:textSize="@dimen/ppb200_title_second_size" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvS"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_third"-->
-                <!--android:gravity="center"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:text="@string/pinpinbox_2_0_0_other_text_people_sponsor"-->
-                <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-                <!--android:textSize="@dimen/ppb200_common_text_small" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--</RelativeLayout>-->
-
-
-                <!--</LinearLayout>-->
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <View
-                            android:layout_width="36dp"
-                            android:layout_height="8dp"
-                            android:background="@drawable/border_2_0_0_grey_third_radius" />
-
-                        <TextView
-                            android:id="@+id/tvViewed"
-                            fontPath="fonts/OpenSans-Bold.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text=""
-                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_title_second_size" />
-
-                        <TextView
-                            android:id="@+id/tvV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                            android:gravity="center"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_other_text_people_browsing"
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:background="@drawable/click_2_0_0_default"
-                        android:id="@+id/linFollowMe"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <View
-                            android:layout_width="36dp"
-                            android:layout_height="8dp"
-                            android:background="@drawable/border_2_0_0_grey_third_radius" />
-
-                        <TextView
-                            android:id="@+id/tvFollow"
-                            fontPath="fonts/OpenSans-Bold.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                            android:text=""
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_title_second_size" />
-
-                        <TextView
-                            android:id="@+id/tvF"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                            android:gravity="center"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_other_text_people_follow"
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linSponsorList"
-                        android:background="@drawable/click_2_0_0_default"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:gravity="center"
-                        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
-                        android:orientation="vertical">
-
-
-                        <View
-                            android:layout_width="36dp"
-                            android:layout_height="8dp"
-                            android:background="@drawable/border_2_0_0_grey_third_radius" />
-
-
-                        <TextView
-                            android:id="@+id/tvSponsor"
-                            fontPath="fonts/OpenSans-Bold.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text=""
-                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_title_second_size" />
-
-                        <TextView
-                            android:id="@+id/tvS"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                            android:gravity="center"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_other_text_people_sponsor"
-                            android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
                 <!--link-->
                 <LinearLayout
                     android:id="@+id/linLink"
@@ -411,7 +235,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:orientation="vertical"
                     android:visibility="gone">
@@ -518,20 +341,10 @@
                 </RelativeLayout>
 
 
-                <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0.5dp"-->
-                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_big"-->
-                <!--android:background="@color/pinpinbox_2_0_0_divider" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tvAlbumsTitle"-->
-                <!--style="@style/ppb200_title_second"-->
-                <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_big"-->
-                <!--android:text="@string/pinpinbox_2_0_0_title_works_collection" />-->
-
             </LinearLayout>
+
+
+
 
         </LinearLayout>
 

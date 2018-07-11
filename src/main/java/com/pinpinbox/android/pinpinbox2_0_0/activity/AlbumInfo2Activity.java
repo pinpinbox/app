@@ -1405,68 +1405,10 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     }
                 }));
 
-                linLike.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
-                    @Override
-                    public void Touch() {
 
-                    }
-
-                    @Override
-                    public void Up() {
-
-                        if (ClickUtils.ButtonContinuousClick()) {
-                            return;
-                        }
-
-                       ActivityIntent.toLikesList(mActivity, album_id);
-
-                    }
-                }));
-
-                linMessage.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
-                    @Override
-                    public void Touch() {
-
-                    }
-
-                    @Override
-                    public void Up() {
-
-                        if (ClickUtils.ButtonContinuousClick()) {
-                            return;
-                        }
-
-                        if (board == null) {
-
-                            board = new PopBoard(mActivity, PopBoard.TypeAlbum, album_id, (RelativeLayout) findViewById(R.id.rBackground), false);
-                            board.setTvCount(tvMessageCount);
-
-                        } else {
-
-                            board.clearList();
-                            board.doGetBoard();
-
-                        }
-
-                    }
-                }));
-
-                linSponsor.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
-                    @Override
-                    public void Touch() {
-
-                    }
-
-                    @Override
-                    public void Up() {
-                        if (ClickUtils.ButtonContinuousClick()) {
-                            return;
-                        }
-
-                        ActivityIntent.toAlbumSponsorList(mActivity, album_id);
-
-                    }
-                }));
+                linLike.setOnClickListener(AlbumInfo2Activity.this);
+                linMessage.setOnClickListener(AlbumInfo2Activity.this);
+                linSponsor.setOnClickListener(AlbumInfo2Activity.this);
 
 
                 tvRead.setOnClickListener(AlbumInfo2Activity.this);
@@ -2042,7 +1984,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
     private class GetReportTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -2443,6 +2384,25 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 break;
 
 
+
+            case R.id.linLike:
+                ActivityIntent.toLikesList(mActivity, album_id);
+                break;
+
+            case R.id.linMessage:
+                if (board == null) {
+                    board = new PopBoard(mActivity, PopBoard.TypeAlbum, album_id, (RelativeLayout) findViewById(R.id.rBackground), false);
+                    board.setTvCount(tvMessageCount);
+                } else {
+                    board.clearList();
+                    board.doGetBoard();
+                }
+                break;
+
+            case R.id.linSponsor:
+                ActivityIntent.toAlbumSponsorList(mActivity, album_id);
+                break;
+
         }
 
     }
@@ -2643,10 +2603,10 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
             Pair<View, String> pImg = Pair.create(findViewById(R.id.userImg), itemAlbum.getUser_picture());
             Pair<View, String> pBg = Pair.create(findViewById(R.id.linAuthor), linAuthor.getTransitionName());
-            Pair<View, String> pName = Pair.create(findViewById(R.id.tvAuthor), tvAlbumAuthor.getTransitionName());
+//            Pair<View, String> pName = Pair.create(findViewById(R.id.tvAuthor), tvAlbumAuthor.getTransitionName());
 
 
-            ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, pImg, pBg, pName);
+            ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, pImg, pBg);
 
 
             Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);
