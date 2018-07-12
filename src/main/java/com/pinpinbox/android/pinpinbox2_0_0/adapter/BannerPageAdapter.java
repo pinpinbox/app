@@ -296,7 +296,7 @@ public class BannerPageAdapter extends PagerAdapter {
                     String url = itemHomeBannerList.get(position).getUrl();
 
                     String event_id = itemHomeBannerList.get(position).getEvent_id();
-                    String album_id =itemHomeBannerList.get(position).getAlbum_id();
+                    String album_id = itemHomeBannerList.get(position).getAlbum_id();
                     String template_id = itemHomeBannerList.get(position).getTemplate_id();
                     String user_id = itemHomeBannerList.get(position).getUser_id();
 
@@ -304,7 +304,7 @@ public class BannerPageAdapter extends PagerAdapter {
                     if (album_id != null && !album_id.equals("")) {
 
 
-                        ActivityIntent.toAlbumInfo(mActivity, false, album_id, null, 0, null);
+                        ActivityIntent.toAlbumInfo(mActivity, false, album_id, null, 0, 0, 0, null);
 
                         return;
                     }

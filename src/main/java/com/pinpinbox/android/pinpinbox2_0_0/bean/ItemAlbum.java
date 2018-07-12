@@ -32,6 +32,7 @@ public class ItemAlbum {
     private int image_orientation = 0;
     public static final int PORTRAIT = 1; //直
     public static final int LANDSCAPE = 2; //橫
+    public static final int SQUARE = 0;//方形
 
 
     private boolean is_likes;

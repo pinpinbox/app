@@ -253,6 +253,8 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
                         albumList.get(position).getAlbum_id(),
                         albumList.get(position).getCover(),
                         albumList.get(position).getImage_orientation(),
+                        albumList.get(position).getCover_width(),
+                        albumList.get(position).getCover_height(),
                         v.findViewById(R.id.coverImg)
                 );
 

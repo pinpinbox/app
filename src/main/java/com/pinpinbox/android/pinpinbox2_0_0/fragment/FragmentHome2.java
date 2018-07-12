@@ -552,6 +552,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         itemAlbumList.get(position).getAlbum_id(),
                         itemAlbumList.get(position).getCover(),
                         itemAlbumList.get(position).getImage_orientation(),
+                        itemAlbumList.get(position).getCover_width(),
+                        itemAlbumList.get(position).getCover_height(),
                         v.findViewById(R.id.coverImg)
                 );
 
@@ -676,6 +678,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         itemAlbumPopularList.get(position).getAlbum_id(),
                         itemAlbumPopularList.get(position).getCover(),
                         itemAlbumPopularList.get(position).getImage_orientation(),
+                        itemAlbumPopularList.get(position).getCover_width(),
+                        itemAlbumPopularList.get(position).getCover_height(),
                         v.findViewById(R.id.coverImg)
                 );
 
@@ -806,7 +810,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                             } else if (height > width) {
                                 itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
                             } else {
-                                itemAlbum.setImage_orientation(0);
+                                itemAlbum.setImage_orientation(ItemAlbum.SQUARE);
                             }
 
 

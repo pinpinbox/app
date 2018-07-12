@@ -83,7 +83,7 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
     private MediaPlayer mediaPlayer;
     private boolean playBeep;
     private static final float BEEP_VOLUME = 0.10f;
-//    private boolean vibrate;
+    //    private boolean vibrate;
     private SurfaceView surfaceView;
 
 
@@ -156,8 +156,6 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
         }
 
 
-
-
         if (resultString.equals("")) {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_dialog_message_scan_error);
 
@@ -174,8 +172,6 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
         } else {
 
 
-
-
             MyLog.Set("d", getClass(), "resultString => " + resultString);
 
             BarcodeFormat s = result.getBarcodeFormat();
@@ -188,7 +184,7 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                 if (isReference) {
                     MyLog.Set("d", getClass(), "isReference => true");
 
-                    if( !s.toString().equals("QR_CODE")){
+                    if (!s.toString().equals("QR_CODE")) {
                         ((AlbumSettings2Activity) getActivity()).getEdScan().setText(resultString);
 
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -196,7 +192,7 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                         transaction.remove(fragmentScanSearch2);
                         transaction.commit();
 
-                    }else {
+                    } else {
 
                         PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_only_barcode);
 
@@ -217,26 +213,26 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 
 
                 /*20170922 */
-                boolean scanLogin = getArguments().getBoolean(Key.scanLogin,false);
+                boolean scanLogin = getArguments().getBoolean(Key.scanLogin, false);
 
-                if(scanLogin){
+                if (scanLogin) {
                     MyLog.Set("d", getClass(), "scanLogin => true");
 
 
-                    if(s.toString().equals("QR_CODE")){
+                    if (s.toString().equals("QR_CODE")) {
 
                         Uri uri = Uri.parse(resultString);
 
                         String businessuser_id = uri.getQueryParameter(Key.businessuser_id);
 
-                        if(businessuser_id==null || businessuser_id.equals("") || businessuser_id.equals("null")){
+                        if (businessuser_id == null || businessuser_id.equals("") || businessuser_id.equals("null")) {
                             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_dialog_message_scan_invalid);
-                        }else {
-                            ((Login2Activity)getActivity()).doBusiness(businessuser_id);
+                        } else {
+                            ((Login2Activity) getActivity()).doBusiness(businessuser_id);
                         }
 
 
-                    }else {
+                    } else {
 
                         PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_dialog_message_scan_invalid);
 
@@ -261,10 +257,10 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 
                 String a = result.getText();
 
-                if(a!=null && a.length()!=0){
+                if (a != null && a.length() != 0) {
                     Uri uri = Uri.parse(a);
-                    if(uri!=null && uri.getScheme()!=null){
-                        if(!uri.getHost().equals(Uri.parse(BuildConfig.initAPI).getHost())){
+                    if (uri != null && uri.getScheme() != null) {
+                        if (!uri.getHost().equals(Uri.parse(BuildConfig.initAPI).getHost())) {
                             Intent intent = new Intent();
                             intent.setAction("android.intent.action.VIEW");
                             intent.setData(uri);
@@ -761,7 +757,7 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
         viewfinderView.setVisibility(View.INVISIBLE);
 
 
-        ActivityIntent.toAlbumInfo(getActivity(), false, album_id, null, 0, null);
+        ActivityIntent.toAlbumInfo(getActivity(), false, album_id, null, 0, 0, 0, null);
 
     }
 

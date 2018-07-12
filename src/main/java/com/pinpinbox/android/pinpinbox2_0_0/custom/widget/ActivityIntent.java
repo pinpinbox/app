@@ -34,7 +34,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 public class ActivityIntent {
 
 
-    public static void toAlbumInfo(Activity currentActivity, boolean sharedElement, String album_id, String coverUrl, int imageOrientation, View coverImg) {
+    public static void toAlbumInfo(Activity currentActivity, boolean sharedElement, String album_id, String coverUrl, int imageOrientation, int width, int height, View coverImg) {
 
 
         Bundle bundle = new Bundle();
@@ -46,6 +46,8 @@ public class ActivityIntent {
 
             bundle.putString(Key.cover, coverUrl);
             bundle.putInt(Key.image_orientation, imageOrientation);
+            bundle.putInt(Key.image_width, width);
+            bundle.putInt(Key.image_height, height);
 
             coverImg.setTransitionName(coverUrl);
 

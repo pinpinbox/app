@@ -109,6 +109,8 @@ public class Key {
     public static String image_orientation = "image_orientation";
     public static String identifier = "identifier";
     public static String imageLink = "imageLink";
+    public static String image_width = "image_width";
+    public static String image_height = "image_height";
 
 
     //j

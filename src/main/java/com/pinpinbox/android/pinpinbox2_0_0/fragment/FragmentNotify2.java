@@ -397,7 +397,7 @@ public class FragmentNotify2 extends Fragment {
 
         if (type.equals(Key.albumqueue)) {
 
-            ActivityIntent.toAlbumInfo(getActivity(), false, type_id, null, 0, null);
+            ActivityIntent.toAlbumInfo(getActivity(), false, type_id, null, 0, 0, 0, null);
 
         }
 
@@ -727,12 +727,12 @@ public class FragmentNotify2 extends Fragment {
                 adapter.notifyItemRangeRemoved(1, count);
             }
 
-        /*回收資源*/
+            /*回收資源*/
             if (count > 0) {
                 cleanPicasso();
             }
 
-              /*清空數聚*/
+            /*清空數聚*/
             p87arrayList.clear();
 
 

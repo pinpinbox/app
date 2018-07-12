@@ -24,7 +24,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.SizeUtils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -216,43 +215,37 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         int orientation = getIntent().getExtras().getInt(Key.image_orientation, 0);
 
+
+        int thumbnail_width = getIntent().getExtras().getInt(Key.image_width, 0);
+        int thumbnail_height = getIntent().getExtras().getInt(Key.image_height, 0);
+
+        RelativeLayout rImageArea = (RelativeLayout) findViewById(R.id.rImageArea);
+
         if (orientation == ItemAlbum.LANDSCAPE) {
 
             MyLog.Set("e", getClass(), "ItemAlbum.LANDSCAPE");
 
-            RelativeLayout rImageArea = (RelativeLayout) findViewById(R.id.rImageArea);
+            int image_height = (ScreenUtils.getScreenWidth() * thumbnail_height) / thumbnail_width;
 
-            LinearLayout.LayoutParams params = null;
-            if (SystemUtility.isTablet(getApplicationContext())) {
-                params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(440));
-            } else {
-                params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(240));
-            }
-
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), image_height);
 
             rImageArea.setLayoutParams(params);
 
         } else if (orientation == ItemAlbum.PORTRAIT) {
 
             MyLog.Set("e", getClass(), "ItemAlbum.PORTRAIT");
-            RelativeLayout rImageArea = (RelativeLayout) findViewById(R.id.rImageArea);
-            LinearLayout.LayoutParams params = null;
-            if (SystemUtility.isTablet(getApplicationContext())) {
-                params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(800));
-            } else {
-                params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), SizeUtils.dp2px(360));
-            }
 
+            int image_height = (ScreenUtils.getScreenHeight() / 5) * 3;
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), image_height);
 
             rImageArea.setLayoutParams(params);
 
         } else {
 
-            if (SystemUtility.isTablet(getApplicationContext())) {
-                MyLog.Set("e", getClass(), "560");
-            } else {
-                MyLog.Set("e", getClass(), "300");
-            }
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenWidth());
+
+            rImageArea.setLayoutParams(params);
 
         }
 
@@ -304,6 +297,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         linDetail = (LinearLayout) findViewById(R.id.linDetail);
 
         linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
+
+//        DismissScrollView dismissScrollView = (DismissScrollView)findViewById(R.id.parallaxScrollView);
+//
+//        dismissScrollView.setvTouchRange(findViewById(R.id.linContents));
+
 
         ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
 
@@ -357,7 +355,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         linLike = (LinearLayout) findViewById(R.id.linLike);
         linMessage = (LinearLayout) findViewById(R.id.linMessage);
         linSponsor = (LinearLayout) findViewById(R.id.linSponsor);
-
 
 
         tvAlbumName = (TextView) findViewById(R.id.tvName);
@@ -939,7 +936,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 sendData.put(Key.token, token);
                 sendData.put(Key.album_id, album_id);
 
-                   /*判斷是否增加過瀏覽次數*/
+                /*判斷是否增加過瀏覽次數*/
                 String addviewedList = PPBApplication.getInstance().getData().getString("addviewed", "");
 
                 try {
@@ -1025,7 +1022,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         JSONObject jsonUser = new JSONObject(user);
                         JSONObject jsonAlbumstatistics = new JSONObject(albumstatistics);
 
-                    /*album detail*/
+                        /*album detail*/
                         itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.name));
 
 //                        itemAlbum.setDescription(JsonUtility.GetString(jsonAlbum, ProtocolKey.description));
@@ -1050,12 +1047,12 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         itemAlbum.setVideo(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.video));
                         itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.audio));
 
-                    /*user detail*/
+                        /*user detail*/
                         itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
                         itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
                         itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
 
-                    /*albumstatistics*/
+                        /*albumstatistics*/
                         itemAlbum.setViewed(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.viewed));
                         itemAlbum.setLikes(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.likes));
                         itemAlbum.setMessageboard(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.messageboard));
@@ -1063,7 +1060,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
 
-                    /*photo*/
+                        /*photo*/
                         try {
                             JSONArray jsonArray = new JSONArray(photo);
                             int array = jsonArray.length();
@@ -1084,7 +1081,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         /**2016.09.14新增*/
                         strJsonPhoto = object.getString("photo");
 
-                    /*event*/
+                        /*event*/
                         event = object.getString("event");
 
                         if (event.equals("") || event == null || event.equals("null")) {
@@ -1098,7 +1095,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                             bVotestatus = ej.getBoolean("votestatus");
 
 
-                         /*eventjoin  票數 有活動再接即可*/
+                            /*eventjoin  票數 有活動再接即可*/
                             String eventjoin = object.getString("eventjoin");
                             JSONObject ejj = new JSONObject(eventjoin);
                             intVoteCount = ejj.getInt("count");
@@ -1172,7 +1169,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
                 try {
-                   /*瀏覽數*/
+                    /*瀏覽數*/
                     if (itemAlbum.getViewed() > 9999) {
                         String strViewed = StringUtil.ThousandToK(itemAlbum.getViewed());
                         tvViewedCount.setText(strViewed + "K" + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
@@ -1181,7 +1178,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         tvViewedCount.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
 
                     }
-                        /*讚數*/
+                    /*讚數*/
                     if (itemAlbum.getLikes() > 9999) {
                         String strLikes = StringUtil.ThousandToK(itemAlbum.getLikes());
                         tvLikeCount.setText(strLikes + "K");
@@ -1191,7 +1188,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         tvLikeCount.setText(itemAlbum.getLikes() + "");
                     }
 
-                     /*留言數*/
+                    /*留言數*/
                     if (itemAlbum.getMessageboard() > 9999) {
                         String strMessageboard = StringUtil.ThousandToK(itemAlbum.getMessageboard());
                         tvMessageCount.setText(strMessageboard + "K");
@@ -1202,8 +1199,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                     }
 
 
-                     /*贊助數*/
-                    if(itemAlbum.getUser_id()== StringIntMethod.StringToInt(id)){
+                    /*贊助數*/
+                    if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
                         linSponsor.setVisibility(View.VISIBLE);
                         if (itemAlbum.getSponsorCount() > 9999) {
                             String strSponsorCount = StringUtil.ThousandToK(itemAlbum.getSponsorCount());
@@ -1213,13 +1210,9 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         } else {
                             tvSponsorCount.setText(itemAlbum.getSponsorCount() + "");
                         }
-                    }else {
+                    } else {
                         linSponsor.setVisibility(View.GONE);
                     }
-
-
-
-
 
 
                 } catch (Exception e) {
@@ -1278,7 +1271,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
 
                     linEvent.setVisibility(View.VISIBLE);
-                      /*活動名稱*/
+                    /*活動名稱*/
                     tvEvent.setText(strEventName);
 
                     if (bVotestatus) {
@@ -2384,7 +2377,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 break;
 
 
-
             case R.id.linLike:
                 ActivityIntent.toLikesList(mActivity, album_id);
                 break;
@@ -2421,11 +2413,11 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 popSelectShare.dismiss();
                 if (!isFBShareComplate) {
 
-                          /*設置facebook api*/
+                    /*設置facebook api*/
                     FacebookSdk.sdkInitialize(getApplicationContext());
                     callbackManager = CallbackManager.Factory.create();
 
-                       /*設置facebook share api*/
+                    /*設置facebook share api*/
                     shareDialog = new ShareDialog(mActivity);
                     shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
 
@@ -2501,7 +2493,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                         if (popupList == null) {
                             report();
                         } else {
-                           showReport();
+                            showReport();
                         }
 
                     }

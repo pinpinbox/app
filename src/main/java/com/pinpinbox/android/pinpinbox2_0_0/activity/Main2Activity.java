@@ -277,8 +277,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 //        });
 
 
-
-
     }
 
     private ImageView testbuttonImg;
@@ -438,8 +436,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         menuBottom.setPivotToCenter(true);
 
 
-
-
     }
 
     private void setFragment() {
@@ -504,9 +500,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
 //                } else {
 
-                    if (isShowGuideCreate) {
-                        showGuideCreate(false);
-                    }
+                if (isShowGuideCreate) {
+                    showGuideCreate(false);
+                }
 
 //                }
 
@@ -714,7 +710,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
 
     private void toAlbumInfo(String value) {
-        ActivityIntent.toAlbumInfo(mActivity, false, value, null, 0, null);
+        ActivityIntent.toAlbumInfo(mActivity, false, value, null, 0, 0, 0, null);
     }
 
 //    private void toTemInfo(String value) {
@@ -921,7 +917,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
 
-
     public void showRP_menu() {
         vRPmenu.setVisibility(View.VISIBLE);
 
@@ -932,7 +927,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
 
-    private void menuNormal(){
+    private void menuNormal() {
 
         menuTop.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
         menuCenter.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
@@ -940,7 +935,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-    private void menuPressed(){
+    private void menuPressed() {
 
         menuTop.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
         menuCenter.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
@@ -948,7 +943,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-    private void menuAnim(){
+    private void menuAnim() {
 
         RichPathAnimator
                 .animate(menuTop)

@@ -30,7 +30,7 @@
                 android:id="@+id/rContributionstatus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_2_0_0_blackalpha_reaius"
+                android:background="@drawable/border_2_0_0_blackalpha_radius"
                 android:visibility="invisible">
 
                 <!--<ImageView-->

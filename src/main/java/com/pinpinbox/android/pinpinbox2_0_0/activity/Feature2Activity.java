@@ -154,7 +154,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
         userList = new ArrayList<>();
 
-        rBannerDetail = (RelativeLayout)findViewById(R.id.rBannerDetail);
+        rBannerDetail = (RelativeLayout) findViewById(R.id.rBannerDetail);
         linContents = (LinearLayout) findViewById(R.id.linContents);
         linUser = (LinearLayout) findViewById(R.id.linUser);
         linBanner = (LinearLayout) findViewById(R.id.linBanner);
@@ -612,6 +612,8 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                             (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getAlbum_id(),
                             (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getCover(),
                             (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getImage_orientation(),
+                            (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getCover_width(),
+                            (itemAlbumExploreList.get(CGAItemPosition).getItemAlbumList()).get(position).getCover_height(),
                             v.findViewById(R.id.coverImg)
                     );
 
@@ -810,7 +812,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         if (bannerType.equals(ItemCategoryBanner.TYPE_VIDEO)) {
 
 
-           final String videoLink = itemCategoryBannerList.get(position).getVideoLink();
+            final String videoLink = itemCategoryBannerList.get(position).getVideoLink();
             String videoBtnText = itemCategoryBannerList.get(position).getBtnText();
             String videoText = itemCategoryBannerList.get(position).getVideoText();
 
@@ -864,13 +866,11 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
             /*目前只有影片需要控制*/
 
-            if(videoLink.equals("") && videoText.equals("")){
+            if (videoLink.equals("") && videoText.equals("")) {
                 rBannerDetail.setVisibility(View.INVISIBLE);
-            }else {
+            } else {
                 rBannerDetail.setVisibility(View.VISIBLE);
             }
-
-
 
 
         } else {
@@ -904,7 +904,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     }
 
     private void toAlbum(String album_id) {
-        ActivityIntent.toAlbumInfo(mActivity, false, album_id, null, 0, null);
+        ActivityIntent.toAlbumInfo(mActivity, false, album_id, null, 0, 0, 0, null);
     }
 
     private void toUser(String user_id) {

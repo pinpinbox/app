@@ -287,6 +287,8 @@ public class Category2Activity extends DraggerActivity implements View.OnClickLi
                         albumList.get(position).getAlbum_id(),
                         albumList.get(position).getCover(),
                         0,
+                        0,
+                        0,
                         v.findViewById(R.id.coverImg)
                 );
 

@@ -201,7 +201,7 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
             @Override
             public void onItemClick(int position, View v) {
 
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 
@@ -213,6 +213,8 @@ public class Vote2Activity extends DraggerActivity implements View.OnClickListen
                         true, itemAlbumList.get(position).getAlbum_id(),
                         itemAlbumList.get(position).getCover(),
                         itemAlbumList.get(position).getImage_orientation(),
+                        itemAlbumList.get(position).getCover_width(),
+                        itemAlbumList.get(position).getCover_height(),
                         v.findViewById(R.id.coverImg)
                 );
 

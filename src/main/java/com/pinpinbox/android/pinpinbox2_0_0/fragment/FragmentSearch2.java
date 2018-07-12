@@ -284,6 +284,8 @@ public class FragmentSearch2 extends Fragment{
                         searchAlbumList.get(position).getAlbum_id(),
                         searchAlbumList.get(position).getCover(),
                         searchAlbumList.get(position).getImage_orientation(),
+                        searchAlbumList.get(position).getCover_width(),
+                        searchAlbumList.get(position).getCover_height(),
                         v.findViewById(R.id.coverImg)
                 );
 
