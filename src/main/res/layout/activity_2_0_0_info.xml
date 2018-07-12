@@ -7,25 +7,25 @@
     android:fitsSystemWindows="false">
     <!--android:background="@color/white"-->
 
-    <!--<com.pinpinbox.android.Views.DismissScrollView-->
-        <!--android:id="@+id/parallaxScrollView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:clipToPadding="false"-->
-        <!--android:paddingBottom="128dp"-->
-        <!--android:scrollbars="none"-->
-        <!--&gt;-->
-
-
-    <com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView
+    <com.pinpinbox.android.Views.DismissScrollView
         android:id="@+id/parallaxScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingBottom="128dp"
         android:scrollbars="none"
-        app:alpha_factor="1.0"
-        app:parallax_factor="1.9">
+        >
+
+
+    <!--<com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView-->
+        <!--android:id="@+id/parallaxScrollView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:clipToPadding="false"-->
+        <!--android:paddingBottom="128dp"-->
+        <!--android:scrollbars="none"-->
+        <!--app:alpha_factor="1.0"-->
+        <!--app:parallax_factor="1.9">-->
 
         <!--parallax_factor - 對於ScrollView和ListView，第一個視圖的視差因子-->
         <!--inner_parallax_factor - 僅對於ScrollView - 每個視圖和視圖之間的視差因子-->
@@ -371,7 +371,7 @@
         </LinearLayout>
 
 
-    </com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView>
+    </com.pinpinbox.android.Views.DismissScrollView>
 
 
     <RelativeLayout

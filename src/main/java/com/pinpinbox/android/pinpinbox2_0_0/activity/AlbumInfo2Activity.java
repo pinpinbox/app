@@ -42,6 +42,7 @@ import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
+import com.pinpinbox.android.Views.DismissScrollView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -194,9 +195,12 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             return;
         }
 
-        setScrollControl();
 
         setShareElementAnim();
+
+        setScrollControl();
+
+
 
     }
 
@@ -298,27 +302,27 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
 
-//        DismissScrollView dismissScrollView = (DismissScrollView)findViewById(R.id.parallaxScrollView);
+        DismissScrollView dismissScrollView = (DismissScrollView)findViewById(R.id.parallaxScrollView);
+
+        dismissScrollView.setvTouchRange(findViewById(R.id.linContents));
+
+
+//        ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
 //
-//        dismissScrollView.setvTouchRange(findViewById(R.id.linContents));
-
-
-        ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
-
-        parallaxScrollView.setScrollDismissTouchRangeView(findViewById(R.id.linContents));
-
-        parallaxScrollView.setAlphaView(findViewById(R.id.linAlpha), linDetail, linAuthor);
-
-        parallaxScrollView.setActivity(this);
-
-        parallaxScrollView.setCloseActivityListener(new ParallaxScrollView.CloseActivityListener() {
-            @Override
-            public void close() {
-
-                back();
-
-            }
-        });
+//        parallaxScrollView.setScrollDismissTouchRangeView(findViewById(R.id.linContents));
+//
+//        parallaxScrollView.setAlphaView(findViewById(R.id.linAlpha), linDetail, linAuthor);
+//
+//        parallaxScrollView.setActivity(this);
+//
+//        parallaxScrollView.setCloseActivityListener(new ParallaxScrollView.CloseActivityListener() {
+//            @Override
+//            public void close() {
+//
+//                back();
+//
+//            }
+//        });
 
     }
 

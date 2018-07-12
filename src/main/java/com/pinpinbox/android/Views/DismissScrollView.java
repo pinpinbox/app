@@ -19,6 +19,14 @@ public class DismissScrollView extends ScrollView implements View.OnTouchListene
 
     private GestureDetector mGestureDetector;
 
+    /* set drag x*/
+    private float START_DRAG_X = 0;
+    private float START_DRAG_Y = 0;
+    private boolean getDragPosition = false;
+    private boolean isDragging = false;
+    /* *********************/
+
+
     private int topDistance = 0;
 
 
@@ -45,41 +53,50 @@ public class DismissScrollView extends ScrollView implements View.OnTouchListene
 
     private View vTouchRange = null;
 
-
     public void setvTouchRange(View vTouchRange) {
         this.vTouchRange = vTouchRange;
     }
-
 
     private void setGD(Context context) {
 
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 
-
-            private float START_DRAG_X = 0;
-            private boolean getDragPosition = false;
-
-
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+
+                if(e1==null || e2 == null){
+                    return true;
+                }
 
 
                 float scrollY = e2.getY() - e1.getY();
                 float scrollX = e2.getX() - e1.getX();
 
-
-                if (scrollY > START_DRAG_DISTANCE) {
-
-
-                    vTouchRange.setTranslationX(getTranslationX() + scrollX);
-                    vTouchRange.setTranslationY(getTranslationY() + scrollY - START_DRAG_DISTANCE);
+                if (scrollY > START_DRAG_DISTANCE && topDistance == 0) {
+                    isDragging = true;
+                }
 
 
-                    MyLog.Set("e", DismissScrollView.class, "scrollY => " + scrollY);
-                    MyLog.Set("e", DismissScrollView.class, "scrollX => " + scrollX);
+                if(isDragging){
 
+                    if (!getDragPosition) {
+                        getDragPosition = true;
+                        START_DRAG_X = scrollX;
+                        START_DRAG_Y = scrollY - START_DRAG_DISTANCE;
+                    }
+
+
+                    vTouchRange.setTranslationX(getTranslationX() + scrollX - START_DRAG_X);
+                    vTouchRange.setTranslationY(getTranslationY() + scrollY - START_DRAG_DISTANCE - START_DRAG_Y);
+
+
+                    MyLog.Set("d", DismissScrollView.class, "scrollY => " + scrollY);
+                    MyLog.Set("d", DismissScrollView.class, "scrollX => " + scrollX);
+                    MyLog.Set("e", DismissScrollView.class, "START_DRAG_X => " + START_DRAG_X);
+                    MyLog.Set("e", DismissScrollView.class, "START_DRAG_Y => " + START_DRAG_Y);
 
                 }
+
 
 
                 return true;
@@ -103,63 +120,44 @@ public class DismissScrollView extends ScrollView implements View.OnTouchListene
 
     }
 
-    float lastX = 0;
-    float lastY = 0;
-
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
+    public boolean dispatchTouchEvent(MotionEvent event){
+        //先执行滑屏事件
         mGestureDetector.onTouchEvent(event);
 
-        float x = event.getRawX();
-        float y = event.getRawY();
-
         if (event.getAction() == MotionEvent.ACTION_UP) {
-
-//            vTouchRange.setTranslationX(0);
-//            vTouchRange.setTranslationY(0);
 
             vTouchRange.animate().translationX(0).setDuration(200);
             vTouchRange.animate().translationY(0).setDuration(200);
 
 
-        }
-//        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-//
-//
-//            float deltaX = x - lastX;
-//            float deltaY = y - lastY;
-//            float translationX = vTouchRange.getTranslationX() + deltaX;
-//            float translationY = vTouchRange.getTranslationY() + deltaY;
-//
-//
-//            MyLog.Set("e", DismissScrollView.class, "tY => " + translationY);
-//            MyLog.Set("e", DismissScrollView.class, "topDistance => " + topDistance);
-//            MyLog.Set("e", DismissScrollView.class, "deltaY => " + deltaY);
-//
-//
-//
-//            if (translationY > START_DRAG_DISTANCE){
-//                vTouchRange.setTranslationX(translationX);
-//                vTouchRange.setTranslationY(translationY - START_DRAG_DISTANCE);
-//
-//            }
-//
-//
-//
-//
-//
-//        }
-//
-//        lastX = x;
-//        lastY = y;
+            START_DRAG_X = 0;
+            getDragPosition = false;
+            isDragging = false;
 
+        }
+
+
+        super.dispatchTouchEvent(event);
+
+
+        //return true => do onTouchEvent
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
 
         return super.onTouchEvent(event);
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
+
+
         return false;
     }
 }
