@@ -32,7 +32,6 @@
         <!--parallax_views_num - 僅對於ScrollView - 視差視圖的數量-->
         <!--circular_parallax - 僅用於ListView - 是否所有列表都是視差的-->
 
-
         <LinearLayout
             android:id="@+id/linContents"
             android:layout_width="match_parent"

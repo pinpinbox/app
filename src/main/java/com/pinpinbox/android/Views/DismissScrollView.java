@@ -130,7 +130,6 @@ public class DismissScrollView extends ScrollView implements View.OnTouchListene
             vTouchRange.animate().translationX(0).setDuration(200);
             vTouchRange.animate().translationY(0).setDuration(200);
 
-
             START_DRAG_X = 0;
             getDragPosition = false;
             isDragging = false;

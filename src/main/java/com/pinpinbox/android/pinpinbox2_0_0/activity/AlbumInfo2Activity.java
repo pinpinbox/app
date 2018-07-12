@@ -323,7 +323,6 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 //
 //            }
 //        });
-
     }
 
     private void getBundleAlbum_id() {
