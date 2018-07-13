@@ -19,9 +19,11 @@ import android.os.Process;
 import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -42,17 +44,19 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.BuildConfig;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
-import com.pinpinbox.android.SampleTest.OldMainActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.SampleTest.OldMainActivity;
+import com.pinpinbox.android.Utility.FileUtility;
+import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.CreateDir;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
@@ -60,12 +64,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
-import com.pinpinbox.android.Utility.FileUtility;
-import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
@@ -75,10 +73,14 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch2;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95_RefreshToken;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol98_BusinessSubUserFastRegister;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -472,6 +474,16 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
         edLoginMail = (EditText) vLogin.findViewById(R.id.edLoginMail);
         edLoginPassword = (EditText) vLogin.findViewById(R.id.edLoginPassword);
+        edLoginPassword.setImeOptions( EditorInfo.IME_ACTION_SEND);
+        edLoginPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    login();
+                }
+                return false;
+            }
+        });
 
         loginGetPasswordImg = (ImageView) vLogin.findViewById(R.id.loginGetPasswordImg);
         scanImg = (ImageView) vLogin.findViewById(R.id.scanImg);
@@ -889,6 +901,26 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                         Arrays.asList("user_about_me", "user_birthday", "email", "user_friends"));
     }
 
+
+    private void login(){
+
+        isFacebookRegister = false;
+
+        if (edLoginMail.getText().toString().equals("")) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_account);
+            return;
+        }
+
+        if (edLoginPassword.getText().toString().equals("")) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_pwd);
+            return;
+        }
+
+        doLogin();
+
+    }
+
+
 /*--------------------------------------------------------------------------------*/
 
     private void toLogin() {
@@ -1133,11 +1165,11 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
             HttpUtility hu = new HttpUtility();
             hu.downPic(fbData.getString("furl", ""),
                     DirClass.pathName_headpicture, //name
-                    DirClass.sdPath + DirClass.dirHead, //path
+                    DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id), //path
                     mActivity.getApplicationContext());
 
 
-            File file = new File(DirClass.pathHeaderPicture);
+            File file = FileUtility.createHeadFile(mActivity, id);
             String filename = file.getName();
 
             MyLog.Set("e", this.getClass(), "protocol05() => PPBApplication.getInstance().getId() => " + PPBApplication.getInstance().getId());
@@ -1608,7 +1640,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
                         PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_register_success);
 
-                        CreateDir.create();
+                        CreateDir.create(mActivity, id);
 
                         Intent intent = new Intent();
                         intent.setClass(Login2Activity.this, TypeFacebookFriend2Activity.class);
@@ -1626,7 +1658,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
                         if (p28Result == 1) {
 
-                            CreateDir.create();
+                            CreateDir.create(mActivity, id);
 
                             File file = new File(DirClass.pathHeaderPicture);
                             if (file.exists()) {
@@ -1830,13 +1862,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
             if (p01Result == 1) {
 
-                CreateDir.create();
-
-                try {
-                    FileUtility.delAllFile(DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.dirZip);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                CreateDir.create(mActivity, id);
 
                 isToHobby = false;
 
@@ -1935,12 +1961,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
                 if (p28Result == 1) {
 
-                    CreateDir.create();
-
-//                    File file = new File(DirClass.pathHeaderPicture);
-//                    if (file.exists()) {
-//                        file.delete();
-//                    }
+                    CreateDir.create(mActivity, id);
 
                     if (hobbys > 0) {
 
@@ -2175,7 +2196,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
                 PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_register_success);
 
-                CreateDir.create();
+                CreateDir.create(mActivity, id);
 
                 Intent intent = new Intent();
                 intent.setClass(Login2Activity.this, TypeFacebookFriend2Activity.class);
@@ -2486,19 +2507,10 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 /*login*/
             case R.id.tvLoginLogin:
 
-                isFacebookRegister = false;
 
-                if (edLoginMail.getText().toString().equals("")) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_account);
-                    return;
-                }
+                login();
 
-                if (edLoginPassword.getText().toString().equals("")) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_pwd);
-                    return;
-                }
 
-                doLogin();
                 break;
 
             case R.id.tvLoginToRegister:

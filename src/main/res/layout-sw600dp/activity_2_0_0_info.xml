@@ -8,18 +8,27 @@
     android:fitsSystemWindows="false">
 
 
-    <com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView
-        android:id="@+id/parallaxScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        app:alpha_factor="1.0"
-        app:parallax_factor="1.9">
+    <!--<com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView-->
+        <!--android:id="@+id/parallaxScrollView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="none"-->
+        <!--app:alpha_factor="1.0"-->
+        <!--app:parallax_factor="1.9">-->
 
         <!--parallax_factor - 對於ScrollView和ListView，第一個視圖的視差因子-->
         <!--inner_parallax_factor - 僅對於ScrollView - 每個視圖和視圖之間的視差因子-->
         <!--parallax_views_num - 僅對於ScrollView - 視差視圖的數量-->
         <!--circular_parallax - 僅用於ListView - 是否所有列表都是視差的-->
+
+    <com.pinpinbox.android.Views.DismissScrollView
+        android:id="@+id/dismissScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="128dp"
+        android:scrollbars="none"
+        >
 
 
         <LinearLayout
@@ -70,11 +79,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginTop="4dp"
-                            android:src="@drawable/ic200_ding_dark" />
+
 
                         <TextView
                             android:id="@+id/tvLikeCount"
@@ -85,8 +90,13 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic200_ding_dark" />
 
 
                     </LinearLayout>
@@ -100,11 +110,6 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginTop="4dp"
-                            android:src="@drawable/ic200_message_dark" />
 
                         <TextView
                             android:id="@+id/tvMessageCount"
@@ -115,8 +120,14 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic200_message_dark" />
+
 
                     </LinearLayout>
 
@@ -131,12 +142,6 @@
                         android:visibility="gone">
 
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginTop="4dp"
-                            android:src="@drawable/ic200_count_sponsor_dark" />
-
                         <TextView
                             android:id="@+id/tvSponsorCount"
                             fontPath="fonts/OpenSans-Bold.ttf"
@@ -146,8 +151,13 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic200_count_sponsor_dark" />
 
 
                     </LinearLayout>
@@ -364,7 +374,7 @@
 
         </LinearLayout>
 
-    </com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView>
+    </com.pinpinbox.android.Views.DismissScrollView>
 
 
     <RelativeLayout

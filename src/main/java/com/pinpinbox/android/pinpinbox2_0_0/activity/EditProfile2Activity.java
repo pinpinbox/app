@@ -25,21 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -50,7 +36,14 @@ import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.PickerView;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
-import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -59,9 +52,15 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
+import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -135,20 +134,6 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
     private void init() {
 
         mActivity = this;
-
-        try {
-            FileUtility fu = new FileUtility();//建立資料夾
-            fu.createSDDir(DirClass.dirHead);
-
-
-            filePicture = FileUtility.createSDFile(DirClass.pathHeaderPicture);
-            if (!filePicture.exists()) {
-                filePicture.createNewFile();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
         getData = PPBApplication.getInstance().getData();
         id = PPBApplication.getInstance().getId();
@@ -226,6 +211,13 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
         edTwitter = (EditText) findViewById(R.id.edTwitter);
         edYouTube = (EditText) findViewById(R.id.edYouTube);
         edWeb = (EditText) findViewById(R.id.edWeb);
+
+
+        try {
+            filePicture = FileUtility.createHeadFile(mActivity, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -461,8 +453,6 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 //        intent.putExtra("outputY", 300);
 //        intent.putExtra("return-data", true);
 //        startActivityForResult(intent, PHOTO_RESOULT);
-
-
 
 
     }
@@ -863,9 +853,9 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
                 }
 
 
-                if(url==null || url.equals("")|| url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -880,7 +870,6 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
                         }
                     });
                 }
-
 
 
                 d.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -1008,7 +997,7 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
                         editor.putString(Key.sociallink_youtube, JsonUtility.GetString(jsonLink, ProtocolKey.youtube));
                         editor.putString(Key.sociallink_web, JsonUtility.GetString(jsonLink, ProtocolKey.web));
                     }
-                /* *********************************************************************/
+                    /* *********************************************************************/
 
                     editor.commit();
 
@@ -1269,7 +1258,6 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
                             .start(mActivity);
 
                     break;
-
 
 
                 case Crop.REQUEST_CROP:

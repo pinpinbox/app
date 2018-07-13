@@ -48,7 +48,6 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.EditProfile2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Income2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
@@ -61,7 +60,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
@@ -867,10 +865,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         System.gc();
     }
 
-    private void toEditProfile() {
-        startActivity(new Intent(getActivity(), EditProfile2Activity.class));
-        ActivityAnim.StartAnim(getActivity());
-    }
 
     private void toCheckPermission(int type) {
         switch (checkPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -952,7 +946,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
 
 
         try {
-            fileCover = FileUtility.createSDFile(DirClass.pathUserBanner);
+            fileCover = FileUtility.createUserBannerFile(getActivity(), id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1525,30 +1519,10 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         }
 
 
-//        fileCover.delete();
-//
-//        BitmapUtility.saveToLocal(bitmap, fileCover.getPath(), 100);
+
 
 
         /* **********************************************************************************/
-
-
-//        BitmapFactory.Options option = new BitmapFactory.Options();
-//        option.inJustDecodeBounds = true;
-//        BitmapFactory.decodeFile(fileCover.getPath(), option);
-//        option.inSampleSize = calculateInSampleSize(option, 960, 450);  //110,160：转换后的宽和高，具体值会有些出入
-//        option.inJustDecodeBounds = false;
-//        final Bitmap bitmap = BitmapFactory.decodeFile(fileCover.getPath(), option);
-//
-//        File ffff =new File(DirClass.test);
-//
-//        try{
-////            FileOutputStream out = new FileOutputStream(fileCover);
-//            FileOutputStream out = new FileOutputStream(ffff);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
 
 
         Bundle extras = data.getExtras();
@@ -1731,8 +1705,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
             switch (requestCode) {
 
                 case PHOTO_FILES:
-
-                    MyLog.Set("e", getClass(), "PHOTO_FILES");
 
                     Crop.of(data.getData(), Uri.fromFile(fileCover))
                             .withAspect(960, 450)

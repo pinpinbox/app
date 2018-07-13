@@ -13,6 +13,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,12 +27,133 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by vmage on 2014/12/10.
  */
 public class FileUtility {
+
+
+
+
+    /*建立pinpinbox用資料夾*/
+    public static void createMyDir(Activity mActivity, String id){
+        File mydir = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id));
+        if(!mydir.exists()){
+            mydir.mkdirs();
+        }
+    }
+
+    /*建立相片處理用資料夾*/
+    public static void createCopyDir(Activity mActivity, String id){
+
+        createMyDir(mActivity, id);
+
+        File copyDir = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy);
+        if(!copyDir.exists()){
+            copyDir.mkdirs();
+        }
+    }
+
+
+    /*建立照相處理用資料夾*/
+    public static void createCamDir(Activity mActivity, String id){
+
+        createMyDir(mActivity, id);
+
+        File camDir = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCamera);
+        if(!camDir.exists()){
+            camDir.mkdirs();
+        }
+    }
+
+
+    /*建立並返回拍照後的相片文件*/
+    public static File createCamFile(Activity mActivity, String id){
+
+        Date dt = new Date();
+        Long time = dt.getTime();
+
+        File fileCam = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCamera + time + ".jpg");
+        if(!fileCam.exists()){
+            try{
+                fileCam.createNewFile();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return fileCam;
+    }
+
+
+
+
+
+    /*建立並返回頭像文件*/
+    public static File createHeadFile(Activity mActivity, String id){
+
+        createMyDir(mActivity, id);
+
+        File fileHeadPicture = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.pathName_headpicture);
+        if(!fileHeadPicture.exists()){
+            try{
+                fileHeadPicture.createNewFile();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return fileHeadPicture;
+    }
+
+    /*建立並返回個人專區banner文件*/
+    public static File createUserBannerFile(Activity mActivity, String id){
+
+        createMyDir(mActivity, id);
+
+        File fileUserBanner = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.pathName_UserBanner);
+        if(!fileUserBanner.exists()){
+            try{
+                fileUserBanner.createNewFile();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return fileUserBanner;
+    }
+
+
+    /*建立並返回濾鏡後的相片文件*/
+    public static File createAviaryFile(Activity mActivity, String id){
+
+        createMyDir(mActivity, id);
+
+        File fileAviary = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.pathName_FromAviary);
+        if(!fileAviary.exists()){
+            try{
+                fileAviary.createNewFile();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return fileAviary;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private String SDPATH;
@@ -68,11 +191,21 @@ public class FileUtility {
         return file;
     }
 
-//    public File createSDfile(String path, String filename) throws IOException {
-//        File file = new File(SDPATH + path + filename);
-//        file.createNewFile();
-//        return file;
-//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // 在XD卡上創建目錄
 

@@ -44,7 +44,6 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DismissScrollView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
-import com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemReport;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
@@ -302,9 +301,20 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
         linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
 
-        DismissScrollView dismissScrollView = (DismissScrollView)findViewById(R.id.parallaxScrollView);
+        DismissScrollView dismissScrollView = (DismissScrollView)findViewById(R.id.dismissScrollView);
 
         dismissScrollView.setvTouchRange(findViewById(R.id.linContents));
+
+        dismissScrollView.setViewsAlpha(findViewById(R.id.linAlpha), linDetail, linAuthor);
+
+        dismissScrollView.setActivity(this);
+
+        dismissScrollView.setCloseActivityListener(new DismissScrollView.CloseActivityListener() {
+            @Override
+            public void close() {
+                back();
+            }
+        });
 
 
 //        ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);

@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom;
 
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import android.app.Activity;
+
 import com.pinpinbox.android.Utility.FileUtility;
 
 /**
@@ -8,15 +9,11 @@ import com.pinpinbox.android.Utility.FileUtility;
  */
 public class CreateDir {
 
-    public static void create(){
+    public static void create(Activity mActivity, String id){
 
-        String strMyDir = PPBApplication.getInstance().getMyDir();
+        FileUtility.createMyDir(mActivity, id);
+        FileUtility.createCopyDir(mActivity, id);
 
-        FileUtility fu = new FileUtility();//建立資料夾
-        fu.createSDDir(strMyDir);
-        fu.createDirIn(strMyDir, DirClass.dirAlbumList);
-        fu.createDirIn(strMyDir, DirClass.dirZip);
-        fu.createDirIn(strMyDir, DirClass.dirCopy);
 
     }
 

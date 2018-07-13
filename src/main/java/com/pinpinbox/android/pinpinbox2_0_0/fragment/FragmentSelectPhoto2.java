@@ -223,7 +223,6 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
         selectControl();
 
-
         if (createMode == 0) {
             rBottom.setVisibility(View.VISIBLE);
             setHandler();
@@ -288,7 +287,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
         token = getdata.getString(Key.token, "");
         myDir = "PinPinBox" + id + "/";
 
-        strSinglePhotoPath = DirClass.sdPath + myDir + "pinpinbox_select.jpg";
+        strSinglePhotoPath = DirClass.ExternalFileDir(getActivity()) + DirClass.getMyDir(id) + DirClass.pathName_singleUploadPhoto;
 
         intSelectCount = 0;
 
@@ -427,56 +426,16 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
     }
 
     private void cleanFile() {
-        try {
-            File file = new File(strSinglePhotoPath);
-            if (file.exists()) {
-                file.delete();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         try {
-            FileUtility.delAllFile(DirClass.sdPath + myDir + DirClass.dirCopy);
+            FileUtility.delAllFile(DirClass.ExternalFileDir(getActivity()) + DirClass.getMyDir(id));
             MyLog.Set("d", getClass(), "移除 => copy/ 底下檔案");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        try {
 
-            FileUtility.delAllFile(DirClass.sdPath + myDir + "aviary_edit/");
-            MyLog.Set("d", getClass(), "移除 => aviary_edit/ 底下檔案");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-
-            File file = new File(DirClass.sdPath + myDir);
-            File[] files = file.listFiles();
-
-            for (int i = 0; i < files.length; i++) {
-
-                String fName = files[i].getName();
-
-                MyLog.Set("d", getClass(), "fName => " + fName);
-
-                String end = fName
-                        .substring(fName.lastIndexOf(".") + 1, fName.length())
-                        .toLowerCase();
-                if (end.equals("jpg") || end.equals("gif") || end.equals("png")
-                        || end.equals("jpeg") || end.equals("bmp")) {
-
-                    files[i].delete();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        CreateDir.create();
+        CreateDir.create(getActivity(), id);
 
     }
 
@@ -560,14 +519,14 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                         GridItem item = new GridItem();
 
-                            /*原路徑*/
+                        /*原路徑*/
                         item.setPath(path);
 
-                            /*選取狀態*/
+                        /*選取狀態*/
                         item.setSelect(false);
 
 
-                            /*日期*/
+                        /*日期*/
                         long times = cursor.getLong(cursor.getColumnIndex(projection[3]));
                         String mTime = paserTimeToYMD(times, "yyyy / MM");
                         item.setTime(mTime);
@@ -575,7 +534,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                         int _id = cursor.getInt(cursor.getColumnIndex(projection[0]));
                         item.setMedia_id(_id);
 
-                            /*旋轉角度*/
+                        /*旋轉角度*/
                         int orientation = cursor.getInt(cursor.getColumnIndex(projection[2]));
                         item.setDegree(orientation);
 
@@ -597,7 +556,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                     }
 
                     if (totalPhotoCount == stopPosition) {
-                           /*讀取位置到達停止位置*/
+                        /*讀取位置到達停止位置*/
                         break;
                     }
 
@@ -795,8 +754,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
             private void upLoadFinish() {
                 ((Creation2Activity) getActivity()).reFreshBottomPhoto();
-                FileUtility.delAllFile(DirClass.sdPath + myDir + DirClass.dirCopy);
-                MyLog.Set("d", getClass(), "FileUtility.deleteFileFolder(new File(sdPath + myDir + copy))");
+                FileUtility.delAllFile(DirClass.ExternalFileDir(getActivity()) + DirClass.getMyDir(id) + DirClass.dirCopy);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -824,7 +782,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                         //lastRound 為上一輪最大值
                         for (int i = lastRound; i < totalRound; i++) {
-                            final String copyPath = DirClass.sdPath + myDir + DirClass.dirCopy + i + "copy.jpg";
+                            final String copyPath = DirClass.ExternalFileDir(getActivity()) + DirClass.getMyDir(id) + DirClass.dirCopy + i + "copy.jpg";
                             final String path = sendList.get(i).getPath();
                             final int degree = sendList.get(i).getDegree();
                             new Thread(new Runnable() {
@@ -878,7 +836,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                                                         message.what = 1;
                                                         upLoadHandler.sendMessage(message);
                                                     } else if (total > onceCount) {
-                                                    /*再執行1輪*/
+                                                        /*再執行1輪*/
                                                         Message message = new Message();
                                                         message.what = 0;
                                                         upLoadHandler.sendMessage(message);
@@ -909,7 +867,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
 
                         for (int i = totalRound; i < sendList.size(); i++) {
-                            final String copyPath = DirClass.sdPath + myDir + DirClass.dirCopy + i + "copy.jpg";
+                            final String copyPath = DirClass.ExternalFileDir(getActivity()) + DirClass.getMyDir(id) + DirClass.dirCopy + i + "copy.jpg";
                             final String path = sendList.get(i).getPath();
                             final int degree = sendList.get(i).getDegree();
                             new Thread(new Runnable() {
@@ -1239,30 +1197,22 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
     private void dispatchTakePictureIntent() {
 
 
-        //fix android.os.FileUriExposedException
-//        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-//        builder.detectFileUriExposure();
-//        StrictMode.setVmPolicy(builder.build());
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (createMode == 0) {
 
-
-            Date dt = new Date();
-            Long time = dt.getTime();
-
-
             try {
 
-                FileUtility.CreateSDDir(DirClass.dirCamera);
+                FileUtility.createCamDir(getActivity(),id);
 
-                FileUtility.createSDFile(DirClass.pathCamera + time + ".jpg");
+                camFile = FileUtility.createCamFile(getActivity(), id);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            camFile = new File(DirClass.pathCamera + time + ".jpg");
+
 
 
             if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
@@ -1343,7 +1293,7 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
     private void resetAll() {
 
-              /*重置選擇狀態*/
+        /*重置選擇狀態*/
         int size = nonHeaderIdList.size();
         for (int i = 0; i < size; i++) {
             nonHeaderIdList.get(i).setSelect(false);
@@ -1620,12 +1570,12 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
 
                 final String path = itemList.get(i).getPath();
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
                 File Fto;
 
                 Fto = new File(path);
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
                 Map<String, String> data = new HashMap<>();
                 data.put("id", id);
@@ -1977,11 +1927,11 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                     isFromPPBCamera = true;
 
                     if (data != null) {
-                    /*取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意*/
+                        /*取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意*/
 //                        Uri nImageCaptureUri = data.getData();
                         Uri nImageCaptureUri = data.getParcelableExtra(AdobeImageIntent.EXTRA_OUTPUT_URI);
 
-                   /* 返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取*/
+                        /* 返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取*/
                         if (nImageCaptureUri != null) {
 
                             String path = FileUtility.getImageAbsolutePath(getActivity(), nImageCaptureUri);

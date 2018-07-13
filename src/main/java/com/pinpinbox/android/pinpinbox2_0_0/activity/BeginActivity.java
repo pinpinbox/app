@@ -10,26 +10,25 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.orhanobut.logger.Logger;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.CreateDir;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.HobbyManager;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -100,12 +99,6 @@ public class BeginActivity extends DraggerActivity {//02
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
         myDir = PPBApplication.getInstance().getMyDir();
-
-        try {
-            FileUtility.delAllFile(DirClass.sdPath + myDir + DirClass.dirZip);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         MyLog.Set("d", getClass(), "id的值是 ======== " + id + " ========");
         MyLog.Set("d", getClass(), "token的值是 ======== " + token + " ========");
@@ -195,7 +188,10 @@ public class BeginActivity extends DraggerActivity {//02
             if (p02Result.equals("1")) {
                 MyLog.Set("d", mActivity.getClass(), "token success");
                 if (p28Result.equals("1")) {
-                    createPinPinBoxDirs();
+
+
+                    CreateDir.create(mActivity, id);
+
                     if (hobbys > 0) {
                         Bundle bundle = new Bundle();
                         bundle.putBoolean("fromAwsMessage", fromAwsMessage);
@@ -422,13 +418,6 @@ public class BeginActivity extends DraggerActivity {//02
         }
     }
 
-    private void createPinPinBoxDirs() {
-        FileUtility fileUtility = new FileUtility();
-        fileUtility.createSDDir(myDir);
-        fileUtility.createDirIn(myDir, DirClass.dirAlbumList);
-        fileUtility.createDirIn(myDir, DirClass.dirZip);
-        fileUtility.createDirIn(myDir, DirClass.dirCopy);
-    }
 
     @Override
     public void onBackPressed() {

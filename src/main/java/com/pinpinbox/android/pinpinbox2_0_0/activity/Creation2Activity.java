@@ -44,6 +44,7 @@ import android.widget.Toast;
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
 import com.adobe.creativesdk.aviary.internal.filters.ToolsFactory;
 import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
+import com.blankj.utilcode.util.SizeUtils;
 import com.czt.mp3recorder.MP3Recorder;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
@@ -182,8 +183,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private MediaPlayer mPlayer = null, mpBackground;
     private MP3Recorder mp3Recorder;
 
-    private String aviaryPath = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_FromAviary;
-    private String mp3Path = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
+    private String mp3Path = "";
 
     private String strPrefixText;
     private String strSpecialUrl;
@@ -406,33 +406,30 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         /***********************************************************************************************************/
 
 
-        File file = new File(aviaryPath);
-        if (file.exists()) {
-            file.delete();
-        }
+        try{
 
-        File f1 = new File(DirClass.pathHeaderPicture);
-        if (f1.exists()) {
-            f1.delete();
-        }
+            File fileAviary = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.pathName_FromAviary);
+            if(fileAviary.exists()){
+                fileAviary.delete();
+            }
 
-//        File f = new File(DirClass.pathRecordMp3);
-//        if (!f.exists()) {
-//            try {
-//                f.createNewFile();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+            File fileRecord = new File(DirClass.ExternalFileDir(mActivity)  + DirClass.getMyDir(id) + DirClass.pathName_RecordMp3);
+            if(fileRecord.exists()){
+                fileRecord.delete();
+            }
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+        }
 
 
         /***********************************************************************************************************/
 
-
         photoList = new ArrayList<>();
         audioList = new ArrayList<>();
         builder = new ItemAlbumSettings.Builder();
-
 
     }
 
@@ -465,7 +462,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     return;
                 }
 
-                  /*20170908 播放不可切換*/
+                /*20170908 播放不可切換*/
                 if (mPlayer != null && mPlayer.isPlaying()) {
                     PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_audio_playing);
                     return;
@@ -1112,19 +1109,20 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private void record() {
 
-            /*畫面禁止點擊    開始錄音*/
+        /*畫面禁止點擊    開始錄音*/
         setClickable(false);
 
 
-        mp3Path = DirClass.sdPath + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
+        MyLog.Set("e", getClass(), "getExternalFilesDir(null).getAbsolutePath() => " + getExternalFilesDir(null).getAbsolutePath());
+
+        mp3Path = DirClass.ExternalFileDir(mActivity)  + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
+
         MyLog.Set("e", getClass(), mp3Path);
 
         File fMp3 = new File(mp3Path);
         if (!fMp3.exists()) {
             try {
-
                 FileUtility.createSDFile(mp3Path);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1137,6 +1135,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             mp3Recorder = new MP3Recorder(fMp3);
             mp3Recorder.start();
             audioRecordingImg.setImageResource(R.drawable.ic200_recording_white);
+            audioRecordingImg.setPadding(SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6));
             rippleBackgroundRecording.startRippleAnimation();
             rippleBackgroundRecording.setVisibility(View.VISIBLE);
 
@@ -1527,7 +1526,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
 
-                     /*20170915將權限判斷移至選項前*/
+        /*20170915將權限判斷移至選項前*/
         switch (checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
             case SUCCESS:
@@ -2296,27 +2295,12 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-
     private void getUploadFile() {
 
-        File f = new File(aviaryPath);
-        if (f.exists()) {
-            f.delete();
-        }
         try {
-            FileUtility.createSDFile(aviaryPath);//建立新檔案
-
-            MyLog.Set("d", getClass(), "建立空白文件成功");
-
-            uploadFile = new File(aviaryPath);
-
+            uploadFile = FileUtility.createAviaryFile(mActivity, id);
         } catch (Exception e) {
-
             MyLog.Set("e", getClass(), "建立文件失敗");
-
-            if (f.exists()) {
-                f.delete();
-            }
             e.printStackTrace();
         }
 
@@ -3128,30 +3112,27 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             if (previewMode == PREVIEW_ALL) {
 
                 for (int i = 0; i < photoList.size(); i++) {
-                        if (i == 0) {
-                            str = photoList.get(i).get(Key.photo_id) + "";
-                        } else {
-                            str = str + "," + photoList.get(i).get(Key.photo_id);
-                        }
+                    if (i == 0) {
+                        str = photoList.get(i).get(Key.photo_id) + "";
+                    } else {
+                        str = str + "," + photoList.get(i).get(Key.photo_id);
+                    }
                 }
 
 
-            }else {
+            } else {
 
                 for (int i = 0; i < sendPreviewCount; i++) {
 //                    if (i < sendPreviewCount) {
-                        if (i == 0) {
-                            str = photoList.get(i).get(Key.photo_id) + "";
-                        } else {
-                            str = str + "," + photoList.get(i).get(Key.photo_id);
-                        }
+                    if (i == 0) {
+                        str = photoList.get(i).get(Key.photo_id) + "";
+                    } else {
+                        str = str + "," + photoList.get(i).get(Key.photo_id);
+                    }
 //                    }
                 }
 
             }
-
-
-
 
 
             JSONObject obj = new JSONObject();
@@ -4823,7 +4804,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             HttpUtility hu = new HttpUtility();
             hu.downPic((String) photoList.get(lastPosition).get("image_url"),
                     DirClass.pathName_FromAviary,
-                    DirClass.sdPath + "PinPinBox" + id + "/", getApplication().getApplicationContext());
+                    DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id),
+                    getApplication().getApplicationContext());
 
             return null;
         }
@@ -4872,7 +4854,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 break;
 
 
-             /*pop creation audio*/
+            /*pop creation audio*/
             case R.id.tvSave:
 
                 if (mySelectAudioMode.equals(currentAudioMode)) {
@@ -4942,7 +4924,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         switch (v.getId()) {
 
-             /*pop  add*/
+            /*pop  add*/
             case R.id.linAddPhoto:
                 popCreateAdd.dismiss();
                 addPicByFast();

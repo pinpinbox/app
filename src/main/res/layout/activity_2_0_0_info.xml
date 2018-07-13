@@ -8,7 +8,7 @@
     <!--android:background="@color/white"-->
 
     <com.pinpinbox.android.Views.DismissScrollView
-        android:id="@+id/parallaxScrollView"
+        android:id="@+id/dismissScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -76,11 +76,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginTop="4dp"
-                            android:src="@drawable/ic200_ding_dark" />
+
 
                         <TextView
                             android:id="@+id/tvLikeCount"
@@ -91,8 +87,14 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginBottom="4dp"
+                            android:src="@drawable/ic200_ding_dark" />
 
 
                     </LinearLayout>
@@ -106,11 +108,6 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginTop="4dp"
-                            android:src="@drawable/ic200_message_dark" />
 
                         <TextView
                             android:id="@+id/tvMessageCount"
@@ -121,8 +118,15 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginBottom="4dp"
+                            android:src="@drawable/ic200_message_dark" />
+
 
                     </LinearLayout>
 
@@ -137,12 +141,6 @@
                         android:visibility="gone">
 
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginTop="4dp"
-                            android:src="@drawable/ic200_count_sponsor_dark" />
-
                         <TextView
                             android:id="@+id/tvSponsorCount"
                             fontPath="fonts/OpenSans-Bold.ttf"
@@ -152,8 +150,14 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginBottom="4dp"
+                            android:src="@drawable/ic200_count_sponsor_dark" />
 
 
                     </LinearLayout>
