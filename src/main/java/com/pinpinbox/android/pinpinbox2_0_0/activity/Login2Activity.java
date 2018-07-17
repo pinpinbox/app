@@ -898,7 +898,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         isFacebookRegister = true;
         LoginManager.getInstance()
                 .logInWithReadPermissions(mActivity,
-                        Arrays.asList("user_about_me", "user_birthday", "email", "user_friends"));
+                        Arrays.asList("user_birthday", "email", "user_friends"));
     }
 
 
