@@ -1135,7 +1135,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             mp3Recorder = new MP3Recorder(fMp3);
             mp3Recorder.start();
             audioRecordingImg.setImageResource(R.drawable.ic200_recording_white);
-            audioRecordingImg.setPadding(SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6));
+            audioRecordingImg.setPadding(SizeUtils.dp2px(10),SizeUtils.dp2px(10),SizeUtils.dp2px(10),SizeUtils.dp2px(10));
             rippleBackgroundRecording.startRippleAnimation();
             rippleBackgroundRecording.setVisibility(View.VISIBLE);
 
@@ -1155,6 +1155,14 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
     }
+
+    private void resetRecordingImg(){
+
+        audioRecordingImg.setImageResource(R.drawable.ic200_micro_white);
+        audioRecordingImg.setPadding(SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6));
+
+    }
+
 
     /*播放錄音*/
     private void playAudioClick() {
@@ -2146,23 +2154,22 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             audioUrl = (String) photoList.get(position).get("audio_url");
             if (audioUrl == null || audioUrl.equals("null") || audioUrl.equals("")) {
-                audioRecordingImg.setImageResource(R.drawable.ic200_micro_white);
+                resetRecordingImg();
 
-//                audioRecordingImg.setVisibility(View.VISIBLE);
                 rAudioRecording.setVisibility(View.VISIBLE);
 
 
                 rPlay_Delete.setVisibility(View.GONE);
             } else {
                 //有錄音 可播放
-//                audioRecordingImg.setVisibility(View.GONE);
+
                 rAudioRecording.setVisibility(View.GONE);
                 rPlay_Delete.setVisibility(View.VISIBLE);
             }
 
         } else {
             /*此頁為影片 隱藏錄音，特效選項*/
-//            audioRecordingImg.setVisibility(View.GONE);
+
             rAudioRecording.setVisibility(View.GONE);
             rPlay_Delete.setVisibility(View.GONE);
             if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
@@ -4328,7 +4335,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 setChangeProject();
 
-//                audioRecordingImg.setVisibility(View.GONE);
+
                 rAudioRecording.setVisibility(View.GONE);
                 rPlay_Delete.setVisibility(View.VISIBLE);
 
@@ -4339,13 +4346,15 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
             } else if (p78Result.equals("0")) {
-                audioRecordingImg.setImageResource(R.drawable.ic200_micro_white);
+                resetRecordingImg();
+
                 DialogV2Custom.BuildError(mActivity, p78Message);
 
             } else if (p78Result.equals(Key.timeout)) {
                 connectInstability();
             } else {
-                audioRecordingImg.setImageResource(R.drawable.ic200_micro_white);
+                resetRecordingImg();
+
                 DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
             }
         }
@@ -4413,8 +4422,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 setChangeProject();
 
-                audioRecordingImg.setImageResource(R.drawable.ic200_micro_white);
-//                audioRecordingImg.setVisibility(View.VISIBLE);
+                resetRecordingImg();
+
                 rAudioRecording.setVisibility(View.VISIBLE);
                 rPlay_Delete.setVisibility(View.GONE);
 
