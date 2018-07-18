@@ -626,6 +626,8 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                 bundle.putString(Key.album_id,  albumList.get(position).getAlbum_id());
                 bundle.putBoolean("return", true);
+                bundle.putInt(Key.image_width, albumList.get(position).getCover_width());
+                bundle.putInt(Key.image_height, albumList.get(position).getCover_height());
 
                 if (SystemUtility.Above_Equal_V5()) {
 
@@ -693,11 +695,8 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                             MyLog.Set("d", Author2Activity.class, "onSuccess strPicture => " + strPicture);
 
-
                             if (SystemUtility.Above_Equal_V5()) {
                                 scheduleStartPostponedTransition(userImg);
-//                                startPostponedEnterTransition();
-
                             }
 
                             doGetCreative();
@@ -712,7 +711,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
                             if (SystemUtility.Above_Equal_V5()) {
                                 scheduleStartPostponedTransition(userImg);
-//                                startPostponedEnterTransition();
                             }
 
                             doGetCreative();
@@ -753,10 +751,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                 //視覺上先隱藏
                 findViewById(R.id.rActionBar).setVisibility(View.GONE);
                 rBackgroundParallax.setVisibility(View.GONE);
-//                if(from_album_info){
-//                    //如從做品資訊頁進入 需先圓角化背景
-//                    findViewById(R.id.rBackground).setBackgroundResource(R.drawable.border_2_0_0_white_radius_side);
-//                }
 
 
             } else {

@@ -448,12 +448,12 @@ public class FragmentNotify2 extends Fragment {
                 return;
             }
 
-            String template_id = (String) p87arrayList.get(position).get(Key.template_id);
+            int template_id = (Integer) p87arrayList.get(position).get(Key.template_id);
             Intent intent = new Intent(getActivity(), Creation2Activity.class);
             Bundle bundle = new Bundle();
             bundle.putString(Key.album_id, type_id);
             bundle.putString(Key.identity, identity);
-            if (template_id.equals("0")) {
+            if (template_id == 0) {
                 //快速
                 bundle.putInt("create_mode", 0);
 
