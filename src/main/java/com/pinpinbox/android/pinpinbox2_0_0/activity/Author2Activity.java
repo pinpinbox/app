@@ -119,7 +119,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     private RoundCornerImageView userImg;
     private ImageView backImg, bannerImg, messageImg, aboutImg, shareImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg;
     private LinearLayout linLink;
-    private TextView tvName, tvAttention, tvFollow, tvViewed, tvSponsor, tvCreativeName, tvLink;
+    private TextView tvName, tvAttention, tvFollow, tvViewed, tvSponsor, tvCreativeName;
     private View viewHeader;
 
     private String id, token;
@@ -353,7 +353,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
 
         linLink = (LinearLayout) viewHeader.findViewById(R.id.linLink);
-        tvLink = (TextView) viewHeader.findViewById(R.id.tvLink);
 
         webImg = (ImageView) viewHeader.findViewById(R.id.webImg);
         facebookImg = (ImageView) viewHeader.findViewById(R.id.facebookImg);
@@ -572,7 +571,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
         boolean bYoutube = checkUrl(itemUser.getYoutube(), youtubeImg);
 
-        tvLink.setText(itemUser.getName() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_links));
 
         if (!bWeb && !bFacebook && !bGoogle && !bInstagram && !bLinkedin && !bPinterest && !bTwitter && !bYoutube) {
             linLink.setVisibility(View.GONE);

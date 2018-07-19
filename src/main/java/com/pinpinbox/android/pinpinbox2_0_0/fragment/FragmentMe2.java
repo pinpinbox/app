@@ -133,7 +133,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
     private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, messageImg, aboutImg, shareImg, incomeImg;
     private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax;
     private LinearLayout linLink, linSponsorList, linFollowMe;
-    private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvLink, tvSponsor, tvUploadBanner;
+    private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvSponsor, tvUploadBanner;
     private View viewHeader;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private RelativeLayout rCreativeName;
@@ -300,7 +300,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
 
 
         linLink = (LinearLayout) viewHeader.findViewById(R.id.linLink);
-        tvLink = (TextView) viewHeader.findViewById(R.id.tvLink);
 
         webImg = (ImageView) viewHeader.findViewById(R.id.webImg);
         facebookImg = (ImageView) viewHeader.findViewById(R.id.facebookImg);
@@ -637,8 +636,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         boolean bTwitter = checkUrl(itemUser.getTwitter(), twitterImg);
 
         boolean bYoutube = checkUrl(itemUser.getYoutube(), youtubeImg);
-
-        tvLink.setText(itemUser.getName() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_links));
 
         if (!bWeb && !bFacebook && !bGoogle && !bInstagram && !bLinkedin && !bPinterest && !bTwitter && !bYoutube) {
             linLink.setVisibility(View.GONE);

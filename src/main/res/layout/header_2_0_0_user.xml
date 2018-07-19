@@ -166,8 +166,8 @@
                 fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                 android:gravity="left"
                 android:includeFontPadding="false"
@@ -186,7 +186,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                 android:alpha="0"
                 android:orientation="vertical">
 
@@ -244,9 +244,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.1"
-                        android:text=""
+                        android:text="@string/pinpinbox_2_0_0_other_text_links"
                         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                        android:textSize="@dimen/ppb200_common_text_first" />
+                        android:textSize="@dimen/ppb200_common_text_third" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
