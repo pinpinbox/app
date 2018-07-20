@@ -169,6 +169,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
     private boolean isDoingMore = false;
     private boolean isVisible;
     private boolean dowork = false;
+    private boolean isGetData = false;
 
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
         @Override
@@ -200,9 +201,15 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
             String actName = activityList.get(i).getClass().getSimpleName();
             if (actName.equals(Main2Activity.class.getSimpleName())) {
 
-                ((FragmentMe2) ((Main2Activity) activityList.get(i)).getFragment(FragmentMe2.class.getSimpleName())).doRefresh(false);
+                FragmentMe2 fragmentMe2 = (FragmentMe2) ((Main2Activity) activityList.get(i)).getFragment(FragmentMe2.class.getSimpleName());
 
-                MyLog.Set("d", FragmentMe2.class, "doRefreshInOtherClass");
+                if(fragmentMe2.isGetData()){
+                    (
+                            (FragmentMe2) ((Main2Activity) activityList.get(i)).getFragment(FragmentMe2.class.getSimpleName())
+                    ).doRefresh(false);
+                }
+
+
                 break;
             }
         }
@@ -650,6 +657,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
 
         String strJson = "";
         try {
+
             strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P40_GetCreative,
                     SetMapByProtocol.setParam40_getcreative(id, token, id, range), null);
 
@@ -683,7 +691,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
                     itemUser.setDescription(JsonUtility.GetString(jsonUser, ProtocolKey.description));
                     itemUser.setName(JsonUtility.GetString(jsonUser, ProtocolKey.name));
                     itemUser.setPicture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
-//                    itemUser.setCreative_name(JsonUtility.GetString(jsonUser, ProtocolKey.creative_name));
                     itemUser.setViewed(JsonUtility.GetInt(jsonUser, ProtocolKey.viewed));
                     itemUser.setCover(JsonUtility.GetString(jsonUser, ProtocolKey.cover));
 
@@ -862,7 +869,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         System.gc();
     }
 
-
     private void toCheckPermission(int type) {
         switch (checkPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
             case SUCCESS:
@@ -885,9 +891,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         }
     }
 
-
-
-
     private void toSponsorList() {
         ActivityIntent.toSponsorList(getActivity());
     }
@@ -908,7 +911,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         ((Main2Activity) getActivity()).setShowBoard(false);
 
     }
-
 
     private void systemShare() {
 
@@ -1135,6 +1137,10 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
                     round = round + defaultCount;
 
                 }
+
+
+
+                isGetData = true;
 
 
             } else if (p40Result.equals("0")) {
@@ -1445,6 +1451,10 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
 
     public List<ItemAlbum> getAlbumList() {
         return this.albumList;
+    }
+
+    public boolean isGetData(){
+        return this.isGetData;
     }
 
 

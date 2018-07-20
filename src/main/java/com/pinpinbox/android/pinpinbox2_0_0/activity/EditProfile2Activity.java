@@ -567,19 +567,6 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 
                 FragmentMe2.doRefreshInOtherClass();
 
-//                List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-//                for (int i = 0; i < activityList.size(); i++) {
-//                    String actName = activityList.get(i).getClass().getSimpleName();
-//                    if (actName.equals(Main2Activity.class.getSimpleName())) {
-//
-//                        ((FragmentMe2) ((Main2Activity) activityList.get(i)).getFragment(FragmentMe2.class.getSimpleName())).doRefresh(false);
-//
-//                        MyLog.Set("d", mActivity.getClass(), "reset name , description");
-//                        break;
-//                    }
-//                }
-
-
                 if (isChangePic) {
                     doUpdatePic();
                 } else {
@@ -722,26 +709,9 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
             if (p05Result == 1) {
 
 
-                List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-                for (int i = 0; i < activityList.size(); i++) {
-                    String actName = activityList.get(i).getClass().getSimpleName();
-                    if (actName.equals(Main2Activity.class.getSimpleName())) {
-
-                        (
-                                (FragmentMe2) ((Main2Activity) activityList.get(i)).getFragment(FragmentMe2.class.getSimpleName())
-                        ).doRefresh(false);
-
-
-//                        ((Main2Activity) activityList.get(i)).getFragment();
-//                        ((Main2Activity) activityList.get(i)).getFragmentMe2().doRefresh(false);
-
-                        MyLog.Set("d", getClass(), "reset profilepic");
-                        break;
-                    }
-                }
+                FragmentMe2.doRefreshInOtherClass();
 
                 checkFirstEdit();
-
 
             } else if (p05Result == 0) {
 
