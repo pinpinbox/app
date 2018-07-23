@@ -317,7 +317,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_second">
 
                     <TextView
                         android:id="@+id/tvAlbumsTitle"
@@ -336,6 +337,15 @@
                         android:background="@color/pinpinbox_2_0_0_divider" />
 
                 </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/tvGuide"
+                    style="@style/ppb200_guide_no_data"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:text="@string/pinpinbox_2_0_0_guide_no_works"
+                    android:visibility="gone" />
+
 
 
             </LinearLayout>

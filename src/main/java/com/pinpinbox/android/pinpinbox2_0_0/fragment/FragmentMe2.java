@@ -133,7 +133,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
     private ImageView bannerImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg, messageImg, aboutImg, shareImg, incomeImg;
     private RelativeLayout rBackground, rFragmentBackground, rBackgroundParallax;
     private LinearLayout linLink, linSponsorList, linFollowMe;
-    private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvSponsor, tvUploadBanner;
+    private TextView tvName, tvFollow, tvViewed, tvCreativeName, tvSponsor, tvUploadBanner, tvGuide;
     private View viewHeader;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private RelativeLayout rCreativeName;
@@ -290,7 +290,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         viewHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_2_0_0_user, null);
         userImg = (RoundCornerImageView) viewHeader.findViewById(R.id.userImg);
 
-//        tvCreativeName = (TextView) viewHeader.findViewById(R.id.tvCreativeName);
+        tvGuide = (TextView) viewHeader.findViewById(R.id.tvGuide);
         tvName = (TextView) viewHeader.findViewById(R.id.tvName);
 
         tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
@@ -600,6 +600,12 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
 
         authorAdapter.notifyDataSetChanged();
 
+
+        if (albumList.size() > 0) {
+            tvGuide.setVisibility(View.GONE);
+        } else {
+            tvGuide.setVisibility(View.VISIBLE);
+        }
 
         SharedPreferences.Editor editor = PPBApplication.getInstance().getData().edit();
         editor.putString(Key.nickname, itemUser.getName());
@@ -1107,11 +1113,7 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
                 manager.setScrollEnabled(true);
 
 
-                if (albumList.size() > 0) {
-                    ((Main2Activity) getActivity()).showGuideCreate(false);
-                } else {
-                    ((Main2Activity) getActivity()).showGuideCreate(true);
-                }
+
 
 
                 new Handler().postDelayed(new Runnable() {
@@ -1179,19 +1181,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
             pbLoadMore.setVisibility(View.GONE);
             pbLoadMore.progressiveStop();
             if (p40Result.equals("1")) {
-
-
-//                if (p40JsonArray.length() == 0) {
-//                    sizeMax = true;
-//                    if (!isNoDataToastAppeared) {
-//                        PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_scroll_max);
-//                        isNoDataToastAppeared = true;
-//                    }
-//                    return;
-//                }
-//                authorAdapter.notifyItemRangeInserted(albumList.size(), rangeCount);
-//                round = round + rangeCount;
-
 
                 if (p40JsonArray.length() == 0) {
                     sizeMax = true;
@@ -1281,16 +1270,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
             if (p40Result.equals("1")) {
 
                 setdata();
-
-//                authorAdapter.notifyDataSetChanged();
-//                round = round + defaultCount;
-
-                if (albumList.size() > 0) {
-                    ((Main2Activity) getActivity()).showGuideCreate(false);
-                } else {
-                    ((Main2Activity) getActivity()).showGuideCreate(true);
-                }
-
 
                 if (p40JsonArray.length() == 0) {
                     sizeMax = true; // 已達最大值
@@ -1480,13 +1459,6 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
                 doGetCreative();
                 dowork = true;
             } else {
-
-                if (albumList.size() > 0) {
-                    ((Main2Activity) getActivity()).showGuideCreate(false);
-                } else {
-                    ((Main2Activity) getActivity()).showGuideCreate(true);
-                }
-
 
                 if (((Main2Activity) getActivity()).getShowBoard()) {
                     showBoard();

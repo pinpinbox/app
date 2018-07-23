@@ -119,7 +119,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     private RoundCornerImageView userImg;
     private ImageView backImg, bannerImg, messageImg, aboutImg, shareImg, webImg, facebookImg, googleImg, instagramImg, linkedinImg, pinterestImg, twitterImg, youtubeImg;
     private LinearLayout linLink;
-    private TextView tvName, tvAttention, tvFollow, tvViewed, tvSponsor, tvCreativeName;
+    private TextView tvName, tvAttention, tvFollow, tvViewed, tvSponsor, tvCreativeName, tvGuide;
     private View viewHeader;
 
     private String id, token;
@@ -332,7 +332,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
         tvViewed = (TextView) viewHeader.findViewById(R.id.tvViewed);
         tvSponsor = (TextView) viewHeader.findViewById(R.id.tvSponsor);
-//        tvCreativeName = (TextView) viewHeader.findViewById(R.id.tvCreativeName);
+        tvGuide = (TextView) viewHeader.findViewById(R.id.tvGuide);
 
         /*2017.09.08 不讓圖片偏移*/
         tvName.setText(strName);
@@ -534,6 +534,13 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         authorAdapter.notifyDataSetChanged();
 
         setUrl();
+
+        if (albumList.size() > 0) {
+            tvGuide.setVisibility(View.GONE);
+        } else {
+            tvGuide.setVisibility(View.VISIBLE);
+        }
+
 
     }
 
@@ -1195,18 +1202,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
             pbLoadMore.progressiveStop();
             if (p40Result.equals("1")) {
 
-//                if (p40JsonArray.length() == 0) {
-//                    sizeMax = true;
-//                    if (!isNoDataToastAppeared) {
-//                        PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_scroll_max);
-//                        isNoDataToastAppeared = true;
-//                    }
-//                    return;
-//                }
-//                authorAdapter.notifyItemRangeInserted(albumList.size(), rangeCount);
-//                round = round + rangeCount;
-
-
                 if (p40JsonArray.length() == 0) {
                     sizeMax = true;
                     if (!isNoDataToastAppeared) {
@@ -1226,7 +1221,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     round = round + rangeCount;
 
                 }
-
 
             } else if (p40Result.equals("0")) {
 

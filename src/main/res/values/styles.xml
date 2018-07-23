@@ -7,6 +7,7 @@
         <item name="android:maxWidth">360dp</item>
         <item name="android:background">@drawable/border_2_0_0_bg_guide</item>
         <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
         <item name="android:padding">@dimen/ppb200_padding_margin_big</item>

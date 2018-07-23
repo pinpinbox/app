@@ -217,28 +217,6 @@
         android:background="@color/pinpinbox_2_0_0_mainbutton_normal"
         />
 
-    <RelativeLayout
-        android:id="@+id/rGudieCreate"
-        android:layout_width="180dp"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:alpha="0"
-        android:background="@drawable/bg_2_0_0_create">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
-            android:letterSpacing="0.1"
-            android:text="@string/pinpinbox_2_0_0_other_text_create_album_now"
-            android:textColor="@color/white"
-            android:textSize="@dimen/ppb200_guide" />
-
-
-    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/frame"

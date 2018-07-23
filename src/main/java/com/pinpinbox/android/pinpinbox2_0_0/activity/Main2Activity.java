@@ -16,7 +16,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
@@ -110,7 +109,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     private FragmentPagerItemAdapter adapter;
 
     private ViewPager viewPager;
-    private RelativeLayout rGudieCreate, rNotify, rUser, rSearch, rHome, rMenu;
+    private RelativeLayout rNotify, rUser, rSearch, rHome, rMenu;
     private ImageView createImg;
     private RichPathView svgNotify, svgUser, svgSearch, svgHome, svgMenu;
     private View vRPnotify, vRPmenu;
@@ -381,17 +380,15 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         createImg = (ImageView) findViewById(R.id.createImg);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        rGudieCreate = (RelativeLayout) findViewById(R.id.rGudieCreate);
+
 
         rNotify = (RelativeLayout) findViewById(R.id.rNotify);
         rUser = (RelativeLayout) findViewById(R.id.rUser);
-//        rSearch = (RelativeLayout) findViewById(R.id.rSearch);
         rHome = (RelativeLayout) findViewById(R.id.rHome);
         rMenu = (RelativeLayout) findViewById(R.id.rMenu);
 
         svgNotify = (RichPathView) findViewById(R.id.svgNotify);
         svgUser = (RichPathView) findViewById(R.id.svgUser);
-//        svgSearch = (RichPathView) findViewById(R.id.svgSearch);
         svgHome = (RichPathView) findViewById(R.id.svgHome);
         svgMenu = (RichPathView) findViewById(R.id.svgMenu);
 
@@ -488,23 +485,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
             @Override
             public void onPageSelected(int position) {
-
-
-//                if (position == 1) {
-
-//                    Fragment fragment = getFragment(FragmentMe2.class.getSimpleName());
-//
-//                    if (((FragmentMe2) fragment).getAlbumList()!=null&&((FragmentMe2) fragment).getAlbumList().size() == 0) {
-//                        showGuideCreate(true);
-//                    }
-
-//                } else {
-
-                if (isShowGuideCreate) {
-                    showGuideCreate(false);
-                }
-
-//                }
 
 
                 switch (position) {
@@ -1784,47 +1764,10 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 //    }
 
 
-    private boolean isShowGuideCreate = false;
-
 
     public int getPage() {
         return this.viewPager.getCurrentItem();
     }
-
-    public void showGuideCreate(boolean show) {
-
-//        float showPosition = createImg.getY()-144;
-//        float hidePosition = createImg.getY()-24;
-
-        float showPosition = createImg.getY() - showDistance;
-        float hidePosition = createImg.getY() - hideDistance;
-
-        if (show) {
-
-            ViewPropertyAnimator alphaTo1 = rGudieCreate.animate();
-            alphaTo1.setDuration(200).y(showPosition)
-                    .scaleX(1.0f)
-                    .scaleY(1.0f)
-                    .alpha(1)
-                    .start();
-
-            isShowGuideCreate = true;
-
-        } else {
-
-
-            ViewPropertyAnimator alphaTo0 = rGudieCreate.animate();
-            alphaTo0.setDuration(200).y(hidePosition)
-                    .scaleX(0.0f)
-                    .scaleY(0.0f)
-                    .alpha(0)
-                    .start();
-
-            isShowGuideCreate = false;
-        }
-
-    }
-
 
     private void uriControl(Intent intent, Uri uri) {
 
