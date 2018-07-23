@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -18,26 +19,18 @@
         <View
             style="@style/ppb200_divider_list"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"/>
-
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first" />
 
 
     </LinearLayout>
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvRecommendUser"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvRecommendUser"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/ppb200_padding_margin_second"
-            android:clipToPadding="false"/>
-
-
-    </RelativeLayout>
-
+        android:layout_height="136dp"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+        android:clipToPadding="false"
+        android:paddingLeft="@dimen/ppb200_padding_margin_second" />
 
 
 </LinearLayout>

@@ -26,16 +26,16 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
+            android:background="@drawable/click_2_0_0_default"
             android:gravity="center"
             android:letterSpacing="0.1"
+            android:paddingBottom="4dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:paddingBottom="4dp"
             android:paddingTop="4dp"
             android:text="@string/pinpinbox_2_0_0_dialog_close"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_first"
-            android:background="@drawable/click_2_0_0_default"/>
+            android:textSize="@dimen/ppb200_common_text_first" />
 
 
     </RelativeLayout>
@@ -43,9 +43,12 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvUser"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="144dp" />
+        android:layout_height="136dp"
+        android:clipToPadding="false"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+        android:paddingLeft="@dimen/ppb200_padding_margin_second"
+        android:visibility="gone" />
 
 
 </LinearLayout>

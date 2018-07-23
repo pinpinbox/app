@@ -36,12 +36,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="144dp">
+        android:layout_height="136dp"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+        android:layout_marginTop="@dimen/ppb200_padding_margin_second">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvUser"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingLeft="@dimen/ppb200_padding_margin_second"/>
 
         <TextView
             android:id="@+id/tvGuideNoUser"
@@ -68,7 +72,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp">
 
 
@@ -88,18 +91,5 @@
 
         </RelativeLayout>
 
-
-
-
-
-    <!--人氣精選-->
-    <!--<TextView-->
-        <!--android:id="@+id/tvSearchAlbumTitle"-->
-        <!--style="@style/ppb200_title_second"-->
-        <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_second"-->
-        <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-        <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first"-->
-        <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-        <!--android:text="@string/pinpinbox_2_0_0_title_popular_album" />-->
 
 </LinearLayout>

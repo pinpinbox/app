@@ -11,7 +11,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:clipChildren="false"
         android:orientation="vertical">
 
 
@@ -169,6 +168,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
                 android:gravity="left"
                 android:includeFontPadding="false"
                 android:letterSpacing="0.1"
@@ -185,19 +185,14 @@
                 android:id="@+id/linContents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                 android:alpha="0"
                 android:orientation="vertical">
-
-
 
                 <!--sponsor message-->
                 <RelativeLayout
                     android:id="@+id/rSponsorMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:background="@drawable/border_2_0_0_grey_third_radius"
@@ -233,10 +228,12 @@
                     android:id="@+id/linLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
                     android:orientation="vertical"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:visibility="gone">
 
                     <TextView

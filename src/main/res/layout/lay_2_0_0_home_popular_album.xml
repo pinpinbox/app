@@ -23,25 +23,13 @@
     </LinearLayout>
 
 
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="168dp"
-        android:layout_marginTop="@dimen/ppb200_padding_margin_second">
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvPopularAlbum"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="168dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
             android:paddingLeft="@dimen/ppb200_padding_margin_second"
             android:clipToPadding="false"/>
-
-
-
-
-    </RelativeLayout>
-
 
 
 </LinearLayout>

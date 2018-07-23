@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerSearchUserAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryUserLargeAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
@@ -99,10 +99,10 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvUser.setLayoutManager(layoutManager);
-        RecyclerSearchUserAdapter userAdapter = new RecyclerSearchUserAdapter(getActivity(), itemUserList);
+        RecyclerCategoryUserLargeAdapter userAdapter = new RecyclerCategoryUserLargeAdapter(getActivity(), itemUserList);
         rvUser.setAdapter(userAdapter);
 
-        userAdapter.setOnRecyclerViewListener(new RecyclerSearchUserAdapter.OnRecyclerViewListener() {
+        userAdapter.setOnRecyclerViewListener(new RecyclerCategoryUserLargeAdapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
 

@@ -6,15 +6,15 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="160dp">
+        android:layout_height="136dp">
 
         <LinearLayout
             android:id="@+id/linBackground"
             android:layout_width="112dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/ppb200_padding_margin_second"
+            android:paddingTop="@dimen/ppb200_padding_margin_second"
             android:orientation="vertical">
 
 
@@ -26,23 +26,23 @@
                 app:siBorderColor="@color/pinpinbox_2_0_0_divider"
                 app:siBorderWidth="0.5dp"
                 app:siRadius="96dp"
-                android:layout_marginTop="8dp"/>
+               />
 
 
             <TextView
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:textStyle="bold"
                 android:id="@+id/tvName"
-                android:layout_width="92dp"
+                android:layout_width="96dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:letterSpacing="0.1"
-                android:maxLines="2"
+                android:singleLine="true"
                 android:text=""
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="16sp" />
+                android:textSize="@dimen/ppb200_common_text_small" />
 
         </LinearLayout>
 

@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
             android:visibility="visible">
 
             <android.support.v4.view.ViewPager
@@ -35,12 +35,6 @@
                 app:ci_drawable="@drawable/icon_2_0_0_indicator"
                 app:ci_drawable_unselected="@drawable/icon_2_0_0_indicator_unselect" />
 
-            <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first"-->
-            <!--android:background="@color/pinpinbox_2_0_0_divider" />-->
-
 
         </LinearLayout>
 
@@ -50,7 +44,7 @@
             layout="@layout/lay_2_0_0_home_explore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first" />
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />
 
 
         <!--釘關注-->
@@ -58,21 +52,20 @@
             layout="@layout/lay_2_0_0_home_recommend_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first" />
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />
 
         <!--釘創作-->
         <include
             layout="@layout/lay_2_0_0_home_popular_album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first" />
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />
 
 
         <!--推薦-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first">

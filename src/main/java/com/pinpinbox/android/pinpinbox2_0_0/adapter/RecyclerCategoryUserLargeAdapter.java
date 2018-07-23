@@ -18,11 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by vmage on 2017/2/2.
- */
-public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
-
+public class RecyclerCategoryUserLargeAdapter extends RecyclerView.Adapter{
 
     public interface OnRecyclerViewListener {
         void onItemClick(int position, View v);
@@ -42,7 +38,7 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
     private List<ItemUser> itemUserList;
 
 
-    public RecyclerSearchUserAdapter(Activity activity,List<ItemUser> itemUserList) {
+    public RecyclerCategoryUserLargeAdapter(Activity activity,List<ItemUser> itemUserList) {
         this.mActivity = activity;
         this.itemUserList = itemUserList;
 
@@ -58,7 +54,7 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_search_user, null);
+        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_category_user_large, null);
         return new ViewHolder(view);
     }
 
@@ -82,12 +78,12 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
         if (strPicture == null || strPicture.equals("")) {
             holder.userImg.setImageResource(R.drawable.member_back_head);
         } else {
-                Picasso.with(mActivity.getApplicationContext())
-                        .load(strPicture)
-                        .config(Bitmap.Config.RGB_565)
-                        .error(R.drawable.member_back_head)
-                        .tag(mActivity.getApplicationContext())
-                        .into(holder.userImg);
+            Picasso.with(mActivity.getApplicationContext())
+                    .load(strPicture)
+                    .config(Bitmap.Config.RGB_565)
+                    .error(R.drawable.member_back_head)
+                    .tag(mActivity.getApplicationContext())
+                    .into(holder.userImg);
         }
 
 
@@ -158,4 +154,3 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
 
 
 }
-

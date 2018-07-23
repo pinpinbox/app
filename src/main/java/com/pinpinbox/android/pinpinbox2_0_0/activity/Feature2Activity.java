@@ -63,6 +63,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import me.relex.circleindicator.CircleIndicator;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -525,16 +526,25 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                             MyLog.Set("e", mActivity.getClass(), "user_id==null");
                         } else {
                             MyLog.Set("e", mActivity.getClass(), "user_id => " + user_id);
-                            toUser(user_id);
-                            return;
+
+                            if(isDigit(user_id)){
+                                toUser(user_id);
+                                return;
+                            }
                         }
+
+
 
                         if (album_id == null) {
                             MyLog.Set("e", mActivity.getClass(), "album_id==null");
                         } else {
                             MyLog.Set("e", mActivity.getClass(), "album_id => " + album_id);
-                            toAlbum(album_id);
-                            return;
+
+                            if(isDigit(album_id)){
+                                toAlbum(album_id);
+                                return;
+                            }
+
                         }
 
                         if (categoryarea_id != null && category_id == null) {
@@ -553,14 +563,18 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                                 }
                             }
 
-                            if (toContents) {
-                                toCurrentContents(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
-                            } else {
-                                toFeature(StringIntMethod.StringToInt(categoryarea_id));
+
+                            if(isDigit(categoryarea_id)){
+                                if (toContents) {
+                                    toCurrentContents(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
+                                } else {
+                                    toFeature(StringIntMethod.StringToInt(categoryarea_id));
+                                }
+                                return;
                             }
 
 
-                            return;
+
 
                         } else {
                             MyLog.Set("e", mActivity.getClass(), "categoryarea_id==null");
@@ -570,8 +584,13 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
                             MyLog.Set("e", mActivity.getClass(), "event_id==null");
                         } else {
                             MyLog.Set("e", mActivity.getClass(), "event_id => " + event_id);
-                            toEvent(event_id);
-                            return;
+
+                            if(isDigit(event_id)){
+                                toEvent(event_id);
+                                return;
+                            }
+
+
                         }
 
                         toWeb(itemAlbumExploreList.get(finalI).getUrl(), "");
@@ -630,6 +649,13 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
     }
 
+    private boolean isDigit(String str){
+
+        Pattern pattern = Pattern.compile("[0-9]*");
+
+        return pattern.matcher(str).matches();
+
+    }
 
     private List<Fragment> fragmentList;
 
