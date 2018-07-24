@@ -59,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingBottom="56dp"
             android:paddingTop="208dp" />
         <!--20 + 56 + 168 = 244 (-36)(傾斜高度) => 208-->
 
