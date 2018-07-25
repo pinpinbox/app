@@ -5,6 +5,6 @@
 
     <!--內部填充-->
     <solid android:color="@color/pinpinbox_2_0_0_third_main" />
-    <corners android:radius="@dimen/ppb200_radius_big" />
+    <corners android:radius="360dp" />
 
 </shape>
