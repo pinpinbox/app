@@ -297,12 +297,13 @@
                                 android:padding="10dp"
                                 android:src="@drawable/ic200_download_white" />
 
-                            <com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView
-                                android:id="@+id/avLoading"
+                            <com.github.ybq.android.spinkit.SpinKitView
+                                android:id="@+id/spin_kit"
+                                style="@style/SpinKitView.DoubleBounce"
                                 android:layout_width="@dimen/ppb200_common_icon_side"
                                 android:layout_height="@dimen/ppb200_common_icon_side"
                                 android:layout_centerInParent="true"
-                                app:indicatorColor="@color/white" />
+                                app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
 
 
                         </RelativeLayout>

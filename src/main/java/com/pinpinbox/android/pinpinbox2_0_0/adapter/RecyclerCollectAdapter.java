@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -258,21 +257,9 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             String strAct = (String) listData.get(position).get(Key.act);
 
             if (strAct.equals("open")) {
-//                holder.privacyImg.setImageResource(R.drawable.ic200_act_open_white);
                 holder.smallprivacyImg.setImageResource(R.drawable.ic200_act_open_light);
-
-//                holder.smallprivacyImg.setVisibility(View.GONE);
-
             } else {
-//                holder.privacyImg.setImageResource(R.drawable.ic200_act_close_pink);
                 holder.smallprivacyImg.setImageResource(R.drawable.ic200_act_close_pink);
-//                if(strZipped.equals("1")){
-//                    holder.smallprivacyImg.setVisibility(View.VISIBLE);
-//                }else {
-//                    holder.smallprivacyImg.setVisibility(View.GONE);
-//                }
-
-
             }
 
             holder.smallprivacyImg.setVisibility(View.VISIBLE);
@@ -372,7 +359,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
 
                     holder.downloadImg.setImageResource(R.drawable.ic200_download_white);
                     holder.downloadImg.setVisibility(View.VISIBLE);
-                    holder.avLoading.setVisibility(View.GONE);
+//                    holder.avLoading.setVisibility(View.GONE);
                     holder.tvLoadType.setText(R.string.pinpinbox_2_0_0_other_text_download);
 
                     break;
@@ -381,7 +368,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
                 case 1: /* 1 => 下載中*/
 
                     holder.downloadImg.setVisibility(View.GONE);
-                    holder.avLoading.setVisibility(View.VISIBLE);
+//                    holder.avLoading.setVisibility(View.VISIBLE);
                     holder.tvLoadType.setText(R.string.pinpinbox_2_0_0_other_text_downloading);
 
                     break;
@@ -391,7 +378,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
 
                     holder.downloadImg.setImageResource(R.drawable.icon_2_0_0_dialog_check);
                     holder.downloadImg.setVisibility(View.VISIBLE);
-                    holder.avLoading.setVisibility(View.GONE);
+//                    holder.avLoading.setVisibility(View.GONE);
                     holder.tvLoadType.setText(R.string.pinpinbox_2_0_0_other_text_can_redownload);
 
                     break;
@@ -414,7 +401,6 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
         private RoundedImageView coverImg;
         private RoundCornerImageView userImg;
         private ImageView detailImg, downloadImg, smallprivacyImg;
-        private AVLoadingIndicatorView avLoading;
         private TextView tvAlbumName, tvTime, tvCooperationCount, tvLoadType;
         private LinearLayout  linEdit, linCooperation, linShare, linDelete, linCooperationCount, linDownload;
 
@@ -432,7 +418,6 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             coverImg = (RoundedImageView) itemView.findViewById(R.id.coverImg);
             userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
             detailImg = (ImageView) itemView.findViewById(R.id.detailImg);
-//            privacyImg = (ImageView) itemView.findViewById(R.id.privacyImg);
             downloadImg = (ImageView) itemView.findViewById(R.id.downloadImg);
             smallprivacyImg = (ImageView)itemView.findViewById(R.id.smallprivacyImg);
 
@@ -447,9 +432,9 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             linShare = (LinearLayout) itemView.findViewById(R.id.linShare);
             linDelete = (LinearLayout) itemView.findViewById(R.id.linDelete);
             linCooperationCount = (LinearLayout) itemView.findViewById(R.id.linCooperationCount);
-//            linDownload = (LinearLayout) itemView.findViewById(R.id.linDownload);
 
-            avLoading = (AVLoadingIndicatorView) itemView.findViewById(R.id.avLoading);
+
+
 
 
 

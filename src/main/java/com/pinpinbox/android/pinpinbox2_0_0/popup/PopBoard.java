@@ -29,13 +29,13 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
@@ -107,7 +107,7 @@ public class PopBoard {
     private SmoothProgressBar pbLoadMore;
     private RoundedImageView userImg;
     private TextView tvTitle, tvSecondTitle, tvCount, tvNoUser;
-    private AVLoadingIndicatorView vRefreshTag;
+    private SpinKitView loadingView;
 
 
     private String type;
@@ -173,7 +173,7 @@ public class PopBoard {
         v = inflater.inflate(R.layout.pop_2_0_0_board_album, null);
 
         rTag = (RelativeLayout) v.findViewById(R.id.rTag);
-        vRefreshTag = (AVLoadingIndicatorView) v.findViewById(R.id.vRefreshTag);
+        loadingView = (SpinKitView) v.findViewById(R.id.loadingView);
         pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
         rvBoard = (RecyclerView) v.findViewById(R.id.rvBoard);
         rvTag = (RecyclerView) v.findViewById(R.id.rvTag);
@@ -1318,8 +1318,7 @@ public class PopBoard {
             clearUserList();
 
             tvNoUser.setVisibility(View.GONE);
-            vRefreshTag.startAnimation();
-            vRefreshTag.setVisibility(View.VISIBLE);
+            loadingView.setVisibility(View.VISIBLE);
             rTag.setVisibility(View.VISIBLE);
 
 
@@ -1382,19 +1381,15 @@ public class PopBoard {
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
 
-            vRefreshTag.setVisibility(View.GONE);
-            vRefreshTag.stopAnimation();
-
+            loadingView.setVisibility(View.GONE);
 
             if (p41Result == 1) {
 
                 tagUserAdapter.notifyItemRangeInserted(0, itemUserList.size());
 
                 if (itemUserList.size() > 0) {
-//                    rTag.setVisibility(View.VISIBLE);
                     tvNoUser.setVisibility(View.GONE);
                 } else {
-//                    rTag.setVisibility(View.INVISIBLE);
                     tvNoUser.setVisibility(View.VISIBLE);
                 }
 

@@ -47,6 +47,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -64,7 +65,6 @@ import com.pinpinbox.android.Utility.MapUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.ControlSizeScrollView;
 import com.pinpinbox.android.Views.ControllableViewPager;
@@ -1206,7 +1206,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
         /*error*/
-        final AVLoadingIndicatorView loading = (AVLoadingIndicatorView) vPage.findViewById(R.id.vRefreshExchange);
+        final SpinKitView loadingView = (SpinKitView)vPage.findViewById(R.id.loadingView);
         final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
         final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
 
@@ -1411,7 +1411,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         linTimeout.setVisibility(View.GONE);
                         linTimeout.setAlpha(0f);
 
-                        loading.smoothToShow();
+                        loadingView.setVisibility(View.VISIBLE);
 
                     }
 
@@ -1419,7 +1419,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     public void Post() {
 
                         protocol108HashMap.remove(position);
-                        loading.smoothToHide();
+                        loadingView.setVisibility(View.GONE);
 
                     }
 
@@ -1489,7 +1489,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
         /*error*/
-        final AVLoadingIndicatorView loading = (AVLoadingIndicatorView) vPage.findViewById(R.id.vRefreshExchange);
+        final SpinKitView loadingView = (SpinKitView)vPage.findViewById(R.id.loadingView);
         final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
         final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
 
@@ -1791,15 +1791,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     @Override
                     public void IsNotYetStarted() {
-
-//                        tvExchangeEnd.setVisibility(View.VISIBLE);
-//                        tvExchangeEnd.setText(R.string.pinpinbox_2_0_0_other_text_not_yet_begun);
-//
-//                        if (tvExchangeEnd.getAlpha() == 0f) {
-//                            ViewControl.AlphaTo1(tvExchangeEnd);
-//                        } else {
-//                            tvExchangeEnd.setAlpha(1f);
-//                        }
 
                         giftAnim.resetGift();
 

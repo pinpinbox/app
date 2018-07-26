@@ -2,16 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
-    <RelativeLayout
-        android:id="@+id/r"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/border_2_0_0_loading">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/rLoading"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:alpha="0"-->
+        <!--android:layout_centerInParent="true">-->
 
 
         <!--<com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView-->
@@ -22,16 +21,17 @@
             <!--app:indicatorColor="@color/white" />-->
 
         <com.github.ybq.android.spinkit.SpinKitView
-            android:id="@+id/spin_kit"
+            android:id="@+id/loadingView"
             style="@style/SpinKitView.DoubleBounce"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_centerInParent="true"
-            app:SpinKit_Color="@color/white" />
+            android:alpha="0"
+            app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
 
 
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <View
         android:id="@+id/vCatchClose"

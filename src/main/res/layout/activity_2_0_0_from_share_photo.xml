@@ -18,11 +18,15 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView
-            android:id="@+id/vRefresh"
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.DoubleBounce"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            app:indicatorColor="@color/pinpinbox_2_0_0_first_main" />
+            app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
+
+
 
         <TextView
             android:layout_width="wrap_content"

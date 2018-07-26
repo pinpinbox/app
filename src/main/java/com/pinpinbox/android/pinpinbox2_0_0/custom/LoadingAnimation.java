@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.view.Window;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -19,22 +21,11 @@ public class LoadingAnimation {
 
     private Dialog mDialog;
 
-    private static LoadingAnimation instance;
+    private SpinKitView loadingView;
 
-
-//    public static LoadingAnimation getInstance(Activity mActivity) {
-//
-//        if(instance==null){
-//            return instance = new LoadingAnimation(mActivity);
-//        }else {
-//            return instance;
-//        }
-//    }
-
+    private ViewPropertyAnimator alphaTo1;
 
     public LoadingAnimation(Activity activity) {
-
-        instance = this;
 
         mDialog = new Dialog(activity, R.style.myDialog);
 
@@ -48,14 +39,15 @@ public class LoadingAnimation {
         Window window = mDialog.getWindow();
         window.setContentView(R.layout.dialog_2_0_0_loading);
 
+        loadingView = mDialog.findViewById(R.id.loadingView);
+
         View vCatchClose = mDialog.findViewById(R.id.vCatchClose);
         vCatchClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyLog.Set("d" , this.getClass(), "no close");
+                MyLog.Set("d", this.getClass(), "no close");
             }
         });
-
 
     }
 
@@ -67,6 +59,14 @@ public class LoadingAnimation {
                 mDialog.show();
             }
 
+
+            alphaTo1 = loadingView.animate();
+            alphaTo1.setDuration(500)
+                    .alpha(1f)
+                    .setStartDelay(1000)
+                    .start();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,6 +75,12 @@ public class LoadingAnimation {
     public void dismiss() {
         try {
             if (mDialog != null && mDialog.isShowing()) {
+
+                if (alphaTo1 != null) {
+                    alphaTo1.cancel();
+                    alphaTo1 = null;
+                }
+
                 mDialog.dismiss();
             }
         } catch (Exception e) {

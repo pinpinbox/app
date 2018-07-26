@@ -487,7 +487,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
                         //lastRound 為上一輪最大值
                         for (int i = lastRound; i < totalRound; i++) {
-                            final String copyPath = DirClass.sdPath + myDir + DirClass.dirCopy + i + "copy.jpg";
+                            final String copyPath = DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy + i + "copy.jpg";
                             final String path = sendList.get(i).getPath();
                             final int degree = sendList.get(i).getDegree();
                             new Thread(new Runnable() {
@@ -560,7 +560,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
 
                         for (int i = totalRound; i < sendList.size(); i++) {
-                            final String copyPath = DirClass.sdPath + myDir + "copy/" + i + "copy.jpg";
+                            final String copyPath = DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy + i + "copy.jpg";
                             final String path = sendList.get(i).getPath();
                             final int degree = sendList.get(i).getDegree();
                             new Thread(new Runnable() {
@@ -847,8 +847,6 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             int count = itemList.size();
 
             for (int i = 0; i < count; i++) {
-
-//                final String copyPath = sdPath + myDir + "copy/"+ i + "copy.jpg";
 
                 MyLog.Set("d", getClass(), "上傳原始尺寸");
 

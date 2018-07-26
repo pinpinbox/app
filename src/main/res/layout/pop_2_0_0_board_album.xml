@@ -36,25 +36,18 @@
             android:visibility="gone" />
 
 
-        <com.pinpinbox.android.Views.AVLoading.AVLoadingIndicatorView
-            android:id="@+id/vRefreshTag"
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/loadingView"
+            style="@style/SpinKitView.DoubleBounce"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_centerInParent="true"
+            android:alpha="0"
             android:visibility="gone"
-            app:indicatorColor="@color/pinpinbox_2_0_0_third_main" />
+            app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
 
 
     </RelativeLayout>
-
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/rvTag"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="74dp"-->
-    <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-    <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-    <!--android:background="@drawable/border_2_0_0_white_radius"-->
-    <!--android:visibility="invisible" />-->
 
 
     <LinearLayout
