@@ -451,10 +451,10 @@
     <string name="pinpinbox_2_0_0_guide_page_4">Small Sponsorship</string>
     <string name="pinpinbox_2_0_0_guide_page_5">Each time a creator publishes their work, fans can sponsor in small amounts as appreciation to support and give values to the content.</string>
     <string name="pinpinbox_2_0_0_guide_change_photo_place">Click two photos to swap place.</string>
-    <string name="pinpinbox_2_0_0_guide_followmelist_empty">It is empty.</string>
-    <string name="pinpinbox_2_0_0_guide_likelist_empty">It is empty.</string>
-    <string name="pinpinbox_2_0_0_guide_sponsor_empty">It is empty.</string>
-    <string name="pinpinbox_2_0_0_guide_no_works">It is empty.</string>
+    <string name="pinpinbox_2_0_0_guide_followmelist_empty">It is empty</string>
+    <string name="pinpinbox_2_0_0_guide_likelist_empty">It is empty</string>
+    <string name="pinpinbox_2_0_0_guide_sponsor_empty">It is empty</string>
+    <string name="pinpinbox_2_0_0_guide_no_works">It is empty</string>
 
 
 
