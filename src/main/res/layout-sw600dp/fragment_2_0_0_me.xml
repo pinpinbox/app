@@ -73,7 +73,7 @@
         android:paddingLeft="@dimen/ppb200_padding_margin_second"
         android:paddingRight="@dimen/ppb200_padding_margin_second"
         android:text="@string/pinpinbox_2_0_0_button_change"
-        android:textColor="@color/white"
+        android:textColor="@color/pinpinbox_2_0_0_first_text"
         android:textSize="@dimen/ppb200_common_text_third" />
 
 
