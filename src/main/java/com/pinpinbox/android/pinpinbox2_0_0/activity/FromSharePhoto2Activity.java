@@ -52,6 +52,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetVideoImage;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.UserGradeChange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewVisibility;
@@ -97,7 +98,6 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     private List<Boolean> booleanList;
 
     private String id, token;
-    private String myDir;
     private String newAlbum_id;
     private String p58Message = "";
 
@@ -116,11 +116,13 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     private int lastRound;
     private int onceCount;
     private int intAlbumCount;
+    private int screenWidth;
+    private int screenHeight;
 
     private LinearLayout linLoad;
     private RelativeLayout rSelect;
     private ImageView backImg;
-    private TextView tvCount, tvCommonSize, tvOriginalSize, tvUpLoadCount;
+    private TextView tvCount, tvCommonSize, tvOriginalSize, tvUpLoadCount, tvFileName;
     private GridView gvPhoto;
 
     @TargetApi(19)
@@ -335,7 +337,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         totalRound = 0;
         lastRound = 0;
 
-        myDir = DirClass.getMyDir(id);
+        screenWidth = ScreenUtils.getScreenWidth();
+        screenHeight = ScreenUtils.getScreenHeight();
 
         linLoad = (LinearLayout) findViewById(R.id.linLoad);
         rSelect = (RelativeLayout) findViewById(R.id.rSelect);
@@ -346,6 +349,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         tvCommonSize = (TextView) findViewById(R.id.tvCommonSize);
         tvOriginalSize = (TextView) findViewById(R.id.tvOriginalSize);
         tvUpLoadCount = (TextView) findViewById(R.id.tvUpLoadCount);
+        tvFileName = (TextView)findViewById(R.id.tvFileName);
 
         gvPhoto = (GridView) findViewById(R.id.gvPhoto);
 
@@ -439,7 +443,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case 1:
-                            tvUpLoadCount.setText(upCount + "/" + sendList.size());
+                            setUploadCount();
                             break;
                     }
 
@@ -448,12 +452,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         }
         upLoadHandler = new Handler() {
 
-            private int screenWidth = ScreenUtils.getScreenWidth();
-            private int screenHeight = ScreenUtils.getScreenHeight();
-
             private void upLoadFinish() {
 
-                FileUtility.delAllFile(DirClass.sdPath + myDir + DirClass.dirCopy);
+                FileUtility.delAllFile(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy);
                 MyLog.Set("d", getClass(), "FileUtility.deleteFileFolder(new File(sdPath + myDir + copy))");
 
 
@@ -494,7 +495,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                                 @Override
                                 public void run() {
                                     Bitmap smallBitmap = null;
-                                    MyLog.Set("d",  mActivity.getClass(), "上傳一般尺寸");
+                                    MyLog.Set("d", mActivity.getClass(), "上傳一般尺寸");
                                     try {
 
                                         smallBitmap = BitmapUtility.getSmallBitmap(path, generalW, generalH, degree);
@@ -523,7 +524,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                                                     return;
                                                 }
                                                 if (booleanList.size() == totalRound) {
-                                                    MyLog.Set("d",  mActivity.getClass(), "傳送5張了 準備執行下一輪");
+                                                    MyLog.Set("d", mActivity.getClass(), "傳送5張了 準備執行下一輪");
 
                                                     lastRound = totalRound;
 
@@ -534,7 +535,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                                                         message.what = 1;
                                                         upLoadHandler.sendMessage(message);
                                                     } else if (total > onceCount) {
-                                                    /*再執行1輪*/
+                                                        /*再執行1輪*/
                                                         Message message = new Message();
                                                         message.what = 0;
                                                         upLoadHandler.sendMessage(message);
@@ -545,7 +546,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                                             } else if (p58Result == 0) {
                                                 DialogV2Custom.BuildError(mActivity, p58Message);
                                             } else {
-                                                DialogV2Custom.BuildUnKnow(mActivity,  mActivity.getClass().getSimpleName());
+                                                DialogV2Custom.BuildUnKnow(mActivity, mActivity.getClass().getSimpleName());
                                             }
                                         }
                                     });
@@ -609,6 +610,18 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             }
         };
 
+
+    }
+
+    private void setUploadCount(){
+
+        tvUpLoadCount.setText(upCount + "/" + sendList.size());
+
+    }
+
+    private void setFileName(String name){
+
+        tvFileName.setText(name);
 
     }
 
@@ -739,39 +752,44 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
                 if (newAlbum_id != null) {
 
-                    switch (uploadType) {
-                        case COMMON_SIZE_UPLOAD:
-                            total = sendList.size();
 
-                            upCount = 0;
+                    upLoadTask = new UpLoadTask(sendList);
+                    upLoadTask.execute();
 
-                            if (sendList.size() < 11) {
-
-                                MyLog.Set("e",  mActivity.getClass(), "一次上傳");
-
-                                Message msg = new Message();
-                                msg.what = 1;
-                                upLoadHandler.sendMessage(msg);
-                            } else {
-
-                                MyLog.Set("e",  mActivity.getClass(), "分批上傳");
-
-                                Message msg = new Message();
-                                msg.what = 0;
-                                upLoadHandler.sendMessage(msg);
-                            }
-                            break;
-
-                        case ORIGINAL_SIZE_UPLOAD:
-
-                            upLoadTask = new UpLoadTask(sendList);
-                            upLoadTask.execute();
-
-                            break;
-                    }
+//                    switch (uploadType) {
+//                        case COMMON_SIZE_UPLOAD:
+//                            total = sendList.size();
+//
+//                            upCount = 0;
+//
+//                            if (sendList.size() < 11) {
+//
+//                                MyLog.Set("e",  mActivity.getClass(), "一次上傳");
+//
+//                                Message msg = new Message();
+//                                msg.what = 1;
+//                                upLoadHandler.sendMessage(msg);
+//                            } else {
+//
+//                                MyLog.Set("e",  mActivity.getClass(), "分批上傳");
+//
+//                                Message msg = new Message();
+//                                msg.what = 0;
+//                                upLoadHandler.sendMessage(msg);
+//                            }
+//                            break;
+//
+//                        case ORIGINAL_SIZE_UPLOAD:
+//
+//                            upLoadTask = new UpLoadTask(sendList);
+//                            upLoadTask.execute();
+//
+//                            break;
+//                    }
 
 
                 }
+
             } else if (p54Result == 0) {
 
                 DialogV2Custom.BuildError(mActivity, p54Message);
@@ -827,7 +845,14 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
         private List<GridItem> itemList;
 
-        private int upCount;
+        private File fileMedia;
+
+        private String strUploadMessage = "";
+
+        private int upLoadResult = -1;
+        private int generalW = screenWidth / 2;
+        private int generalH = screenHeight / 2;
+
 
         private UpLoadTask(List<GridItem> itemList) {
 
@@ -848,15 +873,20 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
             for (int i = 0; i < count; i++) {
 
-                MyLog.Set("d", getClass(), "上傳原始尺寸");
-
                 String path = itemList.get(i).getPath();
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                File Fto;
+                /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-                Fto = new File(path);
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+                fileMedia = new File(path);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setFileName(fileMedia.getName());
+                    }
+                });
+
+                /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
                 Map<String, String> data = new HashMap<>();
                 data.put("id", id);
@@ -869,19 +899,43 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 sendData.put("album_id", newAlbum_id);
                 sendData.put("sign", sign);
 
-                try {
-                    String strJson = HttpUtility.uploadSubmit(false, ProtocolsClass.P58_InsertPhotoOfDiy, sendData, Fto);
+                String strJson = "";
 
-                    MyLog.Set("d", getClass(), "p58strJson => " + strJson);
+                try {
+                    if (FileUtility.isVideo_mp4(fileMedia.getName())) {
+
+                        strJson = HttpUtility.uploadSubmit(false, ProtocolsClass.P80_InsertVideoOfDiy, sendData, fileMedia);
+
+                    } else if (FileUtility.isImage(fileMedia.getName())) {
+                        if (uploadType == COMMON_SIZE_UPLOAD) {
+                            final String copyPath = DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy + i + "copy.jpg";
+                            final int degree = sendList.get(i).getDegree();
+                            Bitmap smallBitmap = null;
+                            MyLog.Set("d", mActivity.getClass(), "執行 => 上傳一般尺寸");
+                            try {
+                                smallBitmap = BitmapUtility.getSmallBitmap(path, generalW, generalH, degree);
+                                BitmapUtility.saveToLocal(smallBitmap, copyPath, 100);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            if (smallBitmap != null) {
+                                smallBitmap.recycle();
+                            }
+                            fileMedia = new File(copyPath);
+                        }
+                        strJson = HttpUtility.uploadSubmit(false, ProtocolsClass.P58_InsertPhotoOfDiy, sendData, fileMedia);
+                    }
+
+
+                    MyLog.Set("d", getClass(), "upload strJson => " + strJson);
 
                     JSONObject jsonObject = new JSONObject(strJson);
-                    p58Result = JsonUtility.GetInt(jsonObject, Key.result);
-                    if (p58Result == 1) {
+                    upLoadResult = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                    if (upLoadResult == 1) {
 
                         MyLog.Set("d", getClass(), "上傳成功");
 
-
-                        String jdata = jsonObject.getString(Key.data);
+                        String jdata = jsonObject.getString(ProtocolKey.data);
 
                         JSONObject j = new JSONObject(jdata);
 
@@ -901,8 +955,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                tvUpLoadCount.setText(upCount + "/" + sendList.size());
-
+                                setUploadCount();
                             }
                         });
 
@@ -910,9 +963,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                             break;
                         }
 
-                    } else if (p58Result == 0) {
+                    } else if (upLoadResult == 0) {
 
-                        p58Message = JsonUtility.GetString(jsonObject, Key.message);
+                        strUploadMessage = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -930,9 +983,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             super.onPostExecute(result);
 
 
-            if (p58Result == 1) {
+            if (upLoadResult == 1) {
 
-                FileUtility.delAllFile(DirClass.sdPath + myDir + "copy/");
+                FileUtility.delAllFile(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy);
                 MyLog.Set("d", getClass(), "FileUtility.deleteFileFolder(new File(sdPath + myDir + copy))");
 
                 Bundle bundle = new Bundle();
@@ -946,8 +999,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 finish();
 
 
-            } else if (p58Result == 0) {
-                DialogV2Custom.BuildError(mActivity, p58Message);
+            } else if (upLoadResult == 0) {
+                DialogV2Custom.BuildError(mActivity, strUploadMessage);
             } else {
                 DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
             }
@@ -958,6 +1011,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     }
 
     private class PhotoAdapter extends BaseAdapter {
+
+        private SetVideoImage setVideoImage;
 
         @Override
         public int getCount() {
@@ -1000,20 +1055,51 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 mViewHolder.photoImg.setAlpha(1.0f);
             }
 
+
             String path = photoList.get(position).getPath();
-            if (path != null && !path.equals("")) {
-                File file = new File(path);
-                Picasso.with(getApplicationContext())
-                        .load(file)
-                        .config(Bitmap.Config.RGB_565)
-                        .fit()
-                        .error(R.drawable.bg_2_0_0_no_image)
-                        .tag(getApplicationContext())
-                        .centerCrop()
-                        .into(mViewHolder.photoImg);
-            } else {
-                mViewHolder.photoImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+
+
+            MyLog.Set("e", FromService2Activity.class, "pathpathpath => " + path);
+
+
+            File file = new File(path);
+
+            if (FileUtility.isImage(file.getName())) {
+
+                if (path != null && !path.equals("")) {
+                    Picasso.with(getApplicationContext())
+                            .load(file)
+                            .config(Bitmap.Config.RGB_565)
+                            .fit()
+                            .error(R.drawable.bg_2_0_0_no_image)
+                            .tag(getApplicationContext())
+                            .centerCrop()
+                            .into(mViewHolder.photoImg);
+                } else {
+                    mViewHolder.photoImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+                }
+
             }
+
+
+            if (FileUtility.isVideo_mp4(file.getName())) {
+
+                if (SetVideoImage.getVideoThumb(path) == null) {
+
+                    if (setVideoImage == null) {
+                        setVideoImage = new SetVideoImage(mActivity);
+                    }
+
+                    setVideoImage.start(photoList.get(position).getMedia_id(), path, mViewHolder.photoImg);
+
+                } else {
+
+                    mViewHolder.photoImg.setImageBitmap(SetVideoImage.getVideoThumb(path));
+
+                }
+
+            }
+
 
             return convertView;
         }
@@ -1158,7 +1244,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     @Override
     protected void onDestroy() {
 
-        FileUtility.delAllFile(DirClass.sdPath + myDir + DirClass.dirCopy);
+        FileUtility.delAllFile(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy);
 
         if (fastCreateTask != null && !fastCreateTask.isCancelled()) {
             fastCreateTask.cancel(true);
@@ -1169,6 +1255,13 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             upLoadTask.cancel(true);
         }
         upLoadTask = null;
+
+        if(SetVideoImage.lruCache!=null){
+            SetVideoImage.lruCache.evictAll();
+            SetVideoImage.lruCache= null;
+        }
+
+
 
         cleanPicasso();
 

@@ -482,7 +482,7 @@
 
     <string name="pinpinbox_2_0_0_other_message_confirm_buy">確定購買</string>
     <string name="pinpinbox_2_0_0_other_message_confirm_sponsor">確定贊助</string>
-    <string name="pinpinbox_2_0_0_other_message_photo_uploading">相片上傳中</string>
+    <string name="pinpinbox_2_0_0_other_message_photo_uploading">上傳中</string>
     <string name="pinpinbox_2_0_0_other_text_current_point">現有P點:</string>
     <string name="pinpinbox_2_0_0_other_text_people_browsing">瀏覽</string>
     <string name="pinpinbox_2_0_0_other_text_people_follow">關注</string>

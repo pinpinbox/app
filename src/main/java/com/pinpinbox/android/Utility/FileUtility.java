@@ -279,7 +279,7 @@ public class FileUtility {
         File[] files = f.listFiles();
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
-            if (getAllImage(file.getPath()))
+            if (isImage(file.getPath()))
                 it.add(file.getPath());
         }
 
@@ -292,20 +292,20 @@ public class FileUtility {
         File[] files = f.listFiles();
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
-            if (getAllImage(file.getPath()))
+            if (isImage(file.getPath()))
                 it.add(file.getPath());
         }
 
         return it;
     }
 
-    public static List<String> getMp4(String path_dir) {
+    public static List<String> getMp4List(String path_dir) {
         List<String> it = new ArrayList<String>();
         File f = new File(path_dir);
         File[] files = f.listFiles();
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
-            if (getAllMp4(file.getPath()))
+            if (isVideo_mp4(file.getPath()))
                 it.add(file.getPath());
         }
 
@@ -466,7 +466,7 @@ public class FileUtility {
     }
 
     //判斷圖片文件屬性
-    public static boolean getAllImage(String fName) {
+    public static boolean isImage(String fName) {
         boolean re;
         String end = fName
                 .substring(fName.lastIndexOf(".") + 1, fName.length())
@@ -495,7 +495,7 @@ public class FileUtility {
         return re;
     }
 
-    public static boolean getAllMp4(String fName) {
+    public static boolean isVideo_mp4(String fName) {
         boolean re;
         String end = fName
                 .substring(fName.lastIndexOf(".") + 1, fName.length())

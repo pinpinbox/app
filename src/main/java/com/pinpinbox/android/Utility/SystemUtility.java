@@ -173,18 +173,43 @@ public class SystemUtility {
         List<GridItem> gridItemList = new ArrayList<>();
 
         Intent intent = activity.getIntent();//如果从外部进入APP，则实现以下方法
+
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
 
             Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if (imageUri != null) {
-//处理单张图片
 
-                MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => singular number" + imageUri.getPath());
+            if (imageUri != null) {
+
+                //处理单张图片
+//                MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => singular number => " + imageUri.getPath());
+
+
+                GridItem gridItem = new GridItem();
+
+                if (imageUri.getPath().contains("external/video/media")) {
+
+                    String[] proj = {
+                            MediaStore.Video.Media._ID,
+                            MediaStore.Video.Media.DATA,
+                    };
+                    Cursor curVideo = activity.managedQuery(imageUri, proj, null, null, null);
+                    int actual_video_column_index = curVideo.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+                    curVideo.moveToFirst();
+                    String videoPath = curVideo.getString(actual_video_column_index);
+                    int videoId = curVideo.getInt(curVideo.getColumnIndexOrThrow(proj[0]));
+                    gridItem.setPath(videoPath);
+                    gridItem.setMedia_id(videoId);
+
+                    gridItemList.add(gridItem);
+
+                    MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => videoPath => " + videoPath);
+                    MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => videoId => " + videoId);
+                }
+
+
 
 
                 if (imageUri.getPath().contains("external/images/media")) {
-
-                    GridItem gridItem = new GridItem();
 
                     String[] proj = {MediaStore.Images.Media.DATA, MediaStore.Images.Media.ORIENTATION};
                     Cursor actualimagecursor = activity.managedQuery(imageUri, proj, null, null, null);
@@ -206,29 +231,40 @@ public class SystemUtility {
         } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
 
             List<Uri> imageUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+
             if (imageUris != null) {
-//处理多张图片
+
+                //处理多张图片
+
                 for (int i = 0; i < imageUris.size(); i++) {
 
+//                    MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => plural number => " + imageUris.get(i).getPath());
+                    GridItem gridItem = new GridItem();
 
-                    MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => plural number" + imageUris.get(i).getPath());
 
+                    if (imageUris.get(i).getPath().contains("external/video/media")) {
 
-//                    if (imageUris.get(i).getPath().contains("external/video/media")) {
-//
-//                        String[] proj = {MediaStore.Video.Media.DATA};
-//                        Cursor curVideo = activity.managedQuery(imageUris.get(i), proj, null, null, null);
-//                        int actual_video_column_index = curVideo.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-//                        curVideo.moveToFirst();
-//                        String videoPath = curVideo.getString(actual_video_column_index);
-//                        picPath.add(videoPath);
-//                    }
+                        String[] proj = {
+                                MediaStore.Video.Media._ID,
+                                MediaStore.Video.Media.DATA,
+                        };
+                        Cursor curVideo = activity.managedQuery(imageUris.get(i), proj, null, null, null);
+                        int actual_video_column_index = curVideo.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+                        curVideo.moveToFirst();
+                        String videoPath = curVideo.getString(actual_video_column_index);
+                        int videoId = curVideo.getInt(curVideo.getColumnIndexOrThrow(proj[0]));
+                        gridItem.setPath(videoPath);
+                        gridItem.setMedia_id(videoId);
+
+                        MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => videoPath => " + videoPath);
+                        MyLog.Set("d", SystemUtility.class, "getFromShareListPicPath => videoId => " + videoId);
+
+                        gridItemList.add(gridItem);
+
+                    }
 
 
                     if (imageUris.get(i).getPath().contains("external/images/media")) {
-
-                        GridItem gridItem = new GridItem();
-
 
                         String[] proj = {MediaStore.Images.Media.DATA, MediaStore.Images.Media.ORIENTATION};
                         Cursor actualimagecursor = activity.managedQuery(imageUris.get(i), proj, null, null, null);
@@ -245,9 +281,6 @@ public class SystemUtility {
 
                         gridItemList.add(gridItem);
 
-
-//                        String img_path = actualimagecursor.getString(actual_image_column_index);
-//                        picPath.add(img_path);
                     }
 
                 }

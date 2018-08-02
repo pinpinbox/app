@@ -27,25 +27,37 @@
             app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+            android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
-            android:letterSpacing="0.1"
-            android:text="@string/pinpinbox_2_0_0_other_message_photo_uploading"
-            android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/tvFileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:letterSpacing="0.1"
+                android:singleLine="true"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                android:text="@string/pinpinbox_2_0_0_other_message_photo_uploading"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/tvUpLoadCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_third"
             android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_other_text_count_uploading"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
 
     </LinearLayout>
@@ -154,20 +166,6 @@
 
 
     </RelativeLayout>
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pinpinbox_2_0_0_other_text_go_to_editor_upload_video"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:layout_below="@+id/rSelect"
-        android:layout_alignLeft="@+id/rSelect"
-        android:layout_alignRight="@+id/rSelect"
-        android:letterSpacing="0.1"
-        android:layout_marginTop="@dimen/ppb200_padding_margin_second"/>
 
 
 </RelativeLayout>
