@@ -327,7 +327,7 @@
     <string name="pinpinbox_2_0_0_itemtype_plural_audio">多首播放</string>
     <string name="pinpinbox_2_0_0_itemtype_singular_audio">單首播放</string>
     <string name="pinpinbox_2_0_0_itemtype_common_upload">一般上傳</string>
-    <string name="pinpinbox_2_0_0_itemtype_original_upload">原始尺寸上傳</string>
+    <string name="pinpinbox_2_0_0_itemtype_original_upload">原始尺寸</string>
     <string name="pinpinbox_2_0_0_itemtype_first_pagin">主類別</string>
     <string name="pinpinbox_2_0_0_itemtype_second_pagin">子類別</string>
     <string name="pinpinbox_2_0_0_itemtype_album_name">名稱</string>

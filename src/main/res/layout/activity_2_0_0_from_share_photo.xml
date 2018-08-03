@@ -37,11 +37,11 @@
                 android:id="@+id/tvFileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
                 android:ellipsize="end"
                 android:letterSpacing="0.1"
                 android:singleLine="true"
-                android:layout_marginRight="@dimen/ppb200_padding_margin_second"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:text="@string/pinpinbox_2_0_0_other_message_photo_uploading"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="12sp" />
@@ -79,7 +79,7 @@
             android:horizontalSpacing="6dp"
             android:listSelector="@android:color/transparent"
             android:numColumns="3"
-            android:paddingBottom="96dp"
+            android:paddingBottom="48dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="36dp"
@@ -128,41 +128,41 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/border_2_0_0_bar_bottom_white_alpha_radius"
-            android:orientation="vertical"
             android:paddingBottom="@dimen/ppb200_padding_margin_second">
 
             <TextView
-                android:id="@+id/tvCommonSize"
+                android:id="@+id/tvStartUpLoad"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
-                android:layout_weight="1"
                 android:background="@drawable/click_2_0_0_list_item"
                 android:gravity="center"
                 android:letterSpacing="0.1"
-                android:text="@string/pinpinbox_2_0_0_itemtype_common_upload"
+                android:text="@string/pinpinbox_2_0_0_button_start_upload"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_second" />
 
 
             <TextView
                 android:id="@+id/tvOriginalSize"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:layout_weight="1"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/click_2_0_0_list_item"
+                android:paddingRight="@dimen/ppb200_padding_margin_second"
+                android:paddingLeft="@dimen/ppb200_padding_margin_second"
                 android:gravity="center"
                 android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_itemtype_original_upload"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_second" />
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </RelativeLayout>

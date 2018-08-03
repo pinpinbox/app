@@ -9,6 +9,14 @@
         android:layout_height="82dp"
         android:scaleType="centerCrop" />
 
+    <ImageView
+        android:id="@+id/videoImg"
+        android:visibility="gone"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ic200_video_light"
+        android:layout_centerInParent="true"/>
+
     <View
         android:id="@+id/vSelect"
         android:layout_width="36dp"

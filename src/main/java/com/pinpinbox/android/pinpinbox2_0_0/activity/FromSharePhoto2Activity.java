@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
@@ -122,7 +124,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     private LinearLayout linLoad;
     private RelativeLayout rSelect;
     private ImageView backImg;
-    private TextView tvCount, tvCommonSize, tvOriginalSize, tvUpLoadCount, tvFileName;
+    private TextView tvCount, tvStartUpLoad, tvOriginalSize, tvUpLoadCount, tvFileName;
     private GridView gvPhoto;
 
     @TargetApi(19)
@@ -337,6 +339,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         totalRound = 0;
         lastRound = 0;
 
+        uploadType = COMMON_SIZE_UPLOAD;
+
         screenWidth = ScreenUtils.getScreenWidth();
         screenHeight = ScreenUtils.getScreenHeight();
 
@@ -346,16 +350,18 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         backImg = (ImageView) findViewById(R.id.backImg);
 
         tvCount = (TextView) findViewById(R.id.tvCount);
-        tvCommonSize = (TextView) findViewById(R.id.tvCommonSize);
+        tvStartUpLoad = (TextView) findViewById(R.id.tvStartUpLoad);
         tvOriginalSize = (TextView) findViewById(R.id.tvOriginalSize);
         tvUpLoadCount = (TextView) findViewById(R.id.tvUpLoadCount);
-        tvFileName = (TextView)findViewById(R.id.tvFileName);
+        tvFileName = (TextView) findViewById(R.id.tvFileName);
 
         gvPhoto = (GridView) findViewById(R.id.gvPhoto);
 
         backImg.setOnClickListener(this);
-        tvCommonSize.setOnClickListener(this);
+        tvStartUpLoad.setOnClickListener(this);
         tvOriginalSize.setOnClickListener(this);
+
+
 
 
         intMaxCount = StringIntMethod.StringToInt(
@@ -613,13 +619,13 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
     }
 
-    private void setUploadCount(){
+    private void setUploadCount() {
 
         tvUpLoadCount.setText(upCount + "/" + sendList.size());
 
     }
 
-    private void setFileName(String name){
+    private void setFileName(String name) {
 
         tvFileName.setText(name);
 
@@ -1037,19 +1043,21 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 mViewHolder = new ViewHolder();
                 convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_photo, parent, false);
                 mViewHolder.photoImg = (ImageView) convertView.findViewById(R.id.image);
+                mViewHolder.videoImg = (ImageView) convertView.findViewById(R.id.videoImg);
                 mViewHolder.vSelect = convertView.findViewById(R.id.vSelect);
                 convertView.setTag(mViewHolder);
 
             } else {
                 mViewHolder = (ViewHolder) convertView.getTag();
                 mViewHolder.photoImg.setImageBitmap(null);
+                mViewHolder.videoImg.setImageResource(0);
             }
 
 
             boolean isSelect = photoList.get(position).isSelect();
             if (isSelect) {
                 mViewHolder.vSelect.setBackgroundResource(R.drawable.icon_select_pink500_120x120);
-                mViewHolder.photoImg.setAlpha(0.4f);
+                mViewHolder.photoImg.setAlpha(0.6f);
             } else {
                 mViewHolder.vSelect.setBackgroundResource(R.drawable.icon_unselect_teal500_120x120);
                 mViewHolder.photoImg.setAlpha(1.0f);
@@ -1065,6 +1073,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             File file = new File(path);
 
             if (FileUtility.isImage(file.getName())) {
+
+                mViewHolder.videoImg.setVisibility(View.GONE);
 
                 if (path != null && !path.equals("")) {
                     Picasso.with(getApplicationContext())
@@ -1083,6 +1093,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
 
             if (FileUtility.isVideo_mp4(file.getName())) {
+
+                mViewHolder.videoImg.setVisibility(View.VISIBLE);
 
                 if (SetVideoImage.getVideoThumb(path) == null) {
 
@@ -1105,7 +1117,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         }
 
         public class ViewHolder {
-            public ImageView photoImg;
+            public ImageView photoImg, videoImg;
             public View vSelect;
 
         }
@@ -1122,7 +1134,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 finish();
                 break;
 
-            case R.id.tvCommonSize:
+            case R.id.tvStartUpLoad:
 
                 setSendPathList();
 
@@ -1137,14 +1149,23 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
             case R.id.tvOriginalSize:
 
-                setSendPathList();
+                if (uploadType == COMMON_SIZE_UPLOAD) {
+                    uploadType = ORIGINAL_SIZE_UPLOAD;
+                    tvOriginalSize.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+                }else {
+                    uploadType = COMMON_SIZE_UPLOAD;
+                    tvOriginalSize.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                }
 
-                ViewVisibility.setGone(rSelect);
-                ViewVisibility.setVisible(linLoad);
 
-                uploadType = ORIGINAL_SIZE_UPLOAD;
-
-                doFastCreate();
+//                setSendPathList();
+//
+//                ViewVisibility.setGone(rSelect);
+//                ViewVisibility.setVisible(linLoad);
+//
+//                uploadType = ORIGINAL_SIZE_UPLOAD;
+//
+//                doFastCreate();
 
 
                 break;
@@ -1256,11 +1277,10 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         }
         upLoadTask = null;
 
-        if(SetVideoImage.lruCache!=null){
+        if (SetVideoImage.lruCache != null) {
             SetVideoImage.lruCache.evictAll();
-            SetVideoImage.lruCache= null;
+            SetVideoImage.lruCache = null;
         }
-
 
 
         cleanPicasso();
