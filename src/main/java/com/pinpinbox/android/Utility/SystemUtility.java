@@ -17,6 +17,7 @@ import android.provider.Settings;
 
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -191,14 +192,27 @@ public class SystemUtility {
                     String[] proj = {
                             MediaStore.Video.Media._ID,
                             MediaStore.Video.Media.DATA,
+                            MediaStore.Video.Media.DURATION
                     };
                     Cursor curVideo = activity.managedQuery(imageUri, proj, null, null, null);
                     int actual_video_column_index = curVideo.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
                     curVideo.moveToFirst();
                     String videoPath = curVideo.getString(actual_video_column_index);
                     int videoId = curVideo.getInt(curVideo.getColumnIndexOrThrow(proj[0]));
+
+                    Long videoDuration = curVideo.getLong(curVideo.getColumnIndex(proj[2]));
+
+                    if(videoDuration>31000){
+
+                        PinPinToast.ShowToast(activity, "影像大小不可超過30MB");
+
+                      return gridItemList;
+                    }
+
+
                     gridItem.setPath(videoPath);
                     gridItem.setMedia_id(videoId);
+
 
                     gridItemList.add(gridItem);
 
@@ -247,12 +261,22 @@ public class SystemUtility {
                         String[] proj = {
                                 MediaStore.Video.Media._ID,
                                 MediaStore.Video.Media.DATA,
+                                MediaStore.Video.Media.DURATION
                         };
                         Cursor curVideo = activity.managedQuery(imageUris.get(i), proj, null, null, null);
                         int actual_video_column_index = curVideo.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
                         curVideo.moveToFirst();
                         String videoPath = curVideo.getString(actual_video_column_index);
                         int videoId = curVideo.getInt(curVideo.getColumnIndexOrThrow(proj[0]));
+
+                        Long videoDuration = curVideo.getLong(curVideo.getColumnIndex(proj[2]));
+
+                        if(videoDuration>31000){
+                            PinPinToast.ShowToast(activity, "影像大小不可超過30MB");
+                           continue;
+                        }
+
+
                         gridItem.setPath(videoPath);
                         gridItem.setMedia_id(videoId);
 

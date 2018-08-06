@@ -122,7 +122,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     private int screenHeight;
 
     private LinearLayout linLoad;
-    private RelativeLayout rSelect;
+    private RelativeLayout rSelect, rBottom;
     private ImageView backImg;
     private TextView tvCount, tvStartUpLoad, tvOriginalSize, tvUpLoadCount, tvFileName;
     private GridView gvPhoto;
@@ -327,6 +327,12 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             e.printStackTrace();
         }
 
+        if(photoList!=null && photoList.size()>0){
+            rBottom.setVisibility(View.VISIBLE);
+        }else {
+            rBottom.setVisibility(View.GONE);
+        }
+
     }
 
     private void init() {
@@ -346,6 +352,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
         linLoad = (LinearLayout) findViewById(R.id.linLoad);
         rSelect = (RelativeLayout) findViewById(R.id.rSelect);
+        rBottom = (RelativeLayout)findViewById(R.id.rBottom);
 
         backImg = (ImageView) findViewById(R.id.backImg);
 
@@ -402,6 +409,12 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 }
 
                 adapter.notifyDataSetChanged();
+
+                if(selectCount>0){
+                    rBottom.setVisibility(View.VISIBLE);
+                }else {
+                    rBottom.setVisibility(View.GONE);
+                }
 
                 setCount();
 
@@ -469,6 +482,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 bundle.putString("identity", "admin");
                 bundle.putInt("create_mode", 0);
                 bundle.putBoolean(Key.isNewCreate, true);
+
+                bundle.putBoolean(Key.fromlocal, true);
+
                 Intent intent = new Intent(mActivity, Creation2Activity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -999,6 +1015,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 bundle.putString("identity", "admin");
                 bundle.putInt("create_mode", 0);
                 bundle.putBoolean(Key.isNewCreate, true);
+
+                bundle.putBoolean(Key.fromlocal, true);
+
                 Intent intent = new Intent(mActivity, Creation2Activity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);

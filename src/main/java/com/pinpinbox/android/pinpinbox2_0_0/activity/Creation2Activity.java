@@ -386,6 +386,13 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             MyLog.Set("d", getClass(), "bundle => isContibute => " + isContribute);
             MyLog.Set("d", getClass(), "bundle => strPrefixText => " + strPrefixText);
 
+            boolean isFromlocal = bundle.getBoolean(Key.fromlocal, false);
+
+            if(isFromlocal){
+                isModify = true;
+            }
+
+
             //測試用
 //            createMode = CreationTemplate;
 //            album_id = "3047";

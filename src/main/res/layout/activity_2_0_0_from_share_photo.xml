@@ -129,9 +129,11 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:background="@drawable/border_2_0_0_bar_bottom_white_alpha_radius"
             android:paddingBottom="@dimen/ppb200_padding_margin_second">
 
@@ -152,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/click_2_0_0_list_item"
+                android:background="@drawable/click_2_0_0_default"
                 android:paddingRight="@dimen/ppb200_padding_margin_second"
                 android:paddingLeft="@dimen/ppb200_padding_margin_second"
                 android:gravity="center"

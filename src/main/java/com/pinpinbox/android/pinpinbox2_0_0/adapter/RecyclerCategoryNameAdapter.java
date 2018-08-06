@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
@@ -119,7 +119,8 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
 
         private TextView tvName;
 
-        private RelativeLayout rBackground;
+        private LinearLayout linBackground;
+
         private RoundCornerImageView img;
 
 
@@ -129,12 +130,12 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
 
             tvName = (TextView) itemView.findViewById(R.id.tvName);
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
+            linBackground = (LinearLayout) itemView.findViewById(R.id.linBackground);
 
             img = (RoundCornerImageView) itemView.findViewById(R.id.img);
 
-            rBackground.setOnClickListener(this);
-            rBackground.setOnLongClickListener(this);
+            linBackground.setOnClickListener(this);
+            linBackground.setOnLongClickListener(this);
 
         }
 

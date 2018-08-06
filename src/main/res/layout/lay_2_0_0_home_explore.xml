@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tvExplore"
@@ -18,11 +20,10 @@
 
         <View
             style="@style/ppb200_divider_list"
-            android:layout_toRightOf="@+id/tvExplore"
-            android:layout_toEndOf="@+id/tvExplore"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"/>
-
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_toEndOf="@+id/tvExplore"
+            android:layout_toRightOf="@+id/tvExplore" />
 
 
     </RelativeLayout>
@@ -31,8 +32,9 @@
         android:id="@+id/rvCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
+        android:clipToPadding="false"
+        android:clipChildren="false"
         android:paddingLeft="8dp"
-        android:clipToPadding="false"/>
+        android:scrollbars="none" />
 
 </LinearLayout>

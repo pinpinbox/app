@@ -1,62 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
-        android:id="@+id/rBackground"
+    <!--如沒有設定bg 需添加-->
+    <!--android:outlineProvider="bounds"-->
+    <LinearLayout
+        android:id="@+id/linBackground"
         android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+        android:layout_height="128dp"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
         android:layout_marginRight="@dimen/ppb200_padding_margin_second"
-        android:layout_marginBottom="@dimen/ppb200_padding_margin_first">
+        android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+        android:background="@drawable/border_2_0_0_white_radius"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:translationZ="@dimen/ppb200_translationZ_user"
+        tools:ignore="UselessParent">
 
 
         <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
             android:id="@+id/img"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:scaleType="centerCrop"
             app:siBorderAlpha="0"
             app:siRadius="@dimen/ppb200_staggeredgrid_cover_radius" />
 
 
-        <View
-            android:id="@+id/vGradient"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gradient_black_updownalpha" />
-
-
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="4dp"
-            android:layout_marginRight="8dp"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
+            android:background="@drawable/border_2_0_0_category_list_item_bottom"
+            android:layout_marginTop="-6dp"
             android:letterSpacing="0.1"
             android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/ppb200_common_text_first"
-            android:textStyle="bold"
-            fontPath="fonts/OpenSans-Bold.ttf"/>
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_second"
+            android:textStyle="bold" />
 
 
-    </RelativeLayout>
-
-    <!--<TextView-->
-    <!--android:id="@+id/tvName"-->
-    <!--style="@style/ppb200_Button_grey_common_radius"-->
-    <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_first"-->
-    <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-    <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first"-->
-    <!--android:background="@null" />-->
+    </LinearLayout>
 
 
 </RelativeLayout>
