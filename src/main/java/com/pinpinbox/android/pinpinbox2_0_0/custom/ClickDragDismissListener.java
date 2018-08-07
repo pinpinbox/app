@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 
 /**
  * Created by vmage on 2018/3/6.
@@ -34,11 +33,6 @@ public class ClickDragDismissListener implements View.OnTouchListener {
     public ClickDragDismissListener(View vDrag, ActionUpListener actionUpListener) {
         this.vDrag = vDrag;
         this.actionUpListener = actionUpListener;
-
-//        if (vDrag.getId() == R.id.linBackground) {
-//            vDrag.setOnTouchListener(this);
-//        }
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -49,7 +43,7 @@ public class ClickDragDismissListener implements View.OnTouchListener {
 
                 downY = event.getRawY();
 
-                MyLog.Set("e", PopupCustom.class, "downY => " + downY);
+                MyLog.Set("e", ClickDragDismissListener.class, "downY => " + downY);
 
                 if (v.getId() != R.id.linBackground) {
                     v.setPressed(true);
@@ -61,7 +55,7 @@ public class ClickDragDismissListener implements View.OnTouchListener {
 
                 moveY = event.getRawY();//手指所在位置
 
-                MyLog.Set("e", PopupCustom.class, "moveY => " + moveY);
+                MyLog.Set("e", ClickDragDismissListener.class, "moveY => " + moveY);
 
 
                 //向下超過50 or 向上超過50 取消焦點

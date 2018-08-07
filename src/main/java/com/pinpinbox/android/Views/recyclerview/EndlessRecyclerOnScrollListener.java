@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.AnimationSuspensionTouch;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 /**
@@ -234,7 +235,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
         if (vScaleTouchView != null && vScaleTouchView.getScaleX() < 1f && !isTouch) {
             isTouch = true;
-            vScaleTouchView.animate().translationZ(vScaleTouchView.getContext().getResources().getDimension(R.dimen.ppb200_translationZ_user))
+            vScaleTouchView.animate().translationZ(vScaleTouchView.getContext().getResources().getDimension(R.dimen.ppb200_translationZ_default))
                     .scaleX(1f)
                     .scaleY(1f)
                     .setListener(null)
@@ -381,6 +382,13 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     }
 
 
+    private View isOnTouchView;
+
+    public void setIsTouchingView(View isOnTouchView){
+        this.isOnTouchView = isOnTouchView;
+    }
+
+
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
@@ -400,6 +408,8 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
         }
 
+
+        AnimationSuspensionTouch.reset(isOnTouchView);
 
     }
 

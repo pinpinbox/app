@@ -35,6 +35,7 @@ import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.AnimationSuspensionTouch;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
@@ -723,6 +724,13 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         return false;
     }
 
+
+    private View isOnTouchView;
+
+    public void setIsTouchingView(View isOnTouchView){
+        this.isOnTouchView = isOnTouchView;
+    }
+
     /**
      * 主要判断是否应该拦截子View的事件<br>
      * 如果拦截，则交给自己的OnTouchEvent处理<br>
@@ -787,6 +795,9 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                         //my custom 20171129
                         if (isPullEnable) {
                             mIsBeingDragged = true;// 正在下拉
+
+                            AnimationSuspensionTouch.reset(isOnTouchView);
+
                         } else {
                             mIsBeingDragged = false;
                         }

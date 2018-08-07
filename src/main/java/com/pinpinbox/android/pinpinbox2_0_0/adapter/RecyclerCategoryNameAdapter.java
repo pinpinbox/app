@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.SampleTest.ScaleTouhListener;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
@@ -24,9 +26,10 @@ import java.util.List;
 public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
 
     public interface OnRecyclerViewListener {
-        void onItemClick(int position, View v);
 
-        boolean onItemLongClick(int position, View v);
+        void onItemClick(int position, View view);
+
+        void isTouching(View view);
     }
 
     private RecyclerCategoryNameAdapter.OnRecyclerViewListener onRecyclerViewListener;
@@ -72,9 +75,8 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
         holder.tvName.setText(itemAlbumCategoryList.get(position).getName());
 
 
-
         String image = itemAlbumCategoryList.get(position).getImage_360x360();
-        if(image!=null && !image.equals("null") && !image.equals("")){
+        if (image != null && !image.equals("null") && !image.equals("")) {
 
             Picasso.with(mActivity.getApplicationContext())
                     .load(image)
@@ -83,7 +85,7 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
                     .tag(mActivity.getApplicationContext())
                     .into(holder.img);
 
-        }else {
+        } else {
 
             holder.img.setImageResource(R.drawable.bg_2_0_0_no_image);
 
@@ -111,11 +113,10 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
     }
 
 
-    private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-            View.OnLongClickListener {
+
+    private class ViewHolder extends RecyclerView.ViewHolder implements ScaleTouhListener.TouchCallBack {
 
         int position;
-
 
         private TextView tvName;
 
@@ -124,9 +125,9 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
         private RoundCornerImageView img;
 
 
+        @SuppressLint("ClickableViewAccessibility")
         public ViewHolder(View itemView) {
             super(itemView);
-
 
             tvName = (TextView) itemView.findViewById(R.id.tvName);
 
@@ -134,27 +135,28 @@ public class RecyclerCategoryNameAdapter extends RecyclerView.Adapter {
 
             img = (RoundCornerImageView) itemView.findViewById(R.id.img);
 
-            linBackground.setOnClickListener(this);
-            linBackground.setOnLongClickListener(this);
+            linBackground.setOnTouchListener(new ScaleTouhListener(this));
+
 
         }
 
 
         @Override
-        public void onClick(View v) {
+        public void Touch(View v) {
+
+            if (null != onRecyclerViewListener) {
+                onRecyclerViewListener.isTouching(v);
+            }
+
+        }
+
+        @Override
+        public void Up(View v) {
             if (null != onRecyclerViewListener) {
                 onRecyclerViewListener.onItemClick(position, v);
             }
         }
-
-        @Override
-        public boolean onLongClick(View v) {
-            if (null != onRecyclerViewListener) {
-                return onRecyclerViewListener.onItemLongClick(position, v);
-            }
-            return false;
-        }
-
     }
+
 
 }

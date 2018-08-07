@@ -275,12 +275,12 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
         holder.voteImg.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
             @Override
-            public void Touch() {
+            public void Touch(View v) {
                 mOnScrollListener.setvScaleTouchView(holder.voteImg);
             }
 
             @Override
-            public void Up() {
+            public void Up(View v) {
 
                 if(ClickUtils.ButtonContinuousClick()){
                     return;

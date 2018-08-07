@@ -58,6 +58,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.AnimationSuspensionTouch;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
@@ -418,6 +419,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void selectShareMode() {
 
         popSelectShare = new PopupCustom(mActivity);
@@ -559,12 +561,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             popupList.setDissmissWorks(new PopupCustom.DissmissWorks() {
                 @Override
                 public void excute() {
-                    linAuthor.animate().translationZ(getResources().getDimension(R.dimen.ppb200_translationZ_user))
-                            .scaleX(1f)
-                            .scaleY(1f)
-                            .setListener(null)
-                            .setDuration(70)
-                            .start();
+
+                    AnimationSuspensionTouch.reset(linAuthor);
 
                 }
             });
@@ -579,12 +577,8 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
     private void showReport() {
 
-        linAuthor.animate().translationZ(0f)
-                .scaleX(0.9f)
-                .scaleY(0.9f)
-                .setListener(null)
-                .setDuration(70)
-                .start();
+
+        AnimationSuspensionTouch.pressed(linAuthor);
 
         popupList.show((RelativeLayout) findViewById(R.id.rBackground));
 
@@ -919,6 +913,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         deleteLikeTask.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetAlbumInfoTask extends AsyncTask<Void, Void, Object> {
 
         private int p08Result = -1;
@@ -1091,7 +1086,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                             e.printStackTrace();
                         }
 
-                        /**2016.09.14新增*/
+                        /*2016.09.14新增*/
                         strJsonPhoto = object.getString("photo");
 
                         /*event*/
@@ -1388,12 +1383,12 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
 
                 linAuthor.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
                     @Override
-                    public void Touch() {
+                    public void Touch(View v) {
 
                     }
 
                     @Override
-                    public void Up() {
+                    public void Up(View v) {
 
                         if (ClickUtils.ButtonContinuousClick()) {
                             return;

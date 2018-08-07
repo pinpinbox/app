@@ -1,13 +1,13 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -72,6 +72,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.AnimationSuspensionTouch;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -79,6 +80,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
@@ -184,6 +186,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private EditText edSearch;
     private ImageView scanImg;
+    private View isOnTouchView;
 
 
     private LinearLayout linHobby, linFollow;
@@ -250,7 +253,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         pbLoadMore.progressiveStop();
         pbRefresh.progressiveStop();
 
-        rvHome.addItemDecoration(new SpacesItemDecoration(16));
+        rvHome.addItemDecoration(new SpacesItemDecoration(16, deviceType, true));
         rvHome.setItemAnimator(new DefaultItemAnimator());
         rvHome.addOnScrollListener(mOnScrollListener);
 
@@ -283,10 +286,13 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         linHobby.setOnClickListener(this);
         linFollow.setOnClickListener(this);
 
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvNewsFeed), true);
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvExplore), true);
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvRecommend), true);
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvPopularity), true);
+
+        TextUtility.setBold(
+                (TextView) viewHeader.findViewById(R.id.tvNewsFeed),
+                (TextView) viewHeader.findViewById(R.id.tvExplore),
+                (TextView) viewHeader.findViewById(R.id.tvRecommend),
+                (TextView) viewHeader.findViewById(R.id.tvPopularity)
+        );
 
     }
 
@@ -579,7 +585,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         categoryNameAdapter.setOnRecyclerViewListener(new RecyclerCategoryNameAdapter.OnRecyclerViewListener() {
             @Override
-            public void onItemClick(int position, View v) {
+            public void onItemClick(int position, View view) {
 
                 if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
                     return;
@@ -602,11 +608,14 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             }
 
             @Override
-            public boolean onItemLongClick(int position, View v) {
-                return false;
+            public void isTouching(View view) {
+                isOnTouchView = view;
+                mOnScrollListener.setIsTouchingView(isOnTouchView);
+                pinPinBoxRefreshLayout.setIsTouchingView(isOnTouchView);
             }
 
         });
+
 
 
     }
@@ -693,7 +702,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
     }
-
 
     private void getUpdateList(String limit) {
 
@@ -1302,7 +1310,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
     }
 
-
     private void setBanner() {
 
         bannerViewList = new ArrayList<>();
@@ -1396,11 +1403,13 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 MyLog.Set("e", FragmentHome2.class, "newState => " + newState);
 
-
                 switch (newState) {
 
                     case 1:
                         pinPinBoxRefreshLayout.setPullRefresh(false);
+
+                        AnimationSuspensionTouch.reset(isOnTouchView);
+
                         break;
 
                     case 2:
@@ -1680,6 +1689,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class AttentionTask extends AsyncTask<Void, Void, Object> {
 
 
@@ -1773,6 +1783,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class MoreDataTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -1836,6 +1847,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class RefreshTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -1967,6 +1979,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class GetADTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -2202,53 +2215,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-        private final int mSpace;
-
-        public SpacesItemDecoration(int space) {
-            this.mSpace = space;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, final View view, final RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            int position = parent.getChildAdapterPosition(view);
-            int spanIndex = ((StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams()).getSpanIndex();
-            if (parent.getChildAdapterPosition(view) != 0) {
-
-                if (deviceType == TABLE) {
-
-                    if (spanIndex == 0) {
-                        outRect.left = mSpace;
-                        outRect.right = 0;
-                    } else if (spanIndex == 1) {//if you just have 2 span . Or you can use (staggeredGridLayoutManager.getSpanCount()-1) as last span
-                        outRect.left = mSpace;
-                        outRect.right = mSpace;
-                    } else {
-                        outRect.left = 0;
-                        outRect.right = mSpace;
-                    }
-
-                } else if (deviceType == PHONE) {
-
-                    if (spanIndex == 0) {
-                        outRect.left = mSpace;
-                        outRect.right = 0;
-                    } else {//if you just have 2 span . Or you can use (staggeredGridLayoutManager.getSpanCount()-1) as last span
-                        outRect.left = 0;
-                        outRect.right = mSpace;
-                    }
-
-                }
-
-                outRect.bottom = 32;
-
-
-            }
-
-
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

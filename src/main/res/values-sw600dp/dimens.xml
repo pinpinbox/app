@@ -5,7 +5,9 @@
     <!--<dimen name="ppb200_pad_common_button_width">192dp</dimen>-->
 
 
-    <dimen name="ppb200_translationZ_user">12dp</dimen>
+    <dimen name="ppb200_title_margin_left">14dp</dimen>
+
+    <dimen name="ppb200_translationZ_default">12dp</dimen>
 
     <dimen name="ppb200_divider_height">0.5dp</dimen>
 

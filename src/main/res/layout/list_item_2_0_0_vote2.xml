@@ -163,7 +163,7 @@
             android:background="@drawable/border_2_0_0_other_circle_main_first"
             android:padding="12dp"
             android:src="@drawable/ic200_plus_white"
-            android:translationZ="@dimen/ppb200_translationZ_user" />
+            android:translationZ="@dimen/ppb200_translationZ_default" />
 
 
         <!--票數-->

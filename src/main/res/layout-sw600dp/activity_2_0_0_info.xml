@@ -451,7 +451,7 @@
         android:paddingLeft="@dimen/ppb200_padding_margin_big"
         android:paddingRight="@dimen/ppb200_padding_margin_big"
         android:transitionName="bg_user"
-        android:translationZ="@dimen/ppb200_translationZ_user">
+        android:translationZ="@dimen/ppb200_translationZ_default">
 
 
         <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
