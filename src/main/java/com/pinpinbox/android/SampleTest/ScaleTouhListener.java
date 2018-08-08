@@ -2,6 +2,7 @@ package com.pinpinbox.android.SampleTest;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -24,14 +25,13 @@ public class ScaleTouhListener implements View.OnTouchListener {
 
     private TouchCallBack touchCallBack;
 
+    private GestureDetector mGestureDetector;
+
     public ScaleTouhListener(TouchCallBack touchCallBack) {
         this.touchCallBack = touchCallBack;
     }
 
     private boolean click = false;
-
-    private boolean doReset = false;
-
 
     private float downX = 0, downY = 0;
     private float moveX = 0, moveY = 0;
@@ -50,58 +50,54 @@ public class ScaleTouhListener implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
 
 
-        if (touchCallBack != null){
+        if (touchCallBack != null) {
             touchCallBack.Touch(v);
         }
 
+//        mGestureDetector.onTouchEvent(event);
 
-        int safeClickArea = 16;
+        float safeClickArea = 16f;
 
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
 
-                downX = event.getRawX();
-                downY = event.getRawY();
-
-
-                MyLog.Set("e", this.getClass(), "downX => " + downX);
-                MyLog.Set("e", this.getClass(), "downY => " + downY);
+//                downX = event.getRawX();
+//                downY = event.getRawY();
+//
+//
+//                MyLog.Set("e", this.getClass(), "downX => " + downX);
+//                MyLog.Set("e", this.getClass(), "downY => " + downY);
 
                 AnimationSuspensionTouch.pressed(v);
 
-                click = true;
+//                click = true;
 
                 break;
 
             case MotionEvent.ACTION_MOVE:
 
-                moveX = event.getRawX();//手指所在位置
-                moveY = event.getRawY();//手指所在位置
+                MyLog.Set("e", this.getClass(), "ACTION_MOVE");
 
-
-                MyLog.Set("e", this.getClass(), "moveX => " + moveX);
-                MyLog.Set("e", this.getClass(), "moveY => " + moveY);
-
-
-                if (moveY - downY >= safeClickArea || moveY - downY <= -safeClickArea || moveX - downX >= safeClickArea || moveX - downX <= -safeClickArea) {
-
-                    AnimationSuspensionTouch.reset(v);
-
-//                    doReset = true;
-
-                    click = false;
-
-                } else {
-
-                    click = true;
-
-                }
-
-
-//                if(doReset){
+//                moveX = event.getRawX();//手指所在位置
+//                moveY = event.getRawY();//手指所在位置
+//
+//
+////                MyLog.Set("e", this.getClass(), "moveX => " + moveX);
+////                MyLog.Set("e", this.getClass(), "moveY => " + moveY);
+//
+//
+//                float XX = moveX - downX;
+//                float YY = moveY - downY;
+//
+////                MyLog.Set("e", this.getClass(), "XX => " + XX);
+////                MyLog.Set("e", this.getClass(), "YY => " + YY);
+//
+//                if (YY >= safeClickArea || YY <= -safeClickArea || XX >= safeClickArea || XX <= -safeClickArea) {
+//                    click = false;
 //                    AnimationSuspensionTouch.reset(v);
-//                    doReset = false;
+//                } else {
+//                    click = true;
 //                }
 
 
@@ -115,26 +111,37 @@ public class ScaleTouhListener implements View.OnTouchListener {
 
 
                 break;
+
+            case MotionEvent.ACTION_CANCEL:
+
+                MyLog.Set("e", this.getClass(), "ACTION_CANCEL");
+
+                AnimationSuspensionTouch.reset(v);
+
+                break;
+
         }
 
         return true;
     }
 
+
     private Animator.AnimatorListener listener = new Animator.AnimatorListener() {
+
+
         @Override
         public void onAnimationStart(Animator animation) {
-
         }
 
         @Override
         public void onAnimationEnd(Animator animation) {
-            if (touchCallBack != null && click) {
+
+            if (touchCallBack != null) {
                 touchCallBack.Up(null);
-                click = false;
-                downX = 0;
-                downY = 0;
-                moveX = 0;
-                moveY = 0;
+//                downX = 0;
+//                downY = 0;
+//                moveX = 0;
+//                moveY = 0;
             }
         }
 
