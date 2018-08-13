@@ -85,29 +85,36 @@
 
 
         <!--divider-->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_large"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_large">
+            android:orientation="horizontal"
+            android:gravity="center"
+
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
 
             <View
                 style="@style/ppb200_divider_list"
-                android:layout_centerInParent="true" />
+                android:layout_weight="1"
+                android:layout_width="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@color/white"
                 android:paddingLeft="@dimen/ppb200_padding_margin_first"
                 android:paddingRight="@dimen/ppb200_padding_margin_first"
                 android:text="@string/pinpinbox_2_0_0_other_text_or"
                 android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                 android:textSize="@dimen/ppb200_common_text_second" />
 
+            <View
+                style="@style/ppb200_divider_list"
+                android:layout_weight="1"
+                android:layout_width="wrap_content" />
 
-        </RelativeLayout>
+
+        </LinearLayout>
 
 
         <!--email-->
