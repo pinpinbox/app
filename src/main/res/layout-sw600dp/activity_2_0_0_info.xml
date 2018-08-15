@@ -157,7 +157,7 @@
                         <ImageView
                             android:layout_width="14dp"
                             android:layout_height="14dp"
-                            android:src="@drawable/ic200_count_sponsor_dark" />
+                            android:src="@drawable/ic200_buypoint_dark" />
 
 
                     </LinearLayout>

@@ -340,7 +340,7 @@
     <string name="pinpinbox_2_0_0_itemtype_reward_share">Reward(Facebook)</string>
     <string name="pinpinbox_2_0_0_itemtype_common_share">General</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_my">Mine</string>
-    <string name="pinpinbox_2_0_0_itemtype_collect_other">Collections</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_other">Collections\nSponsor</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">Groups</string>
     <string name="pinpinbox_2_0_0_itemtype_autoplay_audio">Autoplay audio</string>
     <string name="pinpinbox_2_0_0_itemtype_work_manager">Work Manager</string>

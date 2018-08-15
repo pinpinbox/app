@@ -348,7 +348,7 @@
     <string name="pinpinbox_2_0_0_itemtype_reward_share">獎勵分享(facebook)</string>
     <string name="pinpinbox_2_0_0_itemtype_common_share">一般分享</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_my">我的作品</string>
-    <string name="pinpinbox_2_0_0_itemtype_collect_other">其他收藏</string>
+    <string name="pinpinbox_2_0_0_itemtype_collect_other">收藏▪贊助</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_cooperation">群組作品</string>
     <string name="pinpinbox_2_0_0_itemtype_autoplay_audio">自動播放音效(作品)</string>
     <string name="pinpinbox_2_0_0_itemtype_work_manager">作品管理</string>
