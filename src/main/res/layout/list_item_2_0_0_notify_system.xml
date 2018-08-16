@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,98 +11,66 @@
         android:minHeight="88dp">
 
 
-
         <RelativeLayout
             android:id="@+id/rBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/click_2_0_0_card_notify"
             android:padding="4dp">
 
 
             <ImageView
                 android:id="@+id/systemImg"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/pinpin_192" />
 
-
             <TextView
                 android:id="@+id/tvMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="38dp"
+                style="@style/ppb200_notify_message"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:layout_toRightOf="@+id/systemImg"
-                android:ellipsize="end"
-                android:lineSpacingExtra="2dp"
-                android:text=""
-                android:letterSpacing="0.1"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="16sp" />
+                android:maxLines="10"
+                android:minHeight="44dp"
+                android:text="" />
 
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvMessage"
+            <ImageView
+                android:id="@+id/messageTypeImg"
+                style="@style/ppb200_notify_message_image"
+                android:layout_below="@id/tvMessage"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_toEndOf="@+id/systemImg"
                 android:layout_toRightOf="@+id/systemImg"
+                android:padding="0dp"
+                android:scaleType="centerInside"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tvMessageTypeText"
+                style="@style/ppb200_notify_message_type_text"
+                android:layout_below="@id/tvMessage"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
                 android:layout_marginTop="4dp"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_second">
+                android:layout_toEndOf="@+id/messageTypeImg"
+                android:layout_toRightOf="@+id/messageTypeImg"
+                android:text="" />
 
-
-                <ImageView
-                    android:id="@+id/typeImg"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:padding="2dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/pinpin_192"
-                    android:layout_centerVertical="true"/>
-
-                <TextView
-                    android:id="@+id/tvSpecies"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
-                    android:layout_toEndOf="@+id/typeImg"
-                    android:layout_toRightOf="@+id/typeImg"
-                    android:gravity="center_vertical"
-                    android:letterSpacing="0.1"
-                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                    android:textSize="@dimen/ppb200_common_text_third" />
-
-
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:letterSpacing="0.1"
-                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                    android:textSize="@dimen/ppb200_common_text_third" />
-
-
-            </RelativeLayout>
-
-
-
-
-
-
-
-
+            <TextView
+                android:id="@+id/tvTime"
+                style="@style/ppb200_notify_message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tvMessage"
+                android:layout_marginTop="4dp"
+                android:text="" />
 
 
         </RelativeLayout>
@@ -111,3 +80,5 @@
 
 
 </RelativeLayout>
+
+

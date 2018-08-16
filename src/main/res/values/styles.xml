@@ -1,6 +1,43 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
 
+    <style name="ppb200_notify_message" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_third</item>
+    </style>
+
+    <style name="ppb200_notify_message_type_text" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_secondary_text</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_small</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ppb200_notify_message_time" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_secondary_text</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_small</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ppb200_notify_message_image">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+
     <style name="ppb200_guide_no_data" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -197,16 +234,6 @@
         <item name="android:background">@drawable/click_2_0_0_list_item_white_alpha</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
-
-
-
-
-
-
-
-
-
-
 
 
     <style name="ppb200_loading">
@@ -464,14 +491,13 @@
     </style>
 
 
-
     reader
+
     <style name="reader" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/black</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">false</item>
     </style>
-
 
 
     <style name="ppb200_common_white" parent="Theme.AppCompat.Light.NoActionBar">
@@ -483,7 +509,7 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowIsTranslucent">false</item>
         <!--windowIsTranslucent => true => sharedelement動畫時背景會黑 設置WindowManager.LayoutParams alpha透明 可修正 -->
-         <!--或是在ac內設定setTheme(沒試過)-->
+        <!--或是在ac內設定setTheme(沒試過)-->
 
         <!--A 跳转到 B时，使B中的View进入场景的transition-->
         <!--<item name="android:windowSharedElementExitTransition">@transition/change_bounds</item>&lt;!&ndash;A 跳转到 B时，使A中的View退出场景的transition&ndash;&gt;-->
@@ -502,9 +528,6 @@
         <item name="android:fitsSystemWindows">false</item>
         <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
     </style>
-
-
-
 
 
     <style name="AppTheme.NoActionBar">
