@@ -9,12 +9,12 @@
     <RelativeLayout
         android:id="@+id/rBackground"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="96dp"
         android:background="@drawable/click_2_0_0_list_item">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="96dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_toEndOf="@+id/relativeLayout8"
@@ -30,8 +30,8 @@
 
                 <com.pinpinbox.android.Views.CircleView.RoundedImageView
                     android:id="@+id/coverImg"
-                    android:layout_width="56dp"
-                    android:layout_height="84dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:alpha="0.9"
                     android:scaleType="centerCrop"
                     app:riv_corner_radius="@dimen/ppb200_radius_general"
@@ -39,8 +39,8 @@
 
                 <RelativeLayout
                     android:id="@+id/rWarn"
-                    android:layout_width="56dp"
-                    android:layout_height="84dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:visibility="gone">
 
                     <View
@@ -62,6 +62,7 @@
 
             <TextView
                 android:id="@+id/tvAlbumName"
+                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -72,23 +73,24 @@
                 android:ellipsize="end"
                 android:letterSpacing="0.1"
                 android:lineSpacingExtra="2dp"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_second" />
+                android:textSize="@dimen/ppb200_common_text_third" />
 
             <TextView
                 android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="32dp"
                 android:gravity="center_vertical"
+                android:layout_marginBottom="-2dp"
                 android:letterSpacing="0.1"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                android:textSize="@dimen/ppb200_common_text_third" />
+                android:textSize="@dimen/ppb200_common_text_small" />
 
 
             <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
@@ -111,25 +113,26 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
                 android:layout_toRightOf="@+id/userImg"
+                android:layout_marginBottom="-2dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="bottom"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
                     android:src="@drawable/ic200_cooperation_light" />
 
                 <TextView
                     android:id="@+id/tvCooperationCount"
                     android:layout_width="wrap_content"
-                    android:layout_height="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-                    android:gravity="center_vertical"
                     android:letterSpacing="0.1"
                     android:text=""
                     android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                    android:textSize="@dimen/ppb200_common_text_third" />
+                    android:textSize="@dimen/ppb200_common_text_small" />
 
             </LinearLayout>
 
@@ -143,20 +146,20 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_marginBottom="-8dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/click_2_0_0_default"
             android:padding="8dp"
             android:src="@drawable/ic200_act_close_pink"
-            android:visibility="gone"
-            android:layout_alignParentTop="true"/>
+            android:visibility="gone" />
 
 
         <!--設置-->
         <RelativeLayout
             android:id="@+id/rDetail"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="96dp"
             android:visibility="gone">
 
             <View
@@ -165,165 +168,162 @@
                 android:background="@color/pinpinbox2_0_0_black_alpha" />
 
 
+            <LinearLayout
 
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="32dp"
+                android:paddingTop="8dp">
+
+                <!--編輯-->
                 <LinearLayout
-
-                    android:layout_width="wrap_content"
+                    android:id="@+id/linEdit"
+                    android:layout_width="64dp"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="32dp"
-                    android:paddingTop="8dp">
+                    android:background="@drawable/click_2_0_0_default"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <!--編輯-->
-                    <LinearLayout
-                        android:id="@+id/linEdit"
-                        android:layout_width="64dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/ppb200_common_icon_side"
+                        android:layout_height="@dimen/ppb200_common_icon_side"
+                        android:padding="10dp"
+                        android:src="@drawable/ic200_edit_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_button_edit"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_small" />
+
+                </LinearLayout>
+
+                <!--邀請-->
+                <LinearLayout
+                    android:id="@+id/linCooperation"
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/ppb200_common_icon_side"
+                        android:layout_height="@dimen/ppb200_common_icon_side"
+                        android:padding="10dp"
+                        android:src="@drawable/ic200_cooperation_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_button_invite"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_small" />
+
+                </LinearLayout>
+
+                <!--分享-->
+                <LinearLayout
+                    android:id="@+id/linShare"
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default_light"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/ppb200_common_icon_side"
+                        android:layout_height="@dimen/ppb200_common_icon_side"
+                        android:padding="10dp"
+                        android:src="@drawable/ic200_share_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_button_share"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_small" />
+
+                </LinearLayout>
+
+                <!--刪除-->
+                <LinearLayout
+                    android:id="@+id/linDelete"
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/ppb200_common_icon_side"
+                        android:layout_height="@dimen/ppb200_common_icon_side"
+                        android:padding="10dp"
+                        android:src="@drawable/ic200_delete_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_button_delete"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_small" />
+
+                </LinearLayout>
+
+                <!--下載-->
+                <LinearLayout
+                    android:id="@+id/linDownload"
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/click_2_0_0_default"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/ppb200_common_icon_side"
+                        android:layout_height="@dimen/ppb200_common_icon_side">
 
                         <ImageView
+                            android:id="@+id/downloadImg"
                             android:layout_width="@dimen/ppb200_common_icon_side"
                             android:layout_height="@dimen/ppb200_common_icon_side"
                             android:padding="10dp"
-                            android:src="@drawable/ic200_edit_white" />
+                            android:src="@drawable/ic200_download_white" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_button_edit"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
-                    <!--邀請-->
-                    <LinearLayout
-                        android:id="@+id/linCooperation"
-                        android:layout_width="64dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
+                        <com.github.ybq.android.spinkit.SpinKitView
+                            android:id="@+id/spin_kit"
+                            style="@style/SpinKitView.DoubleBounce"
                             android:layout_width="@dimen/ppb200_common_icon_side"
                             android:layout_height="@dimen/ppb200_common_icon_side"
-                            android:padding="10dp"
-                            android:src="@drawable/ic200_cooperation_white" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_button_invite"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
-                    <!--分享-->
-                    <LinearLayout
-                        android:id="@+id/linShare"
-                        android:layout_width="64dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default_light"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/ppb200_common_icon_side"
-                            android:layout_height="@dimen/ppb200_common_icon_side"
-                            android:padding="10dp"
-                            android:src="@drawable/ic200_share_white" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_button_share"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
-                    <!--刪除-->
-                    <LinearLayout
-                        android:id="@+id/linDelete"
-                        android:layout_width="64dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="@dimen/ppb200_common_icon_side"
-                            android:layout_height="@dimen/ppb200_common_icon_side"
-                            android:padding="10dp"
-                            android:src="@drawable/ic200_delete_white" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_button_delete"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
-                    <!--下載-->
-                    <LinearLayout
-                        android:id="@+id/linDownload"
-                        android:layout_width="64dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/click_2_0_0_default"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="@dimen/ppb200_common_icon_side"
-                            android:layout_height="@dimen/ppb200_common_icon_side">
-
-                            <ImageView
-                                android:id="@+id/downloadImg"
-                                android:layout_width="@dimen/ppb200_common_icon_side"
-                                android:layout_height="@dimen/ppb200_common_icon_side"
-                                android:padding="10dp"
-                                android:src="@drawable/ic200_download_white" />
-
-                            <com.github.ybq.android.spinkit.SpinKitView
-                                android:id="@+id/spin_kit"
-                                style="@style/SpinKitView.DoubleBounce"
-                                android:layout_width="@dimen/ppb200_common_icon_side"
-                                android:layout_height="@dimen/ppb200_common_icon_side"
-                                android:layout_centerInParent="true"
-                                app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
+                            android:layout_centerInParent="true"
+                            app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
 
 
-                        </RelativeLayout>
+                    </RelativeLayout>
 
 
-                        <TextView
-                            android:id="@+id/tvLoadType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:text="@string/pinpinbox_2_0_0_button_download"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/ppb200_common_text_small" />
-
-                    </LinearLayout>
-
+                    <TextView
+                        android:id="@+id/tvLoadType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.1"
+                        android:text="@string/pinpinbox_2_0_0_button_download"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/ppb200_common_text_small" />
 
                 </LinearLayout>
 
 
+            </LinearLayout>
 
 
         </RelativeLayout>

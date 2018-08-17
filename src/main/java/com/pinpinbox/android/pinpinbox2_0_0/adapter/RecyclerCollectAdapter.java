@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -140,8 +140,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
         /*set album name*/
         try {
             String strAlbumName = (String) listData.get(position).get("albumname");
-            TextPaint tp = holder.tvAlbumName.getPaint();
-            tp.setFakeBoldText(true);
+            TextUtility.setBold(holder.tvAlbumName);
             holder.tvAlbumName.setText(strAlbumName);
         } catch (Exception e) {
             e.printStackTrace();

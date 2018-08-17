@@ -74,10 +74,10 @@
 
     <color name="pinpinbox_2_0_0_gradient_dark_pink">#a61252</color>
     <color name="pinpinbox_2_0_0_gradient_light_pink">#f15187</color>
-    <color name="pinpinbox_2_0_0_dark_pink">#f0ad1457</color>
-    <color name="pinpinbox_2_0_0_first_pink">#f0e91e63</color>
-    <color name="pinpinbox_2_0_0_second_pink">#f0f27ba3</color>
-    <color name="pinpinbox_2_0_0_third_pink">#f0f4adc5</color>
+    <color name="pinpinbox_2_0_0_dark_pink">#ad1457</color>
+    <color name="pinpinbox_2_0_0_first_pink">#e91e63</color>
+    <color name="pinpinbox_2_0_0_second_pink">#f27ba3</color>
+    <color name="pinpinbox_2_0_0_third_pink">#f4adc5</color>
 
 
     <color name="pinpinbox_2_0_0_gradient_first_dark_grey">#434343</color>
