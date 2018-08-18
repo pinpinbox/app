@@ -32,16 +32,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/image_background_2_0_0_home_item_cover_radius">
+                >
 
                 <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                     android:id="@+id/exchangeImg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:alpha="0.9"
+                    android:alpha="0.85"
                     app:siBorderAlpha="0"
-                    app:siRadius="8dp" />
+                    app:siRadius="@dimen/ppb200_radius_general" />
 
             </RelativeLayout>
 

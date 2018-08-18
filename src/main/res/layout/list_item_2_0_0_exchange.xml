@@ -1,57 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/rBackground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/ppb200_staggeredgrid_click_padding">
+        android:layout_height="@dimen/ppb200_common_detaillist_item_height"
+        android:background="@drawable/click_2_0_0_list_item">
 
 
         <RelativeLayout
-            android:id="@+id/rItemBg"
-            style="@style/ppb200_staggered_bg_cover">
+            android:id="@+id/rDetailListImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/image_background_2_0_0_radius">
+
 
             <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
-                android:id="@+id/exchangeImg"
-                android:layout_width="match_parent"
-                android:layout_height="234dp"
-                android:layout_centerHorizontal="true"
-                android:scaleType="centerCrop"
-                app:siBorderAlpha="0"
-                app:siRadius="@dimen/ppb200_staggeredgrid_cover_radius" />
+                android:id="@+id/detaillistImg"
+                style="@style/ppb200_common_detaillist_image" />
 
 
         </RelativeLayout>
 
-        <!--作品名稱-->
+
         <TextView
+            style="@style/ppb200_common_detaillist_name"
             android:id="@+id/tvExchangeName"
-            style="@style/ppb200_staggered_album_name"
-            android:layout_marginTop="@dimen/ppb200_staggeredgrid_album_name_margin_top"
-            android:singleLine="true" />
+            android:layout_alignTop="@+id/rDetailListImg"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_toEndOf="@+id/rDetailListImg"
+            android:layout_toRightOf="@+id/rDetailListImg" />
 
-
-        <!--時間-->
         <TextView
             android:id="@+id/tvExchangeTime"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
+            android:layout_alignBottom="@+id/rDetailListImg"
+            android:layout_alignEnd="@+id/tvExchangeName"
+            android:gravity="center_vertical"
             android:letterSpacing="0.1"
-            android:singleLine="true"
+            android:layout_marginBottom="-2dp"
             android:text=""
-            android:textColor="@color/pinpinbox_2_0_0_first_pink"
+            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:textSize="@dimen/ppb200_common_text_small"
-            android:visibility="gone" />
+            android:layout_alignRight="@+id/tvExchangeName" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
-</RelativeLayout>
+    <View style="@style/ppb200_divider_list" />
+
+
+</LinearLayout>

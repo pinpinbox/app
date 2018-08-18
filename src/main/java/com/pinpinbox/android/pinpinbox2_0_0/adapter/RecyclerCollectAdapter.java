@@ -156,11 +156,11 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
                         .config(Bitmap.Config.RGB_565)
                         .error(R.drawable.bg_2_0_0_no_image)
                         .tag(mActivity.getApplicationContext())
-                        .into(holder.coverImg);
-                holder.coverImg.setTag(strCover);
+                        .into(holder.detaillistImg);
+                holder.detaillistImg.setTag(strCover);
             }
         } catch (Exception e) {
-            holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+            holder.detaillistImg.setImageResource(R.drawable.bg_2_0_0_no_image);
             e.printStackTrace();
         }
 
@@ -397,8 +397,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
         int position;
 
         private RelativeLayout rBackground, rDetail, rWarn;
-        private RoundedImageView coverImg;
-        private RoundCornerImageView userImg;
+        private RoundCornerImageView detaillistImg, userImg;
         private ImageView detailImg, downloadImg, smallprivacyImg;
         private TextView tvAlbumName, tvTime, tvCooperationCount, tvLoadType;
         private LinearLayout  linEdit, linCooperation, linShare, linDelete, linCooperationCount, linDownload;
@@ -414,7 +413,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             rDetail = (RelativeLayout) itemView.findViewById(R.id.rDetail);
             rWarn = (RelativeLayout) itemView.findViewById(R.id.rWarn);
 
-            coverImg = (RoundedImageView) itemView.findViewById(R.id.coverImg);
+            detaillistImg = (RoundCornerImageView) itemView.findViewById(R.id.detaillistImg);
             userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
             detailImg = (ImageView) itemView.findViewById(R.id.detailImg);
             downloadImg = (ImageView) itemView.findViewById(R.id.downloadImg);

@@ -27,7 +27,7 @@
                 android:scaleType="centerCrop"
                 app:siBorderColor="@color/pinpinbox_2_0_0_divider"
                 app:siBorderWidth="0.5dp"
-                app:siRadius="56dp" />
+                app:siRadius="64dp" />
 
 
             <TextView

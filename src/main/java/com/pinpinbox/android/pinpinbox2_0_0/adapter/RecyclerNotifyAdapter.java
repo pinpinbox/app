@@ -388,14 +388,14 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
 
         private RelativeLayout rBackground;
         private ImageView messageTypeImg;
-        private RoundedImageView coverImg;
+        private RoundCornerImageView coverImg;
         private TextView tvMessage, tvTime, tvMessageTypeText;
 
         public ViewAlbumHolder(View itemView) {
             super(itemView);
 
             rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
-            coverImg = (RoundedImageView) itemView.findViewById(R.id.coverImg);
+            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
             messageTypeImg = (ImageView) itemView.findViewById(R.id.messageTypeImg);
             tvMessage = (TextView) itemView.findViewById(R.id.tvMessage);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);

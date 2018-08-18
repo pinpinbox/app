@@ -9,12 +9,12 @@
     <RelativeLayout
         android:id="@+id/rBackground"
         android:layout_width="match_parent"
-        android:layout_height="96dp"
+        android:layout_height="@dimen/ppb200_common_detaillist_item_height"
         android:background="@drawable/click_2_0_0_list_item">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="96dp"
+            android:layout_height="@dimen/ppb200_common_detaillist_item_height"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_toEndOf="@+id/relativeLayout8"
@@ -23,19 +23,15 @@
 
 
             <RelativeLayout
-                android:id="@+id/rCover"
+                android:id="@+id/rDetailListImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/image_background_2_0_0_notify_item_cover_radius">
+                android:background="@drawable/image_background_2_0_0_radius">
 
-                <com.pinpinbox.android.Views.CircleView.RoundedImageView
-                    android:id="@+id/coverImg"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:alpha="0.9"
-                    android:scaleType="centerCrop"
-                    app:riv_corner_radius="@dimen/ppb200_radius_general"
-                    app:riv_mutate_background="true" />
+
+                <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                    android:id="@+id/detaillistImg"
+                    style="@style/ppb200_common_detaillist_image" />
 
                 <RelativeLayout
                     android:id="@+id/rWarn"
@@ -62,21 +58,12 @@
 
             <TextView
                 android:id="@+id/tvAlbumName"
-                fontPath="fonts/OpenSans-Bold.ttf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/ppb200_common_detaillist_name"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:layout_marginRight="26dp"
-                android:layout_toRightOf="@+id/rCover"
-                android:ellipsize="end"
-                android:letterSpacing="0.1"
-                android:lineSpacingExtra="2dp"
-                android:maxLines="3"
-                android:text=""
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_third" />
+                android:layout_toRightOf="@+id/rDetailListImg" />
 
             <TextView
                 android:id="@+id/tvTime"
@@ -84,9 +71,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginBottom="-2dp"
                 android:layout_marginRight="32dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="-2dp"
                 android:letterSpacing="0.1"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_secondary_text"
@@ -99,7 +86,7 @@
                 android:layout_height="32dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/rCover"
+                android:layout_toRightOf="@+id/rDetailListImg"
                 android:scaleType="centerCrop"
                 android:visibility="gone"
                 app:siBorderColor="@color/pinpinbox_2_0_0_divider"
@@ -112,12 +99,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="8dp"
-                android:gravity="center_vertical"
-                android:visibility="gone"
+                android:layout_marginBottom="-1dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                 android:layout_toRightOf="@+id/userImg"
-                android:layout_marginBottom="-2dp"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
 
                 <ImageView
                     android:layout_width="12dp"
@@ -128,7 +115,7 @@
                     android:id="@+id/tvCooperationCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_third"
                     android:letterSpacing="0.1"
                     android:text=""
                     android:textColor="@color/pinpinbox_2_0_0_secondary_text"
@@ -159,7 +146,7 @@
         <RelativeLayout
             android:id="@+id/rDetail"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
+            android:layout_height="@dimen/ppb200_common_detaillist_item_height"
             android:visibility="gone">
 
             <View

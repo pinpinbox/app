@@ -1,5 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="ppb200_common_detaillist_image" >
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:alpha">0.85</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="siRadius">@dimen/ppb200_radius_general</item>
+        <item name="siBorderAlpha">0</item>
+
+    </style>
+
+    <style name="ppb200_common_detaillist_name" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_third</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
 
     <style name="ppb200_notify_message" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_width">match_parent</item>
@@ -10,6 +32,7 @@
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:textSize">@dimen/ppb200_common_text_third</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
 
     <style name="ppb200_notify_message_type_text" parent="android:TextAppearance.Widget.TextView">
@@ -113,8 +136,7 @@
     <style name="ppb200_staggered_bg_cover">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/image_background_2_0_0_home_item_cover_radius
-        </item>
+        <item name="android:background">@drawable/image_background_2_0_0_radius</item>
         <item name="android:transitionName">img_bg</item>
     </style>
 

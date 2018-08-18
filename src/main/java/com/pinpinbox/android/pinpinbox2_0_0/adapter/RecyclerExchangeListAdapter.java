@@ -15,6 +15,7 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
+import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.squareup.picasso.Callback;
@@ -79,13 +80,6 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
         final ViewHolder mHolder = (ViewHolder) holder;
         mHolder.position = position;
 
-        int h = exchangeList.get(position).getImageHeight();
-
-        mHolder.exchangeImg.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h));
-        mHolder.exchangeImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-
-
         mHolder.tvExchangeName.setText(exchangeList.get(position).getName());
         TextUtility.setBold(mHolder.tvExchangeName,true);
 
@@ -140,7 +134,7 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
             final String image = exchangeList.get(position).getImage();
 
             if (SystemUtility.Above_Equal_V5()) {
-                mHolder.exchangeImg.setTransitionName(image);
+                mHolder.detaillistImg.setTransitionName(image);
             }
 
             if (image != null && !image.equals("") && !image.equals("null")) {
@@ -151,10 +145,10 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                         .priority(Picasso.Priority.HIGH)
                         .error(R.drawable.bg_2_0_0_no_image)
                         .tag(mActivity.getApplicationContext())
-                        .into(mHolder.exchangeImg, new Callback() {
+                        .into(mHolder.detaillistImg, new Callback() {
                             @Override
                             public void onSuccess() {
-                                mHolder.exchangeImg.setAlpha(0.85f);
+                                mHolder.detaillistImg.setAlpha(0.85f);
                             }
 
                             @Override
@@ -164,7 +158,7 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                         });
 
             }else {
-                mHolder.exchangeImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+                mHolder.detaillistImg.setImageResource(R.drawable.bg_2_0_0_no_image);
             }
 
         }catch (Exception e){
@@ -186,7 +180,7 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
         public int position;
 
 
-        private RoundCornerImageView exchangeImg;
+        private RoundCornerImageView detaillistImg;
         private TextView tvExchangeName, tvExchangeTime;
 
 
@@ -195,9 +189,9 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
+            itemView.setBackgroundResource(R.drawable.click_2_0_0_list_item);
 
-            exchangeImg = (RoundCornerImageView)itemView.findViewById(R.id.exchangeImg);
+            detaillistImg = (RoundCornerImageView)itemView.findViewById(R.id.detaillistImg);
             tvExchangeName = (TextView)itemView.findViewById(R.id.tvExchangeName);
             tvExchangeTime = (TextView)itemView.findViewById(R.id.tvExchangeTime);
 

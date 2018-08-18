@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -75,9 +75,9 @@ public class RecyclerRecentAdapter extends RecyclerView.Adapter {
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
                     .tag(mActivity.getApplicationContext())
-                    .into(holder.coverImg);
+                    .into(holder.detaillistImg);
         }else {
-            holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+            holder.detaillistImg.setImageResource(R.drawable.bg_2_0_0_no_image);
         }
 
 
@@ -90,7 +90,7 @@ public class RecyclerRecentAdapter extends RecyclerView.Adapter {
         int position;
 
         private RelativeLayout rBackground;
-        private RoundedImageView coverImg;
+        private RoundCornerImageView detaillistImg;
         private TextView tvAlbumName, tvUserName;
 
 
@@ -98,7 +98,7 @@ public class RecyclerRecentAdapter extends RecyclerView.Adapter {
             super(itemView);
 
             rBackground = (RelativeLayout)itemView.findViewById(R.id.rBackground);
-            coverImg = (RoundedImageView)itemView.findViewById(R.id.coverImg);
+            detaillistImg = (RoundCornerImageView)itemView.findViewById(R.id.detaillistImg);
             tvAlbumName = (TextView)itemView.findViewById(R.id.tvAlbumName);
             tvUserName = (TextView)itemView.findViewById(R.id.tvUserName);
 

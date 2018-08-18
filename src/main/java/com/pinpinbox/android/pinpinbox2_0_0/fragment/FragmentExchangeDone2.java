@@ -6,6 +6,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -107,19 +108,9 @@ public class FragmentExchangeDone2 extends Fragment {
         adapter = new RecyclerExchangeListAdapter(getActivity(), itemExchangeList, false);
         rvExchangelist.setAdapter(adapter);
 
-        ExStaggeredGridLayoutManager manager = null;
-
-        if (SystemUtility.isTablet(getActivity().getApplicationContext())) {
-            manager = new ExStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-            deviceType = SystemType.TABLE;
-
-        } else {
-            manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-            deviceType = SystemType.PHONE;
-        }
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         rvExchangelist.setLayoutManager(manager);
-        rvExchangelist.addItemDecoration(new SpacesItemDecoration(16, deviceType, false));
         rvExchangelist.setItemAnimator(new DefaultItemAnimator());
 
         adapter.setOnRecyclerViewListener(new RecyclerExchangeListAdapter.OnRecyclerViewListener() {
@@ -130,7 +121,7 @@ public class FragmentExchangeDone2 extends Fragment {
                     return;
                 }
 
-                RoundCornerImageView exchangeImg = (RoundCornerImageView)v.findViewById(R.id.exchangeImg);
+                RoundCornerImageView detaillistImg = (RoundCornerImageView)v.findViewById(R.id.detaillistImg);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("exchangeItem", itemExchangeList.get(position));
@@ -145,8 +136,8 @@ public class FragmentExchangeDone2 extends Fragment {
 
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation(getActivity(),
-                                exchangeImg,
-                                ViewCompat.getTransitionName(exchangeImg));
+                                detaillistImg,
+                                ViewCompat.getTransitionName(detaillistImg));
                 startActivity(intent, options.toBundle());
 
             }

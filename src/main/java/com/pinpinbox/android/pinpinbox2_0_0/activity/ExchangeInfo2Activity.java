@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -191,6 +192,15 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                         public void onSuccess() {
 
                             supportStartPostponedEnterTransition();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    findViewById(R.id.rItemBg).setBackgroundResource(R.drawable.image_background_2_0_0_radius);
+                                }
+                            },300);
+
+
 
                         }
 
@@ -547,6 +557,8 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
+
+        findViewById(R.id.rItemBg).setBackgroundResource(0);
 
 
         if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {

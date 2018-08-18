@@ -26,17 +26,19 @@
                 android:id="@+id/rCover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/image_background_2_0_0_notify_item_cover_radius">
+                android:background="@drawable/image_background_2_0_0_radius">
 
                 <!--0.9看不清楚-->
-                <com.pinpinbox.android.Views.CircleView.RoundedImageView
+                <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                     android:id="@+id/coverImg"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:alpha="0.8"
+                    android:alpha="0.85"
                     android:scaleType="centerCrop"
-                    app:riv_corner_radius="@dimen/ppb200_radius_general"
-                    app:riv_mutate_background="true" />
+                    app:siRadius="@dimen/ppb200_radius_general"
+                    />
+
+
 
             </RelativeLayout>
 
