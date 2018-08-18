@@ -58,7 +58,7 @@ public class TransformationControl {
         }
 
         public BrightnessTransformation() {
-            this.brightness = -5;
+            this.brightness = -3;
         }
 
         @Override

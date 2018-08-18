@@ -37,6 +37,7 @@ import com.pinpinbox.android.SampleTest.ScaleTouhListener;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
@@ -69,6 +70,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.TransformationControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
@@ -259,13 +261,14 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         }
 
 
-        if (!coverUrl.equals("")) {
+        if (ImageUtility.isImageExist(coverUrl)) {
             Picasso.with(getApplicationContext())
                     .load(coverUrl)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
                     .noFade()
                     .tag(getApplicationContext())
+                    .transform(new TransformationControl.BrightnessTransformation())
                     .into(coverImg, new Callback() {
                         @Override
                         public void onSuccess() {
