@@ -3,7 +3,6 @@
     <style name="ppb200_common_detaillist_image" >
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
-        <item name="android:alpha">0.85</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="siRadius">@dimen/ppb200_radius_general</item>
         <item name="siBorderAlpha">0</item>

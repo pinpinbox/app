@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -100,29 +101,31 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
             holder.coverImg.setTransitionName(albumList.get(position).getCover());
         }
 
-        if (!albumList.get(position).getCover().equals("")) {
-            Picasso.with(mActivity.getApplicationContext())
-                    .load(albumList.get(position).getCover())
-                    .config(Bitmap.Config.RGB_565)
-                    .error(R.drawable.bg_2_0_0_no_image)
-                    .tag(mActivity.getApplicationContext())
-                    .into(holder.coverImg, new Callback() {
-                        @Override
-                        public void onSuccess() {
+        ImageUtility.setImage(mActivity, holder.coverImg, albumList.get(position).getCover());
 
-                            drawable.setColor(Color.parseColor(ColorClass.GREY_SECOND));
-
-                            holder.coverImg.setAlpha(0.85f);
-                        }
-
-                        @Override
-                        public void onError() {
-
-                        }
-                    });
-        } else {
-            holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-        }
+//        if (ImageUtility.isImageExist(albumList.get(position).getCover())) {
+//            Picasso.with(mActivity.getApplicationContext())
+//                    .load(albumList.get(position).getCover())
+//                    .config(Bitmap.Config.RGB_565)
+//                    .error(R.drawable.bg_2_0_0_no_image)
+//                    .tag(mActivity.getApplicationContext())
+//                    .into(holder.coverImg, new Callback() {
+//                        @Override
+//                        public void onSuccess() {
+//
+//                            drawable.setColor(Color.parseColor(ColorClass.GREY_SECOND));
+//
+//                            holder.coverImg.setAlpha(0.85f);
+//                        }
+//
+//                        @Override
+//                        public void onError() {
+//
+//                        }
+//                    });
+//        } else {
+//            holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+//        }
 
         if (albumList.get(position).isVideo() || albumList.get(position).isSlot() || albumList.get(position).isExchange() || albumList.get(position).isAudio()) {
             holder.linType.setVisibility(View.VISIBLE);

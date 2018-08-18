@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.ImageUtility;
+import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.squareup.picasso.Picasso;
 
@@ -55,7 +57,7 @@ public class SelectMyWorksAdpater extends BaseAdapter {
             convertView = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_contribute, null);
             holder.rContributionstatus = (RelativeLayout) convertView.findViewById(R.id.rContributionstatus);
             holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
-            holder.coverImg = (ImageView) convertView.findViewById(R.id.coverImg);
+            holder.coverImg = (RoundCornerImageView) convertView.findViewById(R.id.coverImg);
             convertView.setTag(holder);
 
         } else {
@@ -64,7 +66,7 @@ public class SelectMyWorksAdpater extends BaseAdapter {
 
         convertView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-        String cover = canContributeAlbumList.get(position).getCover();
+        String strCover = canContributeAlbumList.get(position).getCover();
         String name = canContributeAlbumList.get(position).getName();
 
 
@@ -76,18 +78,7 @@ public class SelectMyWorksAdpater extends BaseAdapter {
 
         holder.tvName.setText(name);
 
-
-        if (cover != null && !cover.equals("") && !cover.equals("null")) {
-            Picasso.with(mActivity.getApplicationContext())
-                    .load(cover)
-                    .config(Bitmap.Config.RGB_565)
-                    .error(R.drawable.bg_2_0_0_no_image)
-                    .tag(mActivity.getApplicationContext())
-                    .into(holder.coverImg);
-        } else {
-            holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-        }
-
+        ImageUtility.setImage(mActivity, holder.coverImg, strCover);
 
         return convertView;
     }
@@ -98,7 +89,7 @@ public class SelectMyWorksAdpater extends BaseAdapter {
 
         TextView tvName;
 
-        ImageView coverImg;
+        RoundCornerImageView coverImg;
 
     }
 

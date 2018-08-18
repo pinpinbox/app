@@ -21,26 +21,14 @@
             android:background="@drawable/click_2_0_0_card_notify"
             android:padding="4dp">
 
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                android:id="@+id/coverImg"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:scaleType="centerCrop"
+                app:siBorderAlpha="0"
+                app:siRadius="@dimen/ppb200_radius_general" />
 
-            <RelativeLayout
-                android:id="@+id/rCover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/image_background_2_0_0_radius">
-
-                <!--0.9看不清楚-->
-                <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
-                    android:id="@+id/coverImg"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:alpha="0.85"
-                    android:scaleType="centerCrop"
-                    app:siRadius="@dimen/ppb200_radius_general"
-                    />
-
-
-
-            </RelativeLayout>
 
             <TextView
                 android:id="@+id/tvMessage"
@@ -48,15 +36,15 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                android:layout_toRightOf="@+id/rCover" />
+                android:layout_toRightOf="@+id/coverImg" />
 
             <ImageView
                 android:id="@+id/messageTypeImg"
                 style="@style/ppb200_notify_message_image"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="8dp"
-                android:layout_toEndOf="@+id/rCover"
-                android:layout_toRightOf="@+id/rCover"
+                android:layout_toEndOf="@+id/coverImg"
+                android:layout_toRightOf="@+id/coverImg"
                 android:scaleType="centerInside"
                 tools:ignore="ContentDescription" />
 

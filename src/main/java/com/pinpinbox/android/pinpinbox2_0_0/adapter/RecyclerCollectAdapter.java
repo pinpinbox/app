@@ -13,14 +13,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.TransformationControl;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.OnDetailClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -150,15 +151,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
         /*set cover*/
         try {
             String strCover = (String) listData.get(position).get("albumcover");
-            if (strCover != null && !strCover.equals("") && !strCover.isEmpty()) {
-                Picasso.with(mActivity.getApplicationContext())
-                        .load(strCover)
-                        .config(Bitmap.Config.RGB_565)
-                        .error(R.drawable.bg_2_0_0_no_image)
-                        .tag(mActivity.getApplicationContext())
-                        .into(holder.detaillistImg);
-                holder.detaillistImg.setTag(strCover);
-            }
+            ImageUtility.setImage(mActivity, holder.detaillistImg, strCover);
         } catch (Exception e) {
             holder.detaillistImg.setImageResource(R.drawable.bg_2_0_0_no_image);
             e.printStackTrace();
@@ -400,7 +393,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
         private RoundCornerImageView detaillistImg, userImg;
         private ImageView detailImg, downloadImg, smallprivacyImg;
         private TextView tvAlbumName, tvTime, tvCooperationCount, tvLoadType;
-        private LinearLayout  linEdit, linCooperation, linShare, linDelete, linCooperationCount, linDownload;
+        private LinearLayout linEdit, linCooperation, linShare, linDelete, linCooperationCount, linDownload;
 
 
 //        private ImageView downloadImg;
@@ -417,7 +410,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
             detailImg = (ImageView) itemView.findViewById(R.id.detailImg);
             downloadImg = (ImageView) itemView.findViewById(R.id.downloadImg);
-            smallprivacyImg = (ImageView)itemView.findViewById(R.id.smallprivacyImg);
+            smallprivacyImg = (ImageView) itemView.findViewById(R.id.smallprivacyImg);
 
             tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
@@ -430,10 +423,6 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             linShare = (LinearLayout) itemView.findViewById(R.id.linShare);
             linDelete = (LinearLayout) itemView.findViewById(R.id.linDelete);
             linCooperationCount = (LinearLayout) itemView.findViewById(R.id.linCooperationCount);
-
-
-
-
 
 
             rBackground.setOnClickListener(this);

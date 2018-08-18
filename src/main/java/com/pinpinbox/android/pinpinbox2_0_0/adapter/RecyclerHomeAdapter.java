@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.FlurryUtil;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
@@ -164,35 +165,7 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
                 holder.coverImg.setTransitionName(strCover);
             }
 
-            if (strCover != null && !strCover.equals("") && !strCover.equals("null")) {
-
-                Picasso.with(mActivity.getApplicationContext())
-                        .load(strCover)
-                        .config(Bitmap.Config.RGB_565)
-                        .priority(Picasso.Priority.HIGH)
-                        .error(R.drawable.bg_2_0_0_no_image)
-                        .tag(mActivity.getApplicationContext())
-                        .into(holder.coverImg, new Callback() {
-                            @Override
-                            public void onSuccess() {
-
-                                drawable.setColor(Color.parseColor(ColorClass.GREY_SECOND));
-
-                                holder.coverImg.setAlpha(0.85f);
-                            }
-
-                            @Override
-                            public void onError() {
-
-                            }
-                        });
-
-
-            } else {
-                holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-//                holder.coverImg.setImageBitmap(null);
-            }
-
+            ImageUtility.setImage(mActivity, holder.coverImg, strCover);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -359,13 +332,11 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
         private LinearLayout linLocation, linUser, linType, linShowOrHide;
         private RoundCornerImageView coverImg;
         private RelativeLayout rItemBg;
-        private View itemView;
+
 
 
         public ViewHolder(final View itemView) {
             super(itemView);
-
-            this.itemView = itemView;
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 

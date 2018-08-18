@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
@@ -59,12 +60,12 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
         return listData.size();
     }
 
-    public static final int TYPE_USER = 0;
-    public static final int TYPE_ALBUMQUEUE = 1;
-    public static final int TYPE_ALBUMCOOPERATION = 2;
-    public static final int TYPE_DATE = 3;
-    public static final int TYPE_SYSTEM = 4;
-    public static final int TYPE_ALBUMMESSAGEBOARD = 5;
+    private static final int TYPE_USER = 0;
+    private static final int TYPE_ALBUMQUEUE = 1;
+    private static final int TYPE_ALBUMCOOPERATION = 2;
+    private static final int TYPE_DATE = 3;
+    private static final int TYPE_SYSTEM = 4;
+    private static final int TYPE_ALBUMMESSAGEBOARD = 5;
 
     @Override
     public int getItemViewType(int position) {
@@ -178,16 +179,7 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
             holder.tvMessage.setText(strMessage);
             holder.tvTime.setText(strTime);
 
-            if (strImage == null || strImage.equals("")) {
-                holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-            } else {
-                Picasso.with(mActivity.getApplicationContext())
-                        .load(strImage)
-                        .config(Bitmap.Config.RGB_565)
-                        .error(R.drawable.bg_2_0_0_no_image)
-                        .tag(mActivity.getApplicationContext())
-                        .into(holder.coverImg);
-            }
+            ImageUtility.setImage(mActivity, holder.coverImg, strImage);
 
             if(type.equals("albumqueue")) {
 

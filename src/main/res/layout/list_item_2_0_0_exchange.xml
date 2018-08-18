@@ -13,45 +13,35 @@
         android:background="@drawable/click_2_0_0_list_item">
 
 
-        <RelativeLayout
-            android:id="@+id/rDetailListImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+            android:id="@+id/detaillistImg"
+            style="@style/ppb200_common_detaillist_image"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-            android:background="@drawable/image_background_2_0_0_radius">
-
-
-            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
-                android:id="@+id/detaillistImg"
-                style="@style/ppb200_common_detaillist_image" />
-
-
-        </RelativeLayout>
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first" />
 
 
         <TextView
-            style="@style/ppb200_common_detaillist_name"
             android:id="@+id/tvExchangeName"
-            android:layout_alignTop="@+id/rDetailListImg"
+            style="@style/ppb200_common_detaillist_name"
+            android:layout_alignTop="@+id/detaillistImg"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-            android:layout_toEndOf="@+id/rDetailListImg"
-            android:layout_toRightOf="@+id/rDetailListImg" />
+            android:layout_toEndOf="@+id/detaillistImg"
+            android:layout_toRightOf="@+id/detaillistImg" />
 
         <TextView
             android:id="@+id/tvExchangeTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/rDetailListImg"
+            android:layout_alignBottom="@+id/detaillistImg"
             android:layout_alignEnd="@+id/tvExchangeName"
+            android:layout_alignRight="@+id/tvExchangeName"
+            android:layout_marginBottom="-2dp"
             android:gravity="center_vertical"
             android:letterSpacing="0.1"
-            android:layout_marginBottom="-2dp"
             android:text=""
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-            android:textSize="@dimen/ppb200_common_text_small"
-            android:layout_alignRight="@+id/tvExchangeName" />
+            android:textSize="@dimen/ppb200_common_text_small" />
 
 
     </RelativeLayout>

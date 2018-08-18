@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
@@ -77,15 +78,19 @@ public class RecyclerCreationAdapter extends RecyclerView.Adapter {
 
         String url = (String) listData.get(position).get("image_url_thumbnail");
 
-        if (url == null || url.equals("") || url.equals("null")) {
-            holder.picImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-        } else {
+        if(ImageUtility.isImageExist(url)){
+
             Picasso.with(mActivity.getApplicationContext())
                     .load(url)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
                     .tag(mActivity.getApplicationContext())
                     .into(holder.picImg);
+
+        }else {
+
+            holder.picImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+
         }
 
 

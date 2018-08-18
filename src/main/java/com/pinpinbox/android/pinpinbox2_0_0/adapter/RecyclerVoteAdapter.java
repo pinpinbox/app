@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.flyco.labelview.LabelView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.ScaleTouhListener;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
@@ -140,10 +141,6 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     private void setAlbumCover(final ViewHolder holder, int position) {
 
-//        int h = itemAlbumList.get(position).getCover_height();
-//        holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h));
-//        holder.coverImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
         String color = itemAlbumList.get(position).getCover_hex();
         final GradientDrawable drawable = (GradientDrawable) holder.rItemBg.getBackground();
         if (color != null && !color.equals("")) {
@@ -159,34 +156,7 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
                 holder.coverImg.setTransitionName(strCover);
             }
 
-            if (strCover != null && !strCover.equals("") && !strCover.equals("null")) {
-
-                Picasso.with(mActivity.getApplicationContext())
-                        .load(strCover)
-                        .config(Bitmap.Config.RGB_565)
-                        .priority(Picasso.Priority.HIGH)
-                        .error(R.drawable.bg_2_0_0_no_image)
-                        .tag(mActivity.getApplicationContext())
-                        .into(holder.coverImg, new Callback() {
-                            @Override
-                            public void onSuccess() {
-
-                                drawable.setColor(Color.parseColor(ColorClass.GREY_SECOND));
-
-                                holder.coverImg.setAlpha(0.85f);
-                            }
-
-                            @Override
-                            public void onError() {
-
-                            }
-                        });
-
-
-            } else {
-                holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-            }
-
+            ImageUtility.setImage(mActivity, holder.coverImg, strCover);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,23 +27,15 @@
             android:paddingRight="@dimen/ppb200_padding_margin_first">
 
 
-            <RelativeLayout
-                android:id="@+id/rItemBg"
-                android:layout_width="wrap_content"
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                android:id="@+id/exchangeImg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                >
-
-                <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
-                    android:id="@+id/exchangeImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:alpha="0.85"
-                    app:siBorderAlpha="0"
-                    app:siRadius="@dimen/ppb200_radius_general" />
-
-            </RelativeLayout>
+                android:adjustViewBounds="true"
+                android:alpha="0.85"
+                app:siBorderAlpha="0"
+                app:siRadius="@dimen/ppb200_radius_general" />
 
 
             <TextView
@@ -82,11 +74,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="(依活動說明選填即可)"
-                android:letterSpacing="0.1"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_third"
-                android:textSize="@dimen/ppb200_common_text_small"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"/>
+                android:letterSpacing="0.1"
+                android:text="(依活動說明選填即可)"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_small" />
 
 
             <TextView
@@ -180,8 +172,8 @@
 
 
         <TextView
-            fontPath="fonts/OpenSans-Bold.ttf"
             android:id="@+id/tvExchangeTime"
+            fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/ppb200_common_icon_side"
             android:layout_alignParentBottom="true"
@@ -207,9 +199,9 @@
         <TextView
             android:id="@+id/tvExchange"
             style="@style/ppb200_Button_main_common_bottom_radius"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-            android:layout_centerInParent="true"
             android:text="@string/pinpinbox_2_0_0_button_exchange_now" />
 
 

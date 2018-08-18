@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
@@ -30,6 +31,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.TransformationControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -179,7 +181,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
         edPhone.setText(PPBApplication.getInstance().getData().getString(Key.contact_phone, ""));
         edAddress.setText(PPBApplication.getInstance().getData().getString(Key.contact_address, ""));
 
-        if (!itemExchange.getImage().equals("")) {
+        if (ImageUtility.isImageExist(itemExchange.getImage())) {
 
             Picasso.with(getApplicationContext())
                     .load(itemExchange.getImage())
@@ -187,20 +189,12 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
                     .error(R.drawable.bg_2_0_0_no_image)
                     .noFade()
                     .tag(getApplicationContext())
+                    .transform(new TransformationControl.BrightnessTransformation())
                     .into(exchangeImg, new Callback() {
                         @Override
                         public void onSuccess() {
 
                             supportStartPostponedEnterTransition();
-
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    findViewById(R.id.rItemBg).setBackgroundResource(R.drawable.image_background_2_0_0_radius);
-                                }
-                            },300);
-
-
 
                         }
 
@@ -230,7 +224,7 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
             tvExchangeTime.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
         } else {
-                    /*獲取當前時間*/
+            /*獲取當前時間*/
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date curDate = new Date(System.currentTimeMillis());//获取当前时间
 
@@ -245,9 +239,9 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 //                tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
 
                 tvExchangeTime.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
-                + day  + getResources().getString(R.string.pinpinbox_2_0_0_time_day)
-                + hour + getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
-                + min  + getResources().getString(R.string.pinpinbox_2_0_0_time_min));
+                        + day + getResources().getString(R.string.pinpinbox_2_0_0_time_day)
+                        + hour + getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
+                        + min + getResources().getString(R.string.pinpinbox_2_0_0_time_min));
 
 
             } catch (Exception e) {
@@ -557,9 +551,6 @@ public class ExchangeInfo2Activity extends DraggerActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-
-        findViewById(R.id.rItemBg).setBackgroundResource(0);
-
 
         if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {
             supportFinishAfterTransition();

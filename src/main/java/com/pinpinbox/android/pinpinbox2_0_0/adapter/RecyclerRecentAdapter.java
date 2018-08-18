@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.TransformationControl;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -68,17 +70,8 @@ public class RecyclerRecentAdapter extends RecyclerView.Adapter {
         holder.tvUserName.setText(itemAlbumList.get(position).getUser_name());
 
 
-        String cover  = itemAlbumList.get(position).getCover();
-        if(cover!=null&& !cover.equals("") && !cover.equals("null")) {
-            Picasso.with(mActivity.getApplicationContext())
-                    .load(cover)
-                    .config(Bitmap.Config.RGB_565)
-                    .error(R.drawable.bg_2_0_0_no_image)
-                    .tag(mActivity.getApplicationContext())
-                    .into(holder.detaillistImg);
-        }else {
-            holder.detaillistImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-        }
+        String strCover = itemAlbumList.get(position).getCover();
+        ImageUtility.setImage(mActivity, holder.detaillistImg, strCover);
 
 
     }
@@ -97,10 +90,10 @@ public class RecyclerRecentAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout)itemView.findViewById(R.id.rBackground);
-            detaillistImg = (RoundCornerImageView)itemView.findViewById(R.id.detaillistImg);
-            tvAlbumName = (TextView)itemView.findViewById(R.id.tvAlbumName);
-            tvUserName = (TextView)itemView.findViewById(R.id.tvUserName);
+            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
+            detaillistImg = (RoundCornerImageView) itemView.findViewById(R.id.detaillistImg);
+            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
+            tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
 
             rBackground.setOnClickListener(this);
             rBackground.setOnLongClickListener(this);

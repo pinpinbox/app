@@ -16,15 +16,15 @@
             android:layout_height="148dp"
             android:background="@drawable/image_background_2_0_0_radius">
 
-            <com.pinpinbox.android.Views.CircleView.RoundedImageView
+
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                 android:id="@+id/coverImg"
                 android:layout_width="match_parent"
                 android:layout_height="148dp"
                 android:layout_centerHorizontal="true"
-                android:alpha="0.9"
                 android:scaleType="centerCrop"
-                app:riv_corner_radius="4dp"
-                app:riv_mutate_background="true" />
+                app:siBorderAlpha="0"
+                app:siRadius="4dp" />
 
             <RelativeLayout
                 android:id="@+id/rContributionstatus"
