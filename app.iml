@@ -92,13 +92,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/assets" type="java-test-resource" />
@@ -106,6 +99,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -129,17 +129,26 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/build-info" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-resources" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
@@ -162,7 +171,6 @@
     <orderEntry type="library" name="Gradle: io.reactivex:rxjava:1.2.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.trello:rxlifecycle-components-0.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-maps-license-11.8.0" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\pinpinbox\PinPinBox\app\libs\YouTubeAndroidPlayerApi.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton.rxbinding:rxbinding-support-v4-0.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-drive-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: it.sephiroth.android.library.ab:ab-test-2.0.5" level="project" />
@@ -179,7 +187,6 @@
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-config-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: org.greenrobot:eventbus:3.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:26.0.1@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\pinpinbox\PinPinBox\app\libs\android-integration-2.3.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-location-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.ogaclejapan.smarttablayout:library-1.6.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-impl-11.8.0" level="project" />
@@ -206,13 +213,13 @@
     <orderEntry type="library" name="Gradle: io.reactivex:rxjava-async-util:0.21.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-26.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.nineoldandroids:library:2.4.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\pinpinbox\PinPinBox\app\libs\core-2.3.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: it.sephiroth.android.exif:android-exif-extended-1.0.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base-license-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.serchinastico:coolswitch-1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.zzhoujay.richtext:richtext-2.5.4" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\kevin9594\Desktop\PinPinBox\app\libs\renderscript-v8.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.timehop.stickyheadersrecyclerview:library-0.4.3" level="project" />
     <orderEntry type="library" name="Gradle: com.ctrlplusz.anytextview:library-1.2" level="project" />
     <orderEntry type="library" name="Gradle: uk.co.chrisjenx:calligraphy-2.2.0" level="project" />
@@ -221,6 +228,7 @@
     <orderEntry type="library" name="Gradle: com.github.castorflex.smoothprogressbar:library-1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton.rxbinding:rxbinding-0.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:design-26.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\kevin9594\Desktop\PinPinBox\app\libs\android-integration-2.3.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: uk.co.samuelwall:material-tap-target-prompt-1.3.0" level="project" />
     <orderEntry type="library" name="Gradle: com.adobe.creativesdk.foundation:assetcore-0.9.2006-5" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.1@jar" level="project" />
@@ -229,6 +237,7 @@
     <orderEntry type="library" name="Gradle: com.facebook.android:facebook-android-sdk-4.5.0" level="project" />
     <orderEntry type="library" name="Gradle: com.ogaclejapan.smarttablayout:utils-v4-1.6.1" level="project" />
     <orderEntry type="library" name="Gradle: com.readystatesoftware.systembartint:systembartint:1.0.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\kevin9594\Desktop\PinPinBox\app\libs\YouTubeAndroidPlayerApi.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.rubengees:EasyHeaderFooterAdapter-1.0.4" level="project" />
     <orderEntry type="library" name="Gradle: com.getbase:floatingactionbutton-1.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-core-2.6.0" level="project" />
@@ -293,10 +302,10 @@
     <orderEntry type="library" name="Gradle: in.srain.cube:grid-view-with-header-footer:1.0.12@jar" level="project" />
     <orderEntry type="library" name="Gradle: in.srain.cube:ultra-ptr-1.0.11" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-26.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\kevin9594\Desktop\PinPinBox\app\libs\core-2.3.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.picasso:picasso:2.5.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.localytics.android:library-4.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\pinpinbox\PinPinBox\app\libs\renderscript-v8.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp-urlconnection:3.4.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-26.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.birbit:android-priority-jobqueue-2.0.1" level="project" />
