@@ -5,10 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 
 import com.squareup.picasso.Transformation;
 
@@ -48,17 +44,17 @@ public class TransformationControl {
 
     }
 
-    /*亮度 小於0=>暗 大於0=>亮*/
+    /*亮度 小於1f=>暗  大於1f=>亮*/
     public static class BrightnessTransformation implements Transformation {
 
-        private int brightness;
+        private float brightness;
 
-        public BrightnessTransformation(int brightness) {
+        public BrightnessTransformation(float brightness) {
             this.brightness = brightness;
         }
 
         public BrightnessTransformation() {
-            this.brightness = -3;
+            this.brightness = 0.97f;
         }
 
         @Override
@@ -75,10 +71,10 @@ public class TransformationControl {
             Paint paint = new Paint();
             ColorMatrix matrix = new ColorMatrix();
             float[] array = {
-                    1, 0, 0, 0, brightness,
-                    0, 1, 0, 0, brightness,
-                    0, 0, 1, 0, brightness,
-                    0, 0, 0, 1, 0
+                    brightness, 0, 0, 0, 0,
+                    0, brightness, 0, 0, 0,
+                    0, 0, brightness, 0, 0,
+                    0, 0, 0, 1f, 0
             };
             matrix.set(array);
             paint.setColorFilter(new ColorMatrixColorFilter(matrix));
