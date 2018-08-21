@@ -25,7 +25,7 @@ public class ImageUtility {
 
     }
 
-    public static void setImage(Activity mActivity, ImageView imageView, String imageUrl) {
+    public static void setImage(Activity mActivity, final ImageView imageView, String imageUrl) {
 
         if (isImageExist(imageUrl)) {
 
@@ -36,7 +36,18 @@ public class ImageUtility {
                     .error(R.drawable.bg_2_0_0_no_image)
                     .tag(mActivity.getApplicationContext())
                     .transform(new TransformationControl.BrightnessTransformation())
-                    .into(imageView);
+                    .into(imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            imageView.setAlpha(0f);
+                            imageView.animate().setDuration(200).alpha(1f).start();
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
 
             imageView.setTag(imageUrl);
 

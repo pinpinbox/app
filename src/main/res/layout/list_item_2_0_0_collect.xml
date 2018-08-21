@@ -81,8 +81,8 @@
 
             <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                 android:id="@+id/userImg"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/rDetailListImg"
@@ -90,7 +90,7 @@
                 android:visibility="gone"
                 app:siBorderColor="@color/pinpinbox_2_0_0_divider"
                 app:siBorderWidth="0.5dp"
-                app:siRadius="32dp" />
+                app:siRadius="28dp" />
 
 
             <LinearLayout

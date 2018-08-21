@@ -60,10 +60,6 @@ public class TransformationControl {
         @Override
         public Bitmap transform(Bitmap source) {
 
-            if(source==null){
-                MyLog.Set("e", TransformationControl.class, "source==null");
-            }
-
             Bitmap output = Bitmap.createBitmap(source.getWidth(),
                     source.getHeight(), Bitmap.Config.RGB_565);
 
