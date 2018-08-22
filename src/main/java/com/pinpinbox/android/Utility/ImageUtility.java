@@ -40,7 +40,7 @@ public class ImageUtility {
                         @Override
                         public void onSuccess() {
                             imageView.setAlpha(0f);
-                            imageView.animate().setDuration(200).alpha(1f).start();
+                            imageView.animate().setDuration(200).alpha(0.9f).start();
                         }
 
                         @Override
