@@ -135,9 +135,9 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
 
     /*login*/
-    private TextView tvLoginLogin, tvLoginToRegister, tvLoginFacebook, tvAboutUs, tvLoginTitle;
+    private TextView tvLoginLogin, tvLoginToRegister, tvLoginFacebook, tvAboutUs, tvLoginTitle, tvLoginScanToRegister;
     private EditText edLoginMail, edLoginPassword;
-    private ImageView loginGetPasswordImg, scanImg;
+    private ImageView loginGetPasswordImg;
 
     /*register*/
     private TextView tvRegisterTitle, tvRegisterNext, tvRegisterFacebook, tvRegisterNorm,
@@ -471,6 +471,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         tvLoginFacebook = (TextView) vLogin.findViewById(R.id.tvLoginFacebook);
         tvAboutUs = (TextView) vLogin.findViewById(R.id.tvAboutUs);
         tvLoginTitle = (TextView) vLogin.findViewById(R.id.tvLoginTitle);
+        tvLoginScanToRegister = (TextView)vLogin.findViewById(R.id.tvLoginScanToRegister);
 
         edLoginMail = (EditText) vLogin.findViewById(R.id.edLoginMail);
         edLoginPassword = (EditText) vLogin.findViewById(R.id.edLoginPassword);
@@ -486,7 +487,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         });
 
         loginGetPasswordImg = (ImageView) vLogin.findViewById(R.id.loginGetPasswordImg);
-        scanImg = (ImageView) vLogin.findViewById(R.id.scanImg);
+
+
 
         if (scanIntent) {
 
@@ -866,7 +868,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         tvLoginFacebook.setOnClickListener(this);
         tvAboutUs.setOnClickListener(this);
         loginGetPasswordImg.setOnClickListener(this);
-        scanImg.setOnClickListener(this);
+        tvLoginScanToRegister.setOnClickListener(this);
 
         /*register*/
         tvRegisterNext.setOnClickListener(this);
@@ -2539,7 +2541,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 toGetPassword();
                 break;
 
-            case R.id.scanImg:
+            case R.id.tvLoginScanToRegister:
 
 
                 switch (checkPermission(mActivity, Manifest.permission.CAMERA)) {
