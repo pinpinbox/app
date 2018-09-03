@@ -44,7 +44,7 @@
                 android:singleLine="true"
                 android:text="@string/pinpinbox_2_0_0_other_message_photo_uploading"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="12sp" />
+                android:textSize="@dimen/ppb200_common_text_small" />
 
         </RelativeLayout>
 
@@ -57,7 +57,7 @@
             android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_other_text_count_uploading"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/ppb200_common_text_first" />
 
 
     </LinearLayout>

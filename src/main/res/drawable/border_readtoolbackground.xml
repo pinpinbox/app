@@ -3,15 +3,15 @@
 
     <stroke
         android:width="0dp"
-        android:color="@color/pinpinbox_color_dark" />
+        android:color="@color/pinpinbox_2_0_0_first_grey" />
 
     <solid android:color="@color/pinpinbox_color_black_alpha08" />
 
 
     <corners
 
-        android:bottomLeftRadius="8dp"
-        android:bottomRightRadius="8dp"
+        android:bottomLeftRadius="@dimen/ppb200_radius_general"
+        android:bottomRightRadius="@dimen/ppb200_radius_general"
         android:topLeftRadius="0dp"
         android:topRightRadius="0dp" />
 

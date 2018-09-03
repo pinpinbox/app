@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pinpinbox_color_dark">
+    android:background="@color/pinpinbox_2_0_0_first_grey">
 
     <ImageView
         android:id="@+id/imageView11"
@@ -17,7 +17,7 @@
         android:id="@+id/isCropImg"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:background="@color/pinpinbox_color_dark_click"
+        android:background="#ffffff"
         android:scaleType="centerInside"
         android:layout_alignTop="@+id/btCrop"
         android:layout_toRightOf="@+id/btCrop"

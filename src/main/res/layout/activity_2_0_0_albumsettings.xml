@@ -3,7 +3,7 @@
     android:id="@+id/rBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/pinpinbox2_0_0_activity_bg">
 
 
     <ScrollView
@@ -214,11 +214,11 @@
 
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                style="@style/ppb200_divider_list"
                 android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                />
+
 
             <!--*******************************************************************************************************-->
             <!--其他設定-->
@@ -291,11 +291,10 @@
             </LinearLayout>
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                style="@style/ppb200_divider_list"
                 android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                />
 
             <!--*******************************************************************************************************-->
             <!-- P 點設定-->
@@ -380,13 +379,11 @@
 
             </LinearLayout>
 
-
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                style="@style/ppb200_divider_list"
                 android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                />
 
             <!--*******************************************************************************************************-->
             <!-- 進階設定-->
@@ -479,14 +476,6 @@
                         android:scrollbars="none" />
                 </RelativeLayout>
 
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
-                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                    android:background="@color/pinpinbox_2_0_0_divider"
-                    android:visibility="gone" />
 
             </LinearLayout>
 

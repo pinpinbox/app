@@ -80,7 +80,7 @@
                 android:includeFontPadding="false"
                 android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_dialog_message_directions_works_contribute"
-                android:textColor="@color/pinpinbox_color_dark"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_second" />
 
             <LinearLayout

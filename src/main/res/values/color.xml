@@ -25,6 +25,10 @@
     <color name="toast_pink">#e91e63</color><!--pink500-->
     <color name="toast_teal">#00bfa5</color><!--tealaccent700-->
 
+
+    <color name="pinpinbox2_0_0_activity_bg">#ffffff</color>
+
+
     <!--fd9b64-->
     <color name="pinpinbox2_0_0_gradient_dark_eventexchange">#d27d4d</color>
     <color name="pinpinbox2_0_0_gradient_light_eventexchange">#ffb184</color>
@@ -90,7 +94,7 @@
     <color name="pinpinbox_2_0_0_gradient_light_grey">#ededed</color>
     <color name="pinpinbox_2_0_0_first_grey">#4d4d4d</color>
     <color name="pinpinbox_2_0_0_second_grey">#d4d4d4</color>
-    <color name="pinpinbox_2_0_0_third_grey">#e8e8e8</color>
+    <color name="pinpinbox_2_0_0_third_grey">#f2f2f2</color>
     <color name="pinpinbox_2_0_0_hint_grey">#9e9e9e</color>
 
 
@@ -135,8 +139,7 @@
     <color name="pinpinbox_color_unclick_gray">#9e9e9e</color>
 
     <color name="pinpinbox_color_bluegreen">#ff00bdc0</color>
-    <color name="pinpinbox_color_dark">#FF424242</color>
-    material_grey_800
+
     <color name="pinpinbox_color_red">#ffcb4774</color>
 
     <color name="pinpinbox_color_gray">#646464</color>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:background="@color/white">
+    android:background="@color/pinpinbox2_0_0_activity_bg">
 
 
     <com.pinpinbox.android.Views.SuperSwipeRefreshLayout

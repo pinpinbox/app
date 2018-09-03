@@ -4,7 +4,7 @@
     android:id="@+id/rBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/pinpinbox2_0_0_activity_bg"
     android:fitsSystemWindows="false">
 
     <RelativeLayout style="@style/ppb200_action_bar_with_status">
@@ -433,7 +433,7 @@
             android:layout_width="52dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -456,7 +456,7 @@
                 android:singleLine="true"
                 android:text="0/0"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="12sp" />
+                android:textSize="@dimen/ppb200_common_text_small" />
 
 
         </LinearLayout>

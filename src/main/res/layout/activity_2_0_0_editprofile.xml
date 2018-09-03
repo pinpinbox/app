@@ -52,7 +52,7 @@
                             android:alpha="0.2"
                             android:scaleType="centerCrop"
                             android:src="@drawable/member_back_head"
-                            app:riv_border_color="@color/pinpinbox_2_0_0_secondary_text"
+                            app:riv_border_color="@color/pinpinbox_2_0_0_divider"
                             app:riv_border_width="0.5dp"
                             app:riv_corner_radius="96dp"
                             app:riv_mutate_background="true"
@@ -127,7 +127,7 @@
                     android:id="@+id/linPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:orientation="vertical"
                     android:visibility="gone">
 

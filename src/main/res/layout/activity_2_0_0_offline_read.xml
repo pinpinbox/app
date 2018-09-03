@@ -28,7 +28,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/pinpinbox_color_dark"
+            android:background="@color/pinpinbox_2_0_0_first_grey"
             android:layout_alignParentBottom="true"
             />
 
@@ -107,7 +107,7 @@
                 android:id="@+id/aimg"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_color_dark" />
+                android:background="@color/pinpinbox_2_0_0_first_grey" />
 
 
             <com.pinpinbox.android.Views.MyGallery

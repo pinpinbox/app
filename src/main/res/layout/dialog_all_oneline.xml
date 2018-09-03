@@ -61,7 +61,7 @@
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="6dp"
                     android:text=""
-                    android:textColor="@color/pinpinbox_color_dark"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="16sp"
                     android:layout_gravity="center_vertical"/>
 

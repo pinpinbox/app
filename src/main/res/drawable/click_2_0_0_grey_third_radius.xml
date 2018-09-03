@@ -3,6 +3,6 @@
 
     <item android:state_pressed="true" android:drawable="@drawable/border_2_0_0_grey_second_radius" />
     <item android:state_focused="true" android:drawable="@drawable/border_2_0_0_grey_second_radius" />
-    <item android:drawable="@drawable/border_2_0_0_grey_third_for_button_radius" />
+    <item android:drawable="@drawable/border_2_0_0_grey_third_radius" />
 
 </selector>

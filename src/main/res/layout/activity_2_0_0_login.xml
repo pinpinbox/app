@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/rBackground"
     android:fitsSystemWindows="false"
-    android:background="@color/white">
+    android:background="@color/pinpinbox2_0_0_activity_bg">
 
 
 

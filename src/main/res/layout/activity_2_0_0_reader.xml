@@ -101,7 +101,7 @@
                 android:id="@+id/aimg"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_color_dark" />
+                android:background="@color/pinpinbox_2_0_0_first_grey" />
 
             <LinearLayout
                 android:layout_width="match_parent"

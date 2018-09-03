@@ -4,7 +4,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.pinpinbox.android"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 27 //20171102 2.2.9使用24 API25已上手機adobe會出錯
         versionCode 148
         versionName "2.5.70"
@@ -19,11 +19,8 @@ android {
         lintOptions {
             abortOnError false
             checkReleaseBuilds false
-// 防止在发布的时候出现因MissingTranslation导致Build Failed!
             disable 'MissingTranslation'
         }
-
-//        manifestPlaceholders = [appPackageName: "${applicationId}"]
 
 
     }
@@ -102,8 +99,6 @@ android {
         abi {
             enable true
             reset()
-//            include 'armeabi-v7a', 'x86'
-//            include 'x86', 'armeabi-v7a', 'mips'
         }
     }
 

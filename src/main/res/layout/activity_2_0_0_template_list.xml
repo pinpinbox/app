@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    android:background="@color/white">
+    android:background="@color/pinpinbox2_0_0_activity_bg">
 
 
     <GridView

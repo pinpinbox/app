@@ -36,7 +36,7 @@
             android:id="@+id/name"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/pinpinbox_color_dark"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
             android:layout_marginBottom="4dp"/>
 
         <ImageView

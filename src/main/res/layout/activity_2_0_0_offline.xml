@@ -31,7 +31,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-            android:background="@drawable/click_2_0_0_grey_second_radius"
+            android:background="@drawable/click_2_0_0_grey_third_radius"
             android:gravity="center_vertical"
             android:letterSpacing="0.1"
             android:paddingLeft="8dp"

@@ -96,9 +96,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="@dimen/ppb200_common_text_first"
                 android:text="抽獎或兌換功能要先收藏才能使用唷"
-                android:textColor="@color/pinpinbox_color_dark"/>
+                android:textColor="@color/pinpinbox_2_0_0_first_text"/>
 
             <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/btCollect"

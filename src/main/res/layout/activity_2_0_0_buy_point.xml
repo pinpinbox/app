@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    android:background="@color/white">
+    android:background="@color/pinpinbox2_0_0_activity_bg">
 
 
     <in.srain.cube.views.GridViewWithHeaderAndFooter
@@ -15,8 +15,8 @@
         android:scrollbars="none"
         android:columnWidth="98dp"
         android:horizontalSpacing="16dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"/>
+        android:paddingRight="@dimen/ppb200_padding_margin_first"
+        android:paddingLeft="@dimen/ppb200_padding_margin_first"/>
     <!--android:stretchMode="columnWidth"-->
 
     <RelativeLayout

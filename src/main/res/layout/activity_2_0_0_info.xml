@@ -3,7 +3,7 @@
     android:id="@+id/rBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/pinpinbox2_0_0_activity_bg"
     android:fitsSystemWindows="false">
     <!--android:background="@color/white"-->
 
@@ -85,7 +85,7 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/ppb200_common_text_first"
                             android:textStyle="bold" />
 
                         <ImageView
@@ -116,7 +116,7 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/ppb200_common_text_first"
                             android:textStyle="bold" />
 
                         <ImageView
@@ -148,7 +148,7 @@
                             android:letterSpacing="0.1"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/ppb200_common_text_first"
                             android:textStyle="bold" />
 
                         <ImageView
@@ -183,7 +183,7 @@
                     android:layout_height="16dp"
                     android:layout_gravity="right"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                     android:orientation="horizontal"
                     android:visibility="visible">
 

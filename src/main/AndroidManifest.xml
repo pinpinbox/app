@@ -7,13 +7,9 @@
 
     <!--包名 com.pinpinbox.android-->
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="23" />
-
-    <!-- android:minSdkVersion="9" -->
-    <!-- android:targetSdkVersion="23" -->
-
+    <!--<uses-sdk-->
+        <!--android:minSdkVersion="18"-->
+        <!--android:targetSdkVersion="23" />-->
 
     <!-- 支持多种分辨率 -->
     <!-- <supports-screens -->
@@ -137,7 +133,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
 
@@ -784,6 +780,39 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+
+
+
+
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorStickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorTextActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
+
+
+
 
 
     </application>

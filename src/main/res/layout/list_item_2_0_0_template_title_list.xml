@@ -14,7 +14,7 @@
            android:layout_height="wrap_content"
            android:text=""
            android:textSize="16sp"
-           android:textColor="@color/pinpinbox_color_dark"
+           android:textColor="@color/pinpinbox_2_0_0_first_text"
            android:layout_marginTop="16dp"
            android:layout_marginBottom="16dp"
            />

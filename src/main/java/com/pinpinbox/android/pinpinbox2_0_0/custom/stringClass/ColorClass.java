@@ -31,7 +31,7 @@ public class ColorClass {
 
     public static final String GREY_SECOND = "#d4d4d4";
 
-    public static final String GREY_THIRD = "#e8e8e8";
+    public static final String GREY_THIRD = "#f2f2f2";
 
     public static final String PINK_FRIST = "#f0e91e63";
 
