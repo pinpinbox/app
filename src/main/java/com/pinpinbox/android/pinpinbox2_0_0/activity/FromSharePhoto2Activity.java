@@ -192,7 +192,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 }
             });
 
-            dlgLogin.getBlurView().setOnClickListener(new View.OnClickListener() {
+            dlgLogin.getDarkBg().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dlgLogin.dismiss();
@@ -250,7 +250,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 }
             });
 
-            dlgCheckEdit.getBlurView().setOnClickListener(new View.OnClickListener() {
+            dlgCheckEdit.getDarkBg().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dlgCheckEdit.dismiss();

@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="false">
 
 
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@color/pinpinbox2_0_0_black_alpha" />-->
-
-    <eightbitlab.com.blurview.BlurView
-        android:id="@+id/blurview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:blurOverlayColor="@color/blur_black"
-        android:alpha="0"/>
+    <View
+        android:id="@+id/vDarkBg"
+        style="@style/ppb200_dialog_bg" />
 
 
     <TextView
         android:id="@+id/tvTitle"
         style="@style/ppb200_detail_name"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
         android:layout_above="@+id/bannerImg"
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:text="@string/pinpinbox_2_0_0_title_latest_event"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 
 
     <ImageView
@@ -35,9 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        />
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/tvClose"
@@ -46,13 +37,12 @@
         android:layout_below="@+id/bannerImg"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-        android:text="@string/pinpinbox_2_0_0_other_text_i_know"
-        android:padding="@dimen/ppb200_padding_margin_first"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:background="@drawable/click_2_0_0_default"
         android:letterSpacing="0.1"
-        android:background="@drawable/click_2_0_0_default"/>
-
+        android:padding="@dimen/ppb200_padding_margin_first"
+        android:text="@string/pinpinbox_2_0_0_other_text_i_know"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

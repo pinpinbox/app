@@ -106,7 +106,7 @@ public class FromService2Activity extends Activity {
 
             }
         }
-        d.getBlurView().setOnClickListener(new View.OnClickListener() {
+        d.getDarkBg().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 d.dismiss();

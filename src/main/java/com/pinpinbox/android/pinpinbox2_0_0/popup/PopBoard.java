@@ -7,7 +7,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -74,8 +73,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
@@ -100,7 +97,7 @@ public class PopBoard {
     /***********************************************/
     private PopupWindow popupWindow;
     private RelativeLayout rBackground, rShow, rTag;
-    private BlurView blurView;
+    private View vDarkBg;
     private View v;
     private RecyclerView rvBoard, rvTag;
     private EditText edText;
@@ -1418,7 +1415,7 @@ public class PopBoard {
 
 
     private void resetBackground() {
-        ViewPropertyAnimator alphaTo0 = blurView.animate();
+        ViewPropertyAnimator alphaTo0 = vDarkBg.animate();
         alphaTo0.setDuration(intAnimDuration)
                 .alpha(0)
                 .setListener(new Animator.AnimatorListener() {
@@ -1432,8 +1429,8 @@ public class PopBoard {
                         MyLog.Set("d", PopupCustom.class, "onAnimationEnd");
 
                                  /*移除模糊背景*/
-                        rBackground.removeView(blurView);
-                        blurView = null;
+                        rBackground.removeView(vDarkBg);
+                        vDarkBg = null;
                     }
 
                     @Override
@@ -1466,7 +1463,7 @@ public class PopBoard {
         setBlur(rBackground);
 
         /*彈出並顯示並模糊背景*/
-        ViewPropertyAnimator alphaTo1 = blurView.animate();
+        ViewPropertyAnimator alphaTo1 = vDarkBg.animate();
         alphaTo1.setDuration(intAnimDuration)
                 .alpha(1)
                 .start();
@@ -1483,26 +1480,16 @@ public class PopBoard {
     private void setBlur(RelativeLayout rBackground) {
 
         /*建立模糊視窗*/
-        blurView = new BlurView(mActivity);
-        blurView.setLayoutParams(new FrameLayout.LayoutParams(
+        vDarkBg = new View(mActivity);
+        vDarkBg.setLayoutParams(new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT));
-        blurView.setOverlayColor(Color.parseColor("#82000000"));
-
-        final float radius = 4f;
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-
+        vDarkBg.setBackgroundColor(Color.parseColor(ColorClass.BLACK_ALPHA));
         /*先設置為透明*/
-        blurView.setAlpha(0);
+        vDarkBg.setAlpha(0);
 
         /*添加置background*/
-        rBackground.addView(blurView);
+        rBackground.addView(vDarkBg);
 
 
     }

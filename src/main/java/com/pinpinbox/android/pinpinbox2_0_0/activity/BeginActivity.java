@@ -122,7 +122,7 @@ public class BeginActivity extends DraggerActivity {//02
         final DialogV2Custom d = new DialogV2Custom(mActivity);
         d.setStyle(DialogStyleClass.TIMEOUT);
         d.setConnectInstability(connectInstability);
-        d.getBlurView().setOnClickListener(new View.OnClickListener() {
+        d.getDarkBg().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 d.dismiss();

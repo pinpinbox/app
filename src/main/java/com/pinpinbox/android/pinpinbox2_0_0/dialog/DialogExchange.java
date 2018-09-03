@@ -4,19 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * Created by kevin9594 on 2018/3/17.
@@ -28,9 +23,6 @@ public class DialogExchange {
 
     public Activity mActivity;
     public Dialog mDialog;
-
-    private BlurView blurView;
-
 
     public DialogExchange(Activity activity){
 
@@ -49,8 +41,6 @@ public class DialogExchange {
 
         RelativeLayout rClose = (RelativeLayout)mDialog.findViewById(R.id.close);
         TextView tvClose = (TextView)mDialog.findViewById(R.id.tvClose);
-        blurView = (BlurView) mDialog.findViewById(R.id.blurview);
-
 
         rClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +65,6 @@ public class DialogExchange {
             }
         });
 
-        setBlur();
-
-
     }
 
 
@@ -93,16 +80,7 @@ public class DialogExchange {
         }
     }
 
-    private void setBlur(){
-        final float radius = 4f;
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-    }
+
 
     public void setDismissExcute(DismissExcute dismissExcute) {
         this.dismissExcute = dismissExcute;

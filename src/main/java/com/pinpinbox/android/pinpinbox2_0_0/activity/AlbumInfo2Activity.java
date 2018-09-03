@@ -504,7 +504,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         d.getTvLeftOrTop().setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
         d.getTvLeftOrTop().setBackgroundResource(R.drawable.click_2_0_0_default);
 
-        d.getBlurView().setOnClickListener(new View.OnClickListener() {
+        d.getDarkBg().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 d.dismiss();

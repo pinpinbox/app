@@ -20,14 +20,12 @@
 
     <drawable name="background">#ffffff</drawable>
 
-
-
     <color name="toast_pink">#e91e63</color><!--pink500-->
     <color name="toast_teal">#00bfa5</color><!--tealaccent700-->
 
 
     <color name="pinpinbox2_0_0_activity_bg">#ffffff</color>
-
+    <color name="pinpinbox2_0_0_dialog_bg">#c8000000</color>
 
     <!--fd9b64-->
     <color name="pinpinbox2_0_0_gradient_dark_eventexchange">#d27d4d</color>

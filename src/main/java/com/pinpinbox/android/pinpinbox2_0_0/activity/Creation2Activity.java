@@ -2347,6 +2347,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 //                .saveWithNoChanges(false).withPreviewSize(1024)
 //                .build();
 
+
         ToolsFactory.Tools[] tools = {
                 ToolsFactory.Tools.ENHANCE,
                 ToolsFactory.Tools.CROP,
@@ -2374,6 +2375,15 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 .withOutputSize(MegaPixels.Mp5).withNoExitConfirmation(true)
                 .saveWithNoChanges(false).withPreviewSize(1024)
                 .build();
+
+//        Intent dsPhotoEditorIntent = new Intent(this, DsPhotoEditorActivity.class);
+//
+//        dsPhotoEditorIntent.setData(fromUri);
+//
+//        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_API_KEY, KeysForSKD.ADOBE_CREATIVE_SDK_CLIENT_SECRET);
+//
+//        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, fromUri);
+
 
 
         if (fragmentSelectPhoto2 != null) {

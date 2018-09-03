@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,13 +19,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * Created by vmage on 2017/1/18.
@@ -49,7 +46,7 @@ public class PopupList {
 
     private RelativeLayout rBackground;
 
-    private BlurView blurView;
+    private View vDarkBg;
 
     private View vPopup;
 
@@ -104,7 +101,7 @@ public class PopupList {
                 }
 
                 /*恢復背景*/
-                ViewPropertyAnimator alphaTo0 = blurView.animate();
+                ViewPropertyAnimator alphaTo0 = vDarkBg.animate();
                 alphaTo0.setDuration(intAnimDuration)
                         .alpha(0)
                         .setListener(new Animator.AnimatorListener() {
@@ -118,8 +115,8 @@ public class PopupList {
                                 MyLog.Set("d", PopupCustom.class, "onAnimationEnd");
 
                                  /*移除模糊背景*/
-                                rBackground.removeView(blurView);
-                                blurView = null;
+                                rBackground.removeView(vDarkBg);
+                                vDarkBg = null;
 
                                 if (dissmissWorks != null) {
                                     dissmissWorks.excute();
@@ -167,7 +164,7 @@ public class PopupList {
         setBlur(rBackground);
 
         /*彈出並顯示並模糊背景*/
-        ViewPropertyAnimator alphaTo1 = blurView.animate();
+        ViewPropertyAnimator alphaTo1 = vDarkBg.animate();
         alphaTo1.setDuration(intAnimDuration)
                 .alpha(1)
                 .start();
@@ -189,26 +186,17 @@ public class PopupList {
 
     private void setBlur(RelativeLayout rBackground) {
         /*建立模糊視窗*/
-        blurView = new BlurView(mActivity);
-        blurView.setLayoutParams(new FrameLayout.LayoutParams(
+        vDarkBg = new View(mActivity);
+        vDarkBg.setLayoutParams(new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT));
-        blurView.setOverlayColor(Color.parseColor("#82000000"));
-
-        final float radius = 4f;
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
+        vDarkBg.setBackgroundColor(Color.parseColor(ColorClass.BLACK_ALPHA));
 
         /*先設置為透明*/
-        blurView.setAlpha(0);
+        vDarkBg.setAlpha(0);
 
         /*添加置background*/
-        rBackground.addView(blurView);
+        rBackground.addView(vDarkBg);
 
     }
 

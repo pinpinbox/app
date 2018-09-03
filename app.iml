@@ -201,7 +201,6 @@
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.zhy:mpermission-api-1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.zhy:mpermission-annotation:1.0.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.eightbitlab:blurview-1.1.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.4@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex:rxjava-async-util:0.21.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-26.0.1" level="project" />

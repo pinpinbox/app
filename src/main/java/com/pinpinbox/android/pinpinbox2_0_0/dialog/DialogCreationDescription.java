@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -12,9 +11,6 @@ import android.widget.ImageView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * Created by vmage on 2016/8/30.
@@ -26,7 +22,6 @@ public class DialogCreationDescription {
 
     private ImageView confirmImg, cancelImg;
     private EditText etDescription;
-    private BlurView blurView;
 
     public String string;
 
@@ -67,14 +62,4 @@ public class DialogCreationDescription {
         return this.mDialog;
     }
 
-    private void setBlur(){
-        final float radius = 4f;
-        final View decorView = activity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(activity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-    }
 }

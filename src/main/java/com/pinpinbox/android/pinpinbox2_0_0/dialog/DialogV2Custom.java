@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
@@ -15,21 +14,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * Created by kevin9594 on 2017/2/11.
@@ -46,7 +42,7 @@ public class DialogV2Custom {
     private ImageView bgImg, smallImg;
     private RelativeLayout rTopBackground;
     private LinearLayout linBottom;
-    private BlurView blurView;
+    private View vDarkBg;
 
     private int orientation = LinearLayout.HORIZONTAL;
 
@@ -73,7 +69,7 @@ public class DialogV2Custom {
         tvRightOrBottom = (TextView) mDialog.findViewById(R.id.tvRightOrBottom);
         tvMessage = (TextView) mDialog.findViewById(R.id.tvMessage);
 
-        blurView = (BlurView) mDialog.findViewById(R.id.blurview);
+        vDarkBg = mDialog.findViewById(R.id.vDarkBg);
         bgImg = (ImageView) mDialog.findViewById(R.id.bgImg);
         smallImg = (ImageView) mDialog.findViewById(R.id.smallImg);
 
@@ -82,10 +78,6 @@ public class DialogV2Custom {
 
 
         TextUtility.setBold(tvRightOrBottom, true);
-
-
-        setBlur();
-
 
     }
 
@@ -118,8 +110,8 @@ public class DialogV2Custom {
         return this.linBottom;
     }
 
-    public BlurView getBlurView() {
-        return this.blurView;
+    public View getDarkBg() {
+        return this.vDarkBg;
     }
 
     public Dialog getmDialog() {
@@ -198,20 +190,6 @@ public class DialogV2Custom {
 
     }
 
-
-    private void setBlur() {
-
-        final float radius = 4f;
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-
-
-    }
 
     /**
      * 設定 dialog 風格
@@ -297,7 +275,7 @@ public class DialogV2Custom {
             }
         });
 
-        blurView.setOnClickListener(new View.OnClickListener() {
+        vDarkBg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -376,7 +354,7 @@ public class DialogV2Custom {
         tvLeftOrTop.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
         tvLeftOrTop.setBackgroundResource(R.drawable.click_2_0_0_default);
 
-        blurView.setOnClickListener(new View.OnClickListener() {
+        vDarkBg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
@@ -465,7 +443,7 @@ public class DialogV2Custom {
             }
         });
 
-        blurView.setOnClickListener(new View.OnClickListener() {
+        vDarkBg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();

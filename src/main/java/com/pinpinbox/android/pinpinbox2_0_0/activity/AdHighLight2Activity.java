@@ -1,6 +1,5 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
@@ -19,8 +18,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
-
-import eightbitlab.com.blurview.BlurView;
 
 /**
  * Created by vmage on 2017/11/22.
@@ -31,7 +28,8 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
     private ImageView bannerImg;
 
     private TextView tvClose;
-    private BlurView blurview;
+
+    private View vDarkBg;
 
     private String strBannerUrl;
 
@@ -40,7 +38,6 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_0_0_adfocus);
 
-        setLastActivityBlur();
 
         init();
 
@@ -52,29 +49,16 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
     }
 
-    private void setLastActivityBlur() {
-
-        blurview = (BlurView) findViewById(R.id.blurview);
-
-        Activity activity = SystemUtility.getActivity(Main2Activity.class.getSimpleName());
-
-        if (activity != null) {
-
-            ViewControl.setBlur(activity, blurview, 4f);
-
-        }
-
-    }
 
     private void init() {
 
+        vDarkBg = findViewById(R.id.vDarkBg);
 
         bannerImg = (ImageView) findViewById(R.id.bannerImg);
 
         tvClose = (TextView) findViewById(R.id.tvClose);
 
         TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
-
 
         tvClose.setOnClickListener(this);
 
@@ -107,7 +91,7 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
                             supportStartPostponedEnterTransition();
 
-                            ViewControl.AlphaTo1(blurview);
+                            ViewControl.AlphaTo1(vDarkBg);
 
 
                         }
@@ -159,10 +143,7 @@ public class AdHighLight2Activity extends FragmentActivity implements View.OnCli
 
         if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {
 
-
-            ViewControl.AlphaTo0(blurview);
-
-
+            ViewControl.AlphaTo0(vDarkBg);
             supportFinishAfterTransition();
 
         } else {

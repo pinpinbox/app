@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -12,11 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.TextUtility;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 
 /**
  * Created by vmage on 2016/7/12.
@@ -29,7 +25,7 @@ public class DialogHandselPoint{
     private RelativeLayout rClose;
     private TextView tvTitle, tvRestriction, tvDescription, tvLink;
     private ImageView img;
-    private BlurView blurView;
+
 
     public DialogHandselPoint(Activity activity) {
         this.mActivity = activity;
@@ -61,11 +57,8 @@ public class DialogHandselPoint{
         tvRestriction = (TextView)mDialog.findViewById(R.id.tvRestriction);
         tvLink = (TextView) mDialog.findViewById(R.id.tvLink);
         img = (ImageView)mDialog.findViewById(R.id.img);
-        blurView = (BlurView)mDialog.findViewById(R.id.blurview);
 
         TextUtility.setBold(tvTitle, true);
-
-        setBlur();
 
         mDialog.show();
     }
@@ -94,18 +87,6 @@ public class DialogHandselPoint{
     public Dialog getDialog(){
         return this.mDialog;
     }
-
-    private void setBlur(){
-        final float radius = 4f;
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-    }
-
 
 
 }

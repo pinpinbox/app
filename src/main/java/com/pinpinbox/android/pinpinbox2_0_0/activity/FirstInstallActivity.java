@@ -281,7 +281,7 @@ public class FirstInstallActivity extends DraggerActivity {
                         d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_pop_go_to_google_play);
                         d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_new_version);
 
-                        d.getBlurView().setOnClickListener(new View.OnClickListener() {
+                        d.getDarkBg().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 d.dismiss();
@@ -383,7 +383,7 @@ public class FirstInstallActivity extends DraggerActivity {
                 d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_pop_go_to_google_play);
                 d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_new_version);
 
-                d.getBlurView().setOnClickListener(new View.OnClickListener() {
+                d.getDarkBg().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         d.dismiss();

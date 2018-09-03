@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -12,11 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.TextUtility;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 
 /**
  * Created by kevin9594 on 2016/5/27.
@@ -29,8 +25,6 @@ public class DialogCheckContribute {
     private RelativeLayout rClose;
     private TextView tvY, tvN, tvTitle, tvDirections;
     private ImageView coverImg;
-    private BlurView blurView;
-
 
     public DialogCheckContribute(final Activity activity) {
         this.activity = activity;
@@ -55,7 +49,6 @@ public class DialogCheckContribute {
     private void init(){
 
         rClose = (RelativeLayout) mDialog.findViewById(R.id.close);
-        blurView = (BlurView)mDialog.findViewById(R.id.blurview);
 
         tvY = (TextView)mDialog.findViewById(R.id.y);
         tvN = (TextView)mDialog.findViewById(R.id.n);
@@ -85,8 +78,6 @@ public class DialogCheckContribute {
                 mDialog.dismiss();
             }
         });
-
-        setBlur();
 
     }
 
@@ -118,15 +109,5 @@ public class DialogCheckContribute {
         return this.coverImg;
     }
 
-    private void setBlur(){
-        final float radius = 4f;
-        final View decorView = activity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(activity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-    }
 
 }

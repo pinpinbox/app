@@ -1,14 +1,9 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.widget.RelativeLayout;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * Created by vmage on 2016/12/19.
@@ -55,30 +50,6 @@ public class ViewControl {
         root.setAlpha(1);
     }
 
-    /**
-     * radius range => 0~25
-     */
-    public static void setBlur(Activity mActivity, BlurView blurView, float radius) {
-        //final float radius = 4f;
-//        final Drawable windowBackground = v.getBackground();
-//        blurView.setupWith(v)
-//                .windowBackground(windowBackground)
-//                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-//                .blurRadius(radius);
-
-
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-
-
-
-
-    }
 
     public static void setMargins(View v, int l, int t, int r, int b) {
         if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -13,9 +12,6 @@ import android.widget.RelativeLayout;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * Created by vmage on 2016/12/20.
@@ -27,8 +23,6 @@ public class DialogQRCode {
 
     private RelativeLayout rClose;
     public ImageView bigQRcodeImg;
-    private BlurView blurView;
-
     public String string;
 
 
@@ -48,7 +42,6 @@ public class DialogQRCode {
         window.setContentView(R.layout.dialog_2_0_0_qrcode);
 
         rClose = (RelativeLayout)mDialog.findViewById(R.id.close);
-        blurView = (BlurView) mDialog.findViewById(R.id.blurview);
 
         bigQRcodeImg = (ImageView)mDialog.findViewById(R.id.bigQRcodeImg);
 
@@ -59,12 +52,7 @@ public class DialogQRCode {
             }
         });
 
-
         bigQRcodeImg.setImageBitmap(bitmap);
-
-
-        setBlur();
-
 
     }
 
@@ -79,16 +67,4 @@ public class DialogQRCode {
             mDialog.dismiss();
         }
     }
-
-    private void setBlur(){
-        final float radius = 4f;
-        final View decorView = mActivity.getWindow().getDecorView();
-        final View rootView = decorView.findViewById(android.R.id.content);
-        final Drawable windowBackground = decorView.getBackground();
-        blurView.setupWith(rootView)
-                .windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mActivity, true)) //Preferable algorithm, needs RenderScript support mode enabled
-                .blurRadius(radius);
-    }
-
 }

@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.6"
-        android:background="@color/black" />
+
+    <View
+        android:id="@+id/vDarkBg"
+        style="@style/ppb200_dialog_bg" />
 
 
     <RelativeLayout
