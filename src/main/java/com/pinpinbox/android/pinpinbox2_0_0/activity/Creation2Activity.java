@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.os.Process;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -41,11 +42,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adobe.creativesdk.aviary.AdobeImageIntent;
-import com.adobe.creativesdk.aviary.internal.filters.ToolsFactory;
-import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
 import com.blankj.utilcode.util.SizeUtils;
 import com.czt.mp3recorder.MP3Recorder;
+import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
+import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.CreateAlbum.ChangeItemAdapter;
@@ -65,6 +65,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
@@ -116,6 +117,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -177,6 +179,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private List<ItemAlbumSettings> audioList;
 
     private JSONArray jsonArray;//已有相片張數
+    private File downloadFile;
     private File uploadFile;//上傳的photo
     private Bitmap bmp;
 
@@ -388,7 +391,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             boolean isFromlocal = bundle.getBoolean(Key.fromlocal, false);
 
-            if(isFromlocal){
+            if (isFromlocal) {
                 isModify = true;
             }
 
@@ -413,19 +416,19 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         /***********************************************************************************************************/
 
 
-        try{
+        try {
 
             File fileAviary = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.pathName_FromAviary);
-            if(fileAviary.exists()){
+            if (fileAviary.exists()) {
                 fileAviary.delete();
             }
 
-            File fileRecord = new File(DirClass.ExternalFileDir(mActivity)  + DirClass.getMyDir(id) + DirClass.pathName_RecordMp3);
-            if(fileRecord.exists()){
+            File fileRecord = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.pathName_RecordMp3);
+            if (fileRecord.exists()) {
                 fileRecord.delete();
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
 
@@ -563,18 +566,15 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         TextUtility.setBold(tvCheck, true);
 
 
-        if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
-            aviaryImg.setVisibility(View.VISIBLE);
-        } else {
-
-            if (BuildConfig.FLAVOR.equals("w3_private")) {
-                aviaryImg.setVisibility(View.VISIBLE);
-            } else {
-                aviaryImg.setVisibility(View.GONE);
-            }
-
-
-        }
+//        if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
+//            aviaryImg.setVisibility(View.VISIBLE);
+//        } else {
+//            if (BuildConfig.FLAVOR.equals("w3_private")) {
+//                aviaryImg.setVisibility(View.VISIBLE);
+//            } else {
+//                aviaryImg.setVisibility(View.GONE);
+//            }
+//        }
 
 
     }
@@ -1122,7 +1122,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         MyLog.Set("e", getClass(), "getExternalFilesDir(null).getAbsolutePath() => " + getExternalFilesDir(null).getAbsolutePath());
 
-        mp3Path = DirClass.ExternalFileDir(mActivity)  + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
+        mp3Path = DirClass.ExternalFileDir(mActivity) + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
 
         MyLog.Set("e", getClass(), mp3Path);
 
@@ -1142,7 +1142,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             mp3Recorder = new MP3Recorder(fMp3);
             mp3Recorder.start();
             audioRecordingImg.setImageResource(R.drawable.ic200_recording_white);
-            audioRecordingImg.setPadding(SizeUtils.dp2px(10),SizeUtils.dp2px(10),SizeUtils.dp2px(10),SizeUtils.dp2px(10));
+            audioRecordingImg.setPadding(SizeUtils.dp2px(10), SizeUtils.dp2px(10), SizeUtils.dp2px(10), SizeUtils.dp2px(10));
             rippleBackgroundRecording.startRippleAnimation();
             rippleBackgroundRecording.setVisibility(View.VISIBLE);
 
@@ -1163,10 +1163,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-    private void resetRecordingImg(){
+    private void resetRecordingImg() {
 
         audioRecordingImg.setImageResource(R.drawable.ic200_micro_white);
-        audioRecordingImg.setPadding(SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6),SizeUtils.dp2px(6));
+        audioRecordingImg.setPadding(SizeUtils.dp2px(6), SizeUtils.dp2px(6), SizeUtils.dp2px(6), SizeUtils.dp2px(6));
 
     }
 
@@ -2153,9 +2153,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             /*不為影片*/
 
-            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
-                aviaryImg.setVisibility(View.VISIBLE);
-            }
+//            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
+            aviaryImg.setVisibility(View.VISIBLE);
+//            }
 
             videoPlayImg.setVisibility(View.GONE);
 
@@ -2179,9 +2179,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             rAudioRecording.setVisibility(View.GONE);
             rPlay_Delete.setVisibility(View.GONE);
-            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
-                aviaryImg.setVisibility(View.GONE);
-            }
+//            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
+            aviaryImg.setVisibility(View.GONE);
+//            }
 
             videoPlayImg.setVisibility(View.VISIBLE);
 
@@ -2309,20 +2309,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-    private void getUploadFile() {
 
-        try {
-            uploadFile = FileUtility.createAviaryFile(mActivity, id);
-        } catch (Exception e) {
-            MyLog.Set("e", getClass(), "建立文件失敗");
-            e.printStackTrace();
-        }
-
-    }
-
-    private void deleteUploadFile() {
-        if (uploadFile != null && uploadFile.exists()) {
-            uploadFile.delete();
+    private void deleteDownloadFile() {
+        if (downloadFile != null && downloadFile.exists()) {
+            downloadFile.delete();
         }
         if (bmp != null && !bmp.isRecycled()) {
             bmp.recycle();
@@ -2338,59 +2328,45 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
 
 
-        Uri fromUri = Uri.fromFile(uploadFile);
-
-//        Intent newIntent = new AviaryIntent.Builder(this).setData(fromUri)
-//                .withOutput(fromUri)
-//                .withOutputFormat(Bitmap.CompressFormat.JPEG)
-//                .withOutputSize(MegaPixel.Mp5).withNoExitConfirmation(true)
-//                .saveWithNoChanges(false).withPreviewSize(1024)
-//                .build();
+        Uri fromUri = null;
 
 
-        ToolsFactory.Tools[] tools = {
-                ToolsFactory.Tools.ENHANCE,
-                ToolsFactory.Tools.CROP,
-                ToolsFactory.Tools.ADJUST,
-                ToolsFactory.Tools.SHARPNESS,
-                ToolsFactory.Tools.FOCUS,
-                ToolsFactory.Tools.VIGNETTE,
-                ToolsFactory.Tools.ORIENTATION,
-                //沒有Transform選項
-                ToolsFactory.Tools.SPLASH,
-                ToolsFactory.Tools.DRAW,
-                ToolsFactory.Tools.TEXT,
-                ToolsFactory.Tools.MEME,
-                ToolsFactory.Tools.BLEMISH,
-                ToolsFactory.Tools.BLUR,
-                ToolsFactory.Tools.REDEYE,
-                ToolsFactory.Tools.WHITEN
-        };
+        if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
 
-        Intent newIntent = new AdobeImageIntent.Builder(this).setData(fromUri)
-                .withToolList(tools)
-                .disableUserLogin()
-                .withOutput(fromUri)
-                .withOutputFormat(Bitmap.CompressFormat.JPEG)
-                .withOutputSize(MegaPixels.Mp5).withNoExitConfirmation(true)
-                .saveWithNoChanges(false).withPreviewSize(1024)
-                .build();
+            MyLog.Set("e", getClass(), "11111111111");
 
-//        Intent dsPhotoEditorIntent = new Intent(this, DsPhotoEditorActivity.class);
-//
-//        dsPhotoEditorIntent.setData(fromUri);
-//
-//        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_API_KEY, KeysForSKD.ADOBE_CREATIVE_SDK_CLIENT_SECRET);
-//
-//        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, fromUri);
+            fromUri = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID + ".provider", downloadFile);
+        } else {
+            MyLog.Set("e", getClass(), "22222222222");
+            fromUri = Uri.fromFile(downloadFile);
+        }
 
+
+        File editDirFile = new File(DirClass.sdPath + "pinpinbox_edit/");
+        if (!editDirFile.exists()) {
+            editDirFile.mkdirs();
+            MyLog.Set("e", getClass(), "3333333333333");
+        }
+
+        MyLog.Set("e", getClass(), "editDirFile => " + editDirFile.getAbsolutePath());
+
+
+        Intent intent = new Intent(this, DsPhotoEditorActivity.class);
+        intent.setData(fromUri);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        intent.setFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
+        intent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+
+        intent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_API_KEY, KeysForSKD.DSPHOTOEDITOR());
+        intent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "pinpinbox_edit");
 
 
         if (fragmentSelectPhoto2 != null) {
             fragmentSelectPhoto2.setFromPPBCamera(true);
         }
 
-        startActivityForResult(newIntent, ACTION_REQUEST_FEATHER);
+        startActivityForResult(intent, ACTION_REQUEST_FEATHER);
 
     }
 
@@ -3896,7 +3872,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
             try {
-                deleteUploadFile();
+                deleteDownloadFile();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -4050,7 +4026,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 try {
                     JSONObject jsonObject = new JSONObject(strJson);
 
-                    p59Result = jsonObject.getString(Key.result);
+                    p59Result = jsonObject.getString(ProtocolKey.result);
                     if (p59Result.equals("1")) {
 
                         getJsonArray_setBottomList(jsonObject);
@@ -4062,7 +4038,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         }
 
                     } else if (p59Result.equals("0")) {
-                        p59Message = jsonObject.getString(Key.message);
+                        p59Message = jsonObject.getString(ProtocolKey.message);
                     } else {
                         p59Result = "";
                     }
@@ -4070,7 +4046,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 } catch (Exception e) {
                     p59Result = "";
-                    deleteUploadFile();
+                    deleteDownloadFile();
                     e.printStackTrace();
                 }
 
@@ -4084,7 +4060,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             dissmissLoading();
 
-            deleteUploadFile();
+            deleteDownloadFile();
 
             if (p59Result != null) {
                 if (p59Result.equals("1")) {
@@ -4092,8 +4068,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     isModify = true; //已修改內容
                     setChangeProject();
                     lastPosition = thisPosition;
-
                     FlurryUtil.onEvent(FlurryKey.creation_use_adobe);
+
+                    if (uploadFile != null && uploadFile.exists()) {
+                        uploadFile.delete();
+                    }
 
                 } else if (p59Result.equals("0")) {
                     DialogV2Custom.BuildError(mActivity, p59Message);
@@ -4677,7 +4656,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 } catch (Exception e) {
                     p59Result = "";
-                    deleteUploadFile();
+                    deleteDownloadFile();
                     e.printStackTrace();
 
                 }
@@ -4779,7 +4758,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 } catch (Exception e) {
                     p59Result = "";
-                    deleteUploadFile();
+                    deleteDownloadFile();
                     e.printStackTrace();
 
                 }
@@ -4826,7 +4805,14 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         @Override
         protected Void doInBackground(Void... params) {
-            getUploadFile();
+
+            try {
+                downloadFile = FileUtility.createAviaryFile(mActivity, id);
+            } catch (Exception e) {
+                MyLog.Set("e", getClass(), "建立文件失敗");
+                e.printStackTrace();
+            }
+
             HttpUtility hu = new HttpUtility();
             hu.downPic((String) photoList.get(lastPosition).get("image_url"),
                     DirClass.pathName_FromAviary,
@@ -5091,31 +5077,51 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 doDeleteBitmapToRefresh();
             }
-        } else if (resultCode == RESULT_OK) {
+        } else if (resultCode == RESULT_OK || resultCode == 0) {
             if (requestCode == ACTION_REQUEST_FEATHER) {
-                boolean changed = true;
+
                 if (null != data) {
-                    Bundle extra = data.getExtras();
 
-                    if (null != extra) {
-                        // image was changed by the user?
-//                        changed = extra.getBoolean(Constants.EXTRA_OUT_BITMAP_CHANGED);
+                    try {
 
-                        changed = extra.getBoolean(AdobeImageIntent.EXTRA_OUT_BITMAP_CHANGED);
+                        Uri uuu = null;
 
+                        if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
 
-                        doAfterAviary();
+                            MyLog.Set("e", getClass(), "44444444");
 
+                            uuu = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID + ".provider", new File(data.getDataString()));
+                        } else {
+                            MyLog.Set("e", getClass(), "55555555");
+                            uuu = data.getData();
+                        }
+
+                        uploadFile = new File(new URI(uuu.toString()));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }
-                if (!changed) {
 
-                    MyLog.Set("d", getClass(), "User did not modify the image, but just clicked on 'Done' button");
+//                    try {
+//                        uploadFile = new File(new URI(outputUri.toString()));
+//
+//                        MyLog.Set("e", getClass(), "outputUri.getPath() => " + outputUri.getPath());
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+
+                    doAfterAviary();
+
+                }else {
+
+                    MyLog.Set("e", getClass(), "data => null");
 
                 }
+
             }
         } else {
-            deleteUploadFile();
+            deleteDownloadFile();
         }
 
 
@@ -5321,7 +5327,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 MyLog.Set("e", getClass(), "newLoction.getLongitude() => " + newLoction.getLongitude());
             } else {
 
-                MyLog.Set("e", getClass(), "-9-9-9-9-9-9--9-9-9-9-9-9");
+                MyLog.Set("e", getClass(), "-------------");
             }
 
 
@@ -5408,7 +5414,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             MyLog.Set("d", this.getClass(), "移除 => fragmentSelectVideo2");
         }
 
-        deleteUploadFile();
+        deleteDownloadFile();
 
         File f = new File(mp3Path);
         if (f.exists()) {

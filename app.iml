@@ -159,6 +159,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-26.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.github.ozodrukh:CircularReveal-1.0.4" level="project" />
     <orderEntry type="library" name="Gradle: me.relex:circleindicator-1.1.8" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.volley:volley-1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex:rxjava:1.2.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.trello:rxlifecycle-components-0.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-maps-license-11.8.0" level="project" />
@@ -186,6 +187,7 @@
     <orderEntry type="library" name="Gradle: com.parse.bolts:bolts-android:1.2.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.tarek360.RichPath:richpath-0.0.5" level="project" />
     <orderEntry type="library" name="Gradle: it.sephiroth.android.library.imagezoom:imagezoom-2.2.5" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\vmage\Desktop\inst\android-sdk-windows\build-tools\27.0.3\renderscript\lib\renderscript-v8.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:disklrucache:4.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-common-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-impl-license-11.8.0" level="project" />
@@ -276,6 +278,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-26.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.trello:rxlifecycle-android-0.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-26.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: ds-photo-editor-sdk:@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.tarek360.RichPath:animator-0.0.5" level="project" />
     <orderEntry type="library" name="Gradle: org.quanqi:CircularProgress-1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.czt.mp3recorder:library-1.0.3" level="project" />
@@ -295,7 +298,6 @@
     <orderEntry type="library" name="Gradle: com.squareup.picasso:picasso:2.5.2@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks-11.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.localytics.android:library-4.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\pinpinbox\PinPinBox\app\libs\renderscript-v8.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp-urlconnection:3.4.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-26.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.birbit:android-priority-jobqueue-2.0.1" level="project" />

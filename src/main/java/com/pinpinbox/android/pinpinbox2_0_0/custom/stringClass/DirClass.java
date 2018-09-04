@@ -38,9 +38,7 @@ public class DirClass {
 
     public static final String pathCamera = sdPath + dirCamera;
 
-    public static final String test = sdPath + "aaaaaaaaaaaaaaaaaaaaaaaaaaa" +pathName_UserBanner;
-
-    public static final String getMyDir(String id){
+    public static String getMyDir(String id){
 
         return "PinPinBox" + id + "/";
 
