@@ -85,11 +85,6 @@ public class ContentsAdapter extends RecyclerView.Adapter {
         public ContentsViewHolder(View view) {
             super(view);
 
-
-
-            contentImg = (ImageView)view.findViewById(R.id.contentImg);
-
-
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
 

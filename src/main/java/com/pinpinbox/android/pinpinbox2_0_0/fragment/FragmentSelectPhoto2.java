@@ -28,7 +28,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -41,9 +40,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.adobe.creativesdk.aviary.AdobeImageIntent;
-import com.adobe.creativesdk.aviary.internal.headless.utils.MegaPixels;
 import com.bumptech.glide.Glide;
+import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
+import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.BitmapUtility;
@@ -61,6 +60,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.CreateDir;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -1274,14 +1274,30 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
             return;
         }
 
-//         uri = Uri.parse(picPath);
-        Intent newIntent = new AdobeImageIntent.Builder(getActivity()).setData(Uri.parse(picPath))
-                .withOutput(Uri.parse(DirClass.sdPath + myDir + "aviary_edit/" + (new File(picPath).getName())))//修改完成會存放的路徑
-                .withOutputFormat(Bitmap.CompressFormat.JPEG)
-                .withOutputSize(MegaPixels.Mp5).withNoExitConfirmation(true)
-                .saveWithNoChanges(true).withPreviewSize(1024)
-                .build();
-        startActivityForResult(newIntent, 100);
+        Uri fromUri = null;
+
+        if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
+
+            MyLog.Set("e", getClass(), "11111111111");
+
+            fromUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", new File(picPath));
+        } else {
+            MyLog.Set("e", getClass(), "22222222222");
+            fromUri = Uri.fromFile(new File(picPath));
+        }
+
+
+        File editDirFile = new File(DirClass.sdPath + "pinpinbox_edit/");
+        if (!editDirFile.exists()) {
+            editDirFile.mkdirs();
+        }
+
+        Intent intent = new Intent(getActivity(), DsPhotoEditorActivity.class);
+        intent.setData(fromUri);
+        intent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_API_KEY, KeysForSKD.DSPHOTOEDITOR());
+        intent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "pinpinbox_edit");
+
+        startActivityForResult(intent, 100);
     }
 
     private void resetButtonUpLoad() {
@@ -1929,7 +1945,22 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                     if (data != null) {
                         /*取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意*/
 //                        Uri nImageCaptureUri = data.getData();
-                        Uri nImageCaptureUri = data.getParcelableExtra(AdobeImageIntent.EXTRA_OUTPUT_URI);
+                        Uri nImageCaptureUri = null;
+
+                        try {
+
+                            if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
+                                nImageCaptureUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", new File(data.getDataString()));
+                            } else {
+                                nImageCaptureUri = data.getData();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+
 
                         /* 返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取*/
                         if (nImageCaptureUri != null) {
@@ -1965,16 +1996,11 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                     break;
 
 
-                case 100: //adobe 返回
+                case 100:
 
-                    boolean changed = true;
                     if (null != data) {
                         Bundle extra = data.getExtras();
                         if (null != extra) {
-
-//                            changed = extra.getBoolean(Constants.EXTRA_OUT_BITMAP_CHANGED);
-                            changed = extra.getBoolean(AdobeImageIntent.EXTRA_OUT_BITMAP_CHANGED);
-
                             ImageView img = ((CreationTemplate2Activity) getActivity()).getToFragmentImg();
                             RelativeLayout relativeLayout = ((CreationTemplate2Activity) getActivity()).getToFragmentRelativeLayout();
                             int area = ((CreationTemplate2Activity) getActivity()).getToFragmentArea();
@@ -1983,10 +2009,6 @@ public class FragmentSelectPhoto2 extends Fragment implements View.OnTouchListen
                             back();
                         }
                     }
-                    if (!changed) {
-                        Log.w("TAG", "User did not modify the image, but just clicked on 'Done' button");
-                    }
-
 
                     break;
 

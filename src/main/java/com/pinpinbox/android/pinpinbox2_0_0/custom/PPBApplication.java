@@ -5,11 +5,10 @@ import android.content.SharedPreferences;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
-
-import com.adobe.creativesdk.foundation.AdobeCSDKFoundation;
-import com.adobe.creativesdk.foundation.auth.IAdobeAuthClientCredentials;
 import com.blankj.utilcode.util.Utils;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
@@ -22,18 +21,36 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 /**
  * Created by vmage on 2015/10/27
  */
-public class PPBApplication extends MultiDexApplication implements IAdobeAuthClientCredentials {
+public class PPBApplication extends MultiDexApplication {
+
+
+
+    private static GoogleAnalytics sAnalytics;
+    private static Tracker sTracker;
+
+
+
 
 
     private int staggeredWidth;
 
     private int statusBarHeight = 0;
 
+
+
+
+
+
     private static PPBApplication instance;
 
     public static PPBApplication getInstance() {
         return instance;
     }
+
+
+
+
+
 
 
     private SharedPreferences getData, fbData;
@@ -51,7 +68,6 @@ public class PPBApplication extends MultiDexApplication implements IAdobeAuthCli
 
         return this.getData;
     }
-
 
     public void setSharedPreferencesByFacebook(SharedPreferences fbData) {
         this.fbData = fbData;
@@ -91,6 +107,15 @@ public class PPBApplication extends MultiDexApplication implements IAdobeAuthCli
     }
 
 
+
+
+
+
+
+
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -100,16 +125,13 @@ public class PPBApplication extends MultiDexApplication implements IAdobeAuthCli
 
         getData = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
 
-        AdobeCSDKFoundation.initializeCSDKFoundation(getApplicationContext());
-
-//        RichText.initCacheDir(this);
-
         setFont();
 
         setFlurryAgent();
 
         setUtils();
 
+        setGA();
 
     }
 
@@ -117,8 +139,6 @@ public class PPBApplication extends MultiDexApplication implements IAdobeAuthCli
         /*2016.09.25*/
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                         .setDefaultFontPath("fonts/NotoSans-Regular.ttf")
-//                        .setDefaultFontPath("fonts/OpenSans-Bold.ttf")
-
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
@@ -159,9 +179,25 @@ public class PPBApplication extends MultiDexApplication implements IAdobeAuthCli
     }
 
     private void setUtils(){
-
         Utils.init(this);
+    }
 
+    private void setGA(){
+        sAnalytics = GoogleAnalytics.getInstance(this);
+
+
+
+
+    }
+
+    synchronized public Tracker getDefaultTracker() {
+        // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+        if (sTracker == null) {
+//            sTracker = sAnalytics.newTracker(R.xml.global_tracker);
+            sTracker = sAnalytics.newTracker(KeysForSKD.GOOGLE_ANALYTICS);
+
+        }
+        return sTracker;
     }
 
 
@@ -179,31 +215,6 @@ public class PPBApplication extends MultiDexApplication implements IAdobeAuthCli
 
     public void setStatusBarHeight(int statusBarHeight) {
         this.statusBarHeight = statusBarHeight;
-    }
-
-//    @Override
-//    public String getBillingKey() {
-//        return "";
-//    }
-
-    @Override
-    public String getClientID() {
-        return KeysForSKD.ADOBE_CREATIVE_SDK_CLIENT_ID;
-    }
-
-    @Override
-    public String getClientSecret() {
-        return KeysForSKD.ADOBE_CREATIVE_SDK_CLIENT_SECRET;
-    }
-
-    @Override
-    public String[] getAdditionalScopesList() {
-        return new String[0];
-    }
-
-    @Override
-    public String getRedirectURI() {
-        return null;
     }
 
 

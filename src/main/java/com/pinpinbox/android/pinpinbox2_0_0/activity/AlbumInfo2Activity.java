@@ -49,6 +49,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemReport;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -2876,6 +2877,14 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         MyLog.Set("e", getClass(), "data => " + data.toString());
 
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onResume(){
+
+        GAControl.sendViewName("作品資訊頁");
+
+        super.onResume();
     }
 
 

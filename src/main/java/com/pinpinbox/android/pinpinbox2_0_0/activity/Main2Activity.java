@@ -16,14 +16,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.flurry.android.FlurryAgent;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.BuildConfig;
@@ -37,6 +35,7 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.UrlUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
@@ -220,10 +219,10 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
             testSet();
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
-            FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-            mFirebaseAnalytics.setUserId(id + " , " + getdata.getString(Key.nickname, "---"));
             testbuttonImg.setVisibility(View.GONE);
         }
+
+        GAControl.sendUserId(id);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -232,49 +231,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 ViewControl.AlphaTo1(findViewById(R.id.rAlpha));
             }
         }, 600);
-
-
-//        if (FirebaseApp.getApps(mActivity).isEmpty()) {
-//            FirebaseApp.initializeApp(mActivity, FirebaseOptions.fromResource(mActivity));
-//        }
-//
-//        final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-//        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-//                .setDeveloperModeEnabled(BuildConfig.DEBUG)
-//                .build();
-//        config.setConfigSettings(configSettings);
-//
-//        config.fetch(0).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if(task.isSuccessful()){
-//
-//                    config.activateFetched();
-//
-//                    String playStoreVersionCode = config.getString(
-//                            "android_latest_version_code");
-//                    MyLog.Set("e", mActivity.getClass(), "playStoreVersionCode => " + playStoreVersionCode);
-//
-//                }
-//
-//
-//                PackageInfo pInfo = null;
-//                try {
-//                    pInfo = mActivity.getPackageManager().getPackageInfo(getPackageName(), 0);
-//                } catch (PackageManager.NameNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//                int currentAppVersionCode = pInfo.versionCode;
-//
-//
-//
-//                MyLog.Set("e", mActivity.getClass(), "currentAppVersionCode => " + currentAppVersionCode);
-//                MyLog.Set("e", mActivity.getClass(), "pInfo.versionName => " + pInfo.versionName);
-//
-//
-//            }
-//        });
-
 
     }
 
@@ -316,17 +272,17 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
 
-    private void scheduleStartPostponedTransition(final View sharedElement) {
-        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-                        startPostponedEnterTransition();
-                        return true;
-                    }
-                });
-    }
+//    private void scheduleStartPostponedTransition(final View sharedElement) {
+//        sharedElement.getViewTreeObserver().addOnPreDrawListener(
+//                new ViewTreeObserver.OnPreDrawListener() {
+//                    @Override
+//                    public boolean onPreDraw() {
+//                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
+//                        startPostponedEnterTransition();
+//                        return true;
+//                    }
+//                });
+//    }
 
 
     private void checkMainExist() {

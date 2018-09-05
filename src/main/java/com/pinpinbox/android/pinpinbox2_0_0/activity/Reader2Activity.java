@@ -78,6 +78,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GiftAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -566,12 +567,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                 MyLog.Set("e", mActivity.getClass(), "photoContentsList.get(position).getPhoto_id() => " + photoContentsList.get(position).getPhoto_id());
 
-                if(photoContentsList.get(position).getPhoto_id()!=0){
+                if (photoContentsList.get(position).getPhoto_id() != 0) {
                     startPhotoID = photoContentsList.get(position).getPhoto_id();
                 }
 
 
-                MyLog.Set("e", mActivity.getClass(), "startPhotoID => " +startPhotoID);
+                MyLog.Set("e", mActivity.getClass(), "startPhotoID => " + startPhotoID);
 
 
                 page = position;
@@ -1206,7 +1207,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
         /*error*/
-        final SpinKitView loadingView = (SpinKitView)vPage.findViewById(R.id.loadingView);
+        final SpinKitView loadingView = (SpinKitView) vPage.findViewById(R.id.loadingView);
         final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
         final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
 
@@ -1489,7 +1490,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
         /*error*/
-        final SpinKitView loadingView = (SpinKitView)vPage.findViewById(R.id.loadingView);
+        final SpinKitView loadingView = (SpinKitView) vPage.findViewById(R.id.loadingView);
         final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
         final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
 
@@ -2379,17 +2380,17 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     }
 
     private void setAutoPlay(int duration, int position) {
-                /*判斷秒數大於0*/
+        /*判斷秒數大於0*/
         if (duration != 0) {
 
-                    /*判斷不是最後頁*/
+            /*判斷不是最後頁*/
             if (position != photoContentsList.size() - 1) {
 
-                        /*判斷auto play 開關*/
+                /*判斷auto play 開關*/
                 if (isAutoPlay) {
                     String strUsefor = photoContentsList.get(position).getUsefor();
 
-                        /*此頁為圖片或影片才執行自動撥放*/
+                    /*此頁為圖片或影片才執行自動撥放*/
                     if (strUsefor.equals("image") || strUsefor.equals("video")) {
                         autoScrollHandler.postDelayed(runnable, duration * 1500); //default 1000 手機上執行效果太快
                     }
@@ -3037,7 +3038,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         JSONObject jsonData = new JSONObject(JsonUtility.GetString(jsonResult, ProtocolKey.data));
 
 
-                    /*album detail*/
+                        /*album detail*/
                         JSONObject jsonAlbum = new JSONObject(JsonUtility.GetString(jsonData, ProtocolKey.album));
                         itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_name));
                         itemAlbum.setDescription(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_description));
@@ -3052,7 +3053,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         itemAlbum.setIs_likes(JsonUtility.GetBoolean(jsonAlbum, ProtocolKey.is_likes));
 
 
-                     /*album usefor*/
+                        /*album usefor*/
                         String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.album_usefor);
                         JSONObject jsonUsefor = new JSONObject(usefor);
                         itemAlbum.setExchange(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.album_exchange));
@@ -3062,13 +3063,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.album_audio));
 
 
-                    /*user detail*/
+                        /*user detail*/
                         JSONObject jsonUser = new JSONObject(JsonUtility.GetString(jsonData, ProtocolKey.user));
                         itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
                         itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.user_name));
                         itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
 
-                    /*event*/
+                        /*event*/
                         event = JsonUtility.GetString(jsonData, ProtocolKey.event);
 
 
@@ -3076,7 +3077,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
 
-                    /*photo detail*/
+                        /*photo detail*/
                         try {
                             JSONArray jsonArray = new JSONArray(JsonUtility.GetString(jsonData, ProtocolKey.photo));
                             int array = jsonArray.length();
@@ -3432,7 +3433,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 JSONArray jsonCookieArray = new JSONArray(strRecent);
 
 
-                   /*判斷是否在原排序內*/
+                /*判斷是否在原排序內*/
                 for (int i = 0; i < jsonCookieArray.length(); i++) {
                     JSONObject obj = (JSONObject) jsonCookieArray.get(i);
 
@@ -3462,7 +3463,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     }
                 }
 
-                 /*建立新排序*/
+                /*建立新排序*/
                 JSONArray newCookieArray = new JSONArray();
 
                 /*建立新cookie新增至新排序第一順位*/
@@ -3473,7 +3474,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 jsonObject.put(Key.cover, itemAlbum.getCover());
                 newCookieArray.put(jsonObject);
 
-                  /*原排序新增至新排序*/
+                /*原排序新增至新排序*/
                 for (int i = 0; i < jsonCookieArray.length(); i++) {
                     JSONObject obj = (JSONObject) jsonCookieArray.get(i);
                     newCookieArray.put(obj);
@@ -4404,12 +4405,12 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 popSelectShare.dismiss();
                 if (!isFBShareComplate) {
 
-                          /*設置facebook api*/
+                    /*設置facebook api*/
                     FacebookSdk.sdkInitialize(getApplicationContext());
                     callbackManager = CallbackManager.Factory.create();
 
 
-                       /*設置facebook share api*/
+                    /*設置facebook share api*/
                     shareDialog = new ShareDialog(mActivity);
                     shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
 
@@ -4582,6 +4583,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
+
+
+        GAControl.sendViewName("閱讀器");
 
 
         try {

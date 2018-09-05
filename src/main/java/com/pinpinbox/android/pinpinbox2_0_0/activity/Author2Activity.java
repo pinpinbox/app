@@ -46,6 +46,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -133,7 +134,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
     private boolean shareElement = true;
     private boolean showSponsor = false;
     private boolean from_album_info = false;
-
 
 
     private int round; //listview添加前的初始值
@@ -295,7 +295,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         rangeCount = 16;
 
         rBackgroundParallax = (RelativeLayout) findViewById(R.id.rBackgroundParallax);
-        rCreativeName = (RelativeLayout)findViewById(R.id.rCreativeName);
+        rCreativeName = (RelativeLayout) findViewById(R.id.rCreativeName);
 
         backImg = (ImageView) findViewById(R.id.backImg);
         bannerImg = (ImageView) findViewById(R.id.bannerImg);
@@ -304,7 +304,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         shareImg = (ImageView) findViewById(R.id.shareImg);
 
         tvAttention = (TextView) findViewById(R.id.tvAttention);
-        tvCreativeName = (TextView)findViewById(R.id.tvCreativeName);
+        tvCreativeName = (TextView) findViewById(R.id.tvCreativeName);
 
         rvAuthor = (RecyclerView) findViewById(R.id.rvAuthor);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
@@ -524,7 +524,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         StringUtil.ThousandToK(tvSponsor, intSponsor);
 
 
-        if(intSponsor<1){
+        if (intSponsor < 1) {
 
             viewHeader.findViewById(R.id.linSponsorList).setVisibility(View.INVISIBLE);
 
@@ -625,11 +625,9 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-
-
                 Bundle bundle = new Bundle();
 
-                bundle.putString(Key.album_id,  albumList.get(position).getAlbum_id());
+                bundle.putString(Key.album_id, albumList.get(position).getAlbum_id());
                 bundle.putBoolean("return", true);
                 bundle.putInt(Key.image_width, albumList.get(position).getCover_width());
                 bundle.putInt(Key.image_height, albumList.get(position).getCover_height());
@@ -656,7 +654,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                     );
 
 
-                }else {
+                } else {
 
                     bundle.putBoolean(Key.shareElement, false);
                     startActivity(
@@ -748,7 +746,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         if (SystemUtility.getSystemVersion() >= SystemUtility.V5) {
 
             if (shareElement) {
-
 
 
                 supportFinishAfterTransition();
@@ -942,7 +939,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                             String creative = JsonUtility.GetString(jsonData, ProtocolKey.creative);
                             JSONObject jsonCreative = new JSONObject(creative);
                             itemUser.setInfo_url(JsonUtility.GetString(jsonCreative, ProtocolKey.info_url));
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -1147,12 +1144,11 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-
                 Bundle bundle = getIntent().getExtras();
 
                 boolean pinpinboard = bundle.getBoolean(Key.pinpinboard, false);
 
-                if(pinpinboard){
+                if (pinpinboard) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -1163,7 +1159,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                                 board.doGetBoard();
                             }
                         }
-                    },200);
+                    }, 200);
                 }
 
             } else if (p40Result.equals("0")) {
@@ -1437,7 +1433,7 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         }
 
 
-        private void changeUserListFollowStatus(List<Activity> activityList){
+        private void changeUserListFollowStatus(List<Activity> activityList) {
 
             for (int i = 0; i < activityList.size(); i++) {
                 if (activityList.get(i).getClass().getSimpleName().equals(SponsorList2Activity.class.getSimpleName())) {
@@ -1603,12 +1599,9 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-
-
-
-                if(url==null || url.equals("") || url.equals("null")){
+                if (url == null || url.equals("") || url.equals("null")) {
                     d.getTvLink().setVisibility(View.GONE);
-                }else {
+                } else {
                     d.getTvLink().setVisibility(View.VISIBLE);
                     d.getTvLink().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -1623,8 +1616,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
                         }
                     });
                 }
-
-
 
 
             } else if (p83Result.equals("2")) {
@@ -1933,6 +1924,16 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         cleanPicasso();
 
         super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+
+
+        GAControl.sendViewName("用戶專區");
+
+
+        super.onResume();
     }
 
 

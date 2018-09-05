@@ -56,6 +56,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAuthorAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -1452,6 +1453,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
             // 调用Fragment显示的代码段
 
             MyLog.Set("e", getClass(), "可看見 FragmentMe2");
+
+            GAControl.sendViewName("個人專區");
 
             if (!dowork) {
                 init();

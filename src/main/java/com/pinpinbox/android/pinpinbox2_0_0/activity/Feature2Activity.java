@@ -40,6 +40,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumExplore;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemCategoryBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
@@ -92,6 +93,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     private FrameLayout frameUser;
 
     private String strJsonData = "";
+    private String strTitle = "";
 
     private int categoryarea_id;
 
@@ -230,6 +232,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
                             showContents(categoryareaName);
 
+                            strTitle = categoryareaName;
+
+                            GAControl.sendViewName("分類(" + strTitle + ")");
 
                         }
 
@@ -1053,6 +1058,15 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    @Override
+    public void onResume(){
+
+        if(strTitle!=null && !strTitle.equals("")){
+            GAControl.sendViewName("分類(" + strTitle + ")");
+        }
+
+        super.onResume();
+    }
 
     @Override
     protected void onPause() {

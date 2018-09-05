@@ -64,6 +64,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -5114,7 +5115,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                     doAfterAviary();
 
-                }else {
+                } else {
 
                     MyLog.Set("e", getClass(), "data => null");
 
@@ -5289,6 +5290,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     @Override
     public void onResume() {
         super.onResume();
+
+
+        GAControl.sendViewName("編輯器");
+
 
         if (mpBackground != null) {
 

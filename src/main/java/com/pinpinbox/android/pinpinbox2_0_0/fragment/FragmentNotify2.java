@@ -31,6 +31,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerNotifyAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
@@ -1124,6 +1125,7 @@ public class FragmentNotify2 extends Fragment {
             // 调用Fragment显示的代码段
 
             MyLog.Set("e", getClass(), "可看見 FragmentNotify2");
+            GAControl.sendViewName("通知");
 
             if (!dowork) {
                 init();

@@ -59,6 +59,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -265,7 +266,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         scanImg.setOnClickListener(this);
 
     }
-
 
     private void initHeaderView() {
 
@@ -615,7 +615,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             }
 
         });
-
 
 
     }
@@ -1019,7 +1018,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                                 e.printStackTrace();
                             }
 
-                                /*2016.08.19新增album template user Object*/
+                            /*2016.08.19新增album template user Object*/
                             try {
                                 String album = JsonUtility.GetString(object, ProtocolKey.album);
                                 if (album != null) {
@@ -2107,6 +2106,17 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && isResumed() && ((Main2Activity) getActivity()).getPage() == 0) {
+            MyLog.Set("e", getClass(), "isVisibleToUser => " + true);
+            GAControl.sendViewName("首頁");
+        }
+
+    }
+
 
 //    @Override
 //    public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -2386,7 +2396,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
         }
-
 
         super.onResume();
     }
