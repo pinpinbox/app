@@ -2353,10 +2353,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         Intent intent = new Intent(this, DsPhotoEditorActivity.class);
         intent.setData(fromUri);
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        intent.setFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
-        intent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+//        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//        intent.setFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
+//        intent.setFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+
 
         intent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_API_KEY, KeysForSKD.DSPHOTOEDITOR());
         intent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "pinpinbox_edit");
@@ -5376,8 +5377,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         Recycle.IMG(videoPlayImg);
         Recycle.IMG(photo_or_templateImg);
         Recycle.IMG(addUserImg);
-//        Recycle.IMG(addDescriptionImg);
-//        Recycle.IMG(descriptionDeleteImg);
         Recycle.IMG(albumSetImg);
         Recycle.IMG(refreshImg);
         Recycle.IMG(deleteImg);
