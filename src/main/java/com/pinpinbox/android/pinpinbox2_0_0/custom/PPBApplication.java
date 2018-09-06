@@ -13,7 +13,6 @@ import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -170,12 +169,6 @@ public class PPBApplication extends MultiDexApplication {
             FlurryAgent.init(this, KeysForSKD.FLURRY_WWW);//www 2.1.9
             return;
         }
-
-
-
-
-
-        MyLog.Set("d", getClass(), "啟動Flurry");
     }
 
     private void setUtils(){
@@ -185,8 +178,9 @@ public class PPBApplication extends MultiDexApplication {
     private void setGA(){
         sAnalytics = GoogleAnalytics.getInstance(this);
 
-
-
+        if(BuildConfig.FLAVOR.equals("w3_private")){
+            sAnalytics.setDryRun(true);
+        }
 
     }
 
