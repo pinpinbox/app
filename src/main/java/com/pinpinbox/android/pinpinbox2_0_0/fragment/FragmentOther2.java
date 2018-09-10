@@ -823,7 +823,7 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener, C
 
 
                 if (p17arraylist.size() > 0) {
-
+                    rGuideOther.setVisibility(View.GONE);
                     if (adapter != null) {
                         adapter.notifyDataSetChanged();
                         if(loadCount<rangeCount){
@@ -833,7 +833,7 @@ public class FragmentOther2 extends Fragment implements OnDetailClickListener, C
                         }
                         round = round + rangeCount;
                     }
-                    rGuideOther.setVisibility(View.GONE);
+
                 } else {
                     sizeMax = true;
                     rGuideOther.setVisibility(View.VISIBLE);

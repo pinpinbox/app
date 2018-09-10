@@ -831,7 +831,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             if (p17Result.equals("1")) {
 
                 if (p17arraylist.size() > 0) {
-
+                    linGuideMy.setVisibility(View.GONE);
                     if (adapter != null) {
                         adapter.notifyDataSetChanged();
                         if (loadCount < rangeCount) {
@@ -842,7 +842,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                         round = round + rangeCount;
                     }
 
-                    linGuideMy.setVisibility(View.GONE);
+
                 } else {
                     sizeMax = true;
                     linGuideMy.setVisibility(View.VISIBLE);

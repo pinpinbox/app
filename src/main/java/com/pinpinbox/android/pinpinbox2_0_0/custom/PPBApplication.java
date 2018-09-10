@@ -178,7 +178,7 @@ public class PPBApplication extends MultiDexApplication {
     private void setGA(){
         sAnalytics = GoogleAnalytics.getInstance(this);
 
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if(BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private")){
             sAnalytics.setDryRun(true);
         }
 
