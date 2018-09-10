@@ -102,7 +102,7 @@
              android:letterSpacing="0.1"
              android:text="@string/pinpinbox_2_0_0_other_text_create_album_now"
              android:textSize="@dimen/ppb200_guide"
-             android:textColor="@color/white"
+             android:textColor="@color/pinpinbox_2_0_0_hint_grey"
              android:background="@drawable/click_2_0_0_main_button_radius"/>
 
 
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_guide_collect_my"
-            android:textColor="@color/white"
+            android:textColor="@color/pinpinbox_2_0_0_hint_grey"
             android:lineSpacingExtra="4dp"
             android:textSize="@dimen/ppb200_guide"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"/>
@@ -142,7 +142,7 @@
             android:id="@+id/tvGuide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/pinpinbox_2_0_0_hint_grey"
             android:lineSpacingExtra="4dp"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/ppb200_guide"
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:text="@string/pinpinbox_2_0_0_guide_collect_cooperation"
             android:letterSpacing="0.1"
-            android:textColor="@color/white"
+            android:textColor="@color/pinpinbox_2_0_0_hint_grey"
             android:lineSpacingExtra="4dp"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/ppb200_guide" />
