@@ -95,15 +95,11 @@
 
 
          <TextView
+              style="@style/ppb200_Button_main_common_radius"
              android:id="@+id/tvCreate"
              android:layout_width="match_parent"
-             android:layout_height="48dp"
-             android:gravity="center"
-             android:letterSpacing="0.1"
              android:text="@string/pinpinbox_2_0_0_other_text_create_album_now"
-             android:textSize="@dimen/ppb200_guide"
-             android:textColor="@color/pinpinbox_2_0_0_hint_grey"
-             android:background="@drawable/click_2_0_0_main_button_radius"/>
+             android:textSize="@dimen/ppb200_guide"/>
 
 
 
