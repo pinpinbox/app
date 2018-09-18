@@ -7,7 +7,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.mode.TestMode;
  */
 public class Url {
 
-    public static String domain = TestMode.domain();
+    public static String domain = TestMode.Domain;
 
     public static String P13_BuyAlbum = domain + "/index/api/buyalbum" + "/2.0";
 

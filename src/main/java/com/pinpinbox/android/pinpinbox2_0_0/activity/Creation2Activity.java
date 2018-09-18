@@ -760,7 +760,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-                if (mySelectAudioMode != SINGULAR) {
+                if (!mySelectAudioMode.equals(SINGULAR)) {
                     return;
                 }
 

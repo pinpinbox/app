@@ -214,7 +214,11 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         checkNewDay();
 
         testbuttonImg = (ImageView) findViewById(R.id.testbutton);
-        if (BuildConfig.FLAVOR.equals("w3_private")) {
+
+
+        if(BuildConfig.FLAVOR.equals("platformvmage5_private")){
+            testSet();
+        } else if (BuildConfig.FLAVOR.equals("w3_private")) {
             testSet();
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
             testSet();

@@ -231,7 +231,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         //20171128
         tvShowTime = (TextView) v.findViewById(R.id.tvShowTime);
-        if (BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private")) {
+        if (BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private") || BuildConfig.FLAVOR.equals("platformvmage5_private")) {
             testSet();
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
             tvShowTime.setVisibility(View.GONE);

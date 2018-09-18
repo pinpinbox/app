@@ -13,19 +13,19 @@ public class UrlClass {
 //
 //    public static String platformvmage5 = "http://platformvmage5.cloudapp.net/pinpinbox";
 
-    public static final String shareUserUrl = TestMode.domain() + "/index/creative/content/?user_id=";//分享創作人
+    public static final String shareUserUrl = TestMode.Domain + "/index/creative/content/?user_id=";//分享創作人
 
-    public static final String shareAlbumUrl = TestMode.domain() + "/index/album/content/?album_id=";//分享相本
+    public static final String shareAlbumUrl = TestMode.Domain + "/index/album/content/?album_id=";//分享相本
 
-    public static final String shareTemplateUrl =  TestMode.domain()  + "/index/template/content/?template_id=";//分享套版
+    public static final String shareTemplateUrl =  TestMode.Domain  + "/index/template/content/?template_id=";//分享套版
 
-    public static final String message = TestMode.domain()  + "/index/discuss/?albumid=";//留言板
+    public static final String message = TestMode.Domain  + "/index/discuss/?albumid=";//留言板
 
-    public static final String privacy = TestMode.domain()  + "/index/index/privacy/";//隱私權
+    public static final String privacy = TestMode.Domain  + "/index/index/privacy/";//隱私權
 
-    public static final String platform = TestMode.domain()  + "/index/index/terms/";//平台規範
+    public static final String platform = TestMode.Domain  + "/index/index/terms/";//平台規範
 
-    public static final String about = TestMode.domain()  + "/index/about/";//了解
+    public static final String about = TestMode.Domain  + "/index/about/";//了解
 
 
 

@@ -23,12 +23,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 public class PPBApplication extends MultiDexApplication {
 
 
-
     private static GoogleAnalytics sAnalytics;
     private static Tracker sTracker;
-
-
-
 
 
     private int staggeredWidth;
@@ -36,20 +32,11 @@ public class PPBApplication extends MultiDexApplication {
     private int statusBarHeight = 0;
 
 
-
-
-
-
     private static PPBApplication instance;
 
     public static PPBApplication getInstance() {
         return instance;
     }
-
-
-
-
-
 
 
     private SharedPreferences getData, fbData;
@@ -61,7 +48,7 @@ public class PPBApplication extends MultiDexApplication {
     public SharedPreferences getData() {
 
         //20171011
-        if(getData==null) {
+        if (getData == null) {
             getData = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
         }
 
@@ -83,7 +70,7 @@ public class PPBApplication extends MultiDexApplication {
     public String getId() {
 
         //20171011
-        if(getData==null) {
+        if (getData == null) {
             getData = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
         }
 
@@ -93,7 +80,7 @@ public class PPBApplication extends MultiDexApplication {
     public String getToken() {
 
         //20171011
-        if(getData==null) {
+        if (getData == null) {
             getData = getSharedPreferences(SharedPreferencesDataClass.memberdata, Activity.MODE_PRIVATE);
         }
 
@@ -104,15 +91,6 @@ public class PPBApplication extends MultiDexApplication {
 
         return "PinPinBox" + getId() + "/";
     }
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -137,9 +115,9 @@ public class PPBApplication extends MultiDexApplication {
     private void setFont() {
         /*2016.09.25*/
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/NotoSans-Regular.ttf")
-                        .setFontAttrId(R.attr.fontPath)
-                        .build()
+                .setDefaultFontPath("fonts/NotoSans-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
         );
     }
 
@@ -159,26 +137,22 @@ public class PPBApplication extends MultiDexApplication {
         FlurryAgent.setLogLevel(Log.DEBUG);
 
 
-
-        if(BuildConfig.FLAVOR.equals("w3_private")){
+        if (BuildConfig.FLAVOR.equals("w3_private")) {
             FlurryAgent.init(this, KeysForSKD.FLURRY_W3);//w3 2.0.0
-        }else if(BuildConfig.FLAVOR.equals("www_private")){
+        } else if (BuildConfig.FLAVOR.equals("www_private")) {
             FlurryAgent.init(this, KeysForSKD.FLURRY_WWW);//www 2.1.9
-            return;
-        }else if(BuildConfig.FLAVOR.equals("www_public")){
+        } else if (BuildConfig.FLAVOR.equals("www_public")) {
             FlurryAgent.init(this, KeysForSKD.FLURRY_WWW);//www 2.1.9
-            return;
         }
     }
 
-    private void setUtils(){
+    private void setUtils() {
         Utils.init(this);
     }
 
-    private void setGA(){
+    private void setGA() {
         sAnalytics = GoogleAnalytics.getInstance(this);
-
-        if(BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private")){
+        if (BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private") || BuildConfig.FLAVOR.equals("platformvmage5_private")) {
             sAnalytics.setDryRun(true);
         }
 

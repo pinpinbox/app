@@ -7,19 +7,13 @@ import com.pinpinbox.android.pinpinbox2_0_0.mode.TestMode;
  * Created by vmage on 2015/3/13
  */
 public class ProtocolsClass {
-//    http://platformvmage3.cloudapp.net/pinpinbox      /index/api/login
+//    http://platformvmage5.cloudapp.net/pinpinbox      /index/api/login
 //    http://w3.pinpinbox.com                           /index/api/login
 
 
-//    public static String domain = UrlClass.platformvmage5;
-//    public static String domain = UrlClass.testW3domain;
-//    public static String domain = UrlClass.domain;
-
-
     public static String https_domain = "https://www.pinpinbox.com";
-    public static String w3https_domain = "https://w3.pinpinbox.com";
 
-    public static String domain = TestMode.domain();
+    public static String domain = TestMode.Domain;
 
     public static String version = "/1.1";
 
@@ -27,8 +21,9 @@ public class ProtocolsClass {
     public static String P01_Login() {
         String strDomain = "";
 
-
-        if (BuildConfig.FLAVOR.equals("w3_private")) {
+        if (BuildConfig.FLAVOR.equals("platformvmage5_private")) {
+            strDomain = domain + "/index/api/login" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/login" + "/1.2";
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
             strDomain = https_domain + "/index/api/login" + "/1.2";
@@ -44,20 +39,14 @@ public class ProtocolsClass {
 
     public static String P03_RequestSmsPassword = domain + "/index/api/requestsmspwd" + version;
 
-    //    public static String P04_Registration = domain +"/index/api/registration" + "/1.2"; //2016.04.29
+
     public static String P04_Registration() {
         String strDomain = "";
 
-//        if (TestMode.TESTMODE) {
-//            //test
-//            strDomain = domain + "/index/api/registration" + "/1.2";
-//        } else {
-//            strDomain = https_domain + "/index/api/registration" + "/1.2";
-//        }
 
-
-
-        if (BuildConfig.FLAVOR.equals("w3_private")) {
+        if (BuildConfig.FLAVOR.equals("platformvmage5_private")) {
+            strDomain = domain + "/index/api/registration" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/registration" + "/1.2";
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
             strDomain = https_domain + "/index/api/registration" + "/1.2";
@@ -73,13 +62,13 @@ public class ProtocolsClass {
 
     public static String P06_UpdateProfileHobby = domain + "/index/api/updateprofilehobby" + version;
 
-    //    public static String P07_RetrievePassword = domain + "/index/api/retrievepassword" + version;
     public static String P07_RetrievePassword() {
 
         String strDomain = "";
 
-
-        if (BuildConfig.FLAVOR.equals("w3_private")) {
+        if (BuildConfig.FLAVOR.equals("platformvmage5_private")) {
+            strDomain = domain + "/index/api/retrievepassword" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/retrievepassword" + "/1.2";
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
             strDomain = https_domain + "/index/api/retrievepassword" + "/1.2";
@@ -125,8 +114,9 @@ public class ProtocolsClass {
 
         String strDomain = "";
 
-
-        if (BuildConfig.FLAVOR.equals("w3_private")) {
+        if (BuildConfig.FLAVOR.equals("platformvmage5_private")) {
+            strDomain = domain + "/index/api/updatepwd" + "/1.2";
+        } else if (BuildConfig.FLAVOR.equals("w3_private")) {
             strDomain = domain + "/index/api/updatepwd" + "/1.2";
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
             strDomain = https_domain + "/index/api/updatepwd" + "/1.2";
@@ -266,10 +256,6 @@ public class ProtocolsClass {
     public static String P93_DeleteAlbum2Likes = domain + "/index/api/deletealbum2likes" + "/1.3";
 
     public static String P94_GetHobbyList = domain + "/index/api/gethobbylist" + "/1.3";
-
-
-
-
 
 
 }

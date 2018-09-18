@@ -32,6 +32,17 @@ android {
     flavorDimensions "default"
 
     productFlavors {
+//        http://platformvmage5.cloudapp.net/pinpinbox/
+
+
+        platformvmage5_private {
+            applicationId "com.pinpinboxPlatformvmage5.android"
+            resValue "string", "pinpinbox_app_name", "platformvmage5"
+            buildConfigField "String", "initAPI", "\"http://platformvmage5.cloudapp.net/pinpinbox\""
+            dimension "default"
+            manifestPlaceholders = [appPackageName: "${applicationId}"]
+        }
+
 
         w3_private {
             applicationId "com.pinpinboxW3.android"

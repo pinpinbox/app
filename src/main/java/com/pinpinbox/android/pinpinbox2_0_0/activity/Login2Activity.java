@@ -220,41 +220,40 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
         HorizontalScrollView svHorizontal = (HorizontalScrollView) vLogin.findViewById(R.id.svHorizontal);
 
-//        if (TestMode.TESTMODE) {
-//            svHorizontal.setVisibility(View.VISIBLE);
-//        } else {
-//            svHorizontal.setVisibility(View.INVISIBLE);
-//            return;
-//        }
 
-        if (BuildConfig.FLAVOR.equals("w3_private")) {
+        if (BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("platformvmage5_private")) {
+
+
             svHorizontal.setVisibility(View.VISIBLE);
+
+
+            Button btMenu = (Button) vLogin.findViewById(R.id.btMenu);
+            Button btTest01 = (Button) vLogin.findViewById(R.id.btTest01);
+            Button btC1 = (Button) vLogin.findViewById(R.id.btC1);
+            Button btC2 = (Button) vLogin.findViewById(R.id.btC2);
+            Button btC3 = (Button) vLogin.findViewById(R.id.btC3);
+            Button btC4 = (Button) vLogin.findViewById(R.id.btC4);
+            Button btC5 = (Button) vLogin.findViewById(R.id.btC5);
+            Button btC6 = (Button) vLogin.findViewById(R.id.btC6);
+
+            TestClick testClick = new TestClick();
+            btMenu.setOnClickListener(testClick);
+            btTest01.setOnClickListener(testClick);
+            btC1.setOnClickListener(testClick);
+            btC2.setOnClickListener(testClick);
+            btC3.setOnClickListener(testClick);
+            btC4.setOnClickListener(testClick);
+            btC5.setOnClickListener(testClick);
+            btC6.setOnClickListener(testClick);
+
+
         } else if (BuildConfig.FLAVOR.equals("www_private")) {
             svHorizontal.setVisibility(View.INVISIBLE);
-            return;
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
             svHorizontal.setVisibility(View.INVISIBLE);
-            return;
         }
 
-        Button btMenu = (Button) vLogin.findViewById(R.id.btMenu);
-        Button btTest01 = (Button) vLogin.findViewById(R.id.btTest01);
-        Button btC1 = (Button) vLogin.findViewById(R.id.btC1);
-        Button btC2 = (Button) vLogin.findViewById(R.id.btC2);
-        Button btC3 = (Button) vLogin.findViewById(R.id.btC3);
-        Button btC4 = (Button) vLogin.findViewById(R.id.btC4);
-        Button btC5 = (Button) vLogin.findViewById(R.id.btC5);
-        Button btC6 = (Button) vLogin.findViewById(R.id.btC6);
 
-        TestClick testClick = new TestClick();
-        btMenu.setOnClickListener(testClick);
-        btTest01.setOnClickListener(testClick);
-        btC1.setOnClickListener(testClick);
-        btC2.setOnClickListener(testClick);
-        btC3.setOnClickListener(testClick);
-        btC4.setOnClickListener(testClick);
-        btC5.setOnClickListener(testClick);
-        btC6.setOnClickListener(testClick);
     }
 
     private class TestClick implements View.OnClickListener {
@@ -471,11 +470,11 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         tvLoginFacebook = (TextView) vLogin.findViewById(R.id.tvLoginFacebook);
         tvAboutUs = (TextView) vLogin.findViewById(R.id.tvAboutUs);
         tvLoginTitle = (TextView) vLogin.findViewById(R.id.tvLoginTitle);
-        tvLoginScanToRegister = (TextView)vLogin.findViewById(R.id.tvLoginScanToRegister);
+        tvLoginScanToRegister = (TextView) vLogin.findViewById(R.id.tvLoginScanToRegister);
 
         edLoginMail = (EditText) vLogin.findViewById(R.id.edLoginMail);
         edLoginPassword = (EditText) vLogin.findViewById(R.id.edLoginPassword);
-        edLoginPassword.setImeOptions( EditorInfo.IME_ACTION_SEND);
+        edLoginPassword.setImeOptions(EditorInfo.IME_ACTION_SEND);
         edLoginPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -487,7 +486,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         });
 
         loginGetPasswordImg = (ImageView) vLogin.findViewById(R.id.loginGetPasswordImg);
-
 
 
         if (scanIntent) {
@@ -904,7 +902,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
     }
 
 
-    private void login(){
+    private void login() {
 
         isFacebookRegister = false;
 
@@ -923,7 +921,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
     }
 
 
-/*--------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------*/
 
     private void toLogin() {
 
@@ -1051,7 +1049,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
     }
 
-/*--------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------*/
 
     private void checkViewToGone(final View readyGoneView) {
         if (readyGoneView.getAlpha() > 0) {
@@ -1083,7 +1081,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         return m.matches();
     }
 
-/*--------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------*/
 
     private void getFacebookJsonObjectToDoLogin(JSONObject jsonObject) {
         try {
@@ -1310,7 +1308,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 editor.putString(Key.cover, strCover);
 
 
-                 /*20171108*/
+                /*20171108*/
                 String sociallink = JsonUtility.GetString(object, ProtocolKey.sociallink);
                 if (sociallink != null && !sociallink.equals("") && !sociallink.equals("null")) {
                     JSONObject jsonLink = new JSONObject(sociallink);
@@ -1463,7 +1461,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
     }
 
-/*--------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------*/
 
     private void connectInstability() {
 
@@ -1583,7 +1581,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-         /*timestamp*/
+        /*timestamp*/
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = df.format(new Date(System.currentTimeMillis()));
 
@@ -2491,7 +2489,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
     }
 
-/*--------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------*/
 
     @Override
     public void onClick(View v) {
@@ -2506,7 +2504,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
         switch (v.getId()) {
 
-                /*login*/
+            /*login*/
             case R.id.tvLoginLogin:
 
 
@@ -2558,7 +2556,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
 
 
-                /*register*/
+            /*register*/
             case R.id.tvRegisterNext:
                 toVerificationCode();
                 break;
@@ -2588,7 +2586,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 break;
 
 
-                /*verification code*/
+            /*verification code*/
             case R.id.linVerBack:
                 toRegister();
                 break;
@@ -2621,7 +2619,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
 
 
-                /*get password*/
+            /*get password*/
             case R.id.linPwdBack:
                 toLogin();
                 break;
@@ -2916,7 +2914,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         Recycle.IMG(loginGetPasswordImg);
 
 
-
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.img2));
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.img3));
         Recycle.IMG((ImageView) vRegister.findViewById(R.id.img4));
@@ -2927,7 +2924,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         Recycle.IMG((ImageView) vVerificationCode.findViewById(R.id.img2));
         Recycle.IMG((ImageView) vVerificationCode.findViewById(R.id.backImg));
 
- 
+
         Recycle.IMG((ImageView) vGetPassword.findViewById(R.id.img2));
         Recycle.IMG((ImageView) vGetPassword.findViewById(R.id.backImg));
 
