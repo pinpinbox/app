@@ -566,6 +566,16 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                             public void onDismiss(DialogInterface dialogInterface) {
                                 surfaceView.setVisibility(View.VISIBLE);
                                 viewfinderView.setVisibility(View.VISIBLE);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (handler != null) {   //实现连续扫描
+                                            handler.restartPreviewAndDecode();
+                                        }
+                                    }
+                                }, 2000);
+
                             }
                         });
 
@@ -591,11 +601,25 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                 d.show();
 
                 if (d.getmDialog().isShowing()) {
+
                     d.getmDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialogInterface) {
+
                             surfaceView.setVisibility(View.VISIBLE);
                             viewfinderView.setVisibility(View.VISIBLE);
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (handler != null) {   //实现连续扫描
+                                        handler.restartPreviewAndDecode();
+                                    }
+                                }
+                            }, 2000);
+
+
+
                         }
                     });
 

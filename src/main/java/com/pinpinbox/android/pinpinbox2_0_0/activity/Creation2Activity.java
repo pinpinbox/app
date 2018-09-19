@@ -95,6 +95,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCooperation2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMyUpLoad2;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectAudio2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectPhoto2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectVideo2;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightEndedListener;
@@ -160,8 +161,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private FragmentSelectPhoto2 fragmentSelectPhoto2;
     private FragmentSelectVideo2 fragmentSelectVideo2;
+    private FragmentSelectAudio2 fragmentSelectAudio2;
 
-    private PopupCustom popCreationSet, popCreateSort, popCreateAdd, popCreateAudio;
+    private PopupCustom popCreationSet, popCreateSort, popCreateAdd, popCreateAudio, popSelectAudioFile;
 //   popCreatePreview
 
 
@@ -1068,26 +1070,32 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 if (mp3Recorder == null) {
 
-                    switch (checkPermission(mActivity, Manifest.permission.RECORD_AUDIO)) {
-                        case SUCCESS:
 
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    record();
-                                }
-                            }, 200);
+                    if (popSelectAudioFile == null) {
 
 
-                            break;
-                        case REFUSE:
-                            MPermissions.requestPermissions(mActivity, REQUEST_CODE_RECORD, Manifest.permission.RECORD_AUDIO);
-                            break;
+                        popSelectAudioFile = new PopupCustom(mActivity);
+                        popSelectAudioFile.setPopup(R.layout.pop_2_0_0_upload_audio, R.style.pinpinbox_popupAnimation_bottom);
+
+
+                        TextView tvRecording = popSelectAudioFile.getPopupView().findViewById(R.id.tvRecording);
+                        TextView tvSelectAudioFile = popSelectAudioFile.getPopupView().findViewById(R.id.tvSelectAudioFile);
+
+
+                        TextUtility.setBold(tvRecording, tvSelectAudioFile, (TextView) popSelectAudioFile.getPopupView().findViewById(R.id.tvTitle));
+
+
+                        View vContents = popSelectAudioFile.getPopupView().findViewById(R.id.linBackground);
+
+                        tvRecording.setOnTouchListener(new ClickDragDismissListener(vContents, Creation2Activity.this));
+                        tvSelectAudioFile.setOnTouchListener(new ClickDragDismissListener(vContents, Creation2Activity.this));
 
                     }
 
+                    popSelectAudioFile.show(rBackground);
 
                 } else {
+
 
                     if (mp3Recorder.isRecording()) {
                         mp3Recorder.stop();
@@ -1109,11 +1117,36 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
                 }
+
+
             }
         });
 
 
     }
+
+    private void checkRecorder() {
+
+        switch (checkPermission(mActivity, Manifest.permission.RECORD_AUDIO)) {
+            case SUCCESS:
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        record();
+                    }
+                }, 200);
+
+
+                break;
+            case REFUSE:
+                MPermissions.requestPermissions(mActivity, REQUEST_CODE_RECORD, Manifest.permission.RECORD_AUDIO);
+                break;
+
+        }
+
+    }
+
 
     private void record() {
 
@@ -1726,83 +1759,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             }
 
         }
-
-
-//        /*將當下list帶入選擇畫面的list供選擇用*/
-//        selectingList = photoList;
-//
-//        HashMap<String, Object> map = new HashMap<>();
-//
-//        map.put("photo_id", selectingList.get(0).get("photo_id"));
-//        map.put("image_url", selectingList.get(0).get("image_url"));
-//        map.put("image_url_thumbnail", selectingList.get(0).get("image_url_thumbnail"));
-//        map.put("image_url_operate", selectingList.get(0).get("image_url_operate"));
-//        map.put("select", selectingList.get(0).get("select"));
-//        map.put("name", selectingList.get(0).get("name"));
-//        map.put("audio_url", selectingList.get(0).get("audio_url"));
-//        map.put("video_url", selectingList.get(0).get("video_url"));
-//        map.put(Key.description, selectingList.get(0).get(Key.description));
-//        map.put(Key.location, selectingList.get(0).get(Key.location));
-//        map.put(Key.is_preview, true);
-//
-//        //20171018
-//        map.put(Key.user_id, selectingList.get(0).get(Key.user_id));
-//
-//        photoList.set(0, map);
-//
-//        if (selectPreviewAdapter != null) {
-//            selectPreviewAdapter.notifyDataSetChanged();
-//        } else {
-//
-//            MyLog.Set("d", mActivity.getClass(), "selectPreviewAdapter => null");
-//            selectPreviewAdapter = new SelectPreviewAdapter(mActivity, selectingList);
-//            gvPreview.setAdapter(selectPreviewAdapter);
-//
-//            gvPreview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                    if (position == 0) {
-//                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_cover_can_not_remove);
-//                        return;
-//                    }
-//
-//                    photoPreviewType = true;
-//
-//
-//                    HashMap<String, Object> map = new HashMap<>();
-//
-//                    map.put("photo_id", selectingList.get(position).get("photo_id"));
-//                    map.put("image_url", selectingList.get(position).get("image_url"));
-//                    map.put("image_url_thumbnail", selectingList.get(position).get("image_url_thumbnail"));
-//                    map.put("image_url_operate", selectingList.get(position).get("image_url_operate"));
-//                    map.put("select", selectingList.get(position).get("select"));
-//                    map.put("name", selectingList.get(position).get("name"));
-//                    map.put("audio_url", selectingList.get(position).get("audio_url"));
-//                    map.put("video_url", selectingList.get(position).get("video_url"));
-//                    map.put(Key.description, selectingList.get(position).get(Key.description));
-//                    map.put(Key.location, selectingList.get(position).get(Key.location));
-//                    boolean b = (boolean) selectingList.get(position).get("is_preview");
-//
-//                    if (b) {
-//                        map.put(Key.is_preview, false);
-//                    } else {
-//                        map.put(Key.is_preview, true);
-//                    }
-//
-//                    //20171018
-//                    map.put(Key.user_id, selectingList.get(position).get(Key.user_id));
-//
-//                    photoList.set(position, map);
-//                    selectPreviewAdapter.notifyDataSetChanged();
-//
-//                }
-//            });
-//
-//        }
-
-//        popCreatePreview.show(rBackground);
-
 
     }
 
@@ -4694,7 +4650,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
     }
 
-
     /*新增刪除地點都使用protocol59*/
     private class LocationTask extends AsyncTask<Void, Void, Object> {
 
@@ -4988,6 +4943,31 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 break;
 
+            case R.id.tvRecording:
+
+                popSelectAudioFile.dismiss();
+
+                checkRecorder();
+
+
+                break;
+
+            case R.id.tvSelectAudioFile:
+
+                popSelectAudioFile.dismiss();
+
+
+                getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                if (fragmentSelectAudio2 == null) {
+                    fragmentSelectAudio2 = new FragmentSelectAudio2();
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_content, fragmentSelectAudio2, fragmentSelectAudio2.getClass().getSimpleName()).commit();
+                } else {
+                    getSupportFragmentManager().beginTransaction().show(fragmentSelectAudio2).commit();
+                }
+
+
+                break;
+
 
         }
 
@@ -5046,13 +5026,18 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             getSupportFragmentManager().beginTransaction().hide(fragmentSelectPhoto2).commit();
 
-
         } else if (fragmentSelectVideo2 != null && fragmentSelectVideo2.isAdded() && fragmentSelectVideo2.isVisible()) {
 
             getSupportFragmentManager().beginTransaction().hide(fragmentSelectVideo2).commit();
 
+        } else if (fragmentSelectAudio2 != null && fragmentSelectAudio2.isAdded() && fragmentSelectAudio2.isVisible()) {
+
+            getSupportFragmentManager().beginTransaction().hide(fragmentSelectAudio2).commit();
+
         } else {
+
             backCheck();
+
         }
     }
 
@@ -5088,15 +5073,18 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                         Uri uuu = null;
 
-                        if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
-
-                            MyLog.Set("e", getClass(), "44444444");
-
-                            uuu = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID + ".provider", new File(data.getDataString()));
-                        } else {
-                            MyLog.Set("e", getClass(), "55555555");
-                            uuu = data.getData();
-                        }
+//                        if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {
+//
+//                            MyLog.Set("e", getClass(), "44444444");
+//                            MyLog.Set("e", getClass(), "data.getData().toString() => " + data.getData().toString());
+//
+////                            /file:/storage/emulated/0/pinpinbox_edit/pinpinbox_edit_1537326192524.png
+//
+//                            uuu = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID + ".provider", new File(data.getData().toString()));
+//                        } else {
+                        MyLog.Set("e", getClass(), "55555555");
+                        uuu = data.getData();
+//                        }
 
                         uploadFile = new File(new URI(uuu.toString()));
 

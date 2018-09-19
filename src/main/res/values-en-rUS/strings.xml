@@ -27,6 +27,7 @@
     <string name="pinpinbox_2_0_0_no_template">No template</string>
     <string name="pinpinbox_2_0_0_no_template_own">No template can be used</string>
 
+    <string name="pinpinbox_2_0_0_button_upload">Upload</string>
     <string name="pinpinbox_2_0_0_button_read_album">Read</string>
     <string name="pinpinbox_2_0_0_button_start_upload">Upload</string>
     <string name="pinpinbox_2_0_0_button_send">Send</string>

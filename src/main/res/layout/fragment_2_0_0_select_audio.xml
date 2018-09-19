@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvAudioFile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/ppb200_action_bar_height_with_status" />
+
+    <RelativeLayout
+        style="@style/ppb200_action_bar_with_status">
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_action_bar_icon"
+            android:src="@drawable/ic200_arrow_left_dark"
+            android:layout_alignParentBottom="true"/>
+
+
+    </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--style="@style/ppb200_bottom_bar"-->
+        <!--android:id="@+id/rBottom"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:visibility="visible">-->
+        <!---->
+    <!--</RelativeLayout>-->
+
+
+</RelativeLayout>
+

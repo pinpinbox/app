@@ -27,6 +27,7 @@
     <string name="pinpinbox_2_0_0_no_template">搜尋不到版型</string>
     <string name="pinpinbox_2_0_0_no_template_own">還沒有版型可以用</string>
 
+    <string name="pinpinbox_2_0_0_button_upload">上傳</string>
     <string name="pinpinbox_2_0_0_button_read_album">觀看內容</string>
     <string name="pinpinbox_2_0_0_button_start_upload">開始上傳</string>
     <string name="pinpinbox_2_0_0_button_send">送出</string>

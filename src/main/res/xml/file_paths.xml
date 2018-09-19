@@ -4,6 +4,20 @@
     <!--<external-path path="Android/data/com.pinpinbox.android/ppb_camera" name="files_root" />-->
     <!--<external-path path="." name="external_storage_root" />-->
 
-    <external-path name="external_files" path="."/>
+
+    <!--外部存储区域根目录下的文件。它对应Environment.getExternalStorageDirectory返回的路径：eg:"/storage/emulated/0"-->
+    <external-path
+        name="external_path"
+        path="." />
+
+
+    <!--在应用的外部存储区根目录的下的文件。它对应Context#getExternalFilesDir(String) Context.getExternalFilesDir(null)返回的路径。eg:"/storage/emulated/0/Android/data/com.jph.simple/files"-->
+    <!--<external-files-path name="external_files_path" path="."/>-->
+
+
+    <!--<root-path-->
+        <!--name="root_path"-->
+        <!--path="pinpinbox_edit" />-->
+
 
 </paths>
