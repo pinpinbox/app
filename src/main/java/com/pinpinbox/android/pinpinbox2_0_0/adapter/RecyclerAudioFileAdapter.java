@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
@@ -42,10 +43,10 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
     private Activity mActivity;
 
-    private List<String> filePathList;
+    private  List<HashMap<String, Object>> filePathList;
 
 
-    public RecyclerAudioFileAdapter(Activity activity, List<String> filePathList) {
+    public RecyclerAudioFileAdapter(Activity activity,  List<HashMap<String, Object>> filePathList) {
         this.mActivity = activity;
         this.filePathList = filePathList;
     }
@@ -62,11 +63,9 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
         ViewHolder mHolder = (ViewHolder) holder;
         mHolder.position = position;
 
+        mHolder.tvFileName.setText((String)filePathList.get(position).get("name"));
 
-        String fileName = filePathList.get(position);
-
-        mHolder.tvFileName.setText(fileName);
-
+        mHolder.tvTime.setText((String)filePathList.get(position).get("time"));
 
 
         mHolder.tvUpload.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +96,7 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
         private int position;
         private RelativeLayout rBackground;
-        private TextView tvFileName, tvUpload;
+        private TextView tvFileName, tvUpload, tvTime;
 
 
 
@@ -108,7 +107,7 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
             tvFileName = (TextView) itemView.findViewById(R.id.tvFileName);
             tvUpload = (TextView) itemView.findViewById(R.id.tvUpload);
-
+            tvTime = (TextView)itemView.findViewById(R.id.tvTime);
             rBackground.setOnClickListener(this);
 
         }

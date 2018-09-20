@@ -11,27 +11,58 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:clipToPadding="false"
+        android:paddingBottom="@dimen/ppb200_bottom_height"
         android:paddingTop="@dimen/ppb200_action_bar_height_with_status" />
 
-    <RelativeLayout
-        style="@style/ppb200_action_bar_with_status">
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
 
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_action_bar_icon"
-            android:src="@drawable/ic200_arrow_left_dark"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic200_arrow_left_dark" />
+
+        <TextView
+            android:id="@+id/tvActionBarTitle"
+            style="@style/ppb200_title_in_actionbar"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/ppb200_common_icon_side"
+            android:layout_marginRight="@dimen/ppb200_common_icon_side"
+            android:alpha="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="選擇音訊檔" />
 
 
     </RelativeLayout>
 
-    <!--<RelativeLayout-->
-        <!--style="@style/ppb200_bottom_bar"-->
-        <!--android:id="@+id/rBottom"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:visibility="visible">-->
-        <!---->
-    <!--</RelativeLayout>-->
+
+    <RelativeLayout
+        android:id="@+id/rBottom"
+        style="@style/ppb200_bottom_bar"
+        android:visibility="visible"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/pinpinbox_2_0_0_third_grey">
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/controlImg" />
+
+        <ImageView
+            android:id="@+id/controlImg"
+            style="@style/ppb200_action_bar_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic200_video_dark" />
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

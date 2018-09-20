@@ -42,7 +42,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.czt.mp3recorder.MP3Recorder;
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
 import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
@@ -1176,7 +1175,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             mp3Recorder = new MP3Recorder(fMp3);
             mp3Recorder.start();
             audioRecordingImg.setImageResource(R.drawable.ic200_recording_white);
-            audioRecordingImg.setPadding(SizeUtils.dp2px(10), SizeUtils.dp2px(10), SizeUtils.dp2px(10), SizeUtils.dp2px(10));
+
             rippleBackgroundRecording.startRippleAnimation();
             rippleBackgroundRecording.setVisibility(View.VISIBLE);
 
@@ -1200,7 +1199,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void resetRecordingImg() {
 
         audioRecordingImg.setImageResource(R.drawable.ic200_micro_white);
-        audioRecordingImg.setPadding(SizeUtils.dp2px(6), SizeUtils.dp2px(6), SizeUtils.dp2px(6), SizeUtils.dp2px(6));
 
     }
 
@@ -5031,7 +5029,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             getSupportFragmentManager().beginTransaction().hide(fragmentSelectVideo2).commit();
 
         } else if (fragmentSelectAudio2 != null && fragmentSelectAudio2.isAdded() && fragmentSelectAudio2.isVisible()) {
-
+            fragmentSelectAudio2.cleanMedia();
             getSupportFragmentManager().beginTransaction().hide(fragmentSelectAudio2).commit();
 
         } else {
