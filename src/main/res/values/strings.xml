@@ -166,7 +166,7 @@
     <string name="pinpinbox_2_0_0_dialog_message_scroll_to_final_page_to_collect_by_point">內容預覽已到最末頁，點擊贊助才能瀏覽完整內容!</string>
     <string name="pinpinbox_2_0_0_dialog_message_scroll_to_final_page_to_collect_by_send_point">喜歡作品就給個鼓勵吧！\n要贊助並收藏此作品嗎？</string>
     <string name="pinpinbox_2_0_0_dialog_message_change_album_mode">切換播放模式之後會將先前音效設定移除，確定要進行切換嗎?</string>
-    <string name="pinpinbox_2_0_0_dialog_message_change_album_mode_singular_to_plural">當前播放模式為作品單一的背景音樂，確定要切換成每頁的錄音嗎?\n(此動作會移除背景音樂)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_change_album_mode_singular_to_plural">當前播放模式為作品單一的背景音樂，確定要切換成每頁嗎?\n(此動作會移除背景音樂)</string>
     <string name="pinpinbox_2_0_0_dialog_message_open_permission_camera">此功能需要開啟權限「相機」</string>
     <string name="pinpinbox_2_0_0_dialog_message_open_permission_sdcard">此功能需要開啟權限「儲存裝置」</string>
     <string name="pinpinbox_2_0_0_dialog_message_open_permission_record">此功能需要開啟權限「麥克風」</string>

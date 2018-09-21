@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAudioFileAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
@@ -272,6 +275,18 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
             @Override
             public void onClick(int position) {
 
+
+                Activity ac = SystemUtility.getActivity(Creation2Activity.class.getSimpleName());
+
+                if(ac!=null){
+
+                    ((Creation2Activity)getActivity()).uploadMyAudioFile((String) filePathList.get(position).get("path"));
+
+                }
+
+                hideFragment();
+
+
             }
         });
 
@@ -340,6 +355,13 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
     }
 
+    private void hideFragment(){
+
+        cleanMedia();
+
+        getActivity().getSupportFragmentManager().beginTransaction().hide(this).commit();
+
+    }
 
 
     @Override
@@ -349,9 +371,7 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
             case R.id.backImg:
 
-                cleanMedia();
-
-                getActivity().getSupportFragmentManager().beginTransaction().hide(this).commit();
+                hideFragment();
 
                 break;
 

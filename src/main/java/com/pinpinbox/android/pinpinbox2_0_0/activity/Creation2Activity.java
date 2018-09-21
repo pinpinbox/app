@@ -1153,8 +1153,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         setClickable(false);
 
 
-        MyLog.Set("e", getClass(), "getExternalFilesDir(null).getAbsolutePath() => " + getExternalFilesDir(null).getAbsolutePath());
-
         mp3Path = DirClass.ExternalFileDir(mActivity) + PPBApplication.getInstance().getMyDir() + DirClass.pathName_RecordMp3;
 
         MyLog.Set("e", getClass(), mp3Path);
@@ -4856,7 +4854,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-
     private void selectPreviewPage() {
         previewMode = PREVIEW_PAGE;
         selectPreviewPage.setImageResource(R.drawable.border_2_0_0_click_default_radius);
@@ -4880,7 +4877,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         edPreviewPageStart.setEnabled(false);
 
     }
-
 
     @Override
     public void OnClick(View v) {
@@ -4993,7 +4989,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-
     public String getAlbum_id() {
         return album_id;
     }
@@ -5006,9 +5001,16 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         return this.event_id;
     }
 
-
     public boolean isModify() {
         return this.isModify;
+    }
+
+    public void uploadMyAudioFile(String mp3Path){
+
+        this.mp3Path = mp3Path;
+
+        doUploadAudio();
+
     }
 
 
