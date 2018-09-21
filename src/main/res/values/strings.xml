@@ -336,6 +336,7 @@
     <string name="pinpinbox_2_0_0_itemtype_album_location">地點</string>
     <string name="pinpinbox_2_0_0_itemtype_album_weather">天氣</string>
     <string name="pinpinbox_2_0_0_itemtype_album_mood">心情</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_photo_link">連結</string>
     <string name="pinpinbox_2_0_0_itemtype_collected">已收藏</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_need_sponsor">收藏(需贊助</string>
     <string name="pinpinbox_2_0_0_itemtype_clear_downloaded_albums">清除下載過的作品</string>
@@ -479,6 +480,8 @@
     <string name="pinpinbox_2_0_0_input_hint_password">密碼</string>
     <string name="pinpinbox_2_0_0_input_hint_nickname">暱稱</string>
     <string name="pinpinbox_2_0_0_input_hint_board_express">有什麼想表達的嗎?</string>
+    <string name="pinpinbox_2_0_0_input_hint_link_name">連結名稱</string>
+    <string name="pinpinbox_2_0_0_input_hint_link_url">網址</string>
 
 
     <string name="pinpinbox_2_0_0_other_message_confirm_buy">確定購買</string>

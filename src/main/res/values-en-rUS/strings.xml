@@ -329,6 +329,7 @@
     <string name="pinpinbox_2_0_0_itemtype_album_location">Location</string>
     <string name="pinpinbox_2_0_0_itemtype_album_weather">Weather</string>
     <string name="pinpinbox_2_0_0_itemtype_album_mood">Mood</string>
+    <string name="pinpinbox_2_0_0_itemtype_album_photo_link">Link</string>
     <string name="pinpinbox_2_0_0_itemtype_collected">Collected</string>
     <string name="pinpinbox_2_0_0_itemtype_collect_need_sponsor">Collect(</string>
     <string name="pinpinbox_2_0_0_itemtype_clear_downloaded_albums">Delete all downloaded</string>
@@ -473,6 +474,8 @@
     <string name="pinpinbox_2_0_0_input_hint_password">Password</string>
     <string name="pinpinbox_2_0_0_input_hint_nickname">Name</string>
     <string name="pinpinbox_2_0_0_input_hint_board_express">Say something.</string>
+    <string name="pinpinbox_2_0_0_input_hint_link_name">Link name</string>
+    <string name="pinpinbox_2_0_0_input_hint_link_url">URL</string>
 
 
     <string name="pinpinbox_2_0_0_other_message_confirm_buy">Are you sure to buy&#160;</string>

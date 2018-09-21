@@ -203,6 +203,7 @@
             android:clipChildren="false"
             android:visibility="invisible">
 
+            <!--濾鏡-->
             <LinearLayout
                 android:id="@+id/lin"
                 android:layout_width="36dp"
@@ -222,6 +223,7 @@
 
             </LinearLayout>
 
+            <!--聲音-->
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="36dp"
@@ -252,7 +254,7 @@
                         app:rb_scale="4" />
 
                     <ImageView
-                        android:id="@+id/audioRecording"
+                        android:id="@+id/audioRecordingImg"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:background="@drawable/click_2_0_0_circle_grey_hint"
@@ -284,7 +286,7 @@
                         android:layout_marginLeft="4.2dp"
                         android:layout_marginRight="4.2dp"
                         android:layout_marginTop="16dp"
-                        android:alpha="0.5"
+                        android:alpha="0.8"
                         android:background="@color/white" />
 
                     <RelativeLayout
@@ -306,7 +308,7 @@
                             app:rb_scale="4" />
 
                         <ImageView
-                            android:id="@+id/audioPlay"
+                            android:id="@+id/audioPlayImg"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:background="@drawable/click_2_0_0_circle_grey_hint"
@@ -338,7 +340,9 @@
 
             </LinearLayout>
 
+            <!--地點-->
             <LinearLayout
+                android:id="@+id/linearLayout7"
                 android:layout_width="36dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout6"
@@ -361,7 +365,7 @@
                             android:layout_marginLeft="4.2dp"
                             android:layout_marginRight="4.2dp"
                             android:layout_marginTop="16dp"
-                            android:alpha="0.5"
+                            android:alpha="0.8"
                             android:background="@color/white" />
 
 
@@ -390,6 +394,62 @@
 
 
             </LinearLayout>
+
+            <!--連結-->
+            <LinearLayout
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout7"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rLinkDelete"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="36dp"
+                            android:layout_height="44dp"
+                            android:layout_marginLeft="4.2dp"
+                            android:layout_marginRight="4.2dp"
+                            android:layout_marginTop="16dp"
+                            android:alpha="0.8"
+                            android:background="@color/white" />
+
+
+                        <ImageView
+                            android:id="@+id/linkDeleteImg"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="40dp"
+                            android:background="@drawable/click_2_0_0_default"
+                            android:padding="2dp"
+                            android:src="@drawable/button_delete_record" />
+
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/linkImg"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/click_2_0_0_circle_grey_hint"
+                        android:padding="8dp"
+                        android:src="@drawable/ic200_photolink_white"
+                        android:visibility="visible" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
 
 
             <ImageView

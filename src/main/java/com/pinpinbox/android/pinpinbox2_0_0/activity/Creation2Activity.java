@@ -88,6 +88,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCreationDescription;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCreationLink;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogCreationLocation;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -167,6 +168,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
     private DialogCreationLocation dlgCreationLocation;
+    private DialogCreationLink dlgCreationLink;
 
     private ChangeItemAdapter pop_qeAdapter;
     private SelectPreviewAdapter selectPreviewAdapter;
@@ -277,14 +279,13 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private boolean isShowAudioGuide = false;
 
 
-    private RelativeLayout rPlay_Delete, rBackground, rLocationDelete, rPhotoSettingBar, rAudioRecording;
-
+    private RelativeLayout rPlay_Delete, rBackground, rLocationDelete, rPhotoSettingBar, rAudioRecording, rLinkDelete;
 
     private ImageView addPicImg, addUserImg, refreshImg, backImg, videoPlayImg, albumSetImg,
             selectAudioNoneImg, selectAudioPageImg, selectAudioBackgroundImg, photo_or_templateImg;
     private ImageView selectPreviewPage, selectPreviewAll;
 
-    private ImageView locationImg, audioRecordingImg, audioPlayImg, deleteImg, aviaryImg, locationDeleteImg, audioDeleteImg;
+    private ImageView locationImg, audioRecordingImg, audioPlayImg, linkImg, deleteImg, aviaryImg, locationDeleteImg, audioDeleteImg, linkDeleteImg;
 
     private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSendPreview;
 
@@ -509,57 +510,49 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private void initView() {
 
+        photoImg = (PinchImageView) findViewById(R.id.photoImg);
+
         tvPicCount = (TextView) findViewById(R.id.tvPicCount);
         tvCheck = (TextView) findViewById(R.id.tvCheck);
         tvAddDescription = (TextView) findViewById(R.id.tvAddDescription);
+        tvDescription = (TextView) findViewById(R.id.tvDescription);
+        tvLocation = (TextView) findViewById(R.id.tvLocation);
+
 
         deleteImg = (ImageView) findViewById(R.id.deleteImg);
         addPicImg = (ImageView) findViewById(R.id.addPicImg);
         aviaryImg = (ImageView) findViewById(R.id.aviaryImg);
         addUserImg = (ImageView) findViewById(R.id.addUserImg);
-        photoImg = (PinchImageView) findViewById(R.id.photoImg);
         refreshImg = (ImageView) findViewById(R.id.refreshImg);
         backImg = (ImageView) findViewById(R.id.backImg);
         videoPlayImg = (ImageView) findViewById(R.id.videoPlayImg);
+        audioRecordingImg = (ImageView) findViewById(R.id.audioRecordingImg);
+        audioPlayImg = (ImageView) findViewById(R.id.audioPlayImg);
+        audioDeleteImg = (ImageView) findViewById(R.id.audioDeleteImg);
+        albumSetImg = (ImageView) findViewById(R.id.albumSetImg);
+        locationImg = (ImageView) findViewById(R.id.locationImg);
+        locationDeleteImg = (ImageView) findViewById(R.id.locationDeleteImg);
+        linkDeleteImg = (ImageView) findViewById(R.id.linkDeleteImg);
+        linkImg = (ImageView) findViewById(R.id.linkImg);
 
         rippleBackgroundRecording = (RippleBackground) findViewById(R.id.rippleRecording);
         rippleBackgroundPlay = (RippleBackground) findViewById(R.id.ripplePlay);
 
-        audioRecordingImg = (ImageView) findViewById(R.id.audioRecording);
-        audioPlayImg = (ImageView) findViewById(R.id.audioPlay);
-        audioDeleteImg = (ImageView) findViewById(R.id.audioDeleteImg);
 
         rBackground = (RelativeLayout) findViewById(R.id.rBackground);
         rPlay_Delete = (RelativeLayout) findViewById(R.id.rPlay_Delete);
-
-        //20171106
         rAudioRecording = (RelativeLayout) findViewById(R.id.rAudioRecording);
-
+        rPhotoSettingBar = (RelativeLayout) findViewById(R.id.rPhotoSettingBar);
+        rLocationDelete = (RelativeLayout) findViewById(R.id.rLocationDelete);
+        rLinkDelete = (RelativeLayout) findViewById(R.id.rLinkDelete);
 
 
         /*2016.08.30新增*/
         linDetail = (LinearLayout) findViewById(R.id.linDetail);
         linDetailDescription = (LinearLayout) findViewById(R.id.linDetailDescription);
         linDetailLocation = (LinearLayout) findViewById(R.id.linDetailLocation);
-        tvDescription = (TextView) findViewById(R.id.tvDescription);
-        tvLocation = (TextView) findViewById(R.id.tvLocation);
 
-
-        /*2016.11.28 new add*/
-        albumSetImg = (ImageView) findViewById(R.id.albumSetImg);
-
-
-        /*2016.11.29 new add*/
         setAllPop();
-
-        /*2017.08.30 new add*/
-
-        rPhotoSettingBar = (RelativeLayout) findViewById(R.id.rPhotoSettingBar);
-
-        rLocationDelete = (RelativeLayout) findViewById(R.id.rLocationDelete);
-        locationImg = (ImageView) findViewById(R.id.locationImg);
-        locationDeleteImg = (ImageView) findViewById(R.id.locationDeleteImg);
-
 
         tvCheck.setOnClickListener(this);
         refreshImg.setOnClickListener(this);
@@ -915,212 +908,234 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-    /*刪除當前照片*/
-    private void deleteClick() {
-        deleteImg.setOnClickListener(new View.OnClickListener() {
+
+    private void clickListener() {
+
+
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-
-                if (!HttpUtility.isConnect(mActivity)) {
-                    setNoConnect();
-                    return;
-                }
-
-
-                if (jsonArray.length() != 0) {
-
-                    //20171018
-                    if (!checkMyPhoto(thisPosition)) {
-                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-                        return;
-                    }
-
-
-                    final DialogV2Custom d = new DialogV2Custom(mActivity);
-                    d.setStyle(DialogStyleClass.CHECK);
-                    d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
-                    d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_delete_item);
-                    d.setCheckExecute(new CheckExecute() {
-                        @Override
-                        public void DoCheck() {
-                            doDeletePhoto();
-                        }
-                    });
-                    d.show();
-
-                } else {
-
-                    MyLog.Set("d", mActivity.getClass(), "No Photo");
-
-                }
+            public void run() {
+                addPicImg.setOnClickListener(Creation2Activity.this);
             }
-        });
+        }, 400);
+
+
+        addUserImg.setOnClickListener(this);
+        aviaryImg.setOnClickListener(this);
+        deleteImg.setOnClickListener(this);
+        videoPlayImg.setOnClickListener(this);
+        tvAddDescription.setOnClickListener(this);
+
+        audioRecordingImg.setOnClickListener(this);
+        audioPlayImg.setOnClickListener(this);
+        audioDeleteImg.setOnClickListener(this);
+
+        locationImg.setOnClickListener(this);
+        locationDeleteImg.setOnClickListener(this);
+
+        linkImg.setOnClickListener(this);
+        linkDeleteImg.setOnClickListener(this);
+
+
     }
 
-    /*下載當前照片 帶入adobe*/
+    /*添加新一頁*/
+    private void addPictureClick() {
+        /*選取已達上限*/
+        if (jsonArray.length() >= intUserGrade) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_count_max);
+            return;
+        }
+        SDpermissionEnable();
+    }
+
+    /*新增用戶*/
+    private void addUserClick() {
+        if (identity != null) {
+
+            if (identity.equals("editor")) {
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deficiency_identity);
+            } else {
+
+                FlurryUtil.onEvent(FlurryKey.creation_into_adduser_view);
+
+                Bundle bundle = new Bundle();
+                bundle.putString(Key.album_id, album_id);
+                bundle.putString(Key.identity, identity);
+                Intent intent = new Intent(mActivity, AlbumGroup2Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                ActivityAnim.StartAnim(mActivity);
+            }
+        }
+    }
+
+    /*濾鏡*/
     private void aviaryClick() {
-        aviaryImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
+        if (jsonArray.length() != 0) {
 
-                if (!HttpUtility.isConnect(mActivity)) {
-                    setNoConnect();
-                    return;
-                }
-
-
-                MyLog.Set("d", mActivity.getClass(), "被選擇的是 => " + lastPosition);
-
-                if (jsonArray.length() != 0) {
-
-                    //20171018
-                    if (!checkMyPhoto(thisPosition)) {
-                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-                        return;
-                    }
-
-
-                    BeforeAviaryTask beforeAviaryTask = new BeforeAviaryTask();
-                    beforeAviaryTask.execute();
-                } else {
-
-                    MyLog.Set("d", mActivity.getClass(), "jsonArray => " + jsonArray.length());
-
-                }
-
-
-            }
-        });
-    }
-
-    /*刷新*/
-    private void reFreshClick() {
-
-        if (jsonArray.length() > 0) {
-
-            if (getPhotoTask != null && !getPhotoTask.isCancelled()) {
-                getPhotoTask.cancel(true);
-                getPhotoTask = null;
+            if (!checkMyPhoto(thisPosition)) {
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+                return;
             }
 
-            isModify = true;
+            BeforeAviaryTask beforeAviaryTask = new BeforeAviaryTask();
+            beforeAviaryTask.execute();
+        } else {
 
-            doDeleteBitmapToRefresh();
+            MyLog.Set("d", mActivity.getClass(), "jsonArray => " + jsonArray.length());
 
         }
+    }
+
+    /*刪除當前照片*/
+    private void deleteClick() {
+        if (jsonArray.length() != 0) {
+
+            if (!checkMyPhoto(thisPosition)) {
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+                return;
+            }
+
+            final DialogV2Custom d = new DialogV2Custom(mActivity);
+            d.setStyle(DialogStyleClass.CHECK);
+            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
+            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_delete_item);
+            d.setCheckExecute(new CheckExecute() {
+                @Override
+                public void DoCheck() {
+                    doDeletePhoto();
+                }
+            });
+            d.show();
+
+        } else {
+
+            MyLog.Set("d", mActivity.getClass(), "No Photo");
+
+        }
+    }
+
+    /*播放影片*/
+    private void playVideoClick() {
+
+        ActivityIntent.toVideoPlay(mActivity, videoUrl);
+    }
+
+    /*單頁說明*/
+    private void addDescriptionClick() {
+
+        if (photoList == null || photoList.size() < 1) {
+            PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_add_item_first_to_add_description);
+            return;
+        }
+
+        //20171018
+        if (!checkMyPhoto(thisPosition)) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+            return;
+        }
+
+        final DialogCreationDescription d = new DialogCreationDescription(mActivity);
+        d.getEtDescription().setText(strDescription);
+        d.getConfirmImg().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                d.getDialog().dismiss();
+                strDescription = d.getEtDescription().getText().toString();
+                doDescription(strDescription);
+            }
+        });
 
     }
 
     /*錄音*/
+    @SuppressLint("WrongConstant")
     private void recordingClick() {
 
-        audioRecordingImg.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onClick(View v) {
+        if (!checkMyPhoto(thisPosition)) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+            return;
+        }
 
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
+        if (mPlayer != null && mPlayer.isPlaying()) {
+            View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast, null);
+            TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
+            tvToast.setText(R.string.pinpinbox_2_0_0_toast_message_audio_playing);
+            Toast toast = new Toast(mActivity.getApplicationContext());
+            toast.setDuration(500);
+            toast.setView(view);
+            toast.show();
+
+            return;
+        }
+
+        if (currentAudioMode.equals(SINGULAR)) {
+
+            final DialogV2Custom d = new DialogV2Custom(mActivity);
+            d.setStyle(DialogStyleClass.CHECK);
+            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_change_album_mode_singular_to_plural);
+            d.setCheckExecute(new CheckExecute() {
+                @Override
+                public void DoCheck() {
+                    d.dismiss();
+                    setAudioMode(PLURAL);
+                    doSendAudio();
                 }
+            });
+            d.show();
+
+            return;
+        }
 
 
-                //20171018
-                if (!checkMyPhoto(thisPosition)) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-                    return;
-                }
-
-                if (mPlayer != null && mPlayer.isPlaying()) {
-                    View view = LayoutInflater.from(mActivity).inflate(R.layout.pinpinbox_toast, null);
-                    TextView tvToast = (TextView) view.findViewById(R.id.tvToast);
-                    tvToast.setText(R.string.pinpinbox_2_0_0_toast_message_audio_playing);
-                    Toast toast = new Toast(mActivity.getApplicationContext());
-                    toast.setDuration(500);
-                    toast.setView(view);
-                    toast.show();
-
-                    return;
-                }
-
-                if (currentAudioMode.equals(SINGULAR)) {
-
-                    final DialogV2Custom d = new DialogV2Custom(mActivity);
-                    d.setStyle(DialogStyleClass.CHECK);
-                    d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_change_album_mode_singular_to_plural);
-                    d.setCheckExecute(new CheckExecute() {
-                        @Override
-                        public void DoCheck() {
-                            d.dismiss();
-                            setAudioMode(PLURAL);
-                            doSendAudio();
-                        }
-                    });
-                    d.show();
-
-                    return;
-                }
+        if (mp3Recorder == null) {
 
 
-                if (mp3Recorder == null) {
+            if (popSelectAudioFile == null) {
 
 
-                    if (popSelectAudioFile == null) {
+                popSelectAudioFile = new PopupCustom(mActivity);
+                popSelectAudioFile.setPopup(R.layout.pop_2_0_0_upload_audio, R.style.pinpinbox_popupAnimation_bottom);
 
 
-                        popSelectAudioFile = new PopupCustom(mActivity);
-                        popSelectAudioFile.setPopup(R.layout.pop_2_0_0_upload_audio, R.style.pinpinbox_popupAnimation_bottom);
+                TextView tvRecording = popSelectAudioFile.getPopupView().findViewById(R.id.tvRecording);
+                TextView tvSelectAudioFile = popSelectAudioFile.getPopupView().findViewById(R.id.tvSelectAudioFile);
 
 
-                        TextView tvRecording = popSelectAudioFile.getPopupView().findViewById(R.id.tvRecording);
-                        TextView tvSelectAudioFile = popSelectAudioFile.getPopupView().findViewById(R.id.tvSelectAudioFile);
+                TextUtility.setBold(tvRecording, tvSelectAudioFile, (TextView) popSelectAudioFile.getPopupView().findViewById(R.id.tvTitle));
 
 
-                        TextUtility.setBold(tvRecording, tvSelectAudioFile, (TextView) popSelectAudioFile.getPopupView().findViewById(R.id.tvTitle));
+                View vContents = popSelectAudioFile.getPopupView().findViewById(R.id.linBackground);
 
-
-                        View vContents = popSelectAudioFile.getPopupView().findViewById(R.id.linBackground);
-
-                        tvRecording.setOnTouchListener(new ClickDragDismissListener(vContents, Creation2Activity.this));
-                        tvSelectAudioFile.setOnTouchListener(new ClickDragDismissListener(vContents, Creation2Activity.this));
-
-                    }
-
-                    popSelectAudioFile.show(rBackground);
-
-                } else {
-
-
-                    if (mp3Recorder.isRecording()) {
-                        mp3Recorder.stop();
-                        mp3Recorder = null;
-                        rippleBackgroundRecording.stopRippleAnimation();
-                        rippleBackgroundRecording.setVisibility(View.INVISIBLE);
-
-                        setClickable(true);
-
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                doUploadAudio();
-
-                            }
-                        }, 300);//500
-
-                    }
-
-
-                }
-
+                tvRecording.setOnTouchListener(new ClickDragDismissListener(vContents, Creation2Activity.this));
+                tvSelectAudioFile.setOnTouchListener(new ClickDragDismissListener(vContents, Creation2Activity.this));
 
             }
-        });
 
+            popSelectAudioFile.show(rBackground);
+
+        } else {
+
+            if (mp3Recorder.isRecording()) {
+                mp3Recorder.stop();
+                mp3Recorder = null;
+                rippleBackgroundRecording.stopRippleAnimation();
+                rippleBackgroundRecording.setVisibility(View.INVISIBLE);
+
+                setClickable(true);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        doUploadAudio();
+
+                    }
+                }, 300);//500
+
+            }
+
+        }
 
     }
 
@@ -1145,7 +1160,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
 
     }
-
 
     private void record() {
 
@@ -1204,287 +1218,203 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     /*播放錄音*/
     private void playAudioClick() {
 
-        audioPlayImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (mp3Recorder != null && mp3Recorder.isRecording()) {
+            PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_audio_recording);
+            return;
+        }
+
+        /*單獨添加*/
+        refreshImg.setClickable(false);
+
+        /*畫面禁止點擊*/
+        setClickable(false);
+
+        if (mPlayer != null && mPlayer.isPlaying()) {
+            cleanMp3();
+            rippleBackgroundPlay.stopRippleAnimation();
+            rippleBackgroundPlay.setVisibility(View.INVISIBLE);
+
+            refreshImg.setClickable(true);
+            setClickable(true);
+            return;
+        }
+
+        if (mPlayer == null) {
 
 
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
+            rippleBackgroundPlay.startRippleAnimation();
+            rippleBackgroundPlay.setVisibility(View.VISIBLE);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
 
+                    try {
+                        mPlayer = new MediaPlayer();
+                        mPlayer.setDataSource(audioUrl);
 
-                if (mp3Recorder != null && mp3Recorder.isRecording()) {
-
-                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_audio_recording);
-
-                    return;
-
-                }
-
-
-                /*單獨添加*/
-                refreshImg.setClickable(false);
-
-                /*畫面禁止點擊*/
-                setClickable(false);
-
-                if (mPlayer != null && mPlayer.isPlaying()) {
-                    cleanMp3();
-                    rippleBackgroundPlay.stopRippleAnimation();
-                    rippleBackgroundPlay.setVisibility(View.INVISIBLE);
-
-                    refreshImg.setClickable(true);
-                    setClickable(true);
-                    return;
-                }
-
-                if (mPlayer == null) {
-
-
-                    rippleBackgroundPlay.startRippleAnimation();
-                    rippleBackgroundPlay.setVisibility(View.VISIBLE);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            try {
-                                mPlayer = new MediaPlayer();
-                                mPlayer.setDataSource(audioUrl);
-
-                                mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                                    @Override
-                                    public boolean onError(MediaPlayer mp, int what, int extra) {
-                                        MyLog.Set("e", this.getClass(), "setOnErrorListener");
-                                        cleanMp3();
-                                        rippleBackgroundPlay.stopRippleAnimation();
-                                        rippleBackgroundPlay.setVisibility(View.INVISIBLE);
-                                        refreshImg.setClickable(true);
-                                        setClickable(true);
-                                        return false;
-                                    }
-                                });
-
-                                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                    @Override
-                                    public void onCompletion(MediaPlayer mp) {
-                                        cleanMp3();
-                                        rippleBackgroundPlay.stopRippleAnimation();
-                                        rippleBackgroundPlay.setVisibility(View.INVISIBLE);
-                                        refreshImg.setClickable(true);
-                                        setClickable(true);
-                                    }
-                                });
-
-
-                                mPlayer.prepare();
-                                mPlayer.start();
-
-
-                            } catch (Exception e) {
+                        mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                            @Override
+                            public boolean onError(MediaPlayer mp, int what, int extra) {
+                                MyLog.Set("e", this.getClass(), "setOnErrorListener");
+                                cleanMp3();
+                                rippleBackgroundPlay.stopRippleAnimation();
+                                rippleBackgroundPlay.setVisibility(View.INVISIBLE);
                                 refreshImg.setClickable(true);
                                 setClickable(true);
-                                e.printStackTrace();
+                                return false;
                             }
-                        }
-                    }).start();
-                }
+                        });
 
-            }
-        });
+                        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                cleanMp3();
+                                rippleBackgroundPlay.stopRippleAnimation();
+                                rippleBackgroundPlay.setVisibility(View.INVISIBLE);
+                                refreshImg.setClickable(true);
+                                setClickable(true);
+                            }
+                        });
+
+
+                        mPlayer.prepare();
+                        mPlayer.start();
+
+
+                    } catch (Exception e) {
+                        refreshImg.setClickable(true);
+                        setClickable(true);
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
 
     }
 
     /*刪除錄音*/
     private void deleteAudioClick() {
-        audioDeleteImg.setOnClickListener(new View.OnClickListener() {
+        if (!checkMyPhoto(thisPosition)) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+            return;
+        }
+
+        if (mp3Recorder != null && mp3Recorder.isRecording()) {
+            PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_audio_recording);
+            return;
+
+        }
+
+        if (mPlayer != null && mPlayer.isPlaying()) {
+            PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_audio_playing);
+            return;
+        }
+
+        DialogV2Custom d = new DialogV2Custom(mActivity);
+        d.setStyle(DialogStyleClass.CHECK);
+        d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
+        d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_delete_recording);
+        d.setCheckExecute(new CheckExecute() {
             @Override
-            public void onClick(View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-                //20171018
-                if (!checkMyPhoto(thisPosition)) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-                    return;
-                }
-
-                if (mp3Recorder != null && mp3Recorder.isRecording()) {
-                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_audio_recording);
-                    return;
-
-                }
-
-                if (mPlayer != null && mPlayer.isPlaying()) {
-                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_audio_playing);
-                    return;
-                }
-
-                DialogV2Custom d = new DialogV2Custom(mActivity);
-                d.setStyle(DialogStyleClass.CHECK);
-                d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
-                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_delete_recording);
-                d.setCheckExecute(new CheckExecute() {
-                    @Override
-                    public void DoCheck() {
-                        doDeleteAudio();
-                    }
-                });
-                d.show();
-
+            public void DoCheck() {
+                doDeleteAudio();
             }
         });
+        d.show();
     }
-
-    /*播放影片*/
-    private void playVideoClick() {
-
-        videoPlayImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-
-                ActivityIntent.toVideoPlay(mActivity, videoUrl);
-
-            }
-        });
-
-    }
-
-    /*單頁說明*/
-    private void addDescription() {
-
-        tvAddDescription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-
-                if (photoList == null || photoList.size() < 1) {
-
-                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_add_item_first_to_add_description);
-
-                    return;
-                }
-
-                //20171018
-                if (!checkMyPhoto(thisPosition)) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-                    return;
-                }
-
-
-                final DialogCreationDescription d = new DialogCreationDescription(mActivity);
-                d.getEtDescription().setText(strDescription);
-                d.getConfirmImg().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        d.getDialog().dismiss();
-                        strDescription = d.getEtDescription().getText().toString();
-                        doDescription(strDescription);
-
-                    }
-                });
-
-
-            }
-        });
-
-
-    }
-
 
     /*單頁地點*/
-    private void addLocation() {
+    private void addLocationClick() {
+        if (!checkMyPhoto(thisPosition)) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+            return;
+        }
 
-        locationImg.setOnClickListener(new View.OnClickListener() {
+        if (dlgCreationLocation == null) {
+
+            dlgCreationLocation = new DialogCreationLocation((FragmentActivity) mActivity, mLocation);
+            dlgCreationLocation.getEdLocation().setText(strLocation);
+            dlgCreationLocation.setLocation(strLocation);
+            dlgCreationLocation.getConfirmImg().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dlgCreationLocation.getDialog().dismiss();
+                    strLocation = dlgCreationLocation.getEdLocation().getText().toString();
+                    doLocation(strLocation);
+                }
+            });
+        } else {
+
+            MyLog.Set("d", mActivity.getClass(), "dlgCreationLocation!=null");
+
+            dlgCreationLocation.getEdLocation().setText(strLocation);
+            dlgCreationLocation.setLocation(strLocation);
+            dlgCreationLocation.getDialog().show();
+
+        }
+    }
+
+    /*刪除地點*/
+    private void deleteLocationClick() {
+        if (!checkMyPhoto(thisPosition)) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+            return;
+        }
+
+        DialogV2Custom d = new DialogV2Custom(mActivity);
+        d.setStyle(DialogStyleClass.CHECK);
+        d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
+        d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_delete_location);
+        d.setCheckExecute(new CheckExecute() {
             @Override
-            public void onClick(View view) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-                //20171018
-                if (!checkMyPhoto(thisPosition)) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-                    return;
-                }
-
-
-                if (dlgCreationLocation == null) {
-
-                    MyLog.Set("d", mActivity.getClass(), "dlgCreationLocation==null");
-
-                    dlgCreationLocation = new DialogCreationLocation((FragmentActivity) mActivity, mLocation);
-                    dlgCreationLocation.getEdLocation().setText(strLocation);
-                    dlgCreationLocation.setLocation(strLocation);
-                    dlgCreationLocation.getConfirmImg().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dlgCreationLocation.getDialog().dismiss();
-                            strLocation = dlgCreationLocation.getEdLocation().getText().toString();
-                            doLocation(strLocation);
-                        }
-                    });
-                } else {
-
-                    MyLog.Set("d", mActivity.getClass(), "dlgCreationLocation!=null");
-
-                    dlgCreationLocation.getEdLocation().setText(strLocation);
-                    dlgCreationLocation.setLocation(strLocation);
-                    dlgCreationLocation.getDialog().show();
-
-                }
+            public void DoCheck() {
+                strLocation = "";
+                doLocation(strLocation);
             }
         });
+        d.show();
+    }
+
+    /*圖片連結*/
+    private void addlinkClick() {
+
+        if (!checkMyPhoto(thisPosition)) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+            return;
+        }
+
+
+        if (dlgCreationLink == null) {
+
+            dlgCreationLink = new DialogCreationLink(mActivity);
+
+            dlgCreationLink.getConfirmImg().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    dlgCreationLink.getDialog().dismiss();
+
+                }
+            });
+
+
+        } else {
+
+
+        }
+
+        dlgCreationLink.getDialog().show();
+
 
     }
 
+    /*刪除連結*/
+    private void deleteLinkClick() {
 
-    /*刪除地點*/
-    private void deleteLocation() {
-
-        locationDeleteImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-                //20171018
-                if (!checkMyPhoto(thisPosition)) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
-                    return;
-                }
-
-                DialogV2Custom d = new DialogV2Custom(mActivity);
-                d.setStyle(DialogStyleClass.CHECK);
-                d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
-                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_delete_location);
-                d.setCheckExecute(new CheckExecute() {
-                    @Override
-                    public void DoCheck() {
-                        strLocation = "";
-                        doLocation(strLocation);
-                    }
-                });
-                d.show();
-            }
-        });
-
+        if (!checkMyPhoto(thisPosition)) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deal_with_your_uploaded_items);
+            return;
+        }
 
     }
 
@@ -1534,35 +1464,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             MyLog.Set("d", getClass(), "isModify = false");
             toAlbumSettings();
         }
-    }
-
-    /*添加新一頁*/
-    private void addPicture() {
-        addPicImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-
-                if (!HttpUtility.isConnect(mActivity)) {
-                    setNoConnect();
-                    return;
-                }
-
-                /*選取已達上限*/
-                if (jsonArray.length() >= intUserGrade) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_count_max);
-                    return;
-                }
-
-
-                SDpermissionEnable();
-
-
-            }
-        });
     }
 
 
@@ -1634,39 +1535,22 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
 
-    /*新增用戶*/
-    private void addUser() {
-        addUserImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
+    /*刷新*/
+    private void reFreshClick() {
 
-                if (!HttpUtility.isConnect(mActivity)) {
-                    setNoConnect();
-                    return;
-                }
+        if (jsonArray.length() > 0) {
 
-                if (identity != null) {
-
-                    if (identity.equals("editor")) {
-                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_deficiency_identity);
-                    } else {
-
-                        FlurryUtil.onEvent(FlurryKey.creation_into_adduser_view);
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString(Key.album_id, album_id);
-                        bundle.putString(Key.identity, identity);
-                        Intent intent = new Intent(mActivity, AlbumGroup2Activity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
-                    }
-                }
+            if (getPhotoTask != null && !getPhotoTask.isCancelled()) {
+                getPhotoTask.cancel(true);
+                getPhotoTask = null;
             }
-        });
+
+            isModify = true;
+
+            doDeleteBitmapToRefresh();
+
+        }
+
     }
 
     /*作品設定*/
@@ -3684,36 +3568,25 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                     initView();
                     setCount();
-                    deleteClick();
-                    aviaryClick();
+                    clickListener();
 
-
-                    /*2016.06.21新增錄音相關*/
-                    recordingClick();
-                    playAudioClick();
-                    deleteAudioClick();
-
-                    /*2016.06.24新增播放影片*/
-                    playVideoClick();
-
-                    /*2016.08.30新增單頁說明*/
-                    addDescription();
-//                    deleteDescription();
-
-                    /*2017.08.30新增地圖資訊*/
-                    addLocation();
-                    deleteLocation();
-
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            addPicture();
-                        }
-                    }, 400);
-
-
-                    addUser();
+//                    deleteClick();
+//                    aviaryClick();
+//                    recordingClick();
+//                    playAudioClick();
+//                    deleteAudioClick();
+//                    playVideoClick();
+//                    addDescriptionClick();
+//                    addLocationClick();
+//                    deleteLocationClick();
+//                    addUserClick();
+//
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            addPictureClick();
+//                        }
+//                    }, 400);
 
 
                     backImg.setOnClickListener(new View.OnClickListener() {
@@ -4789,7 +4662,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
 
-        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+        if (ClickUtils.ButtonContinuousClick()) {
             return;
         }
         if (!HttpUtility.isConnect(mActivity)) {
@@ -4800,6 +4673,61 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         cleanPicasso();
 
         switch (view.getId()) {
+
+
+            case R.id.addUserImg:
+                addUserClick();
+                break;
+
+            case R.id.addPicImg:
+                addPictureClick();
+                break;
+
+            case R.id.aviaryImg:
+                aviaryClick();
+                break;
+
+            case R.id.deleteImg:
+                deleteClick();
+                break;
+
+            case R.id.videoPlayImg:
+                playVideoClick();
+                break;
+
+            case R.id.tvAddDescription:
+                addDescriptionClick();
+                break;
+
+            case R.id.audioRecordingImg:
+                recordingClick();
+                break;
+
+            case R.id.audioPlayImg:
+                playAudioClick();
+                break;
+
+            case R.id.audioDeleteImg:
+                deleteAudioClick();
+                break;
+
+            case R.id.locationImg:
+                addLocationClick();
+                break;
+
+            case R.id.locationDeleteImg:
+                deleteLocationClick();
+                break;
+
+            case R.id.linkImg:
+                addlinkClick();
+                break;
+
+            case R.id.linkDeleteImg:
+                deleteLinkClick();
+                break;
+
+
             case R.id.tvCheck:
                 sendAlbumCheck();
                 break;
@@ -5005,7 +4933,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         return this.isModify;
     }
 
-    public void uploadMyAudioFile(String mp3Path){
+    public void uploadMyAudioFile(String mp3Path) {
 
         this.mp3Path = mp3Path;
 
