@@ -57,6 +57,7 @@
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                 android:hint="@string/pinpinbox_2_0_0_input_hint_link_name"
+                android:singleLine="true"
                 android:text="" />
 
             <EditText
@@ -68,6 +69,7 @@
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                 android:hint="@string/pinpinbox_2_0_0_input_hint_link_url"
+                android:singleLine="true"
                 android:text="" />
 
             <View
@@ -93,6 +95,7 @@
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                 android:hint="@string/pinpinbox_2_0_0_input_hint_link_name"
+                android:singleLine="true"
                 android:text="" />
 
             <EditText
@@ -104,19 +107,13 @@
                 android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                 android:hint="@string/pinpinbox_2_0_0_input_hint_link_url"
+                android:singleLine="true"
                 android:text="" />
 
             <View
                 style="@style/ppb200_divider_list"
                 android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                 android:layout_marginBottom="@dimen/ppb200_padding_margin_first"/>
-
-
-
-
-
-
-
 
 
             <LinearLayout

@@ -2,24 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="@dimen/ppb200_creation_bottom_height"><!--80-->
 
 
-    <LinearLayout
-        android:layout_width="60dp"
+    <RelativeLayout
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical">
 
 
         <RelativeLayout
-            android:layout_width="60dp"
-            android:layout_height="86dp"
-            android:layout_marginBottom="-4dp">
+            android:id="@+id/rTop"
+            android:layout_width="64dp"
+            android:layout_height="64dp">
 
+            <!--border-->
             <RelativeLayout
                 android:id="@+id/rBorder"
                 android:layout_width="match_parent"
@@ -28,37 +27,39 @@
                 android:visibility="invisible" />
 
 
+            <!--image-->
             <ImageView
                 android:id="@+id/picImg"
-                android:layout_width="52dp"
-                android:layout_height="78dp"
+                android:layout_width="@dimen/ppb200_creation_thumbnailimage"
+                android:layout_height="@dimen/ppb200_creation_thumbnailimage"
                 android:layout_centerInParent="true"
-                android:scaleType="centerCrop"
-                />
+                android:scaleType="centerCrop" />
 
+
+            <!--lock-->
             <RelativeLayout
                 android:id="@+id/rLockOverlay"
-                android:layout_width="52dp"
-                android:layout_height="78dp"
+                android:layout_width="@dimen/ppb200_creation_thumbnailimage"
+                android:layout_height="@dimen/ppb200_creation_thumbnailimage"
                 android:layout_centerInParent="true"
                 android:visibility="gone">
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:alpha="0.8"/>
+                    android:alpha="0.8"
+                    android:background="@color/white" />
 
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/ic200_act_close_pink"
-                    />
+                    android:src="@drawable/ic200_act_close_pink" />
 
-                </RelativeLayout>
+            </RelativeLayout>
 
 
+            <!--type-->
             <ImageView
                 android:id="@+id/typeImg"
                 android:layout_width="24dp"
@@ -73,17 +74,20 @@
 
 
         <TextView
-            android:letterSpacing="0.1"
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/rTop"
             android:gravity="center"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="-4dp"
             android:singleLine="true"
+            android:text=""
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="12sp" />
+            android:textSize="@dimen/ppb200_common_text_small" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

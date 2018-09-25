@@ -2917,12 +2917,12 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         try {
 
             JSONObject obj1 = new JSONObject();
-            obj1.put("text", dlgCreationLink.getEdLinkName1());
-            obj1.put("url", dlgCreationLink.getEdLinkUrl1());
+            obj1.put("text", dlgCreationLink.getEdLinkName1().getText().toString());
+            obj1.put("url", dlgCreationLink.getEdLinkUrl1().getText().toString());
 
             JSONObject obj2 = new JSONObject();
-            obj2.put("text", dlgCreationLink.getEdLinkName2());
-            obj2.put("url", dlgCreationLink.getEdLinkUrl2());
+            obj2.put("text", dlgCreationLink.getEdLinkName2().getText().toString());
+            obj2.put("url", dlgCreationLink.getEdLinkUrl2().getText().toString());
 
             array = new JSONArray();
             array.put(obj1);

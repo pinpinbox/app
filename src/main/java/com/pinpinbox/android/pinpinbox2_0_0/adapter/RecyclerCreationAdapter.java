@@ -17,6 +17,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.TransformationControl;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class RecyclerCreationAdapter extends RecyclerView.Adapter {
                     .load(url)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
+                    .transform(new TransformationControl.BrightnessTransformation())
                     .tag(mActivity.getApplicationContext())
                     .into(holder.picImg);
 

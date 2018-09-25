@@ -482,17 +482,16 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout29"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/ppb200_creation_bottom_height"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentBottom="true">
 
         <LinearLayout
             android:id="@+id/linAdd"
-            android:layout_width="52dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="1dp"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:gravity="center"
             android:orientation="vertical">
@@ -500,10 +499,10 @@
 
             <ImageView
                 android:id="@+id/addPicImg"
-                android:layout_width="52dp"
-                android:layout_height="78dp"
+                android:layout_width="@dimen/ppb200_creation_thumbnailimage"
+                android:layout_height="@dimen/ppb200_creation_thumbnailimage"
                 android:background="@drawable/click_2_0_0_main_button_radius"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic200_plus_white" />
 
@@ -515,6 +514,7 @@
                 android:letterSpacing="0.1"
                 android:singleLine="true"
                 android:text="0/0"
+                android:layout_marginTop="1dp"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_small" />
 

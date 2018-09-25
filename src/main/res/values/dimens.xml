@@ -72,7 +72,8 @@
     <dimen name="ppb200_loading_margintop_with_actionbar_status">88dp</dimen>
 
     <dimen name="ppb200_item_height">48dp</dimen>
-    <dimen name="ppb200_creation_bottom_height">100dp</dimen>
+    <dimen name="ppb200_creation_bottom_height">80dp</dimen>
+    <dimen name="ppb200_creation_thumbnailimage">56dp</dimen>
 
 
     <dimen name="ppb200_action_bar_height">56dp</dimen>
