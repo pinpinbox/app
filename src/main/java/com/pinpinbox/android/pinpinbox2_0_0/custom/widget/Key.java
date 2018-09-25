@@ -91,6 +91,7 @@ public class Key {
 
     //h
     public static String hobby = "hobby";
+    public static String hyperlink = "hyperlink";
 
 
     //i

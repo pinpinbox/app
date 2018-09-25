@@ -61,6 +61,7 @@ import com.pinpinbox.android.Views.PinchImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHyperlink;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
@@ -158,6 +159,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private SetSettingsTask setSettingsTask;
     private SendAudioTask sendAudioTask;
     private Protocol33_AlbumSettings protocol33;
+    private SendHyperlinkTask sendHyperlinkTask;
 
     private FragmentSelectPhoto2 fragmentSelectPhoto2;
     private FragmentSelectVideo2 fragmentSelectVideo2;
@@ -252,6 +254,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private static final int DoDescription = 9;
     private static final int DoDeleteBitmapToRefresh = 10;
     private static final int DoSendPreview = 11;
+    private static final int DoSendHyperLink = 12;
     private static final int DoLocation = 14;
 
 
@@ -908,7 +911,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-
     private void clickListener() {
 
 
@@ -1394,14 +1396,86 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                     dlgCreationLink.getDialog().dismiss();
 
+                    doSendHyperLink();
+
                 }
             });
 
+        }
+
+        String hyperlink = (String) photoList.get(thisPosition).get(Key.hyperlink);
+
+        List<ItemHyperlink> itemHyperlinkList = new ArrayList<>();
+
+        try {
+
+            if (hyperlink != null && !hyperlink.equals("") && !hyperlink.equals("null")) {
+
+                JSONArray jsonHyperlinkArray = new JSONArray(hyperlink);
+
+                if (jsonHyperlinkArray.length() > 0) {
+
+                    for (int i = 0; i < jsonHyperlinkArray.length(); i++) {
+
+                        JSONObject obj = (JSONObject) jsonHyperlinkArray.get(i);
+
+                        ItemHyperlink itemHyperlink = new ItemHyperlink();
+
+                        itemHyperlink.setIcon(JsonUtility.GetString(obj, ProtocolKey.icon));
+                        itemHyperlink.setText(JsonUtility.GetString(obj, ProtocolKey.text));
+                        itemHyperlink.setUrl(JsonUtility.GetString(obj, ProtocolKey.url));
+
+                        itemHyperlinkList.add(itemHyperlink);
+
+                    }
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (itemHyperlinkList.size() > 0) {
+
+            for (int i = 0; i < itemHyperlinkList.size(); i++) {
+
+                String name = itemHyperlinkList.get(i).getText();
+
+                String url = itemHyperlinkList.get(i).getUrl();
+
+
+                switch (i) {
+
+                    case 0:
+
+                        dlgCreationLink.getEdLinkName1().setText(name);
+                        dlgCreationLink.getEdLinkUrl1().setText(url);
+
+
+                        break;
+
+                    case 1:
+
+                        dlgCreationLink.getEdLinkName2().setText(name);
+                        dlgCreationLink.getEdLinkUrl2().setText(url);
+
+                        break;
+
+                }
+
+            }
 
         } else {
 
+            dlgCreationLink.getEdLinkName1().setText("");
+            dlgCreationLink.getEdLinkUrl1().setText("");
+            dlgCreationLink.getEdLinkName2().setText("");
+            dlgCreationLink.getEdLinkUrl2().setText("");
 
         }
+
 
         dlgCreationLink.getDialog().show();
 
@@ -2257,6 +2331,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 //20171018
                 String user_id = obj.getString(ProtocolKey.user_id);
 
+                String hyperlink = JsonUtility.GetString(obj, ProtocolKey.hyperlink);
+
 
                 MyLog.Set("d", getClass(),
                         "photo_id => " + photo_id + "\n"
@@ -2268,7 +2344,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                                 + "description => " + description + "\n"
                                 + "is_preview => " + is_preview + "\n"
                                 + "location => " + location + "\n"
-                                + "user_id => " + user_id
+                                + "user_id => " + user_id + "\n"
+                                + "hyperlink => " + hyperlink
                 );
 
 
@@ -2301,6 +2378,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 //20171018
                 map.put(Key.user_id, user_id);
+
+                map.put(Key.hyperlink, hyperlink);
 
                 photoList.add(map);
             }
@@ -2824,6 +2903,39 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
         sendAudioTask = new SendAudioTask();
         sendAudioTask.execute();
+
+    }
+
+    private void doSendHyperLink() {
+        if (!HttpUtility.isConnect(this)) {
+            setNoConnect();
+            return;
+        }
+
+        JSONArray array = null;
+
+        try {
+
+            JSONObject obj1 = new JSONObject();
+            obj1.put("text", dlgCreationLink.getEdLinkName1());
+            obj1.put("url", dlgCreationLink.getEdLinkUrl1());
+
+            JSONObject obj2 = new JSONObject();
+            obj2.put("text", dlgCreationLink.getEdLinkName2());
+            obj2.put("url", dlgCreationLink.getEdLinkUrl2());
+
+            array = new JSONArray();
+            array.put(obj1);
+            array.put(obj2);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        sendHyperlinkTask = new SendHyperlinkTask(array.toString());
+        sendHyperlinkTask.execute();
 
     }
 
@@ -4578,6 +4690,107 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                     } else if (p59Result.equals("0")) {
                         p59Message = jsonObject.getString(Key.message);
+                    } else {
+                        p59Result = "";
+                    }
+
+                } catch (Exception e) {
+                    p59Result = "";
+                    deleteDownloadFile();
+                    e.printStackTrace();
+
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+
+            dissmissLoading();
+
+            if (p59Result != null) {
+                if (p59Result.equals("1")) {
+
+                    isModify = true; //已修改內容
+                    setChangeProject();
+                    lastPosition = thisPosition;
+
+
+                } else if (p59Result.equals("0")) {
+                    DialogV2Custom.BuildError(mActivity, p59Message);
+                } else if (p59Result.equals(Key.timeout)) {
+                    connectInstability();
+                } else {
+                    DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+                }
+
+
+            }
+
+        }
+    }
+
+
+    private class SendHyperlinkTask extends AsyncTask<Void, Void, Object> {
+
+        private String hyperlink;
+
+        public SendHyperlinkTask(String hyperlink) {
+            this.hyperlink = hyperlink;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            doingType = DoSendHyperLink;
+            startLoading();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            String photo_id = (String) photoList.get(thisPosition).get("photo_id");
+
+            MyLog.Set("d", getClass(), "allready hyperlink => " + hyperlink);
+
+            Map<String, String> data = new HashMap<>();
+            data.put("id", id);
+            data.put("token", token);
+            data.put("album_id", album_id);
+            data.put("photo_id", photo_id);
+            String sign = IndexSheet.encodePPB(data);
+            Map<String, String> sendData = new HashMap<>();
+            sendData.put("id", id);
+            sendData.put("token", token);
+            sendData.put("album_id", album_id);
+            sendData.put("photo_id", photo_id);
+            sendData.put("settings[hyperlink]", hyperlink);
+            sendData.put("sign", sign);
+
+            String strJson = "";
+
+            try {
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P59_UpDatePhotoOfDiy, sendData, null);
+                MyLog.Set("d", getClass(), "p59strJson by settings hyperlink => " + strJson);
+            } catch (SocketTimeoutException timeout) {
+                p59Result = Key.timeout;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (strJson != null && !strJson.equals("")) {
+                try {
+
+                    JSONObject jsonObject = new JSONObject(strJson);
+
+                    p59Result = jsonObject.getString(ProtocolKey.result);
+                    if (p59Result.equals("1")) {
+
+                        getJsonArray_setBottomList(jsonObject);
+
+                    } else if (p59Result.equals("0")) {
+                        p59Message = jsonObject.getString(ProtocolKey.message);
                     } else {
                         p59Result = "";
                     }
