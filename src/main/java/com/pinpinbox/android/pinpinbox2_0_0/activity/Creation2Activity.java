@@ -154,10 +154,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private FirstCreateFreeAlbumTask firstCreateFreeAlbumTask;
     private DescriptionTask descriptionTask;
     private LocationTask locationTask;
-    private SendPreviewTask sendPreviewTask;
     private GetSettingsTask getSettingsTask;
     private SetSettingsTask setSettingsTask;
-    private SendAudioTask sendAudioTask;
+    private SendAudioModeTask sendAudioModeTask;
     private Protocol33_AlbumSettings protocol33;
     private SendHyperlinkTask sendHyperlinkTask;
 
@@ -253,7 +252,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private static final int DoFirstCreateFreeAlbum = 8;
     private static final int DoDescription = 9;
     private static final int DoDeleteBitmapToRefresh = 10;
-    private static final int DoSendPreview = 11;
     private static final int DoSendHyperLink = 12;
     private static final int DoLocation = 14;
 
@@ -261,6 +259,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private static final String NONE = "none";
     private static final String SINGULAR = "singular"; //單首
     private static final String PLURAL = "plural"; //多首
+    private static final String CUSTOM = "custom"; //上傳 自定義 不是由server給予
 
     private static final int PREVIEW_ALL = 99;
     private static final int PREVIEW_PAGE = 98;
@@ -284,13 +283,14 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private RelativeLayout rPlay_Delete, rBackground, rLocationDelete, rPhotoSettingBar, rAudioRecording, rLinkDelete;
 
-    private ImageView addPicImg, addUserImg, refreshImg, backImg, videoPlayImg, albumSetImg,
-            selectAudioNoneImg, selectAudioPageImg, selectAudioBackgroundImg, photo_or_templateImg;
+    private ImageView addPicImg, addUserImg, refreshImg, backImg, videoPlayImg, albumSetImg, photo_or_templateImg;
     private ImageView selectPreviewPage, selectPreviewAll;
+
+    private ImageView selectAudioNoneImg, selectAudioPageImg, selectAudioBackgroundImg, selectAudioCustomImg;
 
     private ImageView locationImg, audioRecordingImg, audioPlayImg, linkImg, deleteImg, aviaryImg, locationDeleteImg, audioDeleteImg, linkDeleteImg;
 
-    private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSendPreview;
+    private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSelectAudioCustom, tvSendPreview;
 
     private EditText edPreviewPageStart;
 
@@ -452,12 +452,12 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void setRecycler() {
 
         rvPhoto = (RecyclerView) findViewById(R.id.rvPhoto);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvPhoto.setLayoutManager(layoutManager);
         adapter = new RecyclerCreationAdapter(this, photoList, identity);
         rvPhoto.setAdapter(adapter);
+
 
         adapter.setOnRecyclerViewListener(new RecyclerCreationAdapter.OnRecyclerViewListener() {
             @Override
@@ -489,12 +489,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 setChangeProject();
 
-//                checkLocation(thisPosition);
-//                checkDescription(thisPosition);
-//                checkMp3_setAudioUrl(thisPosition);
-//                setImageUrl(thisPosition);
-//                selectBackground(thisPosition, lastPosition);
-//                adapter.notifyDataSetChanged();
                 lastPosition = thisPosition;
 
 
@@ -579,23 +573,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     @SuppressLint("ClickableViewAccessibility")
     private void setAllPop() {
-
-        /**/
-//        popCreatePreview = new PopupCustom(mActivity);
-//        popCreatePreview.setPopup(R.layout.pop_2_0_0_creation_preview, R.style.pinpinbox_popupAnimation_bottom);
-//        gvPreview = (GridView) popCreatePreview.getPopupView().findViewById(R.id.gvPreview);
-//        TextView tvPreviewConfirm = (TextView) popCreatePreview.getPopupView().findViewById(R.id.tvPreviewConfirm);
-//        tvPreviewConfirm.setOnClickListener(this);
-//        TextUtility.setBold((TextView) popCreatePreview.getPopupView().findViewById(R.id.tvTitle), true);
-//        TextUtility.setBold(tvPreviewConfirm, true);
-//
-//        popCreatePreview.getPopupView().findViewById(R.id.linBackground).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                popCreatePreview.dismiss();
-//            }
-//        });
-
 
         /**/
         popCreateSort = new PopupCustom(mActivity);
@@ -706,20 +683,20 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         (popCreateAudio.getPopupView().findViewById(R.id.tvSave)).setOnClickListener(this);
 
 
-        selectAudioNoneImg = (ImageView) popCreateAudio.getPopupView().findViewById(R.id.selectAudioNoneImg);
-        selectAudioPageImg = (ImageView) popCreateAudio.getPopupView().findViewById(R.id.selectAudioPageImg);
-        selectAudioBackgroundImg = (ImageView) popCreateAudio.getPopupView().findViewById(R.id.selectAudioBackgroundImg);
+        selectAudioNoneImg = popCreateAudio.getPopupView().findViewById(R.id.selectAudioNoneImg);
+        selectAudioPageImg = popCreateAudio.getPopupView().findViewById(R.id.selectAudioPageImg);
+        selectAudioBackgroundImg = popCreateAudio.getPopupView().findViewById(R.id.selectAudioBackgroundImg);
+        selectAudioCustomImg = popCreateAudio.getPopupView().findViewById(R.id.selectAudioCustomImg);
 
-        tvSelectAudioNone = (TextView) popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioNone);
-        tvSelectAudioPage = (TextView) popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioPage);
-        tvSelectAudioBackground = (TextView) popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioBackground);
+        tvSelectAudioNone = popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioNone);
+        tvSelectAudioPage = popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioPage);
+        tvSelectAudioBackground = popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioBackground);
+        tvSelectAudioCustom = popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioCustom);
 
 
-        TextUtility.setBold((TextView) popCreateAudio.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvSelectAudioNone, true);
-        TextUtility.setBold(tvSelectAudioPage, true);
-        TextUtility.setBold(tvSelectAudioBackground, true);
-        TextUtility.setBold((TextView) popCreateAudio.getPopupView().findViewById(R.id.tvSave), true);
+        TextUtility.setBold(tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSelectAudioCustom,
+                (TextView) popCreateAudio.getPopupView().findViewById(R.id.tvTitle),
+                (TextView) popCreateAudio.getPopupView().findViewById(R.id.tvSave));
 
 
         linearLayoutManager = new ScrollLinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
@@ -744,9 +721,15 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 setAudioMode(SINGULAR);
             }
         });
+        selectAudioCustomImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAudioMode(CUSTOM);
+            }
+        });
 
 
-        audioAdapter = new RecyclerAlbumSettingsAdapter(mActivity, audioList);
+        audioAdapter = new RecyclerAlbumSettingsAdapter(mActivity, audioList, true);
         rvAudio.setAdapter(audioAdapter);
 
         audioAdapter.setOnRecyclerViewListener(new RecyclerAlbumSettingsAdapter.OnRecyclerViewListener() {
@@ -757,7 +740,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-                if (!mySelectAudioMode.equals(SINGULAR)) {
+                if (!mySelectAudioMode.equals(SINGULAR) && rvAudio.getAlpha() == 0.2f) {
                     return;
                 }
 
@@ -857,19 +840,23 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 selectAudioNoneImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
                 selectAudioPageImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
                 selectAudioBackgroundImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                selectAudioCustomImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
 
                 tvSelectAudioNone.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
                 tvSelectAudioPage.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 tvSelectAudioBackground.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                tvSelectAudioCustom.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
 
                 linearLayoutManager.setScrollEnabled(false);
 
                 rvAudio.setAlpha(0.2f);
 
-
                 mySelectAudioMode = NONE;
 
+                if (mpBackground != null && mpBackground.isPlaying()) {
+                    mpBackground.stop();
+                }
 
                 break;
 
@@ -877,33 +864,67 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 selectAudioNoneImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
                 selectAudioPageImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
                 selectAudioBackgroundImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                selectAudioCustomImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
 
                 tvSelectAudioNone.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 tvSelectAudioPage.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
                 tvSelectAudioBackground.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                tvSelectAudioCustom.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
                 linearLayoutManager.setScrollEnabled(false);
 
                 rvAudio.setAlpha(0.2f);
 
-
                 mySelectAudioMode = PLURAL;
+
+                if (mpBackground != null && mpBackground.isPlaying()) {
+                    mpBackground.stop();
+                }
+
                 break;
 
             case SINGULAR://單首
                 selectAudioNoneImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
                 selectAudioPageImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
                 selectAudioBackgroundImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+                selectAudioCustomImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
 
                 tvSelectAudioNone.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 tvSelectAudioPage.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 tvSelectAudioBackground.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+                tvSelectAudioCustom.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
                 linearLayoutManager.setScrollEnabled(true);
 
                 rvAudio.setAlpha(1f);
 
                 mySelectAudioMode = SINGULAR;
+
+                break;
+
+            case CUSTOM://上傳
+
+                selectAudioNoneImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                selectAudioPageImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                selectAudioBackgroundImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+                selectAudioCustomImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+
+                tvSelectAudioNone.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                tvSelectAudioPage.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                tvSelectAudioBackground.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                tvSelectAudioCustom.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+
+
+                linearLayoutManager.setScrollEnabled(false);
+
+                rvAudio.setAlpha(0.2f);
+
+                mySelectAudioMode = SINGULAR; //童單首
+
+                if (mpBackground != null && mpBackground.isPlaying()) {
+                    mpBackground.stop();
+                }
+
                 break;
 
 
@@ -1082,7 +1103,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 public void DoCheck() {
                     d.dismiss();
                     setAudioMode(PLURAL);
-                    doSendAudio();
+                    doSendAudioMode();
                 }
             });
             d.show();
@@ -1385,23 +1406,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             return;
         }
 
+        buildDialogHyperLink();
 
-        if (dlgCreationLink == null) {
-
-            dlgCreationLink = new DialogCreationLink(mActivity);
-
-            dlgCreationLink.getConfirmImg().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    dlgCreationLink.getDialog().dismiss();
-
-                    doSendHyperLink();
-
-                }
-            });
-
-        }
 
         String hyperlink = (String) photoList.get(thisPosition).get(Key.hyperlink);
 
@@ -1421,7 +1427,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                         ItemHyperlink itemHyperlink = new ItemHyperlink();
 
-                        itemHyperlink.setIcon(JsonUtility.GetString(obj, ProtocolKey.icon));
                         itemHyperlink.setText(JsonUtility.GetString(obj, ProtocolKey.text));
                         itemHyperlink.setUrl(JsonUtility.GetString(obj, ProtocolKey.url));
 
@@ -1490,6 +1495,42 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             return;
         }
 
+        buildDialogHyperLink();
+
+
+        DialogV2Custom d = new DialogV2Custom(mActivity);
+        d.setStyle(DialogStyleClass.CHECK);
+        d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
+        d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_delete_hyperlink);
+        d.setCheckExecute(new CheckExecute() {
+            @Override
+            public void DoCheck() {
+
+                dlgCreationLink.getEdLinkName1().setText("");
+                dlgCreationLink.getEdLinkName2().setText("");
+                dlgCreationLink.getEdLinkUrl1().setText("");
+                dlgCreationLink.getEdLinkUrl2().setText("");
+
+
+                doSendHyperLink();
+            }
+        });
+        d.show();
+
+
+    }
+
+    private void buildDialogHyperLink() {
+        if (dlgCreationLink == null) {
+            dlgCreationLink = new DialogCreationLink(mActivity);
+            dlgCreationLink.getConfirmImg().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dlgCreationLink.getDialog().dismiss();
+                    doSendHyperLink();
+                }
+            });
+        }
     }
 
 
@@ -1652,7 +1693,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         });
 
         popChangeListener();
-        popConfirmPreviewListener();
+
 
     }
 
@@ -1677,13 +1718,15 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private void confirmPreviewClick() {
 
+        if (previewMode == -1) {
 
-        if (previewMode == PREVIEW_ALL) {
+            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_select_preview_way);
+
+        } else if (previewMode == PREVIEW_ALL) {
 
             doSendPreview();
 
         } else {
-
 
             if (photoList != null && photoList.size() == 0) {
                 PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_album_content_is_null);
@@ -1694,7 +1737,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_type_the_number_you_want_to_be_visible);
                 return;
             }
-
 
             sendPreviewCount = StringIntMethod.StringToInt(edPreviewPageStart.getText().toString());
 
@@ -1870,31 +1912,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-    private void popConfirmPreviewListener() {
-
-//        popCreatePreview.setDissmissWorks(new PopupCustom.DissmissWorks() {
-//            @Override
-//            public void excute() {
-//                if (photoPreviewType) {
-//                    doSendPreview();
-//                }
-//            }
-//        });
-
-//        popCreatePreview.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//
-//
-//                popCreatePreview.resetBackground();
-//
-//
-//
-//            }
-//        });
-
-    }
-
     private void addVideo() {
 
         Bundle bundle = new Bundle();
@@ -2023,6 +2040,58 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
+    private void checkHyperLink(int position) {
+
+        String strHyperlink = (String) photoList.get(position).get(Key.hyperlink);
+
+        if (strHyperlink == null || strHyperlink.equals("null") || strHyperlink.equals("")) {
+
+            rLinkDelete.setVisibility(View.GONE);
+
+        } else {
+
+            boolean isVisible = false;
+
+            try {
+
+                JSONArray jsonHyperlinkArray = new JSONArray(strHyperlink);
+
+                if (jsonHyperlinkArray.length() > 0) {
+
+                    for (int i = 0; i < jsonHyperlinkArray.length(); i++) {
+
+                        JSONObject obj = (JSONObject) jsonHyperlinkArray.get(i);
+
+                        String text = JsonUtility.GetString(obj, ProtocolKey.text);
+                        String url = JsonUtility.GetString(obj, ProtocolKey.url);
+
+                        if (!text.equals("") || !url.equals("")) {
+                            isVisible = true;
+                            break;
+                        } else {
+                            isVisible = false;
+                        }
+
+                    }
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (isVisible) {
+                rLinkDelete.setVisibility(View.VISIBLE);
+            } else {
+                rLinkDelete.setVisibility(View.GONE);
+            }
+
+
+        }
+
+    }
+
     private void checkDescription(int position) {
 
         strDescription = (String) photoList.get(position).get(Key.description);
@@ -2139,31 +2208,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void selectBackground(int thisposition, int lastposition) {
 
         if (lastposition != photoList.size()) {
-            //原本點擊的恢復
-//            HashMap<String, Object> hashMap = new HashMap<>();
-//            hashMap.put("photo_id", (String) photoList.get(lastposition).get("photo_id"));
-//            hashMap.put("image_url", (String) photoList.get(lastposition).get("image_url"));
-//            hashMap.put("image_url_thumbnail", (String) photoList.get(lastposition).get("image_url_thumbnail"));
-//            hashMap.put("image_url_operate", (String) photoList.get(lastposition).get("image_url_operate"));
-//            hashMap.put("select", false);
-//
-//            /*2016.06.23新增*/
-//            hashMap.put("audio_url", (String) photoList.get(lastposition).get("audio_url"));
-//            hashMap.put("video_url", (String) photoList.get(lastposition).get("video_url"));
-//
-//            /*2016.08.30新增*/
-//            hashMap.put("description", (String) photoList.get(lastposition).get("description"));
-//
-//            if (lastposition == 0) {
-//                hashMap.put("name", getResources().getString(R.string.pinpinbox_2_0_0_other_text_creation_cover));
-//            } else {
-//                hashMap.put("name", lastposition);
-//            }
-//
-//            /*2016.11.29 new add*/
-//            hashMap.put(Key.is_preview, (boolean) photoList.get(lastposition).get(Key.is_preview));
-//            photoList.set(lastposition, hashMap);
-
 
             HashMap<String, Object> mp = photoList.get(lastposition);
 
@@ -2176,37 +2220,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
         }
-
-
-//        --------------------------------------------------------------
-
-
-        //點擊的改背景
-//        HashMap<String, Object> map = new HashMap<>();
-//        map.put("photo_id", (String) photoList.get(thisposition).get("photo_id"));
-//        map.put("image_url", (String) photoList.get(thisposition).get("image_url"));
-//        map.put("image_url_thumbnail", (String) photoList.get(thisposition).get("image_url_thumbnail"));
-//        map.put("image_url_operate", (String) photoList.get(thisposition).get("image_url_operate"));
-//        map.put("select", true);
-//
-//        /*2016.06.23新增*/
-//        map.put("audio_url", (String) photoList.get(thisposition).get("audio_url"));
-//        map.put("video_url", (String) photoList.get(thisposition).get("video_url"));
-//
-//        /*2016.08.30新增*/
-//        map.put("description", (String) photoList.get(thisposition).get("description"));
-//
-//        if (thisposition == 0) {
-//            map.put("name", getResources().getString(R.string.pinpinbox_2_0_0_other_text_creation_cover));
-//        } else {
-//            map.put("name", thisposition);
-//        }
-//
-//        /*2016.11.29 new add*/
-//        map.put(Key.is_preview, (boolean) photoList.get(thisposition).get(Key.is_preview));
-//
-//        photoList.set(thisposition, map);
-
 
         HashMap<String, Object> mp = photoList.get(thisposition);
 
@@ -2395,6 +2408,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         checkCount();
         checkLocation(thisPosition);
+        checkHyperLink(thisPosition);
         checkDescription(thisPosition);
         checkDetail();
         checkMp3_setAudioUrl(thisPosition);
@@ -2725,8 +2739,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         doDeleteBitmapToRefresh();
                         break;
 
-                    case DoSendPreview:
-                        doSendPreview();
+                    case DoSendHyperLink:
+                        doSendHyperLink();
                         break;
 
                     case DoingTypeClass.DoGetSettings:
@@ -2737,8 +2751,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         doSetSettings();
                         break;
 
-                    case DoingTypeClass.DoSendAudio:
-                        doSendAudio();
+                    case DoingTypeClass.DoSendAudioMode:
+                        doSendAudioMode();
                         break;
 
 
@@ -2871,8 +2885,69 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             setNoConnect();
             return;
         }
-        sendPreviewTask = new SendPreviewTask();
-        sendPreviewTask.execute();
+
+        String idlist = "";
+        if (previewMode == PREVIEW_ALL) {
+            for (int i = 0; i < photoList.size(); i++) {
+                if (i == 0) {
+                    idlist = photoList.get(i).get(Key.photo_id) + "";
+                } else {
+                    idlist = idlist + "," + photoList.get(i).get(Key.photo_id);
+                }
+            }
+        } else {
+            for (int i = 0; i < sendPreviewCount; i++) {
+                if (i == 0) {
+                    idlist = photoList.get(i).get(Key.photo_id) + "";
+                } else {
+                    idlist = idlist + "," + photoList.get(i).get(Key.photo_id);
+                }
+            }
+        }
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put(ProtocolKey.photo_preview, idlist);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        protocol33 = new Protocol33_AlbumSettings(
+                mActivity,
+                id,
+                token,
+                album_id,
+                obj.toString(),
+                new Protocol33_AlbumSettings.TaskCallBack() {
+
+                    @Override
+                    public void Prepare() {
+                        startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success() {
+                        isModify = true;
+                        photoPreviewType = false;
+                        PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_edit_finish);
+                        tvSendPreview.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doSendPreview();
+                    }
+
+
+                }
+        );
+
+
     }
 
     private void doGetSettings() {
@@ -2896,13 +2971,13 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-    private void doSendAudio() {
+    private void doSendAudioMode() {
         if (!HttpUtility.isConnect(this)) {
             setNoConnect();
             return;
         }
-        sendAudioTask = new SendAudioTask();
-        sendAudioTask.execute();
+        sendAudioModeTask = new SendAudioModeTask();
+        sendAudioModeTask.execute();
 
     }
 
@@ -3041,131 +3116,13 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
     }
 
-    /*protocol33*/
-    private class SendPreviewTask extends AsyncTask<Void, Void, Object> {
+    /*protocol33_1.2*/
+    private class SendAudioModeTask extends AsyncTask<Void, Void, Object> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            doingType = DoSendPreview;
-            startLoading();
-
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-
-            String str = "";
-
-
-            if (previewMode == PREVIEW_ALL) {
-
-                for (int i = 0; i < photoList.size(); i++) {
-                    if (i == 0) {
-                        str = photoList.get(i).get(Key.photo_id) + "";
-                    } else {
-                        str = str + "," + photoList.get(i).get(Key.photo_id);
-                    }
-                }
-
-
-            } else {
-
-                for (int i = 0; i < sendPreviewCount; i++) {
-//                    if (i < sendPreviewCount) {
-                    if (i == 0) {
-                        str = photoList.get(i).get(Key.photo_id) + "";
-                    } else {
-                        str = str + "," + photoList.get(i).get(Key.photo_id);
-                    }
-//                    }
-                }
-
-            }
-
-
-            JSONObject obj = new JSONObject();
-            try {
-                obj.put("preview", str);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            MyLog.Set("d", mActivity.getClass(), " obj.toString() => " + obj.toString());
-
-            String strJson = "";
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P33_AlbumSettings, SetMapByProtocol.setParam33_albumsettings(id, token, album_id, obj.toString()), null);
-                MyLog.Set("d", getClass(), "p33strJson => " + strJson);
-            } catch (SocketTimeoutException timeout) {
-                p33Result = Key.timeout;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p33Result = jsonObject.getString(Key.result);
-                    if (p33Result.equals("1")) {
-
-
-                    } else if (p33Result.equals("0")) {
-                        p33Message = jsonObject.getString(Key.message);
-                    } else {
-                        p33Result = "";
-                    }
-                } catch (Exception e) {
-                    p33Result = "";
-                    e.printStackTrace();
-                }
-            } else {
-                p33Result = "";
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            dissmissLoading();
-//            popCreatePreview.dismiss();
-
-            if (p33Result.equals("1")) {
-
-                isModify = true;
-
-                photoPreviewType = false;
-
-                PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_edit_finish);
-
-                tvSendPreview.setVisibility(View.GONE);
-
-
-            } else if (p33Result.equals("0")) {
-
-                DialogV2Custom.BuildError(mActivity, p33Message);
-
-            } else if (p33Result.equals(Key.timeout)) {
-
-                connectInstability();
-
-            } else {
-
-                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
-            }
-        }
-    }
-
-    private class SendAudioTask extends AsyncTask<Void, Void, Object> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoSendAudio;
+            doingType = DoingTypeClass.DoSendAudioMode;
             startLoading();
 
         }
@@ -3436,6 +3393,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
     }
 
+    /*protocol55*/
     private class SaveToFinishTask extends AsyncTask<Void, Void, Object> {
 
         private Toast toast;
@@ -4276,7 +4234,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 if (!currentAudioMode.equals(PLURAL)) {
                     setAudioMode(PLURAL);
-                    doSendAudio();
+                    doSendAudioMode();
                 }
 
 
@@ -4732,7 +4690,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
     }
 
-
+    /*新增刪除連結都使用protocol59*/
     private class SendHyperlinkTask extends AsyncTask<Void, Void, Object> {
 
         private String hyperlink;
@@ -4965,7 +4923,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 if (mySelectAudioMode.equals(currentAudioMode)) {
                     popCreateAudio.dismiss();
-                    doSendAudio();
+                    doSendAudioMode();
                     return;
                 }
 
@@ -4978,7 +4936,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 d.setCheckExecute(new CheckExecute() {
                     @Override
                     public void DoCheck() {
-                        doSendAudio();
+                        doSendAudioMode();
                     }
                 });
                 d.show();
@@ -5502,11 +5460,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         cancelTask(deleteAudioTask);
         cancelTask(firstCreateFreeAlbumTask);
         cancelTask(descriptionTask);
-        cancelTask(sendPreviewTask);
         cancelTask(getSettingsTask);
         cancelTask(setSettingsTask);
-        cancelTask(sendAudioTask);
+        cancelTask(sendAudioModeTask);
         cancelTask(locationTask);
+        cancelTask(protocol33);
 
         Recycle.IMG(videoPlayImg);
         Recycle.IMG(photo_or_templateImg);

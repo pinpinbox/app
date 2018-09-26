@@ -168,6 +168,7 @@ public class ProtocolKey {
     public static String photo_audio_loop = "audio_loop";
     public static String photo_audio_refer = "audio_refer";
     public static String photo_audio_target = "audio_target";
+    public static String photo_preview = "preview";
     public static String photo_description = "description";
     public static String photo_duration = "duration";
     public static String photo_location = "location";

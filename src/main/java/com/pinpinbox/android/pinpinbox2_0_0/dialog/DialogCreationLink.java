@@ -47,7 +47,6 @@ public class DialogCreationLink {
             }
         });
 
-        mDialog.show();
     }
 
     public ImageView getConfirmImg(){

@@ -93,7 +93,7 @@ public class DoingTypeClass {
 
     public static final int DoGetSettings = 43;
 
-    public static final int DoSendAudio = 44;
+    public static final int DoSendAudioMode = 44;
 
     public static final int DoInsert = 45;
 

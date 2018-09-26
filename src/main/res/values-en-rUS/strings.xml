@@ -186,6 +186,7 @@
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_recording">Delete audio from this page?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_description">Delete this page description?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_location">Delete this page location?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_hyperlink">Delete this page link?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_close_creation">Exit from Editor?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_item">"Delete this item?"</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_is_contribute">Sorry, you\'ve reached maximum submission! Want to replace existing work with a new one? (If yes, the original work\'s vote will drop back to zero.)</string>
@@ -302,6 +303,10 @@
     <string name="pinpinbox_2_0_0_toast_message_type_the_number_you_want_to_be_visible">Type the number you want to be visible</string>
     <string name="pinpinbox_2_0_0_toast_message_at_least_1_page">Least 1 page</string>
     <string name="pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total">Can't be larger than the total</string>
+    <string name="pinpinbox_2_0_0_toast_message_select_preview_way">Please select preview type</string>
+
+
+
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
     <string name="pinpinbox_2_0_0_size_original">Original(Long time)</string>
@@ -320,6 +325,7 @@
     <string name="pinpinbox_2_0_0_itemtype_no_audio">No audio</string>
     <string name="pinpinbox_2_0_0_itemtype_plural_audio">Plural</string>
     <string name="pinpinbox_2_0_0_itemtype_singular_audio">Singular</string>
+    <string name="pinpinbox_2_0_0_itemtype_custom_audio">Upload</string>
     <string name="pinpinbox_2_0_0_itemtype_common_upload">General</string>
     <string name="pinpinbox_2_0_0_itemtype_original_upload">Original</string>
     <string name="pinpinbox_2_0_0_itemtype_first_pagin">Main category</string>

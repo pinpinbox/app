@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 
 import java.util.List;
 
@@ -34,10 +34,19 @@ public class RecyclerAlbumSettingsAdapter extends RecyclerView.Adapter {
 
     private List<ItemAlbumSettings> settingsList;
 
+    private boolean smallText = true;
+
 
     public RecyclerAlbumSettingsAdapter(Activity activity,  List<ItemAlbumSettings> settingsList) {
         this.mActivity = activity;
         this.settingsList = settingsList;
+        smallText = false;
+    }
+
+    public RecyclerAlbumSettingsAdapter(Activity activity,  List<ItemAlbumSettings> settingsList, boolean smallText) {
+        this.mActivity = activity;
+        this.settingsList = settingsList;
+        this.smallText = true;//強制true
     }
 
 
@@ -60,6 +69,10 @@ public class RecyclerAlbumSettingsAdapter extends RecyclerView.Adapter {
         holder.position = position;
 
         holder.tvName.setText(settingsList.get(position).getName());
+
+        if(smallText){
+            holder.tvName.setTextSize(12f);
+        }
 
         if(settingsList.get(position).isSelect()){
 

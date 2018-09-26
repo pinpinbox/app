@@ -188,6 +188,7 @@
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_recording">確定刪除本頁錄音檔?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_description">確定刪除本頁敘述?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_location">確定刪除本頁地點資訊?</string>
+    <string name="pinpinbox_2_0_0_dialog_message_check_delete_hyperlink">確定刪除本頁連結資訊?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_close_creation">確定退出編輯器?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_item">"確定刪除此項目?"</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_is_contribute">投稿作品數量已達上限, 是否確認撤下該作品並建立新作品?(若確定，則原作品的投票數將會歸零)</string>
@@ -304,7 +305,7 @@
     <string name="pinpinbox_2_0_0_toast_message_type_the_number_you_want_to_be_visible">請輸入開放頁數</string>
     <string name="pinpinbox_2_0_0_toast_message_at_least_1_page">至少1頁</string>
     <string name="pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total">不可大於作品總張數</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_select_preview_way">請選擇預覽方式</string>
 
 
 
@@ -327,6 +328,7 @@
     <string name="pinpinbox_2_0_0_itemtype_no_audio">無音樂</string>
     <string name="pinpinbox_2_0_0_itemtype_plural_audio">多首播放</string>
     <string name="pinpinbox_2_0_0_itemtype_singular_audio">單首播放</string>
+    <string name="pinpinbox_2_0_0_itemtype_custom_audio">自行上傳</string>
     <string name="pinpinbox_2_0_0_itemtype_common_upload">一般上傳</string>
     <string name="pinpinbox_2_0_0_itemtype_original_upload">原始尺寸</string>
     <string name="pinpinbox_2_0_0_itemtype_first_pagin">主類別</string>
