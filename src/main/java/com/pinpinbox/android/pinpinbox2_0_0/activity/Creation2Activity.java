@@ -149,7 +149,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private ConfirmTask confirmTask;
     private DeleteBitmapToReFreshTask deleteBitmapToReFreshTask;
     private SaveToFinishTask saveToFinishTask;
-    private UpLoadAudioTask upLoadAudioTask;
+    private UpLoadPageAudioTask upLoadPageAudioTask;
     private DeleteAudioTask deleteAudioTask;
     private FirstCreateFreeAlbumTask firstCreateFreeAlbumTask;
     private DescriptionTask descriptionTask;
@@ -1151,7 +1151,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        doUploadAudio();
+                        doUploadPageAudio();
 
                     }
                 }, 300);//500
@@ -2716,7 +2716,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         break;
 
                     case DoUploadAudio:
-                        doUploadAudio();
+                        doUploadPageAudio();
                         break;
 
                     case DoDeleteAudio:
@@ -2818,13 +2818,13 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         changeTask.execute();
     }
 
-    private void doUploadAudio() {
+    private void doUploadPageAudio() {
         if (!HttpUtility.isConnect(mActivity)) {
             setNoConnect();
             return;
         }
-        upLoadAudioTask = new UpLoadAudioTask();
-        upLoadAudioTask.execute();
+        upLoadPageAudioTask = new UpLoadPageAudioTask();
+        upLoadPageAudioTask.execute();
     }
 
     private void doDeleteAudio() {
@@ -4169,7 +4169,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol78*/
-    private class UpLoadAudioTask extends AsyncTask<Void, Void, Object> {
+    private class UpLoadPageAudioTask extends AsyncTask<Void, Void, Object> {
 
         @Override
         protected void onPreExecute() {
@@ -5108,7 +5108,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         this.mp3Path = mp3Path;
 
-        doUploadAudio();
+        doUploadPageAudio();
 
     }
 
@@ -5456,7 +5456,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         cancelTask(confirmTask);
         cancelTask(deleteBitmapToReFreshTask);
         cancelTask(saveToFinishTask);
-        cancelTask(upLoadAudioTask);
+        cancelTask(upLoadPageAudioTask);
         cancelTask(deleteAudioTask);
         cancelTask(firstCreateFreeAlbumTask);
         cancelTask(descriptionTask);
