@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -31,6 +32,7 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBarCodeAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -64,6 +66,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33_AlbumSettings;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol34_GetAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol96_InsertAlbumIndex;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol97_DeleteAlbumIndex;
 import com.zhy.m.permission.MPermissions;
@@ -91,12 +94,11 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private FragmentScanSearch2 fragmentScanSearch2;
     private MediaPlayer mediaPlayer;
 
-
     private GetSettingsTask getSettingsTask;
-    private SetSettingsTask setSettingsTask;
     private GetPhotoCountTask getPhotoCountTask;
     private SendContributeTask sendContributeTask;
     private Protocol33_AlbumSettings protocol33;
+    private Protocol34_GetAlbumSettings protocol34;
     private Protocol96_InsertAlbumIndex protocol96;
     private Protocol97_DeleteAlbumIndex protocol97;
 
@@ -115,10 +117,10 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
     private String id, token;
     private String album_id;
-    private String strTitle, strDescription, strLocation, strWeather, strMood, strAct, strUsergrade;
-    private String settings;
+    private String strName, strDescription, strLocation, strWeather, strMood, strAct;
+    private String settings, strUsergrade;
     private String event_id;
-    private String strGetTitle, strGetDescription, strGetLocation, strGetPoint;
+    private String strGetName, strGetDescription, strGetLocation, strGetPoint;
     private String strPrefixText, strSpecialUrl;
 
 
@@ -126,7 +128,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
     private int doingType;
     private static final int RefreshSecondCategoryPaging = 1;
-    private int intFirstpaging, intSecondpaging, intAudio, intPoint;
+    private int intCategoryarea_id, intCategory_id, intPoint;
     private int barCodeItem;
     private static final int REQUEST_CODE_CAMERA = 104;
     private final int SUCCESS = 0;
@@ -548,14 +550,11 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
         try {
 
-            jsonObject.put(ProtocolKey.title, edName.getText().toString());
+            jsonObject.put(ProtocolKey.name, edName.getText().toString());
             jsonObject.put(ProtocolKey.description, edDescription.getText().toString());
             jsonObject.put(ProtocolKey.location, edLocation.getText().toString());
             jsonObject.put(ProtocolKey.usergrade, strUsergrade);
             jsonObject.put(ProtocolKey.act, strAct);
-
-//            if (isCreative) {
-
 
             String p = edPoint.getText().toString();
             if (p.equals("")) {
@@ -574,18 +573,17 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
 
             jsonObject.put(ProtocolKey.point, p);
-//            }
 
-            for (int i = 0; i < categoryFirstList.size(); i++) {
-                if (categoryFirstList.get(i).isSelect()) {
-                    jsonObject.put(ProtocolKey.firstpaging, categoryFirstList.get(i).getId());
-                    break;
-                }
-            }
+//            for (int i = 0; i < categoryFirstList.size(); i++) {
+//                if (categoryFirstList.get(i).isSelect()) {
+//                    jsonObject.put(ProtocolKey.firstpaging, categoryFirstList.get(i).getId());
+//                    break;
+//                }
+//            }
 
             for (int i = 0; i < categorySecondList.size(); i++) {
                 if (categorySecondList.get(i).isSelect()) {
-                    jsonObject.put(ProtocolKey.secondpaging, categorySecondList.get(i).getId());
+                    jsonObject.put(ProtocolKey.category_id, categorySecondList.get(i).getId());
                     break;
                 }
             }
@@ -627,7 +625,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         String location = edLocation.getText().toString();
         String point = edPoint.getText().toString();
 
-        if (!strGetTitle.equals(name) || !strGetDescription.equals(description) || !strGetLocation.equals(location) || !strGetPoint.equals(point)) {
+        if (!strGetName.equals(name) || !strGetDescription.equals(description) || !strGetLocation.equals(location) || !strGetPoint.equals(point)) {
             isModify = true;
         }
     }
@@ -733,8 +731,209 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             setNoConnect();
             return;
         }
-        setSettingsTask = new SetSettingsTask();
-        setSettingsTask.execute();
+
+        protocol34 = new Protocol34_GetAlbumSettings(
+                mActivity,
+                id,
+                token,
+                album_id,
+                new Protocol34_GetAlbumSettings.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success(ItemAlbum itemAlbum) {
+
+                        strName = itemAlbum.getName();
+                        strDescription = itemAlbum.getDescription();
+                        strLocation = itemAlbum.getLocation();
+                        strWeather = itemAlbum.getWeather();
+                        strMood = itemAlbum.getMood();
+                        strAct = itemAlbum.getAct();
+
+                        intCategoryarea_id = itemAlbum.getCategoryarea_id();
+                        intCategory_id = itemAlbum.getCategory_id();
+                        intPoint = itemAlbum.getPoint();
+
+                        albumindexList = itemAlbum.getAlbumindexList();
+
+
+                        //設為當前取得
+                        strGetName = itemAlbum.getName();
+                        strGetDescription = itemAlbum.getDescription();
+                        strGetLocation = itemAlbum.getLocation();
+                        strGetPoint = itemAlbum.getPoint() + "";
+
+
+                        setData();
+
+                        ViewControl.AlphaTo1(findViewById(R.id.scrollView));
+
+                        boolean bFirstToAlbumSetting = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.first_to_albumsetting, false);
+
+                        if (!bFirstToAlbumSetting) {
+                            TapAct();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doSetSettings();
+                    }
+
+
+                    private void setData() {
+
+                        if (isNewCreate && isContribute) {
+                            edName.setHint(strPrefixText);
+                        } else {
+                            edName.setText(strName);
+                        }
+
+
+                        edDescription.setText(strDescription);
+                        edLocation.setText(strLocation);
+                        edPoint.setText(intPoint + "");
+
+
+                        if (strUsergrade.equals(UserGradeKey.profession)) {
+
+                            findViewById(R.id.linScan).setVisibility(View.VISIBLE);
+                            tvAdvanced.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+
+
+                        } else {
+
+                            findViewById(R.id.linScan).setVisibility(View.GONE);
+                            tvAdvanced.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+                        }
+
+                        if (isNewCreate) {
+                            strAct = "open";
+                        }
+
+                        changeActType();
+
+                        for (int i = 0; i < categoryFirstList.size(); i++) {
+                            if (intCategoryarea_id == categoryFirstList.get(i).getId()) {
+                                categoryFirstList.get(i).setSelect(true);
+                                rvCategoryFirst.scrollToPosition(i);
+                                categoryFirstAdapter.notifyItemChanged(i);
+
+                                try {
+
+                                    JSONArray secondpagingArray = new JSONArray(categoryFirstList.get(i).getSecondpaging());
+
+                                    for (int k = 0; k < secondpagingArray.length(); k++) {
+
+                                        JSONObject o = secondpagingArray.getJSONObject(k);
+                                        categorySecondList.add(
+                                                builder
+                                                        .id(JsonUtility.GetInt(o, ProtocolKey.id))
+                                                        .name(JsonUtility.GetString(o, ProtocolKey.name))
+                                                        .build()
+                                        );
+                                    }
+
+                                    for (int s = 0; s < categorySecondList.size(); s++) {
+
+                                        MyLog.Set("e", mActivity.getClass(), "11111111111111111111111111");
+
+                                        if (intCategory_id == categorySecondList.get(s).getId()) {
+                                            categorySecondList.get(s).setSelect(true);
+                                            categorySecondAdapter.notifyDataSetChanged();
+                                            rvCategorySecond.scrollToPosition(s);
+
+                                            MyLog.Set("e", mActivity.getClass(), "22222222222222222222");
+                                            break;
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+                            }
+                        }
+
+
+                        if (categorySecondList.size() == 0) {
+                            tvSelectFirstPaging.setVisibility(View.VISIBLE);
+                            rvCategorySecond.setVisibility(View.GONE);
+                        } else {
+                            tvSelectFirstPaging.setVisibility(View.GONE);
+                            rvCategorySecond.setVisibility(View.VISIBLE);
+                        }
+
+
+                        for (int i = 0; i < weatherList.size(); i++) {
+                            if (strWeather.equals(weatherList.get(i).getStrId())) {
+                                weatherList.get(i).setSelect(true);
+                                weatherAdapter.notifyItemChanged(i);
+                                rvWeather.scrollToPosition(i);
+                                break;
+                            }
+                        }
+
+                        for (int i = 0; i < moodList.size(); i++) {
+                            if (strMood.equals(moodList.get(i).getStrId())) {
+                                moodList.get(i).setSelect(true);
+                                moodAdapter.notifyItemChanged(i);
+                                rvMood.scrollToPosition(i);
+                                break;
+                            }
+                        }
+
+
+                        RecyclerView rvBarCode = (RecyclerView) findViewById(R.id.rvBarCode);
+
+                        ScrollLinearLayoutManager manager = new ScrollLinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
+                        manager.setScrollEnabled(false);
+
+                        rvBarCode.setLayoutManager(manager);
+
+                        barCodeAdapter = new RecyclerBarCodeAdapter(mActivity, albumindexList);
+                        rvBarCode.setAdapter(barCodeAdapter);
+
+                        barCodeAdapter.setOnDeleteListenter(new RecyclerBarCodeAdapter.OnDeleteListener() {
+                            @Override
+                            public void delete(int position) {
+
+                                if (ClickUtils.ButtonContinuousClick()) {
+                                    return;
+                                }
+
+                                barCodeItem = position;
+
+                                DialogV2Custom d = new DialogV2Custom(mActivity);
+                                d.setStyle(DialogStyleClass.CHECK);
+                                d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_delete) + " " + albumindexList.get(barCodeItem) + " ?");
+                                d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
+                                d.setCheckExecute(new CheckExecute() {
+                                    @Override
+                                    public void DoCheck() {
+                                        doDeleteBarCode();
+                                    }
+                                });
+                                d.show();
+
+                            }
+                        });
+
+                    }
+
+                }
+        );
+
 
     }
 
@@ -806,10 +1005,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                                     }
                                     back();
                                 }
-                            },100);
-
-
-
+                            }, 100);
 
 
                         }
@@ -894,8 +1090,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
 
     }
-
-
 
 
     private void doAddBarCode() {
@@ -1008,6 +1202,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         sendContributeTask.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetSettingsTask extends AsyncTask<Void, Void, Object> {
 
         private int p32Result = -1;
@@ -1052,7 +1247,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                         JSONObject object = new JSONObject(jdata);
 
                         String firstpaging = JsonUtility.GetString(object, ProtocolKey.firstpaging);
-                        String audio = JsonUtility.GetString(object, ProtocolKey.audio);
                         String weather = JsonUtility.GetString(object, ProtocolKey.weather);
                         String mood = JsonUtility.GetString(object, ProtocolKey.mood);
                         String act = JsonUtility.GetString(object, ProtocolKey.act);
@@ -1073,31 +1267,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                             );
 
                         }
-
-//                        /*添加空音樂*/
-//                        audioList.add(
-//                                builder
-//                                        .id(0)
-//                                        .name("不選擇\n背景音樂")
-//                                        .url("")
-//                                        .select(false)
-//                                        .build()
-//                        );
-//
-//                        JSONArray audioArray = new JSONArray(audio);
-//                        for (int i = 0; i < audioArray.length(); i++) {
-//
-//                            JSONObject obj = audioArray.getJSONObject(i);
-//
-//                            audioList.add(
-//                                    builder
-//                                            .id(JsonUtility.GetInt(obj, ProtocolKey.id))
-//                                            .name(JsonUtility.GetString(obj, ProtocolKey.name))
-//                                            .url(JsonUtility.GetString(obj, ProtocolKey.url))
-//                                            .select(false)
-//                                            .build()
-//                            );
-//                        }
 
 
                         JSONArray weatherArray = new JSONArray(weather);
@@ -1155,7 +1324,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             if (p32Result == 1) {
 
                 categoryFirstAdapter.notifyDataSetChanged();
-//                audioAdapter.notifyDataSetChanged();
                 moodAdapter.notifyDataSetChanged();
                 weatherAdapter.notifyDataSetChanged();
 
@@ -1179,296 +1347,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         }
     }
 
-    private class SetSettingsTask extends AsyncTask<Void, Void, Object> {
-
-
-        private int p34Result = -1;
-        private String p34Message = "";
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoSetSettings;
-            startLoading();
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P34_GetAlbumSettings, SetMapByProtocol.setParam34_getalbumsettings(id, token, album_id), null);
-
-                MyLog.Set("d", getClass(), "p34strJson => " + strJson);
-
-            } catch (SocketTimeoutException timeout) {
-                p34Result = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p34Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-
-                    if (p34Result == 1) {
-
-                        String jsonData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                        JSONObject object = new JSONObject(jsonData);
-
-                        strTitle = JsonUtility.GetString(object, ProtocolKey.title);
-                        strDescription = JsonUtility.GetString(object, ProtocolKey.description);
-                        strLocation = JsonUtility.GetString(object, ProtocolKey.location);
-                        strWeather = JsonUtility.GetString(object, ProtocolKey.weather);
-                        strMood = JsonUtility.GetString(object, ProtocolKey.mood);
-                        strAct = JsonUtility.GetString(object, ProtocolKey.act);
-
-                        intFirstpaging = JsonUtility.GetInt(object, ProtocolKey.firstpaging);
-                        intSecondpaging = JsonUtility.GetInt(object, ProtocolKey.secondpaging);
-                        intAudio = JsonUtility.GetInt(object, ProtocolKey.audio);
-                        intPoint = JsonUtility.GetInt(object, ProtocolKey.point);
-
-
-                        String albumindex = JsonUtility.GetString(object, ProtocolKey.albumindex);
-                        MyLog.Set("d", mActivity.getClass(), "albumindex => " + albumindex);
-
-                        JSONArray array = new JSONArray(albumindex);
-
-                        if (array.length() > 0) {
-
-                            for (int i = 0; i < array.length(); i++) {
-
-                                String index = array.getString(i);
-
-                                MyLog.Set("d", mActivity.getClass(), "index => " + index);
-
-                                albumindexList.add(index);
-
-                            }
-
-                        }
-
-
-                        MyLog.Set("d", mActivity.getClass(),
-                                "strTitle => " + strTitle + "\n" +
-                                        "strDescription => " + strDescription + "\n" +
-                                        "strLocation => " + strLocation + "\n" +
-                                        "strWeather => " + strWeather + "\n" +
-                                        "strMood => " + strMood + "\n" +
-                                        "strAct => " + strAct + "\n" +
-                                        "intFirstpaging => " + intFirstpaging + "\n" +
-                                        "intSecondpaging => " + intSecondpaging + "\n" +
-                                        "intAudio => " + intAudio + "\n" +
-                                        "intPoint => " + intPoint
-                        );
-
-                        strGetTitle = strTitle;
-                        strGetDescription = strDescription;
-                        strGetLocation = strLocation;
-                        strGetPoint = intPoint + "";
-
-
-//                        /**2016.06.03 new add 作為發送前的比較*/
-//                        strAlbumNameByProtocol = strAlbumName;
-//                        strAlbumDescriptionByProtocol = strAlbumDescription;
-//                        strLocationByProtocol = strLocation;
-//
-//                        /**2016.12.08 new add*/
-//                        try {
-//                            strPointByProtocol = strPoint;
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-
-                    } else if (p34Result == 0) {
-                        p34Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            dissmissLoading();
-
-            if (p34Result == 1) {
-
-                setData();
-
-                ViewControl.AlphaTo1(findViewById(R.id.scrollView));
-
-                boolean bFirstToAlbumSetting = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.first_to_albumsetting, false);
-
-                if (!bFirstToAlbumSetting) {
-                    TapAct();
-                }
-
-
-            } else if (p34Result == 0) {
-
-                DialogV2Custom.BuildError(mActivity, p34Message);
-
-
-            } else if (p34Result == Key.TIMEOUT) {
-
-                connectInstability();
-
-            } else {
-                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
-            }
-        }
-
-        private void setData() {
-
-            if (isNewCreate && isContribute) {
-//                edName.setText(strPrefixText);
-                edName.setHint(strPrefixText);
-            } else {
-                edName.setText(strTitle);
-            }
-
-
-            edDescription.setText(strDescription);
-            edLocation.setText(strLocation);
-            edPoint.setText(intPoint + "");
-
-
-            if (strUsergrade.equals(UserGradeKey.profession)) {
-
-                findViewById(R.id.linScan).setVisibility(View.VISIBLE);
-                tvAdvanced.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-
-
-            } else {
-
-                findViewById(R.id.linScan).setVisibility(View.GONE);
-                tvAdvanced.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-
-            }
-
-
-            /*20171115*/
-            if (isNewCreate) {
-                strAct = "open";
-            }
-
-            changeActType();
-
-
-            for (int i = 0; i < categoryFirstList.size(); i++) {
-                if (intFirstpaging == categoryFirstList.get(i).getId()) {
-                    categoryFirstList.get(i).setSelect(true);
-                    rvCategoryFirst.scrollToPosition(i);
-                    categoryFirstAdapter.notifyItemChanged(i);
-
-
-                    try {
-
-                        JSONArray secondpagingArray = new JSONArray(categoryFirstList.get(i).getSecondpaging());
-
-                        for (int k = 0; k < secondpagingArray.length(); k++) {
-
-                            JSONObject o = secondpagingArray.getJSONObject(k);
-                            categorySecondList.add(
-                                    builder
-                                            .id(JsonUtility.GetInt(o, ProtocolKey.id))
-                                            .name(JsonUtility.GetString(o, ProtocolKey.name))
-                                            .build()
-                            );
-                        }
-
-                        for (int s = 0; s < categorySecondList.size(); s++) {
-                            if (intSecondpaging == categorySecondList.get(s).getId()) {
-                                categorySecondList.get(s).setSelect(true);
-                                categorySecondAdapter.notifyDataSetChanged();
-                                rvCategorySecond.scrollToPosition(s);
-                                break;
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-            }
-
-
-            if (categorySecondList.size() == 0) {
-                tvSelectFirstPaging.setVisibility(View.VISIBLE);
-                rvCategorySecond.setVisibility(View.GONE);
-            } else {
-                tvSelectFirstPaging.setVisibility(View.GONE);
-                rvCategorySecond.setVisibility(View.VISIBLE);
-            }
-
-
-            for (int i = 0; i < weatherList.size(); i++) {
-                if (strWeather.equals(weatherList.get(i).getStrId())) {
-                    weatherList.get(i).setSelect(true);
-                    weatherAdapter.notifyItemChanged(i);
-                    rvWeather.scrollToPosition(i);
-                    break;
-                }
-            }
-
-            for (int i = 0; i < moodList.size(); i++) {
-                if (strMood.equals(moodList.get(i).getStrId())) {
-                    moodList.get(i).setSelect(true);
-                    moodAdapter.notifyItemChanged(i);
-                    rvMood.scrollToPosition(i);
-                    break;
-                }
-            }
-
-
-            RecyclerView rvBarCode = (RecyclerView) findViewById(R.id.rvBarCode);
-
-            ScrollLinearLayoutManager manager = new ScrollLinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
-            manager.setScrollEnabled(false);
-
-            rvBarCode.setLayoutManager(manager);
-
-            barCodeAdapter = new RecyclerBarCodeAdapter(mActivity, albumindexList);
-            rvBarCode.setAdapter(barCodeAdapter);
-
-            barCodeAdapter.setOnDeleteListenter(new RecyclerBarCodeAdapter.OnDeleteListener() {
-                @Override
-                public void delete(int position) {
-
-                    if (ClickUtils.ButtonContinuousClick()) {
-                        return;
-                    }
-
-                    barCodeItem = position;
-
-                    DialogV2Custom d = new DialogV2Custom(mActivity);
-                    d.setStyle(DialogStyleClass.CHECK);
-                    d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_delete) + " " + albumindexList.get(barCodeItem) + " ?");
-                    d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_delete);
-                    d.setCheckExecute(new CheckExecute() {
-                        @Override
-                        public void DoCheck() {
-                            doDeleteBarCode();
-                        }
-                    });
-                    d.show();
-
-                }
-            });
-
-        }
-
-
-    }
-
+    @SuppressLint("StaticFieldLeak")
     private class GetPhotoCountTask extends AsyncTask<Void, Void, Object> {
 
 
@@ -1586,6 +1465,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class SendContributeTask extends AsyncTask<Void, Void, Object> {
 
         private boolean contributionstatus;
@@ -1688,7 +1568,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 startActivity(intent);
                 finish();
                 ActivityAnim.StartAnim(mActivity);
-
 
 
             } else if (p73Result.equals("0")) {
@@ -1939,7 +1818,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                             } else {
 
-                                      /*編輯器不存在 intent進入*/
+                                /*編輯器不存在 intent進入*/
                                 creationIsNotExistToCreation();
 
                                 MyLog.Set("e", mActivity.getClass(), "#4");
@@ -2118,9 +1997,9 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         SystemUtility.SysApplication.getInstance().removeActivity(this);
 
         cancelTask(getSettingsTask);
-        cancelTask(setSettingsTask);
-
         cancelTask(protocol33);
+        cancelTask(protocol34);
+
         cancelTask(protocol96);
         cancelTask(protocol97);
 
@@ -2131,9 +2010,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         }
 
         Recycle.IMG(scanImg);
-//        Recycle.IMG(qAudioImg);
-//        Recycle.IMG(qPointImg);
-//        Recycle.IMG(qLevelImg);
         Recycle.IMG(actImg);
 
         super.onDestroy();

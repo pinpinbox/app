@@ -60,6 +60,7 @@ import com.pinpinbox.android.Views.EditDragGridView;
 import com.pinpinbox.android.Views.PinchImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHyperlink;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
@@ -105,6 +106,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33_AlbumSettings;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol34_GetAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.util.CheckExternalStorage;
 import com.skyfishjy.library.RippleBackground;
@@ -155,9 +157,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private DescriptionTask descriptionTask;
     private LocationTask locationTask;
     private GetSettingsTask getSettingsTask;
-    private SetSettingsTask setSettingsTask;
     private SendAudioModeTask sendAudioModeTask;
     private Protocol33_AlbumSettings protocol33;
+    private Protocol34_GetAlbumSettings protocol34;
     private SendHyperlinkTask sendHyperlinkTask;
 
     private FragmentSelectPhoto2 fragmentSelectPhoto2;
@@ -237,7 +239,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private int lastPosition = 0;//選擇的位置(前一次)
     private int thisPosition = 0;//選擇的位置(當前)
     private int intUserGrade = 22;//預設最大張數
-    private int intAudio = -1;
+    private int intAudio_target = -1;
     private int previewMode = -1;
 
 
@@ -290,7 +292,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     private ImageView locationImg, audioRecordingImg, audioPlayImg, linkImg, deleteImg, aviaryImg, locationDeleteImg, audioDeleteImg, linkDeleteImg;
 
-    private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSelectAudioCustom, tvSendPreview;
+    private TextView tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSelectAudioCustom, tvSelectFile, tvSendPreview;
 
     private EditText edPreviewPageStart;
 
@@ -692,6 +694,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         tvSelectAudioPage = popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioPage);
         tvSelectAudioBackground = popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioBackground);
         tvSelectAudioCustom = popCreateAudio.getPopupView().findViewById(R.id.tvSelectAudioCustom);
+        tvSelectFile = popCreateAudio.getPopupView().findViewById(R.id.tvSelectFile);
 
 
         TextUtility.setBold(tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSelectAudioCustom,
@@ -727,6 +730,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 setAudioMode(CUSTOM);
             }
         });
+
+
+        tvSelectFile.setOnClickListener(this);
 
 
         audioAdapter = new RecyclerAlbumSettingsAdapter(mActivity, audioList, true);
@@ -847,10 +853,12 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 tvSelectAudioBackground.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 tvSelectAudioCustom.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
-
                 linearLayoutManager.setScrollEnabled(false);
 
                 rvAudio.setAlpha(0.2f);
+                tvSelectFile.setAlpha(0.2f);
+
+                tvSelectFile.setClickable(false);
 
                 mySelectAudioMode = NONE;
 
@@ -874,6 +882,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 linearLayoutManager.setScrollEnabled(false);
 
                 rvAudio.setAlpha(0.2f);
+                tvSelectFile.setAlpha(0.2f);
+
+                tvSelectFile.setClickable(false);
 
                 mySelectAudioMode = PLURAL;
 
@@ -897,6 +908,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 linearLayoutManager.setScrollEnabled(true);
 
                 rvAudio.setAlpha(1f);
+                tvSelectFile.setAlpha(0.2f);
+
+                tvSelectFile.setClickable(false);
 
                 mySelectAudioMode = SINGULAR;
 
@@ -918,6 +932,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 linearLayoutManager.setScrollEnabled(false);
 
                 rvAudio.setAlpha(0.2f);
+                tvSelectFile.setAlpha(1f);
+
+                tvSelectFile.setClickable(true);
 
                 mySelectAudioMode = SINGULAR; //童單首
 
@@ -2827,6 +2844,62 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         upLoadPageAudioTask.execute();
     }
 
+    private void doUploadAlbumAudio(String mp3Path) {
+
+        if (!HttpUtility.isConnect(mActivity)) {
+            setNoConnect();
+            return;
+        }
+
+        this.mp3Path = mp3Path;
+
+        JSONObject object = new JSONObject();
+
+        try {
+
+            object.put(ProtocolKey.album_audio_refer, "file");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String settings = object.toString();
+
+        File file = new File(mp3Path);
+
+        Protocol33_AlbumSettings protocol33 = new Protocol33_AlbumSettings(
+                mActivity,
+                id,
+                token,
+                album_id,
+                settings,
+                file,
+                new Protocol33_AlbumSettings.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+
+                    }
+
+                    @Override
+                    public void Post() {
+
+                    }
+
+                    @Override
+                    public void Success() {
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+
+                    }
+                }
+
+        );
+
+    }
+
     private void doDeleteAudio() {
         if (!HttpUtility.isConnect(mActivity)) {
             setNoConnect();
@@ -2966,8 +3039,60 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             setNoConnect();
             return;
         }
-        setSettingsTask = new SetSettingsTask();
-        setSettingsTask.execute();
+
+
+        protocol34 = new Protocol34_GetAlbumSettings(
+                mActivity,
+                id,
+                token,
+                album_id,
+                new Protocol34_GetAlbumSettings.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success(ItemAlbum itemAlbum) {
+
+
+//                        audio_mode (enum, 相本音訊模式, none: 無 / singular: 單首 / plural: 多首)
+//                        audio_refer (enum, 相本音訊來源, embed: 嵌入 / file: 檔案 / system: 系統)
+//                        audio_target (int / string, 相本音訊位置,
+//                                     audio_refer 為 embed 時為嵌入代碼;
+//                                     audio_refer 為 file 時為接收檔案;
+//                                     audio_refer 為 system 時為 int id)
+
+                        if (itemAlbum.getAudio_target() != null && !itemAlbum.getAudio_target().equals("")) {
+
+                            intAudio_target = StringIntMethod.StringToInt(itemAlbum.getAudio_target());
+
+                            for (int i = 0; i < audioList.size(); i++) {
+                                if (intAudio_target == audioList.get(i).getId()) {
+                                    audioList.get(i).setSelect(true);
+                                    audioAdapter.notifyItemChanged(i);
+                                    rvAudio.scrollToPosition(i);
+                                    break;
+                                }
+                            }
+
+                            setAudioMode(currentAudioMode);
+
+                        }
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doSetSettings();
+                    }
+                }
+        );
 
     }
 
@@ -3016,6 +3141,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
 
     /*protocol32*/
+    @SuppressLint("StaticFieldLeak")
     private class GetSettingsTask extends AsyncTask<Void, Void, Object> {
 
         private int p32Result = -1;
@@ -3117,6 +3243,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol33_1.2*/
+    @SuppressLint("StaticFieldLeak")
     private class SendAudioModeTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -3219,98 +3346,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
     }
 
-    /*protocol34*/
-    private class SetSettingsTask extends AsyncTask<Void, Void, Object> {
-
-
-        private int p34Result = -1;
-        private String p34Message = "";
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoSetSettings;
-            startLoading();
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P34_GetAlbumSettings, SetMapByProtocol.setParam34_getalbumsettings(id, token, album_id), null);
-
-                MyLog.Set("d", getClass(), "p34strJson => " + strJson);
-
-            } catch (SocketTimeoutException timeout) {
-                p34Result = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p34Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-
-                    if (p34Result == 1) {
-
-                        String jsonData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                        JSONObject object = new JSONObject(jsonData);
-
-                        intAudio = JsonUtility.GetInt(object, ProtocolKey.audio);
-
-                        MyLog.Set("d", mActivity.getClass(), "intAudio => " + intAudio);
-
-
-                    } else if (p34Result == 0) {
-                        p34Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            dissmissLoading();
-
-            if (p34Result == 1) {
-
-                for (int i = 0; i < audioList.size(); i++) {
-                    if (intAudio == audioList.get(i).getId()) {
-                        audioList.get(i).setSelect(true);
-                        audioAdapter.notifyItemChanged(i);
-                        rvAudio.scrollToPosition(i);
-                        break;
-                    }
-                }
-
-                setAudioMode(currentAudioMode);
-
-            } else if (p34Result == 0) {
-
-                DialogV2Custom.BuildError(mActivity, p34Message);
-
-
-            } else if (p34Result == Key.TIMEOUT) {
-
-                connectInstability();
-
-            } else {
-                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
-            }
-        }
-
-    }
-
     /*protocol55*/
+    @SuppressLint("StaticFieldLeak")
     private class ConfirmTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -3394,6 +3431,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol55*/
+    @SuppressLint("StaticFieldLeak")
     private class SaveToFinishTask extends AsyncTask<Void, Void, Object> {
 
         private Toast toast;
@@ -3491,9 +3529,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-//                PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_save_album_done);
-
-
             } else if (p55Result.equals("0")) {
 
                 DialogV2Custom.BuildError(mActivity, p55Message);
@@ -3565,6 +3600,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol57*/
+    @SuppressLint("StaticFieldLeak")
     private class GetPhotoTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -3755,6 +3791,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DeleteBitmapToReFreshTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -3883,6 +3920,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol59*/
+    @SuppressLint("StaticFieldLeak")
     private class AfterAviaryTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -3986,6 +4024,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol60*/
+    @SuppressLint("StaticFieldLeak")
     private class DeleteTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -4090,6 +4129,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol62*/
+    @SuppressLint("StaticFieldLeak")
     private class ChangeTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -4169,6 +4209,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol78*/
+    @SuppressLint("StaticFieldLeak")
     private class UpLoadPageAudioTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -4254,6 +4295,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol79*/
+    @SuppressLint("StaticFieldLeak")
     private class DeleteAudioTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -4339,6 +4381,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*protocol83*/
+    @SuppressLint("StaticFieldLeak")
     private class FirstCreateFreeAlbumTask extends AsyncTask<Void, Void, Object> {
 
         private String name;
@@ -4489,6 +4532,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*新增刪除說明都使用protocol59*/
+    @SuppressLint("StaticFieldLeak")
     private class DescriptionTask extends AsyncTask<Void, Void, Object> {
 
         private String des;
@@ -4590,6 +4634,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*新增刪除地點都使用protocol59*/
+    @SuppressLint("StaticFieldLeak")
     private class LocationTask extends AsyncTask<Void, Void, Object> {
 
         private String location;
@@ -4691,6 +4736,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     }
 
     /*新增刪除連結都使用protocol59*/
+    @SuppressLint("StaticFieldLeak")
     private class SendHyperlinkTask extends AsyncTask<Void, Void, Object> {
 
         private String hyperlink;
@@ -4791,7 +4837,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         }
     }
 
-
+    @SuppressLint("StaticFieldLeak")
     private class BeforeAviaryTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -4943,6 +4989,15 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 break;
 
+            case R.id.tvSelectFile:
+
+                popCreateAudio.dismiss();
+
+                openFragmentSelectAudio(SINGULAR);
+
+
+                break;
+
 
             /*pop creation sort*/
             case R.id.tvSortConfirm:
@@ -4974,6 +5029,26 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         linPreviewAll.setAlpha(1f);
         linPreviewPage.setAlpha(0.2f);
         edPreviewPageStart.setEnabled(false);
+
+    }
+
+    private void openFragmentSelectAudio(String audio_mode) {
+
+        Bundle bundle = new Bundle();
+
+
+        bundle.putString(Key.audio_mode, audio_mode);
+
+
+        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (fragmentSelectAudio2 == null) {
+            fragmentSelectAudio2 = new FragmentSelectAudio2();
+            fragmentSelectAudio2.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_content, fragmentSelectAudio2, fragmentSelectAudio2.getClass().getSimpleName()).commit();
+        } else {
+            fragmentSelectAudio2.setAudio_mode(audio_mode);
+            getSupportFragmentManager().beginTransaction().show(fragmentSelectAudio2).commit();
+        }
 
     }
 
@@ -5050,13 +5125,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 popSelectAudioFile.dismiss();
 
 
-                getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                if (fragmentSelectAudio2 == null) {
-                    fragmentSelectAudio2 = new FragmentSelectAudio2();
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_content, fragmentSelectAudio2, fragmentSelectAudio2.getClass().getSimpleName()).commit();
-                } else {
-                    getSupportFragmentManager().beginTransaction().show(fragmentSelectAudio2).commit();
-                }
+                openFragmentSelectAudio(PLURAL);
 
 
                 break;
@@ -5110,6 +5179,18 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         doUploadPageAudio();
 
+    }
+
+    public void upLoadMyAudioFileForSingular(String mp3Path) {
+
+        this.mp3Path = mp3Path;
+
+
+    }
+
+    public void showPopCreateAudio() {
+
+        popCreateAudio.show(rBackground);
     }
 
 
@@ -5461,7 +5542,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         cancelTask(firstCreateFreeAlbumTask);
         cancelTask(descriptionTask);
         cancelTask(getSettingsTask);
-        cancelTask(setSettingsTask);
         cancelTask(sendAudioModeTask);
         cancelTask(locationTask);
         cancelTask(protocol33);

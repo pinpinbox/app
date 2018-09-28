@@ -70,6 +70,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.OnDetailClickListener;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
+import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.service.DownLoadService;
 import com.squareup.picasso.Picasso;
 
@@ -1357,11 +1358,11 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
 
     private class GetOriginalSettingsTask extends AsyncTask<Void, Void, Object> {
 
-        private String albumid;
+        private String album_id;
 
-        private String p34Result, p34Message;
+        private String p34Result = "", p34Message = "";
 
-        private String strAlbumName, strAlbumDescription, strFirstPaging, strSecondPaging;
+        private String strAlbumName, strFirstPaging, strSecondPaging;
 
 
         private int p57Result = -1;
@@ -1371,8 +1372,8 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
         private int photoCount = 0;
 
 
-        public GetOriginalSettingsTask(String albumid) {
-            this.albumid = albumid;
+        public GetOriginalSettingsTask(String album_id) {
+            this.album_id = album_id;
         }
 
 
@@ -1381,7 +1382,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             String strJson = "";
 
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P57_GetAlbumOfDiy, SetMapByProtocol.setParam57_getalbumofdiy(id, token, albumid), null);
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P57_GetAlbumOfDiy, SetMapByProtocol.setParam57_getalbumofdiy(id, token, album_id), null);
                 MyLog.Set("d", getActivity().getClass(), "p57strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p57Result = Key.TIMEOUT;
@@ -1436,12 +1437,12 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             String strJson = "";
 
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P34_GetAlbumSettings, SetMapByProtocol.setParam34_getalbumsettings(id, token, albumid), null);
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P34_GetAlbumSettings, SetMapByProtocol.setParam34_getalbumsettings(id, token, album_id), null);
 
                 MyLog.Set("d", getClass(), "p34strJson => " + strJson);
 
             } catch (SocketTimeoutException timeout) {
-                p34Result = Key.timeout;
+                p34Result = ResultType.TIMEOUT;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1452,23 +1453,20 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                     JSONObject jsonObject = new JSONObject(strJson);
                     p34Result = jsonObject.getString(Key.result);
 
-                    if (p34Result.equals("1")) {
+                    if (p34Result.equals(ResultType.SYSTEM_OK)) {
 
                         String jsonData = jsonObject.getString(Key.data);
                         JSONObject object = new JSONObject(jsonData);
-                        strAlbumName = JsonUtility.GetString(object, "title");
-                        strAlbumDescription = JsonUtility.GetString(object, "description");
-                        strFirstPaging = JsonUtility.GetString(object, "firstpaging");
-                        strSecondPaging = JsonUtility.GetString(object, "secondpaging");
+                        strAlbumName = JsonUtility.GetString(object, ProtocolKey.album_name);
+                        strFirstPaging = JsonUtility.GetString(object, ProtocolKey.categoryarea_id);
+                        strSecondPaging = JsonUtility.GetString(object, ProtocolKey.category_id);
 
 
-                    } else if (p34Result.equals("0")) {
+                    } else{
                         p34Message = jsonObject.getString(Key.message);
-                    } else {
-                        p34Result = "";
                     }
+
                 } catch (Exception e) {
-                    p34Result = "";
                     e.printStackTrace();
                 }
 
@@ -1486,7 +1484,7 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             super.onPostExecute(result);
             loading.dismiss();
 
-            if (p34Result.equals("1")) {
+            if (p34Result.equals(ResultType.SYSTEM_OK)) {
 
                 if (strAlbumName.equals("") || strFirstPaging.equals("") || strSecondPaging.equals("")) {
                     PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_album_info_is_incomplete_can_not_make_public);
@@ -1522,9 +1520,11 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                 }
 
 
-            } else if (p34Result.equals("0")) {
+            } else if (p34Result.equals(ResultType.USER_ERROR)) {
+
                 DialogV2Custom.BuildError(getActivity(), p34Message);
-            } else if (p34Result.equals(Key.timeout)) {
+
+            } else if (p34Result.equals(ResultType.TIMEOUT)) {
 
                 connectInstability();
 
@@ -1608,27 +1608,6 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
                 } else if (strOriginalAct != null && strOriginalAct.equals("close")) {
                     HashMapKeyControl.changeMapKey(map, Key.act, "open");
                 }
-
-
-//                HashMap<String, Object> map = new HashMap<>();
-//                map.put("album_id", (String) p17arraylist.get(clickPosition).get("album_id"));
-//                map.put("albumname", (String) p17arraylist.get(clickPosition).get("albumname"));
-//                map.put("albumdescription", (String) p17arraylist.get(clickPosition).get("albumdescription"));
-//                map.put("albumcover", (String) p17arraylist.get(clickPosition).get("albumcover"));
-//                map.put("albuminsertdate", (String) p17arraylist.get(clickPosition).get("albuminsertdate"));
-//                map.put("user_id", (String) p17arraylist.get(clickPosition).get("user_id"));
-//                map.put("username", (String) p17arraylist.get(clickPosition).get("username"));
-//                map.put("picture", (String) p17arraylist.get(clickPosition).get("picture"));
-//                map.put("zipped", (String) p17arraylist.get(clickPosition).get("zipped"));
-//                map.put("count", (String) p17arraylist.get(clickPosition).get("count"));
-//                map.put("identity", "admin"); //我上傳的相本 暫時強制admin
-//                map.put("template_id", (String) p17arraylist.get(clickPosition).get("template_id"));
-//                map.put("detail_is_open", (boolean) p17arraylist.get(clickPosition).get("detail_is_open"));
-//                if (strOriginalAct != null && strOriginalAct.equals("open")) {
-//                    map.put(Key.act, "close");
-//                } else if (strOriginalAct != null && strOriginalAct.equals("close")) {
-//                    map.put(Key.act, "open");
-//                }
 
 
                 p17arraylist.set(clickPosition, map);

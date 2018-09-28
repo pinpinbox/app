@@ -11,7 +11,7 @@
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
         android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
         android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-        android:text="上傳音訊檔" />
+        android:text="@string/pinpinbox_2_0_0_pop_title_upload_audio_file" />
 
 
     <LinearLayout
@@ -26,13 +26,13 @@
             android:id="@+id/tvRecording"
             style="@style/ppb200_pop_item"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
-            android:text="錄音" />
+            android:text="@string/pinpinbox_2_0_0_itemtype_recording" />
 
         <TextView
             android:id="@+id/tvSelectAudioFile"
             style="@style/ppb200_pop_item"
             android:paddingLeft="@dimen/ppb200_padding_margin_first"
-            android:text="選擇檔案" />
+            android:text="@string/pinpinbox_2_0_0_itemtype_select_file" />
 
     </LinearLayout>
 

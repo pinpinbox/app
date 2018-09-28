@@ -163,11 +163,11 @@ public class SetMapByProtocol {
     }
 
 
-    public static Map<String, String> setParam34_getalbumsettings(String id, String token, String albumid){
+    public static Map<String, String> setParam34_getalbumsettings(String id, String token, String album_id){
         map = new HashMap<>();
-        map.put(MapKey.id, id);
+        map.put(MapKey.user_id, id);
         map.put(MapKey.token, token);
-        map.put(MapKey.albumid, albumid);
+        map.put(MapKey.album_id, album_id);
         return sendData(map);
     }
 

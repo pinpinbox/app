@@ -36,6 +36,7 @@ public class ProtocolKey {
     public static String album_audio = "audio";
     public static String auto = "auto";
 
+
     //b
     public static String besponsored = "besponsored";
     public static String birthday = "birthday";
@@ -65,6 +66,7 @@ public class ProtocolKey {
     public static String colorhex = "colorhex";
     public static String contribution = "contribution";
     public static String categoryarea_style = "categoryarea_style";
+    public static String category_id = "category_id";
 
 
     //d

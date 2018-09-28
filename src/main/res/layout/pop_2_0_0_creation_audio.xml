@@ -172,9 +172,20 @@
                 android:id="@+id/tvSelectAudioCustom"
                 style="@style/ppb200_pop_item"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_width="wrap_content"
                 android:layout_toRightOf="@+id/selectAudioCustomImg"
                 android:background="@null"
                 android:text="@string/pinpinbox_2_0_0_itemtype_custom_audio" />
+
+
+            <TextView
+                android:id="@+id/tvSelectFile"
+                style="@style/ppb200_Button_grey_small_radius"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/tvSelectAudioCustom"
+                android:text="@string/pinpinbox_2_0_0_button_select_file"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"/>
 
 
             <TextView

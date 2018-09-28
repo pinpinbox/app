@@ -13,8 +13,11 @@ public class Url {
 
     public static String P21_UpdateUser = domain + "/index/api/updateuser" + "/2.0";
 
-    public static String P33_AlbumSettings = domain + "/index/api/albumsettings" + "/2.0";
+//    public static String P33_AlbumSettings = domain + "/index/api/albumsettings" + "/2.0";
+public static String P33_AlbumSettings = domain + "/index/api/updatealbumsettings" + "/2.0";
 
+
+    public static String P34_GetAlbumSettings = domain + "/index/api/getalbumsettings" + "/2.0";
 
     public static String P42_GetPhotoUseFor_User = domain + "/index/api/getphotousefor_user" + "/1.3";
 

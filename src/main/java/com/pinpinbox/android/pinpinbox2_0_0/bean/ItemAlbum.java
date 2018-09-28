@@ -1,9 +1,13 @@
 package com.pinpinbox.android.pinpinbox2_0_0.bean;
 
+import java.util.List;
+
 /**
  * Created by kevin9594 on 2017/2/25.
  */
 public class ItemAlbum {
+
+    private List<String> albumindexList;
 
     private String album_id; //作品ID
     private String description; //描述
@@ -16,6 +20,9 @@ public class ItemAlbum {
     private String inserttime; //建立時間
     private String difftime;
     private String cover_hex;
+    private String weather;
+    private String mood;
+    private String act;
 
 
     private int messageboard;
@@ -28,6 +35,8 @@ public class ItemAlbum {
     private int cover_height; //封面高
     private int color;
     private int sponsorCount = 0;
+    private int categoryarea_id;
+    private int category_id;
 
     private int image_orientation = 0;
     public static final int PORTRAIT = 1; //直
@@ -63,6 +72,53 @@ public class ItemAlbum {
     private String user_name; //作者名稱
     private String user_picture;
 
+    public List<String> getAlbumindexList() {
+        return albumindexList;
+    }
+
+    public void setAlbumindexList(List<String> albumindexList) {
+        this.albumindexList = albumindexList;
+    }
+
+    public int getCategoryarea_id() {
+        return categoryarea_id;
+    }
+
+    public void setCategoryarea_id(int categoryarea_id) {
+        this.categoryarea_id = categoryarea_id;
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getMood() {
+        return mood;
+    }
+
+    public void setMood(String mood) {
+        this.mood = mood;
+    }
+
+    public String getAct() {
+        return act;
+    }
+
+    public void setAct(String act) {
+        this.act = act;
+    }
 
     public int getSponsorCount() {
         return sponsorCount;

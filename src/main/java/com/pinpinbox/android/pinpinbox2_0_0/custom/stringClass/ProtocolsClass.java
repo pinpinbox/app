@@ -146,7 +146,7 @@ public class ProtocolsClass {
 
     public static String P33_AlbumSettings = domain + "/index/api/albumsettings" + "/1.2"; //2016.02.25 修改為1.2
 
-    public static String P34_GetAlbumSettings = domain + "/index/api/getalbumsettings" + version;
+    public static String P34_GetAlbumSettings = domain + "/index/api/getalbumsettings" + "/2.0";
 
     public static String P35_FacebookLogin = domain + "/index/api/facebooklogin" + version;
 

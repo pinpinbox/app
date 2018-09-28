@@ -21,6 +21,7 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAudioFileAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 
@@ -48,6 +49,13 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
     private RecyclerView rvAudioFile;
     private SeekBar seekBar;
     private ImageView controlImg;
+
+    private String audio_mode = "";
+
+    private static final String NONE = "none";
+    private static final String SINGULAR = "singular"; //單首
+    private static final String PLURAL = "plural"; //多首
+    private static final String CUSTOM = "custom"; //上傳 自定義 不是由server給予
 
 
     /*
@@ -173,8 +181,7 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
 
     private void getBundle() {
-
-
+        audio_mode = getArguments().getString(Key.audio_mode);
     }
 
 
@@ -275,14 +282,28 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
             @Override
             public void onClick(int position) {
 
-
                 Activity ac = SystemUtility.getActivity(Creation2Activity.class.getSimpleName());
 
-                if(ac!=null){
+                if (ac != null) {
+                    switch (audio_mode) {
 
-                    ((Creation2Activity)getActivity()).uploadMyAudioFile((String) filePathList.get(position).get("path"));
+                        case SINGULAR:
 
+
+                            break;
+
+                        case PLURAL:
+
+                            ((Creation2Activity) getActivity()).uploadMyAudioFile((String) filePathList.get(position).get("path"));
+
+                            break;
+
+                    }
                 }
+
+
+
+
 
                 hideFragment();
 
@@ -292,7 +313,7 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
     }
 
-    private void audioPrepared(){
+    private void audioPrepared() {
 
 
         seekBar.setMax(mediaPlayer.getDuration());
@@ -320,10 +341,9 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
         }
 
 
-
     }
 
-    private void audioErrorState(){
+    private void audioErrorState() {
         cleanMedia();
         cleanTimer();
         PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_audio_error);
@@ -342,7 +362,7 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
         timer = null;
     }
 
-    public void cleanMedia(){
+    public void cleanMedia() {
 
         if (mediaPlayer != null) {
             mediaPlayer.reset();
@@ -355,12 +375,21 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
     }
 
-    private void hideFragment(){
+    private void hideFragment() {
 
         cleanMedia();
 
+        if (audio_mode.equals(SINGULAR)) {
+            ((Creation2Activity) getActivity()).showPopCreateAudio();
+        }
+
+
         getActivity().getSupportFragmentManager().beginTransaction().hide(this).commit();
 
+    }
+
+    public void setAudio_mode(String audio_mode) {
+        this.audio_mode = audio_mode;
     }
 
 
@@ -410,7 +439,6 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
             MyLog.Set("e", getClass(), "setUserVisibleHint => " + "!isVisibleToUser && isResumed()");
 
             cleanMedia();
-
 
 
         } else if (isVisibleToUser && isResumed()) {

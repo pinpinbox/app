@@ -98,6 +98,7 @@
     <string name="pinpinbox_2_0_0_button_refresh_video">重新讀取影片</string>
     <string name="pinpinbox_2_0_0_button_learn_now">立即了解</string>
     <string name="pinpinbox_2_0_0_button_scan_sign_up">邀請碼註冊</string>
+    <string name="pinpinbox_2_0_0_button_select_file">選擇檔案</string>
 
 
 
@@ -125,6 +126,7 @@
     <string name="pinpinbox_2_0_0_pop_title_choose_country_number">選擇國碼</string>
     <string name="pinpinbox_2_0_0_pop_title_choose_category">選擇分類</string>
     <string name="pinpinbox_2_0_0_pop_title_choose_size">請選擇上傳尺寸</string>
+    <string name="pinpinbox_2_0_0_pop_title_upload_audio_file">上傳音訊檔</string>
 
 
     <string name="pinpinbox_2_0_0_dialog_try_again">再試一次</string>
@@ -379,6 +381,9 @@
     <string name="pinpinbox_2_0_0_itemtype_exchange_list">兌換清單</string>
     <string name="pinpinbox_2_0_0_itemtype_autoplay_cga_banner_video">自動播放影片(分類輪播)</string>
     <string name="pinpinbox_2_0_0_itemtype_all">全部</string>
+    <string name="pinpinbox_2_0_0_itemtype_recording">錄音</string>
+    <string name="pinpinbox_2_0_0_itemtype_select_file">選擇檔案</string>
+
 
     <!--特殊-->
     <string name="pinpinbox_2_0_0_itemtype_visible_page_before">開放前</string>

@@ -20,6 +20,7 @@ public class Key {
     public static String albumdescription = "albumdescription";
     public static String albumname = "albumname";
     public static String albumexplore = "albumexplore";
+    public static String audio_mode = "audio_mode";
 
 
 
