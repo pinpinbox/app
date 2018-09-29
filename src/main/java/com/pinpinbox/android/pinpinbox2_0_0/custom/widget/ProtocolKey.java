@@ -35,6 +35,7 @@ public class ProtocolKey {
     public static String album_video = "video";
     public static String album_audio = "audio";
     public static String auto = "auto";
+    public static String album_preview = "preview";
 
 
     //b
@@ -210,6 +211,7 @@ public class ProtocolKey {
     public static String starttime = "starttime";
     public static String endtime = "endtime";
     public static String special = "special";
+    public static String settings = "settings";
 
 
     //t

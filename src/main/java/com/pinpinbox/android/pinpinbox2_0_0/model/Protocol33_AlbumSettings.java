@@ -215,10 +215,10 @@ public class Protocol33_AlbumSettings extends AsyncTask<Void, Void, Object> {
     private Map<String, String> putMap() {
 
         Map<String, String> map = new HashMap<>();
-        map.put(Key.album_id, album_id);
-        map.put(Key.settings, settings);
-        map.put(Key.token, token);
-        map.put(Key.user_id, user_id);
+        map.put(ProtocolKey.album_id, album_id);
+        map.put(ProtocolKey.settings, settings);
+        map.put(ProtocolKey.token, token);
+        map.put(ProtocolKey.user_id, user_id);
 
         return map;
     }

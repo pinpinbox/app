@@ -2920,10 +2920,12 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         JSONObject obj = new JSONObject();
         try {
-            obj.put(ProtocolKey.photo_preview, idlist);
+            obj.put(ProtocolKey.album_preview, idlist);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        MyLog.Set("e", mActivity.getClass(), "idlist => " + idlist);
 
         protocol33 = new Protocol33_AlbumSettings(
                 mActivity,
@@ -3692,14 +3694,18 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         private void setPreviewCout() {
 
-            if (isNewCreate) {
-
+            if (isNewCreate || strPreviewPageNum.equals("0") || strPreviewPageNum.equals("")) {
+                selectPreviewAll();
             } else {
-                if (strPreviewPageNum == null || strPreviewPageNum.equals("") || strPreviewPageNum.equals("null") || strPreviewPageNum.equals("0")) {
+
+                if((StringIntMethod.StringToInt(strPreviewPageNum)==photoList.size())){
                     selectPreviewAll();
-                } else {
+                }else {
                     selectPreviewPage();
+
                 }
+
+
             }
         }
 
@@ -4948,7 +4954,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
         if (edPreviewPageStart.getText().toString().equals("0")) {
             edPreviewPageStart.setText("1");
+        }else {
+            edPreviewPageStart.setText(strPreviewPageNum);
         }
+
+
 
     }
 
