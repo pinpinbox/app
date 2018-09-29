@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -187,6 +188,18 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_first"/>
 
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/loadingView"
+                style="@style/SpinKitView.DoubleBounce"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                android:layout_toEndOf="@+id/tvSelectFile"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/pinpinbox_2_0_0_third_main" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -211,10 +224,31 @@
             android:background="@color/pinpinbox_2_0_0_third_grey">
 
 
+            <TextView
+                android:id="@+id/tvAudioTarget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/controlImg"
+                android:paddingLeft="@dimen/ppb200_padding_margin_first"
+                android:letterSpacing="0.1"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
+
+            <ImageView
+                android:id="@+id/controlImg"
+                style="@style/ppb200_action_bar_icon"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic200_video_dark" />
+
         </RelativeLayout>
 
 
     </LinearLayout>
+
+
 
 
 </LinearLayout>

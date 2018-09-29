@@ -289,6 +289,8 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
                         case SINGULAR:
 
+                            ((Creation2Activity)getActivity()).upLoadMyAudioFileForSingular((String) filePathList.get(position).get("path"));
+
 
                             break;
 
@@ -296,16 +298,17 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
                             ((Creation2Activity) getActivity()).uploadMyAudioFile((String) filePathList.get(position).get("path"));
 
+
                             break;
 
                     }
                 }
 
 
-
-
-
                 hideFragment();
+
+
+
 
 
             }
