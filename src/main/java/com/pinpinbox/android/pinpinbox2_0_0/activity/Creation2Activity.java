@@ -4891,6 +4891,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 popCreationSet.show(rBackground);
 
+                doGetAlbumDataOptions();
+
 
                 break;
 
