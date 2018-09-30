@@ -28,6 +28,7 @@ public class Key {
     public static String birthday = "birthday";
     public static String businessuser_id = "businessuser_id";
     public static String badgeCount = "badgeCount";
+    public static String buttonType = "buttonType";
 
 
     //c

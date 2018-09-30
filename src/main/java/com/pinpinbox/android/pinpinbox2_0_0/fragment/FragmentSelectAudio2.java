@@ -57,6 +57,7 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
     private static final String PLURAL = "plural"; //多首
     private static final String CUSTOM = "custom"; //上傳 自定義 不是由server給予
 
+    private int buttonType = -1;
 
     /*
      * onCreate
@@ -182,6 +183,8 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
     private void getBundle() {
         audio_mode = getArguments().getString(Key.audio_mode);
+        buttonType = getArguments().getInt(Key.buttonType);
+
     }
 
 
@@ -227,7 +230,10 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
     private void setRecycler() {
 
-        adapter = new RecyclerAudioFileAdapter(getActivity(), filePathList);
+
+        adapter = new RecyclerAudioFileAdapter(getActivity(), filePathList, buttonType);
+
+
         rvAudioFile.setAdapter(adapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -289,7 +295,7 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
                         case SINGULAR:
 
-                            ((Creation2Activity)getActivity()).upLoadMyAudioFileForSingular((String) filePathList.get(position).get("path"));
+                            ((Creation2Activity) getActivity()).upLoadMyAudioFileForSingular((String) filePathList.get(position).get("path"));
 
 
                             break;
@@ -306,9 +312,6 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
 
                 hideFragment();
-
-
-
 
 
             }
@@ -393,6 +396,22 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
     public void setAudio_mode(String audio_mode) {
         this.audio_mode = audio_mode;
+    }
+
+    public void setButtonType(int buttonType) {
+
+        switch (buttonType) {
+
+            case RecyclerAudioFileAdapter.SELECT:
+                adapter.setButtonSelect();
+                break;
+
+            case RecyclerAudioFileAdapter.UPLOAD:
+                adapter.setButtonUpload();
+                break;
+
+        }
+
     }
 
 

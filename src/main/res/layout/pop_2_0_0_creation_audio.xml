@@ -217,6 +217,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rCustomControl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ppb200_common_list_item_height"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_first"

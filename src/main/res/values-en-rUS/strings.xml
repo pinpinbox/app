@@ -99,7 +99,7 @@
     <string name="pinpinbox_2_0_0_button_learn_now">Learn now</string>
     <string name="pinpinbox_2_0_0_button_scan_sign_up">Use invitation code</string>
     <string name="pinpinbox_2_0_0_button_select_file">Select file</string>
-
+    <string name="pinpinbox_2_0_0_button_select">選擇</string>
 
     <string name="pinpinbox_2_0_0_event_info">Details</string>
     <string name="pinpinbox_2_0_0_event_contributors">Submit</string>
@@ -303,10 +303,10 @@
     <string name="pinpinbox_2_0_0_toast_message_video_error">Video play is abnormal</string>
     <string name="pinpinbox_2_0_0_toast_message_type_the_number_you_want_to_be_visible">Type the number you want to be visible</string>
     <string name="pinpinbox_2_0_0_toast_message_at_least_1_page">Least 1 page</string>
-    <string name="pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total">Can't be larger than the total</string>
+    <string name="pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total">Can not be larger than the total</string>
     <string name="pinpinbox_2_0_0_toast_message_select_preview_way">Please select preview type</string>
-
-
+    <string name="pinpinbox_2_0_0_toast_message_please_select_audio_file">Please select audio file</string>
+    <string name="pinpinbox_2_0_0_toast_message_please_select_an_audio">Please select an audio</string>
 
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
@@ -597,8 +597,9 @@
     <string name="pinpinbox_2_0_0_other_text_or">or</string>
     <string name="pinpinbox_2_0_0_other_text_slogan_a">Create valuable contents and get the massive income</string>
     <string name="pinpinbox_2_0_0_other_text_go_to_editor_upload_video">If you need to upload video, please go to Edtor</string>
-    <string name="pinpinbox_2_0_0_other_text_upload_already">Audio upload already</string>
 
+    <string name="pinpinbox_2_0_0_other_text_upload_already">Audio upload already</string>
+    <string name="pinpinbox_2_0_0_other_text_click_save_to_upload">Click "Save" to upload</string>
 
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>

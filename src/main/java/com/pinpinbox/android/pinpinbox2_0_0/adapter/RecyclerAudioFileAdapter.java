@@ -16,7 +16,6 @@ import java.util.List;
 
 public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
-
     public interface OnRecyclerViewListener {
         void onItemClick(int position, View v);
         boolean onItemLongClick(int position, View v);
@@ -45,10 +44,14 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
     private  List<HashMap<String, Object>> filePathList;
 
+    private int buttonType = -1;
+    public static final int UPLOAD = 0;
+    public static final int SELECT = 1;
 
-    public RecyclerAudioFileAdapter(Activity activity,  List<HashMap<String, Object>> filePathList) {
+    public RecyclerAudioFileAdapter(Activity activity,  List<HashMap<String, Object>> filePathList, int buttonType) {
         this.mActivity = activity;
         this.filePathList = filePathList;
+        this.buttonType = buttonType;
     }
 
 
@@ -67,6 +70,11 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
         mHolder.tvTime.setText((String)filePathList.get(position).get("time"));
 
+        if(buttonType == UPLOAD){
+            mHolder.tvUpload.setText(R.string.pinpinbox_2_0_0_button_upload);
+        }else if(buttonType == SELECT){
+            mHolder.tvUpload.setText(R.string.pinpinbox_2_0_0_button_select);
+        }
 
         mHolder.tvUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +141,25 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
     }
 
+
+
+    public void setButtonUpload(){
+
+        buttonType = UPLOAD;
+
+        this.notifyDataSetChanged();
+
+    }
+
+
+    public void setButtonSelect(){
+
+        buttonType = SELECT;
+
+        this.notifyDataSetChanged();
+
+
+    }
 
 
 }

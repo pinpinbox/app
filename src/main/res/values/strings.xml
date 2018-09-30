@@ -99,6 +99,7 @@
     <string name="pinpinbox_2_0_0_button_learn_now">立即了解</string>
     <string name="pinpinbox_2_0_0_button_scan_sign_up">邀請碼註冊</string>
     <string name="pinpinbox_2_0_0_button_select_file">選擇檔案</string>
+    <string name="pinpinbox_2_0_0_button_select">選擇</string>
 
 
 
@@ -308,9 +309,11 @@
     <string name="pinpinbox_2_0_0_toast_message_at_least_1_page">至少1頁</string>
     <string name="pinpinbox_2_0_0_toast_message_can_not_larger_than_the_total">不可大於作品總張數</string>
     <string name="pinpinbox_2_0_0_toast_message_select_preview_way">請選擇預覽方式</string>
+    <string name="pinpinbox_2_0_0_toast_message_please_select_audio_file">請先選擇音訊檔</string>
+    <string name="pinpinbox_2_0_0_toast_message_please_select_an_audio">請選擇一部音頻</string>
 
 
-
+    Please select an audio
 
 
     <string name="pinpinbox_2_0_0_size_general">一般尺寸</string>
@@ -601,7 +604,9 @@
     <string name="pinpinbox_2_0_0_other_text_or">或</string>
     <string name="pinpinbox_2_0_0_other_text_slogan_a">創造內容價值 獲得贊助回饋</string>
     <string name="pinpinbox_2_0_0_other_text_go_to_editor_upload_video">影片請從編輯器內上傳唷</string>
+
     <string name="pinpinbox_2_0_0_other_text_upload_already">已上傳音檔</string>
+    <string name="pinpinbox_2_0_0_other_text_click_save_to_upload">點擊"保存"後開始上傳</string>
 
 
     <string name="crop__saving">相片儲存中</string>
