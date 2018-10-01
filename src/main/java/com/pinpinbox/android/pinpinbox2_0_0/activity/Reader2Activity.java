@@ -179,6 +179,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private EditText edPoint;
     private ImageView backImg, autoplayImg, voiceImg, locationImg, messageImg, likeImg, moreImg;
     private SeekBar seekBar;
+    private ControlSizeScrollView svDescription;
 
     private String album_id = "";
     private String id, token;
@@ -347,7 +348,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         linDescription = (LinearLayout) findViewById(R.id.linDescription);
         linLink = (WarpLinearLayout) findViewById(R.id.linLink);
         tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
-        tvPageDescription = (TextView) findViewById(R.id.tvPageDescription);
         tvPage = (TextView) findViewById(R.id.tvPage);
         backImg = (ImageView) findViewById(R.id.backImg);
         autoplayImg = (ImageView) findViewById(R.id.autoplayImg);
@@ -359,7 +359,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         seekBar = (SeekBar) findViewById(R.id.seekBar);
 
 
-        ControlSizeScrollView svDescription = (ControlSizeScrollView) findViewById(R.id.svDescription);
+        svDescription = (ControlSizeScrollView) findViewById(R.id.svDescription);
         svDescription.setVerticalFadingEdgeEnabled(true);
         svDescription.setFadingEdgeLength(32);
 
@@ -592,6 +592,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //                    photoContentsList.get(lastPosition).setVideoView(null);
                 }
 
+                svDescription.scrollTo(0,0);
 
                 setPage(position);
                 setPageDetail(position);
@@ -2095,51 +2096,9 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 //
 //    }
 
-    private void setPageDescription(int position) {
+    private void setPageDescription(final int position) {
 
         linLink.removeAllViews();
-
-        /*set link button*/
-        String link = photoContentsList.get(position).getHyperlink();
-
-        if (link != null && !link.equals("null") && !link.equals("")) {
-
-            try {
-                JSONArray linkArray = new JSONArray(link);
-
-                for (int i = 0; i < linkArray.length(); i++) {
-
-                    JSONObject jsonLink = (JSONObject) linkArray.get(i);
-
-                    final String text = JsonUtility.GetString(jsonLink, ProtocolKey.text);
-                    final String url = JsonUtility.GetString(jsonLink, ProtocolKey.url);
-
-                    if (!text.equals("") && !text.equals("null") && !url.equals("") && !url.equals("null")) {
-                        TextView tvLink = (TextView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
-                        tvLink.setText(text);
-                        tvLink.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                ActivityIntent.toWeb(mActivity, url, text);
-                            }
-                        });
-                        linLink.addView(tvLink);
-                        ViewControl.setMargins(tvLink, SizeUtils.dp2px(8), 0, 0, 0);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        if (linLink.getChildCount() > 0) {
-            linLink.setVisibility(View.VISIBLE);
-        } else {
-            linLink.setVisibility(View.GONE);
-        }
-
-
 
         /*set description*/
         final String strDescription = photoContentsList.get(position).getDescription();
@@ -2179,6 +2138,61 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             tvPageDescription.setVisibility(View.GONE);
 
         }
+
+
+        //防止字串閃爍
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                /*set link button*/
+                String link = photoContentsList.get(position).getHyperlink();
+
+                if (link != null && !link.equals("null") && !link.equals("")) {
+
+                    try {
+                        JSONArray linkArray = new JSONArray(link);
+
+                        for (int i = 0; i < linkArray.length(); i++) {
+
+                            JSONObject jsonLink = (JSONObject) linkArray.get(i);
+
+                            final String text = JsonUtility.GetString(jsonLink, ProtocolKey.text);
+                            final String url = JsonUtility.GetString(jsonLink, ProtocolKey.url);
+
+                            if (!text.equals("") && !text.equals("null") && !url.equals("") && !url.equals("null")) {
+                                TextView tvLink = (TextView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
+                                tvLink.setText(text);
+                                tvLink.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        ActivityIntent.toWeb(mActivity, url, text);
+                                    }
+                                });
+                                linLink.addView(tvLink);
+                                ViewControl.setMargins(tvLink, SizeUtils.dp2px(8), 0, 0, 0);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (linLink.getChildCount() > 0) {
+                    linLink.setVisibility(View.VISIBLE);
+                } else {
+                    linLink.setVisibility(View.GONE);
+                }
+
+
+
+
+
+            }
+        },100);
+
+
+
 
 
     }

@@ -27,7 +27,7 @@
             android:id="@+id/tvSave"
             style="@style/ppb200_Button_main_small_radius"
             android:layout_gravity="right"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:text="@string/pinpinbox_2_0_0_pop_save" />
@@ -75,7 +75,7 @@
             android:id="@+id/rSelectAudioPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first">
 
             <ImageView
                 android:id="@+id/selectAudioPageImg"
@@ -115,7 +115,7 @@
             android:id="@+id/rSelectAudioBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first">
 
             <ImageView
                 android:id="@+id/selectAudioBackgroundImg"
@@ -160,7 +160,7 @@
             android:id="@+id/rSelectAudioCustom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_big">
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first">
 
             <ImageView
                 android:id="@+id/selectAudioCustomImg"
@@ -221,8 +221,8 @@
             android:id="@+id/rCustomControl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ppb200_common_list_item_height"
-
             android:layout_marginTop="@dimen/ppb200_padding_margin_second"
+            android:visibility="gone"
             android:background="@color/pinpinbox_2_0_0_third_grey">
 
 

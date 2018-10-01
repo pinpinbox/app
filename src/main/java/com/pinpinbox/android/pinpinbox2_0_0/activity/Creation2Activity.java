@@ -130,6 +130,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -3243,11 +3244,37 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
+    private Pattern httpPattern = Pattern.compile("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?");
+
+    private boolean checkHttp(String url) {
+
+        if (httpPattern.matcher(url).matches()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
     private void doSendHyperLink() {
         if (!HttpUtility.isConnect(this)) {
             setNoConnect();
             return;
         }
+
+        String url1 = dlgCreationLink.getEdLinkUrl1().getText().toString();
+        String url2 = dlgCreationLink.getEdLinkUrl2().getText().toString();
+
+
+        if (!url1.equals("") && !checkHttp(url1)) {
+            url1 = "https://" + dlgCreationLink.getEdLinkUrl1().getText().toString();
+        }
+
+        if (!url2.equals("") && !checkHttp(url2)) {
+            url2 = "https://" + dlgCreationLink.getEdLinkUrl2().getText().toString();
+        }
+
 
         JSONArray array = null;
 
@@ -3255,11 +3282,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             JSONObject obj1 = new JSONObject();
             obj1.put("text", dlgCreationLink.getEdLinkName1().getText().toString());
-            obj1.put("url", dlgCreationLink.getEdLinkUrl1().getText().toString());
+            obj1.put("url", url1);
 
             JSONObject obj2 = new JSONObject();
             obj2.put("text", dlgCreationLink.getEdLinkName2().getText().toString());
-            obj2.put("url", dlgCreationLink.getEdLinkUrl2().getText().toString());
+            obj2.put("url", url2);
 
             array = new JSONArray();
             array.put(obj1);
@@ -5038,7 +5065,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             case R.id.controlImg:
 
-                if(mp3Path!=null && !mp3Path.equals("")){
+                if (mp3Path != null && !mp3Path.equals("")) {
 
                     if (mpBackground != null && mpBackground.isPlaying()) {
                         mpBackground.stop();
@@ -5052,8 +5079,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     controlImg.setImageResource(R.drawable.ic200_recording_dark);
 
 
-                }else {
-
+                } else {
 
 
                 }
@@ -5619,7 +5645,9 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         cancelTask(descriptionTask);
         cancelTask(getAlbumDataOptionsTask);
         cancelTask(locationTask);
+        cancelTask(sendHyperlinkTask);
         cancelTask(protocol33);
+        cancelTask(protocol34);
 
         Recycle.IMG(videoPlayImg);
         Recycle.IMG(photo_or_templateImg);
