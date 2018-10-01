@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:paddingBottom="@dimen/ppb200_padding_margin_first"
         android:orientation="vertical">
 
 
@@ -220,7 +221,7 @@
             android:id="@+id/rCustomControl"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ppb200_common_list_item_height"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
+
             android:layout_marginTop="@dimen/ppb200_padding_margin_second"
             android:background="@color/pinpinbox_2_0_0_third_grey">
 

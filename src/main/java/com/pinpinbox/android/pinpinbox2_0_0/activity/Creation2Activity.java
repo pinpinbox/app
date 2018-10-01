@@ -70,7 +70,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ScrollLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
@@ -763,7 +762,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         return;
                     }
 
-                    playAudio(position);
+                    playAudio(audioList.get(position).getUrl());
 
                 } else {
 
@@ -782,7 +781,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     audioList.get(position).setSelect(true);
                     audioAdapter.notifyItemChanged(position);
 
-                    playAudio(position);
+                    playAudio(audioList.get(position).getUrl());
                 }
 
             }
@@ -807,7 +806,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
-    private void playAudio(final int position) {
+    private void playAudio(final String path) {
 
 
         if (mpBackground == null) {
@@ -819,19 +818,21 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             public void run() {
                 try {
                     mpBackground.reset();
-                    mpBackground.setDataSource(audioList.get(position).getUrl());
+                    mpBackground.setDataSource(path);
                     mpBackground.prepare(); // prepare自动播放
                     mpBackground.start();
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!isShowAudioGuide) {
-                                PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_select_same_item_can_play_stop);
-                                isShowAudioGuide = true;
+                    if (!isCustomAudio) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!isShowAudioGuide) {
+                                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_select_same_item_can_play_stop);
+                                    isShowAudioGuide = true;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
 
 
                 } catch (Exception e) {
@@ -928,6 +929,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 mySelectAudioMode = SINGULAR;
 
+                if (mpBackground != null && mpBackground.isPlaying() && isCustomAudio) {
+                    mpBackground.stop();
+                }
+
                 isCustomAudio = false;
 
                 break;
@@ -957,7 +962,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 mySelectAudioMode = SINGULAR; //童單首
 
-                if (mpBackground != null && mpBackground.isPlaying()) {
+                if (mpBackground != null && mpBackground.isPlaying() && !isCustomAudio) {
                     mpBackground.stop();
                 }
 
@@ -2622,6 +2627,62 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
     }
 
+    private void saveAudioMode() {
+
+        if (isCustomAudio) {
+
+            if (isUploadAudioDone) {
+                popCreateAudio.dismiss();
+            } else {
+                doUploadAlbumAudio(mp3Path);
+            }
+
+            return;
+        }
+
+        if (mySelectAudioMode.equals(SINGULAR) && !isCustomAudio) {
+
+            boolean isSelect = false;
+
+            for (int i = 0; i < audioList.size(); i++) {
+                if (audioList.get(i).isSelect()) {
+                    isSelect = true;
+                    break;
+                } else {
+                    isSelect = false;
+                }
+            }
+
+            if (!isSelect) {
+
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_please_select_an_audio);
+
+                return;
+            }
+
+        }
+
+        if (mySelectAudioMode.equals(currentAudioMode)) {
+            doSendAudioMode();
+            return;
+        }
+
+
+        DialogV2Custom d = new DialogV2Custom(mActivity);
+        d.setStyle(DialogStyleClass.CHECK);
+        d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_change_album_mode);
+        d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_cancel);
+        d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_confirm_to_change_audio_mode);
+        d.setCheckExecute(new CheckExecute() {
+            @Override
+            public void DoCheck() {
+                doSendAudioMode();
+            }
+        });
+        d.show();
+
+    }
+
     private void cleanPicasso() {
 
         if (photoList != null && photoList.size() > 0) {
@@ -2955,6 +3016,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                         //先清空 tvAudioTarget
                         tvAudioTarget.setText("");
+                        rCustomControl.setVisibility(View.GONE);
 
 
                         if (itemAlbum.getAudio_mode().equals(PLURAL)) {
@@ -2970,6 +3032,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                                 isUploadAudioDone = true;
 
                                 tvAudioTarget.setText(R.string.pinpinbox_2_0_0_other_text_upload_already);
+
+                                rCustomControl.setVisibility(View.VISIBLE);
+
+                                mp3Path = itemAlbum.getAudio_target();
 
                             } else if (itemAlbum.getAudio_refer().equals("system")) {
 
@@ -3674,6 +3740,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                         }
 
                         setChangeProject();
+
+                        rvPhoto.scrollToPosition(thisPosition);
 
 
                     }
@@ -4955,58 +5023,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             case R.id.tvSave:
 
 
-                if (isCustomAudio) {
-
-                    if (isUploadAudioDone) {
-                        popCreateAudio.dismiss();
-                    } else {
-                        doUploadAlbumAudio(mp3Path);
-                    }
-
-                    return;
-                }
-
-                if (mySelectAudioMode.equals(SINGULAR) && !isCustomAudio) {
-
-                    boolean isSelect = false;
-
-                    for (int i = 0; i < audioList.size(); i++) {
-                        if (audioList.get(i).isSelect()) {
-                            isSelect = true;
-                            break;
-                        } else {
-                            isSelect = false;
-                        }
-                    }
-
-                    if (!isSelect) {
-
-                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_please_select_an_audio);
-
-                        return;
-                    }
-
-
-                }
-
-                if (mySelectAudioMode.equals(currentAudioMode)) {
-                    doSendAudioMode();
-                    return;
-                }
-
-
-                DialogV2Custom d = new DialogV2Custom(mActivity);
-                d.setStyle(DialogStyleClass.CHECK);
-                d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_change_album_mode);
-                d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_cancel);
-                d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_confirm_to_change_audio_mode);
-                d.setCheckExecute(new CheckExecute() {
-                    @Override
-                    public void DoCheck() {
-                        doSendAudioMode();
-                    }
-                });
-                d.show();
+                saveAudioMode();
 
                 break;
 
@@ -5021,6 +5038,25 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
             case R.id.controlImg:
 
+                if(mp3Path!=null && !mp3Path.equals("")){
+
+                    if (mpBackground != null && mpBackground.isPlaying()) {
+                        mpBackground.stop();
+
+                        controlImg.setImageResource(R.drawable.ic200_video_dark);
+
+                        return;
+                    }
+                    playAudio(mp3Path);
+
+                    controlImg.setImageResource(R.drawable.ic200_recording_dark);
+
+
+                }else {
+
+
+
+                }
 
                 break;
 
@@ -5221,6 +5257,8 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         this.mp3Path = mp3Path;
 
         tvAudioTarget.setText(R.string.pinpinbox_2_0_0_other_text_click_save_to_upload);
+
+        rCustomControl.setVisibility(View.VISIBLE);
 
         isUploadAudioDone = false;
 
