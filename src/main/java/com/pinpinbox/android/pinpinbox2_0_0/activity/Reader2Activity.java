@@ -527,9 +527,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
         }
 
-//        rvReader.getItemAnimator().setSupportsChangeAnimations(false);
-
-
         recyclerReaderAdapter = new RecyclerReaderAdapter(mActivity, photoContentsList);
         rvReader.setAdapter(recyclerReaderAdapter);
 
@@ -589,7 +586,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 if (photoContentsList.get(lastPosition).getVideoView() != null) {
                     MyLog.Set("d", mActivity.getClass(), "重置videoView => " + lastPosition);
                     photoContentsList.get(lastPosition).getVideoView().reset();
-//                    photoContentsList.get(lastPosition).setVideoView(null);
                 }
 
                 svDescription.scrollTo(0,0);
@@ -660,10 +656,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
         recyclerReaderAdapter.setOnRecyclerViewListener(new RecyclerReaderAdapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
-
-//                if (!itemAlbum.isOwn() && position == photoContentsList.size() - 1) {
-//                    return;
-//                }
                 vpReader.setCurrentItem(position, false);
             }
 
@@ -1981,10 +1973,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             @Override
             public void onClick(View view) {
 
-
-//                startPhotoID = photoContentsList.get(vpReader.getCurrentItem()).getPhoto_id();
-
-
                 if (itemAlbum.getPoint() > 0) {
 
                     vpReader.setCurrentItem(photoContentsList.size());
@@ -2039,62 +2027,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     }
 
-//    private void setPageLink(int position) {
-//
-//        linLink.removeAllViews();
-//
-//        String link = photoContentsList.get(position).getHyperlink();
-//
-//        MyLog.Set("e", getClass(), "linklinklink => " + link);
-//
-//        if (link != null && !link.equals("null") && !link.equals("")) {
-//
-//            try {
-//
-//                JSONArray linkArray = new JSONArray(link);
-//
-//                for (int i = 0; i < linkArray.length(); i++) {
-//
-//                    JSONObject jsonLink = (JSONObject) linkArray.get(i);
-//
-//                    final String text = JsonUtility.GetString(jsonLink, ProtocolKey.text);
-//                    final String url = JsonUtility.GetString(jsonLink, ProtocolKey.url);
-//
-//                    if (!text.equals("") && !text.equals("null") && !url.equals("") && !url.equals("null")) {
-//                        TextView tvLink = (TextView) LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.textview_reader_page_link, null);
-//                        tvLink.setText(text);
-//                        tvLink.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                ActivityIntent.toWeb(mActivity, url, text);
-//                            }
-//                        });
-//
-//                        linLink.addView(tvLink);
-//                        ViewControl.setMargins(tvLink, SizeUtils.dp2px(8), 0, 0, 0);
-//                    }
-//
-//                }
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            if (linLink.getChildCount() > 0) {
-//                linLink.setVisibility(View.VISIBLE);
-//            } else {
-//                linLink.setVisibility(View.GONE);
-//            }
-//
-//
-//        } else {
-//
-//            linLink.setVisibility(View.GONE);
-//
-//        }
-//
-//
-//    }
 
     private void setPageDescription(final int position) {
 
