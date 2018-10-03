@@ -120,7 +120,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private String strName, strDescription, strLocation, strWeather, strMood, strAct;
     private String settings, strUsergrade;
     private String event_id;
-    private String strGetName, strGetDescription, strGetLocation, strGetPoint;
+    private String strGetName = "", strGetDescription="", strGetLocation="", strGetPoint="";
     private String strPrefixText, strSpecialUrl;
 
 
@@ -624,6 +624,8 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         String description = edDescription.getText().toString();
         String location = edLocation.getText().toString();
         String point = edPoint.getText().toString();
+
+
 
         if (!strGetName.equals(name) || !strGetDescription.equals(description) || !strGetLocation.equals(location) || !strGetPoint.equals(point)) {
             isModify = true;

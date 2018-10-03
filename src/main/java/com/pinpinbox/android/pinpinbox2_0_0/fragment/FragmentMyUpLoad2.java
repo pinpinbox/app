@@ -1799,6 +1799,11 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
             return;
         }
 
+        if(p17arraylist.size()<1){
+            PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_there_are_no_contents_in_the_work);
+            return;
+        }
+
 
         final String strAct = (String) p17arraylist.get(position).get(Key.act); // 隱私權 (close: 關閉 / open: 開啟)
         if (strAct != null && strAct.equals("open")) {
@@ -1806,6 +1811,8 @@ public class FragmentMyUpLoad2 extends Fragment implements OnDetailClickListener
         } else {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_open_act_to_share);
         }
+
+
 
     }
 

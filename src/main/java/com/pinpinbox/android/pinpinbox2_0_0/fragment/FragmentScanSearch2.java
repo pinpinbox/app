@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -45,6 +44,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DismissExcute;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.camera.CameraManager;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.CaptureActivityHandler;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.scan.decoding.DecodeHandlerInterface;
@@ -522,7 +522,7 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 
             /**獲取zipped*/
             if (p46Result.equals("1")) {
-                protocol17();
+//                protocol17();
             }
 
 //            /**此作品可下載並判斷作品更新時間*/
@@ -548,40 +548,10 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 
             loading.dismiss();
 //            && p63Result.equals("1") && p17Result.equals("1")
-            if (p46Result.equals("1") && p17Result.equals("1")) {
+            if (p46Result.equals("1")) {
 
                 surfaceView.setVisibility(View.INVISIBLE);
                 viewfinderView.setVisibility(View.INVISIBLE);
-
-                if (!strZipped.equals("1")) {
-
-                    DialogV2Custom d = new DialogV2Custom(getActivity());
-                    d.setStyle(DialogStyleClass.ERROR);
-                    d.setMessage(R.string.pinpinbox_2_0_0_toast_message_album_save_not_yet);
-                    d.show();
-
-                    if (d.getmDialog().isShowing()) {
-                        d.getmDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialogInterface) {
-                                surfaceView.setVisibility(View.VISIBLE);
-                                viewfinderView.setVisibility(View.VISIBLE);
-
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (handler != null) {   //实现连续扫描
-                                            handler.restartPreviewAndDecode();
-                                        }
-                                    }
-                                }, 2000);
-
-                            }
-                        });
-
-                    }
-                    return;
-                }
 
                 Intent intent = new Intent(getActivity(), Reader2Activity.class);
                 Bundle bundle = new Bundle();
@@ -591,9 +561,9 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                 ActivityAnim.StartAnim(getActivity());
 
             } else if (p46Result.equals("0")) {
+
                 surfaceView.setVisibility(View.INVISIBLE);
                 viewfinderView.setVisibility(View.INVISIBLE);
-
 
                 DialogV2Custom d = new DialogV2Custom(getActivity());
                 d.setStyle(DialogStyleClass.ERROR);
@@ -602,9 +572,9 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
 
                 if (d.getmDialog().isShowing()) {
 
-                    d.getmDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    d.setDismissExcute(new DismissExcute() {
                         @Override
-                        public void onDismiss(DialogInterface dialogInterface) {
+                        public void AfterDismissDo() {
 
                             surfaceView.setVisibility(View.VISIBLE);
                             viewfinderView.setVisibility(View.VISIBLE);
@@ -617,8 +587,6 @@ public class FragmentScanSearch2 extends Fragment implements SurfaceHolder.Callb
                                     }
                                 }
                             }, 2000);
-
-
 
                         }
                     });

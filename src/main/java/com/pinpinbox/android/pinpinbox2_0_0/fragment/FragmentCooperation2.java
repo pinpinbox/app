@@ -385,17 +385,12 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
 
                 clickPosition = position;
 
-                if (((String) p17arraylist.get(position).get(Key.zipped)).equals("1")) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Key.album_id, (String) p17arraylist.get(position).get(Key.album_id));
-                    Intent intent = new Intent(getActivity(), Reader2Activity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    ActivityAnim.StartAnim(getActivity());
-                } else {
-                    PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_albumwork_undone);
-                }
-
+                Bundle bundle = new Bundle();
+                bundle.putString(Key.album_id, (String) p17arraylist.get(position).get(Key.album_id));
+                Intent intent = new Intent(getActivity(), Reader2Activity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                ActivityAnim.StartAnim(getActivity());
 
             }
 
@@ -1290,6 +1285,11 @@ public class FragmentCooperation2 extends Fragment implements OnDetailClickListe
         String strZipped = (String) p17arraylist.get(position).get(Key.zipped);
         if (!strZipped.equals("1")) {
             PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_albumwork_undone);
+            return;
+        }
+
+        if(p17arraylist.size()<1){
+            PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_there_are_no_contents_in_the_work);
             return;
         }
 

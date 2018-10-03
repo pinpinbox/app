@@ -271,6 +271,12 @@ public class DialogV2Custom {
         tvCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (dismissExcute != null) {
+                    dismissExcute.AfterDismissDo();
+                }
+
+
                 dismiss();
             }
         });
@@ -278,6 +284,12 @@ public class DialogV2Custom {
         vDarkBg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (dismissExcute != null) {
+                    dismissExcute.AfterDismissDo();
+                }
+
+
                 dismiss();
             }
         });
