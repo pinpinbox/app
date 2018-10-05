@@ -2161,9 +2161,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private void checkCount() {
         if (jsonArray.length() > 0) {
             rPhotoSettingBar.setVisibility(View.VISIBLE);
+            tvAddDescription.setVisibility(View.VISIBLE);
 
         } else {
             rPhotoSettingBar.setVisibility(View.INVISIBLE);
+            tvAddDescription.setVisibility(View.INVISIBLE);
 
         }
     }
@@ -3736,8 +3738,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                 if (array != 0) {
 
-                    rPhotoSettingBar.setVisibility(View.VISIBLE);
-
                     setCount();
 
                     if (adapter == null) {
@@ -3778,6 +3778,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     /*作品無內容*/
 
                     rPhotoSettingBar.setVisibility(View.INVISIBLE);
+                    tvAddDescription.setVisibility(View.INVISIBLE);
 
 
                     boolean bFirstToCreation = getdata.getBoolean(TaskKeyClass.first_to_creation, false);
@@ -4167,9 +4168,6 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
 
                     if (jsonArray.length() != 0) {
 
-                        rPhotoSettingBar.setVisibility(View.VISIBLE);
-
-
                         if (thisPosition == jsonArray.length()) {
                             thisPosition = thisPosition - 1;
                             lastPosition = lastPosition - 1;
@@ -4182,6 +4180,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                     } else {
                         photoImg.setImageDrawable(null);
                         rPhotoSettingBar.setVisibility(View.INVISIBLE);
+                        tvAddDescription.setVisibility(View.INVISIBLE);
 
 
                     }
