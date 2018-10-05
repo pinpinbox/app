@@ -475,7 +475,7 @@
             android:background="@drawable/click_2_0_0_grey_hint_button_radius"
             android:text="@string/pinpinbox_2_0_0_button_add_description"
             android:textColor="@color/white"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
     </RelativeLayout>
 
