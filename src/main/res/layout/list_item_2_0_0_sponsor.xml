@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/rBackground"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="@dimen/ppb200_common_detaillist_item_height_low"
         android:layout_marginTop="@dimen/ppb200_padding_margin_first"
         android:background="@drawable/click_2_0_0_list_item">
 

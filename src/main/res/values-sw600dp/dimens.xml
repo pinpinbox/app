@@ -56,6 +56,7 @@
 
     <dimen name="ppb200_common_list_item_height">48dp</dimen>
     <dimen name="ppb200_common_detaillist_item_height">96dp</dimen>
+    <dimen name="ppb200_common_detaillist_item_height_low">84dp</dimen>
 
     <dimen name="ppb200_common_button_width">168dp</dimen>
     <dimen name="ppb200_common_button_height">48dp</dimen>

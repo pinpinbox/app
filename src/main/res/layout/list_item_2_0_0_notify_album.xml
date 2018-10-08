@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="88dp">
+        android:layout_height="@dimen/ppb200_common_detaillist_item_height_low">
 
 
         <RelativeLayout
@@ -17,7 +17,7 @@
             android:layout_height="72dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:background="@drawable/click_2_0_0_card_notify"
             android:padding="4dp">
 
