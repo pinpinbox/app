@@ -183,23 +183,7 @@ public class AlbumGroup2Activity extends DraggerActivity implements View.OnClick
         groupAdapter = new RecyclerGroupAdapter(this, groupUserList);
         rvGroup.setAdapter(groupAdapter);
 
-//        groupAdapter.setOnRecyclerViewListener(new RecyclerGroupAdapter.OnRecyclerViewListener() {
-//            @Override
-//            public void onItemClick(int position, View v) {
-//                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-//                    return;
-//                }
-//
-//                MyLog.Set("d", mActivity.getClass(), "點擊的是 => " + groupUserList.get(position).getName());
-//
-//
-//            }
-//
-//            @Override
-//            public boolean onItemLongClick(int position, View v) {
-//                return false;
-//            }
-//        });
+
 
 
         groupAdapter.setGroupSetListener(new GroupSetListener() {
@@ -237,6 +221,7 @@ public class AlbumGroup2Activity extends DraggerActivity implements View.OnClick
                     setChangeCooperationPop();
                 }
 
+                MyLog.Set("d", mActivity.getClass(), "點擊的位置是 => " + position);
 
 
             }
@@ -831,15 +816,17 @@ public class AlbumGroup2Activity extends DraggerActivity implements View.OnClick
                 itemUser.setIdentity("viewer");
 
 
-                groupUserList.add(1, itemUser);
-                groupAdapter.notifyItemInserted(1);
+//                groupUserList.add(1, itemUser);
+//                groupAdapter.notifyItemInserted(1);
+
+                groupAdapter.addData(1, itemUser);
+
+//                MyLog.Set("e", getClass(), "------" + groupUserList.size());
+//                MyLog.Set("e", getClass(), "++++++" + groupAdapter.getItemUserList().size());
+
 
                 searchUserList.get(clickPosition).setInvite(true);
                 searchAdapter.notifyItemChanged(clickPosition);
-
-
-//                searchAdapter.removeData(clickPosition);
-
 
 
             } else if (p46Result == 0) {
@@ -918,8 +905,7 @@ public class AlbumGroup2Activity extends DraggerActivity implements View.OnClick
                         }
                     }
                 }
-//                groupUserList.remove(clickPosition);
-//                groupAdapter.notifyItemRemoved(clickPosition);
+
 
                 groupAdapter.removeData(clickPosition);
 

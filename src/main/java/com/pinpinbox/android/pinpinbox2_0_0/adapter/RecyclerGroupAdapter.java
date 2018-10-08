@@ -3,6 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,9 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
         this.itemUserList = itemUserList;
     }
 
+    public List<ItemUser> getItemUserList() {
+        return itemUserList;
+    }
 
     @Override
     public int getItemCount() {
@@ -72,7 +76,7 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder vHolder, final int position) {
 
-        ViewHolder holder = (ViewHolder) vHolder;
+        final ViewHolder holder = (ViewHolder) vHolder;
         holder.position = position;
 
         holder.tvName.setText(itemUserList.get(position).getName());
@@ -118,7 +122,7 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
                     if (ClickUtils.ButtonContinuousClick()) {
                         return;
                     }
-                    groupSetListener.changeType(position);
+                    groupSetListener.changeType(holder.position);
                 }
             });
 
@@ -128,7 +132,7 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
                     if (ClickUtils.ButtonContinuousClick()) {
                         return;
                     }
-                    groupSetListener.delete(position);
+                    groupSetListener.delete(holder.position);
                 }
             });
 
@@ -168,10 +172,6 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
             tvIdentity = (TextView) itemView.findViewById(R.id.tvIdentity);
             deleteImg = (ImageView) itemView.findViewById(R.id.deleteImg);
 
-//                rBackground.setOnClickListener(this);
-//                rBackground.setOnLongClickListener(this);
-
-
         }
 
 
@@ -195,6 +195,14 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
     public void addData(int position, ItemUser itemUser) {
         itemUserList.add(position, itemUser);
         notifyItemInserted(position);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               notifyDataSetChanged();
+            }
+        },400);
+
     }
 
     public void setData(int position, ItemUser itemUser) {
