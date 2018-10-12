@@ -604,9 +604,9 @@
     <string name="pinpinbox_2_0_0_other_text_or">或</string>
     <string name="pinpinbox_2_0_0_other_text_slogan_a">創造內容價值 獲得贊助回饋</string>
     <string name="pinpinbox_2_0_0_other_text_go_to_editor_upload_video">影片請從編輯器內上傳唷</string>
-
     <string name="pinpinbox_2_0_0_other_text_upload_already">已上傳音檔</string>
     <string name="pinpinbox_2_0_0_other_text_click_save_to_upload">點擊"保存"後開始上傳</string>
+    <string name="pinpinbox_2_0_0_other_text_select_newsletter">願意收到電子報，掌握最新創作及抽獎資訊</string>
 
 
     <string name="crop__saving">相片儲存中</string>

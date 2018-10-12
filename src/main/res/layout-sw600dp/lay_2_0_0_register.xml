@@ -251,18 +251,18 @@
                 android:text="@string/pinpinbox_2_0_0_button_next" />
 
 
-            <TextView
-                android:id="@+id/tvRegisterNorm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                android:gravity="right"
-                android:letterSpacing="0.1"
-                android:text="@string/pinpinbox_2_0_0_other_text_agree_norm"
-                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                android:textSize="@dimen/ppb200_common_text_second" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvRegisterNorm"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_first"-->
+                <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first"-->
+                <!--android:gravity="right"-->
+                <!--android:letterSpacing="0.1"-->
+                <!--android:text="@string/pinpinbox_2_0_0_other_text_agree_norm"-->
+                <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+                <!--android:textSize="@dimen/ppb200_common_text_second" />-->
 
 
         </LinearLayout>

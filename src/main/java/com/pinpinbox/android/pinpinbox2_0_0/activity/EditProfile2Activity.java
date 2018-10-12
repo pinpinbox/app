@@ -98,8 +98,8 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private EditText edName, edCreativearea, edEmail;
     private EditText edFacebook, edGoogle, edInstagram, edLinkedin, edPinterest, edTwitter, edYouTube, edWeb;
-    private TextView tvPassword, tvPhone, tvBoy, tvGirl, tvPrivate, tvBirthday, tvHobby, tvConfirm;
-    private ImageView backImg;
+    private TextView tvPassword, tvPhone, tvBoy, tvGirl, tvPrivate, tvBirthday, tvHobby, tvConfirm, tvNewsletter;
+    private ImageView backImg, selectNewsletterImg;
     private RoundedImageView profileImg;
 
     private String id, token;
@@ -116,6 +116,8 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
     private static final int REFUSE = 101;
 
     private boolean isChangePic = false;
+
+    private boolean isSelectNewsletter = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,7 +155,9 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
         tvBirthday = (TextView) findViewById(R.id.tvBirthday);
         tvHobby = (TextView) findViewById(R.id.tvHobby);
         tvConfirm = (TextView) findViewById(R.id.tvConfirm);
+        tvNewsletter = (TextView)findViewById(R.id.tvNewsletter);
 
+        selectNewsletterImg = (ImageView)findViewById(R.id.selectNewsletterImg);
         backImg = (ImageView) findViewById(R.id.backImg);
         profileImg = (RoundedImageView) findViewById(R.id.profileImg);
 
@@ -168,6 +172,7 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
         tvConfirm.setOnClickListener(this);
         backImg.setOnClickListener(this);
         profileImg.setOnClickListener(this);
+        selectNewsletterImg.setOnClickListener(this);
 
 
         TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
@@ -258,15 +263,6 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
                 "-" + getData.getString("month", "06") +
                 "-" + getData.getString("day", "15"));
 
-//        editor.putString(Key.sociallink_facebook, JsonUtility.GetString(jsonLink, ProtocolKey.facebook));
-//        editor.putString(Key.sociallink_google, JsonUtility.GetString(jsonLink, ProtocolKey.google));
-//        editor.putString(Key.sociallink_instagram, JsonUtility.GetString(jsonLink, ProtocolKey.instagram));
-//        editor.putString(Key.sociallink_linkedin, JsonUtility.GetString(jsonLink, ProtocolKey.linkedin));
-//        editor.putString(Key.sociallink_pinterest, JsonUtility.GetString(jsonLink, ProtocolKey.pinterest));
-//        editor.putString(Key.sociallink_twitter, JsonUtility.GetString(jsonLink, ProtocolKey.twitter));
-//        editor.putString(Key.sociallink_youtube, JsonUtility.GetString(jsonLink, ProtocolKey.youtube));
-//        editor.putString(Key.sociallink_web, JsonUtility.GetString(jsonLink, ProtocolKey.web));
-
 
         edFacebook.setText(getData.getString(Key.sociallink_facebook, ""));
         edGoogle.setText(getData.getString(Key.sociallink_google, ""));
@@ -322,6 +318,23 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
         tvGirl.setBackgroundResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
 
         strGender = "2";
+
+
+    }
+
+   private void selectNewsletter() {
+
+        if (isSelectNewsletter) {
+
+            selectNewsletterImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+            isSelectNewsletter = false;
+
+        } else {
+
+            selectNewsletterImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+            isSelectNewsletter = true;
+
+        }
 
 
     }
@@ -1111,6 +1124,12 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
                 i3.putExtras(bundle);
                 startActivity(i3);
                 ActivityAnim.StartAnim(mActivity);
+                break;
+
+            case R.id.selectNewsletterImg:
+
+                selectNewsletter();
+
                 break;
 
 

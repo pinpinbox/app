@@ -135,22 +135,22 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
 
     /*login*/
-    private TextView tvLoginLogin, tvLoginToRegister, tvLoginFacebook, tvAboutUs, tvLoginTitle, tvLoginScanToRegister;
+    private TextView tvLoginLogin, tvLoginToRegister, tvLoginFacebook, tvAboutUs, tvLoginTitle, tvLoginScanToRegister, tvLoginNorm;
     private EditText edLoginMail, edLoginPassword;
     private ImageView loginGetPasswordImg;
 
     /*register*/
-    private TextView tvRegisterTitle, tvRegisterNext, tvRegisterFacebook, tvRegisterNorm,
-            tvRegCheckEmail, tvRegPassword, tvRegPasswordCheck;
+    private TextView tvRegisterTitle, tvRegisterNext, tvRegCheckEmail, tvRegPassword, tvRegPasswordCheck;
     private EditText edRegNickname, edRegMail, edRegPassword, edRegPasswordCheck;
     private LinearLayout linRegisterBack;
 
 
     /*verification code*/
     private LinearLayout linVerBack;
-    private TextView tvVerTitle, tvVerCountry, tvVerSendPhone, tvVerFinish, tvVerTime;
+    private TextView tvVerTitle, tvVerCountry, tvVerSendPhone, tvVerFinish, tvVerTime, tvVerNewsletter;
     private EditText edVerPhone, edVerCode;
     private RelativeLayout rVerCode;
+    private ImageView verSelectNewsletterImg;
 
     /*get password*/
     private LinearLayout linPwdBack;
@@ -196,6 +196,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
     private boolean isPwdMail = false;
 
     private boolean scanIntent = false;
+
+    private boolean isSelectNewsletter = true;
 
 
     @Override
@@ -471,6 +473,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         tvAboutUs = (TextView) vLogin.findViewById(R.id.tvAboutUs);
         tvLoginTitle = (TextView) vLogin.findViewById(R.id.tvLoginTitle);
         tvLoginScanToRegister = (TextView) vLogin.findViewById(R.id.tvLoginScanToRegister);
+        tvLoginNorm = (TextView) vLogin.findViewById(R.id.tvLoginNorm);
+
 
         edLoginMail = (EditText) vLogin.findViewById(R.id.edLoginMail);
         edLoginPassword = (EditText) vLogin.findViewById(R.id.edLoginPassword);
@@ -513,8 +517,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
     private void initViewRegister() {
         tvRegisterTitle = (TextView) vRegister.findViewById(R.id.tvRegisterTitle);
         tvRegisterNext = (TextView) vRegister.findViewById(R.id.tvRegisterNext);
-//        tvRegisterFacebook = (TextView) vRegister.findViewById(R.id.tvRegisterFacebook);
-        tvRegisterNorm = (TextView) vRegister.findViewById(R.id.tvRegisterNorm);
         tvRegCheckEmail = (TextView) vRegister.findViewById(R.id.tvRegCheckEmail);
         tvRegPassword = (TextView) vRegister.findViewById(R.id.tvRegPassword);
         tvRegPasswordCheck = (TextView) vRegister.findViewById(R.id.tvRegPasswordCheck);
@@ -541,11 +543,14 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         tvVerSendPhone = (TextView) vVerificationCode.findViewById(R.id.tvVerSendPhone);
         tvVerFinish = (TextView) vVerificationCode.findViewById(R.id.tvVerFinish);
         tvVerTime = (TextView) vVerificationCode.findViewById(R.id.tvVerTime);
+        tvVerNewsletter = (TextView) vVerificationCode.findViewById(R.id.tvVerNewsletter);
 
         edVerPhone = (EditText) vVerificationCode.findViewById(R.id.edVerPhone);
         edVerCode = (EditText) vVerificationCode.findViewById(R.id.edVerCode);
 
         rVerCode = (RelativeLayout) vVerificationCode.findViewById(R.id.rVerCode);
+
+        verSelectNewsletterImg = vVerificationCode.findViewById(R.id.verSelectNewsletterImg);
 
     }
 
@@ -566,27 +571,18 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
     private void setTextBold() {
 
         /*login*/
-        TextUtility.setBold(tvLoginTitle, true);
-        TextUtility.setBold(tvLoginLogin, true);
-        TextUtility.setBold(tvLoginToRegister, true);
-        TextUtility.setBold(tvLoginFacebook, true);
-        TextUtility.setBold(tvAboutUs, true);
+        TextUtility.setBold(tvLoginTitle, tvLoginLogin, tvLoginToRegister, tvLoginFacebook, tvAboutUs);
 
 
         /*register*/
-        TextUtility.setBold(tvRegisterTitle, true);
-        TextUtility.setBold(tvRegisterNext, true);
-        TextUtility.setBold(tvRegPassword, true);
-        TextUtility.setBold(tvRegPasswordCheck, true);
+        TextUtility.setBold(tvRegisterTitle, tvRegisterNext, tvRegPassword, tvRegPasswordCheck);
+
 
         /*verification code*/
-        TextUtility.setBold(tvVerTitle, true);
-        TextUtility.setBold(tvVerSendPhone, true);
-        TextUtility.setBold(tvVerFinish, true);
+        TextUtility.setBold(tvVerTitle, tvVerSendPhone, tvVerFinish);
 
         /*get password*/
-        TextUtility.setBold(tvPwdTitle, true);
-        TextUtility.setBold(tvPwdSendPhone, true);
+        TextUtility.setBold(tvPwdTitle, tvPwdSendPhone);
 
     }
 
@@ -867,11 +863,11 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         tvAboutUs.setOnClickListener(this);
         loginGetPasswordImg.setOnClickListener(this);
         tvLoginScanToRegister.setOnClickListener(this);
+        tvLoginNorm.setOnClickListener(this);
 
         /*register*/
         tvRegisterNext.setOnClickListener(this);
         linRegisterBack.setOnClickListener(this);
-        tvRegisterNorm.setOnClickListener(this);
         tvRegCheckEmail.setOnClickListener(this);
 
         /*verification code*/
@@ -879,6 +875,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         tvVerCountry.setOnClickListener(this);
         tvVerSendPhone.setOnClickListener(this);
         tvVerFinish.setOnClickListener(this);
+        verSelectNewsletterImg.setOnClickListener(this);
 
         /*get password*/
         linPwdBack.setOnClickListener(this);
@@ -917,6 +914,23 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
         }
 
         doLogin();
+
+    }
+
+    private void selectNewsletter() {
+
+        if (isSelectNewsletter) {
+
+            verSelectNewsletterImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+            isSelectNewsletter = false;
+
+        } else {
+
+            verSelectNewsletterImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+            isSelectNewsletter = true;
+
+        }
+
 
     }
 
@@ -2507,9 +2521,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
             /*login*/
             case R.id.tvLoginLogin:
 
-
                 login();
-
 
                 break;
 
@@ -2519,8 +2531,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
             case R.id.tvLoginFacebook:
 
-
-                //20170925
                 isBusinessRegister = false;
 
                 getFacebookProfile();
@@ -2554,6 +2564,9 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
                 break;
 
+            case R.id.tvLoginNorm:
+                toNorm();
+                break;
 
 
             /*register*/
@@ -2561,10 +2574,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 toVerificationCode();
                 break;
 
-
-            case R.id.tvRegisterNorm:
-                toNorm();
-                break;
 
             case R.id.linRegisterBack:
                 toLogin();
@@ -2615,6 +2624,12 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 }
                 isFacebookRegister = false;
                 doNoAccountToRegister();
+                break;
+
+            case R.id.verSelectNewsletterImg:
+
+                selectNewsletter();
+
                 break;
 
 

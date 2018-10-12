@@ -145,6 +145,7 @@ public class ProtocolKey {
     public static String numberofcompleted = "numberofcompleted";
     public static String nickname = "nickname";
     public static String notice = "notice";
+    public static String newsletter = "newsletter";
 
 
     //o

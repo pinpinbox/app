@@ -238,21 +238,22 @@
             style="@style/ppb200_Button_main_common_bottom_radius"
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"
             android:gravity="center"
-            android:text="@string/pinpinbox_2_0_0_button_next" />
+            android:text="@string/pinpinbox_2_0_0_button_next"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"/>
 
 
-        <TextView
-            android:id="@+id/tvRegisterNorm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-            android:gravity="center"
-            android:letterSpacing="0.1"
-            android:text="@string/pinpinbox_2_0_0_other_text_agree_norm"
-            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-            android:textSize="16sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/tvRegisterNorm"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginBottom="@dimen/ppb200_padding_margin_first"-->
+            <!--android:layout_marginTop="@dimen/ppb200_padding_margin_first"-->
+            <!--android:gravity="center"-->
+            <!--android:letterSpacing="0.1"-->
+            <!--android:text="@string/pinpinbox_2_0_0_other_text_agree_norm"-->
+            <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
+            <!--android:textSize="16sp" />-->
 
 
     </LinearLayout>
