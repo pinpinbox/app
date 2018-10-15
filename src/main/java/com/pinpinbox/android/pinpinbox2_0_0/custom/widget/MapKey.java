@@ -93,6 +93,7 @@ public class MapKey {
     public static String name = "name"; /*使用者暱稱*/
     public static String newpwd = "newpwd"; /*新的使用者密碼*/
     public static String newcellphone = "newcellphone"; /*新的手機號碼*/
+    public static String newsletter = "newsletter";
 
     //o
     public static String oldpwd = "oldpwd"; /*舊的使用者密碼*/

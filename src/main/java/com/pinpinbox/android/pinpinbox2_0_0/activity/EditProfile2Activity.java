@@ -273,6 +273,11 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
         edYouTube.setText(getData.getString(Key.sociallink_youtube, ""));
         edWeb.setText(getData.getString(Key.sociallink_web, ""));
 
+        isSelectNewsletter = getData.getBoolean(Key.newsletter, true);
+        selectNewsletter(isSelectNewsletter);
+
+
+
 
     }
 
@@ -322,20 +327,15 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 
     }
 
-   private void selectNewsletter() {
+   private void selectNewsletter(boolean isSelect) {
 
-        if (isSelectNewsletter) {
-
-            selectNewsletterImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
-            isSelectNewsletter = false;
-
-        } else {
-
+        if (isSelect) {
             selectNewsletterImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
-            isSelectNewsletter = true;
-
+            isSelectNewsletter =  true;
+        } else {
+            selectNewsletterImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+            isSelectNewsletter =  false;
         }
-
 
     }
 
@@ -539,6 +539,8 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 //            String sociallink = jsonSociallink.toString();
 
             jsonObject.put(ProtocolKey.sociallink, jsonSociallink);
+
+            jsonObject.put(ProtocolKey.newsletter, isSelectNewsletter);
 
 
         } catch (Exception e) {
@@ -941,6 +943,8 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 
                     String strCover = JsonUtility.GetString(object, ProtocolKey.cover);
 
+                    boolean isNewsletter = JsonUtility.GetBoolean(object, ProtocolKey.newsletter);
+
 
                     SharedPreferences.Editor editor = getData.edit();
                     editor.putString(Key.id, id);
@@ -966,6 +970,7 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
                     editor.putBoolean(Key.creative, bCreative);
                     editor.putString(Key.creative_name, creative_name);
                     editor.putString(Key.cover, strCover);
+                    editor.putBoolean(Key.newsletter, isNewsletter);
 
                     /*20171108*/
                     String sociallink = JsonUtility.GetString(object, ProtocolKey.sociallink);
@@ -1128,7 +1133,11 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
 
             case R.id.selectNewsletterImg:
 
-                selectNewsletter();
+                if(isSelectNewsletter){
+                    selectNewsletter(false);
+                }else {
+                    selectNewsletter(true);
+                }
 
                 break;
 

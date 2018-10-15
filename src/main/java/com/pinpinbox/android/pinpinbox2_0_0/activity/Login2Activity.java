@@ -552,6 +552,9 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
         verSelectNewsletterImg = vVerificationCode.findViewById(R.id.verSelectNewsletterImg);
 
+
+        selectNewsletter(true);
+
     }
 
     private void initViewGetPassword() {
@@ -917,17 +920,17 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
     }
 
-    private void selectNewsletter() {
+    private void selectNewsletter(boolean isSelect) {
 
-        if (isSelectNewsletter) {
-
-            verSelectNewsletterImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
-            isSelectNewsletter = false;
-
-        } else {
+        if (isSelect) {
 
             verSelectNewsletterImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
             isSelectNewsletter = true;
+
+        } else {
+
+            verSelectNewsletterImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+            isSelectNewsletter = false;
 
         }
 
@@ -1292,6 +1295,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
                 String strCover = JsonUtility.GetString(object, ProtocolKey.cover);
 
+                boolean isNewsletter = JsonUtility.GetBoolean(object, ProtocolKey.newsletter);
+
 
                 SharedPreferences.Editor editor = getdata.edit();
                 editor.putString(Key.id, id);
@@ -1320,6 +1325,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 editor.putBoolean(Key.creative, bCreative);
                 editor.putString(Key.creative_name, creative_name);
                 editor.putString(Key.cover, strCover);
+                editor.putBoolean(Key.newsletter, isNewsletter);
 
 
                 /*20171108*/
@@ -1472,6 +1478,19 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
         }
 
+
+    }
+
+    private void checkCameraPermission(){
+
+        switch (checkPermission(mActivity, Manifest.permission.CAMERA)) {
+            case SUCCESS:
+                toScan();
+                break;
+            case REFUSE:
+                MPermissions.requestPermissions(Login2Activity.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
+                break;
+        }
 
     }
 
@@ -1941,10 +1960,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                         editor.putString(Key.id, id);
                         editor.commit();
 
-
                         protocol28();
                         protocol23();
-//                        protocol05();
 
                     } else if (p35Result == 0) {
                         p35Message = JsonUtility.GetString(jsonObject, Key.message);
@@ -1998,7 +2015,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
             } else if (p35Result == 2) {
                 //停權或用戶不存在
-
                 doNoAccountToRegister();
 
             } else if (p35Result == 0) {
@@ -2106,6 +2122,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
             senddata.put(MapKey.gender, strGender);
             senddata.put(MapKey.birthday, strBirthday);
+            senddata.put(MapKey.newsletter, isSelectNewsletter + "");
 //            senddata.put(MapKey.coordinate, latitude + "," + longitude);
             senddata.put(MapKey.sign, sign);
 
@@ -2169,6 +2186,8 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                         }
 
                         editor.putString(Key.creative_name, "");
+
+                        editor.putBoolean(Key.newsletter, isSelectNewsletter);
 
 
                         editor.commit();
@@ -2534,6 +2553,31 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 isBusinessRegister = false;
 
                 getFacebookProfile();
+
+
+//                DialogV2Custom dlgCheck_b = new DialogV2Custom(mActivity);
+//                dlgCheck_b.setStyle(DialogStyleClass.CHECK);
+//                dlgCheck_b.setMessage(R.string.pinpinbox_2_0_0_other_text_select_newsletter);
+//                dlgCheck_b.getTvRightOrBottom().setText("我要訂閱");
+//                dlgCheck_b.getTvLeftOrTop().setText("暫時不用");
+//                dlgCheck_b.setCheckExecute(new CheckExecute() {
+//                    @Override
+//                    public void DoCheck() {
+//                        isSelectNewsletter = true;
+//                        getFacebookProfile();
+//                    }
+//                });
+//
+//                dlgCheck_b.setDismissExcute(new DismissExcute() {
+//                    @Override
+//                    public void AfterDismissDo() {
+//                        isSelectNewsletter = false;
+//                        getFacebookProfile();
+//                    }
+//                });
+//                dlgCheck_b.show();
+
+
                 break;
 
             case R.id.tvAboutUs:
@@ -2552,14 +2596,32 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
             case R.id.tvLoginScanToRegister:
 
 
-                switch (checkPermission(mActivity, Manifest.permission.CAMERA)) {
-                    case SUCCESS:
-                        toScan();
-                        break;
-                    case REFUSE:
-                        MPermissions.requestPermissions(Login2Activity.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-                        break;
-                }
+
+                checkCameraPermission();
+
+
+//                DialogV2Custom dlgCheck_a = new DialogV2Custom(mActivity);
+//                dlgCheck_a.setStyle(DialogStyleClass.CHECK);
+//                dlgCheck_a.getTvRightOrBottom().setText("我要訂閱");
+//                dlgCheck_a.getTvLeftOrTop().setText("暫時不用");
+//                dlgCheck_a.setMessage(R.string.pinpinbox_2_0_0_other_text_select_newsletter);
+//                dlgCheck_a.setCheckExecute(new CheckExecute() {
+//                    @Override
+//                    public void DoCheck() {
+//                        isSelectNewsletter = true;
+//                        checkCameraPermission();
+//                    }
+//                });
+//
+//                dlgCheck_a.setDismissExcute(new DismissExcute() {
+//                    @Override
+//                    public void AfterDismissDo() {
+//                        isSelectNewsletter = false;
+//                        checkCameraPermission();
+//                    }
+//                });
+//                dlgCheck_a.show();
+
 
 
                 break;
@@ -2628,7 +2690,11 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
             case R.id.verSelectNewsletterImg:
 
-                selectNewsletter();
+                if (isSelectNewsletter) {
+                    selectNewsletter(false);
+                } else {
+                    selectNewsletter(true);
+                }
 
                 break;
 

@@ -136,6 +136,7 @@ public class Key {
     public static String numberofcompleted = "numberofcompleted";
     public static String nickname = "nickname";
     public static String isNewCreate = "isNewCreate";
+    public static String newsletter = "newsletter";
 
     //o
     public static String own = "own";
