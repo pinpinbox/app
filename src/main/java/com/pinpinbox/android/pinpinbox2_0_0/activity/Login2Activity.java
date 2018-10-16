@@ -1481,7 +1481,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
     }
 
-    private void checkCameraPermission(){
+    private void checkCameraPermission() {
 
         switch (checkPermission(mActivity, Manifest.permission.CAMERA)) {
             case SUCCESS:
@@ -1674,6 +1674,10 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                         PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_register_success);
 
                         CreateDir.create(mActivity, id);
+
+
+                        getdata.edit().putBoolean(Key.checkNewsletter, true).commit();
+
 
                         Intent intent = new Intent();
                         intent.setClass(Login2Activity.this, TypeFacebookFriend2Activity.class);
@@ -2231,6 +2235,10 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
                 CreateDir.create(mActivity, id);
 
+                if (isFacebookRegister) {
+                    getdata.edit().putBoolean(Key.checkNewsletter, true).commit();
+                }
+
                 Intent intent = new Intent();
                 intent.setClass(Login2Activity.this, TypeFacebookFriend2Activity.class);
                 startActivity(intent);
@@ -2596,7 +2604,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
             case R.id.tvLoginScanToRegister:
 
 
-
                 checkCameraPermission();
 
 
@@ -2621,7 +2628,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 //                    }
 //                });
 //                dlgCheck_a.show();
-
 
 
                 break;

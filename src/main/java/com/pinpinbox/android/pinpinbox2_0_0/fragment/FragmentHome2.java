@@ -2023,6 +2023,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 round = round + count;
 
+                //check newletter
+
 
             } else if (p75Result == 0) {
                 DialogV2Custom.BuildError(getActivity(), p75Message);
