@@ -147,6 +147,8 @@
     <string name="pinpinbox_2_0_0_dialog_yes">OK</string>
     <string name="pinpinbox_2_0_0_dialog_no_need">No need</string>
     <string name="pinpinbox_2_0_0_dialog_filters">Filters</string>
+    <string name="pinpinbox_2_0_0_dialog_subscribe">Subscribe</string>
+    <string name="pinpinbox_2_0_0_dialog_no_subscribe">No,thanks</string>
 
     <string name="pinpinbox_2_0_0_dialog_message_unknow">So sorry! This is unknown error.</string>
     <string name="pinpinbox_2_0_0_dialog_message_send_error_message">Thank you for notifying us the problem. We\'ll fix it as soon as possible!</string>
@@ -599,7 +601,8 @@
     <string name="pinpinbox_2_0_0_other_text_go_to_editor_upload_video">If you need to upload video, please go to Edtor</string>
     <string name="pinpinbox_2_0_0_other_text_upload_already">Audio upload already</string>
     <string name="pinpinbox_2_0_0_other_text_click_save_to_upload">Click "Save" to upload</string>
-    <string name="pinpinbox_2_0_0_other_text_select_newsletter">Yes, I want to receive the new creative works and raffle, delivered by email </string>
+    <string name="pinpinbox_2_0_0_other_text_select_newsletter">Yes, I want to receive the new creative works and raffle, delivered by email</string>
+    <string name="pinpinbox_2_0_0_other_text_select_newsletter_default_receiving">I want to receive the new creative works and raffle, delivered by email(Default is receiving)</string>
 
 
     <string name="crop__saving">相片儲存中</string>

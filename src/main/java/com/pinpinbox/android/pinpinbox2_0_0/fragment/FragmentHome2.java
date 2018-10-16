@@ -86,7 +86,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DismissExcute;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 import com.squareup.picasso.Picasso;
@@ -2025,6 +2027,35 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 //check newletter
 
+                if (PPBApplication.getInstance().getData().getBoolean(Key.checkNewsletter, false)) {
+
+
+                    DialogV2Custom dlgCheckNL = new DialogV2Custom(getActivity());
+                    dlgCheckNL.setStyle(DialogStyleClass.CHECK);
+                    dlgCheckNL.setMessage(R.string.pinpinbox_2_0_0_other_text_select_newsletter_default_receiving);
+                    dlgCheckNL.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_subscribe);
+                    dlgCheckNL.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_no_subscribe);
+                    dlgCheckNL.setCheckExecute(new CheckExecute() {
+                        @Override
+                        public void DoCheck() {
+                            doUploadNewsletter(true);
+                        }
+                    });
+
+                    dlgCheckNL.setDismissExcute(new DismissExcute() {
+                        @Override
+                        public void AfterDismissDo() {
+                            doUploadNewsletter(false);
+                        }
+                    });
+                    dlgCheckNL.getDarkBg().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }});
+                    dlgCheckNL.show();
+
+                }
+
 
             } else if (p75Result == 0) {
                 DialogV2Custom.BuildError(getActivity(), p75Message);
@@ -2034,6 +2065,61 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 DialogV2Custom.BuildUnKnow(getActivity(), this.getClass().getSimpleName());
             }
         }
+    }
+
+
+    private void doUploadNewsletter(final boolean newsletter) {
+
+        String param = "";
+
+        try {
+            JSONObject object = new JSONObject();
+            object.put(ProtocolKey.newsletter, newsletter);
+            param = object.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        Protocol21_UpdateUser protocol21 = new Protocol21_UpdateUser(
+                getActivity(),
+                id,
+                token,
+                param,
+                new Protocol21_UpdateUser.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        loading.show();
+                    }
+
+                    @Override
+                    public void Post() {
+                        loading.dismiss();
+                    }
+
+                    @Override
+                    public void Success() {
+
+                        if(newsletter){
+                            PinPinToast.showSuccessToast(getActivity(), "成功訂閱電子報");
+                        }else {
+                            PinPinToast.ShowToast(getActivity(),"已取消訂閱電子報");
+                        }
+
+                        PPBApplication.getInstance().getData().edit().putBoolean(Key.checkNewsletter, true).commit();
+
+
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doUploadNewsletter(newsletter);
+                    }
+                }
+
+        );
+
     }
 
 

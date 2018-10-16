@@ -151,6 +151,9 @@
     <string name="pinpinbox_2_0_0_dialog_yes">好</string>
     <string name="pinpinbox_2_0_0_dialog_no_need">不需要</string>
     <string name="pinpinbox_2_0_0_dialog_filters">特效</string>
+    <string name="pinpinbox_2_0_0_dialog_subscribe">我要訂閱</string>
+    <string name="pinpinbox_2_0_0_dialog_no_subscribe">暫時不用</string>
+
 
     <string name="pinpinbox_2_0_0_dialog_message_unknow">很抱歉，發生不明錯誤</string>
     <string name="pinpinbox_2_0_0_dialog_message_send_error_message">此問題已發送至pinpinbox團隊，本團隊將盡力搶修</string>
@@ -607,7 +610,7 @@
     <string name="pinpinbox_2_0_0_other_text_upload_already">已上傳音檔</string>
     <string name="pinpinbox_2_0_0_other_text_click_save_to_upload">點擊"保存"後開始上傳</string>
     <string name="pinpinbox_2_0_0_other_text_select_newsletter">願意收到電子報，掌握最新創作及抽獎資訊</string>
-
+    <string name="pinpinbox_2_0_0_other_text_select_newsletter_default_receiving">願意收到電子報，掌握最新創作及抽獎資訊(預設為接收)</string>
 
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>

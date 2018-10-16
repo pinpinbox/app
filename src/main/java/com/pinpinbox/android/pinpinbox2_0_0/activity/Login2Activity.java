@@ -2126,11 +2126,22 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
             senddata.put(MapKey.gender, strGender);
             senddata.put(MapKey.birthday, strBirthday);
-            senddata.put(MapKey.newsletter, isSelectNewsletter + "");
+
+            if(isSelectNewsletter){
+                senddata.put(MapKey.newsletter, "1");
+            }else {
+                senddata.put(MapKey.newsletter, "0");
+            }
+
+
+
+
 //            senddata.put(MapKey.coordinate, latitude + "," + longitude);
             senddata.put(MapKey.sign, sign);
 
             String strJson = "";
+
+            MyLog.Set("e", mActivity.getClass(), "isSelectNewsletter = > " + isSelectNewsletter);
 
             try {
                 strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P04_Registration(), senddata, null);
@@ -2563,29 +2574,6 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
                 getFacebookProfile();
 
 
-//                DialogV2Custom dlgCheck_b = new DialogV2Custom(mActivity);
-//                dlgCheck_b.setStyle(DialogStyleClass.CHECK);
-//                dlgCheck_b.setMessage(R.string.pinpinbox_2_0_0_other_text_select_newsletter);
-//                dlgCheck_b.getTvRightOrBottom().setText("我要訂閱");
-//                dlgCheck_b.getTvLeftOrTop().setText("暫時不用");
-//                dlgCheck_b.setCheckExecute(new CheckExecute() {
-//                    @Override
-//                    public void DoCheck() {
-//                        isSelectNewsletter = true;
-//                        getFacebookProfile();
-//                    }
-//                });
-//
-//                dlgCheck_b.setDismissExcute(new DismissExcute() {
-//                    @Override
-//                    public void AfterDismissDo() {
-//                        isSelectNewsletter = false;
-//                        getFacebookProfile();
-//                    }
-//                });
-//                dlgCheck_b.show();
-
-
                 break;
 
             case R.id.tvAboutUs:
@@ -2603,31 +2591,7 @@ public class Login2Activity extends DraggerActivity implements View.OnClickListe
 
             case R.id.tvLoginScanToRegister:
 
-
                 checkCameraPermission();
-
-
-//                DialogV2Custom dlgCheck_a = new DialogV2Custom(mActivity);
-//                dlgCheck_a.setStyle(DialogStyleClass.CHECK);
-//                dlgCheck_a.getTvRightOrBottom().setText("我要訂閱");
-//                dlgCheck_a.getTvLeftOrTop().setText("暫時不用");
-//                dlgCheck_a.setMessage(R.string.pinpinbox_2_0_0_other_text_select_newsletter);
-//                dlgCheck_a.setCheckExecute(new CheckExecute() {
-//                    @Override
-//                    public void DoCheck() {
-//                        isSelectNewsletter = true;
-//                        checkCameraPermission();
-//                    }
-//                });
-//
-//                dlgCheck_a.setDismissExcute(new DismissExcute() {
-//                    @Override
-//                    public void AfterDismissDo() {
-//                        isSelectNewsletter = false;
-//                        checkCameraPermission();
-//                    }
-//                });
-//                dlgCheck_a.show();
 
 
                 break;
