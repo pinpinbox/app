@@ -6,8 +6,8 @@ android {
         applicationId "com.pinpinbox.android"
         minSdkVersion 18
         targetSdkVersion 27 //20171102 2.2.9使用24 API25已上手機adobe會出錯
-        versionCode 150
-        versionName "2.5.90"
+        versionCode 151
+        versionName "2.6.00"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
 
