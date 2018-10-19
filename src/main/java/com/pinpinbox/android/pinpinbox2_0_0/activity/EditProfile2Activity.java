@@ -899,6 +899,7 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
             super.onPreExecute();
             doingType = DoingTypeClass.DoRefresh;
 
+            tvConfirm.setClickable(false);
         }
 
         @Override
@@ -1010,8 +1011,9 @@ public class EditProfile2Activity extends DraggerActivity implements View.OnClic
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
-
             pinPinBoxRefreshLayout.setRefreshing(false);
+
+            tvConfirm.setClickable(true);
 
             if (p28Result == 1) {
 

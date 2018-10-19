@@ -230,9 +230,7 @@ public class FragmentSelectAudio2 extends Fragment implements View.OnClickListen
 
     private void setRecycler() {
 
-
         adapter = new RecyclerAudioFileAdapter(getActivity(), filePathList, buttonType);
-
 
         rvAudioFile.setAdapter(adapter);
 

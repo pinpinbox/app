@@ -100,6 +100,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCooperation2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMyUpLoad2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectAudio2;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectPDF2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectPhoto2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectVideo2;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightEndedListener;
@@ -167,6 +168,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
     private FragmentSelectPhoto2 fragmentSelectPhoto2;
     private FragmentSelectVideo2 fragmentSelectVideo2;
     private FragmentSelectAudio2 fragmentSelectAudio2;
+    private FragmentSelectPDF2 fragmentSelectPDF2;
 
     private PopupCustom popCreationSet, popCreateSort, popCreateAdd, popCreateAudio, popSelectAudioFile;
 //   popCreatePreview
@@ -659,18 +661,23 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         popCreateAdd.setPopup(R.layout.pop_2_0_0_creation_add, R.style.pinpinbox_popupAnimation_bottom);
         LinearLayout linAddPhoto = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddPhoto);
         LinearLayout linAddVideo = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddVideo);
+        LinearLayout linAddPdf = (LinearLayout)popCreateAdd.getPopupView().findViewById(R.id.linAddPdf);
+
         tvSelect_Photo_or_Template = (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvSelect_Photo_or_Template);
         photo_or_templateImg = (ImageView) popCreateAdd.getPopupView().findViewById(R.id.photo_or_templateImg);
 
-        TextUtility.setBold(tvSelect_Photo_or_Template, true);
-        TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvVideo), true);
-        TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle), true);
+        TextUtility.setBold(
+                tvSelect_Photo_or_Template,
+                (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle),
+                (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvVideo),
+                (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvPdf)
+                );
 
         View vContentAdd = popCreateAdd.getPopupView().findViewById(R.id.linBackground);
 
         linAddPhoto.setOnTouchListener(new ClickDragDismissListener(vContentAdd, this));
         linAddVideo.setOnTouchListener(new ClickDragDismissListener(vContentAdd, this));
-
+        linAddPdf.setOnTouchListener(new ClickDragDismissListener(vContentAdd, this));
 
 
 
@@ -1988,6 +1995,23 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             getSupportFragmentManager().beginTransaction().show(fragmentSelectPhoto2).commit();
             fragmentSelectPhoto2.doGetAlbumContent();
         }
+    }
+
+    private void addPdf(){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, album_id);
+
+        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (fragmentSelectPDF2 == null) {
+            fragmentSelectPDF2 = new FragmentSelectPDF2();
+            fragmentSelectPDF2.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_content, fragmentSelectPDF2, fragmentSelectPDF2.getClass().getSimpleName()).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction().show(fragmentSelectPDF2).commit();
+        }
+
+
     }
 
     public void reFreshBottomPhoto() {
@@ -5164,6 +5188,11 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
                 addVideo();
                 break;
 
+            case R.id.linAddPdf:
+                popCreateAdd.dismiss();
+                addPdf();
+                break;
+
             /*pop  set*/
             case R.id.tvSort:
                 popCreationSet.dismiss();
@@ -5314,6 +5343,10 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
         } else if (fragmentSelectAudio2 != null && fragmentSelectAudio2.isAdded() && fragmentSelectAudio2.isVisible()) {
             fragmentSelectAudio2.cleanMedia();
             getSupportFragmentManager().beginTransaction().hide(fragmentSelectAudio2).commit();
+
+        } else if(fragmentSelectPDF2 != null && fragmentSelectPDF2.isAdded() && fragmentSelectPDF2.isVisible()){
+
+            getSupportFragmentManager().beginTransaction().hide(fragmentSelectPDF2).commit();
 
         } else {
 
@@ -5686,6 +5719,7 @@ public class Creation2Activity extends DraggerActivity implements View.OnClickLi
             fragmentSelectVideo2 = null;
             MyLog.Set("d", this.getClass(), "移除 => fragmentSelectVideo2");
         }
+
 
         deleteDownloadFile();
 

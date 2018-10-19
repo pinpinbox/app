@@ -6,7 +6,7 @@
     android:background="@color/white">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvAudioFile"
+        android:id="@+id/rvPdfFile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -38,31 +38,15 @@
 
     </RelativeLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/rBottom"
-        style="@style/ppb200_bottom_bar"
-        android:visibility="visible"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@color/pinpinbox_2_0_0_third_grey">
-
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/controlImg" />
-
-        <ImageView
-            android:id="@+id/controlImg"
-            style="@style/ppb200_action_bar_icon"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic200_video_dark" />
-
-
-    </RelativeLayout>
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
+        android:layout_width="1440dp"
+        android:layout_height="1920dp"
+        android:layout_marginBottom="-480dp"
+        android:layout_marginLeft="-360dp"
+        android:layout_marginRight="-360dp"
+        android:layout_marginTop="-480dp"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>

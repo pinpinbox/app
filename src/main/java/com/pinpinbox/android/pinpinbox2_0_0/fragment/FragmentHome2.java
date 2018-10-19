@@ -125,6 +125,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private MoreDataTask moreDataTask;
     private RefreshTask refreshTask;
     private GetADTask getADTask;
+    private Protocol21_UpdateUser protocol21;
 
     private JSONArray p20JsonArray;
 
@@ -2081,7 +2082,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
 
 
-        Protocol21_UpdateUser protocol21 = new Protocol21_UpdateUser(
+        protocol21 = new Protocol21_UpdateUser(
                 getActivity(),
                 id,
                 token,
@@ -2510,6 +2511,12 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             getADTask.cancel(true);
         }
         getADTask = null;
+
+        if (protocol21 != null && !protocol21.isCancelled()) {
+            protocol21.cancel(true);
+        }
+        protocol21 = null;
+
 
         /*nullj移除所有runnable*/
         if (autoPageScrollManager != null) {

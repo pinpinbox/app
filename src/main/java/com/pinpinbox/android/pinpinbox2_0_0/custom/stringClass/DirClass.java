@@ -25,12 +25,14 @@ public class DirClass {
     public static final String dirJPG = "my_video_screenshot/";
     public static final String dirHead = "HeadPic/";
     public static final String dirCamera = "ppb_camera/";
+    public static final String dirPdf = "PDFIMAGE/";
 
     public static final String pathName_headpicture = "pinpinbox_memberheadpic.jpg";
     public static final String pathName_FromAviary = "elect.jpg";
     public static final String pathName_RecordMp3 = "recording.mp3";
     public static final String pathName_UserBanner = "userbanner.jpg";
     public static final String pathName_singleUploadPhoto = "pinpinbox_select.jpg";
+
 
     public static final String pathHeaderPicture = sdPath + dirHead + pathName_headpicture;
 
@@ -41,6 +43,13 @@ public class DirClass {
     public static String getMyDir(String id){
 
         return "PinPinBox" + id + "/";
+
+    }
+
+    public static String getPdfDir(Activity activity, String id){
+
+
+        return ExternalFileDir(activity) + getMyDir(id) +  DirClass.dirPdf;
 
     }
 

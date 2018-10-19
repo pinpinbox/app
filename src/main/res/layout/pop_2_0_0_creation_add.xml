@@ -63,6 +63,27 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:id="@+id/linAddPdf"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ppb200_common_list_item_height"
+            android:background="@drawable/click_2_0_0_list_item"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/ppb200_list_item_icon"
+                android:src="@drawable/ic200_pdf_dark" />
+
+            <TextView
+                android:id="@+id/tvPdf"
+                style="@style/ppb200_pop_item"
+                android:text="PDF" />
+
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 

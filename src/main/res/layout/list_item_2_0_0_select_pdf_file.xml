@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_common_detaillist_item_height_low"
+        android:background="@drawable/click_2_0_0_list_item">
+
+
+        <TextView
+            android:id="@+id/tvFileName"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:layout_toStartOf="@+id/tvUpload"
+            android:ellipsize="end"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"
+            android:maxLines="2"
+            android:text=""
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+
+        <TextView
+            android:id="@+id/tvUpload"
+            style="@style/ppb200_Button_main_small_radius"
+            android:layout_width="72dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:text="@string/pinpinbox_2_0_0_button_upload"
+            android:textSize="@dimen/ppb200_common_text_third"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/pinpinbox_2_0_0_divider" />
+
+</LinearLayout>

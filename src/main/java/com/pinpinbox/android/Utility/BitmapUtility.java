@@ -3,7 +3,10 @@ package com.pinpinbox.android.Utility;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.media.ExifInterface;
 import android.util.Base64;
 import android.util.Log;
@@ -20,6 +23,24 @@ import java.io.InputStream;
  * Created by vmage on 2015/11/25.
  */
 public class BitmapUtility {
+
+    public static Bitmap createViewBitmapByLight(Bitmap source , float bt){
+
+
+        Bitmap output = Bitmap.createBitmap(source.getWidth(),
+                source.getHeight(), Bitmap.Config.RGB_565);
+
+        Canvas canvas = new Canvas(output);
+        Paint paint = new Paint();
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(bt);
+        paint.setColorFilter(new ColorMatrixColorFilter(matrix));
+        canvas.drawBitmap(source, 0, 0, paint);
+        source.recycle();
+
+
+        return output;
+    }
 
 
     public static Bitmap createViewBitmap(View v) {

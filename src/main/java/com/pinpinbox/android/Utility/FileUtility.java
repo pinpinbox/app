@@ -70,6 +70,25 @@ public class FileUtility {
     }
 
 
+    public static void createPdfFile(Activity mActivity, String id){
+
+
+        createMyDir(mActivity, id);
+
+        File pdfDir = new File(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirPdf);
+        if(!pdfDir.exists()){
+            pdfDir.mkdirs();
+        }
+
+    }
+
+
+
+
+
+
+
+
     /*建立並返回拍照後的相片文件*/
     public static File createCamFile(Activity mActivity, String id){
 
@@ -86,9 +105,6 @@ public class FileUtility {
         }
         return fileCam;
     }
-
-
-
 
 
     /*建立並返回頭像文件*/
@@ -146,16 +162,6 @@ public class FileUtility {
 
 
 
-
-
-
-
-
-
-
-
-
-
     private String SDPATH;
 
     private int FILESIZE = 4 * 1024;
@@ -190,18 +196,6 @@ public class FileUtility {
         file.createNewFile();
         return file;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -306,6 +300,19 @@ public class FileUtility {
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
             if (isVideo_mp4(file.getPath()))
+                it.add(file.getPath());
+        }
+
+        return it;
+    }
+
+    public static List<String> getPdfList(String path_dir) {
+        List<String> it = new ArrayList<String>();
+        File f = new File(path_dir);
+        File[] files = f.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            File file = files[i];
+            if (isPdf(file.getPath()))
                 it.add(file.getPath());
         }
 
@@ -508,6 +515,39 @@ public class FileUtility {
         return re;
     }
 
+    public static boolean isPdf(String fName) {
+        boolean re;
+        String end = fName
+                .substring(fName.lastIndexOf(".") + 1, fName.length())
+                .toLowerCase();
+        if (end.equals("pdf")) {
+            re = true;
+        } else {
+            re = false;
+        }
+        return re;
+    }
+
+    public static boolean isPdf_(String fName){
+
+        boolean re;
+
+        if(fName.length()>4){
+
+            String end = fName
+                    .substring(fName.lastIndexOf(".") + 1, fName.length())
+                    .toLowerCase();
+            if (end.equals("pdf")) {
+                re = true;
+            } else {
+                re = false;
+            }
+        }else {
+            re = false;
+        }
+
+        return re;
+    }
 
     public static boolean getMusic(String mName) {
         boolean re;
