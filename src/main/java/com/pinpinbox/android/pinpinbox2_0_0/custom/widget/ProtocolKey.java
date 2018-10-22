@@ -183,6 +183,7 @@ public class ProtocolKey {
     public static String photo_video_target = "video_target";
     public static String photo_image_url = "image_url";
     public static String photo_image_url_thumbnail = "image_url_thumbnail";
+    public static String photo_limit_of_album = "photo_limit_of_album";
 
 
     //q

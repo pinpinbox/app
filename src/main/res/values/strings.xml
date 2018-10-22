@@ -314,9 +314,11 @@
     <string name="pinpinbox_2_0_0_toast_message_select_preview_way">請選擇預覽方式</string>
     <string name="pinpinbox_2_0_0_toast_message_please_select_audio_file">請先選擇音訊檔</string>
     <string name="pinpinbox_2_0_0_toast_message_please_select_an_audio">請選擇一部音頻</string>
+    <string name="pinpinbox_2_0_0_toast_message_converting_files">正在轉換檔案</string>
 
 
-    Please select an audio
+
+
 
 
     <string name="pinpinbox_2_0_0_size_general">一般尺寸</string>
