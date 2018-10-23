@@ -314,7 +314,7 @@
     <string name="pinpinbox_2_0_0_toast_message_select_preview_way">請選擇預覽方式</string>
     <string name="pinpinbox_2_0_0_toast_message_please_select_audio_file">請先選擇音訊檔</string>
     <string name="pinpinbox_2_0_0_toast_message_please_select_an_audio">請選擇一部音頻</string>
-    <string name="pinpinbox_2_0_0_toast_message_converting_files">正在轉換檔案</string>
+
 
 
 
@@ -614,6 +614,7 @@
     <string name="pinpinbox_2_0_0_other_text_click_save_to_upload">點擊"保存"後開始上傳</string>
     <string name="pinpinbox_2_0_0_other_text_select_newsletter">願意收到電子報，掌握最新創作及抽獎資訊</string>
     <string name="pinpinbox_2_0_0_other_text_select_newsletter_default_receiving">願意收到電子報，掌握最新創作及抽獎資訊(預設為接收)</string>
+    <string name="pinpinbox_2_0_0_other_text_converting_files">正在轉換檔案</string>
 
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>

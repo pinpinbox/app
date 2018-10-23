@@ -1,8 +1,10 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,7 +37,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol58_InsertPhotoOfDiy;
@@ -56,6 +57,8 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
 
     private Protocol58_InsertPhotoOfDiy protocol58;
 
+    private ConvertingTask convertingTask;
+
     private RecyclerPdfFileAdapter adapter;
 
     private List<HashMap<String, Object>> filePathList;
@@ -68,12 +71,13 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
 
     private TextView tvStartUpLoad;
 
+    private View vContent;
+
     private String album_id;
 
     private int page = 0;
 
     private boolean isUploading = false;
-
 
     private LoaderManager.LoaderCallbacks<Cursor> loaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
 
@@ -150,9 +154,9 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
 
     };
 
-
     private Handler mHandler = new Handler() {
 
+        @SuppressLint("StaticFieldLeak")
         @Override
         public void handleMessage(Message msg) {
 
@@ -160,32 +164,7 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
 
                 case 0:
 
-                    Bitmap bitmap = BitmapUtility.createViewBitmapByLight(BitmapUtility.createViewBitmap(pdfView), 0.85f);
-
-                    BitmapUtility.saveToLocal(bitmap, DirClass.getPdfDir(getActivity(), PPBApplication.getInstance().getId()) + page + ".jpg", 100);
-
-                    if (bitmap != null && !bitmap.isRecycled()) {
-                        bitmap.recycle();
-                    }
-                    bitmap = null;
-
-                    page = page + 1;
-
-                    pdfView.jumpTo(page);
-
-                    if (page < pdfView.getPageCount()) {
-
-                        Message mmm = new Message();
-                        mmm.what = 0;
-                        mHandler.sendMessageDelayed(mmm, 500);
-
-                    } else {
-
-                        loading.dismiss();
-
-                        doUpload();
-
-                    }
+                    doConverting();
 
                     break;
 
@@ -209,21 +188,21 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_2_0_0_select_pdf, container, false);
+        vContent = inflater.inflate(R.layout.fragment_2_0_0_select_pdf, container, false);
 
-        rvPdfFile = (RecyclerView) v.findViewById(R.id.rvPdfFile);
+        rvPdfFile = vContent.findViewById(R.id.rvPdfFile);
 
-        rBottom = (RelativeLayout) v.findViewById(R.id.rBottom);
+        rBottom = vContent.findViewById(R.id.rBottom);
 
-        tvStartUpLoad = (TextView) v.findViewById(R.id.tvStartUpLoad);
+        tvStartUpLoad = vContent.findViewById(R.id.tvStartUpLoad);
 
-        pdfView = (PDFView) v.findViewById(R.id.pdfView);
+        pdfView = vContent.findViewById(R.id.pdfView);
 
-        (v.findViewById(R.id.backImg)).setOnClickListener(this);
+        (vContent.findViewById(R.id.backImg)).setOnClickListener(this);
 
         TextUtility.setBold(tvStartUpLoad, true);
 
-        return v;
+        return vContent;
     }
 
 
@@ -309,9 +288,10 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
             @Override
             public void onClick(int position) {
 
-                loading.show();
+                upLoadStart();
 
-                PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_converting_files);
+                tvStartUpLoad.setText(R.string.pinpinbox_2_0_0_other_text_converting_files);
+                rBottom.setVisibility(View.VISIBLE);
 
                 changeToImage(position);
 
@@ -330,6 +310,12 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
 
     private void changeToImage(int position) {
 
+
+        if (pdfView == null || pdfView.isRecycled()) {
+            pdfView = vContent.findViewById(R.id.pdfView);
+        }
+
+
         pdfView.fromFile(new File((String) filePathList.get(position).get("path")))   //设置pdf文件地址
                 .swipeHorizontal(true)
                 .pageSnap(true)
@@ -345,6 +331,7 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
         Message msg = new Message();
         msg.what = 0;
         mHandler.sendMessageDelayed(msg, 1000);
+
 
     }
 
@@ -367,6 +354,9 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
                     @Override
                     public void DoCheck() {
 
+                        loading.dismiss();
+
+                        reset();
 
                     }
                 });
@@ -374,6 +364,32 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
             dlgUploading.show();
 
         }
+
+    }
+
+    private void reset() {
+
+        if (protocol58 != null && !protocol58.isCancelled()) {
+            protocol58.cancel(true);
+        }
+
+        if (convertingTask != null && !convertingTask.isCancelled()) {
+            convertingTask.cancel(true);
+        }
+
+        page = 0;
+
+        if (pdfView != null) {
+            pdfView.recycle();
+            pdfView = null;
+        }
+
+        rBottom.setVisibility(View.GONE);
+
+        FileUtility.delAllFile(DirClass.getPdfDir(getActivity(), PPBApplication.getInstance().getId()));
+
+        mHandler.removeCallbacksAndMessages(null);
+
 
     }
 
@@ -396,7 +412,7 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
             return;
         }
 
-        rBottom.setVisibility(View.VISIBLE);
+
         tvStartUpLoad.setText(R.string.pinpinbox_2_0_0_button_uploading);
 
         protocol58 = new Protocol58_InsertPhotoOfDiy(
@@ -406,7 +422,7 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
                 new Protocol58_InsertPhotoOfDiy.TaskCallBack() {
                     @Override
                     public void Prepare() {
-                        upLoadStart();
+
                     }
 
                     @Override
@@ -416,11 +432,11 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
 
                     @Override
                     public void Post() {
+
                         upLoadStop();
 
-                        rBottom.setVisibility(View.GONE);
+                        reset();
 
-                        FileUtility.delAllFile(DirClass.getPdfDir(getActivity(), PPBApplication.getInstance().getId()));
                     }
 
                     @Override
@@ -438,6 +454,64 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
                 }
 
         );
+
+
+    }
+
+    private void doConverting() {
+
+        convertingTask = new ConvertingTask();
+        convertingTask.execute();
+
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class ConvertingTask extends AsyncTask<Void, Void, Object> {
+
+
+        @Override
+        public void onPreExecute() {
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected Object doInBackground(Void... voids) {
+
+            Bitmap bitmap = BitmapUtility.createViewBitmapByLight(BitmapUtility.createViewBitmap(pdfView), 0.85f);
+
+            BitmapUtility.saveToLocal(bitmap, DirClass.getPdfDir(getActivity(), PPBApplication.getInstance().getId()) + page + ".jpg", 100);
+
+            if (bitmap != null && !bitmap.isRecycled()) {
+                bitmap.recycle();
+            }
+            bitmap = null;
+
+            return null;
+        }
+
+        @Override
+        public void onPostExecute(Object obj) {
+            super.onPostExecute(obj);
+
+            page = page + 1;
+
+            pdfView.jumpTo(page);
+
+            if (page < pdfView.getPageCount()) {
+
+                Message mmm = new Message();
+                mmm.what = 0;
+                mHandler.sendMessageDelayed(mmm, 500);
+
+            } else {
+
+                doUpload();
+
+            }
+
+
+        }
 
 
     }
@@ -461,13 +535,10 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
     @Override
     public void onDestroy() {
 
-        FileUtility.delAllFile(DirClass.getPdfDir(getActivity(), PPBApplication.getInstance().getId()));
-
-        pdfView.recycle();
-
-        pdfView = null;
+        reset();
 
         super.onDestroy();
+
     }
 
 }
