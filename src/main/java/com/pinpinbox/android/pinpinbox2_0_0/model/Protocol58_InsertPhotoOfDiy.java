@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
@@ -11,6 +12,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 
@@ -51,6 +53,8 @@ public class Protocol58_InsertPhotoOfDiy extends AsyncTask<Void, Void, Object> {
     private String result = "";
     private String message = "";
 
+    private boolean isMax = false;
+
     public Protocol58_InsertPhotoOfDiy(Activity mActivity, String album_id, List<String> pathList, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
@@ -80,7 +84,6 @@ public class Protocol58_InsertPhotoOfDiy extends AsyncTask<Void, Void, Object> {
             MyLog.Set("e", getClass(), "pathppppp => " + pathList.get(i));
 
         }
-
 
 
         for (int i = 0; i < count; i++) {
@@ -133,6 +136,9 @@ public class Protocol58_InsertPhotoOfDiy extends AsyncTask<Void, Void, Object> {
 
                     //判斷張數是否超過最大值
                     if (albumPhotoCount >= maxCount) {
+
+                        isMax = true;
+
                         break;
                     }
 
@@ -168,6 +174,10 @@ public class Protocol58_InsertPhotoOfDiy extends AsyncTask<Void, Void, Object> {
 
             case "1":
 
+                if(isMax){
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_is_max);
+                }
+
                 callBack.Success();
 
                 break;
@@ -183,7 +193,6 @@ public class Protocol58_InsertPhotoOfDiy extends AsyncTask<Void, Void, Object> {
                 DialogV2Custom.BuildUnKnow(mActivity, mActivity.getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
 
                 break;
-
 
         }
 

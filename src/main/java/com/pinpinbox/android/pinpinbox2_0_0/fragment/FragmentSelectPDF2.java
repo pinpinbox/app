@@ -358,6 +358,10 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
 
                         reset();
 
+                        //在建立一次
+                        createDir();
+
+
                     }
                 });
             }
