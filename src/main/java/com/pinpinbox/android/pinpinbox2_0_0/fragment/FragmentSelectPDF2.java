@@ -254,34 +254,17 @@ public class FragmentSelectPDF2 extends Fragment implements View.OnClickListener
         rvPdfFile.setLayoutManager(manager);
 
 
-        adapter.setOnRecyclerViewListener(new RecyclerPdfFileAdapter.OnRecyclerViewListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-
-//                pdfView.fromFile(new File((String)filePathList.get(position).get("path")))   //设置pdf文件地址
-//                        .swipeHorizontal(true)
-//                        .pageSnap(true)
-//                        .autoSpacing(true)
-//                        .pageFling(true)
-//                        .onLoad(new OnLoadCompleteListener() {
-//                            @Override
-//                            public void loadComplete(int nbPages) {
+//        adapter.setOnRecyclerViewListener(new RecyclerPdfFileAdapter.OnRecyclerViewListener() {
+//            @Override
+//            public void onItemClick(int position, View v) {
 //
+//            }
 //
-//
-//                            }
-//                        })
-//
-//                        .load();
-
-
-            }
-
-            @Override
-            public boolean onItemLongClick(int position, View v) {
-                return false;
-            }
-        });
+//            @Override
+//            public boolean onItemLongClick(int position, View v) {
+//                return false;
+//            }
+//        });
 
 
         adapter.setOnUploadListener(new RecyclerPdfFileAdapter.OnUploadListener() {
