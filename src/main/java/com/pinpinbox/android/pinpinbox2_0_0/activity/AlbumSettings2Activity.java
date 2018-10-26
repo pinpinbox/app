@@ -102,10 +102,10 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private Protocol96_InsertAlbumIndex protocol96;
     private Protocol97_DeleteAlbumIndex protocol97;
 
-    private RecyclerAlbumSettingsAdapter categoryFirstAdapter, categorySecondAdapter, weatherAdapter, moodAdapter;
+    private RecyclerAlbumSettingsAdapter categoryFirstAdapter, categorySecondAdapter;
     private RecyclerBarCodeAdapter barCodeAdapter;
 
-    private List<ItemAlbumSettings> categoryFirstList, categorySecondList, weatherList, moodList, actList;
+    private List<ItemAlbumSettings> categoryFirstList, categorySecondList, actList;
 
 
     //    tvSaveToRead
@@ -113,11 +113,11 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private TextView tvToCreation, tvSaveToLeave, tvPoint, tvAdvanced, tvAct,
             tvSelectFirstPaging, tvIndispensable1, tvIndispensable2, tvIndispensable3, tvIndispensable4;
     private ImageView scanImg, actImg, addBarCodeImg, backImg;//backImg qLevelImg
-    private RecyclerView rvCategoryFirst, rvCategorySecond, rvWeather, rvMood;
+    private RecyclerView rvCategoryFirst, rvCategorySecond;
 
     private String id, token;
     private String album_id;
-    private String strName, strDescription, strLocation, strWeather, strMood, strAct;
+    private String strName, strDescription, strLocation, strAct;
     private String settings, strUsergrade;
     private String event_id;
     private String strGetName = "", strGetDescription="", strGetLocation="", strGetPoint="";
@@ -275,8 +275,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
         categoryFirstList = new ArrayList<>();
         categorySecondList = new ArrayList<>();
-        weatherList = new ArrayList<>();
-        moodList = new ArrayList<>();
         actList = new ArrayList<>();
         albumindexList = new ArrayList<>();
 
@@ -306,8 +304,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
         rvCategoryFirst = (RecyclerView) findViewById(R.id.rvCategoryFirst);
         rvCategorySecond = (RecyclerView) findViewById(R.id.rvCategorySecond);
-        rvWeather = (RecyclerView) findViewById(R.id.rvWeather);
-        rvMood = (RecyclerView) findViewById(R.id.rvMood);
+
 
 
         scanImg.setOnClickListener(this);
@@ -329,7 +326,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         TextUtility.setBold((TextView) findViewById(R.id.tv2), true);
         TextUtility.setBold((TextView) findViewById(R.id.tv3), true);
         TextUtility.setBold((TextView) findViewById(R.id.tv4), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv5), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv5), true);
         TextUtility.setBold(tvPoint, true);
         TextUtility.setBold(tvAdvanced, true);
         TextUtility.setBold(tvToCreation, true);
@@ -341,30 +338,22 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
         rvCategoryFirst.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
         rvCategorySecond.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
-        rvWeather.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
-        rvMood.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
+
 
 
         categoryFirstAdapter = new RecyclerAlbumSettingsAdapter(mActivity, categoryFirstList);
         categorySecondAdapter = new RecyclerAlbumSettingsAdapter(mActivity, categorySecondList);
-        weatherAdapter = new RecyclerAlbumSettingsAdapter(mActivity, weatherList);
-        moodAdapter = new RecyclerAlbumSettingsAdapter(mActivity, moodList);
+
 
 
         rvCategoryFirst.setAdapter(categoryFirstAdapter);
         rvCategorySecond.setAdapter(categorySecondAdapter);
-        rvWeather.setAdapter(weatherAdapter);
-        rvMood.setAdapter(moodAdapter);
+
 
 
         recyclerClick(categoryFirstAdapter, categoryFirstList, RefreshSecondCategoryPaging);
 
         recyclerClick(categorySecondAdapter, categorySecondList, 0);
-
-        recyclerClick(weatherAdapter, weatherList, 0);
-
-        recyclerClick(moodAdapter, moodList, 0);
-
 
     }
 
@@ -589,20 +578,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             }
 
 
-            for (int i = 0; i < weatherList.size(); i++) {
-                if (weatherList.get(i).isSelect()) {
-                    jsonObject.put(ProtocolKey.weather, weatherList.get(i).getStrId());
-                    break;
-                }
-            }
-
-            for (int i = 0; i < moodList.size(); i++) {
-                if (moodList.get(i).isSelect()) {
-                    jsonObject.put(ProtocolKey.mood, moodList.get(i).getStrId());
-                    break;
-                }
-            }
-
             settings = jsonObject.toString();
 
             if (LOG.isLogMode) {
@@ -756,8 +731,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                         strName = itemAlbum.getName();
                         strDescription = itemAlbum.getDescription();
                         strLocation = itemAlbum.getLocation();
-                        strWeather = itemAlbum.getWeather();
-                        strMood = itemAlbum.getMood();
                         strAct = itemAlbum.getAct();
 
                         intCategoryarea_id = itemAlbum.getCategoryarea_id();
@@ -849,14 +822,11 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                                     for (int s = 0; s < categorySecondList.size(); s++) {
 
-                                        MyLog.Set("e", mActivity.getClass(), "11111111111111111111111111");
-
                                         if (intCategory_id == categorySecondList.get(s).getId()) {
                                             categorySecondList.get(s).setSelect(true);
                                             categorySecondAdapter.notifyDataSetChanged();
                                             rvCategorySecond.scrollToPosition(s);
 
-                                            MyLog.Set("e", mActivity.getClass(), "22222222222222222222");
                                             break;
                                         }
                                     }
@@ -876,24 +846,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                             rvCategorySecond.setVisibility(View.VISIBLE);
                         }
 
-
-                        for (int i = 0; i < weatherList.size(); i++) {
-                            if (strWeather.equals(weatherList.get(i).getStrId())) {
-                                weatherList.get(i).setSelect(true);
-                                weatherAdapter.notifyItemChanged(i);
-                                rvWeather.scrollToPosition(i);
-                                break;
-                            }
-                        }
-
-                        for (int i = 0; i < moodList.size(); i++) {
-                            if (strMood.equals(moodList.get(i).getStrId())) {
-                                moodList.get(i).setSelect(true);
-                                moodAdapter.notifyItemChanged(i);
-                                rvMood.scrollToPosition(i);
-                                break;
-                            }
-                        }
 
 
                         RecyclerView rvBarCode = (RecyclerView) findViewById(R.id.rvBarCode);
@@ -1249,8 +1201,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                         JSONObject object = new JSONObject(jdata);
 
                         String firstpaging = JsonUtility.GetString(object, ProtocolKey.firstpaging);
-                        String weather = JsonUtility.GetString(object, ProtocolKey.weather);
-                        String mood = JsonUtility.GetString(object, ProtocolKey.mood);
                         String act = JsonUtility.GetString(object, ProtocolKey.act);
                         strUsergrade = JsonUtility.GetString(object, ProtocolKey.usergrade);
 
@@ -1270,30 +1220,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                         }
 
-
-                        JSONArray weatherArray = new JSONArray(weather);
-                        for (int i = 0; i < weatherArray.length(); i++) {
-                            JSONObject obj = weatherArray.getJSONObject(i);
-                            weatherList.add(
-                                    builder
-                                            .strId(JsonUtility.GetString(obj, ProtocolKey.id))
-                                            .name(JsonUtility.GetString(obj, ProtocolKey.name))
-                                            .select(false)
-                                            .build()
-                            );
-                        }
-
-                        JSONArray moodArray = new JSONArray(mood);
-                        for (int i = 0; i < moodArray.length(); i++) {
-                            JSONObject obj = moodArray.getJSONObject(i);
-                            moodList.add(
-                                    builder
-                                            .strId(JsonUtility.GetString(obj, ProtocolKey.id))
-                                            .name(JsonUtility.GetString(obj, ProtocolKey.name))
-                                            .select(false)
-                                            .build()
-                            );
-                        }
 
                         JSONArray actArray = new JSONArray(act);
                         for (int i = 0; i < actArray.length(); i++) {
@@ -1326,8 +1252,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
             if (p32Result == 1) {
 
                 categoryFirstAdapter.notifyDataSetChanged();
-                moodAdapter.notifyDataSetChanged();
-                weatherAdapter.notifyDataSetChanged();
 
                 doSetSettings();
 

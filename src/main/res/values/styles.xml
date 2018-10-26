@@ -192,6 +192,7 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_third_size</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>

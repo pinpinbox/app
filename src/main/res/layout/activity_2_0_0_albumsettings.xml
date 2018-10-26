@@ -52,7 +52,7 @@
 
                     <TextView
                         android:id="@+id/tv1"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:text="@string/pinpinbox_2_0_0_title_title" />
 
                     <TextView
@@ -64,7 +64,7 @@
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_other_text_necessary_fill_in"
                         android:textColor="@color/pinpinbox_2_0_0_first_pink"
-                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:textSize="@dimen/ppb200_common_text_third"
                         android:visibility="gone" />
 
                 </LinearLayout>
@@ -94,20 +94,9 @@
 
                     <TextView
                         android:id="@+id/tv2"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:text="@string/pinpinbox_2_0_0_itemtype_album_description" />
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/tvIndispensable2"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_second"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:letterSpacing="0.1"-->
-                        <!--android:text="@string/pinpinbox_2_0_0_other_text_necessary_fill_in"-->
-                        <!--android:textColor="@color/pinpinbox_2_0_0_first_pink"-->
-                        <!--android:textSize="@dimen/ppb200_common_text_second"-->
-                        <!--android:visibility="gone" />-->
 
                 </LinearLayout>
 
@@ -134,7 +123,7 @@
 
                     <TextView
                         android:id="@+id/tv3"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:text="@string/pinpinbox_2_0_0_itemtype_first_pagin" />
 
                     <TextView
@@ -146,7 +135,7 @@
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_other_text_necessary_select"
                         android:textColor="@color/pinpinbox_2_0_0_first_pink"
-                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:textSize="@dimen/ppb200_common_text_third"
                         android:visibility="gone" />
 
                 </LinearLayout>
@@ -171,7 +160,7 @@
 
                     <TextView
                         android:id="@+id/tv4"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:text="@string/pinpinbox_2_0_0_itemtype_second_pagin" />
 
 
@@ -184,11 +173,10 @@
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_other_text_necessary_select"
                         android:textColor="@color/pinpinbox_2_0_0_first_pink"
-                        android:textSize="@dimen/ppb200_common_text_second"
+                        android:textSize="@dimen/ppb200_common_text_third"
                         android:visibility="gone" />
 
                 </LinearLayout>
-
 
                 <TextView
                     android:id="@+id/tvSelectFirstPaging"
@@ -199,9 +187,8 @@
                     android:letterSpacing="0.1"
                     android:text="@string/pinpinbox_2_0_0_other_text_select_first_pagin_first"
                     android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                    android:textSize="@dimen/ppb200_common_text_second"
+                    android:textSize="@dimen/ppb200_common_text_third"
                     android:visibility="gone" />
-
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvCategorySecond"
@@ -210,35 +197,7 @@
                     android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
 
 
-            </LinearLayout>
-
-
-            <View
-                style="@style/ppb200_divider_list"
-                android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                />
-
-
-            <!--*******************************************************************************************************-->
-            <!--其他設定-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/tv5"
-                    style="@style/ppb200_title_second"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                    android:text="@string/pinpinbox_2_0_0_title_other_setting" />
-
-
-                <!--*******************************************************************************************************-->
                 <!--地點-->
-
                 <TextView
                     style="@style/ppb200_title_third"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
@@ -256,39 +215,8 @@
                     android:text="" />
 
 
-                <!--*******************************************************************************************************-->
-                <!--天氣-->
-
-                <TextView
-                    style="@style/ppb200_title_third"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                    android:text="@string/pinpinbox_2_0_0_itemtype_album_weather"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvWeather"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
-
-
-                <!--*******************************************************************************************************-->
-                <!--心情-->
-
-                <TextView
-                    style="@style/ppb200_title_third"
-                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                    android:text="@string/pinpinbox_2_0_0_itemtype_album_mood" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvMood"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="@dimen/ppb200_padding_margin_second" />
-
-
             </LinearLayout>
+
 
             <View
                 style="@style/ppb200_divider_list"
@@ -315,7 +243,7 @@
 
                     <TextView
                         android:id="@+id/tvPoint"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:text="@string/pinpinbox_2_0_0_title_point_setting" />
 
                     <TextView
@@ -326,7 +254,7 @@
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_other_text_least_3p"
                         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                        android:textSize="@dimen/ppb200_common_text_first" />
+                        android:textSize="@dimen/ppb200_common_text_third" />
 
 
                 </LinearLayout>
@@ -406,7 +334,7 @@
 
                     <TextView
                         android:id="@+id/tvAdvanced"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:text="@string/pinpinbox_2_0_0_title_advanced_setting" />
 
                     <TextView
@@ -417,7 +345,7 @@
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_other_text_member_level_profession"
                         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                        android:textSize="@dimen/ppb200_common_text_first" />
+                        android:textSize="@dimen/ppb200_common_text_third" />
 
 
                 </LinearLayout>

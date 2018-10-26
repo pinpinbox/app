@@ -507,12 +507,12 @@
     <string name="pinpinbox_2_0_0_other_text_back_to_settings">App Settings</string>
     <string name="pinpinbox_2_0_0_other_text_only_read_photo_description">Only browse photos and descriptions</string>
     <string name="pinpinbox_2_0_0_other_text_click_left_icon_or_input">Type number code</string>
-    <string name="pinpinbox_2_0_0_other_text_member_level_profession">(Lv:profession)</string>
+    <string name="pinpinbox_2_0_0_other_text_member_level_profession">Lv:profession</string>
     <string name="pinpinbox_2_0_0_other_text_collect_byrequired_point">Sponsor of points:</string>
-    <string name="pinpinbox_2_0_0_other_text_least_3p">(Min. 3p)</string>
+    <string name="pinpinbox_2_0_0_other_text_least_3p">Min. 3p</string>
     <string name="pinpinbox_2_0_0_other_text_necessary_select">(Require)</string>
     <string name="pinpinbox_2_0_0_other_text_necessary_fill_in">(Require)</string>
-    <string name="pinpinbox_2_0_0_other_text_select_first_pagin_first">(Select main category first)</string>
+    <string name="pinpinbox_2_0_0_other_text_select_first_pagin_first">Select main category first</string>
     <string name="pinpinbox_2_0_0_other_text_accepted_sponsor"> </string>
     <string name="pinpinbox_2_0_0_other_text_sponsor_times">&#160;sponsors</string>
     <string name="pinpinbox_2_0_0_other_text_lowest_point">Min.&#160;</string>

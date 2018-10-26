@@ -70,7 +70,7 @@
 
                     <TextView
                         android:id="@+id/tv0"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:layout_above="@+id/edName"
                         android:layout_alignLeft="@+id/edName"
                         android:layout_alignStart="@+id/edName"
@@ -95,7 +95,7 @@
 
                 <TextView
                     android:id="@+id/tv1"
-                    style="@style/ppb200_title_second"
+                    style="@style/ppb200_title_third"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:text="@string/pinpinbox_2_0_0_title_creativearea" />
 
@@ -110,7 +110,7 @@
 
                 <TextView
                     android:id="@+id/tv2"
-                    style="@style/ppb200_title_second"
+                    style="@style/ppb200_title_third"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:text="@string/pinpinbox_2_0_0_title_mail" />
 
@@ -133,7 +133,7 @@
 
                     <TextView
                         android:id="@+id/tv3"
-                        style="@style/ppb200_title_second"
+                        style="@style/ppb200_title_third"
                         android:text="@string/pinpinbox_2_0_0_title_password" />
 
 
@@ -147,7 +147,7 @@
 
                 <TextView
                     android:id="@+id/tv4"
-                    style="@style/ppb200_title_second"
+                    style="@style/ppb200_title_third"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:text="@string/pinpinbox_2_0_0_title_cellphone" />
 
@@ -159,7 +159,7 @@
 
                 <TextView
                     android:id="@+id/tv7"
-                    style="@style/ppb200_title_second"
+                    style="@style/ppb200_title_third"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:text="@string/pinpinbox_2_0_0_title_hobby" />
 
@@ -173,7 +173,7 @@
                 <!--生日-->
                 <TextView
                     android:id="@+id/tv6"
-                    style="@style/ppb200_title_second"
+                    style="@style/ppb200_title_third"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:text="@string/pinpinbox_2_0_0_title_birthday" />
 
@@ -195,7 +195,7 @@
                 <!--性別-->
                 <TextView
                     android:id="@+id/tv5"
-                    style="@style/ppb200_title_second"
+                    style="@style/ppb200_title_third"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:text="@string/pinpinbox_2_0_0_title_gender" />
 
@@ -247,7 +247,7 @@
                 <!--社群-->
                 <TextView
                     android:id="@+id/tv8"
-                    style="@style/ppb200_title_second"
+                    style="@style/ppb200_title_third"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                     android:text="@string/pinpinbox_2_0_0_title_social_networks" />
 

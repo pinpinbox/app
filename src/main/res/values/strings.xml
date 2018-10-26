@@ -517,12 +517,12 @@
     <string name="pinpinbox_2_0_0_other_text_back_to_settings">返回設定</string>
     <string name="pinpinbox_2_0_0_other_text_only_read_photo_description">僅能瀏覽相片和文字敘述</string>
     <string name="pinpinbox_2_0_0_other_text_click_left_icon_or_input">點擊左方圖示或直接輸入</string>
-    <string name="pinpinbox_2_0_0_other_text_member_level_profession">(會員等級profession)</string>
+    <string name="pinpinbox_2_0_0_other_text_member_level_profession">會員等級profession</string>
     <string name="pinpinbox_2_0_0_other_text_collect_byrequired_point">贊助所需P點:</string>
-    <string name="pinpinbox_2_0_0_other_text_least_3p">(最少設定3P)</string>
+    <string name="pinpinbox_2_0_0_other_text_least_3p">最少設定3P</string>
     <string name="pinpinbox_2_0_0_other_text_necessary_select">(必選)</string>
     <string name="pinpinbox_2_0_0_other_text_necessary_fill_in">(必填)</string>
-    <string name="pinpinbox_2_0_0_other_text_select_first_pagin_first">(先選擇主類別)</string>
+    <string name="pinpinbox_2_0_0_other_text_select_first_pagin_first">先選擇主類別</string>
     <string name="pinpinbox_2_0_0_other_text_accepted_sponsor">已接受</string>
     <string name="pinpinbox_2_0_0_other_text_sponsor_times">次贊助</string>
     <string name="pinpinbox_2_0_0_other_text_lowest_point">最低額度</string>
