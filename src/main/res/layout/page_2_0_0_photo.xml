@@ -395,106 +395,223 @@
 
 
     <!--last pagew-->
-    <LinearLayout
-        android:id="@+id/linLastPage"
+
+
+    <ScrollView
+        android:id="@+id/svLastPageSponsor"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="@dimen/ppb200_padding_margin_big"
-        android:background="@drawable/border_2_0_0_white_radius"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/ppb200_padding_margin_big"
+        android:layout_marginBottom="@dimen/ppb200_bottom_height"
+        android:layout_marginLeft="@dimen/ppb200_padding_margin_big"
+        android:layout_marginRight="@dimen/ppb200_padding_margin_big"
+        android:layout_marginTop="@dimen/ppb200_action_bar_height_with_status"
+        android:scrollbars="none"
         android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/lastPageImg"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_first"
-            android:layout_marginTop="-96dp"
-            android:visibility="gone" />
-
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.1"
-            android:text=""
-            android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_first" />
-
-        <TextView
-            android:id="@+id/tvCurrentPoint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:letterSpacing="0.1"
-            android:text=""
-            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-            android:textSize="@dimen/ppb200_common_text_second" />
-
-
         <LinearLayout
-            android:id="@+id/linSponsor"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_2_0_0_white_radius"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/ppb200_padding_margin_big"
+            android:visibility="visible">
 
+
+            <!--標題-->
             <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pinpinbox_2_0_0_other_text_i_want_sponsor"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_second" />
-
-            <EditText
-                android:id="@+id/edPoint"
-                style="@style/ppb200_EditText"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                android:imeOptions="actionDone"
-                android:inputType="number"
                 android:letterSpacing="0.1"
-                android:maxLength="4"
-                android:paddingLeft="@dimen/ppb200_padding_margin_second"
-                android:paddingRight="@dimen/ppb200_padding_margin_second"
-                android:singleLine="true" />
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_first" />
 
+            <!--當前P點-->
             <TextView
+                android:id="@+id/tvCurrentPoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="P"
-                android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_second" />
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:letterSpacing="0.1"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                android:textSize="@dimen/ppb200_common_text_third" />
+
+
+            <!--P點輸入-->
+            <LinearLayout
+                android:id="@+id/linSponsor"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.1"
+                    android:text="@string/pinpinbox_2_0_0_other_text_i_want_sponsor"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_third" />
+
+                <EditText
+                    android:id="@+id/edPoint"
+                    style="@style/ppb200_EditText_small"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                    android:inputType="number"
+                    android:letterSpacing="0.1"
+                    android:maxLength="4"
+                    android:paddingLeft="@dimen/ppb200_padding_margin_second"
+                    android:paddingRight="@dimen/ppb200_padding_margin_second"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="P"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_third" />
+
+            </LinearLayout>
+
+
+            <!--已贊助次數-->
+            <TextView
+                android:id="@+id/tvSponsorCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:letterSpacing="0.1"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_pink"
+                android:textSize="@dimen/ppb200_common_text_third"
+                android:visibility="gone" />
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/linSponsorData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <View style="@style/ppb200_divider_list" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.1"
+                    android:text="回饋寄送填寫"
+                    android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                    android:textSize="@dimen/ppb200_common_text_small" />
+
+
+                <!--收件-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.1"
+                    android:text="收件人"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_small" />
+
+                <EditText
+                    android:id="@+id/edUserName"
+                    style="@style/ppb200_EditText_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                    android:letterSpacing="0.1"
+                    android:paddingLeft="@dimen/ppb200_padding_margin_second"
+                    android:paddingRight="@dimen/ppb200_padding_margin_second" />
+
+
+                <!--連絡電話-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.1"
+                    android:text="連絡電話"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_small" />
+
+                <EditText
+                    android:id="@+id/edPhone"
+                    style="@style/ppb200_EditText_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                    android:inputType="phone"
+                    android:letterSpacing="0.1"
+                    android:paddingLeft="@dimen/ppb200_padding_margin_second"
+                    android:paddingRight="@dimen/ppb200_padding_margin_second" />
+
+
+                <!--寄送地址-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.1"
+                    android:text="寄送地址"
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_small" />
+
+                <EditText
+                    android:id="@+id/edAddress"
+                    style="@style/ppb200_EditText_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                    android:letterSpacing="0.1"
+                    android:paddingLeft="@dimen/ppb200_padding_margin_second"
+                    android:paddingRight="@dimen/ppb200_padding_margin_second" />
+
+
+                <TextView
+                    android:id="@+id/tvSponsorDescription"
+                    fontPath="fonts/OpenSans-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.1"
+                    android:text=""
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_small"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvClick"
+                style="@style/ppb200_Button_main_small_radius"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_first" />
+
 
         </LinearLayout>
 
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/tvClick"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/ppb200_common_button_height"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/click_2_0_0_main_button_radius"
-            android:gravity="center"
-            android:letterSpacing="0.1"
-            android:minWidth="@dimen/ppb200_common_button_width"
-            android:paddingLeft="@dimen/ppb200_padding_margin_first"
-            android:paddingRight="@dimen/ppb200_padding_margin_first"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/ppb200_buttontext_for_height48" />
-
-
-    </LinearLayout>
 
     <!--refresh img-->
     <ImageView

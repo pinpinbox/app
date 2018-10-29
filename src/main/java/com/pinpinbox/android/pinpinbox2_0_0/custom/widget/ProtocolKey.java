@@ -76,6 +76,7 @@ public class ProtocolKey {
     public static String download_id = "download_id";
     public static String difftime = "difftime";
     public static String discuss = "discuss";
+    public static String display_num_of_collect = "display_num_of_collect";
 
     //e
     public static String event = "event";
@@ -198,7 +199,12 @@ public class ProtocolKey {
     public static String ratio = "ratio";
     public static String repeat = "repeat";
     public static String reportintent_id = "reportintent_id";
+    public static String reward_after_collect = "reward_after_collect";
+    public static String reward_description = "reward_description";
 
+    public static String recipient = "recipient";
+    public static String recipient_tel = "recipient_tel";
+    public static String recipient_address = "recipient_address";
 
     //s
     public static String selfdescription = "selfdescription";

@@ -176,7 +176,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private LinearLayout linDescription;
     private WarpLinearLayout linLink;
     private TextView tvPageDescription, tvPage, tvCurrentPoint;
-    private EditText edPoint;
+    private EditText edPoint, edUserName, edPhone, edAddress;
     private ImageView backImg, autoplayImg, voiceImg, locationImg, messageImg, likeImg, moreImg;
     private SeekBar seekBar;
     private ControlSizeScrollView svDescription;
@@ -588,7 +588,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                     photoContentsList.get(lastPosition).getVideoView().reset();
                 }
 
-                svDescription.scrollTo(0,0);
+                svDescription.scrollTo(0, 0);
 
                 setPage(position);
                 setPageDetail(position);
@@ -1061,25 +1061,32 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
 
                     //最後一頁
-                    LinearLayout linLastPage = (LinearLayout) vPage.findViewById(R.id.linLastPage);
-                    linLastPage.setVisibility(View.VISIBLE);
+                    ScrollView svLastPageSponsor = (ScrollView) vPage.findViewById(R.id.svLastPageSponsor);
+                    svLastPageSponsor.setVisibility(View.VISIBLE);
+
 
                     LinearLayout linSponsor = (LinearLayout) vPage.findViewById(R.id.linSponsor);
-                    TextView tvTitle = (TextView) vPage.findViewById(R.id.tvTitle);
+                    LinearLayout linSponsorData = (LinearLayout) vPage.findViewById(R.id.linSponsorData);
+
                     tvCurrentPoint = (TextView) vPage.findViewById(R.id.tvCurrentPoint);
-                    edPoint = (EditText) vPage.findViewById(R.id.edPoint);
+                    TextView tvTitle = (TextView) vPage.findViewById(R.id.tvTitle);
                     TextView tvClick = (TextView) vPage.findViewById(R.id.tvClick);
+                    TextView tvSponsorCount = (TextView) vPage.findViewById(R.id.tvSponsorCount);
+                    TextView tvSponsorDescription = (TextView) vPage.findViewById(R.id.tvSponsorDescription);
+
+
+                    edPoint = (EditText) vPage.findViewById(R.id.edPoint);
+                    edUserName = (EditText) vPage.findViewById(R.id.edUserName);
+                    edPhone = (EditText) vPage.findViewById(R.id.edPhone);
+                    edAddress = (EditText) vPage.findViewById(R.id.edAddress);
+
 
                     TextUtility.setBold(tvTitle, true);
-
-                    ImageView lastPageImg = (ImageView) vPage.findViewById(R.id.lastPageImg);
-
 
                     if (itemAlbum.getPoint() == 0) {
                         tvCurrentPoint.setVisibility(View.GONE);
                         if (photoContentsList.size() - 1 == itemAlbum.getCount_photo()) {
 
-                            lastPageImg.setVisibility(View.GONE);
                             tvTitle.setText(R.string.pinpinbox_2_0_0_dialog_message_read_done);
                             tvClick.setBackgroundResource(R.drawable.click_2_0_0_grey_third_radius);
                             tvClick.setText(R.string.pinpinbox_2_0_0_button_exit);
@@ -1095,9 +1102,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             return;
 
                         } else {
-
-                            lastPageImg.setVisibility(View.VISIBLE);
-                            lastPageImg.setImageResource(R.drawable.bg200_preview_collect);
 
                             tvTitle.setText(R.string.pinpinbox_2_0_0_dialog_message_read_all_content);
                             tvClick.setText(R.string.pinpinbox_2_0_0_button_collect);
@@ -1116,9 +1120,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     if (itemAlbum.getPoint() > 0) {
 
-                        lastPageImg.setVisibility(View.VISIBLE);
-                        lastPageImg.setImageResource(R.drawable.bg200_preview_sponsor);
-
                         linSponsor.setVisibility(View.VISIBLE);
 
                         setCurrentPoint();
@@ -1126,7 +1127,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         edPoint.setHint(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_lowest_point) + itemAlbum.getPoint());
 
                         tvClick.setText(getResources().getString(R.string.pinpinbox_2_0_0_button_sponsor));
-//                        + itemAlbum.getPoint() + "P"
 
                         if (photoContentsList.size() - 1 == itemAlbum.getCount_photo()) {
                             tvTitle.setText(R.string.pinpinbox_2_0_0_dialog_message_sponsor_by_like_album);
@@ -1136,9 +1136,68 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         }
 
 
+                        if (itemAlbum.isDisplay_num_of_collect() && itemAlbum.getSponsorCount() > 0) {
+
+                            tvSponsorCount.setVisibility(View.VISIBLE);
+                            tvSponsorCount.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_has_gotten) + itemAlbum.getSponsorCount() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_sponsors_times));
+
+                        } else {
+
+                            tvSponsorCount.setVisibility(View.GONE);
+
+                        }
+
+
+                        if (itemAlbum.isReward_after_collect()) {
+
+                            linSponsorData.setVisibility(View.VISIBLE);
+
+                            if (itemAlbum.getReward_description() != null && !itemAlbum.getReward_description().equals("null") && !itemAlbum.getReward_description().equals("")) {
+                                tvSponsorDescription.setText(itemAlbum.getReward_description());
+                                tvSponsorDescription.setVisibility(View.VISIBLE);
+                            } else {
+                                tvSponsorDescription.setVisibility(View.GONE);
+                            }
+
+
+                        } else {
+
+                            linSponsorData.setVisibility(View.GONE);
+
+                        }
+
+
                         tvClick.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+
+
+                                if (itemAlbum.isReward_after_collect()) {
+
+                                    if (edUserName.getText().toString().equals("")) {
+                                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_recipient_name);
+                                        return;
+                                    }
+
+
+                                    if (edPhone.getText().toString().equals("")) {
+                                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_cellphone_number);
+                                        return;
+                                    }
+
+                                    if (edAddress.getText().toString().equals("")) {
+                                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_recipient_address);
+                                        return;
+                                    }
+
+                                }
+
+
+                                //檢查輸入空值
+                                if (edPoint.getText().toString().equals("")) {
+                                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_input_sponsor_count);
+                                    return;
+                                }
 
                                 //檢查第一位數
                                 String p = edPoint.getText().toString();
@@ -1150,12 +1209,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                     return;
                                 }
 
-
-                                //檢查輸入空值
-                                if (edPoint.getText().toString().equals("")) {
-                                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_input_sponsor_count);
-                                    return;
-                                }
 
 
                                 //檢查最低額度輸入
@@ -2117,14 +2170,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 }
 
 
-
-
-
             }
-        },100);
-
-
-
+        }, 100);
 
 
     }
@@ -2788,6 +2835,30 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             return;
         }
 
+        String param = "";
+
+        JSONObject object = new JSONObject();
+
+        if (itemAlbum.isReward_after_collect()) {
+
+            try {
+
+                JSONObject obj = new JSONObject();
+                obj.put(ProtocolKey.recipient, edUserName.getText().toString());
+                obj.put(ProtocolKey.recipient_tel, edPhone.getText().toString());
+                obj.put(ProtocolKey.recipient_address, edAddress.getText().toString());
+
+                object.put(ProtocolKey.reward, obj.toString());
+                param = object.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
         protocol13 = new Protocol13_BuyAlbum(
                 mActivity,
                 id,
@@ -2795,6 +2866,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 album_id,
                 "google",
                 comfirmPoint,
+                param,
                 new Protocol13_BuyAlbum.TaskCallBack() {
                     @Override
                     public void Prepare() {
@@ -2997,7 +3069,13 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         itemAlbum.setAudio_refer(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_audio_refer));
                         itemAlbum.setAudio_target(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_audio_target));
                         itemAlbum.setIs_likes(JsonUtility.GetBoolean(jsonAlbum, ProtocolKey.is_likes));
+                        itemAlbum.setDisplay_num_of_collect(JsonUtility.GetBoolean(jsonAlbum, ProtocolKey.display_num_of_collect));
+                        itemAlbum.setReward_after_collect(JsonUtility.GetBoolean(jsonAlbum, ProtocolKey.reward_after_collect));
+                        itemAlbum.setReward_description(JsonUtility.GetString(jsonAlbum, ProtocolKey.reward_description));
 
+                        /*album albumstatistics */
+                        JSONObject jsonAlbumstatistics = new JSONObject(JsonUtility.GetString(jsonData, ProtocolKey.albumstatistics));
+                        itemAlbum.setSponsorCount(JsonUtility.GetInt(jsonAlbumstatistics, ProtocolKey.exchange));
 
                         /*album usefor*/
                         String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.album_usefor);

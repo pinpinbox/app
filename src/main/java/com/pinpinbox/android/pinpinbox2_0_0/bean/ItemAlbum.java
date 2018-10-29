@@ -23,6 +23,7 @@ public class ItemAlbum {
     private String weather;
     private String mood;
     private String act;
+    private String reward_description;
 
 
     private int messageboard;
@@ -52,6 +53,8 @@ public class ItemAlbum {
     private boolean video; //是否有影片類相片
     private boolean audio; //是否有影音類相片
     private boolean audio_loop; //相本音訊循環
+    private boolean reward_after_collect;
+    private boolean display_num_of_collect;
 
     private boolean contributionstatus;
     private boolean isFocuse = false;
@@ -71,6 +74,30 @@ public class ItemAlbum {
     private int user_id; //作者ID
     private String user_name; //作者名稱
     private String user_picture;
+
+    public String getReward_description() {
+        return reward_description;
+    }
+
+    public void setReward_description(String reward_description) {
+        this.reward_description = reward_description;
+    }
+
+    public boolean isReward_after_collect() {
+        return reward_after_collect;
+    }
+
+    public void setReward_after_collect(boolean reward_after_collect) {
+        this.reward_after_collect = reward_after_collect;
+    }
+
+    public boolean isDisplay_num_of_collect() {
+        return display_num_of_collect;
+    }
+
+    public void setDisplay_num_of_collect(boolean display_num_of_collect) {
+        this.display_num_of_collect = display_num_of_collect;
+    }
 
     public List<String> getAlbumindexList() {
         return albumindexList;

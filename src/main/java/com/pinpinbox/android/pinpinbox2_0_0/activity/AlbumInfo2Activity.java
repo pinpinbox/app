@@ -801,6 +801,7 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
                 album_id,
                 "google",
                 itemAlbum.getPoint() + "",
+                "",
                 new Protocol13_BuyAlbum.TaskCallBack() {
                     @Override
                     public void Prepare() {

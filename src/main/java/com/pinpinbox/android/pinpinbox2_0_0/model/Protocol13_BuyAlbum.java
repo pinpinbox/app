@@ -52,12 +52,13 @@ public class Protocol13_BuyAlbum extends AsyncTask<Void, Void, Object> {
     private String album_id;
     private String platform;
     private String point;
+    private String param;
 
     private String result = "";
     private String message = "";
     private String reponse = "";
 
-    public Protocol13_BuyAlbum(Activity mActivity, String user_id, String token, String album_id, String platform, String point, TaskCallBack callBack) {
+    public Protocol13_BuyAlbum(Activity mActivity, String user_id, String token, String album_id, String platform, String point, String param, TaskCallBack callBack) {
         this.mActivity = mActivity;
         this.callBack = callBack;
         this.user_id = user_id;
@@ -65,6 +66,7 @@ public class Protocol13_BuyAlbum extends AsyncTask<Void, Void, Object> {
         this.album_id = album_id;
         this.platform = platform;
         this.point = point;
+        this.param = param;
         execute();
 
     }
@@ -82,7 +84,6 @@ public class Protocol13_BuyAlbum extends AsyncTask<Void, Void, Object> {
         try {
 
             reponse = HttpUtility.uploadSubmit(true, Url.P13_BuyAlbum, putMap(), null);
-
 
 
             MyLog.Set("d", getClass(), "p13reponse => " + reponse);
@@ -168,7 +169,6 @@ public class Protocol13_BuyAlbum extends AsyncTask<Void, Void, Object> {
                 break;
 
 
-
         }
 
 
@@ -183,6 +183,10 @@ public class Protocol13_BuyAlbum extends AsyncTask<Void, Void, Object> {
         map.put(Key.token, token);
         map.put(Key.user_id, user_id);
         map.put(Key.point, point);
+
+        if (!param.equals("")) {
+            map.put(Key.param, param);
+        }
 
         return map;
     }

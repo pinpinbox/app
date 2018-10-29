@@ -8,8 +8,8 @@
     <!--包名 com.pinpinbox.android-->
 
     <!--<uses-sdk-->
-        <!--android:minSdkVersion="18"-->
-        <!--android:targetSdkVersion="23" />-->
+    <!--android:minSdkVersion="18"-->
+    <!--android:targetSdkVersion="23" />-->
 
     <!-- 支持多种分辨率 -->
     <!-- <supports-screens -->
@@ -520,7 +520,8 @@
             android:name=".pinpinbox2_0_0.activity.Reader2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="user"
-            android:theme="@style/reader" />
+            android:theme="@style/reader"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
         <activity
@@ -782,9 +783,6 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
-
-
-
         <activity
             android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"
             android:screenOrientation="portrait"
@@ -810,9 +808,6 @@
             android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorDrawActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" />
-
-
-
 
 
     </application>
