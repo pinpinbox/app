@@ -2837,8 +2837,6 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
         String param = "";
 
-        JSONObject object = new JSONObject();
-
         if (itemAlbum.isReward_after_collect()) {
 
             try {
@@ -2848,8 +2846,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 obj.put(ProtocolKey.recipient_tel, edPhone.getText().toString());
                 obj.put(ProtocolKey.recipient_address, edAddress.getText().toString());
 
-                object.put(ProtocolKey.reward, obj.toString());
-                param = object.toString();
+                param = obj.toString();
 
             } catch (Exception e) {
                 e.printStackTrace();

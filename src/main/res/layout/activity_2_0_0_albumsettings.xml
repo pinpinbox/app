@@ -234,11 +234,11 @@
                 android:orientation="vertical">
 
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                    android:gravity="center"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:orientation="horizontal">
 
                     <TextView
@@ -247,17 +247,18 @@
                         android:text="@string/pinpinbox_2_0_0_title_point_setting" />
 
                     <TextView
+                        android:layout_alignParentRight="true"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                        android:layout_marginTop="1dp"
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_other_text_least_3p"
                         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                         android:textSize="@dimen/ppb200_common_text_third" />
 
 
-                </LinearLayout>
+                </RelativeLayout>
 
 
                 <RelativeLayout
@@ -313,6 +314,226 @@
                 android:layout_marginTop="@dimen/ppb200_padding_margin_big"
                 />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/linSponsorData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSponsorCountVisibility"
+                        style="@style/ppb200_title_third"
+                        android:text="贊助次數顯示" />
+
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                        android:letterSpacing="0.1"
+                        android:text="會員等級plus"
+                        android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                        android:textSize="@dimen/ppb200_common_text_third" />
+
+
+                </RelativeLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/linEnableSc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ppb200_common_button_height"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/enableScImg"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+
+                        <TextView
+                            android:id="@+id/tvEnableSc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/ppb200_common_text_second"
+                            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                            android:letterSpacing="0.1"
+                            android:text="開啟"/>
+
+
+
+                    </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/linCloseSc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ppb200_common_button_height"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/closeScImg"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+
+                        <TextView
+                            android:id="@+id/tvCloseSc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/ppb200_common_text_second"
+                            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                            android:letterSpacing="0.1"
+                            android:text="關閉"/>
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/tvReward"
+                    style="@style/ppb200_title_third"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:text="贊助回饋" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/linEnableReward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ppb200_common_button_height"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/enableRewardImg"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+
+                        <TextView
+                            android:id="@+id/tvEnableReward"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/ppb200_common_text_second"
+                            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                            android:letterSpacing="0.1"
+                            android:text="開啟"/>
+
+
+
+                    </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/linCloseReward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ppb200_common_button_height"
+                        android:layout_marginLeft="@dimen/ppb200_padding_margin_large"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/closeRewardImg"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+
+                        <TextView
+                            android:id="@+id/tvCloseReward"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/ppb200_common_text_second"
+                            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
+                            android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                            android:letterSpacing="0.1"
+                            android:text="關閉"/>
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/edReward"
+                    style="@style/ppb200_EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:hint="回饋說明"/>
+
+
+                <View
+                    style="@style/ppb200_divider_list"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+                    />
+
+            </LinearLayout>
+
+
+
+
             <!--*******************************************************************************************************-->
             <!-- 進階設定-->
 
@@ -325,11 +546,11 @@
                 android:visibility="visible">
 
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
-                    android:gravity="center"
+                    android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:orientation="horizontal">
 
                     <TextView
@@ -341,14 +562,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                        android:layout_marginTop="1dp"
+                        android:layout_alignParentRight="true"
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_other_text_member_level_profession"
                         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                         android:textSize="@dimen/ppb200_common_text_third" />
 
 
-                </LinearLayout>
+                </RelativeLayout>
 
 
                 <RelativeLayout
@@ -509,6 +730,7 @@
 
     <FrameLayout
         android:id="@+id/frame"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"

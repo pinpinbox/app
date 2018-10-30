@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
@@ -108,11 +109,13 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private List<ItemAlbumSettings> categoryFirstList, categorySecondList, actList;
 
 
-    //    tvSaveToRead
-    private EditText edName, edDescription, edLocation, edPoint, edScan;
+    private LinearLayout linSponsorData, linEnableSc, linCloseSc, linEnableReward, linCloseReward;
+    private EditText edName, edDescription, edLocation, edPoint, edScan, edReward;
     private TextView tvToCreation, tvSaveToLeave, tvPoint, tvAdvanced, tvAct,
-            tvSelectFirstPaging, tvIndispensable1, tvIndispensable2, tvIndispensable3, tvIndispensable4;
-    private ImageView scanImg, actImg, addBarCodeImg, backImg;//backImg qLevelImg
+            tvSelectFirstPaging, tvIndispensable1, tvIndispensable2, tvIndispensable3,
+            tvIndispensable4, tvSponsorCountVisibility, tvEnableSc, tvCloseSc, tvReward,
+            tvEnableReward, tvCloseReward;
+    private ImageView scanImg, actImg, addBarCodeImg, backImg, enableScImg, closeScImg, enableRewardImg, closeRewardImg;
     private RecyclerView rvCategoryFirst, rvCategorySecond;
 
     private String id, token;
@@ -120,7 +123,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private String strName, strDescription, strLocation, strAct;
     private String settings, strUsergrade;
     private String event_id;
-    private String strGetName = "", strGetDescription="", strGetLocation="", strGetPoint="";
+    private String strGetName = "", strGetDescription = "", strGetLocation = "", strGetPoint = "";
     private String strPrefixText, strSpecialUrl;
 
 
@@ -306,7 +309,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         rvCategorySecond = (RecyclerView) findViewById(R.id.rvCategorySecond);
 
 
-
         scanImg.setOnClickListener(this);
         actImg.setOnClickListener(this);
         backImg.setOnClickListener(this);
@@ -340,15 +342,12 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         rvCategorySecond.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
 
 
-
         categoryFirstAdapter = new RecyclerAlbumSettingsAdapter(mActivity, categoryFirstList);
         categorySecondAdapter = new RecyclerAlbumSettingsAdapter(mActivity, categorySecondList);
 
 
-
         rvCategoryFirst.setAdapter(categoryFirstAdapter);
         rvCategorySecond.setAdapter(categorySecondAdapter);
-
 
 
         recyclerClick(categoryFirstAdapter, categoryFirstList, RefreshSecondCategoryPaging);
@@ -601,7 +600,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         String point = edPoint.getText().toString();
 
 
-
         if (!strGetName.equals(name) || !strGetDescription.equals(description) || !strGetLocation.equals(location) || !strGetPoint.equals(point)) {
             isModify = true;
         }
@@ -845,7 +843,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                             tvSelectFirstPaging.setVisibility(View.GONE);
                             rvCategorySecond.setVisibility(View.VISIBLE);
                         }
-
 
 
                         RecyclerView rvBarCode = (RecyclerView) findViewById(R.id.rvBarCode);

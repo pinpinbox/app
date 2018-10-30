@@ -185,7 +185,7 @@ public class Protocol13_BuyAlbum extends AsyncTask<Void, Void, Object> {
         map.put(Key.point, point);
 
         if (!param.equals("")) {
-            map.put(Key.param, param);
+            map.put(Key.reward, param);
         }
 
         return map;
