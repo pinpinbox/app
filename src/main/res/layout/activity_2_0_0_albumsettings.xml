@@ -317,21 +317,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
             <LinearLayout
                 android:id="@+id/linSponsorData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
 
@@ -520,6 +510,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+                    android:visibility="gone"
                     android:hint="回饋說明"/>
 
 
@@ -543,7 +534,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <RelativeLayout

@@ -53,10 +53,12 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.UserGradeKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DismissExcute;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMyUpLoad2;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch2;
@@ -109,12 +111,11 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private List<ItemAlbumSettings> categoryFirstList, categorySecondList, actList;
 
 
-    private LinearLayout linSponsorData, linEnableSc, linCloseSc, linEnableReward, linCloseReward;
+    private LinearLayout linEnableSc, linCloseSc, linEnableReward, linCloseReward;
     private EditText edName, edDescription, edLocation, edPoint, edScan, edReward;
-    private TextView tvToCreation, tvSaveToLeave, tvPoint, tvAdvanced, tvAct,
+    private TextView tvToCreation, tvSaveToLeave, tvAct,
             tvSelectFirstPaging, tvIndispensable1, tvIndispensable2, tvIndispensable3,
-            tvIndispensable4, tvSponsorCountVisibility, tvEnableSc, tvCloseSc, tvReward,
-            tvEnableReward, tvCloseReward;
+            tvIndispensable4, tvEnableSc, tvCloseSc, tvEnableReward, tvCloseReward;
     private ImageView scanImg, actImg, addBarCodeImg, backImg, enableScImg, closeScImg, enableRewardImg, closeRewardImg;
     private RecyclerView rvCategoryFirst, rvCategorySecond;
 
@@ -123,9 +124,9 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private String strName, strDescription, strLocation, strAct;
     private String settings, strUsergrade;
     private String event_id;
-    private String strGetName = "", strGetDescription = "", strGetLocation = "", strGetPoint = "";
+    private String strGetName = "", strGetDescription = "", strGetLocation = "", strGetPoint = "", strGetRewardDescription = "";
     private String strPrefixText, strSpecialUrl;
-
+    private String strRewardDescription;
 
     private List<String> albumindexList;
 
@@ -144,6 +145,8 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     private boolean isCreationExist = false;
     private boolean isModify = false;
     private boolean isNewCreate = false;
+    private boolean isRewardAfterCollect = false;
+    private boolean isDisplayNumOfCollect = false;
 
 
     @Override
@@ -281,28 +284,40 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         actList = new ArrayList<>();
         albumindexList = new ArrayList<>();
 
+        linEnableSc = (LinearLayout) findViewById(R.id.linEnableSc);
+        linCloseSc = (LinearLayout) findViewById(R.id.linCloseSc);
+        linEnableReward = (LinearLayout) findViewById(R.id.linEnableReward);
+        linCloseReward = (LinearLayout) findViewById(R.id.linCloseReward);
+
+
         edName = (EditText) findViewById(R.id.edName);
         edDescription = (EditText) findViewById(R.id.edDescription);
         edLocation = (EditText) findViewById(R.id.edLocation);
         edPoint = (EditText) findViewById(R.id.edPoint);
         edScan = (EditText) findViewById(R.id.edScan);
+        edReward = (EditText) findViewById(R.id.edReward);
 
         tvToCreation = (TextView) findViewById(R.id.tvToCreation);
         tvSaveToLeave = (TextView) findViewById(R.id.tvSaveToLeave);
-        tvPoint = (TextView) findViewById(R.id.tvPoint);
-        tvAdvanced = (TextView) findViewById(R.id.tvAdvanced);
         tvAct = (TextView) findViewById(R.id.tvAct);
         tvSelectFirstPaging = (TextView) findViewById(R.id.tvSelectFirstPaging);
         tvIndispensable1 = (TextView) findViewById(R.id.tvIndispensable1);
-//        tvIndispensable2 = (TextView) findViewById(R.id.tvIndispensable2);
         tvIndispensable3 = (TextView) findViewById(R.id.tvIndispensable3);
         tvIndispensable4 = (TextView) findViewById(R.id.tvIndispensable4);
+        tvEnableSc = (TextView) findViewById(R.id.tvEnableSc);
+        tvCloseSc = (TextView) findViewById(R.id.tvCloseSc);
+        tvEnableReward = (TextView) findViewById(R.id.tvEnableReward);
+        tvCloseReward = (TextView) findViewById(R.id.tvCloseReward);
 
 
         scanImg = (ImageView) findViewById(R.id.scanImg);
         actImg = (ImageView) findViewById(R.id.actImg);
         backImg = (ImageView) findViewById(R.id.backImg);
         addBarCodeImg = (ImageView) findViewById(R.id.addBarCodeImg);
+        enableScImg = (ImageView) findViewById(R.id.enableScImg);
+        closeScImg = (ImageView) findViewById(R.id.closeScImg);
+        enableRewardImg = (ImageView) findViewById(R.id.enableRewardImg);
+        closeRewardImg = (ImageView) findViewById(R.id.closeRewardImg);
 
 
         rvCategoryFirst = (RecyclerView) findViewById(R.id.rvCategoryFirst);
@@ -315,6 +330,10 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         addBarCodeImg.setOnClickListener(this);
         tvToCreation.setOnClickListener(this);
         tvSaveToLeave.setOnClickListener(this);
+        linEnableSc.setOnClickListener(this);
+        linCloseSc.setOnClickListener(this);
+        linEnableReward.setOnClickListener(this);
+        linCloseReward.setOnClickListener(this);
 
         /*20171120 string null error*/
         /*set strAct default*/
@@ -324,15 +343,16 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
     private void setBold() {
 
-        TextUtility.setBold((TextView) findViewById(R.id.tv1), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv2), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv3), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv4), true);
-//        TextUtility.setBold((TextView) findViewById(R.id.tv5), true);
-        TextUtility.setBold(tvPoint, true);
-        TextUtility.setBold(tvAdvanced, true);
-        TextUtility.setBold(tvToCreation, true);
-        TextUtility.setBold(tvSaveToLeave, true);
+        TextUtility.setBold(
+                (TextView) findViewById(R.id.tv1),
+                (TextView) findViewById(R.id.tv2),
+                (TextView) findViewById(R.id.tv3),
+                (TextView) findViewById(R.id.tv4),
+                (TextView) findViewById(R.id.tvPoint),
+                (TextView) findViewById(R.id.tvAdvanced),
+                (TextView) findViewById(R.id.tvSponsorCountVisibility),
+                (TextView) findViewById(R.id.tvReward),
+                tvToCreation, tvSaveToLeave);
 
     }
 
@@ -562,18 +582,33 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
             jsonObject.put(ProtocolKey.point, p);
 
-//            for (int i = 0; i < categoryFirstList.size(); i++) {
-//                if (categoryFirstList.get(i).isSelect()) {
-//                    jsonObject.put(ProtocolKey.firstpaging, categoryFirstList.get(i).getId());
-//                    break;
-//                }
-//            }
-
             for (int i = 0; i < categorySecondList.size(); i++) {
                 if (categorySecondList.get(i).isSelect()) {
                     jsonObject.put(ProtocolKey.category_id, categorySecondList.get(i).getId());
                     break;
                 }
+            }
+
+
+            if (isDisplayNumOfCollect) {
+
+                jsonObject.put(ProtocolKey.display_num_of_collect, true);
+
+            } else {
+
+                jsonObject.put(ProtocolKey.display_num_of_collect, false);
+
+            }
+
+            if (isRewardAfterCollect) {
+
+                jsonObject.put(ProtocolKey.reward_after_collect, true);
+                jsonObject.put(ProtocolKey.reward_description, edReward.getText().toString());
+
+            } else {
+
+                jsonObject.put(ProtocolKey.reward_after_collect, false);
+
             }
 
 
@@ -598,9 +633,10 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         String description = edDescription.getText().toString();
         String location = edLocation.getText().toString();
         String point = edPoint.getText().toString();
+        String rewardDescription = edReward.getText().toString();
 
 
-        if (!strGetName.equals(name) || !strGetDescription.equals(description) || !strGetLocation.equals(location) || !strGetPoint.equals(point)) {
+        if (!strGetName.equals(name) || !strGetDescription.equals(description) || !strGetLocation.equals(location) || !strGetPoint.equals(point) || !strGetRewardDescription.equals(rewardDescription)) {
             isModify = true;
         }
     }
@@ -637,6 +673,59 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .add(R.id.frame, fragmentScanSearch2, fragmentScanSearch2.getClass().getSimpleName()).commit();
         }
+
+    }
+
+    private void setEnableSc() {
+
+        enableScImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+        closeScImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+
+        tvEnableSc.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+        tvCloseSc.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+        isDisplayNumOfCollect = true;
+
+    }
+
+    private void setCloseSc() {
+
+        enableScImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+        closeScImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+
+        tvEnableSc.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+        tvCloseSc.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+
+        isDisplayNumOfCollect = false;
+
+    }
+
+    private void setEnableReward() {
+
+        enableRewardImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+        closeRewardImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+
+        tvEnableReward.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+        tvCloseReward.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+        edReward.setVisibility(View.VISIBLE);
+
+        isRewardAfterCollect = true;
+
+
+    }
+
+    private void setCloseReward() {
+
+        enableRewardImg.setImageResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+        closeRewardImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
+
+        tvEnableReward.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+        tvCloseReward.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+
+        edReward.setVisibility(View.GONE);
+
+        isRewardAfterCollect = false;
 
     }
 
@@ -730,6 +819,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                         strDescription = itemAlbum.getDescription();
                         strLocation = itemAlbum.getLocation();
                         strAct = itemAlbum.getAct();
+                        strRewardDescription = itemAlbum.getReward_description();
 
                         intCategoryarea_id = itemAlbum.getCategoryarea_id();
                         intCategory_id = itemAlbum.getCategory_id();
@@ -737,12 +827,17 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                         albumindexList = itemAlbum.getAlbumindexList();
 
+                        isRewardAfterCollect = itemAlbum.isReward_after_collect();
+
+                        isDisplayNumOfCollect = itemAlbum.isDisplay_num_of_collect();
+
 
                         //設為當前取得
                         strGetName = itemAlbum.getName();
                         strGetDescription = itemAlbum.getDescription();
                         strGetLocation = itemAlbum.getLocation();
                         strGetPoint = itemAlbum.getPoint() + "";
+                        strGetRewardDescription = itemAlbum.getReward_description();
 
 
                         setData();
@@ -776,18 +871,50 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                         edDescription.setText(strDescription);
                         edLocation.setText(strLocation);
                         edPoint.setText(intPoint + "");
+                        edReward.setText(strRewardDescription);
+
+
+                        if (strUsergrade.equals(UserGradeKey.plus) || strUsergrade.equals(UserGradeKey.profession)) {
+
+                            findViewById(R.id.linSponsorData).setVisibility(View.VISIBLE);
+
+                            if (isDisplayNumOfCollect) {
+
+                                setEnableSc();
+
+                            } else {
+
+                                setCloseSc();
+
+                            }
+
+
+                            if (isRewardAfterCollect && intPoint > 2) {
+
+                                setEnableReward();
+
+                            } else {
+
+                                setCloseReward();
+
+                            }
+
+
+                        } else {
+
+                            findViewById(R.id.linSponsorData).setVisibility(View.GONE);
+
+                        }
 
 
                         if (strUsergrade.equals(UserGradeKey.profession)) {
 
                             findViewById(R.id.linScan).setVisibility(View.VISIBLE);
-                            tvAdvanced.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
 
 
                         } else {
 
                             findViewById(R.id.linScan).setVisibility(View.GONE);
-                            tvAdvanced.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
                         }
 
@@ -1042,7 +1169,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
     }
 
-
     private void doAddBarCode() {
 
         if (!HttpUtility.isConnect(this)) {
@@ -1192,8 +1318,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
 
                         String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-
-                        Logger.json(jdata);
 
                         JSONObject object = new JSONObject(jdata);
 
@@ -1623,7 +1747,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         }
     }
 
-
     @Override
     public void onClick(View view) {
         if (ClickUtils.ButtonContinuousClick_1s()) {
@@ -1767,7 +1890,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 break;
             case R.id.tvSaveToLeave:
 
-
                 checkToSend();
 
                 break;
@@ -1811,6 +1933,48 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                 break;
 
+
+            case R.id.linEnableSc:
+                setEnableSc();
+                isModify = true;
+                break;
+
+            case R.id.linCloseSc:
+                setCloseSc();
+                isModify = true;
+                break;
+
+            case R.id.linEnableReward:
+
+                String p = edPoint.getText().toString();
+
+                if (p == null || p.equals("") || StringIntMethod.StringToInt(p) < 3) {
+
+                    PinPinToast.ShowToast(mActivity, "贊助條件至少3P才能開啟");
+
+                    return;
+                }
+
+
+                DialogV2Custom d = new DialogV2Custom(mActivity);
+                d.setMessage("啟用需遵守個人資料保護法之相關規定，盡善良管理人之注意義務，不得外流或作為本次回饋使用者以外目的之使用，並須遵守本平台含隱私權政策在內之相關規定，如有違反，需自負一切責任。");
+                d.setStyle(DialogStyleClass.CHECK);
+                d.getTvRightOrBottom().setVisibility(View.GONE);
+                d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_i_know);
+                d.setDismissExcute(new DismissExcute() {
+                    @Override
+                    public void AfterDismissDo() {
+                        setEnableReward();
+                    }
+                });
+                d.show();
+                isModify = true;
+                break;
+
+            case R.id.linCloseReward:
+                setCloseReward();
+                isModify = true;
+                break;
 
         }
 
@@ -1885,7 +2049,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
     }
 
-
     @Override
     public void onPause() {
         if (mediaPlayer != null) {
@@ -1912,7 +2075,6 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
     }
 
     private boolean isPause = false;
-
 
     @Override
     public void onDestroy() {

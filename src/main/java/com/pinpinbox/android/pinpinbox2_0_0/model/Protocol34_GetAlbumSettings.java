@@ -95,7 +95,7 @@ public class Protocol34_GetAlbumSettings extends AsyncTask<Void, Void, Object> {
                 JSONObject jsonObject = new JSONObject(reponse);
                 result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
 
-                if(result.equals(ResultType.SYSTEM_OK)){
+                if (result.equals(ResultType.SYSTEM_OK)) {
 
 
                     String jsonData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
@@ -130,8 +130,14 @@ public class Protocol34_GetAlbumSettings extends AsyncTask<Void, Void, Object> {
                     }
                     itemAlbum.setAlbumindexList(albumindexList);
 
+                    itemAlbum.setPoint(JsonUtility.GetInt(object, ProtocolKey.point));
 
-                }else {
+                    itemAlbum.setReward_description(JsonUtility.GetString(object, ProtocolKey.reward_description));
+                    itemAlbum.setReward_after_collect(JsonUtility.GetBoolean(object, ProtocolKey.reward_after_collect));
+                    itemAlbum.setDisplay_num_of_collect(JsonUtility.GetBoolean(object, ProtocolKey.display_num_of_collect));
+
+
+                } else {
                     message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
                 }
 
@@ -145,7 +151,6 @@ public class Protocol34_GetAlbumSettings extends AsyncTask<Void, Void, Object> {
 
         return null;
     }
-
 
 
     @Override
@@ -202,7 +207,6 @@ public class Protocol34_GetAlbumSettings extends AsyncTask<Void, Void, Object> {
                 break;
 
 
-
         }
 
 
@@ -229,7 +233,6 @@ public class Protocol34_GetAlbumSettings extends AsyncTask<Void, Void, Object> {
     public AsyncTask getTask() {
         return this;
     }
-
 
 
 }
