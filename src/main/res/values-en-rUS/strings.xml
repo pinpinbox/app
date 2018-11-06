@@ -311,6 +311,8 @@
     <string name="pinpinbox_2_0_0_toast_message_please_select_an_audio">Please select an audio</string>
     <string name="pinpinbox_2_0_0_toast_message_enter_recipient_name">Please enter the recipient name</string>
     <string name="pinpinbox_2_0_0_toast_message_enter_recipient_address">Please enter the recipient address</string>
+    <string name="pinpinbox_2_0_0_toast_message_max_is_50000p">Max is 50000P</string>
+    <string name="pinpinbox_2_0_0_toast_message_at_least_3p_to_enable">Least 3 point to enable</string>
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
     <string name="pinpinbox_2_0_0_size_original">Original(Long time)</string>

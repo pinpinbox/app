@@ -316,7 +316,8 @@
     <string name="pinpinbox_2_0_0_toast_message_please_select_an_audio">請選擇一部音頻</string>
     <string name="pinpinbox_2_0_0_toast_message_enter_recipient_name">請輸入收件人姓名</string>
     <string name="pinpinbox_2_0_0_toast_message_enter_recipient_address">請輸入收件人地址</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_max_is_50000p">最大為50000P</string>
+    <string name="pinpinbox_2_0_0_toast_message_at_least_3p_to_enable">贊助條件至少3P才能開啟</string>
 
 
     <string name="pinpinbox_2_0_0_size_general">一般尺寸</string>

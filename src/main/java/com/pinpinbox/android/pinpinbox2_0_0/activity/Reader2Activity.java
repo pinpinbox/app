@@ -22,6 +22,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -1083,6 +1085,30 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
                     TextUtility.setBold(tvTitle, true);
 
+
+                    edPoint.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                            if(!s.toString().equals("") && StringIntMethod.StringToInt(s.toString()) > 50000){
+                                edPoint.setText(50000 + "");
+                            }
+
+                        }
+                    });
+
+
+
                     if (itemAlbum.getPoint() == 0) {
                         tvCurrentPoint.setVisibility(View.GONE);
                         if (photoContentsList.size() - 1 == itemAlbum.getCount_photo()) {
@@ -1215,6 +1241,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                                 int inputPoint = StringIntMethod.StringToInt(edPoint.getText().toString());
                                 if (inputPoint < itemAlbum.getPoint()) {
                                     PinPinToast.showErrorToast(mActivity, mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_lowest_point) + itemAlbum.getPoint());
+                                    return;
+                                }
+
+                                if(StringIntMethod.StringToInt(p) >50000){
+                                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_max_is_50000p);
                                     return;
                                 }
 

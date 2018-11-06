@@ -16,6 +16,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
@@ -339,6 +341,29 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
         /*set strAct default*/
         strAct = "open";
 
+
+        edPoint.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(!s.toString().equals("") && StringIntMethod.StringToInt(s.toString()) > 50000){
+                    edPoint.setText(50000 + "");
+                }
+
+            }
+        });
+
+
     }
 
     private void setBold() {
@@ -578,6 +603,14 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
                 PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_at_least_3p);
                 return;
             }
+
+
+
+            if(StringIntMethod.StringToInt(p) >50000){
+                PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_max_is_50000p);
+                return;
+            }
+
 
 
             jsonObject.put(ProtocolKey.point, p);
@@ -1950,7 +1983,7 @@ public class AlbumSettings2Activity extends DraggerActivity implements View.OnCl
 
                 if (p == null || p.equals("") || StringIntMethod.StringToInt(p) < 3) {
 
-                    PinPinToast.ShowToast(mActivity, "贊助條件至少3P才能開啟");
+                    PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_at_least_3p_to_enable);
 
                     return;
                 }

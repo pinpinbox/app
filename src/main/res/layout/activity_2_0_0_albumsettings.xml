@@ -293,7 +293,6 @@
                         android:background="@null"
                         android:inputType="number"
                         android:letterSpacing="0.1"
-                        android:maxLength="4"
                         android:paddingBottom="@dimen/ppb200_padding_margin_second"
                         android:paddingRight="@dimen/ppb200_padding_margin_first"
                         android:paddingTop="@dimen/ppb200_padding_margin_second"

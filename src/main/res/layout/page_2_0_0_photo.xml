@@ -466,7 +466,6 @@
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
                     android:inputType="number"
                     android:letterSpacing="0.1"
-                    android:maxLength="4"
                     android:paddingLeft="@dimen/ppb200_padding_margin_second"
                     android:paddingRight="@dimen/ppb200_padding_margin_second"
                     android:singleLine="true" />
