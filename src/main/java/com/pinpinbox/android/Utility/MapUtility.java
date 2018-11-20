@@ -6,6 +6,8 @@ package com.pinpinbox.android.Utility;
 //import org.apache.http.client.methods.HttpGet;
 //import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
+
 import org.json.JSONObject;
 
 /**
@@ -17,11 +19,16 @@ public class MapUtility {
         JSONObject jsonObject = null;
 
         try {
-           String str = OkHttpClientManager.getAsString("http://maps.google."
+//           String str = OkHttpClientManager.getAsString("http://maps.google."
+//
+//                    + "com/maps/api/geocode/json?address=" + address
+//
+//                    + "&sensor=false");
 
-                    + "com/maps/api/geocode/json?address=" + address
+            String str = OkHttpClientManager.getAsString("https://maps.googleapis.com/maps/api/geocode/json?address=" + address
 
-                    + "&sensor=false");
+                    + "&key=" + KeysForSKD.GOOGLE_MAP);
+
             jsonObject = new JSONObject(str);
 
         }catch (Exception e){
