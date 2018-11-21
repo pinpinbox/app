@@ -18,70 +18,33 @@ public class MapUtility {
 
         JSONObject jsonObject = null;
 
-        try {
-//           String str = OkHttpClientManager.getAsString("http://maps.google."
-//
-//                    + "com/maps/api/geocode/json?address=" + address
-//
-//                    + "&sensor=false");
+        /*example*/
+//        https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=台灣&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=
 
-            String str = OkHttpClientManager.getAsString("https://maps.googleapis.com/maps/api/geocode/json?address=" + address
+        try {
+
+//            String str = OkHttpClientManager.getAsString("https://maps.googleapis.com/maps/api/geocode/json?address=" + address
+//
+//                    + "&key=" + KeysForSKD.GOOGLE_MAP + "&sensor=false");
+
+//            String str = OkHttpClientManager.getAsString("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + address
+//
+//                    + "&inputtype=textquery"
+//
+//                    + "&fields=formatted_address,name,geometry"
+//
+//                    + "&key=" + KeysForSKD.GOOGLE_MAP);
+
+            String str = OkHttpClientManager.getAsString("https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + address
 
                     + "&key=" + KeysForSKD.GOOGLE_MAP);
 
+
             jsonObject = new JSONObject(str);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-//        HttpGet httpGet = new HttpGet("http://maps.google."
-//
-//                + "com/maps/api/geocode/json?address=" + address
-//
-//                + "&sensor=false");
-//
-//        HttpClient client = new DefaultHttpClient();
-//
-//        HttpResponse response;
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//
-//        try {
-//
-//            response = client.execute(httpGet);
-//
-//            HttpEntity entity = response.getEntity();
-//
-//            InputStream stream = entity.getContent();
-//
-//            int b;
-//
-//            while ((b = stream.read()) != -1) {
-//
-//                stringBuilder.append((char) b);
-//
-//            }
-//
-//        } catch (IOException e) {
-//
-//            e.printStackTrace();
-//
-//        }
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        try {
-//
-//            jsonObject = new JSONObject(stringBuilder.toString());
-//
-//        } catch (JSONException e) {
-//
-//            e.printStackTrace();
-//
-//        }
 
         return jsonObject;
 

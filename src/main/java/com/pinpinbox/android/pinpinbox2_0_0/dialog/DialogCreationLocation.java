@@ -18,8 +18,8 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.MapUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 
@@ -126,9 +126,14 @@ public class DialogCreationLocation {
 
             private Double locLat = 0.0, locLng = 0.0;
 
+            private boolean isNoLocation = false;
+
             @Override
             public void run() {
                 JSONObject obj = MapUtility.getLocationInfo(strNewLocation);
+
+                MyLog.Set("d", mActivity.getClass(), " obj.toString() => " + obj.toString());
+
                 try {
                     if (obj.get("results") != null && !obj.get("results").equals("")) {
                         if (((JSONArray) obj.get("results")).length() != 0) {
@@ -136,8 +141,31 @@ public class DialogCreationLocation {
                             locLng = ((JSONArray) obj.get("results")).getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
                             MyLog.Set("d", mActivity.getClass(), "locLat(緯度) => " + locLat);
                             MyLog.Set("d", mActivity.getClass(), "locLng(經度) => " + locLng);
+                        }else {
+
+                            if(obj.get("status") != null && !obj.get("status").equals("") && obj.get("status").equals("ZERO_RESULTS")){
+                                isNoLocation = true;
+                            }
+
                         }
                     }
+
+//                    if (obj.get("candidates") != null && !obj.get("candidates").equals("")) {
+//
+//                        int count = ((JSONArray)obj.get("candidates")).length();
+//
+//                        if(count!=0){
+//
+//                            locLat = ((JSONArray) obj.get("candidates")).getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+//                            locLng = ((JSONArray) obj.get("candidates")).getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+//                            MyLog.Set("d", mActivity.getClass(), "locLat(緯度) => " + locLat);
+//                            MyLog.Set("d", mActivity.getClass(), "locLng(經度) => " + locLng);
+//
+//                        }
+//
+//                    }
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -145,6 +173,15 @@ public class DialogCreationLocation {
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
+
+                        if(isNoLocation){
+
+                            PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_location_not_found_by_edit);
+
+                            return;
+                        }
+
 
                         if (mapPhoto != null) {
                             mapPhoto.clear();
@@ -200,6 +237,8 @@ public class DialogCreationLocation {
 
                             }
                         });
+
+
                     }
                 });
             }

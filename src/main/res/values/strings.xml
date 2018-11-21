@@ -318,7 +318,8 @@
     <string name="pinpinbox_2_0_0_toast_message_enter_recipient_address">請輸入收件人地址</string>
     <string name="pinpinbox_2_0_0_toast_message_max_is_50000p">最大為50000P</string>
     <string name="pinpinbox_2_0_0_toast_message_at_least_3p_to_enable">贊助條件至少3P才能開啟</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_location_not_found">找不到地點</string>
+    <string name="pinpinbox_2_0_0_toast_message_location_not_found_by_edit">找不到地點\n(條件越多可增加搜尋結果)</string>
 
     <string name="pinpinbox_2_0_0_size_general">一般尺寸</string>
     <string name="pinpinbox_2_0_0_size_original">原始尺寸(上傳時間較長)</string>

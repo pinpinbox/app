@@ -211,6 +211,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
     private boolean isSaveToRecent = false;
     private boolean isPlayAudio = true;
     private boolean soundEnable = true;
+    private boolean isNoLocation = false;
 
     private Handler autoScrollHandler = new Handler();
     private Runnable runnable = new Runnable() {
@@ -2426,10 +2427,15 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
 
     private void setLocationOnMap(final String location, final GoogleMap map) {
 
+        isNoLocation = false;
+
+
         final String strNewLocation = location.replaceAll(" ", "");
+
         new Thread(new Runnable() {
 
             private Double locLat = 0.0, locLng = 0.0;
+
 
             @Override
             public void run() {
@@ -2441,6 +2447,11 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                             locLng = ((JSONArray) obj.get("results")).getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
                             MyLog.Set("d", mActivity.getClass(), "locLat(緯度) => " + locLat);
                             MyLog.Set("d", mActivity.getClass(), "locLng(經度) => " + locLng);
+                        }else {
+                            if(obj.get("status") != null && !obj.get("status").equals("") && obj.get("status").equals("ZERO_RESULTS")){
+                                isNoLocation = true;
+                            }
+
                         }
                     }
                 } catch (Exception e) {
@@ -2450,6 +2461,7 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         if (mLocation == null) {
                             return;
                         }
@@ -4363,6 +4375,15 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
             case R.id.locationImg:
 
                 popPageMap.show((RelativeLayout) findViewById(R.id.rBackground));
+
+
+                if(isNoLocation){
+
+                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_location_not_found);
+
+                    return;
+                }
+
                 break;
 
             case R.id.moreImg:
