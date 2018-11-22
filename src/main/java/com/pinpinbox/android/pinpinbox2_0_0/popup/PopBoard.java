@@ -598,7 +598,7 @@ public class PopBoard {
                 }
 
 
-                if (ClickUtils.ButtonContinuousClick_2s()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
                     PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_send_continuous);
                     return;
                 }
