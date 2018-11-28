@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.CardAdapterHelper;
 
@@ -35,7 +34,8 @@ public class SampleGalleryAdapter extends RecyclerView.Adapter<SampleGalleryAdap
 
     public SampleGalleryAdapter(List<Integer> imgList) {
         this.imgList = imgList;
-        mCardAdapterHelper.setShowLeftCardWidth(SizeUtils.dp2px(16));
+        mCardAdapterHelper.setShowLeftCardWidth(8);
+        mCardAdapterHelper.setPagePadding(4);//兩邊
 
     }
 

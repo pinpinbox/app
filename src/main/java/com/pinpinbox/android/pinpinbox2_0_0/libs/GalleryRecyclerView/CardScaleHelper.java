@@ -14,8 +14,8 @@ public class CardScaleHelper {
     private Context mContext;
 
     private float mScale = 1f; // 两边视图scale
-    private int mPagePadding = 15; // 卡片的padding, 卡片间的距离等于2倍的mPagePadding
-    private int mShowLeftCardWidth = 15;   // 左边卡片显示大小
+    private int mPagePadding = 16; // 卡片的padding, 卡片间的距离等于2倍的mPagePadding
+    private int mShowLeftCardWidth = 16;   // 左边卡片显示大小
 
     private int mCardWidth; // 卡片宽度
     private int mOnePageWidth; // 滑动一页的距离

@@ -12,5 +12,20 @@
         android:clipChildren="false"
         android:clipToPadding="false" />
 
+    <View
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:background="@color/pinpinbox_2_0_0_first_text"
+        android:alpha="0.4"
+        />
+
+    <View
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@color/pinpinbox_2_0_0_first_text"
+        android:alpha="0.4"
+        />
+
 
 </RelativeLayout>

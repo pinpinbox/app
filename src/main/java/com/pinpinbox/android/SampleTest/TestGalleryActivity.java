@@ -39,10 +39,9 @@ public class TestGalleryActivity extends DraggerActivity {
 
         for (int i = 0; i < 3; i++) {
 
-            imgList.add(R.drawable.test_album);
-            imgList.add(R.drawable.test_banner);
-            imgList.add(R.drawable.test_get_color);
-
+            imgList.add(R.drawable.test_banner_960x540_1);
+            imgList.add(R.drawable.test_banner_960x540_2);
+            imgList.add(R.drawable.test_banner_960x540_3);
 
         }
 

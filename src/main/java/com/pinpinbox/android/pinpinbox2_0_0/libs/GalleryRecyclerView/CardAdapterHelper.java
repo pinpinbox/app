@@ -11,8 +11,8 @@ import com.blankj.utilcode.util.SizeUtils;
  * Created by jameson on 9/1/16.
  */
 public class CardAdapterHelper {
-    private int mPagePadding = 15;
-    private int mShowLeftCardWidth = 15;
+    private int mPagePadding = 16;
+    private int mShowLeftCardWidth = 16;
 
     public void onCreateViewHolder(ViewGroup parent,  View itemView) {
         RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) itemView.getLayoutParams();
