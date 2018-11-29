@@ -11,6 +11,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
@@ -21,6 +22,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * Created by vmage on 2015/10/27
  */
 public class PPBApplication extends MultiDexApplication {
+
+
+
+    public static final int PHONE = 10001;
+    public static final int TABLE = 10002;
 
 
     private static GoogleAnalytics sAnalytics;
@@ -90,6 +96,16 @@ public class PPBApplication extends MultiDexApplication {
     public String getMyDir() {
 
         return "PinPinBox" + getId() + "/";
+    }
+
+    public boolean isPhone(){
+
+        if(!SystemUtility.isTablet(this)){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 

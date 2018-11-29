@@ -54,6 +54,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Rotate3d;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMenu;
 import com.pinpinbox.android.pinpinbox2_0_0.service.DownLoadService;
 import com.squareup.okhttp.Callback;
@@ -532,13 +533,22 @@ public class OldMainActivity extends FragmentActivity {
             }
         });
 
+        final FragmentCategory fragmentCategory = new FragmentCategory();
         Button btn15 = (Button) findViewById(R.id.button15);
         btn15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(OldMainActivity.this, Category2Activity.class);
-                startActivity(intent);
+
+                if (!fragmentCategory.isAdded()) {
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.frame, fragmentCategory, TagClass.TagFragmentPhotoCrop).commit();
+
+                    getSupportFragmentManager().beginTransaction().show(fragmentCategory);
+
+                } else {
+                    getSupportFragmentManager().beginTransaction().show(fragmentCategory);
+                }
 
             }
         });

@@ -44,6 +44,8 @@
     <color name="pinpinbox_2_0_0_first_text">@color/pinpinbox_2_0_0_first_grey</color>
     <color name="pinpinbox_2_0_0_secondary_text">@color/pinpinbox_2_0_0_second_grey</color>
 
+    <color name="pinpinbox_2_0_0_categroy_text">@color/pinpinbox_2_0_0_hint_grey</color>
+
     <color name="pinpinbox_2_0_0_mainbutton_normal">@color/pinpinbox_2_0_0_first_main</color>
     <color name="pinpinbox_2_0_0_mainbutton_focuse">@color/pinpinbox_2_0_0_dark_main</color>
 

@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/ppb200_padding_margin_second"
+    android:gravity="center">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+    <LinearLayout
+        android:id="@+id/linItemBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/click_2_0_0_second_grey_button_frame_white_radius"
+        android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/categoryImg"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop" />
 
-        <View
-            android:id="@+id/vItemBackground"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_alignParentBottom="true"/>
-
-        
         <TextView
-            android:letterSpacing="0.1"
-            android:id="@+id/tvName"
+            android:id="@+id/tvCategoryName"
+            style="@style/ppb200_title_third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textSize="@dimen/ppb200_title_second_size"
-            android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:layout_marginLeft="16dp"
-            />
-        
-        
-        
-    </RelativeLayout>
-    
-    
-    
+            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:textColor="@color/pinpinbox_2_0_0_categroy_text"/>
+
+    </LinearLayout>
+
+
+
+
 </RelativeLayout>

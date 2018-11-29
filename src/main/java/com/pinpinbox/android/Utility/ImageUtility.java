@@ -84,5 +84,27 @@ public class ImageUtility {
 
     }
 
+    public static void setCommonImage(Activity mActivity, ImageView imageView, String imageUrl){
+
+        if (isImageExist(imageUrl)) {
+
+            Picasso.with(mActivity.getApplicationContext())
+                    .load(imageUrl)
+                    .config(Bitmap.Config.RGB_565)
+                    .priority(Picasso.Priority.HIGH)
+                    .error(R.drawable.bg_2_0_0_no_image)
+                    .tag(mActivity.getApplicationContext())
+                    .into(imageView);
+
+            imageView.setTag(imageUrl);
+
+        } else {
+
+            imageView.setImageResource(R.drawable.bg_2_0_0_no_image);
+
+        }
+
+    }
+
 
 }

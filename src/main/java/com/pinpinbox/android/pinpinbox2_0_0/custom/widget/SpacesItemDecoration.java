@@ -19,11 +19,24 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     private boolean hasHeader = false;
 
+    private boolean isSquare = false;
+
 
     public SpacesItemDecoration(int space, int deviceType, boolean hasHeader) {
         this.mSpace = space;
         this.deviceType = deviceType;
         this.hasHeader = hasHeader;
+
+
+    }
+
+    public SpacesItemDecoration(int space, int deviceType, boolean hasHeader, boolean isSquare) {
+        this.mSpace = space;
+        this.deviceType = deviceType;
+        this.hasHeader = hasHeader;
+        this.isSquare = isSquare;
+
+
     }
 
     @Override
@@ -74,7 +87,13 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
         }
 
-        outRect.bottom = 32;
+        if(isSquare){
+            outRect.bottom = 0;
+        }else {
+            outRect.bottom = 32;
+        }
+
+
 
     }
 
