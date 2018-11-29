@@ -23,9 +23,11 @@ import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapt
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategory2Adapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
@@ -51,7 +53,7 @@ import java.util.List;
 
 public class FragmentCategory extends Fragment implements View.OnClickListener {
 
-//    private LoadingAnimation loading;
+    private LoadingAnimation loading;
 
     private GetCategoryTask getCategoryTask;
 
@@ -109,10 +111,11 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
         rvCategory = v.findViewById(R.id.rvCategory);
 
+        /*16修正為12*/
         if (PPBApplication.getInstance().isPhone()) {
-            rvCategory.addItemDecoration(new SpacesItemDecoration(16, SystemType.PHONE, true, true));
+            rvCategory.addItemDecoration(new SpacesItemDecoration(12, SystemType.PHONE, true, true));
         }else {
-            rvCategory.addItemDecoration(new SpacesItemDecoration(16, SystemType.TABLE, true, true));
+            rvCategory.addItemDecoration(new SpacesItemDecoration(12, SystemType.TABLE, true, true));
         }
 
         rvCategory.setItemAnimator(new DefaultItemAnimator());
@@ -133,7 +136,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
     private void init() {
 
-//        loading = ((Main2Activity) getActivity()).getLoading();
+        loading = ((Main2Activity) getActivity()).getLoading();
 
         itemAlbumCategoryList = new ArrayList<>();
 
@@ -196,10 +199,10 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
     private void doGetCategory() {
 
-//        if (!HttpUtility.isConnect(getActivity())) {
-//            ((Main2Activity) getActivity()).setNoConnect();
-//            return;
-//        }
+        if (!HttpUtility.isConnect(getActivity())) {
+            ((Main2Activity) getActivity()).setNoConnect();
+            return;
+        }
 
         getCategoryTask = new GetCategoryTask();
         getCategoryTask.execute();
@@ -219,7 +222,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            loading.show();
+            loading.show();
         }
 
         @Override
@@ -236,7 +239,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
 
-//            loading.dismiss();
+            loading.dismiss();
 
             try {
 
@@ -246,7 +249,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
                 } else if (p09Result == 0) {
 
-//                    loading.dismiss();
+                    loading.dismiss();
 
                     DialogV2Custom.BuildError(getActivity(), p09Message);
 
@@ -254,7 +257,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
                 } else if (p09Result == Key.TIMEOUT) {
 
-//                    loading.dismiss();
+                    loading.dismiss();
 
                     connectInstability();
 
@@ -262,7 +265,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
                 } else {
 
-//                    loading.dismiss();
+                    loading.dismiss();
 
                     DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
 

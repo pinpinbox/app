@@ -120,6 +120,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private CountDownTimer countDownTimer;
 
     private FragmentSearch2 fragmentSearch2;
+    private FragmentCategory fragmentCategory;
 
     private AttentionTask attentionTask;
     private MoreDataTask moreDataTask;
@@ -189,8 +190,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private LinearLayout linBanner;
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private EditText edSearch;
-    private ImageView scanImg;
+    private ImageView scanImg, categoryImg;
+    private TextView tvCategory;
     private View isOnTouchView;
+    private LinearLayout linCategory;
 
 
     private LinearLayout linHobby, linFollow;
@@ -215,7 +218,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -233,7 +235,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
         //20171128
-        tvShowTime = (TextView) v.findViewById(R.id.tvShowTime);
+        tvShowTime = v.findViewById(R.id.tvShowTime);
         if (BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private") || BuildConfig.FLAVOR.equals("platformvmage5_private")) {
             testSet();
         } else if (BuildConfig.FLAVOR.equals("www_public")) {
@@ -244,45 +246,178 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         return v;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        init();
+        setSearch();
+        setRecycler();
+        setCategoryRecycler();
+        setUserRecycler();
+        setPopularRecycler();
+        doAttention();
+
+    }
+
+    @Override
+    public void onResume() {
+
+
+        if (autoPageScrollManager != null) {
+
+            autoPageScrollManager.post();
+        }
+
+
+        if (bannerPageAdapter != null) {
+
+
+            if (bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
+
+
+                for (int i = 0; i < bannerPageAdapter.getGifList().size(); i++) {
+
+                    String url = (String) bannerPageAdapter.getGifList().get(i).get(Key.url);
+                    ImageView imageView = (ImageView) bannerPageAdapter.getGifList().get(i).get(Key.imageView);
+
+                    if (imageView != null) {
+                        Glide.with(getActivity().getApplicationContext())
+                                .asGif()
+                                .load(url)
+                                .apply(bannerPageAdapter.getOpts())
+                                .into(imageView);
+                    }
+
+
+                }
+
+
+            }
+
+
+        }
+
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+
+        cleanPicasso();
+
+        if (autoPageScrollManager != null) {
+            autoPageScrollManager.removeRunnable();
+        }
+
+        if (bannerPageAdapter != null && bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
+
+
+            MyLog.Set("e", getClass(), "bannerPageAdapter.getGifListImg().size() => " + bannerPageAdapter.getGifList().size());
+
+
+            for (int i = 0; i < bannerPageAdapter.getGifList().size(); i++) {
+
+                ImageView img = (ImageView) bannerPageAdapter.getGifList().get(i).get(Key.imageView);
+
+                if (img != null) {
+
+                    Glide.with(getActivity().getApplicationContext()).clear(img);
+
+                }
+
+            }
+
+
+        }
+
+
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+
+        if (attentionTask != null && !attentionTask.isCancelled()) {
+            attentionTask.cancel(true);
+        }
+        attentionTask = null;
+
+        if (moreDataTask != null && !moreDataTask.isCancelled()) {
+            moreDataTask.cancel(true);
+        }
+        moreDataTask = null;
+
+        if (refreshTask != null && !refreshTask.isCancelled()) {
+            refreshTask.cancel(true);
+        }
+        refreshTask = null;
+
+        if (getADTask != null && !getADTask.isCancelled()) {
+            getADTask.cancel(true);
+        }
+        getADTask = null;
+
+        if (protocol21 != null && !protocol21.isCancelled()) {
+            protocol21.cancel(true);
+        }
+        protocol21 = null;
+
+
+        /*nullj移除所有runnable*/
+        if (autoPageScrollManager != null) {
+            autoPageScrollManager.recycler();
+        }
+
+
+        cleanPicasso();
+        super.onDestroy();
+    }
+
 
     private void initView(View v) {
 
-        pbRefresh = (SmoothProgressBar) v.findViewById(R.id.pbRefresh);
-        rvHome = (RecyclerView) v.findViewById(R.id.rvHome);
-        pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
-        pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.pinPinBoxRefreshLayout);
-        edSearch = (EditText) v.findViewById(R.id.edSearch);
-        scanImg = (ImageView) v.findViewById(R.id.scanImg);
+        pbRefresh = v.findViewById(R.id.pbRefresh);
+        rvHome = v.findViewById(R.id.rvHome);
+        pbLoadMore = v.findViewById(R.id.pbLoadMore);
+        pinPinBoxRefreshLayout = v.findViewById(R.id.pinPinBoxRefreshLayout);
+        edSearch = v.findViewById(R.id.edSearch);
+        scanImg = v.findViewById(R.id.scanImg);
+        linCategory = v.findViewById(R.id.linCategory);
+        categoryImg = v.findViewById(R.id.categoryImg);
+        tvCategory = v.findViewById(R.id.tvCategory);
 
         pbLoadMore.progressiveStop();
         pbRefresh.progressiveStop();
 
-        rvHome.addItemDecoration(new SpacesItemDecoration(16, deviceType, true));
+        /*16修正為12*/
+        rvHome.addItemDecoration(new SpacesItemDecoration(12, deviceType, true));
         rvHome.setItemAnimator(new DefaultItemAnimator());
         rvHome.addOnScrollListener(mOnScrollListener);
 
-        mOnScrollListener.setvActionBar((LinearLayout) v.findViewById(R.id.linActionBar));
+        mOnScrollListener.setvActionBar(v.findViewById(R.id.linActionBar));
 
         pinPinBoxRefreshLayout.setOnPullRefreshListener(this);
         pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);
 
         scanImg.setOnClickListener(this);
+        linCategory.setOnClickListener(this);
 
     }
 
     private void initHeaderView() {
 
         viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_home, null);
-        vpBanner = (ViewPager) viewHeader.findViewById(R.id.vpBanner);
-        indicator = (CircleIndicator) viewHeader.findViewById(R.id.indicator);
-        linBanner = (LinearLayout) viewHeader.findViewById(R.id.linBanner);
-        linHobby = (LinearLayout) viewHeader.findViewById(R.id.linHobby);
-        linFollow = (LinearLayout) viewHeader.findViewById(R.id.linFollow);
-        rvCategory = (RecyclerView) viewHeader.findViewById(R.id.rvCategory);
-        rvRecommendUser = (RecyclerView) viewHeader.findViewById(R.id.rvRecommendUser);
-        rvPopularAlbum = (RecyclerView) viewHeader.findViewById(R.id.rvPopularAlbum);
-        tvNew = (TextView) viewHeader.findViewById(R.id.tvNew);
-        tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
+        vpBanner = viewHeader.findViewById(R.id.vpBanner);
+        indicator = viewHeader.findViewById(R.id.indicator);
+        linBanner = viewHeader.findViewById(R.id.linBanner);
+        linHobby = viewHeader.findViewById(R.id.linHobby);
+        linFollow = viewHeader.findViewById(R.id.linFollow);
+        rvCategory = viewHeader.findViewById(R.id.rvCategory);
+        rvRecommendUser = viewHeader.findViewById(R.id.rvRecommendUser);
+        rvPopularAlbum = viewHeader.findViewById(R.id.rvPopularAlbum);
+        tvNew = viewHeader.findViewById(R.id.tvNew);
+        tvFollow = viewHeader.findViewById(R.id.tvFollow);
         vHobby = viewHeader.findViewById(R.id.vHobby);
         vFollow = viewHeader.findViewById(R.id.vFollow);
 
@@ -334,20 +469,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     }
 
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        init();
-        setSearch();
-        setRecycler();
-        setCategoryRecycler();
-        setUserRecycler();
-        setPopularRecycler();
-        doAttention();
-
-    }
-
     private void init() {
 
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -382,12 +503,15 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                     // 此处为得到焦点时的处理内容
                     MyLog.Set("e", FragmentHome2.this.getClass(), "監聽輸入框");
 
+                    if (fragmentCategory != null && !fragmentCategory.isHidden()) {
+                        hideCategory();
+                    }
+
                     showSearch();
 
                 } else {
                     // 此处为失去焦点时的处理内容
                     MyLog.Set("e", FragmentHome2.this.getClass(), "取消監聽");
-
 
                 }
 
@@ -493,6 +617,40 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         isSearch = false;
         scanImg.setImageResource(R.drawable.ic200_scancamera_dark);
     }
+
+
+    private void showCategory() {
+
+        if (fragmentCategory == null) {
+            fragmentCategory = new FragmentCategory();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .add(R.id.frameSearch, fragmentCategory).commit();
+        } else {
+
+            if (fragmentCategory.isHidden()) {
+                getActivity().getSupportFragmentManager().beginTransaction().show(fragmentCategory).commit();
+            }
+
+        }
+
+        categoryImg.setImageResource(R.drawable.ic200_category_dark);
+        tvCategory.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+
+    }
+
+
+    private void hideCategory() {
+
+        if (fragmentCategory != null) {
+            getActivity().getSupportFragmentManager().beginTransaction().hide(fragmentCategory).commit();
+        }
+
+        categoryImg.setImageResource(R.drawable.ic200_category_light);
+        tvCategory.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+    }
+
 
     public void scrollToTop() {
 
@@ -2052,7 +2210,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                     dlgCheckNL.getDarkBg().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                        }});
+                        }
+                    });
                     dlgCheckNL.show();
 
                 }
@@ -2101,14 +2260,13 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                     @Override
                     public void Success() {
 
-                        if(newsletter){
+                        if (newsletter) {
                             PinPinToast.showSuccessToast(getActivity(), "成功訂閱電子報");
-                        }else {
-                            PinPinToast.ShowToast(getActivity(),"已取消訂閱電子報");
+                        } else {
+                            PinPinToast.ShowToast(getActivity(), "已取消訂閱電子報");
                         }
 
                         PPBApplication.getInstance().getData().edit().putBoolean(Key.checkNewsletter, true).commit();
-
 
 
                     }
@@ -2184,6 +2342,27 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                     }
 
+                }
+
+                break;
+
+
+            case R.id.linCategory:
+
+
+                if(isSearch){
+                    edSearch.clearFocus();
+                    inputMethodManager.hideSoftInputFromWindow(edSearch.getWindowToken(), 0);
+                    hideSearch();
+                }
+
+                if (fragmentCategory == null || fragmentCategory.isHidden()) {
+
+                    showCategory();
+
+                } else {
+
+                    hideCategory();
 
                 }
 
@@ -2410,122 +2589,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
 
 
-    }
-
-
-    @Override
-    public void onPause() {
-
-        cleanPicasso();
-
-        if (autoPageScrollManager != null) {
-            autoPageScrollManager.removeRunnable();
-        }
-
-        if (bannerPageAdapter != null && bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
-
-
-            MyLog.Set("e", getClass(), "bannerPageAdapter.getGifListImg().size() => " + bannerPageAdapter.getGifList().size());
-
-
-            for (int i = 0; i < bannerPageAdapter.getGifList().size(); i++) {
-
-                ImageView img = (ImageView) bannerPageAdapter.getGifList().get(i).get(Key.imageView);
-
-                if (img != null) {
-
-                    Glide.with(getActivity().getApplicationContext()).clear(img);
-
-                }
-
-            }
-
-
-        }
-
-
-        super.onPause();
-    }
-
-
-    @Override
-    public void onResume() {
-
-
-        if (autoPageScrollManager != null) {
-
-            autoPageScrollManager.post();
-        }
-
-
-        if (bannerPageAdapter != null) {
-
-
-            if (bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
-
-
-                for (int i = 0; i < bannerPageAdapter.getGifList().size(); i++) {
-
-                    String url = (String) bannerPageAdapter.getGifList().get(i).get(Key.url);
-                    ImageView imageView = (ImageView) bannerPageAdapter.getGifList().get(i).get(Key.imageView);
-
-                    if (imageView != null) {
-                        Glide.with(getActivity().getApplicationContext())
-                                .asGif()
-                                .load(url)
-                                .apply(bannerPageAdapter.getOpts())
-                                .into(imageView);
-                    }
-
-
-                }
-
-
-            }
-
-
-        }
-
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-
-        if (attentionTask != null && !attentionTask.isCancelled()) {
-            attentionTask.cancel(true);
-        }
-        attentionTask = null;
-
-        if (moreDataTask != null && !moreDataTask.isCancelled()) {
-            moreDataTask.cancel(true);
-        }
-        moreDataTask = null;
-
-        if (refreshTask != null && !refreshTask.isCancelled()) {
-            refreshTask.cancel(true);
-        }
-        refreshTask = null;
-
-        if (getADTask != null && !getADTask.isCancelled()) {
-            getADTask.cancel(true);
-        }
-        getADTask = null;
-
-        if (protocol21 != null && !protocol21.isCancelled()) {
-            protocol21.cancel(true);
-        }
-        protocol21 = null;
-
-
-        /*nullj移除所有runnable*/
-        if (autoPageScrollManager != null) {
-            autoPageScrollManager.recycler();
-        }
-
-
-        cleanPicasso();
-        super.onDestroy();
     }
 
 

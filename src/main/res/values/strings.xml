@@ -391,6 +391,7 @@
     <string name="pinpinbox_2_0_0_itemtype_all">全部</string>
     <string name="pinpinbox_2_0_0_itemtype_recording">錄音</string>
     <string name="pinpinbox_2_0_0_itemtype_select_file">選擇檔案</string>
+    <string name="pinpinbox_2_0_0_itemtype_category">分類</string>
 
 
     <!--特殊-->
