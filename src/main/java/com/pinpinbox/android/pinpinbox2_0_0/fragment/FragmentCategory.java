@@ -111,11 +111,11 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
         rvCategory = v.findViewById(R.id.rvCategory);
 
-        /*16修正為12*/
+
         if (PPBApplication.getInstance().isPhone()) {
-            rvCategory.addItemDecoration(new SpacesItemDecoration(12, SystemType.PHONE, true, true));
+            rvCategory.addItemDecoration(new SpacesItemDecoration(16, SystemType.PHONE, true, true));
         }else {
-            rvCategory.addItemDecoration(new SpacesItemDecoration(12, SystemType.TABLE, true, true));
+            rvCategory.addItemDecoration(new SpacesItemDecoration(16, SystemType.TABLE, true, true));
         }
 
         rvCategory.setItemAnimator(new DefaultItemAnimator());

@@ -390,8 +390,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         pbLoadMore.progressiveStop();
         pbRefresh.progressiveStop();
 
-        /*16修正為12*/
-        rvHome.addItemDecoration(new SpacesItemDecoration(12, deviceType, true));
+
+        rvHome.addItemDecoration(new SpacesItemDecoration(16, deviceType, true));
         rvHome.setItemAnimator(new DefaultItemAnimator());
         rvHome.addOnScrollListener(mOnScrollListener);
 
