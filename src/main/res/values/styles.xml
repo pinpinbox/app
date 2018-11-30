@@ -162,6 +162,17 @@
     </style>
 
 
+    <style name="ppb200_tab_text" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_secondary_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_small</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+
     <style name="ppb200_title_first" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_marginLeft">@dimen/ppb200_title_margin_left</item>
         <item name="android:layout_marginRight">@dimen/ppb200_title_margin_left</item>

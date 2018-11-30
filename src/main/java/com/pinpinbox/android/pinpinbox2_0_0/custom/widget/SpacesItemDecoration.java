@@ -68,8 +68,8 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
                 outRect.left = mSpace;
                 outRect.right = 0;
             } else if (spanIndex == 1) {
-                outRect.left = mSpace;
-                outRect.right = mSpace;
+                outRect.left = mSpace/2;
+                outRect.right = mSpace/2;
             } else {
                 outRect.left = 0;
                 outRect.right = mSpace;

@@ -11,7 +11,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -34,6 +33,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.BannerSize;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
@@ -71,7 +71,6 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
      */
     private View viewHeader;
     private RoundCornerImageView cgBannerImg;
-    private RelativeLayout rItemBg;
     private String strThemeData = "";
 
 
@@ -125,8 +124,6 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
     private void initHeaderView(View v) {
 
         viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_category, null);
-
-        rItemBg = viewHeader.findViewById(R.id.rItemBg);
 
         cgBannerImg = viewHeader.findViewById(R.id.cgBannerImg);
 
@@ -245,6 +242,15 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
                 if (p09Result == 1) {
 
+//                    int bannerWidth = ScreenUtils.getScreenWidth();
+//
+//                    int bannerHeight = (bannerWidth * 540) / 960;
+//
+//                    cgBannerImg.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
+
+                    BannerSize.set(cgBannerImg, 32);
+
+
                     adapter.notifyDataSetChanged();
 
                 } else if (p09Result == 0) {
@@ -287,7 +293,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
                 }else {
 
-                    rItemBg.setVisibility(View.GONE);
+                    cgBannerImg.setVisibility(View.GONE);
 
                 }
 

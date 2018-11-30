@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
+
+    <string name="pinpinbox_2_0_0_tab_home">Home</string>
+    <string name="pinpinbox_2_0_0_tab_me">Me</string>
+    <string name="pinpinbox_2_0_0_tab_notify">Notifications</string>
+    <string name="pinpinbox_2_0_0_tab_menu">Menu</string>
+
+
     <string name="pinpinbox_2_0_0_time_before_year_single">&#160;year</string>
     <string name="pinpinbox_2_0_0_time_before_month_single">&#160;month</string>
     <string name="pinpinbox_2_0_0_time_before_day_single">&#160;day</string>
@@ -388,7 +395,7 @@
     <string name="pinpinbox_2_0_0_itemtype_all">All</string>
     <string name="pinpinbox_2_0_0_itemtype_recording">Recording</string>
     <string name="pinpinbox_2_0_0_itemtype_select_file">Select file</string>
-    <string name="pinpinbox_2_0_0_itemtype_category">Category</string>
+    <string name="pinpinbox_2_0_0_itemtype_category">Cat</string>
 
     <!--特殊-->
     <string name="pinpinbox_2_0_0_itemtype_visible_page_before">First</string>

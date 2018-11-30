@@ -30,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.BuildConfig;
@@ -74,6 +73,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.AnimationSuspensionTouch;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.BannerSize;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -1483,14 +1483,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         bannerViewList = new ArrayList<>();
 
-
-        int bannerWidth = ScreenUtils.getScreenWidth();
-
-        int bannerHeight = (bannerWidth * 540) / 960;
-
-//        /*banner width = 960 , height = 540*/
-//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(bannerWidth, bannerHeight);
-
         for (int i = 0; i < itemHomeBannerList.size(); i++) {
             View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.page_2_0_0_banner_image, null);
 
@@ -1498,7 +1490,13 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         }
 
-        vpBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
+//        int bannerWidth = ScreenUtils.getScreenWidth();
+//
+//        int bannerHeight = (bannerWidth * 540) / 960;
+//
+//        vpBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
+
+        BannerSize.set(vpBanner,0);
 
         if (bannerPageAdapter != null) {
             bannerPageAdapter = null;

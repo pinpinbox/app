@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -42,6 +41,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -49,6 +49,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
@@ -228,7 +229,11 @@ public class FragmentSearch2 extends Fragment{
 
     private void setAlbumRecycler() {
 
-        rvSearch.addItemDecoration(new SpacesItemDecoration(16));
+        if (PPBApplication.getInstance().isPhone()) {
+            rvSearch.addItemDecoration(new SpacesItemDecoration(16, SystemType.PHONE, true));
+        }else {
+            rvSearch.addItemDecoration(new SpacesItemDecoration(16, SystemType.TABLE, true));
+        }
 
         albumAdapter = new RecyclerSearchAlbumAdapter(getActivity(), searchAlbumList);
         rvSearch.setAdapter(albumAdapter);
@@ -788,36 +793,6 @@ public class FragmentSearch2 extends Fragment{
 
         }
 
-    }
-
-    private class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-        private final int mSpace;
-
-        public SpacesItemDecoration(int space) {
-            this.mSpace = space;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, final View view, final RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            int position = parent.getChildAdapterPosition(view);
-            int spanIndex = ((StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams()).getSpanIndex();
-            if (parent.getChildAdapterPosition(view) != 0) {
-                if (spanIndex == 0) {
-                    outRect.left = 16;
-                    outRect.right = 0;
-                } else {//if you just have 2 span . Or you can use (staggeredGridLayoutManager.getSpanCount()-1) as last span
-                    outRect.left = 0;
-                    outRect.right = 16;
-                }
-                outRect.bottom = 32;
-            }
-            // Add top margin only for the first item to avoid double space between items
-//            if (parent.getChildAdapterPosition(view) == 0) {
-//                outRect.top = 32;
-//                outRect.right = 32;
-//            }
-        }
     }
 
 

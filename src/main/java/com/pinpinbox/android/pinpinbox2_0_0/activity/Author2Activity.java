@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,6 +53,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
@@ -64,6 +64,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
@@ -319,7 +320,12 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
         pbLoadMore = (SmoothProgressBar) findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
 
-        rvAuthor.addItemDecoration(new SpacesItemDecoration(16));
+        if (PPBApplication.getInstance().isPhone()) {
+            rvAuthor.addItemDecoration(new SpacesItemDecoration(16, SystemType.PHONE, true));
+        }else {
+            rvAuthor.addItemDecoration(new SpacesItemDecoration(16, SystemType.TABLE, true));
+        }
+
         rvAuthor.setItemAnimator(new DefaultItemAnimator());
         rvAuthor.addOnScrollListener(mOnScrollListener);
 
@@ -1638,55 +1644,6 @@ public class Author2Activity extends DraggerActivity implements View.OnClickList
 
         }
     }
-
-    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-        private final int mSpace;
-
-        public SpacesItemDecoration(int space) {
-            this.mSpace = space;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, final View view, final RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            int position = parent.getChildAdapterPosition(view);
-            int spanIndex = ((StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams()).getSpanIndex();
-            if (parent.getChildAdapterPosition(view) != 0) {
-
-                if (deviceType == TABLE) {
-
-                    if (spanIndex == 0) {
-                        outRect.left = mSpace;
-                        outRect.right = 0;
-                    } else if (spanIndex == 1) {
-                        outRect.left = mSpace;
-                        outRect.right = mSpace;
-                    } else {
-                        outRect.left = 0;
-                        outRect.right = mSpace;
-                    }
-
-                } else if (deviceType == PHONE) {
-
-                    if (spanIndex == 0) {
-                        outRect.left = mSpace;
-                        outRect.right = 0;
-                    } else {
-                        outRect.left = 0;
-                        outRect.right = mSpace;
-                    }
-
-                }
-
-                outRect.bottom = 32;
-
-
-            }
-
-
-        }
-    }
-
 
     private String getValue(Intent intent) {
         String value = "";

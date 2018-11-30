@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flurry.android.FlurryAgent;
@@ -37,6 +39,7 @@ import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
@@ -44,7 +47,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
@@ -98,7 +100,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     private RichPath userTop, userBottom;
     private RichPath notifyTop, notifyBottom;
-    private RichPath searchInSide, searchOutSide, searchReflective;
     private RichPath insideLeft, insideCenter, insideRight, fillLarge, fillSmall;
     private RichPath menuTop, menuCenter, menuBottom;
 
@@ -108,10 +109,11 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     private FragmentPagerItemAdapter adapter;
 
     private ViewPager viewPager;
-    private RelativeLayout rNotify, rUser, rSearch, rHome, rMenu;
+    private RelativeLayout rNotify, rUser, rHome, rMenu;
     private ImageView createImg;
-    private RichPathView svgNotify, svgUser, svgSearch, svgHome, svgMenu;
+    private RichPathView svgNotify, svgUser, svgHome, svgMenu;
     private View vRPnotify, vRPmenu;
+    private TextView tvTabHome, tvTabMe, tvTabNotify, tvTabMenu;
 
 
     private String strCooperationAlbumId = "";
@@ -276,19 +278,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     }
 
 
-//    private void scheduleStartPostponedTransition(final View sharedElement) {
-//        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-//                new ViewTreeObserver.OnPreDrawListener() {
-//                    @Override
-//                    public boolean onPreDraw() {
-//                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-//                        startPostponedEnterTransition();
-//                        return true;
-//                    }
-//                });
-//    }
-
-
     private void checkMainExist() {
 
         List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
@@ -351,6 +340,11 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         svgUser = (RichPathView) findViewById(R.id.svgUser);
         svgHome = (RichPathView) findViewById(R.id.svgHome);
         svgMenu = (RichPathView) findViewById(R.id.svgMenu);
+
+        tvTabHome = (TextView) findViewById(R.id.tvTabHome);
+        tvTabMe = (TextView) findViewById(R.id.tvTabMe);
+        tvTabNotify = (TextView) findViewById(R.id.tvTabNotify);
+        tvTabMenu = (TextView) findViewById(R.id.tvTabMenu);
 
         vRPnotify = findViewById(R.id.vRPnotify);
         vRPmenu = findViewById(R.id.vRPmenu);
@@ -459,10 +453,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
                     case 1://search
 
-//                        homeNormal();
-//                        searchPressed();
-//                        userNormal();
-//                        notifyNormal();
+
 
                         homeNormal();
                         userPressed();
@@ -472,11 +463,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         break;
 
                     case 2://user
-
-//                        homeNormal();
-//                        searchNormal();
-//                        userPressed();
-//                        notifyNormal();
 
                         homeNormal();
                         userNormal();
@@ -498,23 +484,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                         break;
 
                     case 3://notify
-
-//                        homeNormal();
-//                        searchNormal();
-//                        userNormal();
-//                        notifyPressed();
-//
-//                        if (vRPnotify.getVisibility() == View.VISIBLE) {
-//                            Fragment fragment = getFragment(FragmentNotify2.class.getSimpleName());
-//
-//                            if (((FragmentNotify2) fragment).isGetPushQueue()) {
-//                                ((FragmentNotify2) fragment).doRefresh(false);
-//                                vRPnotify.setVisibility(View.GONE);
-//                            } else {
-//                                vRPnotify.setVisibility(View.GONE);
-//                            }
-//
-//                        }
 
                         homeNormal();
                         userNormal();
@@ -604,70 +573,15 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         return value;
     }
 
-//    private HashMap<String, String> getValueMap(Intent intent) {
-//        HashMap<String, String> map = new HashMap<String, String>();
-//        try {
-//            String dataString = intent.getDataString();
-//            String arg = dataString.substring(dataString.indexOf("?") + 1, dataString.length());
-//            String[] strs = arg.split("&");
-//            for (int x = 0; x < strs.length; x++) {
-//                String[] strs2 = strs[x].split("=");
-//                if (strs2.length == 2) {
-//                    System.out.println(strs2[0] + " , " + strs2[1]);
-//                    map.put(strs2[0], strs2[1]);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return map;
-//    }
-
-//    private void showLogout() {
-//
-//        DialogV2Custom d = new DialogV2Custom(mActivity);
-//        d.setStyle(DialogStyleClass.CHECK);
-//
-//        d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_warning_to_logout);
-//
-//        d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_button_logout);
-//        d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_button_skip);
-//        d.setCheckExecute(new CheckExecute() {
-//            @Override
-//            public void DoCheck() {
-//                toLogin();
-//            }
-//        });
-//        d.show();
-//    }
-
-    private void toLogin() {
-
-        IntentControl.toLoginAndEnableScan(mActivity, id, true);
-
-    }
-
-
     private void toAlbumInfo(String value) {
         ActivityIntent.toAlbumInfo(mActivity, false, value, null, 0, 0, 0, null);
     }
-
-//    private void toTemInfo(String value) {
-//        Bundle bundle = new Bundle();
-//        bundle.putString("template_id", value);
-//        Intent intent = new Intent(mActivity, TemplateInfoActivity.class);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-//        ActivityAnim.StartAnim(mActivity);
-//    }
 
     private void toAuthor(String value, boolean openBoard) {
 
         ActivityIntent.toUser(mActivity, false, openBoard, value, null, null, null);
 
     }
-
 
     private boolean showBoard = false;
 
@@ -866,12 +780,14 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         vRPmenu.setVisibility(View.GONE);
     }
 
-
+    /*menu icon*/
     private void menuNormal() {
 
         menuTop.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
         menuCenter.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
         menuBottom.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
+
+        tvTabMenu.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
 
     }
 
@@ -880,6 +796,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         menuTop.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
         menuCenter.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
         menuBottom.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
+
+        tvTabMenu.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+
 
     }
 
@@ -920,6 +839,10 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        tvTabNotify.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
     }
 
     private void notifyPressed() {
@@ -932,6 +855,8 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        tvTabNotify.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
 
     }
 
@@ -966,6 +891,8 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
             e.printStackTrace();
         }
 
+        tvTabMe.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
 
     }
 
@@ -979,6 +906,8 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        tvTabMe.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
 
         RichPathAnimator
                 .animate(userTop)
@@ -996,49 +925,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-    /*search icon*/
-    private void searchNormal() {
-
-        searchReflective.setFillColor(ContextCompat.getColor(mActivity, R.color.transparent));
-        searchInSide.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
-        searchOutSide.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
-
-
-    }
-
-    private void searchPressed() {
-        searchReflective.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
-        searchInSide.setFillColor(ContextCompat.getColor(mActivity, R.color.transparent));
-        searchOutSide.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey));
-
-    }
-
-    private void searchAnim() {
-        RichPathAnimator
-                .animate(searchReflective)
-                .interpolator(new DecelerateInterpolator())
-                .fillColor(ContextCompat.getColor(mActivity, R.color.transparent), ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_first_grey))
-                .trimPathEnd(0, 1)
-                .duration(600)
-                .animationListener(new AnimationListener() {
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onStop() {
-
-                        if (viewPager.getCurrentItem() != 1) {
-                            searchNormal();
-                        }
-
-                    }
-                })
-
-                .start();
-    }
-
     /*home icon*/
     private void homeNormal() {
 
@@ -1048,6 +934,9 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
         insideRight.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
         fillLarge.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
         fillSmall.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_second_grey));
+
+        tvTabHome.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
 
     }
 
@@ -1070,6 +959,11 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
         fillLarge.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_logo));
         fillSmall.setFillColor(ContextCompat.getColor(mActivity, R.color.pinpinbox_2_0_0_logo));
+
+
+        tvTabHome.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+
+
     }
 
     private void homeAnim() {
@@ -1646,84 +1540,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
 
     }
 
-//    public static List<String> getListPicPath(Activity activity) {
-//        List<String> picPath = new ArrayList<>();
-//
-//        Intent intent = activity.getIntent();//如果从外部进入APP，则实现以下方法
-//        if (Intent.ACTION_SEND.equals(intent.getAction())) {
-////            if (intent.getType().startsWith("image/")) {
-//            Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-//            if (imageUri != null) {
-////处理单张图片
-//                Log.v("从其他APP分享的", imageUri.getPath());
-//
-//                if (!imageUri.getPath().contains("external/images/media"))
-//                    picPath.add(imageUri.getPath());
-//                else {
-//                    String[] proj = {MediaStore.Images.Media.DATA};
-//                    Cursor actualimagecursor = activity.managedQuery(imageUri, proj, null, null, null);
-//                    int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//                    actualimagecursor.moveToFirst();
-//                    String img_path = actualimagecursor.getString(actual_image_column_index);
-//                    picPath.add(img_path);
-//                }
-//            }
-////            }
-//        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
-////            if (intent.getType().startsWith("image/")) {
-//
-//            List<Uri> imageUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-//            if (imageUris != null) {
-////处理多张图片
-//                for (int i = 0; i < imageUris.size(); i++) {
-//
-//                    Log.v("从其他APP分享的", imageUris.get(i).getPath());
-//
-//
-//                    if (imageUris.get(i).getPath().contains("external/video/media")) {
-//
-//                        String[] proj = {MediaStore.Video.Media.DATA};
-//                        Cursor curVideo = activity.managedQuery(imageUris.get(i), proj, null, null, null);
-//                        int actual_video_column_index = curVideo.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-//                        curVideo.moveToFirst();
-//                        String videoPath = curVideo.getString(actual_video_column_index);
-//                        picPath.add(videoPath);
-//                    }
-//
-//
-//                    if (imageUris.get(i).getPath().contains("external/images/media")) {
-//                        String[] proj = {MediaStore.Images.Media.DATA};
-//                        Cursor actualimagecursor = activity.managedQuery(imageUris.get(i), proj, null, null, null);
-//                        int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//                        actualimagecursor.moveToFirst();
-//                        String img_path = actualimagecursor.getString(actual_image_column_index);
-//                        picPath.add(img_path);
-//                    }
-//
-//
-////                    if (!imageUris.get(i).getPath().contains("external/images/media")) {
-////                        picPath.add(imageUris.get(i).getPath());
-////
-////                    } else {
-////                        String[] proj = {MediaStore.Images.Media.DATA};
-////                        Cursor actualimagecursor = activity.managedQuery(imageUris.get(i), proj, null, null, null);
-////                        int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-////                        actualimagecursor.moveToFirst();
-////                        String img_path = actualimagecursor.getString(actual_image_column_index);
-////
-////
-////                        picPath.add(img_path);
-////                    }
-//                }
-//            }
-////            }
-//
-//        }
-//
-//        return picPath;
-//    }
-
-
 
     public int getPage() {
         return this.viewPager.getCurrentItem();
@@ -1885,7 +1701,7 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
 
-        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+        if (ClickUtils.ButtonContinuousClick()) {
             return;
         }
 
@@ -1906,20 +1722,6 @@ public class Main2Activity extends DraggerActivity implements View.OnClickListen
                 }
                 viewPager.setCurrentItem(0, false);
                 break;
-
-//            case R.id.rSearch:
-//
-//                searchAnim();
-//
-//                if (viewPager.getCurrentItem() == 1) {
-//                    ((FragmentSearch2) getFragment(FragmentSearch2.class.getSimpleName())).scrollToTop();
-//                    return;
-//                }
-//
-//
-//                viewPager.setCurrentItem(1, false);
-//
-//                break;
 
             case R.id.rUser:
 

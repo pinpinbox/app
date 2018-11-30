@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
+
+
+
+
+    <string name="pinpinbox_2_0_0_tab_home">首頁</string>
+    <string name="pinpinbox_2_0_0_tab_me">個人專區</string>
+    <string name="pinpinbox_2_0_0_tab_notify">通知</string>
+    <string name="pinpinbox_2_0_0_tab_menu">選單</string>
+
+
+
+
     <string name="pinpinbox_2_0_0_time_before_year_single">年前</string>
     <string name="pinpinbox_2_0_0_time_before_month_single">個月前</string>
     <string name="pinpinbox_2_0_0_time_before_day_single">天前</string>

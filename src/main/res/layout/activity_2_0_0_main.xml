@@ -32,19 +32,6 @@
             android:background="@color/pinpinbox_2_0_0_action_bar_color">
 
 
-            <!--<com.ogaclejapan.smarttablayout.SmartTabLayout-->
-            <!--android:id="@+id/viewPagerTab"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/action_bar_icon_width"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--app:stl_clickable="true"-->
-            <!--app:stl_indicatorColor="@color/pinpinbox_2_0_0_first_grey"-->
-            <!--app:stl_indicatorThickness="4dp"-->
-            <!--/>-->
-            <!--android:layout_width="144dp"-->
-
-
             <LinearLayout
                 android:id="@+id/linTabbar"
                 android:layout_width="match_parent"
@@ -65,37 +52,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/click_2_0_0_default">
+                        android:background="@drawable/click_2_0_0_default"
+                        android:gravity="center">
 
 
-                        <com.richpath.RichPathView
-                            android:id="@+id/svgHome"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/click_2_0_0_default"
-                            app:vector="@drawable/svg_pinpinbox_logo" />
+                            android:layout_marginTop="3dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+
+                            <com.richpath.RichPathView
+                                android:id="@+id/svgHome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/click_2_0_0_default"
+                                app:vector="@drawable/svg_pinpinbox_logo" />
+
+                            <TextView
+                                android:id="@+id/tvTabHome"
+                                style="@style/ppb200_tab_text"
+                                android:layout_marginTop="1dp"
+                                android:text="@string/pinpinbox_2_0_0_tab_home"
+                                android:textColor="@color/pinpinbox_2_0_0_first_text" />
+
+
+                        </LinearLayout>
+
 
                     </RelativeLayout>
-
-
-                    <!--<RelativeLayout-->
-                    <!--android:id="@+id/rSearch"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/click_2_0_0_default">-->
-
-
-                    <!--<com.richpath.RichPathView-->
-                    <!--android:id="@+id/svgSearch"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerInParent="true"-->
-                    <!--android:background="@drawable/click_2_0_0_default"-->
-                    <!--app:vector="@drawable/svg_search" />-->
-
-                    <!--</RelativeLayout>-->
 
 
                     <RelativeLayout
@@ -103,16 +91,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/click_2_0_0_default">
+                        android:background="@drawable/click_2_0_0_default"
+                        android:gravity="center">
 
-
-                        <com.richpath.RichPathView
-                            android:id="@+id/svgUser"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/click_2_0_0_default"
-                            app:vector="@drawable/svg_user" />
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.richpath.RichPathView
+                                android:id="@+id/svgUser"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/click_2_0_0_default"
+                                app:vector="@drawable/svg_user" />
+
+                            <TextView
+                                android:id="@+id/tvTabMe"
+                                style="@style/ppb200_tab_text"
+                                android:text="@string/pinpinbox_2_0_0_tab_me" />
+
+                        </LinearLayout>
+
 
                     </RelativeLayout>
 
@@ -126,8 +128,6 @@
                     android:orientation="horizontal">
 
 
-
-
                     <RelativeLayout
                         android:id="@+id/rNotify"
                         android:layout_width="match_parent"
@@ -136,23 +136,36 @@
                         android:background="@drawable/click_2_0_0_default">
 
 
-                        <com.richpath.RichPathView
-                            android:id="@+id/svgNotify"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/click_2_0_0_default"
-                            android:visibility="visible"
-                            app:vector="@drawable/svg_notification" />
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.richpath.RichPathView
+                                android:id="@+id/svgNotify"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/click_2_0_0_default"
+                                android:visibility="visible"
+                                app:vector="@drawable/svg_notification" />
+
+                            <TextView
+                                android:id="@+id/tvTabNotify"
+                                style="@style/ppb200_tab_text"
+                                android:text="@string/pinpinbox_2_0_0_tab_notify" />
+
+
+                        </LinearLayout>
 
 
                         <View
                             android:id="@+id/vRPnotify"
                             style="@style/ppb200_red_point"
-                            android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
-                            android:layout_marginBottom="36dp"
                             android:layout_marginRight="18dp"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                             android:visibility="gone" />
 
 
@@ -166,23 +179,36 @@
                         android:layout_weight="1"
                         android:background="@drawable/click_2_0_0_default">
 
-
-                        <com.richpath.RichPathView
-                            android:id="@+id/svgMenu"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/click_2_0_0_default"
-                            app:vector="@drawable/svg_menu" />
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.richpath.RichPathView
+                                android:id="@+id/svgMenu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:background="@drawable/click_2_0_0_default"
+                                app:vector="@drawable/svg_menu" />
+
+                            <TextView
+                                android:id="@+id/tvTabMenu"
+                                style="@style/ppb200_tab_text"
+                                android:text="@string/pinpinbox_2_0_0_tab_menu" />
+
+
+                        </LinearLayout>
 
 
                         <View
                             android:id="@+id/vRPmenu"
                             style="@style/ppb200_red_point"
-                            android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"
-                            android:layout_marginBottom="36dp"
                             android:layout_marginRight="18dp"
+                            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                             android:visibility="gone" />
 
 
