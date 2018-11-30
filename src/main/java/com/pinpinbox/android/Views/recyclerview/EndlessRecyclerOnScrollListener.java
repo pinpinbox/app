@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
@@ -70,13 +69,14 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
     private View vActionBar;
     private boolean acbIsHide = false;
-//    private ActionBarControlListener actionBarControlListener;
-//    public void setActionBarControlListener(ActionBarControlListener actionBarControlListener) {
-//        this.actionBarControlListener = actionBarControlListener;
-//    }
+    private boolean canControlActionBar = true;
 
     public void setvActionBar(View vActionBar) {
         this.vActionBar = vActionBar;
+    }
+
+    public void setCanControlActionBar(boolean canControlActionBar){
+        this.canControlActionBar = canControlActionBar;
     }
 
 
@@ -86,15 +86,9 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     private float floatAlpha = 0;
     private float floatTranslationY = 0;
 
-    private ImageView bgImg;
 
     private View[] views;
 
-    public void setBackgroundImage(ImageView bgImg) {
-
-        this.bgImg = bgImg;
-
-    }
 
     public void setBackgroundParallaxViews(View... views) {
 
@@ -191,7 +185,9 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
         titleControl();
 
         /*set actionbarcontrol  判斷上下滑*/
-        actionBarVisibilityControl(dy);
+        if(canControlActionBar) {
+            actionBarVisibilityControl(dy);
+        }
 
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();

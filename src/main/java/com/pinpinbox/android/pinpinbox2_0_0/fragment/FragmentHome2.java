@@ -607,6 +607,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         isSearch = true;
         scanImg.setImageResource(R.drawable.ic200_cancel_dark);
 
+        mOnScrollListener.setCanControlActionBar(false);
+
     }
 
     private void hideSearch() {
@@ -616,6 +618,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         isSearch = false;
         scanImg.setImageResource(R.drawable.ic200_scancamera_dark);
+
+        mOnScrollListener.setCanControlActionBar(true);
+
     }
 
 
@@ -637,6 +642,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         categoryImg.setImageResource(R.drawable.ic200_category_dark);
         tvCategory.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
 
+        mOnScrollListener.setCanControlActionBar(false);
+
     }
 
 
@@ -648,6 +655,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         categoryImg.setImageResource(R.drawable.ic200_category_light);
         tvCategory.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+
+        mOnScrollListener.setCanControlActionBar(true);
 
     }
 
@@ -2285,11 +2294,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     @Override
     public void onClick(View view) {
 
-
-        if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+        if (ClickUtils.ButtonContinuousClick()) {
             return;
         }
-
 
         switch (view.getId()) {
 
