@@ -628,6 +628,15 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
         if (!isTeach) {
 
 
+            if(mActivity == null){
+
+                backCheck();
+
+                return;
+
+            }
+
+
             final Dialog mDialog = new Dialog(mActivity, R.style.myDialog);
             mDialog.getWindow().setWindowAnimations(R.style.dialog_enter_exit);
             mDialog.getWindow().setContentView(R.layout.dialog_2_0_0_teach_scroll_side);
@@ -638,18 +647,14 @@ public class AlbumInfo2Activity extends DraggerActivity implements View.OnClickL
             }
 
 
-            TextView tv1 = (TextView) mDialog.findViewById(R.id.tv1);
-            TextView tv2 = (TextView) mDialog.findViewById(R.id.tv2);
-            TextView tv3 = (TextView) mDialog.findViewById(R.id.tv3);
-            TextView tv4 = (TextView) mDialog.findViewById(R.id.tv4);
-            TextView tv5 = (TextView) mDialog.findViewById(R.id.tv5);
+            TextView tv1 =  mDialog.findViewById(R.id.tv1);
+            TextView tv2 =  mDialog.findViewById(R.id.tv2);
+            TextView tv3 =  mDialog.findViewById(R.id.tv3);
+            TextView tv4 =  mDialog.findViewById(R.id.tv4);
+            TextView tv5 =  mDialog.findViewById(R.id.tv5);
 
 
-            TextUtility.setBold(tv1, true);
-            TextUtility.setBold(tv2, true);
-            TextUtility.setBold(tv3, true);
-            TextUtility.setBold(tv4, true);
-            TextUtility.setBold(tv5, true);
+            TextUtility.setBold(tv1, tv2, tv3, tv4, tv5);
 
             CloseClick closeClick = new CloseClick(mDialog);
 
