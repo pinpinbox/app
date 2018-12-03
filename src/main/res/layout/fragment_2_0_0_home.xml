@@ -21,7 +21,8 @@
             android:background="@color/white"
             android:clipToPadding="false"
             android:focusable="true"
-            android:paddingBottom="72dp" />
+            android:paddingBottom="72dp"
+            android:paddingTop="@dimen/ppb200_title_margin_second"/>
 
     </com.pinpinbox.android.Views.SuperSwipeRefreshLayout>
 

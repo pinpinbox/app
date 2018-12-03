@@ -62,7 +62,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
@@ -257,11 +256,8 @@ public class FragmentMe2 extends Fragment implements View.OnClickListener{
         pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
 
-        if (PPBApplication.getInstance().isPhone()) {
-            rvAuthor.addItemDecoration(new SpacesItemDecoration(16, SystemType.PHONE, true));
-        }else {
-            rvAuthor.addItemDecoration(new SpacesItemDecoration(16, SystemType.TABLE, true));
-        }
+
+            rvAuthor.addItemDecoration(new SpacesItemDecoration(16, true));
 
         rvAuthor.setItemAnimator(new DefaultItemAnimator());
         rvAuthor.addOnScrollListener(mOnScrollListener);

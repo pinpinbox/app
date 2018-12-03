@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 
 /**
  * Created by vmage on 2017/10/11.
@@ -15,24 +15,20 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mSpace;
 
-    private int deviceType = -1;
-
     private boolean hasHeader = false;
 
     private boolean isSquare = false;
 
 
-    public SpacesItemDecoration(int space, int deviceType, boolean hasHeader) {
+    public SpacesItemDecoration(int space, boolean hasHeader) {
         this.mSpace = space;
-        this.deviceType = deviceType;
         this.hasHeader = hasHeader;
 
 
     }
 
-    public SpacesItemDecoration(int space, int deviceType, boolean hasHeader, boolean isSquare) {
+    public SpacesItemDecoration(int space, boolean hasHeader, boolean isSquare) {
         this.mSpace = space;
-        this.deviceType = deviceType;
         this.hasHeader = hasHeader;
         this.isSquare = isSquare;
 
@@ -62,7 +58,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
 
     private void setSpace(int spanIndex, Rect outRect) {
-        if (deviceType == SystemType.TABLE) {
+        if (!PPBApplication.getInstance().isPhone()) {
 
             if (spanIndex == 0) {
                 outRect.left = mSpace;
@@ -75,7 +71,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
                 outRect.right = mSpace;
             }
 
-        } else if (deviceType == SystemType.PHONE) {
+        } else if (PPBApplication.getInstance().isPhone()) {
 
             if (spanIndex == 0) {
                 outRect.left = mSpace;

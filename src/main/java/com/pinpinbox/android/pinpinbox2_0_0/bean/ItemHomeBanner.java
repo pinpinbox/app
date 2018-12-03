@@ -9,10 +9,19 @@ public class ItemHomeBanner {
     private String event_id = "";
     private String image = "";
     private String url = "";
+    private String name = "";
 
     private String album_id = "";
     private String template_id = "";
     private String user_id = "";
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEvent_id() {
         return event_id;

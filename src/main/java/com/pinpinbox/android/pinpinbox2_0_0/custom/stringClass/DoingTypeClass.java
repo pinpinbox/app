@@ -103,11 +103,4 @@ public class DoingTypeClass {
 
     public static final int DoFollowTask = 48;
 
-
-
-
-
-
-
-
 }

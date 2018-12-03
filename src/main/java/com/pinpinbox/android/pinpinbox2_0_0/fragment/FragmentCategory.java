@@ -30,7 +30,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.BannerSize;
@@ -111,11 +110,9 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
         rvCategory = v.findViewById(R.id.rvCategory);
 
 
-        if (PPBApplication.getInstance().isPhone()) {
-            rvCategory.addItemDecoration(new SpacesItemDecoration(16, SystemType.PHONE, true, true));
-        }else {
-            rvCategory.addItemDecoration(new SpacesItemDecoration(16, SystemType.TABLE, true, true));
-        }
+
+            rvCategory.addItemDecoration(new SpacesItemDecoration(16, true, true));
+
 
         rvCategory.setItemAnimator(new DefaultItemAnimator());
 

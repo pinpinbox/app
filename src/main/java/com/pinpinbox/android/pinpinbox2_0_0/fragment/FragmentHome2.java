@@ -8,13 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,15 +46,13 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.BannerPageAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryNameAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBannerAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerPopularAlbumAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -62,35 +60,31 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.AutoPageScrollManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.JsonParamTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.AnimationSuspensionTouch;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.BannerSize;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DismissExcute;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.CardScaleHelper;
+import com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.SpeedRecyclerView;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
-import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
-import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -106,56 +100,45 @@ import java.util.List;
 import java.util.Map;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
-import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by kevin9594 on 2016/12/17.
  */
 public class FragmentHome2 extends Fragment implements View.OnClickListener, SuperSwipeRefreshLayout.OnPullRefreshListener {
 
-    private NoConnect noConnect;
     private LoadingAnimation loading;
-    private AutoPageScrollManager autoPageScrollManager;
     private InputMethodManager inputMethodManager;
     private CountDownTimer countDownTimer;
 
     private FragmentSearch2 fragmentSearch2;
     private FragmentCategory fragmentCategory;
 
-    private AttentionTask attentionTask;
+    private GetAllDataTask getAllDataTask;
     private MoreDataTask moreDataTask;
     private RefreshTask refreshTask;
-    private GetADTask getADTask;
     private Protocol21_UpdateUser protocol21;
 
     private JSONArray p20JsonArray;
 
     private RecyclerHomeAdapter recyclerHomeAdapter;
-    private BannerPageAdapter bannerPageAdapter;
-    private RecyclerCategoryNameAdapter categoryNameAdapter;
     private RecyclerHomeUserAdapter userAdapter;
     private RecyclerPopularAlbumAdapter popularAlbumAdapter;
+    private RecyclerBannerAdapter bannerAdapter;
 
-    private List<ItemAlbumCategory> itemAlbumCategoryList;
     private List<ItemAlbum> itemAlbumList;
     private List<ItemHomeBanner> itemHomeBannerList;
     private List<ItemUser> itemUserList;
     private List<ItemAlbum> itemAlbumPopularList;
-    private List<View> bannerViewList;
-    private List<String> albumIdList;
+    private List<String> reAlbumIdList;
 
     private String id, token;
-    private String p09Message = "";
     private String p20Result, p20Message;
     private String p86MessageUser = "";
     private String p86MessageAlbum = "";
     private String p75Message = "";
-    private String p103Result = "";
-    private String p103Message = "";
     private String strRank;
-    private String strJsonData = "";
 
-    private int p09Result = -1;
+
     private int p75Result = -1;
     private int p86ResultUser = -1;
     private int p86ResultAlbum = -1;
@@ -167,32 +150,23 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private int reCreateCount = 0;
 
     private int doingType;
-    private int deviceType;
-    private static final int DoFirstLogin = 3;
-    private static final int DoFastCreate = 4;
-    private static final int DoGetAD = 5;
-    private static final int DoJoinCooperation = 6;
-    private static final int PHONE = 10001;
-    private static final int TABLE = 10002;
 
 
     private boolean sizeMax = false;
     private boolean isNoDataToastAppeared = false; //判斷無資料訊息是否出現過
     private boolean isDoingMore = false;
-    private boolean isDoingRefreshBanner = true;
     private boolean isSearch = false;
 
-    private RecyclerView rvHome, rvCategory, rvRecommendUser, rvPopularAlbum;
+
+    private SpeedRecyclerView rvBanner;
+    private RecyclerView rvHome, rvRecommendUser, rvPopularAlbum;
     private SmoothProgressBar pbLoadMore, pbRefresh;
     private View viewHeader;
-    private ViewPager vpBanner;
-    private CircleIndicator indicator;
-    private LinearLayout linBanner;
+
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private EditText edSearch;
     private ImageView scanImg, categoryImg;
     private TextView tvCategory;
-    private View isOnTouchView;
     private LinearLayout linCategory;
 
 
@@ -202,19 +176,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        if (SystemUtility.isTablet(getActivity().getApplicationContext())) {
-
-            //平版
-            deviceType = TABLE;
-
-        } else {
-
-            //手機
-            deviceType = PHONE;
-
-        }
 
     }
 
@@ -226,15 +187,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         initView(v);
 
-
         initHeaderView();
 
-
-        //20171123
-        setScrollListener();
-
-
-        //20171128
         tvShowTime = v.findViewById(R.id.tvShowTime);
         if (BuildConfig.FLAVOR.equals("w3_private") || BuildConfig.FLAVOR.equals("www_private") || BuildConfig.FLAVOR.equals("platformvmage5_private")) {
             testSet();
@@ -253,10 +207,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         init();
         setSearch();
         setRecycler();
-        setCategoryRecycler();
         setUserRecycler();
         setPopularRecycler();
-        doAttention();
+        setBannerRecycler();
+        doGetAllData();
+
 
     }
 
@@ -264,28 +219,24 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     public void onResume() {
 
 
-        if (autoPageScrollManager != null) {
-
-            autoPageScrollManager.post();
-        }
 
 
-        if (bannerPageAdapter != null) {
+        if (bannerAdapter != null) {
 
 
-            if (bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
+            if (bannerAdapter.getGifList() != null && bannerAdapter.getGifList().size() > 0) {
 
 
-                for (int i = 0; i < bannerPageAdapter.getGifList().size(); i++) {
+                for (int i = 0; i < bannerAdapter.getGifList().size(); i++) {
 
-                    String url = (String) bannerPageAdapter.getGifList().get(i).get(Key.url);
-                    ImageView imageView = (ImageView) bannerPageAdapter.getGifList().get(i).get(Key.imageView);
+                    String url = (String) bannerAdapter.getGifList().get(i).get(Key.url);
+                    ImageView imageView = (ImageView) bannerAdapter.getGifList().get(i).get(Key.imageView);
 
                     if (imageView != null) {
                         Glide.with(getActivity().getApplicationContext())
                                 .asGif()
                                 .load(url)
-                                .apply(bannerPageAdapter.getOpts())
+                                .apply(bannerAdapter.getOpts())
                                 .into(imageView);
                     }
 
@@ -306,19 +257,16 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         cleanPicasso();
 
-        if (autoPageScrollManager != null) {
-            autoPageScrollManager.removeRunnable();
-        }
 
-        if (bannerPageAdapter != null && bannerPageAdapter.getGifList() != null && bannerPageAdapter.getGifList().size() > 0) {
+        if (bannerAdapter != null && bannerAdapter.getGifList() != null && bannerAdapter.getGifList().size() > 0) {
 
 
-            MyLog.Set("e", getClass(), "bannerPageAdapter.getGifListImg().size() => " + bannerPageAdapter.getGifList().size());
+            MyLog.Set("e", getClass(), "bannerPageAdapter.getGifListImg().size() => " + bannerAdapter.getGifList().size());
 
 
-            for (int i = 0; i < bannerPageAdapter.getGifList().size(); i++) {
+            for (int i = 0; i < bannerAdapter.getGifList().size(); i++) {
 
-                ImageView img = (ImageView) bannerPageAdapter.getGifList().get(i).get(Key.imageView);
+                ImageView img = (ImageView) bannerAdapter.getGifList().get(i).get(Key.imageView);
 
                 if (img != null) {
 
@@ -338,10 +286,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     @Override
     public void onDestroy() {
 
-        if (attentionTask != null && !attentionTask.isCancelled()) {
-            attentionTask.cancel(true);
+        if (getAllDataTask != null && !getAllDataTask.isCancelled()) {
+            getAllDataTask.cancel(true);
         }
-        attentionTask = null;
+        getAllDataTask = null;
 
         if (moreDataTask != null && !moreDataTask.isCancelled()) {
             moreDataTask.cancel(true);
@@ -353,21 +301,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
         refreshTask = null;
 
-        if (getADTask != null && !getADTask.isCancelled()) {
-            getADTask.cancel(true);
-        }
-        getADTask = null;
 
         if (protocol21 != null && !protocol21.isCancelled()) {
             protocol21.cancel(true);
         }
         protocol21 = null;
-
-
-        /*nullj移除所有runnable*/
-        if (autoPageScrollManager != null) {
-            autoPageScrollManager.recycler();
-        }
 
 
         cleanPicasso();
@@ -391,7 +329,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         pbRefresh.progressiveStop();
 
 
-        rvHome.addItemDecoration(new SpacesItemDecoration(16, deviceType, true));
+        rvHome.addItemDecoration(new SpacesItemDecoration(16, true));
         rvHome.setItemAnimator(new DefaultItemAnimator());
         rvHome.addOnScrollListener(mOnScrollListener);
 
@@ -408,12 +346,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     private void initHeaderView() {
 
         viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_home, null);
-        vpBanner = viewHeader.findViewById(R.id.vpBanner);
-        indicator = viewHeader.findViewById(R.id.indicator);
-        linBanner = viewHeader.findViewById(R.id.linBanner);
         linHobby = viewHeader.findViewById(R.id.linHobby);
         linFollow = viewHeader.findViewById(R.id.linFollow);
-        rvCategory = viewHeader.findViewById(R.id.rvCategory);
+        rvBanner = viewHeader.findViewById(R.id.rvBanner);
         rvRecommendUser = viewHeader.findViewById(R.id.rvRecommendUser);
         rvPopularAlbum = viewHeader.findViewById(R.id.rvPopularAlbum);
         tvNew = viewHeader.findViewById(R.id.tvNew);
@@ -427,10 +362,12 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         TextUtility.setBold(
                 (TextView) viewHeader.findViewById(R.id.tvNewsFeed),
-                (TextView) viewHeader.findViewById(R.id.tvExplore),
                 (TextView) viewHeader.findViewById(R.id.tvRecommend),
                 (TextView) viewHeader.findViewById(R.id.tvPopularity)
         );
+
+
+
 
     }
 
@@ -468,7 +405,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         });
     }
 
-
     private void init() {
 
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -484,16 +420,13 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         itemAlbumList = new ArrayList<>();
         itemHomeBannerList = new ArrayList<>();
-        albumIdList = new ArrayList<>();
-        itemAlbumCategoryList = new ArrayList<>();
+        reAlbumIdList = new ArrayList<>();
         itemUserList = new ArrayList<>();
         itemAlbumPopularList = new ArrayList<>();
-
 
     }
 
     private void setSearch() {
-
 
         edSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -623,7 +556,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-
     private void showCategory() {
 
         if (fragmentCategory == null) {
@@ -646,7 +578,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-
     private void hideCategory() {
 
         if (fragmentCategory != null) {
@@ -659,7 +590,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         mOnScrollListener.setCanControlActionBar(true);
 
     }
-
 
     public void scrollToTop() {
 
@@ -684,6 +614,125 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
     }
 
+    private void setBannerRecycler() {
+
+
+
+        bannerAdapter = new RecyclerBannerAdapter(getActivity(), itemHomeBannerList, this);
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
+        rvBanner.setLayoutManager(layoutManager);
+
+        rvBanner.setAdapter(bannerAdapter);
+
+        if(PPBApplication.getInstance().isPhone()) {
+
+            CardScaleHelper mCardScaleHelper = new CardScaleHelper();
+
+            mCardScaleHelper.attachToRecyclerView(rvBanner);
+
+        }
+
+        bannerAdapter.setOnRecyclerViewListener(new RecyclerBannerAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
+                if (itemHomeBannerList != null && itemHomeBannerList.size() > 0) {
+
+                    FlurryUtil.onEvent(FlurryKey.home_click_event);
+
+                    Bundle bundle = new Bundle();
+
+                    Intent intent = new Intent();
+
+                    String url = itemHomeBannerList.get(position).getUrl();
+                    String event_id = itemHomeBannerList.get(position).getEvent_id();
+                    String album_id = itemHomeBannerList.get(position).getAlbum_id();
+                    String user_id = itemHomeBannerList.get(position).getUser_id();
+
+
+                    MyLog.Set("e", FragmentHome2.class, "url => " + url);
+                    MyLog.Set("e", FragmentHome2.class, "event_id => " + event_id);
+                    MyLog.Set("e", FragmentHome2.class, "album_id => " + album_id);
+                    MyLog.Set("e", FragmentHome2.class, "user_id => " + user_id);
+
+                    MyLog.Set("e", FragmentHome2.class, "positionpositionposition => " + position);
+
+
+                    if (album_id != null && !album_id.equals("")) {
+
+                        ActivityIntent.toAlbumInfo(getActivity(), false, album_id, null, 0, 0, 0, null);
+
+                        return;
+                    }
+
+
+                    if (user_id != null && !user_id.equals("")) {
+
+                        ActivityIntent.toUser(getActivity(), false, false, user_id, null, null, null);
+
+                        return;
+                    }
+
+                    if (event_id != null && !event_id.equals("")) {
+
+                        ActivityIntent.toEvent(getActivity(), event_id);
+
+                    } else {
+
+                        if (url == null || url.equals("")) {
+
+                            PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_null_intent);
+
+                        } else {
+
+                            Uri uri = Uri.parse(url);
+
+                            String lastPath = uri.getLastPathSegment();
+
+                            if (lastPath.equals("point")) {
+
+                                ActivityIntent.toBuyPoint(getActivity());
+
+                            } else {
+
+
+                                String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
+                                if (categoryareaId != null && !categoryareaId.equals("")) {
+                                    ActivityIntent.toFeature(getActivity(), StringIntMethod.StringToInt(categoryareaId));
+                                } else {
+                                    bundle.putString("url", url);
+                                    intent.putExtras(bundle);
+                                    intent.setClass(getActivity(), WebView2Activity.class);
+                                    getActivity().startActivity(intent);
+                                    ActivityAnim.StartAnim(getActivity());
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+
+        });
+
+    }
+
     private void setRecycler() {
 
         recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList);
@@ -694,15 +743,13 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         ExStaggeredGridLayoutManager manager = null;
 
-        if (deviceType == TABLE) {
+        if (PPBApplication.getInstance().isPhone()) {
 
-            //平版
-            manager = new ExStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+            manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
         } else {
 
-            //手機
-            manager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            manager = new ExStaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
 
         }
 
@@ -741,51 +788,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 return false;
             }
         });
-
-
-    }
-
-    private void setCategoryRecycler() {
-
-        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvCategory.setLayoutManager(layoutManager);
-        categoryNameAdapter = new RecyclerCategoryNameAdapter(getActivity(), itemAlbumCategoryList);
-        rvCategory.setAdapter(categoryNameAdapter);
-
-        categoryNameAdapter.setOnRecyclerViewListener(new RecyclerCategoryNameAdapter.OnRecyclerViewListener() {
-            @Override
-            public void onItemClick(int position, View view) {
-
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
-                    return;
-                }
-
-                Bundle bundle = new Bundle();
-
-                if (itemAlbumCategoryList.get(position).getCategoryarea_id() == JsonParamTypeClass.NULLCATEGORYID) {
-
-                    bundle.putString(Key.jsonData, strJsonData);
-
-                }
-
-                bundle.putInt(Key.categoryarea_id, itemAlbumCategoryList.get(position).getCategoryarea_id());
-
-                startActivity(new Intent(getActivity(), Feature2Activity.class).putExtras(bundle));
-
-                ActivityAnim.StartAnim(getActivity());
-
-            }
-
-            @Override
-            public void isTouching(View view) {
-                isOnTouchView = view;
-                mOnScrollListener.setIsTouchingView(isOnTouchView);
-                pinPinBoxRefreshLayout.setIsTouchingView(isOnTouchView);
-            }
-
-        });
-
 
     }
 
@@ -872,6 +874,244 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
+    private void getBannerList() {
+
+        String strJson = "";
+        try {
+            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P75_GetAdList, SetMapByProtocol.setParam75_getadlist(id, token, "1"), null);
+            Logger.json(strJson);
+        } catch (SocketTimeoutException timeout) {
+            p75Result = Key.TIMEOUT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (strJson != null && !strJson.equals("")) {
+
+            try {
+
+                JSONObject jsonObject = new JSONObject(strJson);
+
+                p75Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+
+                if (p75Result == 1) {
+
+                    String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+
+                    JSONArray jsonArray = new JSONArray(data);
+
+                    if (jsonArray.length() != 0) {
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+
+                            JSONObject object = (JSONObject) jsonArray.get(i);
+
+                            ItemHomeBanner itemHomeBanner = new ItemHomeBanner();
+
+                            try {
+                                String event = JsonUtility.GetString(object, ProtocolKey.event);
+                                if (event != null && !event.equals("")) {
+                                    JSONObject jsonEvent = new JSONObject(event);
+                                    itemHomeBanner.setEvent_id(JsonUtility.GetString(jsonEvent, ProtocolKey.event_id));
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+                            try {
+                                String ad = JsonUtility.GetString(object, ProtocolKey.ad);
+                                if (ad != null && !ad.equals("")) {
+                                    JSONObject jsonAd = new JSONObject(ad);
+                                    itemHomeBanner.setImage(JsonUtility.GetString(jsonAd, ProtocolKey.image));
+                                    itemHomeBanner.setUrl(JsonUtility.GetString(jsonAd, ProtocolKey.url));
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            /*2016.08.19新增album template user Object*/
+                            try {
+                                String album = JsonUtility.GetString(object, ProtocolKey.album);
+                                if (album != null && !album.equals("")) {
+                                    JSONObject jsonAlbum = new JSONObject(album);
+                                    itemHomeBanner.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+                            try {
+                                String user = JsonUtility.GetString(object, ProtocolKey.user);
+                                if (user != null && !user.equals("")) {
+                                    JSONObject jsonUser = new JSONObject(user);
+                                    itemHomeBanner.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
+
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            itemHomeBannerList.add(itemHomeBanner);
+
+                        }
+                    }
+                } else if (p75Result == 0) {
+
+                    p75Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+
+                }
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+
+    }
+
+    private void getUserList() {
+
+        String strJson = "";
+
+        try {
+            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
+                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.user, "0,16"), null);
+            MyLog.Set("d", getClass(), "p86strJson(user) =>" + strJson);
+        } catch (SocketTimeoutException timeout) {
+            p86ResultUser = Key.TIMEOUT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (strJson != null && !strJson.equals("")) {
+            try {
+                JSONObject jsonObject = new JSONObject(strJson);
+                p86ResultUser = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                if (p86ResultUser == 1) {
+
+                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONArray jsonArray = new JSONArray(jdata);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject j = (JSONObject) jsonArray.get(i);
+
+                        String user = JsonUtility.GetString(j, ProtocolKey.user);
+                        JSONObject object = new JSONObject(user);
+
+                        ItemUser itemUser = new ItemUser();
+                        itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
+                        itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+                        itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
+                        itemUserList.add(itemUser);
+
+                    }
+
+
+                } else if (p86ResultUser == 0) {
+
+                    p86MessageUser = jsonObject.getString(Key.message);
+
+                }
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
+        }
+
+
+    }
+
+    private void getPopularList() {
+
+        String strJson = "";
+
+        try {
+            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
+                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.album, "0,8"), null);
+            MyLog.Set("d", getClass(), "p86strJson(album) => " + strJson);
+        } catch (SocketTimeoutException timeout) {
+            p86ResultAlbum = Key.TIMEOUT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (strJson != null && !strJson.equals("")) {
+            try {
+                JSONObject jsonObject = new JSONObject(strJson);
+                p86ResultAlbum = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                if (p86ResultAlbum == 1) {
+
+                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONArray jsonArray = new JSONArray(jdata);
+                    int minHeight = DensityUtility.dip2px(getActivity().getApplicationContext(), 72);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject j = (JSONObject) jsonArray.get(i);
+
+                        ItemAlbum itemAlbum = new ItemAlbum();
+
+
+                        String album = JsonUtility.GetString(j, ProtocolKey.album);
+                        JSONObject jsonAlbum = new JSONObject(album);
+
+                        itemAlbum.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
+                        itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.name));
+
+                        String cover = JsonUtility.GetString(jsonAlbum, ProtocolKey.cover);
+                        itemAlbum.setCover(cover);
+
+                        try {
+                            int width = jsonAlbum.getInt(ProtocolKey.cover_width);
+                            int height = jsonAlbum.getInt(ProtocolKey.cover_height);
+
+                            itemAlbum.setCover_width(width);
+                            itemAlbum.setCover_height(height);
+                            itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
+
+                            if (width > height) {
+                                itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
+                            } else if (height > width) {
+                                itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
+                            } else {
+                                itemAlbum.setImage_orientation(0);
+                            }
+
+                        } catch (Exception e) {
+                            itemAlbum.setCover_hex("");
+                            itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
+                            itemAlbum.setCover_height(PPBApplication.getInstance().getStaggeredWidth());
+                            MyLog.Set("e", this.getClass(), "圖片長寬無法讀取");
+                        }
+
+                        String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.usefor);
+                        JSONObject jsonUsefor = new JSONObject(usefor);
+                        itemAlbum.setExchange(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.exchange));
+                        itemAlbum.setSlot(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.slot));
+                        itemAlbum.setVideo(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.video));
+                        itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.audio));
+
+
+                        String user = JsonUtility.GetString(j, ProtocolKey.user);
+                        JSONObject jsonUser = new JSONObject(user);
+                        itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
+
+                        itemAlbumPopularList.add(itemAlbum);
+                    }
+
+                } else if (p86ResultAlbum == 0) {
+                    p86MessageAlbum = JsonUtility.GetString(jsonObject, Key.message);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void getUpdateList(String limit) {
 
         Map<String, String> data = new HashMap<String, String>();
@@ -935,11 +1175,11 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                         String album_id = JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id);
 
-                        if (albumIdList.size() > 0) {
+                        if (reAlbumIdList.size() > 0) {
 
-                            for (int j = 0; j < albumIdList.size(); j++) {
+                            for (int j = 0; j < reAlbumIdList.size(); j++) {
 
-                                if (album_id.equals(albumIdList.get(j))) {
+                                if (album_id.equals(reAlbumIdList.get(j))) {
 
                                     MyLog.Set("e", FragmentHome2.class, "重複了重複了重複了重複了重複了重複了重複了重複了重複了重複了重複了重複了重複了重複了");
 
@@ -953,7 +1193,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                         if (isAlbumExist) continue;
 
-                        albumIdList.add(album_id);
+                        reAlbumIdList.add(album_id);
                         /* ********************************************************/
 
                         /*album*/
@@ -1097,13 +1337,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
                         itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
 
-
-//                        int userid = JsonUtility.GetInt(jsonUser, ProtocolKey.user_id);
-
-//                                if((userid + "").equals("189")){
-
-//                                }
-
                         itemAlbumList.add(itemAlbum);
 
 
@@ -1125,510 +1358,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             }
 
         }
-
-    }
-
-    private void getBannerList() {
-
-        if (itemHomeBannerList != null && itemHomeBannerList.size() > 0) {
-
-
-            for (int i = 0; i < itemHomeBannerList.size(); i++) {
-                String image = itemHomeBannerList.get(i).getImage();
-                Picasso.with(getActivity().getApplicationContext()).invalidate(image);
-            }
-
-            itemHomeBannerList.clear();
-        }
-
-
-        String strJson = "";
-        try {
-            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P75_GetAdList, SetMapByProtocol.setParam75_getadlist(id, token, "1"), null);
-            Logger.json(strJson);
-        } catch (SocketTimeoutException timeout) {
-            p75Result = Key.TIMEOUT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (strJson != null && !strJson.equals("")) {
-            try {
-                JSONObject jsonObject = new JSONObject(strJson);
-                p75Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                if (p75Result == 1) {
-                    String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONArray jsonArray = new JSONArray(data);
-
-                    if (jsonArray.length() != 0) {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-
-                            JSONObject object = (JSONObject) jsonArray.get(i);
-                            ItemHomeBanner itemHomeBanner = new ItemHomeBanner();
-
-                            try {
-                                String event = JsonUtility.GetString(object, ProtocolKey.event);
-                                if (event != null) {
-                                    JSONObject jsonEvent = new JSONObject(event);
-                                    itemHomeBanner.setEvent_id(JsonUtility.GetString(jsonEvent, ProtocolKey.event_id));
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-
-                            try {
-                                String ad = JsonUtility.GetString(object, ProtocolKey.ad);
-                                if (ad != null) {
-                                    JSONObject jsonAd = new JSONObject(ad);
-                                    itemHomeBanner.setImage(JsonUtility.GetString(jsonAd, ProtocolKey.image));
-                                    itemHomeBanner.setUrl(JsonUtility.GetString(jsonAd, ProtocolKey.url));
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                            /*2016.08.19新增album template user Object*/
-                            try {
-                                String album = JsonUtility.GetString(object, ProtocolKey.album);
-                                if (album != null) {
-                                    JSONObject jsonAlbum = new JSONObject(album);
-                                    itemHomeBanner.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                String template = JsonUtility.GetString(object, ProtocolKey.template);
-                                if (template != null) {
-                                    JSONObject jsonTemplate = new JSONObject(template);
-                                    itemHomeBanner.setTemplate_id(JsonUtility.GetString(jsonTemplate, ProtocolKey.template_id));
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                String user = JsonUtility.GetString(object, ProtocolKey.user);
-                                if (user != null) {
-                                    JSONObject jsonUser = new JSONObject(user);
-                                    itemHomeBanner.setUser_id(JsonUtility.GetString(jsonUser, ProtocolKey.user_id));
-
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                            itemHomeBannerList.add(itemHomeBanner);
-
-                        }
-                    }
-                } else if (p75Result == 0) {
-                    p75Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
-
-    private void getThemeList() {
-
-        String strJson = "";
-
-        try {
-            strJson = HttpUtility.uploadSubmit(true, Url.P103_GetThemeArea,
-                    SetMapByProtocol.setParam103_getthemearea(id, token),
-                    null);
-            MyLog.Set("json", getClass(), strJson);
-        } catch (SocketTimeoutException timeout) {
-            p103Result = ResultType.TIMEOUT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (strJson != null && !strJson.equals("")) {
-            try {
-
-                JSONObject jsonObject = new JSONObject(strJson);
-                p103Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
-
-                if (p103Result.equals(ResultType.SYSTEM_OK)) {
-
-                    /*Feature需要獲取name*/
-                    strJsonData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONObject jsonData = new JSONObject(strJsonData);
-
-                    /*添加theme至第一項*/
-                    String themearea = JsonUtility.GetString(jsonData, ProtocolKey.themearea);
-
-                    JSONObject jsonThemeArea = new JSONObject(themearea);
-
-                    ItemAlbumCategory itemAlbumCategory = new ItemAlbumCategory();
-                    itemAlbumCategory.setCategoryarea_id(JsonParamTypeClass.NULLCATEGORYID);
-                    itemAlbumCategory.setName(JsonUtility.GetString(jsonThemeArea, ProtocolKey.name));
-                    itemAlbumCategory.setColorhex(JsonUtility.GetString(jsonThemeArea, ProtocolKey.colorhex));
-                    itemAlbumCategory.setImage_360x360(JsonUtility.GetString(jsonThemeArea, ProtocolKey.image_360x360));
-
-                    itemAlbumCategoryList.add(itemAlbumCategory);
-
-
-                }
-
-                if (!p103Result.equals(ResultType.SYSTEM_OK)) {
-                    p103Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private void getCategoryList() {
-
-        String strJson = "";
-
-        try {
-            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P09_RetrieveCategoryList,
-                    SetMapByProtocol.setParam09_retrievecatgeorylist(id, token),
-                    null);
-            MyLog.Set("json", getClass(), strJson);
-        } catch (SocketTimeoutException timeout) {
-            p09Result = Key.TIMEOUT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (strJson != null && !strJson.equals("")) {
-            try {
-                JSONObject jsonObject = new JSONObject(strJson);
-                p09Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-
-                if (p09Result == 1) {
-
-                    String data = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-
-                    JSONArray jsonArray = new JSONArray(data);
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        JSONObject object = (JSONObject) jsonArray.get(i);
-
-                        String categoryarea = JsonUtility.GetString(object, ProtocolKey.categoryarea);
-                        JSONObject jsonCategoryarea = new JSONObject(categoryarea);
-
-                        ItemAlbumCategory itemAlbumCategory = new ItemAlbumCategory();
-                        itemAlbumCategory.setCategoryarea_id(JsonUtility.GetInt(jsonCategoryarea, ProtocolKey.categoryarea_id));
-                        itemAlbumCategory.setName(JsonUtility.GetString(jsonCategoryarea, ProtocolKey.name));
-                        itemAlbumCategory.setColorhex(JsonUtility.GetString(jsonCategoryarea, ProtocolKey.colorhex));
-                        itemAlbumCategory.setImage_360x360(JsonUtility.GetString(jsonCategoryarea, ProtocolKey.image_360x360));
-
-                        itemAlbumCategoryList.add(itemAlbumCategory);
-                    }
-
-
-                } else if (p09Result == 0) {
-                    p09Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private void getUserList() {
-
-
-        String strJson = "";
-
-        try {
-            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
-                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.user, "0,16"), null);
-            MyLog.Set("d", getClass(), "p86strJson(user) =>" + strJson);
-        } catch (SocketTimeoutException timeout) {
-            p86ResultUser = Key.TIMEOUT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (strJson != null && !strJson.equals("")) {
-            try {
-                JSONObject jsonObject = new JSONObject(strJson);
-                p86ResultUser = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                if (p86ResultUser == 1) {
-
-                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONArray jsonArray = new JSONArray(jdata);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject j = (JSONObject) jsonArray.get(i);
-
-
-                        String user = JsonUtility.GetString(j, ProtocolKey.user);
-                        JSONObject object = new JSONObject(user);
-
-
-                        ItemUser itemUser = new ItemUser();
-                        itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
-                        itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
-                        itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
-                        itemUserList.add(itemUser);
-
-
-                    }
-
-
-                } else if (p86ResultUser == 0) {
-                    p86MessageUser = jsonObject.getString(Key.message);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
-
-    private void getPopularList() {
-
-        String strJson = "";
-
-        try {
-            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
-                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.album, "0,8"), null);
-            MyLog.Set("d", getClass(), "p86strJson(album) => " + strJson);
-        } catch (SocketTimeoutException timeout) {
-            p86ResultAlbum = Key.TIMEOUT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (strJson != null && !strJson.equals("")) {
-            try {
-                JSONObject jsonObject = new JSONObject(strJson);
-                p86ResultAlbum = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                if (p86ResultAlbum == 1) {
-
-                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONArray jsonArray = new JSONArray(jdata);
-                    int minHeight = DensityUtility.dip2px(getActivity().getApplicationContext(), 72);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject j = (JSONObject) jsonArray.get(i);
-
-                        ItemAlbum itemAlbum = new ItemAlbum();
-
-
-                        String album = JsonUtility.GetString(j, ProtocolKey.album);
-                        JSONObject jsonAlbum = new JSONObject(album);
-
-                        itemAlbum.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
-                        itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.name));
-
-                        String cover = JsonUtility.GetString(jsonAlbum, ProtocolKey.cover);
-                        itemAlbum.setCover(cover);
-
-                        try {
-                            int width = jsonAlbum.getInt(ProtocolKey.cover_width);
-                            int height = jsonAlbum.getInt(ProtocolKey.cover_height);
-
-                            itemAlbum.setCover_width(width);
-                            itemAlbum.setCover_height(height);
-                            itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
-
-                            if (width > height) {
-                                itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                            } else if (height > width) {
-                                itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                            } else {
-                                itemAlbum.setImage_orientation(0);
-                            }
-
-                        } catch (Exception e) {
-                            itemAlbum.setCover_hex("");
-                            itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
-                            itemAlbum.setCover_height(PPBApplication.getInstance().getStaggeredWidth());
-                            MyLog.Set("e", this.getClass(), "圖片長寬無法讀取");
-                        }
-
-                        String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.usefor);
-                        JSONObject jsonUsefor = new JSONObject(usefor);
-                        itemAlbum.setExchange(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.exchange));
-                        itemAlbum.setSlot(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.slot));
-                        itemAlbum.setVideo(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.video));
-                        itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.audio));
-
-
-                        String user = JsonUtility.GetString(j, ProtocolKey.user);
-                        JSONObject jsonUser = new JSONObject(user);
-                        itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
-
-                        itemAlbumPopularList.add(itemAlbum);
-                    }
-
-                } else if (p86ResultAlbum == 0) {
-                    p86MessageAlbum = JsonUtility.GetString(jsonObject, Key.message);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void setBanner() {
-
-        bannerViewList = new ArrayList<>();
-
-        for (int i = 0; i < itemHomeBannerList.size(); i++) {
-            View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.page_2_0_0_banner_image, null);
-
-            bannerViewList.add(view);
-
-        }
-
-//        int bannerWidth = ScreenUtils.getScreenWidth();
-//
-//        int bannerHeight = (bannerWidth * 540) / 960;
-//
-//        vpBanner.setLayoutParams(new LinearLayout.LayoutParams(ScreenUtils.getScreenWidth(), bannerHeight));
-
-        BannerSize.set(vpBanner,0);
-
-        if (bannerPageAdapter != null) {
-            bannerPageAdapter = null;
-        }
-
-        bannerPageAdapter = new BannerPageAdapter(getActivity(), bannerViewList, itemHomeBannerList, this);
-        vpBanner.setAdapter(bannerPageAdapter);
-        indicator.setViewPager(vpBanner);
-
-
-        if (itemHomeBannerList.size() > 1) {
-            autoPageScrollManager = new AutoPageScrollManager(vpBanner, 5, itemHomeBannerList.size());
-        }
-
-        Glide.get(getActivity().getApplicationContext()).clearMemory();
-
-
-        //判斷是否是活動
-        String event_id = itemHomeBannerList.get(0).getEvent_id();
-
-
-        if (event_id != null && !event_id.equals("") && !event_id.equals("null")) {
-
-            /*當前為活動*/
-
-            //判斷image是否曾經顯示過
-            boolean isUrlExist = false;
-            String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
-            try {
-                JSONArray bannerArray = new JSONArray(bannerList);
-                for (int i = 0; i < bannerArray.length(); i++) {
-                    String strOldImageUrl = (String) bannerArray.get(i);
-                    if (strOldImageUrl.equals(itemHomeBannerList.get(0).getImage())) {
-                        isUrlExist = true;
-                        break;
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (isUrlExist) {
-                if (autoPageScrollManager != null) {
-
-                    autoPageScrollManager.post();
-                }
-            }
-
-        } else {
-
-
-            /*不為活動 直接自動播放*/
-            if (autoPageScrollManager != null) {
-
-                autoPageScrollManager.post();
-            }
-
-
-        }
-
-
-    }
-
-    private void setScrollListener() {
-
-        rvCategory.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-
-                MyLog.Set("e", FragmentHome2.class, "newState => " + newState);
-
-                switch (newState) {
-
-                    case 1:
-                        pinPinBoxRefreshLayout.setPullRefresh(false);
-
-                        AnimationSuspensionTouch.reset(isOnTouchView);
-
-                        break;
-
-                    case 2:
-                        pinPinBoxRefreshLayout.setPullRefresh(true);
-                        break;
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
-
-        vpBanner.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                switch (state) {
-                    case 1://正在滑動
-
-                        if (autoPageScrollManager != null) {
-                            autoPageScrollManager.removeRunnable();
-                            pinPinBoxRefreshLayout.setPullRefresh(false);
-                        }
-
-                        break;
-
-                    case 2://滑動完畢
-
-                        if (autoPageScrollManager != null) {
-                            pinPinBoxRefreshLayout.setPullRefresh(true);
-                            autoPageScrollManager.post();
-                        }
-
-                        break;
-
-                }
-
-            }
-        });
 
     }
 
@@ -1750,11 +1479,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 switch (doingType) {
 
                     case DoingTypeClass.DoDefault:
-                        doAttention();
-                        break;
-
-                    case DoGetAD:
-                        doGetAD();
+                        doGetAllData();
                         break;
 
                     case DoingTypeClass.DoMoreData:
@@ -1765,18 +1490,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                         doRefresh();
                         break;
 
-//                    case DoFastCreate:
-//                        doFastCreate();
-//                        break;
-//
-//                    case DoFirstLogin:
-//                        doFirstLogin();
-//                        break;
-//
-//                    case DoJoinCooperation:
-//                        doJoinCooperation();
-//                        break;
-
                 }
             }
         };
@@ -1785,13 +1498,15 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-    private void doAttention() {
+    private void doGetAllData() {
         if (!HttpUtility.isConnect(getActivity())) {
             ((Main2Activity) getActivity()).setNoConnect();
             return;
         }
-        attentionTask = new AttentionTask();
-        attentionTask.execute();
+
+        getAllDataTask = new GetAllDataTask();
+        getAllDataTask.execute();
+
     }
 
     private void doMoreData() {
@@ -1804,14 +1519,15 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     }
 
     private void doRefresh() {
+
         if (!HttpUtility.isConnect(getActivity())) {
             ((Main2Activity) getActivity()).setNoConnect();
             return;
         }
 
-        if (attentionTask != null && !attentionTask.isCancelled()) {
-            attentionTask.cancel(true);
-            attentionTask = null;
+        if (getAllDataTask != null && !getAllDataTask.isCancelled()) {
+            getAllDataTask.cancel(true);
+            getAllDataTask = null;
         }
 
 
@@ -1819,135 +1535,24 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             cleanPicasso();
         }
 
-        albumIdList.clear();
+        reAlbumIdList.clear();
         itemAlbumList.clear();
-        itemAlbumCategoryList.clear();
         itemUserList.clear();
         itemAlbumPopularList.clear();
+        itemHomeBannerList.clear();
 
         p20total = 0;
         round = 0;
 
+        bannerAdapter.notifyDataSetChanged();
         recyclerHomeAdapter.notifyDataSetChanged();
-        categoryNameAdapter.notifyDataSetChanged();
         userAdapter.notifyDataSetChanged();
         popularAlbumAdapter.notifyDataSetChanged();
-
-        if (autoPageScrollManager != null) {
-            autoPageScrollManager.recycler();
-            autoPageScrollManager = null;
-        }
 
 
         refreshTask = new RefreshTask();
         refreshTask.execute();
 
-    }
-
-    private void doGetAD() {
-        if (!HttpUtility.isConnect(getActivity())) {
-//            noConnect = new NoConnect(getActivity());
-            ((Main2Activity) getActivity()).setNoConnect();
-            return;
-        }
-        getADTask = new GetADTask();
-        getADTask.execute();
-
-
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    public class AttentionTask extends AsyncTask<Void, Void, Object> {
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoDefault;
-            round = 0;
-            sizeMax = false;
-            loading.show();
-
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-
-            getThemeList();
-
-            getCategoryList();
-
-            getUserList();
-
-            getPopularList();
-
-            getUpdateList(round + "," + count);
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-
-
-            try {
-
-                if (p09Result == 1) {
-
-                    categoryNameAdapter.notifyDataSetChanged();
-
-                } else if (p09Result == 0) {
-
-                    loading.dismiss();
-
-                    DialogV2Custom.BuildError(getActivity(), p09Message);
-                    return;
-                } else if (p09Result == Key.TIMEOUT) {
-                    connectInstability();
-                    loading.dismiss();
-                    return;
-                } else {
-                    DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-                }
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            try {
-                if (p20Result.equals("1")) {
-
-
-                    doGetAD();
-
-                } else if (p20Result.equals("0")) {
-                    DialogV2Custom.BuildError(getActivity(), p20Message);
-
-                    loading.dismiss();
-
-                } else if (p20Result.equals(Key.timeout)) {
-                    connectInstability();
-                    loading.dismiss();
-                } else {
-                    DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-                    loading.dismiss();
-                }
-
-            } catch (Exception e) {
-                loading.dismiss();
-                /*2016.11.24 new add*/
-                if (reCreateCount == 0) {
-                    doAttention();
-                }
-                reCreateCount++;
-            }
-
-        }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -1979,7 +1584,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
             isDoingMore = false;
 
-//            canScroll();
             pbLoadMore.setVisibility(View.GONE);
             pbLoadMore.progressiveStop();
 
@@ -2027,9 +1631,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         @Override
         protected Object doInBackground(Void... params) {
 
-            getThemeList();
-
-            getCategoryList();
+            getBannerList();
 
             getUserList();
 
@@ -2037,9 +1639,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
             getUpdateList(round + "," + count);
 
-            if (isDoingRefreshBanner) {
-                getBannerList();
-            }
             return null;
         }
 
@@ -2051,108 +1650,23 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
             pinPinBoxRefreshLayout.setRefreshing(false);
 
+            postData();
 
-            try {
-
-                if (p09Result == 1) {
-                    categoryNameAdapter.notifyDataSetChanged();
-                } else if (p09Result == 0) {
-                    DialogV2Custom.BuildError(getActivity(), p09Message);
-                    return;
-                } else if (p09Result == Key.TIMEOUT) {
-                    connectInstability();
-                    return;
-                } else {
-                    DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-                }
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-
-                if (p86ResultUser == 1) {
-                    userAdapter.notifyDataSetChanged();
-                } else if (p86ResultUser == 0) {
-                    DialogV2Custom.BuildError(getActivity(), p86MessageUser);
-                    return;
-                } else if (p86ResultUser == Key.TIMEOUT) {
-                    connectInstability();
-                    return;
-                } else {
-                    DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-                }
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            try {
-
-                if (p86ResultAlbum == 1) {
-                    popularAlbumAdapter.notifyDataSetChanged();
-                } else if (p86ResultAlbum == 0) {
-                    DialogV2Custom.BuildError(getActivity(), p86MessageAlbum);
-                    return;
-                } else if (p86ResultAlbum == Key.TIMEOUT) {
-                    connectInstability();
-                    return;
-                } else {
-                    DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-                }
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            if (p20Result.equals("1")) {
-                recyclerHomeAdapter.notifyDataSetChanged();
-                round = round + count;
-
-                if (isDoingRefreshBanner) {
-
-                    if (p75Result == 1) {
-                        if (itemHomeBannerList.size() == 0) {
-                            linBanner.setVisibility(View.GONE);
-                        } else {
-                            setBanner();
-                        }
-                    } else if (p75Result == 0) {
-                        DialogV2Custom.BuildError(getActivity(), p75Message);
-                    }
-
-                } else {
-                    isDoingRefreshBanner = true;
-                }
-
-
-            } else if (p20Result.equals("0")) {
-
-                DialogV2Custom.BuildError(getActivity(), p20Message);
-
-            } else if (p20Result.equals(Key.timeout)) {
-
-                connectInstability();
-
-            } else {
-                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-            }
         }
+
     }
 
     @SuppressLint("StaticFieldLeak")
-    public class GetADTask extends AsyncTask<Void, Void, Object> {
+    public class GetAllDataTask extends AsyncTask<Void, Void, Object> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            doingType = DoGetAD;
+
+            doingType = DoingTypeClass.DoDefault;
+            round = 0;
+            sizeMax = false;
+            loading.show();
 
         }
 
@@ -2160,6 +1674,12 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         protected Object doInBackground(Void... params) {
 
             getBannerList();
+
+            getUserList();
+
+            getPopularList();
+
+            getUpdateList(round + "," + count);
 
             return null;
         }
@@ -2172,68 +1692,178 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
             ViewControl.AlphaTo1(pinPinBoxRefreshLayout);
 
+            postData();
+
+            checkNewletter();
+
+
+        }
+
+        private void checkNewletter() {
+
+            if (PPBApplication.getInstance().getData().getBoolean(Key.checkNewsletter, false)) {
+
+                DialogV2Custom dlgCheckNL = new DialogV2Custom(getActivity());
+                dlgCheckNL.setStyle(DialogStyleClass.CHECK);
+                dlgCheckNL.setMessage(R.string.pinpinbox_2_0_0_other_text_select_newsletter_default_receiving);
+                dlgCheckNL.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_subscribe);
+                dlgCheckNL.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_no_subscribe);
+                dlgCheckNL.setCheckExecute(new CheckExecute() {
+                    @Override
+                    public void DoCheck() {
+                        doUploadNewsletter(true);
+                    }
+                });
+
+                dlgCheckNL.setDismissExcute(new DismissExcute() {
+                    @Override
+                    public void AfterDismissDo() {
+                        doUploadNewsletter(false);
+                    }
+                });
+                dlgCheckNL.getDarkBg().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
+                dlgCheckNL.show();
+
+            }
+
+        }
+
+    }
+
+    private void postData() {
+
+
+        /*banner*/
+        try {
 
             if (p75Result == 1) {
-                if (itemHomeBannerList.size() == 0) {
-                    linBanner.setVisibility(View.GONE);
-                } else {
 
-                    setBanner();
+                bannerAdapter.notifyDataSetChanged();
 
-                }
+            } else if (p75Result == 0) {
+
+                DialogV2Custom.BuildError(getActivity(), p75Message);
+
+                return;
+
+            } else if (p75Result == Key.TIMEOUT) {
+
+                connectInstability();
+
+                return;
+
+            } else {
+
+                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
+
+                return;
+
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
 
 
-                recyclerHomeAdapter.notifyDataSetChanged();
+
+        /*熱門關注*/
+        try {
+
+            if (p86ResultUser == 1) {
 
                 userAdapter.notifyDataSetChanged();
 
+            } else if (p86ResultUser == 0) {
+
+                DialogV2Custom.BuildError(getActivity(), p86MessageUser);
+
+                return;
+
+            } else if (p86ResultUser == Key.TIMEOUT) {
+
+                connectInstability();
+
+                return;
+
+            } else {
+
+                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
+
+                return;
+
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+
+
+        /*精選創作*/
+        try {
+
+            if (p86ResultAlbum == 1) {
+
                 popularAlbumAdapter.notifyDataSetChanged();
 
-                round = round + count;
+            } else if (p86ResultAlbum == 0) {
 
-                //check newletter
+                DialogV2Custom.BuildError(getActivity(), p86MessageAlbum);
 
-                if (PPBApplication.getInstance().getData().getBoolean(Key.checkNewsletter, false)) {
+                return;
 
+            } else if (p86ResultAlbum == Key.TIMEOUT) {
 
-                    DialogV2Custom dlgCheckNL = new DialogV2Custom(getActivity());
-                    dlgCheckNL.setStyle(DialogStyleClass.CHECK);
-                    dlgCheckNL.setMessage(R.string.pinpinbox_2_0_0_other_text_select_newsletter_default_receiving);
-                    dlgCheckNL.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_subscribe);
-                    dlgCheckNL.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_no_subscribe);
-                    dlgCheckNL.setCheckExecute(new CheckExecute() {
-                        @Override
-                        public void DoCheck() {
-                            doUploadNewsletter(true);
-                        }
-                    });
-
-                    dlgCheckNL.setDismissExcute(new DismissExcute() {
-                        @Override
-                        public void AfterDismissDo() {
-                            doUploadNewsletter(false);
-                        }
-                    });
-                    dlgCheckNL.getDarkBg().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                        }
-                    });
-                    dlgCheckNL.show();
-
-                }
-
-
-            } else if (p75Result == 0) {
-                DialogV2Custom.BuildError(getActivity(), p75Message);
-            } else if (p75Result == Key.TIMEOUT) {
                 connectInstability();
-            } else {
-                DialogV2Custom.BuildUnKnow(getActivity(), this.getClass().getSimpleName());
-            }
-        }
-    }
 
+                return;
+
+            } else {
+
+                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
+
+                return;
+
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+
+
+        /*瀑布流作品 不用return*/
+        if (p20Result.equals("1")) {
+
+            recyclerHomeAdapter.notifyDataSetChanged();
+
+            round = round + count;
+
+        } else if (p20Result.equals("0")) {
+
+            DialogV2Custom.BuildError(getActivity(), p20Message);
+
+        } else if (p20Result.equals(Key.timeout)) {
+
+            connectInstability();
+
+        } else {
+
+            DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
+
+        }
+
+    }
 
     private void doUploadNewsletter(final boolean newsletter) {
 
@@ -2288,7 +1918,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-
     @Override
     public void onClick(View view) {
 
@@ -2305,8 +1934,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 changeRank(strRank);
 
-                isDoingRefreshBanner = false;
-
                 doRefresh();
 
                 break;
@@ -2316,8 +1943,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
                 strRank = "follow";
 
                 changeRank(strRank);
-
-                isDoingRefreshBanner = false;
 
                 FlurryUtil.onEvent(FlurryKey.home_click_follow);
 
@@ -2351,11 +1976,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 break;
 
-
             case R.id.linCategory:
 
-
-                if(isSearch){
+                if (isSearch) {
                     edSearch.clearFocus();
                     inputMethodManager.hideSoftInputFromWindow(edSearch.getWindowToken(), 0);
                     hideSearch();
@@ -2371,9 +1994,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
                 }
 
-
                 break;
-
 
         }
 
@@ -2389,50 +2010,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
 
     }
-
-
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//
-//        if (!isVisibleToUser && isResumed()) {
-//            MyLog.Set("e", getClass(), "isVisibleToUser => " + false);
-//            resetBannerAutoScroll();
-//
-//        } else if (isVisibleToUser && isResumed() && ((Main2Activity) getActivity()).getPage() == 0) {
-//            MyLog.Set("e", getClass(), "isVisibleToUser => " + true);
-//            beginBannerAutoScroll();
-//
-//        }
-//
-//    }
-//
-//
-//    private void resetBannerAutoScroll() {
-//
-//        MyLog.Set("e", getClass(), "resetBannerAutoScroll");
-//
-//        if (autoPageScrollManager != null) {
-//            autoPageScrollManager.removeRunnable();
-//            vpBanner.setCurrentItem(0);
-//            vpBanner.setAdapter(null);
-//
-//        }
-//        Glide.get(getActivity().getApplicationContext()).clearMemory();
-//
-//
-//    }
-//
-//
-//    private void beginBannerAutoScroll() {
-//
-//        MyLog.Set("e", getClass(), "beginBannerAutoScroll");
-//
-//        if (autoPageScrollManager != null) {
-//            vpBanner.setAdapter(bannerPageAdapter);
-//            autoPageScrollManager.post();
-//        }
-//    }
 
 
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
@@ -2470,27 +2047,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
     @Override
     public void onPullDistance(int distance) {
 
-//        MyLog.Set("d", getClass(), "onPullDistance => " + distance);
-//
-//
-//        floatScaleX = (float)distance / 100;
-//
-//        vRefreshAnim.setScaleX(floatScaleX);
-//        if (distance < 40) {
-//            avLoading.setScaleX(0);
-//            avLoading.setScaleX(0);
-//        } else {
-//
-//            if (distance > 40) {
-//                scale = (distance - 40) / 80f;
-//                if (scale <= 1) {
-//                    avLoading.setScaleX(scale);
-//                    avLoading.setScaleY(scale);
-//
-//                }
-//
-//            }
-//        }
     }
 
     @Override

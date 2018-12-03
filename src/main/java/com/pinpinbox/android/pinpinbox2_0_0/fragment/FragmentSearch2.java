@@ -41,7 +41,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.ExLinearLayoutManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SystemType;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -229,11 +228,8 @@ public class FragmentSearch2 extends Fragment{
 
     private void setAlbumRecycler() {
 
-        if (PPBApplication.getInstance().isPhone()) {
-            rvSearch.addItemDecoration(new SpacesItemDecoration(16, SystemType.PHONE, true));
-        }else {
-            rvSearch.addItemDecoration(new SpacesItemDecoration(16, SystemType.TABLE, true));
-        }
+
+            rvSearch.addItemDecoration(new SpacesItemDecoration(16, true));
 
         albumAdapter = new RecyclerSearchAlbumAdapter(getActivity(), searchAlbumList);
         rvSearch.setAdapter(albumAdapter);
