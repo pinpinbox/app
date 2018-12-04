@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linClickArea"
+    android:layout_width="289dp"
+    android:layout_height="188dp"
+    android:background="@drawable/click_2_0_0_default"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/ppb200_padding_margin_second">
+
+
+    <RelativeLayout
+        android:layout_width="273dp"
+        android:layout_height="128dp"
+        android:background="@drawable/image_background_2_0_0_radius">
+
+        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+            android:id="@+id/coverImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            app:siBorderAlpha="0"
+            app:siRadius="@dimen/ppb200_radius_general" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+            android:id="@+id/userImg"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:scaleType="centerCrop"
+            app:siBorderColor="@color/pinpinbox_2_0_0_divider"
+            app:siBorderWidth="0.5dp"
+            app:siRadius="32dp" />
+
+
+        <TextView
+            android:id="@+id/tvFeatureUserDescription"
+            style="@style/ppb200_home_feature_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:text="" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

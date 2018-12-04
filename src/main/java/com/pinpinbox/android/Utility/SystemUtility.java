@@ -175,6 +175,16 @@ public class SystemUtility {
 
         Intent intent = activity.getIntent();//如果从外部进入APP，则实现以下方法
 
+//        if(intent!=null && intent.getType().equals("text/plain")){
+//
+//            MyLog.Set("e", SystemUtility.class, "intent.toString() => " + intent.toString());
+//
+//            String aaaaaa = intent.getStringExtra(Intent.EXTRA_TEXT);
+//
+//            MyLog.Set("e", SystemUtility.class, "aaaaaa => " + aaaaaa);
+//
+//        }
+
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
 
             Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);

@@ -12,7 +12,7 @@
         android:paddingRight="@dimen/ppb200_padding_margin_first">
 
         <TextView
-            android:id="@+id/tvRecommend"
+            android:id="@+id/tvRecommendUser"
             style="@style/ppb200_title_second"
             android:text="@string/pinpinbox_2_0_0_title_follow" />
 

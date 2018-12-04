@@ -458,10 +458,11 @@
 
 
     <string name="pinpinbox_2_0_0_title_follow">Popular</string>
-    <string name="pinpinbox_2_0_0_title_creation">Feature</string>
     <string name="pinpinbox_2_0_0_title_recommend">Recommend</string>
 
-
+    <string name="pinpinbox_2_0_0_title_feature_area">Feature</string>
+    <string name="pinpinbox_2_0_0_title_feature_recommend">Recommend</string>
+    <string name="pinpinbox_2_0_0_title_feature_hot">Hot</string>
 
     <string name="pinpinbox_2_0_0_guide_cooperation">Co-creating is fun, too.</string>
     <string name="pinpinbox_2_0_0_guide_no_notify">No message today</string>

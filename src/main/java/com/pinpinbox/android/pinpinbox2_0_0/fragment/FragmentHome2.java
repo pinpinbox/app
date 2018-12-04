@@ -49,9 +49,9 @@ import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBannerAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerFeatureAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeUserAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerPopularAlbumAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
@@ -122,26 +122,23 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     private RecyclerHomeAdapter recyclerHomeAdapter;
     private RecyclerHomeUserAdapter userAdapter;
-    private RecyclerPopularAlbumAdapter popularAlbumAdapter;
     private RecyclerBannerAdapter bannerAdapter;
+    private RecyclerFeatureAdapter featureRecommendAdapter, featureHotAdapter;
 
     private List<ItemAlbum> itemAlbumList;
     private List<ItemHomeBanner> itemHomeBannerList;
-    private List<ItemUser> itemUserList;
-    private List<ItemAlbum> itemAlbumPopularList;
+    private List<ItemUser> itemUserList, itemRecommendList, itemHotList;
     private List<String> reAlbumIdList;
 
     private String id, token;
     private String p20Result, p20Message;
     private String p86MessageUser = "";
-    private String p86MessageAlbum = "";
     private String p75Message = "";
     private String strRank;
 
 
     private int p75Result = -1;
     private int p86ResultUser = -1;
-    private int p86ResultAlbum = -1;
 
 
     private int round; //listview添加前的初始值
@@ -159,7 +156,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
 
     private SpeedRecyclerView rvBanner;
-    private RecyclerView rvHome, rvRecommendUser, rvPopularAlbum;
+    private RecyclerView rvHome, rvRecommendUser, rvRecommend, rvHot;
     private SmoothProgressBar pbLoadMore, pbRefresh;
     private View viewHeader;
 
@@ -208,8 +205,12 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         setSearch();
         setRecycler();
         setUserRecycler();
-        setPopularRecycler();
         setBannerRecycler();
+
+        setRecommendRecycler();
+        setHotRecycler();
+
+
         doGetAllData();
 
 
@@ -217,8 +218,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     @Override
     public void onResume() {
-
-
 
 
         if (bannerAdapter != null) {
@@ -349,8 +348,9 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         linHobby = viewHeader.findViewById(R.id.linHobby);
         linFollow = viewHeader.findViewById(R.id.linFollow);
         rvBanner = viewHeader.findViewById(R.id.rvBanner);
+        rvRecommend = viewHeader.findViewById(R.id.rvRecommend);
+        rvHot = viewHeader.findViewById(R.id.rvHot);
         rvRecommendUser = viewHeader.findViewById(R.id.rvRecommendUser);
-        rvPopularAlbum = viewHeader.findViewById(R.id.rvPopularAlbum);
         tvNew = viewHeader.findViewById(R.id.tvNew);
         tvFollow = viewHeader.findViewById(R.id.tvFollow);
         vHobby = viewHeader.findViewById(R.id.vHobby);
@@ -362,8 +362,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         TextUtility.setBold(
                 (TextView) viewHeader.findViewById(R.id.tvNewsFeed),
-                (TextView) viewHeader.findViewById(R.id.tvRecommend),
-                (TextView) viewHeader.findViewById(R.id.tvPopularity)
+                (TextView) viewHeader.findViewById(R.id.tvRecommendUser),
+                (TextView) viewHeader.findViewById(R.id.tvFeatureArea),
+                (TextView) viewHeader.findViewById(R.id.tvHot),
+                (TextView) viewHeader.findViewById(R.id.tvRecommend)
         );
 
 
@@ -422,7 +424,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         itemHomeBannerList = new ArrayList<>();
         reAlbumIdList = new ArrayList<>();
         itemUserList = new ArrayList<>();
-        itemAlbumPopularList = new ArrayList<>();
+        itemRecommendList = new ArrayList<>();
+        itemHotList = new ArrayList<>();
 
     }
 
@@ -614,8 +617,10 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
     }
 
-    private void setBannerRecycler() {
 
+
+
+    private void setBannerRecycler() {
 
 
         bannerAdapter = new RecyclerBannerAdapter(getActivity(), itemHomeBannerList, this);
@@ -626,7 +631,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
         rvBanner.setAdapter(bannerAdapter);
 
-        if(PPBApplication.getInstance().isPhone()) {
+        if (PPBApplication.getInstance().isPhone()) {
 
             CardScaleHelper mCardScaleHelper = new CardScaleHelper();
 
@@ -733,6 +738,63 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
+    private void setRecommendRecycler(){
+
+        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvRecommend.setLayoutManager(layoutManager);
+        featureRecommendAdapter = new RecyclerFeatureAdapter(getActivity(), itemRecommendList);
+        rvRecommend.setAdapter(featureRecommendAdapter);
+
+        featureRecommendAdapter.setOnRecyclerViewListener(new RecyclerFeatureAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
+            }
+
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+        });
+
+    }
+
+
+    private void setHotRecycler(){
+
+        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvHot.setLayoutManager(layoutManager);
+        featureHotAdapter = new RecyclerFeatureAdapter(getActivity(), itemHotList);
+        rvHot.setAdapter(featureHotAdapter);
+
+        featureHotAdapter.setOnRecyclerViewListener(new RecyclerFeatureAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
+
+            }
+
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+        });
+
+
+    }
+
+
+
+
     private void setRecycler() {
 
         recyclerHomeAdapter = new RecyclerHomeAdapter(getActivity(), itemAlbumList);
@@ -835,44 +897,8 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-    private void setPopularRecycler() {
-
-        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvPopularAlbum.setLayoutManager(layoutManager);
-        popularAlbumAdapter = new RecyclerPopularAlbumAdapter(getActivity(), itemAlbumPopularList);
-        rvPopularAlbum.setAdapter(popularAlbumAdapter);
-
-        popularAlbumAdapter.setOnRecyclerViewListener(new RecyclerPopularAlbumAdapter.OnRecyclerViewListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
 
 
-                ActivityIntent.toAlbumInfo(
-                        getActivity(),
-                        true,
-                        itemAlbumPopularList.get(position).getAlbum_id(),
-                        itemAlbumPopularList.get(position).getCover(),
-                        itemAlbumPopularList.get(position).getImage_orientation(),
-                        itemAlbumPopularList.get(position).getCover_width(),
-                        itemAlbumPopularList.get(position).getCover_height(),
-                        v.findViewById(R.id.coverImg)
-                );
-
-            }
-
-            @Override
-            public boolean onItemLongClick(int position, View v) {
-                return false;
-            }
-        });
-
-
-    }
 
     private void getBannerList() {
 
@@ -1027,90 +1053,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
     }
 
-    private void getPopularList() {
 
-        String strJson = "";
-
-        try {
-            strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
-                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.album, "0,8"), null);
-            MyLog.Set("d", getClass(), "p86strJson(album) => " + strJson);
-        } catch (SocketTimeoutException timeout) {
-            p86ResultAlbum = Key.TIMEOUT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (strJson != null && !strJson.equals("")) {
-            try {
-                JSONObject jsonObject = new JSONObject(strJson);
-                p86ResultAlbum = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                if (p86ResultAlbum == 1) {
-
-                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONArray jsonArray = new JSONArray(jdata);
-                    int minHeight = DensityUtility.dip2px(getActivity().getApplicationContext(), 72);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject j = (JSONObject) jsonArray.get(i);
-
-                        ItemAlbum itemAlbum = new ItemAlbum();
-
-
-                        String album = JsonUtility.GetString(j, ProtocolKey.album);
-                        JSONObject jsonAlbum = new JSONObject(album);
-
-                        itemAlbum.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
-                        itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.name));
-
-                        String cover = JsonUtility.GetString(jsonAlbum, ProtocolKey.cover);
-                        itemAlbum.setCover(cover);
-
-                        try {
-                            int width = jsonAlbum.getInt(ProtocolKey.cover_width);
-                            int height = jsonAlbum.getInt(ProtocolKey.cover_height);
-
-                            itemAlbum.setCover_width(width);
-                            itemAlbum.setCover_height(height);
-                            itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
-
-                            if (width > height) {
-                                itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                            } else if (height > width) {
-                                itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                            } else {
-                                itemAlbum.setImage_orientation(0);
-                            }
-
-                        } catch (Exception e) {
-                            itemAlbum.setCover_hex("");
-                            itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
-                            itemAlbum.setCover_height(PPBApplication.getInstance().getStaggeredWidth());
-                            MyLog.Set("e", this.getClass(), "圖片長寬無法讀取");
-                        }
-
-                        String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.usefor);
-                        JSONObject jsonUsefor = new JSONObject(usefor);
-                        itemAlbum.setExchange(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.exchange));
-                        itemAlbum.setSlot(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.slot));
-                        itemAlbum.setVideo(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.video));
-                        itemAlbum.setAudio(JsonUtility.GetBoolean(jsonUsefor, ProtocolKey.audio));
-
-
-                        String user = JsonUtility.GetString(j, ProtocolKey.user);
-                        JSONObject jsonUser = new JSONObject(user);
-                        itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
-
-                        itemAlbumPopularList.add(itemAlbum);
-                    }
-
-                } else if (p86ResultAlbum == 0) {
-                    p86MessageAlbum = JsonUtility.GetString(jsonObject, Key.message);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     private void getUpdateList(String limit) {
 
@@ -1430,18 +1373,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
 
 
-        if (itemAlbumPopularList != null && itemAlbumPopularList.size() > 0) {
-
-            for (int i = 0; i < itemAlbumPopularList.size(); i++) {
-
-                String cover = itemAlbumPopularList.get(i).getCover();
-                if (cover != null && !cover.equals("")) {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
-                }
-            }
-
-        }
-
 
         if (itemUserList != null && itemUserList.size() > 0) {
 
@@ -1538,7 +1469,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         reAlbumIdList.clear();
         itemAlbumList.clear();
         itemUserList.clear();
-        itemAlbumPopularList.clear();
         itemHomeBannerList.clear();
 
         p20total = 0;
@@ -1547,7 +1477,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         bannerAdapter.notifyDataSetChanged();
         recyclerHomeAdapter.notifyDataSetChanged();
         userAdapter.notifyDataSetChanged();
-        popularAlbumAdapter.notifyDataSetChanged();
+
 
 
         refreshTask = new RefreshTask();
@@ -1635,8 +1565,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
 
             getUserList();
 
-            getPopularList();
-
             getUpdateList(round + "," + count);
 
             return null;
@@ -1651,6 +1579,7 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             pinPinBoxRefreshLayout.setRefreshing(false);
 
             postData();
+
 
         }
 
@@ -1676,8 +1605,6 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
             getBannerList();
 
             getUserList();
-
-            getPopularList();
 
             getUpdateList(round + "," + count);
 
@@ -1806,43 +1733,20 @@ public class FragmentHome2 extends Fragment implements View.OnClickListener, Sup
         }
 
 
+        for (int i = 0; i < 6; i++) {
 
-        /*精選創作*/
-        try {
+            ItemUser itemUser = new ItemUser();
 
-            if (p86ResultAlbum == 1) {
-
-                popularAlbumAdapter.notifyDataSetChanged();
-
-            } else if (p86ResultAlbum == 0) {
-
-                DialogV2Custom.BuildError(getActivity(), p86MessageAlbum);
-
-                return;
-
-            } else if (p86ResultAlbum == Key.TIMEOUT) {
-
-                connectInstability();
-
-                return;
-
-            } else {
-
-                DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-
-                return;
-
-            }
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
+            itemRecommendList.add(itemUser);
+            itemHotList.add(itemUser);
         }
 
+        featureRecommendAdapter.notifyDataSetChanged();
+        featureHotAdapter.notifyDataSetChanged();
 
 
-        /*瀑布流作品 不用return*/
+
+        /*瀑布流作品 不用return ( 主要 recyclerview 要最後執行)*/
         if (p20Result.equals("1")) {
 
             recyclerHomeAdapter.notifyDataSetChanged();

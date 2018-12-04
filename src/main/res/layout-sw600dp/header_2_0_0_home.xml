@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical">
@@ -18,23 +14,24 @@
         <com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.SpeedRecyclerView
             android:id="@+id/rvBanner"
             android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />
+
+        <!--專區精選 32修正為24-->
+        <include
+            layout="@layout/lay_2_0_0_home_featurearea"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_big"/>
+            android:layout_marginBottom="24dp" />
 
 
         <!--釘關注-->
         <include
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
-            android:layout_height="wrap_content"
+            layout="@layout/lay_2_0_0_home_recommend_user"
             android:layout_width="wrap_content"
-            layout="@layout/lay_2_0_0_home_recommend_user"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />
 
-        <!--釘創作-->
-        <include
-            android:layout_marginBottom="@dimen/ppb200_padding_margin_big"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            layout="@layout/lay_2_0_0_home_popular_album"/>
 
         <!--推薦-->
         <RelativeLayout

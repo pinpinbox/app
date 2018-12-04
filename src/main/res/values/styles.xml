@@ -122,6 +122,19 @@
     </style>
 
 
+    <style name="ppb200_home_feature_description" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_small</item>
+        <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
+        <item name="android:maxLines">2</item>
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
+
     <!--staggered-->
     <style name="ppb200_staggered_album_name" parent="android:TextAppearance.Widget.TextView">
         <item name="android:layout_width">match_parent</item>
