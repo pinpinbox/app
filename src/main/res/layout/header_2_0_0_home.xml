@@ -15,7 +15,7 @@
         <com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.SpeedRecyclerView
             android:id="@+id/rvBanner"
             android:layout_width="match_parent"
-            android:layout_height="222dp"
+            android:layout_height="234dp"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />
 
 

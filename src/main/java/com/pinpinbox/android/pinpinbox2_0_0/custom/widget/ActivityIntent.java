@@ -13,11 +13,11 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumSponsorList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettings2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.BuyPoint2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryContents2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryAll2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.EditProfile2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Event2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCase2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.FollowMe2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.LikeList2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
@@ -131,14 +131,14 @@ public class ActivityIntent {
 
     }
 
-    public static void toCategoryContents(Activity currentActivity, int categoryarea_id, String categoryarea_name) {
+    public static void toCategoryAll(Activity currentActivity, int categoryarea_id, String categoryarea_name) {
 
         Bundle bundle = new Bundle();
         bundle.putInt(Key.categoryarea_id, categoryarea_id);
         bundle.putString(Key.categoryarea_name, categoryarea_name);
 
         currentActivity.startActivity(
-                new Intent(currentActivity, CategoryContents2Activity.class).putExtras(bundle)
+                new Intent(currentActivity, CategoryAll2Activity.class).putExtras(bundle)
         );
         ActivityAnim.StartAnim(currentActivity);
 
@@ -150,7 +150,7 @@ public class ActivityIntent {
         bundle.putInt(Key.categoryarea_id, categoryarea_id);
 
         currentActivity.startActivity(
-                new Intent(currentActivity, Feature2Activity.class).putExtras(bundle)
+                new Intent(currentActivity, CategoryBookCase2Activity.class).putExtras(bundle)
         );
         ActivityAnim.StartAnim(currentActivity);
 

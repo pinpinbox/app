@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -15,21 +14,19 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 
 import java.util.List;
 
 /**
  * Created by kevin9594 on 2017/4/8.
  */
-public class RecyclerCategoryAdapter extends RecyclerView.Adapter {
+public class RecyclerCategoryAllAdapter extends RecyclerView.Adapter {
 
     public interface OnRecyclerViewListener {
         void onItemClick(int position, View v);
@@ -48,7 +45,7 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter {
     private List<ItemAlbum> albumList;
 
 
-    public RecyclerCategoryAdapter(Activity activity, List<ItemAlbum> albumList) {
+    public RecyclerCategoryAllAdapter(Activity activity, List<ItemAlbum> albumList) {
         this.mActivity = activity;
         this.albumList = albumList;
 
@@ -64,7 +61,7 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_category_contents, null);
+        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_category_all, null);
         return new ViewHolder(view);
     }
 

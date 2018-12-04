@@ -21,7 +21,7 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Feature2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCase2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategory2Adapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
@@ -430,7 +430,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
                 bundle.putInt(Key.categoryarea_id, italbumTheme.getCategoryarea_id());
 
-                startActivity(new Intent(getActivity(), Feature2Activity.class).putExtras(bundle));
+                startActivity(new Intent(getActivity(), CategoryBookCase2Activity.class).putExtras(bundle));
 
                 ActivityAnim.StartAnim(getActivity());
 

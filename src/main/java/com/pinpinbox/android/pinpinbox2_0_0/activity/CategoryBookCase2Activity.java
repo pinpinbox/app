@@ -73,7 +73,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by vmage on 2017/11/17.
  */
 
-public class Feature2Activity extends DraggerActivity implements View.OnClickListener {
+public class CategoryBookCase2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity;
     private FragmentCategoryUser fragmentCategoryUser;
@@ -101,7 +101,7 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2_0_0_feature);
+        setContentView(R.layout.activity_2_0_0_categorybookcase);
 
 //        SystemUtility.SysApplication.getInstance().addActivity(this);
 
@@ -503,14 +503,14 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
             albumExploreList.add(itemAlbumExploreList.get(i));
 
-            View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_feature, null);
+            View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_categorybookcase, null);
 
-            TextView tvName = (TextView) view.findViewById(R.id.tvName);
+            TextView tvName = view.findViewById(R.id.tvName);
 
             tvName.setText(itemAlbumExploreList.get(i).getName());
 
 
-            TextView tvMore = (TextView) view.findViewById(R.id.tvMore);
+            TextView tvMore =  view.findViewById(R.id.tvMore);
 
             if (itemAlbumExploreList.get(i).getUrl() != null && !itemAlbumExploreList.get(i).getUrl().equals("") && !itemAlbumExploreList.get(i).getUrl().equals("null")) {
                 tvMore.setVisibility(View.VISIBLE);
@@ -571,9 +571,9 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
 
                             if(isDigit(categoryarea_id)){
                                 if (toContents) {
-                                    toCurrentContents(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
+                                    toCurrentAll(StringIntMethod.StringToInt(categoryarea_id), tvTitle.getText().toString());
                                 } else {
-                                    toFeature(StringIntMethod.StringToInt(categoryarea_id));
+                                    toCategoryBookCase(StringIntMethod.StringToInt(categoryarea_id));
                                 }
                                 return;
                             }
@@ -608,14 +608,14 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
             }
 
 
-            RecyclerView rvFeatureContent = (RecyclerView) view.findViewById(R.id.rvFeatureContent);
+            RecyclerView rvCategoryBookCase =  view.findViewById(R.id.rvCategoryBookCase);
 
 
             ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(mActivity);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            rvFeatureContent.setLayoutManager(layoutManager);
+            rvCategoryBookCase.setLayoutManager(layoutManager);
             RecyclerExploreAdapter exploreAdapter = new RecyclerExploreAdapter(mActivity, itemAlbumExploreList.get(i).getItemAlbumList());
-            rvFeatureContent.setAdapter(exploreAdapter);
+            rvCategoryBookCase.setAdapter(exploreAdapter);
 
             linContents.addView(view);
 
@@ -915,19 +915,19 @@ public class Feature2Activity extends DraggerActivity implements View.OnClickLis
     }
 
 
-    private void toCurrentContents(int categoryarea_id, String title) {
+    private void toCurrentAll(int categoryarea_id, String title) {
 
-        ActivityIntent.toCategoryContents(mActivity, categoryarea_id, title);
+        ActivityIntent.toCategoryAll(mActivity, categoryarea_id, title);
 
     }
 
-    private void toFeature(int categoryarea_id) {
+    private void toCategoryBookCase(int categoryarea_id) {
 
         Bundle bundle = new Bundle();
 
         bundle.putInt(Key.categoryarea_id, categoryarea_id);
 
-        startActivity(new Intent(mActivity, Feature2Activity.class).putExtras(bundle));
+        startActivity(new Intent(mActivity, CategoryBookCase2Activity.class).putExtras(bundle));
 
         ActivityAnim.StartAnim(mActivity);
 

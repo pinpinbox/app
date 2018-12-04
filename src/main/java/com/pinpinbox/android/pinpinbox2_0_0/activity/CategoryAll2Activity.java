@@ -22,7 +22,7 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryAllAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -55,7 +55,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by kevin9594 on 2017/3/19.
  */
-public class CategoryContents2Activity extends DraggerActivity implements View.OnClickListener {
+public class CategoryAll2Activity extends DraggerActivity implements View.OnClickListener {
 
 
     private Activity mActivity;
@@ -64,7 +64,7 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
     private SetCategoryTask setCategoryTask;
     private MoreDataTask moreDataTask;
 
-    private RecyclerCategoryAdapter categoryAreaAdapter;
+    private RecyclerCategoryAllAdapter categoryAllAdapter;
 
     private List<ItemAlbum> albumList;
 
@@ -218,8 +218,8 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
 
     private void setRecycler() {
 
-        categoryAreaAdapter = new RecyclerCategoryAdapter(mActivity, albumList);
-        rvCategory.setAdapter(categoryAreaAdapter);
+        categoryAllAdapter = new RecyclerCategoryAllAdapter(mActivity, albumList);
+        rvCategory.setAdapter(categoryAllAdapter);
 
         StaggeredGridLayoutManager manager = null;
 
@@ -239,7 +239,7 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
 
         rvCategory.setLayoutManager(manager);
 
-        categoryAreaAdapter.setOnRecyclerViewListener(new RecyclerCategoryAdapter.OnRecyclerViewListener() {
+        categoryAllAdapter.setOnRecyclerViewListener(new RecyclerCategoryAllAdapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
 
@@ -493,10 +493,10 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
             doingType = DoingTypeClass.DoSetCategory;
             startLoading();
 
-            if (categoryAreaAdapter != null) {
+            if (categoryAllAdapter != null) {
 
-                categoryAreaAdapter.notifyItemRangeRemoved(0, albumList.size());
-                categoryAreaAdapter = null;
+                categoryAllAdapter.notifyItemRangeRemoved(0, albumList.size());
+                categoryAllAdapter = null;
 
             }
 
@@ -650,7 +650,7 @@ public class CategoryContents2Activity extends DraggerActivity implements View.O
                     return;
                 }
 
-                categoryAreaAdapter.notifyItemRangeInserted(albumList.size(), count);
+                categoryAllAdapter.notifyItemRangeInserted(albumList.size(), count);
 
                 //添加下一次讀取範圍
                 round = round + count;

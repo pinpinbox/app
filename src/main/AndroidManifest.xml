@@ -706,7 +706,7 @@
 
 
         <activity
-            android:name=".pinpinbox2_0_0.activity.Feature2Activity"
+            android:name=".pinpinbox2_0_0.activity.CategoryBookCase2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -728,7 +728,7 @@
 
 
         <activity
-            android:name=".pinpinbox2_0_0.activity.CategoryContents2Activity"
+            android:name=".pinpinbox2_0_0.activity.CategoryAll2Activity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />

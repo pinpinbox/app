@@ -5,48 +5,6 @@
     android:clipChildren="false"
     android:orientation="vertical">
 
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-    <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-    <!--android:layout_marginTop="@dimen/ppb200_padding_margin_big">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/tvName"-->
-    <!--style="@style/ppb200_title_second"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:text="45456456456464" />-->
-
-    <!--<View-->
-    <!--style="@style/ppb200_divider_list"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_alignBottom="@+id/tvMore"-->
-    <!--android:layout_marginBottom="12dp"-->
-    <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-    <!--android:layout_toEndOf="@+id/tvName"-->
-    <!--android:layout_toLeftOf="@+id/tvMore"-->
-    <!--android:layout_toRightOf="@+id/tvName"-->
-    <!--android:layout_toStartOf="@+id/tvMore"-->
-    <!--android:minWidth="64dp" />-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/tvMore"-->
-    <!--style="@style/ppb200_Button_grey_mini_radius"-->
-    <!--android:layout_alignBottom="@+id/tvName"-->
-    <!--android:layout_alignParentEnd="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-    <!--android:text="@string/pinpinbox_2_0_0_button_more"-->
-    <!--android:visibility="visible" />-->
-
-
-    <!--</RelativeLayout>-->
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +16,7 @@
         <TextView
             android:id="@+id/tvName"
             style="@style/ppb200_title_second"
-            android:maxWidth="384dp"
+            android:maxWidth="192dp"
             android:text="" />
 
         <View
@@ -84,7 +42,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvFeatureContent"
+        android:id="@+id/rvCategoryBookCase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
