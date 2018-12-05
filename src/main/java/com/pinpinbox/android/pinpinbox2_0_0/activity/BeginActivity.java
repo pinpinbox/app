@@ -132,7 +132,7 @@ public class BeginActivity extends DraggerActivity {//02
                 bundle.putString(Key.businessuser_id, businessuser_id);
 
 
-                Intent intent = new Intent(BeginActivity.this, Login2Activity.class);
+                Intent intent = new Intent(BeginActivity.this, LoginActivity.class);
                 intent.putExtras(bundle);
 
                 startActivity(intent);
@@ -199,7 +199,7 @@ public class BeginActivity extends DraggerActivity {//02
                         bundle.putBoolean(Key.scanIntent, scanIntent);
                         Intent intent = new Intent();
                         intent.putExtras(bundle);
-                        intent.setClass(BeginActivity.this, Main2Activity.class);
+                        intent.setClass(BeginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                         overridePendingTransition(R.anim.begin_alpha_enter, R.anim.begin_alpha_exit);
@@ -211,7 +211,7 @@ public class BeginActivity extends DraggerActivity {//02
 
                         Intent intent = new Intent();
                         intent.putExtras(bundle);
-                        intent.setClass(BeginActivity.this, Hobby2Activity.class);
+                        intent.setClass(BeginActivity.this, HobbyActivity.class);
                         startActivity(intent);
                         finish();
                         overridePendingTransition(R.anim.begin_alpha_enter, R.anim.begin_alpha_exit);
@@ -231,7 +231,7 @@ public class BeginActivity extends DraggerActivity {//02
                 bundle.putBoolean(Key.scanIntent, scanIntent);
                 bundle.putString(Key.businessuser_id, businessuser_id);
 
-                Intent intent = new Intent(BeginActivity.this, Login2Activity.class);
+                Intent intent = new Intent(BeginActivity.this, LoginActivity.class);
                 intent.putExtras(bundle);
 
                 startActivity(intent);

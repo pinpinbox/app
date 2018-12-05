@@ -22,7 +22,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLightActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
@@ -199,7 +199,7 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
                                             Bundle bundle = new Bundle();
                                             bundle.putString(Key.image, itemHomeBannerList.get(position).getImage());
                                             bundle.putString(Key.event_id, itemHomeBannerList.get(position).getEvent_id());
-                                            Intent intent = new Intent(mActivity, AdHighLight2Activity.class).putExtras(bundle);
+                                            Intent intent = new Intent(mActivity, AdHighLightActivity.class).putExtras(bundle);
 
                                             ActivityOptionsCompat options = ActivityOptionsCompat.
                                                     makeSceneTransitionAnimation(mActivity,

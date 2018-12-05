@@ -10,7 +10,7 @@ import android.text.Spannable;
 import android.text.style.URLSpan;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.link_builder.Link;
@@ -72,7 +72,7 @@ public class LinkText {
                             @Override
                             public void onClick(String clickedText) {
                                 // single clicked
-                                Intent intent = new Intent(mActivity, WebView2Activity.class);
+                                Intent intent = new Intent(mActivity, WebViewActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString(Key.url, url.getURL());
                                 intent.putExtras(bundle);

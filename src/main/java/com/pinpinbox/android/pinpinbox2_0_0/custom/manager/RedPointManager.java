@@ -3,7 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.custom.manager;
 import android.app.Activity;
 
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 
@@ -17,10 +17,10 @@ public class RedPointManager {
         PPBApplication.getInstance().getData().edit().putBoolean(Key.checkRP_menu, showOrHide).commit();
 
         if(showOrHide){
-            Activity mActivity = SystemUtility.getActivity(Main2Activity.class.getSimpleName());
+            Activity mActivity = SystemUtility.getActivity(MainActivity.class.getSimpleName());
             if(mActivity!=null){
 
-                ((Main2Activity)mActivity).showRP_menu();
+                ((MainActivity)mActivity).showRP_menu();
 
             }
         }

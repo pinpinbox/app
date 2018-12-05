@@ -23,8 +23,8 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.Templateinfo.TemplateInfoActivity;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLight2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLightActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -237,7 +237,7 @@ public class BannerPageAdapter extends PagerAdapter {
                                             Bundle bundle = new Bundle();
                                             bundle.putString(Key.image, itemHomeBannerList.get(position).getImage());
                                             bundle.putString(Key.event_id, itemHomeBannerList.get(position).getEvent_id());
-                                            Intent intent = new Intent(mActivity, AdHighLight2Activity.class).putExtras(bundle);
+                                            Intent intent = new Intent(mActivity, AdHighLightActivity.class).putExtras(bundle);
 
                                             ActivityOptionsCompat options = ActivityOptionsCompat.
                                                     makeSceneTransitionAnimation(mActivity,
@@ -252,7 +252,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
                                             MyLog.Set("e", BannerPageAdapter.class, "活動已顯示過");
 
-//                                            ((FragmentHome2)fragment).setAutoScroll();
+//                                            ((FragmentHome)fragment).setAutoScroll();
 
 
                                         }
@@ -352,7 +352,7 @@ public class BannerPageAdapter extends PagerAdapter {
                                 } else {
                                     bundle.putString("url", url);
                                     intent.putExtras(bundle);
-                                    intent.setClass(mActivity, WebView2Activity.class);
+                                    intent.setClass(mActivity, WebViewActivity.class);
                                     mActivity.startActivity(intent);
                                     ActivityAnim.StartAnim(mActivity);
                                 }

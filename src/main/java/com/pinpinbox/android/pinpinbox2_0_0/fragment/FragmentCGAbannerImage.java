@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -132,7 +132,7 @@ public class FragmentCGAbannerImage extends Fragment implements View.OnClickList
                 Bundle bundle = new Bundle();
                 bundle.putString(Key.url, imageLink);
 
-                Intent intent = new Intent(getActivity(), WebView2Activity.class);
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 ActivityAnim.StartAnim(getActivity());

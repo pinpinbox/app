@@ -37,11 +37,11 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeList2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.OffLine2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.TypeFacebookFriend2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeListActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.LoginActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.OffLineActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.TypeFacebookFriendActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
@@ -195,7 +195,7 @@ public class OldMainActivity extends FragmentActivity {
                 FileUtility.delAllFile(Environment.getExternalStorageDirectory() + "/" + "HeadPic/");
 
                 Toast.makeText(OldMainActivity.this, "已刪除所有相本和暫存檔,請重新啟動pinpinbox", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(OldMainActivity.this, Login2Activity.class);
+                Intent i = new Intent(OldMainActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -216,7 +216,7 @@ public class OldMainActivity extends FragmentActivity {
 
 
                 Toast.makeText(OldMainActivity.this, "已刪除資訊和用pinpinbox照相的照片", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(OldMainActivity.this, Login2Activity.class);
+                Intent i = new Intent(OldMainActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
 
@@ -293,7 +293,7 @@ public class OldMainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(OldMainActivity.this, Hobby2Activity.class);
+//                Intent intent = new Intent(OldMainActivity.this, HobbyActivity.class);
 //                startActivity(intent);
 
                 PinPinToast.showSponsorToast(
@@ -319,7 +319,7 @@ public class OldMainActivity extends FragmentActivity {
                 bundle.putString(Key.url, "https://w3.pinpinbox.com/test.php");
 
 
-                Intent intent = new Intent(OldMainActivity.this, WebView2Activity.class);
+                Intent intent = new Intent(OldMainActivity.this, WebViewActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -360,7 +360,7 @@ public class OldMainActivity extends FragmentActivity {
                 Bundle b = new Bundle();
                 b.putBoolean(Key.exitAPP, true);
 
-                Intent intent = new Intent(OldMainActivity.this, OffLine2Activity.class);
+                Intent intent = new Intent(OldMainActivity.this, OffLineActivity.class);
                 intent.putExtras(b);
                 startActivity(intent);
 
@@ -594,7 +594,7 @@ public class OldMainActivity extends FragmentActivity {
 //                imageView.post(new SwapStartViews());
 
 
-                startActivity(new Intent(OldMainActivity.this, TypeFacebookFriend2Activity.class));
+                startActivity(new Intent(OldMainActivity.this, TypeFacebookFriendActivity.class));
 
 
             }
@@ -682,7 +682,7 @@ public class OldMainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(OldMainActivity.this, ExchangeList2Activity.class));
+                startActivity(new Intent(OldMainActivity.this, ExchangeListActivity.class));
 
 
             }

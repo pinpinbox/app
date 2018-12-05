@@ -212,7 +212,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 String strAcName = activityList.get(i).getClass().getSimpleName();
-                if (strAcName.equals(Creation2Activity.class.getSimpleName()) || strAcName.equals(AlbumSettings2Activity.class.getSimpleName())) {
+                if (strAcName.equals(CreationActivity.class.getSimpleName()) || strAcName.equals(AlbumSettingsActivity.class.getSimpleName())) {
                     cancelActivity = true;
                 }
             }
@@ -230,10 +230,10 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 public void DoCheck() {
                     for (int i = 0; i < count; i++) {
                         String strAcName = activityList.get(i).getClass().getSimpleName();
-                        if (strAcName.equals(Creation2Activity.class.getSimpleName())
-                                || strAcName.equals(AlbumSettings2Activity.class.getSimpleName())
-                                || strAcName.equals(MyCollect2Activity.class.getSimpleName())
-                                || strAcName.equals(AlbumGroup2Activity.class.getSimpleName())) {
+                        if (strAcName.equals(CreationActivity.class.getSimpleName())
+                                || strAcName.equals(AlbumSettingsActivity.class.getSimpleName())
+                                || strAcName.equals(MyCollectActivity.class.getSimpleName())
+                                || strAcName.equals(AlbumGroupActivity.class.getSimpleName())) {
                             activityList.get(i).finish();
                         }
                     }
@@ -485,7 +485,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
                 bundle.putBoolean(Key.fromlocal, true);
 
-                Intent intent = new Intent(mActivity, Creation2Activity.class);
+                Intent intent = new Intent(mActivity, CreationActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
@@ -1018,7 +1018,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
                 bundle.putBoolean(Key.fromlocal, true);
 
-                Intent intent = new Intent(mActivity, Creation2Activity.class);
+                Intent intent = new Intent(mActivity, CreationActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
@@ -1086,7 +1086,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             String path = photoList.get(position).getPath();
 
 
-            MyLog.Set("e", FromService2Activity.class, "pathpathpath => " + path);
+            MyLog.Set("e", FromServiceActivity.class, "pathpathpath => " + path);
 
 
             File file = new File(path);

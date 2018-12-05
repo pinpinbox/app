@@ -278,7 +278,7 @@ public class PhotoPageAdapter extends PagerAdapter {
 //        vPage.findViewById(R.id.vModeChange).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                ((Reader2Activity)mActivity).setModeChange();
+//                ((ReaderActivity)mActivity).setModeChange();
 //            }
 //        });
 //
@@ -356,7 +356,7 @@ public class PhotoPageAdapter extends PagerAdapter {
 //                }
 //
 //                if (!HttpUtility.isConnect(mActivity)) {
-//                    ((Reader2Activity)mActivity).setNoConnect();
+//                    ((ReaderActivity)mActivity).setNoConnect();
 //                    return;
 //                }
 //
@@ -416,7 +416,7 @@ public class PhotoPageAdapter extends PagerAdapter {
 //
 //                                        Bundle bundle = new Bundle();
 //                                        bundle.putString(Key.url, videoTarget);
-//                                        Intent intent = new Intent(mActivity, WebView2Activity.class);
+//                                        Intent intent = new Intent(mActivity, WebViewActivity.class);
 //                                        intent.putExtras(bundle);
 //                                        mActivity.startActivity(intent);
 //                                        ActivityAnim.StartAnim(mActivity);

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
@@ -392,10 +392,10 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         }
 
 
-        Activity mActivity = SystemUtility.getActivity(Main2Activity.class.getSimpleName());
+        Activity mActivity = SystemUtility.getActivity(MainActivity.class.getSimpleName());
         if (mActivity != null) {
             if (!isRPexist) {
-                ((Main2Activity) mActivity).hide_menu();
+                ((MainActivity) mActivity).hide_menu();
             }
         }
 

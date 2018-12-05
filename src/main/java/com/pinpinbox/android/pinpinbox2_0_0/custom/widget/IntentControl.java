@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.LoginActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Login2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95_RefreshToken;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public class IntentControl {
             @Override
             public void Success() {
 
-                Intent intent = new Intent(currentActivity, Login2Activity.class);
+                Intent intent = new Intent(currentActivity, LoginActivity.class);
                 currentActivity.startActivity(intent);
                 List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
                 for (int i = 0; i < activityList.size(); i++) {
@@ -96,7 +96,7 @@ public class IntentControl {
             @Override
             public void Success() {
 
-                Intent intent = new Intent(currentActivity, Login2Activity.class);
+                Intent intent = new Intent(currentActivity, LoginActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Key.scanIntent, enableScan);

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CreateAlbumActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
@@ -37,7 +38,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CreateAlbum2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerTemListAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -218,7 +218,7 @@ public class FragmentTemOwn2 extends Fragment {
         sendData.put("token", token);
         sendData.put("rank", Rank);
         sendData.put("limit", range);
-        sendData.put("style_id", ((CreateAlbum2Activity)getActivity()).getStyle_id());//不加入sign計算
+        sendData.put("style_id", ((CreateAlbumActivity)getActivity()).getStyle_id());//不加入sign計算
         sendData.put("sign", sign);
 
         try {
@@ -387,7 +387,7 @@ public class FragmentTemOwn2 extends Fragment {
 
                 if (!HttpUtility.isConnect(getActivity())) {
                     noConnect = new NoConnect(getActivity());
-                    ((CreateAlbum2Activity) getActivity()).setNoConnect(noConnect);
+                    ((CreateAlbumActivity) getActivity()).setNoConnect(noConnect);
                     return;
                 }
 

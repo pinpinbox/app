@@ -199,7 +199,7 @@ public class RecyclerCategoryAllAdapter extends RecyclerView.Adapter {
 //
 //                if (author_id.equals(PPBApplication.getInstance().getId())) {
 //
-////                    ((Main2Activity)mActivity).toMePage();
+////                    ((MainActivity)mActivity).toMePage();
 //
 //
 //                } else {

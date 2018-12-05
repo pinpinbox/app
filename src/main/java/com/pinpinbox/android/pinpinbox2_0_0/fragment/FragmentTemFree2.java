@@ -38,7 +38,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CreateAlbum2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CreateAlbumActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerTemListAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -382,7 +382,7 @@ public class FragmentTemFree2 extends Fragment {
 
                 if (!HttpUtility.isConnect(getActivity())) {
                     noConnect = new NoConnect(getActivity());
-                    ((CreateAlbum2Activity) getActivity()).setNoConnect(noConnect);
+                    ((CreateAlbumActivity) getActivity()).setNoConnect(noConnect);
                     return;
                 }
 

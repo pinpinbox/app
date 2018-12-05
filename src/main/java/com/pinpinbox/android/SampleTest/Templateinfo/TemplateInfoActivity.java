@@ -46,8 +46,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.WebView2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -567,7 +567,7 @@ public class TemplateInfoActivity extends DraggerActivity {
                     bundle.putString("event_id", event_id);
                 }
 
-                intentToCreation = new Intent(TemplateInfoActivity.this, Creation2Activity.class);
+                intentToCreation = new Intent(TemplateInfoActivity.this, CreationActivity.class);
                 intentToCreation.putExtras(bundle);
 
 
@@ -1187,7 +1187,7 @@ public class TemplateInfoActivity extends DraggerActivity {
 
                         Bundle bundle = new Bundle();
                         bundle.putString("url", url);
-                        Intent intent = new Intent(mActivity, WebView2Activity.class);
+                        Intent intent = new Intent(mActivity, WebViewActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
                         ActivityAnim.StartAnim(mActivity);

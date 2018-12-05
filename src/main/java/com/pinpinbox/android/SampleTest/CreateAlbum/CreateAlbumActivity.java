@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
@@ -38,7 +39,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.UserGradeChange;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Creation2Activity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -504,7 +504,7 @@ public class CreateAlbumActivity extends DraggerActivity {
                     bundle.putString("album_id", new_album_id);
                     bundle.putString("identity", "admin");
                     bundle.putInt("create_mode", 0);
-                    Intent intent = new Intent(CreateAlbumActivity.this, Creation2Activity.class);
+                    Intent intent = new Intent(CreateAlbumActivity.this, CreationActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     ActivityAnim.StartAnim(mActivity);

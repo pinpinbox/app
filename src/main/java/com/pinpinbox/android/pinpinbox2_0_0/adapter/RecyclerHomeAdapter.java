@@ -23,15 +23,13 @@ import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -297,7 +295,7 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
                 if (author_id.equals(PPBApplication.getInstance().getId())) {
 
-                    ((Main2Activity) mActivity).toMePage(false);
+                    ((MainActivity) mActivity).toMePage(false);
 
                 } else {
 

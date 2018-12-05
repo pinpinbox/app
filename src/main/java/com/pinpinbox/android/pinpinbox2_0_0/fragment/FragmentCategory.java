@@ -21,9 +21,9 @@ import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCase2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategory2Adapter;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCaseActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
@@ -56,7 +56,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
     private GetCategoryTask getCategoryTask;
 
-    private RecyclerCategory2Adapter adapter;
+    private RecyclerCategoryAdapter adapter;
 
     private List<ItemAlbumCategory> itemAlbumCategoryList;
 
@@ -130,7 +130,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
     private void init() {
 
-        loading = ((Main2Activity) getActivity()).getLoading();
+        loading = ((MainActivity) getActivity()).getLoading();
 
         itemAlbumCategoryList = new ArrayList<>();
 
@@ -138,7 +138,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
     private void setRecycler() {
 
-        adapter = new RecyclerCategory2Adapter(getActivity(), itemAlbumCategoryList);
+        adapter = new RecyclerCategoryAdapter(getActivity(), itemAlbumCategoryList);
 
         HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(adapter);
         rvCategory.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
@@ -157,7 +157,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
         RecyclerViewUtils.setHeaderView(rvCategory, viewHeader);
 
 
-        adapter.setOnRecyclerViewListener(new RecyclerCategory2Adapter.OnRecyclerViewListener() {
+        adapter.setOnRecyclerViewListener(new RecyclerCategoryAdapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
                 if (ClickUtils.ButtonContinuousClick()) {
@@ -194,7 +194,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
     private void doGetCategory() {
 
         if (!HttpUtility.isConnect(getActivity())) {
-            ((Main2Activity) getActivity()).setNoConnect();
+            ((MainActivity) getActivity()).setNoConnect();
             return;
         }
 
@@ -430,7 +430,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
                 bundle.putInt(Key.categoryarea_id, italbumTheme.getCategoryarea_id());
 
-                startActivity(new Intent(getActivity(), CategoryBookCase2Activity.class).putExtras(bundle));
+                startActivity(new Intent(getActivity(), CategoryBookCaseActivity.class).putExtras(bundle));
 
                 ActivityAnim.StartAnim(getActivity());
 

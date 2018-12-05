@@ -38,9 +38,9 @@ import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfo2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Author2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Reader2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AlbumInfoActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.AuthorActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.ReaderActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBoardAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerTagUserAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemBoard;
@@ -169,16 +169,16 @@ public class PopBoard {
         LayoutInflater inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.pop_2_0_0_board_album, null);
 
-        rTag = (RelativeLayout) v.findViewById(R.id.rTag);
-        loadingView = (SpinKitView) v.findViewById(R.id.loadingView);
-        pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
-        rvBoard = (RecyclerView) v.findViewById(R.id.rvBoard);
-        rvTag = (RecyclerView) v.findViewById(R.id.rvTag);
-        edText = (EditText) v.findViewById(R.id.edText);
-        userImg = (RoundedImageView) v.findViewById(R.id.userImg);
-        tvTitle = (TextView) v.findViewById(R.id.tvTitle);
-        tvSecondTitle = (TextView) v.findViewById(R.id.tvSecondTitle);
-        tvNoUser = (TextView)v.findViewById(R.id.tvNoUser);
+        rTag =  v.findViewById(R.id.rTag);
+        loadingView =  v.findViewById(R.id.loadingView);
+        pbLoadMore =  v.findViewById(R.id.pbLoadMore);
+        rvBoard =  v.findViewById(R.id.rvBoard);
+        rvTag =  v.findViewById(R.id.rvTag);
+        edText =  v.findViewById(R.id.edText);
+        userImg =  v.findViewById(R.id.userImg);
+        tvTitle =  v.findViewById(R.id.tvTitle);
+        tvSecondTitle =  v.findViewById(R.id.tvSecondTitle);
+        tvNoUser = v.findViewById(R.id.tvNoUser);
 
 
         popupWindow = new PopupWindow(v, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -689,17 +689,17 @@ public class PopBoard {
 
         String actName = mActivity.getClass().getSimpleName();
 
-        if (actName.equals(AlbumInfo2Activity.class.getSimpleName())) {
+        if (actName.equals(AlbumInfoActivity.class.getSimpleName())) {
 
-            ((AlbumInfo2Activity) mActivity).setNoConnect();
+            ((AlbumInfoActivity) mActivity).setNoConnect();
 
-        } else if (actName.equals(Reader2Activity.class.getSimpleName())) {
+        } else if (actName.equals(ReaderActivity.class.getSimpleName())) {
 
-            ((Reader2Activity) mActivity).setNoConnect();
+            ((ReaderActivity) mActivity).setNoConnect();
 
-        } else if (actName.equals(Author2Activity.class.getSimpleName())) {
+        } else if (actName.equals(AuthorActivity.class.getSimpleName())) {
 
-            ((Author2Activity) mActivity).setNoConnect();
+            ((AuthorActivity) mActivity).setNoConnect();
 
         }
 
@@ -709,17 +709,17 @@ public class PopBoard {
 
         String actName = mActivity.getClass().getSimpleName();
 
-        if (actName.equals(AlbumInfo2Activity.class.getSimpleName())) {
+        if (actName.equals(AlbumInfoActivity.class.getSimpleName())) {
 
-            ((AlbumInfo2Activity) mActivity).startLoading();
+            ((AlbumInfoActivity) mActivity).startLoading();
 
-        } else if (actName.equals(Reader2Activity.class.getSimpleName())) {
+        } else if (actName.equals(ReaderActivity.class.getSimpleName())) {
 
-            ((Reader2Activity) mActivity).startLoading();
+            ((ReaderActivity) mActivity).startLoading();
 
-        } else if (actName.equals(Author2Activity.class.getSimpleName())) {
+        } else if (actName.equals(AuthorActivity.class.getSimpleName())) {
 
-            ((Author2Activity) mActivity).startLoading();
+            ((AuthorActivity) mActivity).startLoading();
 
         }
     }
@@ -728,17 +728,17 @@ public class PopBoard {
 
         String actName = mActivity.getClass().getSimpleName();
 
-        if (actName.equals(AlbumInfo2Activity.class.getSimpleName())) {
+        if (actName.equals(AlbumInfoActivity.class.getSimpleName())) {
 
-            ((AlbumInfo2Activity) mActivity).dissmissLoading();
+            ((AlbumInfoActivity) mActivity).dissmissLoading();
 
-        } else if (actName.equals(Reader2Activity.class.getSimpleName())) {
+        } else if (actName.equals(ReaderActivity.class.getSimpleName())) {
 
-            ((Reader2Activity) mActivity).dissmissLoading();
+            ((ReaderActivity) mActivity).dissmissLoading();
 
-        } else if (actName.equals(Author2Activity.class.getSimpleName())) {
+        } else if (actName.equals(AuthorActivity.class.getSimpleName())) {
 
-            ((Author2Activity) mActivity).dissmissLoading();
+            ((AuthorActivity) mActivity).dissmissLoading();
 
         }
 

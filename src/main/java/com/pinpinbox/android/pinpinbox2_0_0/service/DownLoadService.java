@@ -11,20 +11,20 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 
+import com.pinpinbox.android.Utility.OkHttpClientManager;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Utility.ZipUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollectActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.DownloadBean;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.Utility.OkHttpClientManager;
-import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.ZipUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.DownloadBean;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCooperation2;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMyUpLoad2;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentOther2;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCooperation;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMyUpLoad;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentOther;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -116,11 +116,11 @@ public class DownLoadService extends Service {
 
         for (int i = 0; i < activityList.size(); i++) {
 
-            if(activityList.get(i).getClass().getSimpleName().equals(MyCollect2Activity.class.getSimpleName())){
+            if(activityList.get(i).getClass().getSimpleName().equals(MyCollectActivity.class.getSimpleName())){
 
                 Activity ac = activityList.get(i);
 
-                fragment = ((MyCollect2Activity)ac).getFragment(className);
+                fragment = ((MyCollectActivity)ac).getFragment(className);
 
                 break;
             }
@@ -163,28 +163,28 @@ public class DownLoadService extends Service {
                                                            1 => 下載中
                                                            2 =>  完成*/
 
-                        if(fragment.getClass().getSimpleName().equals(FragmentMyUpLoad2.class.getSimpleName())) {
+                        if(fragment.getClass().getSimpleName().equals(FragmentMyUpLoad.class.getSimpleName())) {
 
                             if(isSuccess) {
-                                ((FragmentMyUpLoad2) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 2);
+                                ((FragmentMyUpLoad) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 2);
                             }else {
-                                ((FragmentMyUpLoad2) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 0);
+                                ((FragmentMyUpLoad) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 0);
                             }
                         }
 
-                        if(fragment.getClass().getSimpleName().equals(FragmentOther2.class.getSimpleName())) {
+                        if(fragment.getClass().getSimpleName().equals(FragmentOther.class.getSimpleName())) {
                             if(isSuccess) {
-                                ((FragmentOther2) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 2);
+                                ((FragmentOther) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 2);
                             }else {
-                                ((FragmentOther2) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 0);
+                                ((FragmentOther) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 0);
                             }
                         }
 
-                        if(fragment.getClass().getSimpleName().equals(FragmentCooperation2.class.getSimpleName())) {
+                        if(fragment.getClass().getSimpleName().equals(FragmentCooperation.class.getSimpleName())) {
                             if(isSuccess) {
-                                ((FragmentCooperation2) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 2);
+                                ((FragmentCooperation) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 2);
                             }else {
-                                ((FragmentCooperation2) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 0);
+                                ((FragmentCooperation) fragment).changeDownloadType((int) listAblumId.get(0).get(Key.position), 0);
                             }
                         }
 

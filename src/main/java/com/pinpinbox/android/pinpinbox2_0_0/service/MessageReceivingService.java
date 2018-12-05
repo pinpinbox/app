@@ -20,6 +20,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
@@ -28,8 +29,7 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.FirstInstallActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.FromService2Activity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.Main2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.FromServiceActivity;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -173,7 +173,7 @@ public class MessageReceivingService extends Service {
 
         if (activityList.size() > 0) {
 
-            postNotification(new Intent(context, FromService2Activity.class), context, subject, title, icon);
+            postNotification(new Intent(context, FromServiceActivity.class), context, subject, title, icon);
 
         } else {
 
@@ -330,7 +330,7 @@ public class MessageReceivingService extends Service {
 
                     String actName = activityList.get(i).getClass().getSimpleName();
 
-                    if (actName.equals(Main2Activity.class.getSimpleName())) {
+                    if (actName.equals(MainActivity.class.getSimpleName())) {
                         mActivity = activityList.get(i);
                         break;
                     }
@@ -338,7 +338,7 @@ public class MessageReceivingService extends Service {
             }
 
             if (mActivity != null) {
-                ((Main2Activity) mActivity).showRP_notify();
+                ((MainActivity) mActivity).showRP_notify();
             }
 
 

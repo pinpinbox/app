@@ -6,7 +6,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCase2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCaseActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.KeysForSKD;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.SnackManager;
@@ -186,7 +186,7 @@ public class FragmentCGAbannerVideo extends YouTubePlayerSupportFragment{
 
             MyLog.Set("e", FragmentCGAbannerVideo.class, "onPlaying");
 
-            ((CategoryBookCase2Activity) getActivity()).hideLargeUserList();
+            ((CategoryBookCaseActivity) getActivity()).hideLargeUserList();
 
             if (!PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.first_to_set_video_autoplay, false)) {
 

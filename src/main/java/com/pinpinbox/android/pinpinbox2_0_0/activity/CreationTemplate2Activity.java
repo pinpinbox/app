@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectPhoto;
 import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -56,7 +57,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationTemplateAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectPhoto2;
 import com.pinpinbox.android.util.LoadType;
 import com.squareup.picasso.Picasso;
 
@@ -86,7 +86,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
     private MultiTouchListener multiTouchListener;
     private UpLoadTask upLoadTask;
 
-    private FragmentSelectPhoto2 fragmentSelectPhoto2;
+    private FragmentSelectPhoto fragmentSelectPhoto;
 
 
     private Bitmap upBmp;
@@ -713,18 +713,18 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
                 toFragmentArea_Y = DoubleToInt(h);
 
 
-                if(fragmentSelectPhoto2 == null){
+                if(fragmentSelectPhoto == null){
                     Bundle bundle = new Bundle();
                     bundle.putInt(Key.create_mode, 1);
-                    fragmentSelectPhoto2 = new FragmentSelectPhoto2();
+                    fragmentSelectPhoto = new FragmentSelectPhoto();
 
-                    fragmentSelectPhoto2.setArguments(bundle);
+                    fragmentSelectPhoto.setArguments(bundle);
 
                     getSupportFragmentManager().beginTransaction()
-                            .add(R.id.frame, fragmentSelectPhoto2, fragmentSelectPhoto2.getClass().getSimpleName())
+                            .add(R.id.frame, fragmentSelectPhoto, fragmentSelectPhoto.getClass().getSimpleName())
                             .commit();
                 }else {
-                    getSupportFragmentManager().beginTransaction().show(fragmentSelectPhoto2).commit();
+                    getSupportFragmentManager().beginTransaction().show(fragmentSelectPhoto).commit();
                 }
 
 

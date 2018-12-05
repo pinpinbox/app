@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCase2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCaseActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryUserLargeAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -151,7 +151,7 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                     @Override
                     public void run() {
                         Animation animation = AnimationUtils.loadAnimation(getActivity().getApplication(), R.anim.right_enter);
-                        ((CategoryBookCase2Activity) getActivity()).getLinUser().startAnimation(animation);
+                        ((CategoryBookCaseActivity) getActivity()).getLinUser().startAnimation(animation);
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
                                 .setCustomAnimations(R.anim.top_enter, R.anim.top_exit)
@@ -159,7 +159,7 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
                                 .commitAllowingStateLoss();
                         fragment = null;
 
-                        ((CategoryBookCase2Activity) getActivity()).removeFragment();
+                        ((CategoryBookCaseActivity) getActivity()).removeFragment();
 
                     }
                 }, 100);

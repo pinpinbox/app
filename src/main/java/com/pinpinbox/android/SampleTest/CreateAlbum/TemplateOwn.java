@@ -25,7 +25,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferences
 import com.pinpinbox.android.Utility.HtmlUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.TemList2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.TemListActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.TemTitleListAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -242,7 +242,7 @@ public class TemplateOwn extends Fragment {
                 bundle.putString("style_id", style_id);
                 bundle.putString("style_name", style_name);
 
-                Intent intent = new Intent(getActivity(), TemList2Activity.class);
+                Intent intent = new Intent(getActivity(), TemListActivity.class);
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
                 ActivityAnim.StartAnim(getActivity());

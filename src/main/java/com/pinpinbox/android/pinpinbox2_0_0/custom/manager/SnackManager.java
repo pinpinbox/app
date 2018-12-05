@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollect2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollectActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 
@@ -59,7 +59,7 @@ public class SnackManager {
         rBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                acLast.startActivity(new Intent(acLast, MyCollect2Activity.class));
+                acLast.startActivity(new Intent(acLast, MyCollectActivity.class));
                 ActivityAnim.StartAnim(acLast);
             }
         });
