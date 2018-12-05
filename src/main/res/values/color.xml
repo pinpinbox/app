@@ -25,13 +25,13 @@
 
 
     <color name="pinpinbox2_0_0_activity_bg">#ffffff</color>
-    <color name="pinpinbox2_0_0_dialog_bg">#c8000000</color>
+    <color name="pinpinbox2_0_0_dialog_bg">#b9000000</color>
 
     <!--fd9b64-->
     <color name="pinpinbox2_0_0_gradient_dark_eventexchange">#d27d4d</color>
     <color name="pinpinbox2_0_0_gradient_light_eventexchange">#ffb184</color>
 
-    <color name="pinpinbox2_0_0_black_alpha">#c8000000</color>
+    <color name="pinpinbox2_0_0_black_alpha">#b9000000</color>
     <color name="pinpinbox_2_0_0_divider">@color/pinpinbox_2_0_0_third_grey</color>
     <color name="timeout">@color/pinpinbox_2_0_0_dark_main</color>
 

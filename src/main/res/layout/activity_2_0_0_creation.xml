@@ -19,8 +19,8 @@
             <ImageView
                 android:id="@+id/backImg"
                 style="@style/ppb200_action_bar_icon"
-                android:src="@drawable/ic200_arrow_left_dark"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic200_arrow_left_dark" />
 
 
             <LinearLayout
@@ -213,12 +213,9 @@
 
                 <ImageView
                     android:id="@+id/aviaryImg"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/click_2_0_0_circle_grey_hint"
+                    style="@style/ppb200_creation_tool"
                     android:padding="6dp"
-                    android:src="@drawable/ic200_aviary_white"
-                    android:visibility="visible" />
+                    android:src="@drawable/ic200_aviary_white" />
 
 
             </LinearLayout>
@@ -255,23 +252,13 @@
 
                     <ImageView
                         android:id="@+id/audioRecordingImg"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/click_2_0_0_circle_grey_hint"
+                        style="@style/ppb200_creation_tool"
                         android:padding="6dp"
                         android:src="@drawable/ic200_micro_white" />
 
 
                 </RelativeLayout>
 
-                <!--<ImageView-->
-                <!--android:id="@+id/audioRecording"-->
-                <!--android:layout_width="36dp"-->
-                <!--android:layout_height="36dp"-->
-                <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
-                <!--android:padding="6dp"-->
-                <!--android:src="@drawable/ic200_micro_white"-->
-                <!--android:visibility="gone" />-->
 
                 <RelativeLayout
                     android:id="@+id/rPlay_Delete"
@@ -280,14 +267,11 @@
                     android:clipChildren="false"
                     android:visibility="gone">
 
+
                     <View
-                        android:layout_width="36dp"
-                        android:layout_height="44dp"
-                        android:layout_marginLeft="4.2dp"
-                        android:layout_marginRight="4.2dp"
-                        android:layout_marginTop="16dp"
-                        android:alpha="0.8"
-                        android:background="@color/white" />
+                        style="@style/ppb200_creation_tool_bg_attach"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="18dp" />
 
                     <RelativeLayout
                         android:layout_width="36dp"
@@ -309,31 +293,20 @@
 
                         <ImageView
                             android:id="@+id/audioPlayImg"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/click_2_0_0_circle_grey_hint"
+                            style="@style/ppb200_creation_tool"
                             android:padding="8dp"
                             android:src="@drawable/ic200_audio_play_white" />
 
 
                     </RelativeLayout>
 
-                    <!--<ImageView-->
-                    <!--android:id="@+id/audioPlay"-->
-                    <!--android:layout_width="36dp"-->
-                    <!--android:layout_height="36dp"-->
-                    <!--android:background="@drawable/click_2_0_0_circle_grey_hint"-->
-                    <!--android:padding="8dp"-->
-                    <!--android:src="@drawable/ic200_audio_play_white" />-->
 
                     <ImageView
                         android:id="@+id/audioDeleteImg"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        style="@style/ppb200_creation_tool_delete_small"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="40dp"
-                        android:background="@drawable/click_2_0_0_default"
-                        android:padding="2dp"
-                        android:src="@drawable/button_delete_record" />
+                        android:src="@drawable/ic200_delete_white" />
 
                 </RelativeLayout>
 
@@ -359,35 +332,27 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone">
 
-                        <RelativeLayout
-                            android:layout_width="36dp"
-                            android:layout_height="44dp"
-                            android:layout_marginLeft="4.2dp"
-                            android:layout_marginRight="4.2dp"
-                            android:layout_marginTop="16dp"
-                            android:alpha="0.8"
-                            android:background="@color/white" />
+                        <View
+                            style="@style/ppb200_creation_tool_bg_attach"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="18dp" />
 
 
                         <ImageView
                             android:id="@+id/locationDeleteImg"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            style="@style/ppb200_creation_tool_delete_small"
+                            android:layout_centerHorizontal="true"
                             android:layout_marginTop="40dp"
-                            android:background="@drawable/click_2_0_0_default"
-                            android:padding="2dp"
-                            android:src="@drawable/button_delete_record" />
+                            android:src="@drawable/ic200_delete_white" />
 
                     </RelativeLayout>
 
                     <ImageView
+                        style="@style/ppb200_creation_tool"
                         android:id="@+id/locationImg"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/click_2_0_0_circle_grey_hint"
                         android:padding="8dp"
                         android:src="@drawable/ic200_location_white"
-                        android:visibility="visible" />
+                        />
 
 
                 </RelativeLayout>
@@ -413,35 +378,27 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone">
 
-                        <RelativeLayout
-                            android:layout_width="36dp"
-                            android:layout_height="44dp"
-                            android:layout_marginLeft="4.2dp"
-                            android:layout_marginRight="4.2dp"
-                            android:layout_marginTop="16dp"
-                            android:alpha="0.8"
-                            android:background="@color/white" />
+
+                        <View
+                            style="@style/ppb200_creation_tool_bg_attach"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="18dp" />
 
 
                         <ImageView
                             android:id="@+id/linkDeleteImg"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            style="@style/ppb200_creation_tool_delete_small"
+                            android:layout_centerHorizontal="true"
                             android:layout_marginTop="40dp"
-                            android:background="@drawable/click_2_0_0_default"
-                            android:padding="2dp"
-                            android:src="@drawable/button_delete_record" />
+                            android:src="@drawable/ic200_delete_white" />
 
                     </RelativeLayout>
 
                     <ImageView
+                        style="@style/ppb200_creation_tool"
                         android:id="@+id/linkImg"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/click_2_0_0_circle_grey_hint"
                         android:padding="8dp"
-                        android:src="@drawable/ic200_photolink_white"
-                        android:visibility="visible" />
+                        android:src="@drawable/ic200_photolink_white" />
 
 
                 </RelativeLayout>
@@ -450,14 +407,10 @@
             </LinearLayout>
 
 
-
-
             <ImageView
+                style="@style/ppb200_creation_tool"
                 android:id="@+id/deleteImg"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/click_2_0_0_circle_grey_hint"
                 android:padding="8dp"
                 android:src="@drawable/ic200_delete_white" />
 
@@ -510,11 +463,11 @@
                 android:id="@+id/tvPicCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:gravity="center"
                 android:letterSpacing="0.1"
                 android:singleLine="true"
                 android:text="0/0"
-                android:layout_marginTop="1dp"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_small" />
 

@@ -1,6 +1,30 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
 
+    <style name="ppb200_creation_tool_bg_attach">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+
+
+    <style name="ppb200_creation_tool_delete_small">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:background">@drawable/click_2_0_0_circle_pink_second</item>
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="ppb200_creation_tool">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/click_2_0_0_circle_grey_hint</item>
+    </style>
+
+
+
+
     <style name="ppb200_dialog_bg" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

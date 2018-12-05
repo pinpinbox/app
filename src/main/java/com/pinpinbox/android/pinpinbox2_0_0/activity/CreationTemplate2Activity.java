@@ -784,8 +784,8 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         params.setMargins(x + wArea - wDelete, y + yArea - wDelete, 0, 0);
         deleteImg.setLayoutParams(params);
         deleteImg.setPadding(2,2,2,2);
-        deleteImg.setBackgroundResource(R.drawable.click_2_0_0_default);
-        deleteImg.setImageResource(R.drawable.button_delete);
+        deleteImg.setBackgroundResource(R.drawable.click_2_0_0_circle_pink_second);
+        deleteImg.setImageResource(R.drawable.ic200_delete_white);
         rControl_area.addView(deleteImg);
 //        button_template_add_picture_changphoto
 
