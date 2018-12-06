@@ -180,6 +180,7 @@
     <string name="pinpinbox_2_0_0_dialog_message_read_all_content">馬上收藏看全部內容</string>
     <string name="pinpinbox_2_0_0_dialog_message_sponsor_by_like_album">喜歡作品就給個鼓勵吧!</string>
     <string name="pinpinbox_2_0_0_dialog_message_sponsor_point_to_read_all_content">贊助P點 看全部內容</string>
+    <string name="pinpinbox_2_0_0_dialog_message_sponsor_and_buy">贊助購買</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_album_edit">有作品正在進行編輯，要先退出嗎?\n(退出後可在作品管理內找回)</string>
     <string name="pinpinbox_2_0_0_dialog_message_please_login">請先登入pinpinbox</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_album">確定要刪除作品?</string>
