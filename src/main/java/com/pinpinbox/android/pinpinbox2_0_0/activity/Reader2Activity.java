@@ -1178,6 +1178,8 @@ public class Reader2Activity extends DraggerActivity implements View.OnClickList
                         if (itemAlbum.isReward_after_collect()) {
 
 
+                            tvTitle.setText(R.string.pinpinbox_2_0_0_dialog_message_sponsor_and_buy);
+
 
                             linSponsorData.setVisibility(View.VISIBLE);
 
