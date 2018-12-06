@@ -106,6 +106,8 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
         TextUtility.setBold(holder.tvBannerName);
 
+        holder.tvBannerName.setText(itemHomeBannerList.get(position).getName());
+
 
         final String imageUrl = itemHomeBannerList.get(position).getImage();
 

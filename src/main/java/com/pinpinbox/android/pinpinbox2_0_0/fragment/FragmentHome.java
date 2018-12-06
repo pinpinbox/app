@@ -951,6 +951,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                                     JSONObject jsonAd = new JSONObject(ad);
                                     itemHomeBanner.setImage(JsonUtility.GetString(jsonAd, ProtocolKey.image));
                                     itemHomeBanner.setUrl(JsonUtility.GetString(jsonAd, ProtocolKey.url));
+                                    itemHomeBanner.setName(JsonUtility.GetString(jsonAd, ProtocolKey.name));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
