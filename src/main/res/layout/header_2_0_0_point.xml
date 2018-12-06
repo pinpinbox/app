@@ -16,6 +16,7 @@
             android:layout_marginTop="@dimen/ppb200_title_margin_second"
             android:text="@string/pinpinbox_2_0_0_title_buypoint" />
 
+
         <TextView
             android:id="@+id/tvCurrentPoint"
             android:layout_width="wrap_content"
@@ -27,14 +28,29 @@
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:textSize="@dimen/ppb200_common_text_second" />
 
+
+
+        <TextView
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big"
+            android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"
+            fontPath="fonts/OpenSans-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
+            android:text="※注意※\n由於行動平台政策，P點無法跨平台使用，您此次購買的P點平台為google(apple/google/web)僅供pinpinbox android app使用"
+            android:textColor="@color/pinpinbox_2_0_0_first_text"
+            android:textSize="@dimen/ppb200_common_text_second" />
+
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_big"
             android:letterSpacing="0.1"
             android:text="@string/pinpinbox_2_0_0_other_text_choose_one"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_first" />
+            android:textSize="@dimen/ppb200_common_text_second" />
 
 
     </LinearLayout>

@@ -26,7 +26,8 @@
         style="@style/ppb200_Button_main_common_bottom_radius"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-        android:text="@string/pinpinbox_2_0_0_button_buy" />
+        android:text="@string/pinpinbox_2_0_0_button_buy"
+        android:layout_marginBottom="@dimen/ppb200_padding_margin_first"/>
 
 
 </LinearLayout>
