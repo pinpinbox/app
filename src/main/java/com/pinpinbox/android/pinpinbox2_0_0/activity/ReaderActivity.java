@@ -1064,24 +1064,24 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
 
                     //最後一頁
-                    ScrollView svLastPageSponsor = (ScrollView) vPage.findViewById(R.id.svLastPageSponsor);
+                    ScrollView svLastPageSponsor = vPage.findViewById(R.id.svLastPageSponsor);
                     svLastPageSponsor.setVisibility(View.VISIBLE);
 
 
-                    LinearLayout linSponsor = (LinearLayout) vPage.findViewById(R.id.linSponsor);
-                    LinearLayout linSponsorData = (LinearLayout) vPage.findViewById(R.id.linSponsorData);
+                    LinearLayout linSponsor = vPage.findViewById(R.id.linSponsor);
+                    LinearLayout linSponsorData = vPage.findViewById(R.id.linSponsorData);
 
-                    tvCurrentPoint = (TextView) vPage.findViewById(R.id.tvCurrentPoint);
-                    TextView tvTitle = (TextView) vPage.findViewById(R.id.tvTitle);
-                    TextView tvClick = (TextView) vPage.findViewById(R.id.tvClick);
-                    TextView tvSponsorCount = (TextView) vPage.findViewById(R.id.tvSponsorCount);
-                    TextView tvSponsorDescription = (TextView) vPage.findViewById(R.id.tvSponsorDescription);
+                    tvCurrentPoint = vPage.findViewById(R.id.tvCurrentPoint);
+                    TextView tvTitle = vPage.findViewById(R.id.tvTitle);
+                    TextView tvClick = vPage.findViewById(R.id.tvClick);
+                    TextView tvSponsorCount = vPage.findViewById(R.id.tvSponsorCount);
+                    TextView tvSponsorDescription = vPage.findViewById(R.id.tvSponsorDescription);
 
 
-                    edPoint = (EditText) vPage.findViewById(R.id.edPoint);
-                    edUserName = (EditText) vPage.findViewById(R.id.edUserName);
-                    edPhone = (EditText) vPage.findViewById(R.id.edPhone);
-                    edAddress = (EditText) vPage.findViewById(R.id.edAddress);
+                    edPoint = vPage.findViewById(R.id.edPoint);
+                    edUserName = vPage.findViewById(R.id.edUserName);
+                    edPhone = vPage.findViewById(R.id.edPhone);
+                    edAddress = vPage.findViewById(R.id.edAddress);
 
 
                     TextUtility.setBold(tvTitle, true);
@@ -1176,6 +1176,10 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
 
                         if (itemAlbum.isReward_after_collect()) {
+
+
+                            tvTitle.setText(R.string.pinpinbox_2_0_0_dialog_message_sponsor_and_buy);
+
 
                             linSponsorData.setVisibility(View.VISIBLE);
 
