@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.orhanobut.logger.Logger;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
@@ -72,7 +73,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -815,7 +815,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
             strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P40_GetCreative,
                     SetMapByProtocol.setParam40_getcreative(id, token, user_id, range), null);
 
-            if (LOG.isLogMode) {
+            if (BuildConfig.DEBUG) {
                 Logger.json(strJson);
             }
 

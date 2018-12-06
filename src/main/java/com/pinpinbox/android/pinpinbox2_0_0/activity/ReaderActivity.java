@@ -59,6 +59,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -111,7 +112,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol108_GetPhotoUsefor;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109_InsertBookmark;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol111_SlotPhotoUsefor;
@@ -3078,7 +3078,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                 strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P08_RetrieveAlbumProfile,
                         SetMapByProtocol.setParam08_retrievealbumprofile(id, token, album_id), null);//08
 
-                if (LOG.isLogMode) {
+                if (BuildConfig.DEBUG) {
                     Logger.json(strJson);
                 }
             } catch (SocketTimeoutException timeout) {

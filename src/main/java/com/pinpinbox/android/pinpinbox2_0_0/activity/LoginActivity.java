@@ -77,7 +77,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentScanSearch;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol95_RefreshToken;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol98_BusinessSubUserFastRegister;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
@@ -1255,7 +1254,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             sendData.put(Key.sign, sign);
             String strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P28_Getprofile, sendData, null);
 
-            if (LOG.isLogMode) {
+            if (BuildConfig.DEBUG) {
                 Logger.json(strJson);
             }
 
@@ -1747,10 +1746,10 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             try {
                 strJson = HttpUtility.uploadSubmit(
                         true,
-                        ProtocolsClass.P01_Login(),
+                        ProtocolsClass.P01_Login,
                         SetMapByProtocol.setParam01_login(edLoginMail.getText().toString(),
                                 edLoginPassword.getText().toString()), null);
-                if (LOG.isLogMode) {
+                if (BuildConfig.DEBUG) {
                     Logger.json(strJson);
                 }
 
@@ -2144,7 +2143,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             MyLog.Set("e", mActivity.getClass(), "isSelectNewsletter = > " + isSelectNewsletter);
 
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P04_Registration(), senddata, null);
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P04_Registration, senddata, null);
                 MyLog.Set("d", mActivity.getClass(), "p04strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p04Result = Key.TIMEOUT;
@@ -2489,7 +2488,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
             String strJson = "";
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P07_RetrievePassword(), sendData, null);//07
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P07_RetrievePassword, sendData, null);//07
                 MyLog.Set("d", getClass(), "p07strJson => " + strJson);
             } catch (SocketTimeoutException timeout) {
                 p07Result = Key.TIMEOUT;

@@ -7,11 +7,11 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
+import com.pinpinbox.android.BuildConfig;
+import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
@@ -61,7 +61,7 @@ public class RegistraAWSService extends IntentService {
         init();
 
 
-        if (LOG.isLogMode) {
+        if (BuildConfig.DEBUG) {
 
             Log.d(TAG, "deviceid =>" + deviceid);
             Log.d(TAG, "deviceToken =>" + deviceToken);
@@ -90,7 +90,7 @@ public class RegistraAWSService extends IntentService {
     @Override
     public void onDestroy() {
 
-        if (LOG.isLogMode) {
+        if (BuildConfig.DEBUG) {
             Log.d(TAG, "onDestroy");
         }
 
@@ -146,7 +146,7 @@ public class RegistraAWSService extends IntentService {
             MyLog.Set("d", service.getClass(), "do protocol 50 SetAwsSns");
 
             String strJson = HttpUtility.uploadSubmit(600000, ProtocolsClass.P50_SetAwsSns, sendData, null);
-            if (LOG.isLogMode) {
+            if (BuildConfig.DEBUG) {
                 Log.e(TAG, "p50strJson => " + strJson);
             }
             JSONObject object = new JSONObject(strJson);

@@ -301,7 +301,7 @@ public class ChangePasswordActivity extends DraggerActivity implements View.OnCl
             String strJson = "";
 
             try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P22_UpdatePassword(), sendData, null);
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P22_UpdatePassword, sendData, null);
                 MyLog.Set("d", getClass(), "p22strJson => " + strJson);
 
             } catch (SocketTimeoutException timeout) {

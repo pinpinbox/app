@@ -23,31 +23,30 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pinpinbox.android.BuildConfig;
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.CreateAlbum.CreateAlbumActivity;
 import com.pinpinbox.android.SampleTest.CreateAlbum.TemplateOwn;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
-
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
-import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TagClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TagClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -504,7 +503,7 @@ public class TemplateInfoActivity extends DraggerActivity {
             dissmissLoading();
 
             if (p54Result.equals("1") && new_album_id != null) {
-                if (LOG.isLogMode) {
+                if (BuildConfig.DEBUG) {
                     Log.d(TAG, "條件成立");
                     Log.d(TAG, "p57Result => " + p54Result);
                     Log.d(TAG, "new_album_id => " + new_album_id);
@@ -1101,7 +1100,7 @@ public class TemplateInfoActivity extends DraggerActivity {
 
             try {
                 strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P83_DoTask, SetMapByProtocol.setParam83_dotask(id, token, TaskKeyClass.firsttime_download_template, "google"), null);
-                if (LOG.isLogMode) {
+                if (BuildConfig.DEBUG) {
                     Log.d(TAG, "p83strJson => " + strJson);
                 }
             } catch (SocketTimeoutException timeout) {
@@ -1217,7 +1216,7 @@ public class TemplateInfoActivity extends DraggerActivity {
 
             } else if (p83Result.equals("0")) {
 
-                if (LOG.isLogMode) {
+                if (BuildConfig.DEBUG) {
                     Log.d(TAG, "p83Message" + p83Message);
                 }
 

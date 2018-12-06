@@ -33,18 +33,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectPhoto;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.BitmapUtility;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FileUtility;
@@ -52,11 +42,21 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.NoDraggerActivity;
 import com.pinpinbox.android.Views.collageviews.MultiTouchListener;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationTemplateAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCreationTemplateAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentSelectPhoto;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.util.LoadType;
 import com.squareup.picasso.Picasso;
 
@@ -742,7 +742,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         String d = Double.toString(c);
         BigDecimal mData = new BigDecimal(d).setScale(0, BigDecimal.ROUND_HALF_UP);
 
-        if (LOG.isLogMode) {
+        if (BuildConfig.DEBUG) {
             Log.d(TAG, "mData=" + mData);
         }
 
@@ -754,7 +754,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
 
         int w = controlR.getWidth();//use to scale image
 
-        if (LOG.isLogMode) {
+        if (BuildConfig.DEBUG) {
             Log.d(TAG, "controlR.getWidth => " + w);
         }
 
@@ -770,7 +770,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         int x = (int) controlR.getX();
         int y = (int) controlR.getY();
 
-        if (LOG.isLogMode) {
+        if (BuildConfig.DEBUG) {
             Log.d(TAG, "x =>" + x);
             Log.d(TAG, "y =>" + y);
 
@@ -852,7 +852,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         int w = opts.outWidth;
         int h = opts.outHeight;
 
-        if (LOG.isLogMode) {
+        if (BuildConfig.DEBUG) {
             Log.d(TAG, "o.outWidth => " + w);
             Log.d(TAG, "o.outHeight => " + h);
         }

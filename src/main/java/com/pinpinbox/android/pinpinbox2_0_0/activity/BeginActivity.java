@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.orhanobut.logger.Logger;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
@@ -28,7 +29,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -292,7 +292,7 @@ public class BeginActivity extends DraggerActivity {//02
             String strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P28_Getprofile, SetMapByProtocol.setParam28_getprofile(id, token), null);
             JSONObject jsonObject = new JSONObject(strJson);
 
-            if (LOG.isLogMode) {
+            if (BuildConfig.DEBUG) {
                 Logger.json(strJson);
             }
 

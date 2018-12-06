@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -69,7 +70,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.OnSpotlightStartedLis
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.SimpleTarget;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33_AlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol34_GetAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol96_InsertAlbumIndex;
@@ -647,7 +647,7 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
 
             settings = jsonObject.toString();
 
-            if (LOG.isLogMode) {
+            if (BuildConfig.DEBUG) {
                 Logger.json(settings);
             }
 

@@ -14,7 +14,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -142,7 +141,7 @@ public class PPBApplication extends MultiDexApplication {
         /*2016.09.13新增*/
         // 是否打印本地的Flurry Log
 
-        if (LOG.isLogMode) {
+        if (BuildConfig.DEBUG) {
             FlurryAgent.setLogEnabled(true);
         } else {
             FlurryAgent.setLogEnabled(false);

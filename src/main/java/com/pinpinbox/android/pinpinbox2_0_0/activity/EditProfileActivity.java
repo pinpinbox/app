@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
+import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FileUtility;
@@ -58,7 +59,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.mode.LOG;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Picasso;
@@ -909,7 +909,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
 
                 String strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P28_Getprofile, SetMapByProtocol.setParam28_getprofile(id, token), null);
 
-                if (LOG.isLogMode) {
+                if (BuildConfig.DEBUG) {
                     Logger.json(strJson);
                 }
 
