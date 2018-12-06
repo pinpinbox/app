@@ -6,15 +6,14 @@ android {
         applicationId "com.pinpinbox.android"
         minSdkVersion 18
         targetSdkVersion 27
-        versionCode 155
-        versionName "2.6.30"
+        versionCode 156
+        versionName "2.6.40"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
 
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86"
         }
-
 
         lintOptions {
             abortOnError false
