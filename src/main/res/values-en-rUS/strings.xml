@@ -456,10 +456,9 @@
     <string name="pinpinbox_2_0_0_title_who_sponsor_this_work">Who sponsor this work</string>
     <string name="pinpinbox_2_0_0_title_follow_me">Follow me</string>
     <string name="pinpinbox_2_0_0_title_select_file">Select file</string>
-
-
     <string name="pinpinbox_2_0_0_title_follow">Popular</string>
     <string name="pinpinbox_2_0_0_title_recommend">Recommend</string>
+    <string name="pinpinbox_2_0_0_title_newjoin">New join</string>
 
     <string name="pinpinbox_2_0_0_title_feature_area">Feature</string>
     <string name="pinpinbox_2_0_0_title_feature_recommend">Recommend</string>

@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/tvRecommendUser"
             style="@style/ppb200_title_second"
-            android:text="@string/pinpinbox_2_0_0_title_follow" />
+            android:text="@string/pinpinbox_2_0_0_title_newjoin" />
 
         <View
             style="@style/ppb200_divider_list"

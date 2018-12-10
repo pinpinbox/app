@@ -61,4 +61,8 @@ public class Url {
 
     public static String P114_GetAlbumSponsorList = BuildConfig.initAPI + "/index/api/getalbumsponsorlist" + "/2.1";
 
+    public static String P115_GetHotList = BuildConfig.initAPI + "/index/api/gethotlist" + "/2.0";
+
+    public static String P116_GetNewJoinList = BuildConfig.initAPI + "/index/api/getnewjoinlist" + "/2.0";
+
 }

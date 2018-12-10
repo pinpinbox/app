@@ -464,10 +464,9 @@
     <string name="pinpinbox_2_0_0_title_who_sponsor_this_work">給作品贊助的人</string>
     <string name="pinpinbox_2_0_0_title_follow_me">關注我的人</string>
     <string name="pinpinbox_2_0_0_title_select_file">選擇檔案</string>
-
-
     <string name="pinpinbox_2_0_0_title_follow">熱門關注</string>
     <string name="pinpinbox_2_0_0_title_recommend">推薦作品</string>
+    <string name="pinpinbox_2_0_0_title_newjoin">新加入</string>
 
 
     <string name="pinpinbox_2_0_0_title_feature_area">專區精選</string>

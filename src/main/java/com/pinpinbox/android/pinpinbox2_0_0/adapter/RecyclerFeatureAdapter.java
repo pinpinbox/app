@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.ImageUtility;
+import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,12 +44,40 @@ public class RecyclerFeatureAdapter extends RecyclerView.Adapter {
         final ViewHolder holder = (ViewHolder) vHolder;
         holder.position = position;
 
+        /*set cover*/
+        try {
+            final String strCover = itemUserList.get(position).getCover();
+            if (SystemUtility.Above_Equal_V5()) {
+                holder.coverImg.setTransitionName(strCover);
+            }
+            ImageUtility.setImage(mActivity, holder.coverImg, strCover);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        holder.coverImg.setImageResource(R.drawable.test_banner_960x450_1);
 
-        holder.userImg.setImageResource(R.drawable.test_dog);
+        /*set user picture*/
+        final String strPicture = itemUserList.get(position).getPicture();
+        try {
+            if (SystemUtility.Above_Equal_V5()) {
+                holder.userImg.setTransitionName(strPicture);
+            }
+            if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
+                Picasso.with(mActivity.getApplicationContext())
+                        .load(strPicture)
+                        .config(Bitmap.Config.RGB_565)
+                        .error(R.drawable.member_back_head)
+                        .tag(mActivity.getApplicationContext())
+                        .into(holder.userImg);
+            } else {
+                holder.userImg.setImageResource(R.drawable.member_back_head);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        holder.tvFeatureUserDescription.setText("我喜歡吃吃喝喝，旅遊踏青，喜歡文藝創作、插畫、兒童繪本。作品是用photoshop畫的呦!");
+        /*set user description*/
+        holder.tvFeatureUserDescription.setText(itemUserList.get(position).getDescription());
 
 
     }

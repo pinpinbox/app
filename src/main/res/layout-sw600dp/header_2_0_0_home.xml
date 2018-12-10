@@ -25,9 +25,9 @@
             android:layout_marginBottom="24dp" />
 
 
-        <!--釘關注-->
+        <!--新加入-->
         <include
-            layout="@layout/lay_2_0_0_home_recommend_user"
+            layout="@layout/lay_2_0_0_home_new_join_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />

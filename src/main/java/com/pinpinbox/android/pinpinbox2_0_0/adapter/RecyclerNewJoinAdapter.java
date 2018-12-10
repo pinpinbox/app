@@ -22,7 +22,7 @@ import java.util.List;
  * Created by vmage on 2018/6/21.
  */
 
-public class RecyclerHomeUserAdapter extends RecyclerView.Adapter {
+public class RecyclerNewJoinAdapter extends RecyclerView.Adapter {
 
 
     public interface OnRecyclerViewListener {
@@ -43,7 +43,7 @@ public class RecyclerHomeUserAdapter extends RecyclerView.Adapter {
     private List<ItemUser> itemUserList;
 
 
-    public RecyclerHomeUserAdapter(Activity activity, List<ItemUser> itemUserList) {
+    public RecyclerNewJoinAdapter(Activity activity, List<ItemUser> itemUserList) {
         this.mActivity = activity;
         this.itemUserList = itemUserList;
 
@@ -59,7 +59,7 @@ public class RecyclerHomeUserAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_home_user, null);
+        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_home_newjoin, null);
         return new ViewHolder(view);
     }
 

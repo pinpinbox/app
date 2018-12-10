@@ -51,7 +51,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBannerAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerFeatureAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeUserAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerNewJoinAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
@@ -69,6 +69,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
@@ -85,6 +86,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.CardScaleHe
 import com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.SpeedRecyclerView;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
+import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
+import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
@@ -121,24 +124,22 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
     private JSONArray p20JsonArray;
 
     private RecyclerHomeAdapter recyclerHomeAdapter;
-    private RecyclerHomeUserAdapter userAdapter;
+    private RecyclerNewJoinAdapter newJoinAdapter;
     private RecyclerBannerAdapter bannerAdapter;
     private RecyclerFeatureAdapter featureRecommendAdapter, featureHotAdapter;
 
     private List<ItemAlbum> itemAlbumList;
     private List<ItemHomeBanner> itemHomeBannerList;
-    private List<ItemUser> itemUserList, itemRecommendList, itemHotList;
+    private List<ItemUser> itemNewJoinList, itemRecommendList, itemHotList;
     private List<String> reAlbumIdList;
 
     private String id, token;
-    private String p20Result, p20Message;
-    private String p86MessageUser = "";
-    private String p75Message = "";
+    private String p20Result, p20Message, p115Result, p115Message, p116Result, p116Message;
+    private String p75Message = "", p86Message = "";
     private String strRank;
 
 
-    private int p75Result = -1;
-    private int p86ResultUser = -1;
+    private int p75Result = -1, p86Result = -1;
 
 
     private int round; //listview添加前的初始值
@@ -203,13 +204,12 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
         init();
         setSearch();
-        setRecycler();
-        setUserRecycler();
-        setBannerRecycler();
 
+        setBannerRecycler();
         setRecommendRecycler();
         setHotRecycler();
-
+        setNewJoinRecycler();
+        setRecycler();
 
         doGetAllData();
 
@@ -254,7 +254,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
     @Override
     public void onPause() {
 
-        cleanPicasso();
+        cleanCache();
 
 
         if (bannerAdapter != null && bannerAdapter.getGifList() != null && bannerAdapter.getGifList().size() > 0) {
@@ -307,10 +307,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         protocol21 = null;
 
 
-        cleanPicasso();
+        cleanCache();
         super.onDestroy();
     }
-
 
     private void initView(View v) {
 
@@ -368,9 +367,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                 (TextView) viewHeader.findViewById(R.id.tvRecommend)
         );
 
-
-
-
     }
 
 
@@ -421,11 +417,20 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         count = 16;
 
         itemAlbumList = new ArrayList<>();
-        itemHomeBannerList = new ArrayList<>();
         reAlbumIdList = new ArrayList<>();
-        itemUserList = new ArrayList<>();
+
+
+        //banner
+        itemHomeBannerList = new ArrayList<>();
+
+        //專區精選 - 推薦
         itemRecommendList = new ArrayList<>();
+
+        //專區精選 - 熱門
         itemHotList = new ArrayList<>();
+
+        //新加入
+        itemNewJoinList = new ArrayList<>();
 
     }
 
@@ -617,9 +622,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         }
     }
 
-
-
-
     private void setBannerRecycler() {
 
 
@@ -738,7 +740,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-    private void setRecommendRecycler(){
+    private void setRecommendRecycler() {
 
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -754,6 +756,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     return;
                 }
 
+                ActivityIntent.toUser(
+                        getActivity(),
+                        false,
+                        false,
+                        itemRecommendList.get(position).getUser_id(),
+                        itemRecommendList.get(position).getPicture(),
+                        itemRecommendList.get(position).getName(),
+                        v.findViewById(R.id.userImg)
+                );
+
+
+
             }
 
             @Override
@@ -764,8 +778,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-
-    private void setHotRecycler(){
+    private void setHotRecycler() {
 
         ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -781,6 +794,16 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     return;
                 }
 
+                ActivityIntent.toUser(
+                        getActivity(),
+                        false,
+                        false,
+                        itemHotList.get(position).getUser_id(),
+                        itemHotList.get(position).getPicture(),
+                        itemHotList.get(position).getName(),
+                        v.findViewById(R.id.userImg)
+                );
+
             }
 
             @Override
@@ -792,8 +815,50 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
+    private void setNewJoinRecycler() {
+
+        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvRecommendUser.setLayoutManager(layoutManager);
+        newJoinAdapter = new RecyclerNewJoinAdapter(getActivity(), itemNewJoinList);
+        rvRecommendUser.setAdapter(newJoinAdapter);
+
+        newJoinAdapter.setOnRecyclerViewListener(new RecyclerNewJoinAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+
+                if (ClickUtils.ButtonContinuousClick()) {
+                    return;
+                }
 
 
+                if (itemNewJoinList.get(position).getUser_id().equals(id)) {
+
+                    ((MainActivity) getActivity()).toMePage(false);
+
+                    return;
+                }
+
+
+                ActivityIntent.toUser(
+                        getActivity(),
+                        true,
+                        false,
+                        itemNewJoinList.get(position).getUser_id(),
+                        itemNewJoinList.get(position).getPicture(),
+                        itemNewJoinList.get(position).getName(),
+                        v.findViewById(R.id.userImg)
+                );
+
+            }
+
+            @Override
+            public boolean onItemLongClick(int position, View v) {
+                return false;
+            }
+        });
+
+    }
 
     private void setRecycler() {
 
@@ -852,53 +917,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         });
 
     }
-
-    private void setUserRecycler() {
-
-        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvRecommendUser.setLayoutManager(layoutManager);
-        userAdapter = new RecyclerHomeUserAdapter(getActivity(), itemUserList);
-        rvRecommendUser.setAdapter(userAdapter);
-
-        userAdapter.setOnRecyclerViewListener(new RecyclerHomeUserAdapter.OnRecyclerViewListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-
-                if (itemUserList.get(position).getUser_id().equals(id)) {
-
-                    ((MainActivity) getActivity()).toMePage(false);
-
-                    return;
-                }
-
-
-                ActivityIntent.toUser(
-                        getActivity(),
-                        true,
-                        false,
-                        itemUserList.get(position).getUser_id(),
-                        itemUserList.get(position).getPicture(),
-                        itemUserList.get(position).getName(),
-                        v.findViewById(R.id.userImg)
-                );
-
-            }
-
-            @Override
-            public boolean onItemLongClick(int position, View v) {
-                return false;
-            }
-        });
-
-    }
-
-
-
 
     private void getBannerList() {
 
@@ -1001,16 +1019,16 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-    private void getUserList() {
+    private void getRecommendList() {
 
         String strJson = "";
 
         try {
             strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P86_GetRecommendedList,
-                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, Key.user, "0,16"), null);
-            MyLog.Set("d", getClass(), "p86strJson(user) =>" + strJson);
+                    SetMapByProtocol.setParam86_getrecommendedlist(id, token, "user", "0,6"), null);
+            Logger.json(strJson);
         } catch (SocketTimeoutException timeout) {
-            p86ResultUser = Key.TIMEOUT;
+            p86Result = Key.TIMEOUT;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1018,11 +1036,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         if (strJson != null && !strJson.equals("")) {
             try {
                 JSONObject jsonObject = new JSONObject(strJson);
-                p86ResultUser = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                if (p86ResultUser == 1) {
+                p86Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                if (p86Result == 1) {
 
-                    String jdata = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONArray jsonArray = new JSONArray(jdata);
+                    String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONArray jsonArray = new JSONArray(strData);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject j = (JSONObject) jsonArray.get(i);
 
@@ -1030,17 +1048,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                         JSONObject object = new JSONObject(user);
 
                         ItemUser itemUser = new ItemUser();
-                        itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
+                        itemUser.setCover(JsonUtility.GetString(object, ProtocolKey.cover));
                         itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+                        itemUser.setDescription(JsonUtility.GetString(object, ProtocolKey.description));
                         itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
-                        itemUserList.add(itemUser);
+                        itemRecommendList.add(itemUser);
 
                     }
 
 
-                } else if (p86ResultUser == 0) {
+                } else if (p86Result == 0) {
 
-                    p86MessageUser = jsonObject.getString(Key.message);
+                    p86Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
 
                 }
 
@@ -1054,7 +1073,111 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
+    private void getHotList() {
 
+        String strJson = "";
+
+        try {
+            strJson = HttpUtility.uploadSubmit(true, Url.P115_GetHotList,
+                    SetMapByProtocol.setParam115_gethotlist(id, token, "0,6"), null);
+            Logger.json(strJson);
+        } catch (SocketTimeoutException timeout) {
+            p115Result = ResultType.TIMEOUT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (strJson != null && !strJson.equals("")) {
+            try {
+                JSONObject jsonObject = new JSONObject(strJson);
+                p115Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+                if (p115Result.equals(ResultType.SYSTEM_OK)) {
+
+                    String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONArray jsonArray = new JSONArray(strData);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject j = (JSONObject) jsonArray.get(i);
+
+                        String user = JsonUtility.GetString(j, ProtocolKey.user);
+                        JSONObject object = new JSONObject(user);
+
+                        ItemUser itemUser = new ItemUser();
+                        itemUser.setCover(JsonUtility.GetString(object, ProtocolKey.cover));
+                        itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+                        itemUser.setDescription(JsonUtility.GetString(object, ProtocolKey.description));
+                        itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
+                        itemHotList.add(itemUser);
+
+                    }
+
+
+                } else {
+
+                    p115Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+
+                }
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
+        }
+
+    }
+
+    private void getNewJoinUserList() {
+
+        String strJson = "";
+
+        try {
+            strJson = HttpUtility.uploadSubmit(true, Url.P116_GetNewJoinList,
+                    SetMapByProtocol.setParam116_getnewjoinlist(id, token, "0,6"), null);
+            MyLog.Set("d", getClass(), "p116strJson =>" + strJson);
+        } catch (SocketTimeoutException timeout) {
+            p116Result = ResultType.TIMEOUT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (strJson != null && !strJson.equals("")) {
+            try {
+                JSONObject jsonObject = new JSONObject(strJson);
+                p116Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+                if (p116Result.equals(ResultType.SYSTEM_OK)) {
+
+                    String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+                    JSONArray jsonArray = new JSONArray(strData);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject j = (JSONObject) jsonArray.get(i);
+
+                        String user = JsonUtility.GetString(j, ProtocolKey.user);
+                        JSONObject object = new JSONObject(user);
+
+                        ItemUser itemUser = new ItemUser();
+                        itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
+                        itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+                        itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
+                        itemNewJoinList.add(itemUser);
+
+                    }
+
+
+                } else {
+
+                    p116Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+
+                }
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
+        }
+
+
+    }
 
     private void getUpdateList(String limit) {
 
@@ -1338,7 +1461,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-    public void cleanPicasso() {
+    public void cleanCache() {
 
         if (itemAlbumList != null && itemAlbumList.size() > 0) {
 
@@ -1374,12 +1497,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         }
 
 
+        if (itemNewJoinList != null && itemNewJoinList.size() > 0) {
 
-        if (itemUserList != null && itemUserList.size() > 0) {
+            for (int i = 0; i < itemNewJoinList.size(); i++) {
 
-            for (int i = 0; i < itemUserList.size(); i++) {
-
-                String picture = itemUserList.get(i).getPicture();
+                String picture = itemNewJoinList.get(i).getPicture();
                 if (picture != null && !picture.equals("")) {
                     Picasso.with(getActivity().getApplicationContext()).invalidate(picture);
                 }
@@ -1464,22 +1586,24 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
 
         if (p20total > 0) {
-            cleanPicasso();
+            cleanCache();
         }
 
-        reAlbumIdList.clear();
-        itemAlbumList.clear();
-        itemUserList.clear();
         itemHomeBannerList.clear();
+        itemRecommendList.clear();
+        itemHotList.clear();
+        itemNewJoinList.clear();
+        itemAlbumList.clear();
+        reAlbumIdList.clear();
 
         p20total = 0;
         round = 0;
 
         bannerAdapter.notifyDataSetChanged();
+        featureRecommendAdapter.notifyDataSetChanged();
+        featureHotAdapter.notifyDataSetChanged();
+        newJoinAdapter.notifyDataSetChanged();
         recyclerHomeAdapter.notifyDataSetChanged();
-        userAdapter.notifyDataSetChanged();
-
-
 
         refreshTask = new RefreshTask();
         refreshTask.execute();
@@ -1564,7 +1688,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             getBannerList();
 
-            getUserList();
+            getRecommendList();
+
+            getHotList();
+
+            getNewJoinUserList();
 
             getUpdateList(round + "," + count);
 
@@ -1605,7 +1733,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             getBannerList();
 
-            getUserList();
+            getRecommendList();
+
+            getHotList();
+
+            getNewJoinUserList();
 
             getUpdateList(round + "," + count);
 
@@ -1700,31 +1832,21 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
 
 
-        /*熱門關注*/
-        try {
+        /*專區精選- 推薦*/
+        try{
 
-            if (p86ResultUser == 1) {
-
-                userAdapter.notifyDataSetChanged();
-
-            } else if (p86ResultUser == 0) {
-
-                DialogV2Custom.BuildError(getActivity(), p86MessageUser);
-
+            if (p86Result == 1) {
+                featureRecommendAdapter.notifyDataSetChanged();
+            } else if (p86Result == 0) {
+                DialogV2Custom.BuildError(getActivity(), p86Message);
                 return;
 
-            } else if (p86ResultUser == Key.TIMEOUT) {
-
+            } else if (p86Result == Key.TIMEOUT) {
                 connectInstability();
-
                 return;
-
             } else {
-
                 DialogV2Custom.BuildUnKnow(getActivity(), getClass().getSimpleName());
-
                 return;
-
             }
 
         } catch (Exception e) {
@@ -1734,16 +1856,82 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         }
 
 
-        for (int i = 0; i < 6; i++) {
 
-            ItemUser itemUser = new ItemUser();
+        /*新加入*/
+        try {
 
-            itemRecommendList.add(itemUser);
-            itemHotList.add(itemUser);
+            switch (p115Result) {
+
+                case ResultType.SYSTEM_OK:
+                    featureHotAdapter.notifyDataSetChanged();
+                    break;
+
+                case ResultType.TOKEN_ERROR:
+                    PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
+                    IntentControl.toLogin(getActivity(), id);
+                    return;
+
+                case ResultType.USER_ERROR:
+                    DialogV2Custom.BuildError(getActivity(), p115Message);
+                    return;
+
+                case ResultType.SYSTEM_ERROR:
+                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass() + " => " + ResultType.SYSTEM_ERROR);
+                    return;
+
+                case ResultType.TIMEOUT:
+                    connectInstability();
+                    return;
+
+                case "":
+                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
+                    return;
+
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
         }
 
-        featureRecommendAdapter.notifyDataSetChanged();
-        featureHotAdapter.notifyDataSetChanged();
+
+
+        /*新加入*/
+        try {
+
+            switch (p116Result) {
+
+                case ResultType.SYSTEM_OK:
+                    newJoinAdapter.notifyDataSetChanged();
+                    break;
+
+                case ResultType.TOKEN_ERROR:
+                    PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
+                    IntentControl.toLogin(getActivity(), id);
+                    return;
+
+                case ResultType.USER_ERROR:
+                    DialogV2Custom.BuildError(getActivity(), p116Message);
+                    return;
+
+                case ResultType.SYSTEM_ERROR:
+                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass() + " => " + ResultType.SYSTEM_ERROR);
+                    return;
+
+                case ResultType.TIMEOUT:
+                    connectInstability();
+                    return;
+
+                case "":
+                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
+                    return;
+
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
 
 
 
