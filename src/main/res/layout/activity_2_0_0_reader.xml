@@ -230,7 +230,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:progressDrawable="@drawable/progress_bar_reader_voice"
+            android:thumb="@drawable/bg200_seekbar_thumb_reader_voice"/>
 
 
     </RelativeLayout>
