@@ -52,6 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:progressDrawable="@drawable/progress_bar_reader_voice"
+            android:thumb="@drawable/bg200_seekbar_thumb_reader_voice"
             android:layout_toStartOf="@+id/controlImg" />
 
         <ImageView
