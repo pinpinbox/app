@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="82dp"
-    android:layout_height="82dp">
+<com.pinpinbox.android.Views.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="82dp"
-        android:layout_height="82dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/videoImg"
-        android:visibility="gone"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_centerInParent="true"
         android:src="@drawable/ic200_video_light"
-        android:layout_centerInParent="true"/>
+        android:visibility="gone" />
 
     <View
         android:id="@+id/vSelect"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:background="@drawable/icon_unselect_teal500_120x120"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
-</RelativeLayout>
+</com.pinpinbox.android.Views.SquareLayout>

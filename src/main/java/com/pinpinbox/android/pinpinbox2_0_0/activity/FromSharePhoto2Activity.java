@@ -1,7 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,8 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -32,6 +29,15 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.BitmapUtility;
+import com.pinpinbox.android.Utility.DensityUtility;
+import com.pinpinbox.android.Utility.FileUtility;
+import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.ImageUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -40,16 +46,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
-import com.pinpinbox.android.Utility.BitmapUtility;
-import com.pinpinbox.android.Utility.DensityUtility;
-import com.pinpinbox.android.Utility.FileUtility;
-import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
@@ -81,10 +79,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by kevin9594 on 2017/5/13.
  */
-public class FromSharePhoto2Activity extends Activity implements View.OnClickListener {
+public class FromSharePhoto2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity = this;
-    private NoConnect noConnect;
+
     private SharedPreferences getdata;
     private DialogV2Custom dlgLogin, dlgCheckEdit;
 
@@ -127,34 +125,16 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     private TextView tvCount, tvStartUpLoad, tvOriginalSize, tvUpLoadCount, tvFileName;
     private GridView gvPhoto;
 
-    @TargetApi(19)
-    private void setTranslucentStatus(boolean on) {
-
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setStatus();
+        setSwipeBackEnable(false);
 
         checkID();
 
     }
 
-    private void setStatus() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(true);
-        }
-    }
+
 
     private void checkID() {
 
@@ -268,24 +248,46 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
     }
 
     private void check() {
-        switch (checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
-            case SUCCESS:
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        work();
-                    }
-                }, 200);
-                break;
-            case REFUSE:
-                MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
-                break;
+
+        Intent intent = getIntent();
+
+        MyLog.Set("e", this.getClass(), "intent.toString() => " + intent.toString());
+
+        if (intent != null && intent.getType().equals("text/plain")) {
+
+            String url = intent.getStringExtra(Intent.EXTRA_TEXT);
+
+            MyLog.Set("e", this.getClass(), "urlurlurl => " + url);
+
+            /*開啟我的作品 群組作品*/
+
+
+        } else {
+
+
+            switch (checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                case SUCCESS:
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            fromSelectPhoto();
+                        }
+                    }, 200);
+                    break;
+                case REFUSE:
+                    MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
+                    break;
+
+            }
 
         }
+
+
     }
 
-    private void work() {
+    private void fromSelectPhoto() {
 
         setContentView(R.layout.activity_2_0_0_from_share_photo);
 
@@ -327,9 +329,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             e.printStackTrace();
         }
 
-        if(photoList!=null && photoList.size()>0){
+        if (photoList != null && photoList.size() > 0) {
             rBottom.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             rBottom.setVisibility(View.GONE);
         }
 
@@ -352,7 +354,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
         linLoad = (LinearLayout) findViewById(R.id.linLoad);
         rSelect = (RelativeLayout) findViewById(R.id.rSelect);
-        rBottom = (RelativeLayout)findViewById(R.id.rBottom);
+        rBottom = (RelativeLayout) findViewById(R.id.rBottom);
 
         backImg = (ImageView) findViewById(R.id.backImg);
 
@@ -367,8 +369,6 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         backImg.setOnClickListener(this);
         tvStartUpLoad.setOnClickListener(this);
         tvOriginalSize.setOnClickListener(this);
-
-
 
 
         intMaxCount = StringIntMethod.StringToInt(
@@ -410,9 +410,9 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
                 adapter.notifyDataSetChanged();
 
-                if(selectCount>0){
+                if (selectCount > 0) {
                     rBottom.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     rBottom.setVisibility(View.GONE);
                 }
 
@@ -682,7 +682,6 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
                 intAlbumCount = jsonArray.length();
 
-
                 booleanList.add(true);
 
                 upCount++;
@@ -738,13 +737,14 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
     private void doFastCreate() {
         if (!HttpUtility.isConnect(mActivity)) {
-            noConnect = new NoConnect(mActivity);
+            setNoConnect();
             return;
         }
         fastCreateTask = new FastCreateTask();
         fastCreateTask.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class FastCreateTask extends AsyncTask<Void, Void, Object> {
 
         private int p54Result = -1;
@@ -754,14 +754,12 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         protected void onPreExecute() {
             super.onPreExecute();
             doingType = DoingTypeClass.DoFastCreate;
-
         }
 
         @Override
         protected Object doInBackground(Void... params) {
 
             protocol54();
-
 
             return null;
         }
@@ -774,41 +772,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
                 if (newAlbum_id != null) {
 
-
                     upLoadTask = new UpLoadTask(sendList);
                     upLoadTask.execute();
-
-//                    switch (uploadType) {
-//                        case COMMON_SIZE_UPLOAD:
-//                            total = sendList.size();
-//
-//                            upCount = 0;
-//
-//                            if (sendList.size() < 11) {
-//
-//                                MyLog.Set("e",  mActivity.getClass(), "一次上傳");
-//
-//                                Message msg = new Message();
-//                                msg.what = 1;
-//                                upLoadHandler.sendMessage(msg);
-//                            } else {
-//
-//                                MyLog.Set("e",  mActivity.getClass(), "分批上傳");
-//
-//                                Message msg = new Message();
-//                                msg.what = 0;
-//                                upLoadHandler.sendMessage(msg);
-//                            }
-//                            break;
-//
-//                        case ORIGINAL_SIZE_UPLOAD:
-//
-//                            upLoadTask = new UpLoadTask(sendList);
-//                            upLoadTask.execute();
-//
-//                            break;
-//                    }
-
 
                 }
 
@@ -1061,8 +1026,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
             if (convertView == null) {
                 mViewHolder = new ViewHolder();
                 convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_photo, parent, false);
-                mViewHolder.photoImg = (ImageView) convertView.findViewById(R.id.image);
-                mViewHolder.videoImg = (ImageView) convertView.findViewById(R.id.videoImg);
+                mViewHolder.photoImg = convertView.findViewById(R.id.image);
+                mViewHolder.videoImg = convertView.findViewById(R.id.videoImg);
                 mViewHolder.vSelect = convertView.findViewById(R.id.vSelect);
                 convertView.setTag(mViewHolder);
 
@@ -1085,10 +1050,6 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
             String path = photoList.get(position).getPath();
 
-
-            MyLog.Set("e", FromServiceActivity.class, "pathpathpath => " + path);
-
-
             File file = new File(path);
 
             if (FileUtility.isImage(file.getName())) {
@@ -1096,15 +1057,8 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 mViewHolder.videoImg.setVisibility(View.GONE);
 
                 if (path != null && !path.equals("")) {
-                    Picasso.with(getApplicationContext())
-                            .load(file)
-                            .config(Bitmap.Config.RGB_565)
-                            .fit()
-                            .error(R.drawable.bg_2_0_0_no_image)
-                            .tag(getApplicationContext())
-                            .centerCrop()
-                            .into(mViewHolder.photoImg);
-                } else {
+                    ImageUtility.setFileImageToGrid(mActivity, mViewHolder.photoImg, file);
+                }else {
                     mViewHolder.photoImg.setImageResource(R.drawable.bg_2_0_0_no_image);
                 }
 
@@ -1171,21 +1125,10 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
                 if (uploadType == COMMON_SIZE_UPLOAD) {
                     uploadType = ORIGINAL_SIZE_UPLOAD;
                     tvOriginalSize.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-                }else {
+                } else {
                     uploadType = COMMON_SIZE_UPLOAD;
                     tvOriginalSize.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 }
-
-
-//                setSendPathList();
-//
-//                ViewVisibility.setGone(rSelect);
-//                ViewVisibility.setVisible(linLoad);
-//
-//                uploadType = ORIGINAL_SIZE_UPLOAD;
-//
-//                doFastCreate();
-
 
                 break;
         }
@@ -1224,7 +1167,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                work();
+                fromSelectPhoto();
             }
         }, 500);
 
@@ -1282,7 +1225,7 @@ public class FromSharePhoto2Activity extends Activity implements View.OnClickLis
 
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
 
         FileUtility.delAllFile(DirClass.ExternalFileDir(mActivity) + DirClass.getMyDir(id) + DirClass.dirCopy);
 

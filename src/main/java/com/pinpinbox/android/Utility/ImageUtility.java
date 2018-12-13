@@ -9,6 +9,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.TransformationControl;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+
 public class ImageUtility {
 
     public static boolean isImageExist(String imageUrl) {
@@ -24,6 +26,18 @@ public class ImageUtility {
         }
 
     }
+
+
+    public static boolean isFileExist(File file) {
+
+        if (file != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
     public static void setImage(Activity mActivity, final ImageView imageView, String imageUrl) {
 
@@ -84,7 +98,7 @@ public class ImageUtility {
 
     }
 
-    public static void setCommonImage(Activity mActivity, ImageView imageView, String imageUrl){
+    public static void setCommonImage(Activity mActivity, ImageView imageView, String imageUrl) {
 
         if (isImageExist(imageUrl)) {
 
@@ -97,6 +111,31 @@ public class ImageUtility {
                     .into(imageView);
 
             imageView.setTag(imageUrl);
+
+        } else {
+
+            imageView.setImageResource(R.drawable.bg_2_0_0_no_image);
+
+        }
+
+    }
+
+    public static void setFileImageToGrid(Activity mActivity, ImageView imageView, File file) {
+
+        if (isFileExist(file)) {
+
+            //fit 調整圖片大小至view邊寬
+            Picasso.with(mActivity.getApplicationContext())
+                    .load(file)
+                    .config(Bitmap.Config.RGB_565)
+                    .error(R.drawable.bg_2_0_0_no_image)
+                    .tag(mActivity.getApplicationContext())
+                    .fit()
+                    .centerCrop()
+                    .transform(new TransformationControl.BrightnessTransformation())
+                    .into(imageView);
+
+            imageView.setTag(file.getPath());
 
         } else {
 
