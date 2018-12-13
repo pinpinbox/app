@@ -15,7 +15,6 @@ import android.os.Process;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
@@ -58,6 +57,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentHome;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMenu;
@@ -115,16 +115,10 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
     private View vRPnotify, vRPmenu;
     private TextView tvTabHome, tvTabMe, tvTabNotify, tvTabMenu;
 
-
     private String strCooperationAlbumId = "";
     private String id, token;
 
-
     private int doingType;
-
-    private int showDistance;
-    private int hideDistance;
-
 
     private boolean mainIsExist = false;
     private boolean fromAwsMessage = false;
@@ -319,11 +313,6 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
 
         /*防止crash 遺失銀幕長寬*/
         DensityUtility.setScreen(this);
-
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-        showDistance = outMetrics.heightPixels / 9;
-        hideDistance = outMetrics.heightPixels / 53;
 
         icons = new ArrayList<>();
 
@@ -1801,6 +1790,31 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
                     .remove(fragmentScanSearch).commit();
             return;
         }
+
+        FragmentHome fragmentHome = (FragmentHome) getFragment(FragmentHome.class.getSimpleName());
+
+        FragmentCategory fragmentCategory = (FragmentCategory) getFragment(FragmentCategory.class.getSimpleName());
+
+        if(fragmentHome!=null && fragmentHome.isSearch()){
+            fragmentHome.hideSearch();
+            return;
+        }
+
+
+        if(fragmentHome!=null && fragmentCategory!=null && !fragmentCategory.isHidden()){
+            fragmentHome.hideCategory();
+            return;
+        }
+
+
+
+
+        if(viewPager.getCurrentItem()!=0){
+            viewPager.setCurrentItem(0,false);
+            return;
+        }
+
+
 
         List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
         int count = activityList.size();

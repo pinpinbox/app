@@ -552,7 +552,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-    private void hideSearch() {
+    public void hideSearch() {
         if (fragmentSearch != null) {
             getActivity().getSupportFragmentManager().beginTransaction().hide(fragmentSearch).commit();
         }
@@ -586,7 +586,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-    private void hideCategory() {
+    public void hideCategory() {
 
         if (fragmentCategory != null) {
             getActivity().getSupportFragmentManager().beginTransaction().hide(fragmentCategory).commit();
@@ -1524,6 +1524,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         return this.edSearch;
     }
 
+    public boolean isSearch(){
+        return isSearch;
+    }
+
     private void connectInstability() {
 
         ConnectInstability connectInstability = new ConnectInstability() {
@@ -1991,12 +1995,12 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     public void Success() {
 
                         if (newsletter) {
-                            PinPinToast.showSuccessToast(getActivity(), "成功訂閱電子報");
+                            PinPinToast.showSuccessToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_success_subscribe);
                         } else {
-                            PinPinToast.ShowToast(getActivity(), "已取消訂閱電子報");
+                            PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_cancel_subscribe);
                         }
 
-                        PPBApplication.getInstance().getData().edit().putBoolean(Key.checkNewsletter, true).commit();
+                        PPBApplication.getInstance().getData().edit().putBoolean(Key.checkNewsletter, true).apply();
 
 
                     }

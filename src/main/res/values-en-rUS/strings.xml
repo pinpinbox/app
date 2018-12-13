@@ -323,7 +323,8 @@
     <string name="pinpinbox_2_0_0_toast_message_at_least_3p_to_enable">Least 3 point to enable</string>
     <string name="pinpinbox_2_0_0_toast_message_location_not_found">Location not found</string>
     <string name="pinpinbox_2_0_0_toast_message_location_not_found_by_edit">Location not found</string>
-
+    <string name="pinpinbox_2_0_0_toast_message_success_subscribe">Success</string>
+    <string name="pinpinbox_2_0_0_toast_message_cancel_subscribe">Cancel</string>
 
 
     <string name="pinpinbox_2_0_0_size_general">General</string>
