@@ -106,7 +106,8 @@
     <string name="pinpinbox_2_0_0_button_learn_now">Learn now</string>
     <string name="pinpinbox_2_0_0_button_scan_sign_up">Use invitation code</string>
     <string name="pinpinbox_2_0_0_button_select_file">Select file</string>
-    <string name="pinpinbox_2_0_0_button_select">選擇</string>
+    <string name="pinpinbox_2_0_0_button_select">Select</string>
+    <string name="pinpinbox_2_0_0_button_send_text">Send</string>
 
     <string name="pinpinbox_2_0_0_event_info">Details</string>
     <string name="pinpinbox_2_0_0_event_contributors">Submit</string>

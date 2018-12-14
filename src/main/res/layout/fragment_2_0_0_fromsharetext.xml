@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout style="@style/ppb200_action_bar_with_status">
+
+
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ppb200_action_bar_icon"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic200_cancel_dark" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ppb200_common_icon_side"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvTabMy"
+                style="@style/ppb200_action_bar_tab"
+                android:background="@drawable/click_2_0_0_default"
+                android:text="@string/pinpinbox_2_0_0_itemtype_collect_my" />
+
+
+            <TextView
+                android:id="@+id/tvTabShare"
+                style="@style/ppb200_action_bar_tab"
+                android:text="@string/pinpinbox_2_0_0_itemtype_collect_cooperation" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linBottom"
+        style="@style/ppb200_bottom_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:paddingLeft="@dimen/ppb200_padding_margin_first"
+        android:paddingRight="@dimen/ppb200_padding_margin_first">
+
+
+        <TextView
+            android:id="@+id/tvNewCreate"
+            style="@style/ppb200_Button_grey_common_radius"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_second"
+            android:layout_weight="1"
+            android:text="@string/pinpinbox_2_0_0_button_create_new_album"/>
+
+        <TextView
+            android:id="@+id/tvSend"
+            style="@style/ppb200_Button_main_common_radius"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+            android:layout_weight="1"
+            android:text="@string/pinpinbox_2_0_0_button_send_text"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

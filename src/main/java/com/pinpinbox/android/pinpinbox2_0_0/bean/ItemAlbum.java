@@ -60,6 +60,8 @@ public class ItemAlbum {
     private boolean isFocuse = false;
 //    private boolean detail_is_open; //作品設定選項是否開啟
 
+    private boolean isSelect = false;
+
 
     /*活動類*/
     private int event_id; //活動ID
@@ -74,6 +76,14 @@ public class ItemAlbum {
     private int user_id; //作者ID
     private String user_name; //作者名稱
     private String user_picture;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getReward_description() {
         return reward_description;

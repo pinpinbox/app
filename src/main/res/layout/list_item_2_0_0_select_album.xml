@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/linBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ppb200_common_detaillist_item_height"
+        android:background="@drawable/click_2_0_0_list_item"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/ppb200_padding_margin_first"
+        android:paddingRight="@dimen/ppb200_padding_margin_first">
+
+        <ImageView
+            android:id="@+id/selectAlbumImg"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/border_2_0_0_white_frame_grey_second_radius" />
+
+        <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+            android:id="@+id/detaillistImg"
+            style="@style/ppb200_common_detaillist_image" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="@dimen/ppb200_padding_margin_second">
+
+
+            <TextView
+                android:id="@+id/tvAlbumName"
+                android:text=""
+                style="@style/ppb200_common_detaillist_name"/>
+
+            <TextView
+                android:id="@+id/tvCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:letterSpacing="0.1"
+                android:text="0/22"
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_small" />
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <View style="@style/ppb200_divider_list" />
+
+
+</LinearLayout>

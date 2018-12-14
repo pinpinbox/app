@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="136dp">
+
+        <LinearLayout
+            android:id="@+id/linBackground"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/ppb200_padding_margin_second"
+            android:paddingTop="@dimen/ppb200_padding_margin_second"
+            android:orientation="vertical">
+
+
+            <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
+                android:id="@+id/userImg"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:scaleType="centerCrop"
+                app:siBorderColor="@color/pinpinbox_2_0_0_divider"
+                app:siBorderWidth="0.5dp"
+                app:siRadius="96dp"
+               />
+
+
+            <TextView
+                fontPath="fonts/OpenSans-Bold.ttf"
+                android:textStyle="bold"
+                android:id="@+id/tvName"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/pinpinbox_2_0_0_first_text"
+                android:textSize="@dimen/ppb200_common_text_small" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

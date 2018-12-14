@@ -3,6 +3,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,10 +16,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -58,6 +59,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.UserGradeChange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewVisibility;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentFromShareText;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 import com.zhy.m.permission.MPermissions;
@@ -82,6 +84,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class FromSharePhoto2Activity extends DraggerActivity implements View.OnClickListener {
 
     private Activity mActivity = this;
+
+    private FragmentFromShareText fragmentFromShareText;
 
     private SharedPreferences getdata;
     private DialogV2Custom dlgLogin, dlgCheckEdit;
@@ -133,7 +137,6 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
         checkID();
 
     }
-
 
 
     private void checkID() {
@@ -218,7 +221,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
                         }
                     }
 
-                    check();
+                    checkTextOrImage();
                 }
             });
 
@@ -241,13 +244,13 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
             dlgCheckEdit.show();
 
         } else {
-            check();
+            checkTextOrImage();
         }
 
 
     }
 
-    private void check() {
+    private void checkTextOrImage() {
 
 
         Intent intent = getIntent();
@@ -261,6 +264,8 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
             MyLog.Set("e", this.getClass(), "urlurlurl => " + url);
 
             /*開啟我的作品 群組作品*/
+
+            showFromShareText();
 
 
         } else {
@@ -287,6 +292,20 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
     }
 
+
+    private void showFromShareText(){
+
+        setContentView(R.layout.activity_2_0_0_from_share_photo);
+
+        fragmentFromShareText = new FragmentFromShareText();
+        getSupportFragmentManager().beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .add(R.id.frame, fragmentFromShareText).commit();
+
+    }
+
+
+
     private void fromSelectPhoto() {
 
         setContentView(R.layout.activity_2_0_0_from_share_photo);
@@ -298,12 +317,6 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
         setPhoto();
 
         setHandler();
-
-        ViewPropertyAnimator alphaTo1 = findViewById(R.id.rBackground).animate();
-        alphaTo1.setDuration(200)
-                .setStartDelay(300)
-                .alpha(1)
-                .start();
 
     }
 
@@ -376,6 +389,8 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
                         (getdata.getString(Key.usergrade, "22"))
                 )
         );
+
+        rSelect.setVisibility(View.VISIBLE);
 
     }
 
@@ -828,6 +843,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
     }
 
     /*protocol58*/
+    @SuppressLint("StaticFieldLeak")
     private class UpLoadTask extends AsyncTask<Void, Void, Object> {
 
         private List<GridItem> itemList;
@@ -1058,7 +1074,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
                 if (path != null && !path.equals("")) {
                     ImageUtility.setFileImageToGrid(mActivity, mViewHolder.photoImg, file);
-                }else {
+                } else {
                     mViewHolder.photoImg.setImageResource(R.drawable.bg_2_0_0_no_image);
                 }
 
@@ -1095,6 +1111,27 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
         }
 
+    }
+
+    public Fragment getFragment(String fragmentName) {
+
+        @SuppressLint("RestrictedApi")
+        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+
+        Fragment getFragment = null;
+
+        for (int i = 0; i < fragmentList.size(); i++) {
+
+            Fragment fragment = fragmentList.get(i);
+
+            if (fragment.getClass().getSimpleName().equals(fragmentName)) {
+                getFragment = fragment;
+                MyLog.Set("d", getClass(), "fragmentName => " + fragmentName);
+                break;
+            }
+        }
+
+        return getFragment;
     }
 
     @Override
