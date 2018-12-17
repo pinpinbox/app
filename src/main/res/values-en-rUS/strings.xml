@@ -624,6 +624,8 @@
     <string name="pinpinbox_2_0_0_other_text_converting_files">Converting files</string>
     <string name="pinpinbox_2_0_0_other_text_has_gotten">Has gotten</string>
     <string name="pinpinbox_2_0_0_other_text_sponsors_times">sponsors</string>
+    <string name="pinpinbox_2_0_0_other_text_search_own">Me</string>
+
 
     <string name="crop__saving">相片儲存中</string>
     <string name="crop__wait">請稍後</string>
