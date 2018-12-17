@@ -121,10 +121,10 @@ public class FragmentSearch extends Fragment{
 
         View v = inflater.inflate(R.layout.fragment_2_0_0_search, container, false);
 
-        rvSearch = (RecyclerView) v.findViewById(R.id.rvSearch);
+        rvSearch = v.findViewById(R.id.rvSearch);
 
 
-        tvGuideNoAlbum = (TextView) v.findViewById(R.id.tvGuideNoAlbum);
+        tvGuideNoAlbum = v.findViewById(R.id.tvGuideNoAlbum);
 
         if(getActivity()!=null){
             FragmentHome fragmentHome = (FragmentHome) (((MainActivity)getActivity()).getFragment(FragmentHome.class.getSimpleName()));
@@ -137,15 +137,13 @@ public class FragmentSearch extends Fragment{
 
 
         vHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_2_0_0_search, null);
-        rvUser = (RecyclerView) vHeader.findViewById(R.id.rvUser);
-        tvSearchUserTitle = (TextView) vHeader.findViewById(R.id.tvSearchUserTitle);
-        tvSearchAlbumTitle = (TextView) vHeader.findViewById(R.id.tvSearchAlbumTitle);
-        tvGuideNoUser = (TextView) vHeader.findViewById(R.id.tvGuideNoUser);
+        rvUser = vHeader.findViewById(R.id.rvUser);
+        tvSearchUserTitle = vHeader.findViewById(R.id.tvSearchUserTitle);
+        tvSearchAlbumTitle = vHeader.findViewById(R.id.tvSearchAlbumTitle);
+        tvGuideNoUser = vHeader.findViewById(R.id.tvGuideNoUser);
 
 
-        TextUtility.setBold(tvSearchUserTitle, true);
-        TextUtility.setBold(tvSearchAlbumTitle, true);
-
+        TextUtility.setBold(tvSearchUserTitle, tvSearchAlbumTitle);
 
         return v;
     }
@@ -204,16 +202,23 @@ public class FragmentSearch extends Fragment{
                     FlurryUtil.onEvent(FlurryKey.search_success_user_to_select);
                 }
 
+                if(itemUserList.get(position).getUser_id().equals(id)){
 
-                ActivityIntent.toUser(
-                        getActivity(),
-                        true,
-                        false,
-                        itemUserList.get(position).getUser_id(),
-                        itemUserList.get(position).getPicture(),
-                        itemUserList.get(position).getName(),
-                        v.findViewById(R.id.userImg)
-                );
+                    ((MainActivity)getActivity()).toMePage(false);
+
+                }else {
+
+                    ActivityIntent.toUser(
+                            getActivity(),
+                            true,
+                            false,
+                            itemUserList.get(position).getUser_id(),
+                            itemUserList.get(position).getPicture(),
+                            itemUserList.get(position).getName(),
+                            v.findViewById(R.id.userImg)
+                    );
+
+                }
 
 
             }
@@ -584,9 +589,8 @@ public class FragmentSearch extends Fragment{
 
                             String user_id = JsonUtility.GetString(object, ProtocolKey.user_id);
                             itemUser.setUser_id(user_id);
-                            if (!user_id.equals(id)) {
-                                itemUserList.add(itemUser);
-                            }
+                            itemUserList.add(itemUser);
+
 
                         }
 

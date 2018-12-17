@@ -14,6 +14,7 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -90,6 +91,12 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
                         .into(holder.userImg);
         }
 
+        if(itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())){
+            holder.tvOwn.setVisibility(View.VISIBLE);
+        }else {
+            holder.tvOwn.setVisibility(View.GONE);
+        }
+
 
 
     }
@@ -102,18 +109,16 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
 
         private LinearLayout linBackground;
         private RoundCornerImageView userImg;
-        private TextView tvName;
+        private TextView tvName, tvOwn;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
 
-            linBackground = (LinearLayout)itemView.findViewById(R.id.linBackground);
-
-            linBackground.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
-
-            userImg = (RoundCornerImageView)itemView.findViewById(R.id.userImg);
-            tvName = (TextView)itemView.findViewById(R.id.tvName);
+            linBackground = itemView.findViewById(R.id.linBackground);
+            userImg = itemView.findViewById(R.id.userImg);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvOwn = itemView.findViewById(R.id.tvOwn);
 
             linBackground.setOnClickListener(this);
             linBackground.setOnLongClickListener(this);
