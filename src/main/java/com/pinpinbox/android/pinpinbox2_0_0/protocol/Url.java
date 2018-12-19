@@ -21,6 +21,8 @@ public class Url {
 
     public static String P53_UpdateCellphone = BuildConfig.initAPI + "/index/api/updatecellphone" + "/2.0";
 
+    public static String P80_InsertVideoOfDiy = BuildConfig.initAPI + "/index/api/insertvideoofdiy" + "/2.0";
+
     public static String P95_RefreshToken = BuildConfig.initAPI + "/index/api/refreshtoken" + "/2.0";
 
     public static String P96_InsertAlbumIndex = BuildConfig.initAPI + "/index/api/insertalbumindex" + "/2.0";

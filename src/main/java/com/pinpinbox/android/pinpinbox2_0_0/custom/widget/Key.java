@@ -217,6 +217,7 @@ public class Key {
     public static String type_id = "type_id";
     public static String task_for = "task_for";
     public static String timestamp = "timestamp";
+    public static String text = "text";
 
     public static int TIMEOUT = -2;
 
@@ -235,6 +236,8 @@ public class Key {
     public static String viewer = "viewer";
     public static String video = "video";
     public static String videoAutoplayEnable = "videoAutoplayEnable";
+    public static String video_refer = "video_refer";
+    public static String video_target = "video_target";
 
     //w
 

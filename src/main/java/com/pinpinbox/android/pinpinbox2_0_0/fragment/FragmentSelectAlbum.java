@@ -135,7 +135,7 @@ public class FragmentSelectAlbum extends Fragment {
                 if (fragmentFromShareText != null) {
 
                     /*設置選取的album_id*/
-                    fragmentFromShareText.setAlbum_id(itemAlbumList.get(position).getAlbum_id());
+                    fragmentFromShareText.setItemAlbum(itemAlbumList.get(position));
 
 
                     /*設置選取的頁面*/
@@ -267,6 +267,7 @@ public class FragmentSelectAlbum extends Fragment {
 
                             ItemAlbum itemAlbum = new ItemAlbum();
 
+                            /*album*/
                             String album = JsonUtility.GetString(obj, ProtocolKey.album);
 
                             JSONObject jsonAlbum = new JSONObject(album);
@@ -276,11 +277,26 @@ public class FragmentSelectAlbum extends Fragment {
                             itemAlbum.setCover(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover));
                             itemAlbum.setSelect(false);
 
+                            /*usergrade*/
                             String userGrade = JsonUtility.GetString(obj, ProtocolKey.usergrade);
 
                             JSONObject jsonUserGrade = new JSONObject(userGrade);
 
                             itemAlbum.setPhoto_limit_of_album(JsonUtility.GetInt(jsonUserGrade, ProtocolKey.photo_limit_of_album));
+
+                            /*cooperation*/
+                            String cooperation = JsonUtility.GetString(obj, ProtocolKey.cooperation);
+
+                            JSONObject jsonCooperation = new JSONObject(cooperation);
+
+                            itemAlbum.setIdentity(JsonUtility.GetString(jsonCooperation, ProtocolKey.identity));
+
+                            /*template*/
+                            String template = JsonUtility.GetString(obj, ProtocolKey.template);
+
+                            JSONObject jsonTemplate = new JSONObject(template);
+
+                            itemAlbum.setTemplate_id(JsonUtility.GetInt(jsonTemplate, ProtocolKey.template_id));
 
                             itemAlbumList.add(itemAlbum);
 

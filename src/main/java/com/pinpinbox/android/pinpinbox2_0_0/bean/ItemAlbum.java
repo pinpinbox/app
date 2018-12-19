@@ -24,6 +24,7 @@ public class ItemAlbum {
     private String mood;
     private String act;
     private String reward_description;
+    private String identity;
 
 
     private int messageboard;
@@ -78,6 +79,24 @@ public class ItemAlbum {
     private String user_name; //作者名稱
     private String user_picture;
 
+    /*版型 ( 0 => 快速)*/
+    private int template_id;
+
+    public int getTemplate_id() {
+        return template_id;
+    }
+
+    public void setTemplate_id(int template_id) {
+        this.template_id = template_id;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
 
     public int getPhoto_limit_of_album() {
         return photo_limit_of_album;

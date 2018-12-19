@@ -265,7 +265,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
             /*開啟我的作品 群組作品*/
 
-            showFromShareText();
+            showFromShareText(url);
 
 
         } else {
@@ -293,11 +293,15 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
     }
 
 
-    private void showFromShareText(){
+    private void showFromShareText(String text){
 
         setContentView(R.layout.activity_2_0_0_from_share_photo);
 
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.text, text);
+
         fragmentFromShareText = new FragmentFromShareText();
+        fragmentFromShareText.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .add(R.id.frame, fragmentFromShareText).commit();

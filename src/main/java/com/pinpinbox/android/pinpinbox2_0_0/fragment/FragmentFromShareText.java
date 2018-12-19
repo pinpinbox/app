@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,24 +15,40 @@ import android.widget.TextView;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.FromSharePhoto2Activity;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol80_InsertVideoOfDiy;
 
 public class FragmentFromShareText extends Fragment implements View.OnClickListener {
 
 
+    private Protocol80_InsertVideoOfDiy protocol80_insertVideoOfDiy;
+
     private FragmentPagerItemAdapter adapter;
+
+    private ItemAlbum itemAlbum;
 
     private ImageView backImg;
     private TextView tvTabMy, tvTabShare, tvNewCreate, tvSend;
     private ViewPager viewPager;
     private LinearLayout linBottom;
 
-    private String album_id = "";
+    private String text = "";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            text = bundle.getString(Key.text, "");
+        }
 
     }
 
@@ -153,9 +170,68 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
     }
 
 
-    public void setAlbum_id(String album_id) {
-        this.album_id = album_id;
+    private void doSendSharedToAlbum() {
+
+        if (!HttpUtility.isConnect(getActivity())) {
+            ((FromSharePhoto2Activity) getActivity()).setNoConnect();
+            return;
+        }
+
+        protocol80_insertVideoOfDiy = new Protocol80_InsertVideoOfDiy(
+                getActivity(),
+                PPBApplication.getInstance().getId(),
+                PPBApplication.getInstance().getToken(),
+                itemAlbum.getAlbum_id(),
+                "embed",
+                text,
+                new Protocol80_InsertVideoOfDiy.TaskCallBack() {
+                    @Override
+                    public void Prepare() {
+                        ((FromSharePhoto2Activity) getActivity()).startLoading();
+                    }
+
+                    @Override
+                    public void Post() {
+                        ((FromSharePhoto2Activity) getActivity()).dissmissLoading();
+                    }
+
+                    @Override
+                    public void Success() {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Key.album_id, itemAlbum.getAlbum_id());
+                        bundle.putString(Key.identity, itemAlbum.getIdentity());
+
+                        if (itemAlbum.getTemplate_id() == 0) {
+                            bundle.putInt(Key.create_mode, 0);
+                        } else {
+                            bundle.putInt(Key.create_mode, 1);
+                        }
+
+                        Intent intent = new Intent(getActivity(), CreationActivity.class);
+                        intent.putExtras(bundle);
+                        getActivity().startActivity(intent);
+                        ActivityAnim.StartAnim(getActivity());
+
+
+                    }
+
+                    @Override
+                    public void TimeOut() {
+                        doSendSharedToAlbum();
+                    }
+                }
+
+        );
+
+
     }
+
+
+    public void setItemAlbum(ItemAlbum itemAlbum) {
+        this.itemAlbum = itemAlbum;
+    }
+
 
     public void clearOtherPageItem(int otherPage) {
 
@@ -166,7 +242,7 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
     public void showBottom() {
 
-        if(linBottom.getVisibility()==View.GONE) {
+        if (linBottom.getVisibility() == View.GONE) {
             linBottom.setVisibility(View.VISIBLE);
         }
 
@@ -203,13 +279,24 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
             case R.id.tvSend:
 
-                MyLog.Set("e", getClass(), "選擇的 album_id => " + album_id);
+                doSendSharedToAlbum();
 
                 break;
 
-
         }
 
-
     }
+
+    @Override
+    public void onDestroy(){
+
+        if(!protocol80_insertVideoOfDiy.isCancelled()){
+            protocol80_insertVideoOfDiy.cancel(true);
+        }
+        protocol80_insertVideoOfDiy = null;
+
+        super.onDestroy();
+    }
+
+
 }
