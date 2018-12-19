@@ -276,6 +276,11 @@ public class FragmentSelectAlbum extends Fragment {
                             itemAlbum.setCover(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover));
                             itemAlbum.setSelect(false);
 
+                            String userGrade = JsonUtility.GetString(obj, ProtocolKey.usergrade);
+
+                            JSONObject jsonUserGrade = new JSONObject(userGrade);
+
+                            itemAlbum.setPhoto_limit_of_album(JsonUtility.GetInt(jsonUserGrade, ProtocolKey.photo_limit_of_album));
 
                             itemAlbumList.add(itemAlbum);
 

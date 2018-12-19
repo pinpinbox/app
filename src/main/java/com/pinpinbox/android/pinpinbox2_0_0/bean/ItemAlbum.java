@@ -38,6 +38,7 @@ public class ItemAlbum {
     private int sponsorCount = 0;
     private int categoryarea_id;
     private int category_id;
+    private int photo_limit_of_album;
 
     private int image_orientation = 0;
     public static final int PORTRAIT = 1; //直
@@ -76,6 +77,15 @@ public class ItemAlbum {
     private int user_id; //作者ID
     private String user_name; //作者名稱
     private String user_picture;
+
+
+    public int getPhoto_limit_of_album() {
+        return photo_limit_of_album;
+    }
+
+    public void setPhoto_limit_of_album(int photo_limit_of_album) {
+        this.photo_limit_of_album = photo_limit_of_album;
+    }
 
     public boolean isSelect() {
         return isSelect;

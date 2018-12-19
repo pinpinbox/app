@@ -57,6 +57,8 @@ public class RecyclerSelectAlbumAdapter extends RecyclerView.Adapter {
         TextUtility.setBold(mHolder.tvAlbumName);
         mHolder.tvAlbumName.setText(itemAlbumList.get(position).getName());
 
+        mHolder.tvCount.setText( "0/" + itemAlbumList.get(position).getPhoto_limit_of_album());
+
         ImageUtility.setImage(mActivity, mHolder.detaillistImg, itemAlbumList.get(position).getCover());
 
         if (itemAlbumList.get(position).isSelect()) {
@@ -73,7 +75,7 @@ public class RecyclerSelectAlbumAdapter extends RecyclerView.Adapter {
 
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
-        }else {
+        } else {
 
             ViewHolder mHolder = (ViewHolder) holder;
             mHolder.position = position;
