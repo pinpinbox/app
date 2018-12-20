@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,8 +45,6 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by vmage on 2018/2/1.
@@ -235,34 +232,27 @@ public class ExchangeInfoActivity extends DraggerActivity implements View.OnClic
                 long hour = (l / (60 * 60 * 1000) - day * 24);
                 long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
 
-//                tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
 
-                tvExchangeTime.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
-                        + day + getResources().getString(R.string.pinpinbox_2_0_0_time_day)
-                        + hour + getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
-                        + min + getResources().getString(R.string.pinpinbox_2_0_0_time_min));
+
+                if (min < 0 || hour < 0 || day < 0 || l < 0){
+
+                    tvExchangeTime.setText(R.string.pinpinbox_2_0_0_time_expired);
+
+                    if(!isExchanged){
+                        (findViewById(R.id.rBottom)).setVisibility(View.GONE);
+                    }
+
+                }else {
+                    tvExchangeTime.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
+                            + day + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_day)
+                            + hour + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
+                            + min + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_min));
+                }
 
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
-//            try {
-//
-//                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-//                Date endDate = df.parse(itemExchange.getEndtime());
-//
-//                long diff =  endDate.getTime() -curDate.getTime() ;
-//                long days = diff / (1000 * 60 * 60 * 24);
-//                long hours = (diff - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-//                long minutes = (diff - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
-//                tvExchangeTime.setText("剩餘時間:" + days + "天" + hours + "小時" + minutes + "分");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
 
         }
 
@@ -540,13 +530,6 @@ public class ExchangeInfoActivity extends DraggerActivity implements View.OnClic
         }
 
     }
-
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
 
     @Override
     public void onBackPressed() {

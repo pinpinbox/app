@@ -101,10 +101,16 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                     //改為直向列表後 再優化英文版
 //                    mHolder.tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
 
-                    mHolder.tvExchangeTime.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
-                            + day + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_day)
-                            + hour + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
-                            + min + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_min));
+
+                    if (min < 0 || hour < 0 || day < 0 || l < 0){
+                        mHolder.tvExchangeTime.setText(R.string.pinpinbox_2_0_0_time_expired);
+                    }else {
+                        mHolder.tvExchangeTime.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
+                                + day + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_day)
+                                + hour + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
+                                + min + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_min));
+                    }
+
 
 
                     mHolder.tvExchangeTime.setTextColor(Color.parseColor(ColorClass.PINK_FRIST));
@@ -132,7 +138,7 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                 mHolder.detaillistImg.setTransitionName(image);
             }
 
-            ImageUtility.setImage(mActivity,  mHolder.detaillistImg, image);
+            ImageUtility.setImage(mActivity, mHolder.detaillistImg, image);
 
         } catch (Exception e) {
             e.printStackTrace();

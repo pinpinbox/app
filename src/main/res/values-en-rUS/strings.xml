@@ -24,7 +24,7 @@
     <string name="pinpinbox_2_0_0_time_day">d</string>
     <string name="pinpinbox_2_0_0_time_hour">h</string>
     <string name="pinpinbox_2_0_0_time_min">m</string>
-
+    <string name="pinpinbox_2_0_0_time_expired">Expired</string>
 
     <string name="pinpinbox_2_0_0_notify_type_album_notice">Notice</string>
     <string name="pinpinbox_2_0_0_notify_type_user_interactive_notice">Interactive</string>

@@ -740,15 +740,14 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
     }
 
-
     private void setVideo(final View vPage, final String videoTarget, final int position) {
 
-        RelativeLayout rVideo = (RelativeLayout) vPage.findViewById(R.id.rVideo);
+        RelativeLayout rVideo = vPage.findViewById(R.id.rVideo);
         rVideo.setVisibility(View.VISIBLE);
 
         VideoView videoView = null;
         if (photoContentsList.get(position).getVideoView() == null) {
-            videoView = (VideoView) vPage.findViewById(R.id.videoview);
+            videoView = vPage.findViewById(R.id.videoview);
             photoContentsList.get(position).setVideoView(videoView);
         } else {
             videoView = photoContentsList.get(position).getVideoView();
@@ -763,7 +762,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         });
 
 
-        final TextView tvRefreshVideo = (TextView) vPage.findViewById(R.id.tvRefreshVideo);
+        final TextView tvRefreshVideo = vPage.findViewById(R.id.tvRefreshVideo);
 
         try {
             Uri uri = null;
@@ -882,12 +881,12 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
 
 
-        ImageView centerImg = (ImageView) vPage.findViewById(R.id.centerImg);
+        ImageView centerImg = vPage.findViewById(R.id.centerImg);
 
         /*移置adapter執行*/
 //        final View vType = vPage.findViewById(R.id.vType);
 
-        final LinearLayout linExchange = (LinearLayout) vPage.findViewById(R.id.linExchange);
+        final LinearLayout linExchange = vPage.findViewById(R.id.linExchange);
 
         /*移置adapter執行*/
 //        final ImageView refreshImg = (ImageView) vPage.findViewById(R.id.refreshImg);
@@ -996,8 +995,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                         isNoOwnShowCollectType(vPage);
                     } else {
 
-//                        vType.setVisibility(View.VISIBLE);
-
                         linExchange.setVisibility(View.VISIBLE);
 
                         //依linExchange判斷是否呼叫接口
@@ -1013,8 +1010,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     if (!itemAlbum.isOwn()) {
                         isNoOwnShowCollectType(vPage);
                     } else {
-
-//                        vType.setVisibility(View.VISIBLE);
 
                         JSONArray jsonArray = new JSONArray(PPBApplication.getInstance().getData().getString(Key.slot_photo_id, "[]"));
 
@@ -1289,29 +1284,27 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
 
         /*error*/
-        final SpinKitView loadingView = (SpinKitView) vPage.findViewById(R.id.loadingView);
-        final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
-        final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
+        final SpinKitView loadingView = vPage.findViewById(R.id.loadingView);
+        final LinearLayout linTimeout = vPage.findViewById(R.id.linTimeout);
+        final TextView tvAgain = vPage.findViewById(R.id.tvAgain);
 
 
         /*success*/
-        final TextView tvExchangeName = (TextView) vPage.findViewById(R.id.tvExchangeName);
-        final TextView tvExchangeDescription = (TextView) vPage.findViewById(R.id.tvExchangeDescription);
-        final RoundCornerImageView exchangeImg = (RoundCornerImageView) vPage.findViewById(R.id.exchangeImg);
+        final TextView tvExchangeName = vPage.findViewById(R.id.tvExchangeName);
+        final TextView tvExchangeDescription = vPage.findViewById(R.id.tvExchangeDescription);
+        final RoundCornerImageView exchangeImg = vPage.findViewById(R.id.exchangeImg);
 
         /*bottom*/
-        final TextView tvAddToExchangeList = (TextView) vPage.findViewById(R.id.tvAddToExchangeList);
-        final TextView tvChange = (TextView) vPage.findViewById(R.id.tvChange);
-        final RelativeLayout rAddToExchangeList = (RelativeLayout) vPage.findViewById(R.id.rAddToExchangeList);
+        final TextView tvAddToExchangeList = vPage.findViewById(R.id.tvAddToExchangeList);
+        final TextView tvChange = vPage.findViewById(R.id.tvChange);
+        final RelativeLayout rAddToExchangeList = vPage.findViewById(R.id.rAddToExchangeList);
 
 
         /*end*/
-        final TextView tvExchangeEnd = (TextView) vPage.findViewById(R.id.tvExchangeEnd);
+        final TextView tvExchangeEnd = vPage.findViewById(R.id.tvExchangeEnd);
 
-        TextUtility.setBold(tvExchangeName, true);
-        TextUtility.setBold(tvAddToExchangeList, true);
-        TextUtility.setBold(tvChange, true);
-        TextUtility.setBold(tvExchangeEnd, true);
+        TextUtility.setBold(tvExchangeName, tvAddToExchangeList, tvChange, tvExchangeEnd);
+
 
 
         if (protocol108HashMap == null) {
@@ -1974,14 +1967,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                                     MyLog.Set("d", mActivity.getClass(), "stream => " + stream);
 
                                     if (stream == null) {
-
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString(Key.url, videoTarget);
-                                        Intent intent = new Intent(mActivity, WebViewActivity.class);
-                                        intent.putExtras(bundle);
-                                        startActivity(intent);
-                                        ActivityAnim.StartAnim(mActivity);
-
+                                        ActivityIntent.toWeb(mActivity, videoTarget, "");
                                     } else {
                                         ActivityIntent.toVideoPlay(mActivity, videoTarget);
                                     }
@@ -2016,7 +2002,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                 break;
         }
     }
-
 
     private void isNoOwnShowCollectType(View parent) {
 
@@ -2091,7 +2076,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
 
     }
-
 
     private void setPageDescription(final int position) {
 

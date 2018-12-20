@@ -1765,7 +1765,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
         private void checkNewletter() {
 
-            if (PPBApplication.getInstance().getData().getBoolean(Key.checkNewsletter, false)) {
+            if (!PPBApplication.getInstance().getData().getBoolean(Key.checkNewsletter, false)) {
 
                 DialogV2Custom dlgCheckNL = new DialogV2Custom(getActivity());
                 dlgCheckNL.setStyle(DialogStyleClass.CHECK);
@@ -2000,7 +2000,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                             PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_cancel_subscribe);
                         }
 
-                        PPBApplication.getInstance().getData().edit().putBoolean(Key.checkNewsletter, true).apply();
+                        PPBApplication.getInstance().getData().edit().putBoolean(Key.checkNewsletter, true).commit();
 
 
                     }

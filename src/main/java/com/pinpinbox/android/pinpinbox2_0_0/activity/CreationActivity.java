@@ -1082,10 +1082,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
     /*播放影片*/
     private void playVideoClick() {
 
-
         videoUrl = (String) photoList.get(thisPosition).get("video_url");
-
-
 
         try{
             String url = StringUtil.checkYoutubeId(videoUrl);
@@ -1109,14 +1106,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
                             }
 
                             if (stream == null) {
-
-                                Bundle bundle = new Bundle();
-                                bundle.putString(Key.url, videoUrl);
-                                Intent intent = new Intent(mActivity, WebViewActivity.class);
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                                ActivityAnim.StartAnim(mActivity);
-
+                                ActivityIntent.toWeb(mActivity, videoUrl, "");
                             } else {
                                 ActivityIntent.toVideoPlay(mActivity, videoUrl);
                             }
