@@ -1,7 +1,8 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,27 +10,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.FromSharePhoto2Activity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol80_InsertVideoOfDiy;
+
+import org.json.JSONObject;
+
+import java.net.SocketTimeoutException;
 
 public class FragmentFromShareText extends Fragment implements View.OnClickListener {
 
 
     private Protocol80_InsertVideoOfDiy protocol80_insertVideoOfDiy;
+    private FastCreateTask fastCreateTask;
 
     private FragmentPagerItemAdapter adapter;
 
@@ -38,7 +50,6 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
     private ImageView backImg;
     private TextView tvTabMy, tvTabShare, tvNewCreate, tvSend;
     private ViewPager viewPager;
-    private LinearLayout linBottom;
 
     private String text = "";
 
@@ -64,7 +75,6 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
         tvNewCreate = v.findViewById(R.id.tvNewCreate);
         tvSend = v.findViewById(R.id.tvSend);
         viewPager = v.findViewById(R.id.viewPager);
-        linBottom = v.findViewById(R.id.linBottom);
 
         return v;
     }
@@ -169,7 +179,6 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
     }
 
-
     private void doSendSharedToAlbum() {
 
         if (!HttpUtility.isConnect(getActivity())) {
@@ -198,21 +207,8 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
                     @Override
                     public void Success() {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString(Key.album_id, itemAlbum.getAlbum_id());
-                        bundle.putString(Key.identity, itemAlbum.getIdentity());
-
-                        if (itemAlbum.getTemplate_id() == 0) {
-                            bundle.putInt(Key.create_mode, 0);
-                        } else {
-                            bundle.putInt(Key.create_mode, 1);
-                        }
-
-                        Intent intent = new Intent(getActivity(), CreationActivity.class);
-                        intent.putExtras(bundle);
-                        getActivity().startActivity(intent);
-                        ActivityAnim.StartAnim(getActivity());
-
+                        ActivityIntent.toCreation(getActivity(), itemAlbum.getAlbum_id(), itemAlbum.getIdentity(), itemAlbum.getTemplate_id(), false);
+                        getActivity().finish();
 
                     }
 
@@ -227,11 +223,22 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
     }
 
+    private void doFastCreate() {
+
+        if (!HttpUtility.isConnect(getActivity())) {
+            ((FromSharePhoto2Activity) getActivity()).setNoConnect();
+            return;
+        }
+
+        fastCreateTask = new FastCreateTask();
+        fastCreateTask.execute();
+
+    }
+
 
     public void setItemAlbum(ItemAlbum itemAlbum) {
         this.itemAlbum = itemAlbum;
     }
-
 
     public void clearOtherPageItem(int otherPage) {
 
@@ -240,12 +247,94 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
     }
 
-    public void showBottom() {
 
-        if (linBottom.getVisibility() == View.GONE) {
-            linBottom.setVisibility(View.VISIBLE);
+    private void connectInstability() {
+        ConnectInstability connectInstability = new ConnectInstability() {
+            @Override
+            public void DoingAgain() {
+                doFastCreate();
+            }
+        };
+
+        DialogV2Custom.BuildTimeOut(getActivity(), connectInstability);
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    public class FastCreateTask extends AsyncTask<Void, Void, Object> {
+
+        private int p54Result = -1;
+        private String p54Message = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            ((FromSharePhoto2Activity) getActivity()).startLoading();
         }
 
+        @Override
+        protected Object doInBackground(Void... params) {
+            String strJson = "";
+            try {
+
+                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P54_InsertAlbumOfDiy,
+                        SetMapByProtocol.setParam54_insertalbumofdiy(PPBApplication.getInstance().getId(), PPBApplication.getInstance().getToken(), "0"), null);
+                MyLog.Set("json", getClass(), strJson);
+            } catch (SocketTimeoutException timeout) {
+                p54Result = Key.TIMEOUT;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (strJson != null && !strJson.equals("")) {
+                try {
+                    JSONObject jsonObject = new JSONObject(strJson);
+                    p54Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
+                    if (p54Result == 1) {
+
+                        itemAlbum = new ItemAlbum();
+
+                        itemAlbum.setAlbum_id(JsonUtility.GetString(jsonObject, ProtocolKey.data));
+                        itemAlbum.setIdentity("admin");
+                        itemAlbum.setTemplate_id(0);
+
+                    } else if (p54Result == 0) {
+                        p54Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+                    }
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            super.onPostExecute(result);
+            ((FromSharePhoto2Activity) getActivity()).dissmissLoading();
+
+            if (p54Result == 1) {
+
+                doSendSharedToAlbum();
+
+            } else if (p54Result == 0) {
+
+                DialogV2Custom.BuildError(getActivity(), p54Message);
+
+            } else if (p54Result == Key.TIMEOUT) {
+
+                connectInstability();
+
+            } else {
+
+                DialogV2Custom.BuildUnKnow(getActivity(), this.getClass().getSimpleName());
+
+            }
+
+        }
     }
 
 
@@ -274,10 +363,16 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
             case R.id.tvNewCreate:
 
+                doFastCreate();
 
                 break;
 
             case R.id.tvSend:
+
+                if (itemAlbum == null) {
+                    PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_choose_a_work);
+                    return;
+                }
 
                 doSendSharedToAlbum();
 
@@ -288,9 +383,9 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
 
-        if(!protocol80_insertVideoOfDiy.isCancelled()){
+        if (protocol80_insertVideoOfDiy!=null && !protocol80_insertVideoOfDiy.isCancelled()) {
             protocol80_insertVideoOfDiy.cancel(true);
         }
         protocol80_insertVideoOfDiy = null;

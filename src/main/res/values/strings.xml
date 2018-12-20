@@ -336,6 +336,7 @@
     <string name="pinpinbox_2_0_0_toast_message_location_not_found_by_edit">找不到地點\n(條件越多可增加搜尋結果)</string>
     <string name="pinpinbox_2_0_0_toast_message_success_subscribe">成功訂閱電子報</string>
     <string name="pinpinbox_2_0_0_toast_message_cancel_subscribe">已取消訂閱電子報</string>
+    <string name="pinpinbox_2_0_0_toast_message_choose_a_work">選擇一項作品</string>
 
 
     <string name="pinpinbox_2_0_0_size_general">一般尺寸</string>

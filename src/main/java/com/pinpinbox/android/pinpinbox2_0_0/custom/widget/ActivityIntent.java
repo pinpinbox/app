@@ -14,6 +14,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettingsActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AuthorActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.BuyPointActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryAllActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.EditProfileActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.EventActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeListActivity;
@@ -191,7 +192,6 @@ public class ActivityIntent {
 
     }
 
-
     public static void toFollowMe(Activity currentActivity) {
 
         currentActivity.startActivity(
@@ -234,7 +234,6 @@ public class ActivityIntent {
 
     }
 
-
     public static void toEditProfile(Activity currentActivity) {
         currentActivity.startActivity(
                 new Intent(currentActivity, EditProfileActivity.class)
@@ -268,6 +267,24 @@ public class ActivityIntent {
                 new Intent(currentActivity, BuyPointActivity.class)
         );
         ActivityAnim.StartAnim(currentActivity);
+    }
+
+    public static void toCreation(Activity currentActivity, String album_id, String identity, int template_id, boolean newCreate){
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Key.album_id, album_id);
+        bundle.putString(Key.identity, identity);
+        if (template_id == 0) {
+            bundle.putInt(Key.create_mode, 0);
+        } else {
+            bundle.putInt(Key.create_mode, 1);
+        }
+        currentActivity.startActivity(
+                new Intent(currentActivity, CreationActivity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
+
+
     }
 
 

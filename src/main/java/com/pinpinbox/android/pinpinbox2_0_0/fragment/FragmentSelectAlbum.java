@@ -149,11 +149,6 @@ public class FragmentSelectAlbum extends Fragment {
                             break;
                     }
 
-
-                    /*顯示下方按鈕區塊*/
-                    fragmentFromShareText.showBottom();
-
-
                 }
 
 
@@ -275,6 +270,7 @@ public class FragmentSelectAlbum extends Fragment {
                             itemAlbum.setAlbum_id(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_id));
                             itemAlbum.setName(JsonUtility.GetString(jsonAlbum, ProtocolKey.album_name));
                             itemAlbum.setCover(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover));
+                            itemAlbum.setCount_photo(JsonUtility.GetInt(jsonAlbum, ProtocolKey.count_photo));
                             itemAlbum.setSelect(false);
 
                             /*usergrade*/
@@ -330,6 +326,11 @@ public class FragmentSelectAlbum extends Fragment {
 
     @Override
     public void onDestroy() {
+
+        if(getAlbumTask!=null && !getAlbumTask.isCancelled()){
+            getAlbumTask.cancel(true);
+        }
+        getAlbumTask = null;
 
         super.onDestroy();
     }

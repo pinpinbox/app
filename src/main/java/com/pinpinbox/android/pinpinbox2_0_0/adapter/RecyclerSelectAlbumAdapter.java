@@ -57,7 +57,7 @@ public class RecyclerSelectAlbumAdapter extends RecyclerView.Adapter {
         TextUtility.setBold(mHolder.tvAlbumName);
         mHolder.tvAlbumName.setText(itemAlbumList.get(position).getName());
 
-        mHolder.tvCount.setText( "0/" + itemAlbumList.get(position).getPhoto_limit_of_album());
+        mHolder.tvCount.setText( itemAlbumList.get(position).getCount_photo() + "/" + itemAlbumList.get(position).getPhoto_limit_of_album());
 
         ImageUtility.setImage(mActivity, mHolder.detaillistImg, itemAlbumList.get(position).getCover());
 
