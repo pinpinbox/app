@@ -1946,7 +1946,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         switch (videoRefer) {
 
             case "file":
-                toPlayVideo(videoTarget);
+                ActivityIntent.toVideoPlay(mActivity, videoTarget);
                 break;
 
             case "embed":
@@ -1962,20 +1962,13 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                                     String stream = "";
                                     stream = video.getStreams().get("1080p");
                                     if (stream == null || stream.equals("null")) {
-
                                         stream = video.getStreams().get("720p");
-
                                         if (stream == null || stream.equals("null")) {
-
                                             stream = video.getStreams().get("540p");
-
                                             if (stream == null || stream.equals("null")) {
                                                 stream = video.getStreams().get("360p");
                                             }
-
                                         }
-
-
                                     }
 
                                     MyLog.Set("d", mActivity.getClass(), "stream => " + stream);
@@ -1990,7 +1983,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                                         ActivityAnim.StartAnim(mActivity);
 
                                     } else {
-                                        toPlayVideo(stream);
+                                        ActivityIntent.toVideoPlay(mActivity, videoTarget);
                                     }
 
 
@@ -2001,29 +1994,16 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                                 }
                             });
 
-
-                        } else if (StringUtil.containsString(videoTarget, "dailymotion")) {
-
-//                            PinPinToast.ShowToast(mActivity, "dailymotion");
-
-                            toPlayVideo(videoTarget);
-
                         } else {
-                            toPlayVideo(videoTarget);
+                            ActivityIntent.toVideoPlay(mActivity, videoTarget);
                         }
 
 
                     } else {
-                        MyLog.Set("d", mActivity.getClass(), "youtube播放 => " + youtubeUrl);
-                        Intent intent = new Intent(ReaderActivity.this, YouTubeActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("path", videoTarget);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        ActivityAnim.StartAnim(mActivity);
+                        ActivityIntent.toYouTube(mActivity, videoTarget);
                     }
                 } catch (Exception e) {
-                    toPlayVideo(videoTarget);
+                    ActivityIntent.toVideoPlay(mActivity, videoTarget);
                     e.printStackTrace();
                 }
 
@@ -2037,10 +2017,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
     }
 
-    private void toPlayVideo(String url) {
-
-        ActivityIntent.toVideoPlay(mActivity, url);
-    }
 
     private void isNoOwnShowCollectType(View parent) {
 

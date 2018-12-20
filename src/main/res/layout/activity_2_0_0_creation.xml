@@ -215,6 +215,7 @@
                     android:id="@+id/aviaryImg"
                     style="@style/ppb200_creation_tool"
                     android:padding="6dp"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
                     android:src="@drawable/ic200_aviary_white" />
 
 
@@ -228,7 +229,6 @@
                 android:layout_alignLeft="@+id/lin"
                 android:layout_alignStart="@+id/lin"
                 android:layout_below="@+id/lin"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                 android:clipChildren="false"
                 android:orientation="vertical">
 
@@ -237,6 +237,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:clipChildren="false"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
                     android:visibility="gone">
 
 
@@ -264,6 +265,7 @@
                     android:id="@+id/rPlay_Delete"
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
                     android:clipChildren="false"
                     android:visibility="gone">
 
@@ -319,7 +321,6 @@
                 android:layout_width="36dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout6"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_second"
                 android:orientation="vertical">
 
                 <RelativeLayout

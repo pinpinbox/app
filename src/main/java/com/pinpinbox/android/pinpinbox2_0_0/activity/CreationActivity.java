@@ -49,11 +49,11 @@ import com.github.ybq.android.spinkit.SpinKitView;
 import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.CreateAlbum.ChangeItemAdapter;
-import com.pinpinbox.android.SampleTest.CreateAlbum.SelectPreviewAdapter;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
@@ -133,6 +133,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import uk.breedrapps.vimeoextractor.OnVimeoExtractionListener;
+import uk.breedrapps.vimeoextractor.VimeoExtractor;
+import uk.breedrapps.vimeoextractor.VimeoVideo;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
@@ -171,21 +174,20 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
     private FragmentSelectPDF fragmentSelectPDF;
 
     private PopupCustom popCreationSet, popCreateSort, popCreateAdd, popCreateAudio, popSelectAudioFile;
-//   popCreatePreview
+
 
 
     private DialogCreationLocation dlgCreationLocation;
     private DialogCreationLink dlgCreationLink;
 
     private ChangeItemAdapter pop_qeAdapter;
-    private SelectPreviewAdapter selectPreviewAdapter;
     private RecyclerAlbumSettingsAdapter audioAdapter;
 
     private RecyclerCreationAdapter adapter;
     private ScrollLinearLayoutManager linearLayoutManager;
 
 
-    //    private ArrayList<HashMap<String, Object>> selectingList;
+
     private ArrayList<HashMap<String, Object>> photoList;
     private List<ItemAlbumSettings> audioList;
 
@@ -208,7 +210,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
     private String identity;//權限
     private String id, token;
     private String frame;//此相本所用之版型
-    private String p33Result, p33Message;
     private String p55Result, p55Message;
     private String p57Result, p57Message; // get all photo detail
     private String p59Result, p59Message; // add photo
@@ -567,18 +568,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
         TextUtility.setBold(tvCheck, true);
 
-
-//        if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
-//            aviaryImg.setVisibility(View.VISIBLE);
-//        } else {
-//            if (BuildConfig.FLAVOR.equals("w3_private")) {
-//                aviaryImg.setVisibility(View.VISIBLE);
-//            } else {
-//                aviaryImg.setVisibility(View.GONE);
-//            }
-//        }
-
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -661,7 +650,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         popCreateAdd.setPopup(R.layout.pop_2_0_0_creation_add, R.style.pinpinbox_popupAnimation_bottom);
         LinearLayout linAddPhoto = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddPhoto);
         LinearLayout linAddVideo = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddVideo);
-        LinearLayout linAddPdf = (LinearLayout)popCreateAdd.getPopupView().findViewById(R.id.linAddPdf);
+        LinearLayout linAddPdf = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddPdf);
 
         tvSelect_Photo_or_Template = (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvSelect_Photo_or_Template);
         photo_or_templateImg = (ImageView) popCreateAdd.getPopupView().findViewById(R.id.photo_or_templateImg);
@@ -671,7 +660,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
                 (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle),
                 (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvVideo),
                 (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvPdf)
-                );
+        );
 
         View vContentAdd = popCreateAdd.getPopupView().findViewById(R.id.linBackground);
 
@@ -1093,7 +1082,68 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
     /*播放影片*/
     private void playVideoClick() {
 
-        ActivityIntent.toVideoPlay(mActivity, videoUrl);
+
+        videoUrl = (String) photoList.get(thisPosition).get("video_url");
+
+
+
+        try{
+            String url = StringUtil.checkYoutubeId(videoUrl);
+            if(url == null || url.equals("null")){
+
+                if (StringUtil.containsString(videoUrl, "vimeo")) {
+
+                    VimeoExtractor.getInstance().fetchVideoWithURL(videoUrl, null, new OnVimeoExtractionListener() {
+                        @Override
+                        public void onSuccess(VimeoVideo video) {
+                            String stream = "";
+                            stream = video.getStreams().get("1080p");
+                            if (stream == null || stream.equals("null")) {
+                                stream = video.getStreams().get("720p");
+                                if (stream == null || stream.equals("null")) {
+                                    stream = video.getStreams().get("540p");
+                                    if (stream == null || stream.equals("null")) {
+                                        stream = video.getStreams().get("360p");
+                                    }
+                                }
+                            }
+
+                            if (stream == null) {
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString(Key.url, videoUrl);
+                                Intent intent = new Intent(mActivity, WebViewActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                ActivityAnim.StartAnim(mActivity);
+
+                            } else {
+                                ActivityIntent.toVideoPlay(mActivity, videoUrl);
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                        }
+                    });
+
+                }else {
+                    ActivityIntent.toVideoPlay(mActivity, videoUrl);
+                }
+
+            }else {
+                ActivityIntent.toYouTube(mActivity, videoUrl);
+            }
+
+
+        }catch (Exception e){
+            ActivityIntent.toVideoPlay(mActivity, videoUrl);
+            e.printStackTrace();
+        }
+
+
     }
 
     /*單頁說明*/
@@ -1997,7 +2047,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         }
     }
 
-    private void addPdf(){
+    private void addPdf() {
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.album_id, album_id);
@@ -2068,7 +2118,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         addPicImg.setClickable(b);
         aviaryImg.setClickable(b);
         addUserImg.setClickable(b);
-//        addDescriptionImg.setClickable(b);
         albumSetImg.setClickable(b);
         locationImg.setClickable(b);
 
@@ -2203,9 +2252,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
             /*不為影片*/
 
-//            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
             aviaryImg.setVisibility(View.VISIBLE);
-//            }
 
             videoPlayImg.setVisibility(View.GONE);
 
@@ -2229,9 +2276,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
             rAudioRecording.setVisibility(View.GONE);
             rPlay_Delete.setVisibility(View.GONE);
-//            if (SystemUtility.getSystemVersion() < Build.VERSION_CODES.O) {
             aviaryImg.setVisibility(View.GONE);
-//            }
 
             videoPlayImg.setVisibility(View.VISIBLE);
 
@@ -5344,7 +5389,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
             fragmentSelectAudio.cleanMedia();
             getSupportFragmentManager().beginTransaction().hide(fragmentSelectAudio).commit();
 
-        } else if(fragmentSelectPDF != null && fragmentSelectPDF.isAdded() && fragmentSelectPDF.isVisible()){
+        } else if (fragmentSelectPDF != null && fragmentSelectPDF.isAdded() && fragmentSelectPDF.isVisible()) {
 
             getSupportFragmentManager().beginTransaction().hide(fragmentSelectPDF).commit();
 

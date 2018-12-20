@@ -335,6 +335,7 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
             }
 
         }
+
     }
 
 
@@ -389,6 +390,13 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
             protocol80_insertVideoOfDiy.cancel(true);
         }
         protocol80_insertVideoOfDiy = null;
+
+        if (fastCreateTask!=null && !fastCreateTask.isCancelled()) {
+            fastCreateTask.cancel(true);
+        }
+        fastCreateTask = null;
+
+
 
         super.onDestroy();
     }

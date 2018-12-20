@@ -14,11 +14,11 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.AppSettingsActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AuthorActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.BuyPointActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryAllActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCaseActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.EditProfileActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.EventActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeListActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCaseActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.FollowMeActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.LikeListActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollectActivity;
@@ -27,6 +27,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.RecentAlbumActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.SponsorListActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.VideoPlayActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.YouTubeActivity;
 
 /**
  * Created by vmage on 2018/2/21.
@@ -284,6 +285,18 @@ public class ActivityIntent {
         );
         ActivityAnim.StartAnim(currentActivity);
 
+
+    }
+
+
+    public static void toYouTube(Activity currentActivity, String url){
+
+        Bundle bundle = new Bundle();
+        bundle.putString("path", url);
+        currentActivity.startActivity(
+                new Intent(currentActivity, YouTubeActivity.class).putExtras(bundle)
+        );
+        ActivityAnim.StartAnim(currentActivity);
 
     }
 
