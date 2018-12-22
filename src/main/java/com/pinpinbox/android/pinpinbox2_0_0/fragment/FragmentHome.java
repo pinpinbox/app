@@ -756,15 +756,21 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     return;
                 }
 
-                ActivityIntent.toUser(
-                        getActivity(),
-                        false,
-                        false,
-                        itemRecommendList.get(position).getUser_id(),
-                        itemRecommendList.get(position).getPicture(),
-                        itemRecommendList.get(position).getName(),
-                        v.findViewById(R.id.userImg)
-                );
+                if(itemRecommendList.get(position).getUser_id().equals(id)){
+                    ((MainActivity)getActivity()).toMePage(false);
+                }else {
+                    ActivityIntent.toUser(
+                            getActivity(),
+                            false,
+                            false,
+                            itemRecommendList.get(position).getUser_id(),
+                            itemRecommendList.get(position).getPicture(),
+                            itemRecommendList.get(position).getName(),
+                            v.findViewById(R.id.userImg)
+                    );
+                }
+
+
 
 
 
@@ -794,15 +800,21 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     return;
                 }
 
-                ActivityIntent.toUser(
-                        getActivity(),
-                        false,
-                        false,
-                        itemHotList.get(position).getUser_id(),
-                        itemHotList.get(position).getPicture(),
-                        itemHotList.get(position).getName(),
-                        v.findViewById(R.id.userImg)
-                );
+                if(itemHotList.get(position).getUser_id().equals(id)){
+                    ((MainActivity)getActivity()).toMePage(false);
+                }else {
+                    ActivityIntent.toUser(
+                            getActivity(),
+                            false,
+                            false,
+                            itemHotList.get(position).getUser_id(),
+                            itemHotList.get(position).getPicture(),
+                            itemHotList.get(position).getName(),
+                            v.findViewById(R.id.userImg)
+                    );
+                }
+
+
 
             }
 
