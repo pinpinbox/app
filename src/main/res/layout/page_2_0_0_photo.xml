@@ -219,7 +219,7 @@
                         fontPath="fonts/OpenSans-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/ppb200_padding_margin_second"
                         android:letterSpacing="0.1"
                         android:text=""
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
@@ -227,22 +227,13 @@
                         android:textStyle="bold" />
 
 
-                    <RelativeLayout
-                        android:id="@+id/rItemBg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/image_background_2_0_0_radius">
-
                         <com.pinpinbox.android.Views.CircleView.RoundCornerImageView
                             android:id="@+id/exchangeImg"
                             android:layout_width="256dp"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
-                            android:alpha="0.8"
                             app:siBorderAlpha="0"
-                            app:siRadius="8dp" />
-
-                    </RelativeLayout>
+                            app:siRadius="@dimen/ppb200_radius_general" />
 
 
                     <TextView

@@ -63,6 +63,7 @@ import com.pinpinbox.android.BuildConfig;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.MapUtility;
 import com.pinpinbox.android.Utility.StringUtil;
@@ -1327,12 +1328,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                     private void showContents(ItemExchange itemExchange) {
 
-                        Picasso.with(mActivity.getApplicationContext())
-                                .load(itemExchange.getImage())
-                                .config(Bitmap.Config.RGB_565)
-                                .error(R.drawable.bg_2_0_0_no_image)
-                                .tag(mActivity.getApplicationContext())
-                                .into(exchangeImg);
+                        ImageUtility.setImage(mActivity, exchangeImg, itemExchange.getImage(), null);
 
                         linExchange.setVisibility(View.VISIBLE);
 
