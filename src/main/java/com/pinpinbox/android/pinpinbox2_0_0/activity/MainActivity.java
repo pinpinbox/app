@@ -1706,6 +1706,10 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
                 homeAnim();
 
                 if (viewPager.getCurrentItem() == 0) {
+
+
+
+
                     ((FragmentHome) getFragment(FragmentHome.class.getSimpleName())).scrollToTop();
                     return;
                 }

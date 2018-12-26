@@ -52,6 +52,8 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     private boolean isTop = false;
     public static boolean TOP = false;
 
+    private boolean isUpScrolling = false;
+
     private View vTop = null;
 
     public void setTitleTop(View vTop) {
@@ -153,14 +155,16 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
     }
 
 
-
-
     private View vScaleTouchView;
     private boolean isTouch = false;
 
     public void setvScaleTouchView(View vScaleTouchView) {
         this.vScaleTouchView = vScaleTouchView;
         isTouch = false;
+    }
+
+    public boolean isUpScrolling(){
+        return isUpScrolling;
     }
 
 
@@ -358,6 +362,8 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
                             .start();
                 }
 
+                isUpScrolling = true;
+
             } else if (dy < 0) {
                 //往下滾
                 if (acbIsHide) {
@@ -369,6 +375,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
                             .start();
                 }
 
+                isUpScrolling = false;
 
             }
 
@@ -403,6 +410,10 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
             }
 
         }
+
+//        if(currentScrollState ==0){
+//            isUpScrolling = false;
+//        }
 
 
         AnimationSuspensionTouch.reset(isOnTouchView);

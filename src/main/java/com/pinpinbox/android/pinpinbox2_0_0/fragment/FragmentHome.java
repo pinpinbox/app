@@ -444,6 +444,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     // 此处为得到焦点时的处理内容
                     MyLog.Set("e", FragmentHome.this.getClass(), "監聽輸入框");
 
+                    if(mOnScrollListener.isUpScrolling()){
+                        return;
+                    }
+
                     if (fragmentCategory != null && !fragmentCategory.isHidden()) {
                         hideCategory();
                     }
@@ -2087,11 +2091,17 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             case R.id.linCategory:
 
+                if(mOnScrollListener.isUpScrolling()){
+                    return;
+                }
+
                 if (isSearch) {
                     edSearch.clearFocus();
                     inputMethodManager.hideSoftInputFromWindow(edSearch.getWindowToken(), 0);
                     hideSearch();
                 }
+
+
 
                 if (fragmentCategory == null || fragmentCategory.isHidden()) {
 
