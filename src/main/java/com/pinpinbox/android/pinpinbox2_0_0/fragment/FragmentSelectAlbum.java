@@ -20,6 +20,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
@@ -115,6 +116,12 @@ public class FragmentSelectAlbum extends Fragment {
 
             @Override
             public void onItemClick(int position, View v) {
+
+                if (itemAlbumList.get(position).getIdentity().equals(Key.viewer)) {
+                    PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_deficiency_identity);
+                    return;
+                }
+
 
                 /*取消上次點擊*/
                 if (lastPosition != -1) {
@@ -285,7 +292,12 @@ public class FragmentSelectAlbum extends Fragment {
 
                             JSONObject jsonCooperation = new JSONObject(cooperation);
 
-                            itemAlbum.setIdentity(JsonUtility.GetString(jsonCooperation, ProtocolKey.identity));
+                            if(strRank.equals(MINE)){
+                                itemAlbum.setIdentity("admin");
+                            }else {
+                                itemAlbum.setIdentity(JsonUtility.GetString(jsonCooperation, ProtocolKey.identity));
+                            }
+
 
                             /*template*/
                             String template = JsonUtility.GetString(obj, ProtocolKey.template);

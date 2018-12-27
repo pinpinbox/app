@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
@@ -647,6 +648,7 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
 
 
 
+    @SuppressLint("StaticFieldLeak")
     private class GetAlbumTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -655,6 +657,9 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
             doingType = DoingTypeClass.DoDefault;
             round = 0;
             sizeMax = false;
+            if(getActivity()!=null) {
+                ((MyCollectActivity) getActivity()).startLoading();
+            }
         }
 
         @Override
@@ -669,6 +674,9 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
 
+            if(getActivity()!=null) {
+                ((MyCollectActivity) getActivity()).dissmissLoading();
+            }
 
             if (p17Result.equals("1")) {
 
@@ -703,6 +711,7 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MoreDataTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -761,6 +770,7 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class RefreshTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -819,6 +829,7 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DeleteAlbumTask extends AsyncTask<Void, Void, Object> {
         private int mPosition;
 
@@ -941,6 +952,7 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CheckShareTask extends AsyncTask<Void, Void, Object> {
 
         private String p84Result, p84Message;
@@ -1017,6 +1029,7 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class ShareTask extends AsyncTask<Void, Void, Object> {
 
         private String p83Result, p83Message;

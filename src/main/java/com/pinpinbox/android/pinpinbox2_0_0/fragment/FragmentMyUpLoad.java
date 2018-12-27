@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
@@ -799,6 +800,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
 
 
 
+    @SuppressLint("StaticFieldLeak")
     private class GetAlbumTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -807,6 +809,11 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
             doingType = DoingTypeClass.DoDefault;
             round = 0;
             sizeMax = false;
+
+            if(getActivity()!=null) {
+                ((MyCollectActivity) getActivity()).startLoading();
+            }
+
         }
 
         @Override
@@ -821,6 +828,9 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
 
+            if(getActivity()!=null) {
+                ((MyCollectActivity) getActivity()).dissmissLoading();
+            }
 
             if (p17Result.equals("1")) {
 
@@ -856,6 +866,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MoreDataTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -913,6 +924,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class RefreshTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -971,6 +983,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DeleteAlbumTask extends AsyncTask<Void, Void, Object> {
         private int mPosition;
         private String sdpath = Environment.getExternalStorageDirectory() + "/";
@@ -1092,6 +1105,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CheckShareTask extends AsyncTask<Void, Void, Object> {
 
         private String p84Result, p84Message;
@@ -1175,6 +1189,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class ShareTask extends AsyncTask<Void, Void, Object> {
 
         private String p83Result, p83Message;
@@ -1349,6 +1364,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetOriginalSettingsTask extends AsyncTask<Void, Void, Object> {
 
         private String album_id;
@@ -1531,6 +1547,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SendSettingsTask extends AsyncTask<Void, Void, Object> {
 
         private String albumid, settings;
@@ -1623,6 +1640,7 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class FastCreateTask extends AsyncTask<Void, Void, Object> {
 
         private int p54Result = -1;

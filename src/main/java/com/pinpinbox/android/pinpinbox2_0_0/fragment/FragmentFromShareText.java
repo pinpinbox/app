@@ -207,7 +207,7 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
                     @Override
                     public void Success() {
 
-                        ActivityIntent.toCreation(getActivity(), itemAlbum.getAlbum_id(), itemAlbum.getIdentity(), itemAlbum.getTemplate_id(), false);
+                        ActivityIntent.toCreation(getActivity(), itemAlbum.getAlbum_id(), itemAlbum.getIdentity(), itemAlbum.getTemplate_id(), false, true);
                         getActivity().finish();
 
                     }
@@ -386,16 +386,15 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
     @Override
     public void onDestroy() {
 
-        if (protocol80_insertVideoOfDiy!=null && !protocol80_insertVideoOfDiy.isCancelled()) {
+        if (protocol80_insertVideoOfDiy != null && !protocol80_insertVideoOfDiy.isCancelled()) {
             protocol80_insertVideoOfDiy.cancel(true);
         }
         protocol80_insertVideoOfDiy = null;
 
-        if (fastCreateTask!=null && !fastCreateTask.isCancelled()) {
+        if (fastCreateTask != null && !fastCreateTask.isCancelled()) {
             fastCreateTask.cancel(true);
         }
         fastCreateTask = null;
-
 
 
         super.onDestroy();

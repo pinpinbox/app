@@ -36,6 +36,9 @@ public class ProtocolKey {
     public static String album_audio = "audio";
     public static String auto = "auto";
     public static String album_preview = "preview";
+    public static String admin = "admin";
+    public static String approver = "approver";
+
 
 
     //b
@@ -86,6 +89,7 @@ public class ProtocolKey {
     public static String exchange = "exchange";
     public static String event_templatejoin = "event_templatejoin";
     public static String eventjoin = "eventjoin";
+    public static String editor = "editor";
 
     //f
     public static String frame = "frame";

@@ -35,7 +35,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -313,7 +312,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
     private RippleBackground rippleBackgroundRecording, rippleBackgroundPlay;
 
-    private GridView gvPreview;
     private EditDragGridView gvSort;
     private RecyclerView rvAudio;
 
@@ -429,9 +427,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         id = getdata.getString(Key.id, "");
         token = getdata.getString(Key.token, "");
 
-
-        /***********************************************************************************************************/
-
+        /* **********************************************************************************************************/
 
         try {
 
@@ -452,7 +448,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         }
 
 
-        /***********************************************************************************************************/
+        /* **********************************************************************************************************/
 
         photoList = new ArrayList<>();
         audioList = new ArrayList<>();
@@ -1645,18 +1641,21 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
         } else {
 
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_close_creation);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
 
-                    back();
+            backCheck();
 
-                }
-            });
-            d.show();
+//            DialogV2Custom d = new DialogV2Custom(mActivity);
+//            d.setStyle(DialogStyleClass.CHECK);
+//            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_check_close_creation);
+//            d.setCheckExecute(new CheckExecute() {
+//                @Override
+//                public void DoCheck() {
+//
+////                    back();
+//
+//                }
+//            });
+//            d.show();
 
         }
 
@@ -1863,34 +1862,26 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
                     @Override
                     public void run() {
 
-                        if (identity != null && identity.equals("admin")) {
+                        if (identity != null) {
 
 
-                            if (!isModify) {
+                            if(identity.equals(ProtocolKey.admin) || identity.equals(ProtocolKey.approver) || identity.equals(ProtocolKey.editor)) {
 
-                                MyLog.Set("d", mActivity.getClass(), "無修改 直接退出");
 
-                                back();
+                                if (!isModify) {
 
-                            } else {
+                                    MyLog.Set("d", mActivity.getClass(), "無修改 直接退出");
 
-                                MyLog.Set("d", mActivity.getClass(), "有修改 儲存再退出");
-                                doSaveToFinish();
+                                    back();
+
+                                } else {
+
+                                    MyLog.Set("d", mActivity.getClass(), "有修改 儲存再退出");
+                                    doSaveToFinish();
+
+                                }
 
                             }
-
-
-//                            if (jsonArray != null && jsonArray.length() > 0) {
-//                                if (isModify) {
-//                                    MyLog.Set("d", getClass(), "有修改 儲存再退出");
-//                                    doSaveToFinish();
-//                                } else {
-//                                    MyLog.Set("d", getClass(), "無修改 直接退出");
-//                                    back();
-//                                }
-//                            } else {
-//                                back();
-//                            }
 
 
                         } else {

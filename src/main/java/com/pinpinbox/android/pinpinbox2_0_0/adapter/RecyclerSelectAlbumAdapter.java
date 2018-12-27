@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 
 import java.util.List;
 
@@ -57,7 +60,22 @@ public class RecyclerSelectAlbumAdapter extends RecyclerView.Adapter {
         TextUtility.setBold(mHolder.tvAlbumName);
         mHolder.tvAlbumName.setText(itemAlbumList.get(position).getName());
 
-        mHolder.tvCount.setText( itemAlbumList.get(position).getCount_photo() + "/" + itemAlbumList.get(position).getPhoto_limit_of_album());
+
+        if (itemAlbumList.get(position).getIdentity().equals(Key.viewer)) {
+
+            mHolder.tvCount.setTextColor(Color.parseColor(ColorClass.PINK_FRIST));
+            mHolder.tvCount.setText(R.string.pinpinbox_2_0_0_toast_message_deficiency_identity);
+
+        } else {
+
+            mHolder.tvCount.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+            mHolder.tvCount.setText( itemAlbumList.get(position).getCount_photo() + "/" + itemAlbumList.get(position).getPhoto_limit_of_album());
+
+        }
+
+
+
+
 
         ImageUtility.setImage(mActivity, mHolder.detaillistImg, itemAlbumList.get(position).getCover());
 

@@ -270,16 +270,21 @@ public class ActivityIntent {
         ActivityAnim.StartAnim(currentActivity);
     }
 
-    public static void toCreation(Activity currentActivity, String album_id, String identity, int template_id, boolean newCreate){
+    public static void toCreation(Activity currentActivity, String album_id, String identity, int template_id, boolean newCreate, boolean fromLocal){
 
         Bundle bundle = new Bundle();
         bundle.putString(Key.album_id, album_id);
         bundle.putString(Key.identity, identity);
+
         if (template_id == 0) {
             bundle.putInt(Key.create_mode, 0);
         } else {
             bundle.putInt(Key.create_mode, 1);
         }
+
+        bundle.putBoolean(Key.isNewCreate, newCreate);
+        bundle.putBoolean(Key.fromlocal, fromLocal);
+
         currentActivity.startActivity(
                 new Intent(currentActivity, CreationActivity.class).putExtras(bundle)
         );
