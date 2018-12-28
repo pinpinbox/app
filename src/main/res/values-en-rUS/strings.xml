@@ -176,6 +176,7 @@
     <string name="pinpinbox_2_0_0_dialog_message_scroll_to_final_page_to_collect_by_send_point">Like this? Give me some love!\nWant sponsor and collect this work?</string>
     <string name="pinpinbox_2_0_0_dialog_message_change_album_mode">By switching media, the previous audio settings will be erased. Do you wish to proceed?</string>
     <string name="pinpinbox_2_0_0_dialog_message_change_album_mode_singular_to_plural">Sure you want to switch to having different audios per page? (Previous audio will be erased.)</string>
+    <string name="pinpinbox_2_0_0_dialog_message_open_permission_sms">The permission「SMS」is not enabled.</string>
     <string name="pinpinbox_2_0_0_dialog_message_open_permission_camera">The permission「Camera」is not enabled.</string>
     <string name="pinpinbox_2_0_0_dialog_message_open_permission_sdcard">The permission「Storage」is not enabled.</string>
     <string name="pinpinbox_2_0_0_dialog_message_open_permission_record">The permission「Microphone」is not enabled.</string>

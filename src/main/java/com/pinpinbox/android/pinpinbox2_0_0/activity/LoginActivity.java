@@ -166,6 +166,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
     private String p28Message = "";
 
     private static final int REQUEST_CODE_CAMERA = 104;
+    public static final int REQUEST_CODE_RECEIVE_SMS = 105;
     private int doingType;
     private int hobbys = 0;
 
@@ -1493,6 +1494,29 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
     }
 
+    private void checkSmsPermission() {
+
+        switch (checkPermission(mActivity, Manifest.permission.RECEIVE_SMS)) {
+
+            case SUCCESS:
+                if (!isPhone) {
+                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_cellphone_number);
+                    return;
+                }
+                if (isCanSendAgain) {
+                    doRequestSms();
+                }
+                break;
+            case REFUSE:
+                MPermissions.requestPermissions(LoginActivity.this, REQUEST_CODE_RECEIVE_SMS, Manifest.permission.RECEIVE_SMS);
+                break;
+
+        }
+
+
+    }
+
+
     /*--------------------------------------------------------------------------------*/
 
     private void connectInstability() {
@@ -2126,13 +2150,11 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             senddata.put(MapKey.gender, strGender);
             senddata.put(MapKey.birthday, strBirthday);
 
-            if(isSelectNewsletter){
+            if (isSelectNewsletter) {
                 senddata.put(MapKey.newsletter, "1");
-            }else {
+            } else {
                 senddata.put(MapKey.newsletter, "0");
             }
-
-
 
 
 //            senddata.put(MapKey.coordinate, latitude + "," + longitude);
@@ -2638,14 +2660,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
                 break;
             case R.id.tvVerSendPhone:
 
-                if (!isPhone) {
-                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_cellphone_number);
-                    return;
-                }
-
-                if (isCanSendAgain) {
-                    doRequestSms();
-                }
+                checkSmsPermission();
 
                 break;
             case R.id.tvVerFinish:
@@ -2681,6 +2696,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
                 break;
 
             case R.id.tvPwdSendPhone:
+
                 if (!isPwdPhone) {
                     PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_cellphone_number);
                     edPwdPhone.setBackgroundResource(R.drawable.border_2_0_0_pink_third_radius);
@@ -2847,6 +2863,53 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             d.setStyle(DialogStyleClass.CHECK);
             d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
             d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
+            d.setCheckExecute(new CheckExecute() {
+                @Override
+                public void DoCheck() {
+                    SystemUtility.getAppDetailSettingIntent(mActivity);
+                }
+            });
+            d.show();
+
+        } else {
+
+            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
+
+        }
+    }
+
+
+    @PermissionGrant(REQUEST_CODE_RECEIVE_SMS)
+    public void requestSmsSuccess() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (!isPhone) {
+                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_enter_cellphone_number);
+                    return;
+                }
+                if (isCanSendAgain) {
+                    doRequestSms();
+                }
+
+            }
+        }, 500);
+
+
+    }
+
+    @PermissionDenied(REQUEST_CODE_RECEIVE_SMS)
+    public void requestSmsFailed() {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.RECEIVE_SMS)) {
+
+            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
+
+            DialogV2Custom d = new DialogV2Custom(mActivity);
+            d.setStyle(DialogStyleClass.CHECK);
+            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
+            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sms);
             d.setCheckExecute(new CheckExecute() {
                 @Override
                 public void DoCheck() {
