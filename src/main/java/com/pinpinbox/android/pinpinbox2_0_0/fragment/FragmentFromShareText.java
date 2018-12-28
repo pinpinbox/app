@@ -53,6 +53,8 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
     private String text = "";
 
+    private boolean isNewCreate = false;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -207,7 +209,7 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
                     @Override
                     public void Success() {
 
-                        ActivityIntent.toCreation(getActivity(), itemAlbum.getAlbum_id(), itemAlbum.getIdentity(), itemAlbum.getTemplate_id(), false, true);
+                        ActivityIntent.toCreation(getActivity(), itemAlbum.getAlbum_id(), itemAlbum.getIdentity(), itemAlbum.getTemplate_id(), isNewCreate, true);
                         getActivity().finish();
 
                     }
@@ -317,6 +319,8 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
             ((FromSharePhoto2Activity) getActivity()).dissmissLoading();
 
             if (p54Result == 1) {
+
+                isNewCreate = true;
 
                 doSendSharedToAlbum();
 
