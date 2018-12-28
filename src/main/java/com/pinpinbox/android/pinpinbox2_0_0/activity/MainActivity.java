@@ -403,11 +403,15 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
 
             Fragment fragment = fragmentList.get(i);
 
-            if (fragment.getClass().getSimpleName().equals(fragmentName)) {
-                getFragment = fragment;
-                MyLog.Set("d", getClass(), "fragmentName => " + fragmentName);
-                break;
+            if(fragment.getClass()!=null){
+                if (fragment.getClass().getSimpleName().equals(fragmentName)) {
+                    getFragment = fragment;
+                    MyLog.Set("d", getClass(), "fragmentName => " + fragmentName);
+                    break;
+                }
             }
+
+
 
         }
 
