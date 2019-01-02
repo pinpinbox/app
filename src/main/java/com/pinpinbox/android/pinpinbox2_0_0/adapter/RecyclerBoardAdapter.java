@@ -88,7 +88,6 @@ public class RecyclerBoardAdapter extends RecyclerView.Adapter {
         holder.position = position;
 
         holder.tvName.setText(itemBoardList.get(position).getName());
-//        holder.tvText.setText(itemBoardList.get(position).getText());
         holder.tvInsertTime.setText(itemBoardList.get(position).getInserttime());
 
         String url = itemBoardList.get(position).getPicture();
@@ -177,10 +176,10 @@ public class RecyclerBoardAdapter extends RecyclerView.Adapter {
             super(itemView);
 
 
-            userImg = (RoundedImageView) itemView.findViewById(R.id.userImg);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            tvText = (TextView) itemView.findViewById(R.id.tvText);
-            tvInsertTime = (TextView) itemView.findViewById(R.id.tvInsertTime);
+            userImg = itemView.findViewById(R.id.userImg);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvText = itemView.findViewById(R.id.tvText);
+            tvInsertTime = itemView.findViewById(R.id.tvInsertTime);
 
 
         }

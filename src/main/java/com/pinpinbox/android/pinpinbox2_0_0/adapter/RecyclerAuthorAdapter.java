@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -13,15 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.Utility.ImageUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 
 import java.util.List;
 
@@ -103,29 +100,6 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
 
         ImageUtility.setImage(mActivity, holder.coverImg, albumList.get(position).getCover());
 
-//        if (ImageUtility.isImageExist(albumList.get(position).getCover())) {
-//            Picasso.with(mActivity.getApplicationContext())
-//                    .load(albumList.get(position).getCover())
-//                    .config(Bitmap.Config.RGB_565)
-//                    .error(R.drawable.bg_2_0_0_no_image)
-//                    .tag(mActivity.getApplicationContext())
-//                    .into(holder.coverImg, new Callback() {
-//                        @Override
-//                        public void onSuccess() {
-//
-//                            drawable.setColor(Color.parseColor(ColorClass.GREY_SECOND));
-//
-//                            holder.coverImg.setAlpha(0.85f);
-//                        }
-//
-//                        @Override
-//                        public void onError() {
-//
-//                        }
-//                    });
-//        } else {
-//            holder.coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-//        }
 
         if (albumList.get(position).isVideo() || albumList.get(position).isSlot() || albumList.get(position).isExchange() || albumList.get(position).isAudio()) {
             holder.linType.setVisibility(View.VISIBLE);
@@ -180,13 +154,13 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-            rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
-            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
-            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
-            linType = (LinearLayout) itemView.findViewById(R.id.linType);
-            audioImg = (ImageView) itemView.findViewById(R.id.audioImg);
-            videoImg = (ImageView) itemView.findViewById(R.id.videoImg);
-            slotImg = (ImageView) itemView.findViewById(R.id.slotImg);
+            rItemBg = itemView.findViewById(R.id.rItemBg);
+            coverImg = itemView.findViewById(R.id.coverImg);
+            tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
+            linType = itemView.findViewById(R.id.linType);
+            audioImg = itemView.findViewById(R.id.audioImg);
+            videoImg = itemView.findViewById(R.id.videoImg);
+            slotImg = itemView.findViewById(R.id.slotImg);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

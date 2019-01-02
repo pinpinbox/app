@@ -126,15 +126,6 @@
                 android:background="@null"
                 android:text="@string/pinpinbox_2_0_0_itemtype_visible_page_after" />
 
-            <!--<TextView-->
-            <!--android:id="@+id/tvConfirmHideItem"-->
-            <!--style="@style/ppb200_Button_main_small_radius"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-            <!--android:text="@string/pinpinbox_2_0_0_pop_check" />-->
-
 
         </LinearLayout>
 

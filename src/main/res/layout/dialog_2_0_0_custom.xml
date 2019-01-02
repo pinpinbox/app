@@ -87,7 +87,7 @@
                 android:text="@string/pinpinbox_2_0_0_dialog_close_pinpinbox"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_second"
-                fontPath="fonts/OpenSans-Bold.ttf"/>
+                />
             <!--button L-T-->
             <TextView
                 android:id="@+id/tvCenter"
@@ -100,7 +100,7 @@
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="16sp"
                 android:visibility="gone"
-                fontPath="fonts/OpenSans-Bold.ttf"/>
+               />
 
             <TextView
                 android:id="@+id/tvRightOrBottom"
@@ -112,8 +112,8 @@
                 android:text="button R-B"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
                 android:textSize="@dimen/ppb200_common_text_second"
-                android:textStyle="bold"
-                fontPath="fonts/OpenSans-Bold.ttf"/>
+
+               />
 
 
         </LinearLayout>

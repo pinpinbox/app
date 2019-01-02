@@ -65,15 +65,11 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
 
     private GetEventTask getEventTask;
     private GetMyCollectTask getMyCollectTask;
-//    private SendContributeTask sendContributeTask;
-//    private FastCreateTask fastCreateTask;
 
     private String TAG = TagClass.TagEventActivity;
     private String id, token;
     private String url, event_id, image, strName, strTitle, strPrefixText, strSpecialUrl;
     private String p17Result, p17Message;
-    private String sendAlbum_id;
-
 
     private int contribution = 0;
     private int intPopularity = 0;
@@ -81,17 +77,12 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
     private int doingType;
     private static final int DoGetEvent = 0;
     private static final int DoGetMyCollect = 1;
-    private static final int DoSendContribute = 2;
-    private static final int DoFastCreate = 3;
-
-    private boolean canCreate = true; //預設可以建立新作品
 
     private ArrayList<String> eventTemplateList;
     private ArrayList<HashMap<String, Object>> canContributeList;
 
 
     private ImageView eventImg;
-    private ImageView backImg;
     private TextView tvName, tvTitle, tvEvent, tvContribute, tvExit, tvPopularity, tvExchange;
     private LinearLayout linVote;
     private RelativeLayout rDetail;
@@ -154,10 +145,7 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
         eventImg = (ImageView) findViewById(R.id.eventImg);
 
         TextUtility.setBold(tvName, true);
-        TextUtility.setBold(tvEvent, true);
-        TextUtility.setBold(tvContribute, true);
-        TextUtility.setBold(tvExchange, true);
-        TextUtility.setBold((TextView) findViewById(R.id.tvVote), true);
+
 
 
         tvEvent.setOnClickListener(this);
@@ -245,11 +233,6 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
                     case DoGetMyCollect:
                         doGetMyCollect();
                         break;
-
-//                    case DoSendContribute:
-//                        doSendContribute();
-//                        break;
-
 
                 }
             }
@@ -672,193 +655,6 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
 
         }
     }
-
-
-//    public class SendContributeTask extends AsyncTask<Void, Void, Object> {
-//
-//        private String p73Message = "";
-//
-//        private int p73Result = -1;
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            doingType = DoSendContribute;
-//            startLoading();
-//        }
-//
-//        @Override
-//        protected Object doInBackground(Void... params) {
-//            String strJson = "";
-//            try {
-//                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P73_SwitchStatusOfContribution
-//                        , SetMapByProtocol.setParam73_switchstatusofcontribution(id, token, event_id, sendAlbum_id)
-//                        , null);
-//                MyLog.Set("json", getClass(), "p73strJson => " + strJson);
-//
-//            } catch (SocketTimeoutException timeout) {
-//                p73Result = Key.TIMEOUT;
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            if (strJson != null && !strJson.equals("")) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(strJson);
-//                    p73Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-//                    if (p73Result == 0) {
-//                        p73Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Object result) {
-//            super.onPostExecute(result);
-//            dissmissLoading();
-//
-//            if (p73Result == 1) {
-//
-//                canContributeList.clear();
-//
-//                PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_contribute_cancel);
-//
-//                canCreate = true;
-//
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        boolean fastCreate = false;
-//
-//                        for (int i = 0; i < eventTemplateList.size(); i++) {
-//
-//                            String mTemid = eventTemplateList.get(i);
-//                            if (mTemid.equals("0")) {
-//                                fastCreate = true;
-//                                break;
-//                            }
-//                        }
-//
-//                        if (fastCreate) {
-//
-//                            doFastCreate();
-//
-//                        } else {
-//
-//                            Bundle bundle = new Bundle();
-//                            bundle.putBoolean(Key.isContribute, true);
-//                            bundle.putString("event_id", event_id);
-//                            bundle.putString("rank", "hot");//default
-//
-//                            Intent intent = new Intent(EventActivity.this, TemListActivity.class);
-//                            intent.putExtras(bundle);
-//                            startActivity(intent);
-//                            ActivityAnim.StartAnim(mActivity);
-//
-//                        }
-//
-//
-//                    }
-//                }, 300);
-//
-//            } else if (p73Result == 0) {
-//                DialogV2Custom.BuildError(mActivity, p73Message);
-//
-//            } else if (p73Result == Key.TIMEOUT) {
-//
-//                connectInstability();
-//
-//            } else {
-//                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
-//            }
-//
-//        }
-//    }
-
-//    public class FastCreateTask extends AsyncTask<Void, Void, Object> {
-//
-//        private String p54Result, p54Message;
-//        private String new_album_id;
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            doingType = DoFastCreate;
-//            startLoading();
-//        }
-//
-//        @Override
-//        protected Object doInBackground(Void... params) {
-//            String strJson = "";
-//            try {
-//                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P54_InsertAlbumOfDiy,
-//                        SetMapByProtocol.setParam54_insertalbumofdiy(id, token, "0"), null);
-//                MyLog.Set("d", getClass(), "p54strJson => " + strJson);
-//            } catch (SocketTimeoutException timeout) {
-//                p54Result = Key.timeout;
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            if (strJson != null && !strJson.equals("")) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(strJson);
-//                    p54Result = jsonObject.getString(Key.result);
-//                    if (p54Result.equals("1")) {
-//                        new_album_id = jsonObject.getString(Key.data);
-//                    } else if (p54Result.equals("0")) {
-//                        p54Message = jsonObject.getString(Key.message);
-//                    } else {
-//                        p54Result = "";
-//                    }
-//
-//                } catch (Exception e) {
-//                    p54Result = "";
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Object result) {
-//            super.onPostExecute(result);
-//            dissmissLoading();
-//            if (p54Result.equals("1")) {
-//
-//                if (new_album_id != null) {
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("album_id", new_album_id);
-//                    bundle.putString("identity", "admin");
-//                    bundle.putInt("create_mode", 0);
-//                    bundle.putBoolean(Key.isContribute, true);
-//                    bundle.putBoolean(Key.isNewCreate, true);
-//                    bundle.putString("event_id", event_id);
-//                    Intent intent = new Intent(mActivity, CreationActivity.class);
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-//                    ActivityAnim.StartAnim(mActivity);
-//                }
-//            } else if (p54Result.equals("0")) {
-//
-//                DialogV2Custom.BuildError(mActivity, p54Message);
-//
-//            } else if (p54Result.equals(Key.timeout)) {
-//                connectInstability();
-//            } else {
-//                DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
-//            }
-//
-//        }
-//    }
 
 
     @Override

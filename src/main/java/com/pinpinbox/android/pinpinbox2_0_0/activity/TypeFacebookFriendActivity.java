@@ -165,17 +165,17 @@ public class TypeFacebookFriendActivity extends Activity implements View.OnClick
         facebookIdList = new ArrayList<>();
         itemUserList = new ArrayList<>();
 
-        linGuide = (LinearLayout) findViewById(R.id.linGuide);
-        rvFacebookFriends = (RecyclerView)findViewById(R.id.rvFacebookFriends);
-        tvGuide = (TextView)findViewById(R.id.tvGuide);
-        TextView tvContents = (TextView) findViewById(R.id.tvContents);
-        TextView tvConfirm = (TextView) findViewById(R.id.tvConfirm);
+        linGuide = findViewById(R.id.linGuide);
+        rvFacebookFriends = findViewById(R.id.rvFacebookFriends);
+        tvGuide =findViewById(R.id.tvGuide);
+        TextView tvContents = findViewById(R.id.tvContents);
+        TextView tvConfirm = findViewById(R.id.tvConfirm);
 
-        tvBottom = (TextView) findViewById(R.id.tvBottom);
+        tvBottom = findViewById(R.id.tvBottom);
 
 
         TextUtility.setBold(tvContents, true);
-        TextUtility.setBold(tvConfirm, true);
+
 
         tvConfirm.setOnClickListener(this);
         tvBottom.setOnClickListener(this);

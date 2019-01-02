@@ -170,27 +170,27 @@ public class MyCollectActivity extends DraggerActivity implements View.OnClickLi
                 switch (position) {
                     case 0:
                         tabs.get(0).setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-                        TextUtility.setBold(tabs.get(0), true);
+
                         tabs.get(1).setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                        TextUtility.setBold(tabs.get(1), false);
+
                         tabs.get(2).setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                        TextUtility.setBold(tabs.get(2), false);
+
                         break;
                     case 1:
                         tabs.get(0).setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                        TextUtility.setBold(tabs.get(0), false);
+
                         tabs.get(1).setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-                        TextUtility.setBold(tabs.get(1), true);
+
                         tabs.get(2).setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                        TextUtility.setBold(tabs.get(2), false);
+
                         break;
                     case 2:
                         tabs.get(0).setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                        TextUtility.setBold(tabs.get(0), false);
+
                         tabs.get(1).setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                        TextUtility.setBold(tabs.get(1), false);
+
                         tabs.get(2).setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-                        TextUtility.setBold(tabs.get(2), true);
+
                         break;
                 }
 

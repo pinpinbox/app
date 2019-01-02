@@ -248,7 +248,6 @@
 
                     <TextView
                         android:layout_alignParentRight="true"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
@@ -381,7 +380,7 @@
                             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                             android:letterSpacing="0.1"
-                            android:text="開啟"/>
+                            android:text="@string/pinpinbox_2_0_0_itemtype_open"/>
 
 
 
@@ -413,7 +412,7 @@
                             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                             android:letterSpacing="0.1"
-                            android:text="關閉"/>
+                            android:text="@string/pinpinbox_2_0_0_itemtype_close"/>
 
 
 
@@ -430,7 +429,7 @@
                     style="@style/ppb200_title_third"
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
-                    android:text="贊助回饋" />
+                    android:text="@string/pinpinbox_2_0_0_title_feedback" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -461,7 +460,7 @@
                             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                             android:letterSpacing="0.1"
-                            android:text="開啟"/>
+                            android:text="@string/pinpinbox_2_0_0_itemtype_open"/>
 
 
 
@@ -493,7 +492,7 @@
                             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                             android:letterSpacing="0.1"
-                            android:text="關閉"/>
+                            android:text="@string/pinpinbox_2_0_0_itemtype_close"/>
 
 
 
@@ -510,7 +509,7 @@
                     android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
                     android:layout_marginRight="@dimen/ppb200_padding_margin_first"
                     android:visibility="gone"
-                    android:hint="回饋說明"/>
+                    android:hint="@string/pinpinbox_2_0_0_input_hint_feedback_description"/>
 
 
                 <View
@@ -674,7 +673,6 @@
 
         <TextView
             android:id="@+id/tvToCreation"
-            fontPath="fonts/OpenSans-Bold.ttf"
             android:paddingLeft="@dimen/ppb200_padding_margin_second"
             android:paddingRight="@dimen/ppb200_padding_margin_second"
             android:layout_width="wrap_content"
@@ -687,7 +685,6 @@
             android:text="@string/pinpinbox_2_0_0_button_edit_album"
             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
             android:textSize="@dimen/ppb200_buttontext_for_height36"
-            android:textStyle="bold"
             android:visibility="visible" />
 
 

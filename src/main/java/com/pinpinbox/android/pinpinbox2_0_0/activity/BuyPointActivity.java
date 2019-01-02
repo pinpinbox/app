@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -145,13 +146,12 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
         View vHeader = LayoutInflater.from(mActivity).inflate(R.layout.header_2_0_0_point, null);
         View vfooter = LayoutInflater.from(mActivity).inflate(R.layout.footer_2_0_0_point, null);
 
-        tvCurrentPoint = (TextView) vHeader.findViewById(R.id.tvCurrentPoint);
-        tvSum = (TextView) vfooter.findViewById(R.id.tvSum);
-        tvConfirm = (TextView) vfooter.findViewById(R.id.tvConfirm);
+        tvCurrentPoint = vHeader.findViewById(R.id.tvCurrentPoint);
+        tvSum = vfooter.findViewById(R.id.tvSum);
+        tvConfirm = vfooter.findViewById(R.id.tvConfirm);
 
         TextUtility.setBold((TextView) vHeader.findViewById(R.id.tvTitle), true);
         TextUtility.setBold(tvSum, true);
-        TextUtility.setBold(tvConfirm, true);
 
 
         gvPoint.addHeaderView(vHeader, null, false);
@@ -171,6 +171,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
         ActivityAnim.FinishAnim(mActivity);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void doWork() {
 
         if (mHelper != null) {
@@ -262,10 +263,6 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
             }
         }.execute();
 
-
-//        setPoint(PPBApplication.getInstance().getData().getString(Key.point, ""));
-//
-//        PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_buy_point_success_to_refresh);
 
     }
 
@@ -502,6 +499,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetPointTask extends AsyncTask<Void, Void, Object> {
 
         private int p23Result = -1;
@@ -585,6 +583,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetPointStoreTask extends AsyncTask<Void, Void, Object> {
 
         private int p24Result = -1;
@@ -712,6 +711,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
     /*獲取payload */
     /*send msg 0*/
     /* protocol29*/
+    @SuppressLint("StaticFieldLeak")
     private class GetPayloadTask extends AsyncTask<Void, Void, Object> {
 
 
@@ -783,6 +783,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
     /*此為 msg.what =  2 */
    /*完成購買*/
    /*protocol30*/
+    @SuppressLint("StaticFieldLeak")
     private class BuyCompleteTask extends AsyncTask<Void, Void, Object> {
 
         private int p30Result = -1;
@@ -910,6 +911,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class FirstBuyPointTask extends AsyncTask<Void, Void, Object> {
 
         private String name;

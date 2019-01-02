@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextPaint;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +14,10 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MapKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Value;
@@ -240,11 +239,7 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
 
             String strDate = (String) listData.get(holder.position).get("date");
 
-            TextPaint tp = holder.tvDate.getPaint();
-
             if (strDate.equals(Value.noMessage)) {
-
-                tp.setFakeBoldText(false);
 
                 holder.tvDate.setGravity(Gravity.CENTER_VERTICAL);
                 holder.tvDate.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
@@ -253,8 +248,6 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
                 holder.pointImg.setVisibility(View.INVISIBLE);
 
             } else {
-
-                tp.setFakeBoldText(true);
 
                 holder.tvDate.setGravity(Gravity.BOTTOM);
                 holder.tvDate.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));

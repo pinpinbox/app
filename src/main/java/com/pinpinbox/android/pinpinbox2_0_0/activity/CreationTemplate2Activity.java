@@ -4,6 +4,7 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
  * Created by vmage on 2016/5/12.
  */
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -181,7 +182,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
 
 
 
-        rSecondBar = (RelativeLayout) findViewById(R.id.rSecondBar);
+        rSecondBar = findViewById(R.id.rSecondBar);
         vto = rSecondBar.getViewTreeObserver();
 
         myViewTreeObserver = new MyViewTreeObserver();
@@ -274,15 +275,15 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
 
         /***********************************************************************************************************/
 
-        changeImg = (ImageView) findViewById(R.id.changeImg);
-        tvDone = (TextView) findViewById(R.id.tvDone);
-        rvTemplate = (RecyclerView)findViewById(R.id.rvTemplate);
-        rControl_area = (RelativeLayout) findViewById(R.id.rControl_area);
+        changeImg = findViewById(R.id.changeImg);
+        tvDone = findViewById(R.id.tvDone);
+        rvTemplate = findViewById(R.id.rvTemplate);
+        rControl_area = findViewById(R.id.rControl_area);
 
 
 
         /**2016.11.23 new adde*/
-        final TextView tvGuide = (TextView) findViewById(R.id.tvGuide);
+        final TextView tvGuide = findViewById(R.id.tvGuide);
 
         changeImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -664,9 +665,9 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         list_addImg.clear();
 
         rControl_view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.test_controlpic, null);//單一格
-        final RelativeLayout controlR = (RelativeLayout) rControl_view.findViewById(R.id.relativeLayout_control);
+        final RelativeLayout controlR = rControl_view.findViewById(R.id.relativeLayout_control);
 
-        ImageView addImg = (ImageView) controlR.findViewById(R.id.plus);
+        ImageView addImg = controlR.findViewById(R.id.plus);
         list_addImg.add(addImg);
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(DoubleToInt(w), DoubleToInt(h));
@@ -677,7 +678,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         rControl_area.addView(rControl_view);
 
 
-        final ImageView photoImg = (ImageView) rControl_view.findViewById(R.id.single_control);
+        final ImageView photoImg = rControl_view.findViewById(R.id.single_control);
         photoImg.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         photoImg.setOnTouchListener(multiTouchListener);
         photoImg.setVisibility(View.INVISIBLE);
@@ -1058,7 +1059,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
 //    }
 
     private void back() {
-        back = (ImageView) findViewById(R.id.backImg);
+        back = findViewById(R.id.backImg);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1104,6 +1105,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         upLoadTask.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class UpLoadTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {

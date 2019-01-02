@@ -84,7 +84,6 @@
             android:layout_toStartOf="@+id/tvFollow"
             android:text="@string/pinpinbox_2_0_0_button_message"
             android:textSize="@dimen/ppb200_common_text_third"
-            android:textStyle="bold"
             android:visibility="gone"/>
 
         <TextView
@@ -98,38 +97,6 @@
             android:textSize="@dimen/ppb200_common_text_third"
             android:visibility="gone"/>
 
-        <!--<ImageView-->
-        <!--android:id="@+id/messageImg"-->
-        <!--android:layout_width="36dp"-->
-        <!--android:layout_height="36dp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--android:layout_toLeftOf="@+id/tvFollow"-->
-        <!--android:layout_toStartOf="@+id/tvFollow"-->
-        <!--android:background="@drawable/click_2_0_0_grey_third_radius"-->
-        <!--android:padding="6dp"-->
-        <!--android:src="@drawable/ic200_message_dark" />-->
-
-
-        <!--<TextView-->
-        <!--android:id="@+id/tvFollow"-->
-        <!--style="@style/ppb200_Button_main_small_radius"-->
-        <!--android:layout_width="72dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-        <!--android:text="@string/pinpinbox_2_0_0_button_follow" />-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/pinImg"-->
-        <!--android:layout_width="36dp"-->
-        <!--android:layout_height="36dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--android:padding="6dp"-->
-        <!--android:background="@drawable/click_2_0_0_main_button_radius"-->
-        <!--android:src="@drawable/ic200_pin_white" />-->
 
 
     </RelativeLayout>

@@ -9,10 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHobby;
-import com.pinpinbox.android.R;
-import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -53,9 +52,9 @@ public class HobbyAdapter extends BaseAdapter {
 
         convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_hobby, null);
 
-        RoundCornerImageView hobbyImg = (RoundCornerImageView) convertView.findViewById(R.id.hobbyImg);
-        TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        LinearLayout linSelect = (LinearLayout) convertView.findViewById(R.id.linSelect);
+        RoundCornerImageView hobbyImg = convertView.findViewById(R.id.hobbyImg);
+        TextView tvName = convertView.findViewById(R.id.tvName);
+        LinearLayout linSelect = convertView.findViewById(R.id.linSelect);
 
 
         tvName.setText(itemHobbyList.get(position).getName());

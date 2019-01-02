@@ -328,13 +328,13 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
         /*********************************************************************************************************/
 
         viewHeader = LayoutInflater.from(this).inflate(R.layout.header_2_0_0_user, null);
-        userImg = (RoundCornerImageView) viewHeader.findViewById(R.id.userImg);
+        userImg = viewHeader.findViewById(R.id.userImg);
 
-        tvName = (TextView) viewHeader.findViewById(R.id.tvName);
-        tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
-        tvViewed = (TextView) viewHeader.findViewById(R.id.tvViewed);
-        tvSponsor = (TextView) viewHeader.findViewById(R.id.tvSponsor);
-        tvGuide = (TextView) viewHeader.findViewById(R.id.tvGuide);
+        tvName = viewHeader.findViewById(R.id.tvName);
+        tvFollow = viewHeader.findViewById(R.id.tvFollow);
+        tvViewed = viewHeader.findViewById(R.id.tvViewed);
+        tvSponsor = viewHeader.findViewById(R.id.tvSponsor);
+        tvGuide = viewHeader.findViewById(R.id.tvGuide);
 
         /*2017.09.08 不讓圖片偏移*/
         tvName.setText(strName);
@@ -342,28 +342,19 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
 
         /*********************************************************************************************************/
 
-
-        TextUtility.setBold(tvName, true);
-        TextUtility.setBold(tvCreativeName, true);
-        TextUtility.setBold(tvAttention, true);
-
         TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvAlbumsTitle), true);
+        TextUtility.setBold(tvName, tvCreativeName, tvFollow, tvViewed, tvSponsor);
 
-        TextUtility.setBold(tvFollow, true);
-        TextUtility.setBold(tvViewed, true);
-        TextUtility.setBold(tvSponsor, true);
+        linLink = viewHeader.findViewById(R.id.linLink);
 
-
-        linLink = (LinearLayout) viewHeader.findViewById(R.id.linLink);
-
-        webImg = (ImageView) viewHeader.findViewById(R.id.webImg);
-        facebookImg = (ImageView) viewHeader.findViewById(R.id.facebookImg);
-        googleImg = (ImageView) viewHeader.findViewById(R.id.googleImg);
-        instagramImg = (ImageView) viewHeader.findViewById(R.id.instagramImg);
-        linkedinImg = (ImageView) viewHeader.findViewById(R.id.linkedinImg);
-        pinterestImg = (ImageView) viewHeader.findViewById(R.id.pinterestImg);
-        twitterImg = (ImageView) viewHeader.findViewById(R.id.twitterImg);
-        youtubeImg = (ImageView) viewHeader.findViewById(R.id.youtubeImg);
+        webImg = viewHeader.findViewById(R.id.webImg);
+        facebookImg = viewHeader.findViewById(R.id.facebookImg);
+        googleImg = viewHeader.findViewById(R.id.googleImg);
+        instagramImg = viewHeader.findViewById(R.id.instagramImg);
+        linkedinImg = viewHeader.findViewById(R.id.linkedinImg);
+        pinterestImg = viewHeader.findViewById(R.id.pinterestImg);
+        twitterImg = viewHeader.findViewById(R.id.twitterImg);
+        youtubeImg = viewHeader.findViewById(R.id.youtubeImg);
 
 
         webImg.setOnClickListener(this);
@@ -391,8 +382,8 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
 //                tvBuyP
 
 
-        RelativeLayout rSponsorMessage = (RelativeLayout) viewHeader.findViewById(R.id.rSponsorMessage);
-        TextView tvBuyP = (TextView) viewHeader.findViewById(R.id.tvBuyP);
+        RelativeLayout rSponsorMessage = viewHeader.findViewById(R.id.rSponsorMessage);
+        TextView tvBuyP = viewHeader.findViewById(R.id.tvBuyP);
 
 
         if (showSponsor) {
@@ -640,7 +631,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
                     bundle.putString(Key.cover, albumList.get(position).getCover());
                     bundle.putInt(Key.image_orientation, albumList.get(position).getImage_orientation());
 
-                    final ImageView img = (ImageView) v.findViewById(R.id.coverImg);
+                    final ImageView img = v.findViewById(R.id.coverImg);
 
                     img.setTransitionName(albumList.get(position).getCover());
 

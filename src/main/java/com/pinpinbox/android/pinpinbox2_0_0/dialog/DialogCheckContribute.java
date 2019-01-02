@@ -48,16 +48,16 @@ public class DialogCheckContribute {
 
     private void init(){
 
-        rClose = (RelativeLayout) mDialog.findViewById(R.id.close);
+        rClose =  mDialog.findViewById(R.id.close);
 
-        tvY = (TextView)mDialog.findViewById(R.id.y);
-        tvN = (TextView)mDialog.findViewById(R.id.n);
-        tvTitle = (TextView)mDialog.findViewById(R.id.tvTitle);
-        tvDirections = (TextView)mDialog.findViewById(R.id.tvDirections);
-        coverImg = (ImageView)mDialog.findViewById(R.id.coverImg);
+        tvY = mDialog.findViewById(R.id.y);
+        tvN = mDialog.findViewById(R.id.n);
+        tvTitle = mDialog.findViewById(R.id.tvTitle);
+        tvDirections = mDialog.findViewById(R.id.tvDirections);
+        coverImg = mDialog.findViewById(R.id.coverImg);
 
         TextUtility.setBold(tvTitle, true);
-        TextUtility.setBold(tvY, true);
+
 
 
 

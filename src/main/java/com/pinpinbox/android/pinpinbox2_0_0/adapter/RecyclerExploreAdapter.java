@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -16,13 +15,11 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 
 import java.util.List;
 
@@ -89,8 +86,6 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         int h = albumList.get(position).getCover_height();
 
 
-
-
         if (albumList.get(position).getImage_orientation() == ItemAlbum.LANDSCAPE){
 
             holder.coverImg.setLayoutParams(new RelativeLayout.LayoutParams((fixHeight*w)/h, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -124,43 +119,6 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-//        /*set username*/
-//        try {
-//            String strUsername = albumList.get(position).getUser_name();
-//            holder.tvUserName.setText(strUsername);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//
-//        /*set user picture*/
-//        final String strPicture = albumList.get(position).getUser_picture();
-//        try {
-//            if (SystemUtility.Above_Equal_V5()) {
-//                holder.userImg.setTransitionName(strPicture);
-//            }
-//
-//            if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(strPicture)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.member_back_head)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.userImg);
-//
-//
-//            } else {
-//                holder.userImg.setImageResource(R.drawable.member_back_head);
-//            }
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
 
 
         /*set cover*/
@@ -203,69 +161,11 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
                 }
 
             }
-//            if (albumList.get(position).isExchange()) {
-//                holder.slotImg.setVisibility(View.VISIBLE);
-//            } else {
-//                holder.slotImg.setVisibility(View.GONE);
-//            }//歸類於slot
+
         } else {
             holder.linType.setVisibility(View.GONE);
         }
 
-
-        /*click user*/
-//        holder.linUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (ClickUtils.ButtonContinuousClick()) {
-//                    return;
-//                }
-//
-//                FlurryUtil.onEvent(FlurryKey.home_click_item_user);
-//
-//
-//                String author_id = albumList.get(position).getUser_id() + "";
-//
-//                if (author_id.equals(PPBApplication.getInstance().getId())) {
-//
-//                    ((MainActivity) mActivity).toMePage();
-//
-//
-//                } else {
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString(Key.author_id, author_id);
-//                    bundle.putString(Key.picture, albumList.get(position).getUser_picture());
-//
-//
-//                    if (SystemUtility.Above_Equal_V5()) {
-//
-//                        Intent intent = new Intent(mActivity, Author2Activity.class).putExtras(bundle);
-//                        ActivityOptionsCompat options = ActivityOptionsCompat.
-//                                makeSceneTransitionAnimation(mActivity,
-//                                        holder.userImg,
-//                                        ViewCompat.getTransitionName(holder.userImg));
-//                        mActivity.startActivity(intent, options.toBundle());
-//
-//
-//                    } else {
-//
-//
-//                        Intent intent = new Intent(mActivity, Author2Activity.class);
-//                        intent.putExtras(bundle);
-//                        mActivity.startActivity(intent);
-//                        ActivityAnim.StartAnim(mActivity);
-//
-//
-//                    }
-//
-//
-//                }
-//
-//
-//            }
-//        });
 
     }
 
@@ -275,10 +175,10 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
 
         int position;
 
-        private ImageView userImg;
+
         private ImageView audioImg, videoImg, slotImg;
-        private TextView tvUserName, tvAlbumName;
-        private LinearLayout linUser, linType;
+        private TextView tvAlbumName;
+        private LinearLayout linType;
         private RoundCornerImageView coverImg;
         private RelativeLayout rItemBg, rClickArea;
 
@@ -286,23 +186,19 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         public ViewHolder(final View itemView) {
             super(itemView);
 
+            coverImg = itemView.findViewById(R.id.coverImg);
 
-//            itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
-
-            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
-            userImg = (ImageView) itemView.findViewById(R.id.userImg);
-            audioImg = (ImageView) itemView.findViewById(R.id.audioImg);
-            videoImg = (ImageView) itemView.findViewById(R.id.videoImg);
-            slotImg = (ImageView) itemView.findViewById(R.id.slotImg);
-
-            tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
-            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
+            audioImg = itemView.findViewById(R.id.audioImg);
+            videoImg = itemView.findViewById(R.id.videoImg);
+            slotImg = itemView.findViewById(R.id.slotImg);
 
 
-            linType = (LinearLayout) itemView.findViewById(R.id.linType);
-            linUser = (LinearLayout) itemView.findViewById(R.id.linUser);
-            rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
-            rClickArea = (RelativeLayout) itemView.findViewById(R.id.rClickArea);
+            tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
+
+
+            linType = itemView.findViewById(R.id.linType);
+            rItemBg = itemView.findViewById(R.id.rItemBg);
+            rClickArea = itemView.findViewById(R.id.rClickArea);
 
             rClickArea.setOnClickListener(this);
             rClickArea.setOnLongClickListener(this);

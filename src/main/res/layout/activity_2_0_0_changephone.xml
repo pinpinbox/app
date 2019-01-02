@@ -50,7 +50,7 @@
 
         <TextView
             android:id="@+id/tv1"
-            style="@style/ppb200_title_second"
+            style="@style/ppb200_title_third"
             android:layout_gravity="left"
             android:text="@string/pinpinbox_2_0_0_other_text_to_change_to" />
 
@@ -59,7 +59,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+            android:layout_marginTop="@dimen/ppb200_padding_margin_second"
             android:orientation="horizontal">
 
 

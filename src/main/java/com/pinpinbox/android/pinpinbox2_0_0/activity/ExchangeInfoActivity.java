@@ -121,11 +121,7 @@ public class ExchangeInfoActivity extends DraggerActivity implements View.OnClic
         tvContactTitle = (TextView) findViewById(R.id.tvContactTitle);
         tvRegisterPhone = (TextView) findViewById(R.id.tvRegisterPhone);
 
-        TextUtility.setBold(tvExchange, true);
-        TextUtility.setBold(tvExchangeTime, true);
-        TextUtility.setBold(tvName, true);
-        TextUtility.setBold(tvContactTitle, true);
-        TextUtility.setBold(tvRegisterPhone, true);
+        TextUtility.setBold(tvExchangeTime, tvName, tvContactTitle, tvRegisterPhone);
 
         tvRegisterPhone.setOnClickListener(this);
         backImg.setOnClickListener(this);

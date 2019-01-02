@@ -1,11 +1,9 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.Utility.ImageUtility;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 
 import java.util.ArrayList;
 
@@ -96,8 +93,7 @@ private ArrayList<ItemAlbum> albumList;
         ImageUtility.setImage(mActivity, holder.coverImg, albumList.get(position).getCover());
 
         /*set album name*/
-        TextPaint tp = holder.tvAlbumName.getPaint();
-        tp.setFakeBoldText(true);
+        TextUtility.setBold(holder.tvAlbumName);
         holder.tvAlbumName.setText(albumList.get(position).getName());
 
         /*set user name*/

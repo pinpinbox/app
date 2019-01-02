@@ -84,7 +84,7 @@ public class ExchangeListActivity extends DraggerActivity implements View.OnClic
         tvTabUnfinished.setOnClickListener(this);
         tvTabDone.setOnClickListener(this);
 
-        TextUtility.setBold(tvActionBarTitle, true);
+        TextUtility.setBold(tvActionBarTitle, tvTabUnfinished, tvTabDone);
         ViewControl.AlphaTo1(tvActionBarTitle);
 
     }
@@ -180,17 +180,13 @@ public class ExchangeListActivity extends DraggerActivity implements View.OnClic
 
     private void focuseUnfinished() {
         tvTabUnfinished.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-        TextUtility.setBold(tvTabUnfinished, true);
         tvTabDone.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-        TextUtility.setBold(tvTabDone, false);
 
     }
 
     private void focuseDone() {
         tvTabUnfinished.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-        TextUtility.setBold(tvTabUnfinished, false);
         tvTabDone.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-        TextUtility.setBold(tvTabDone, true);
 
     }
 

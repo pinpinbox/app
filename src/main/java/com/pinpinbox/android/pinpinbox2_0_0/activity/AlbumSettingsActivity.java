@@ -376,8 +376,7 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
                 (TextView) findViewById(R.id.tvPoint),
                 (TextView) findViewById(R.id.tvAdvanced),
                 (TextView) findViewById(R.id.tvSponsorCountVisibility),
-                (TextView) findViewById(R.id.tvReward),
-                tvToCreation, tvSaveToLeave);
+                (TextView) findViewById(R.id.tvReward));
 
     }
 

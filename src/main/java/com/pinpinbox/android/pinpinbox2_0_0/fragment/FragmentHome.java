@@ -154,6 +154,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
     private boolean isNoDataToastAppeared = false; //判斷無資料訊息是否出現過
     private boolean isDoingMore = false;
     private boolean isSearch = false;
+    private boolean isGetData = false;
 
 
     private SpeedRecyclerView rvBanner;
@@ -962,6 +963,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                     if (jsonArray.length() != 0) {
 
+                        itemHomeBannerList.clear();
+
                         for (int i = 0; i < jsonArray.length(); i++) {
 
                             JSONObject object = (JSONObject) jsonArray.get(i);
@@ -1057,6 +1060,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                     String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
                     JSONArray jsonArray = new JSONArray(strData);
+                    itemRecommendList.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject j = (JSONObject) jsonArray.get(i);
 
@@ -1111,6 +1115,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                     String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
                     JSONArray jsonArray = new JSONArray(strData);
+                    itemHotList.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject j = (JSONObject) jsonArray.get(i);
 
@@ -1149,7 +1154,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         try {
             strJson = HttpUtility.uploadSubmit(true, Url.P116_GetNewJoinList,
                     SetMapByProtocol.setParam116_getnewjoinlist(id, token, "0,6"), null);
-            MyLog.Set("d", getClass(), "p116strJson =>" + strJson);
+            Logger.json(strJson);
         } catch (SocketTimeoutException timeout) {
             p116Result = ResultType.TIMEOUT;
         } catch (Exception e) {
@@ -1164,6 +1169,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                     String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
                     JSONArray jsonArray = new JSONArray(strData);
+                    itemNewJoinList.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject j = (JSONObject) jsonArray.get(i);
 
@@ -1238,6 +1244,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                     int minHeight = DensityUtility.dip2px(getActivity().getApplicationContext(), 72);
 
+
+
                     for (int i = 0; i < jsonArrayCount; i++) {
 
                         JSONObject object = (JSONObject) p20JsonArray.get(i);
@@ -1245,12 +1253,12 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                         String album = JsonUtility.GetString(object, ProtocolKey.album);
                         String albumstatistics = JsonUtility.GetString(object, ProtocolKey.albumstatistics);
                         String notice = JsonUtility.GetString(object, ProtocolKey.notice);
-                        String user = JsonUtility.GetString(object, ProtocolKey.user);
+//                        String user = JsonUtility.GetString(object, ProtocolKey.user);
 
                         JSONObject jsonAlbum = new JSONObject(album);
                         JSONObject jsonAlbumstatistics = new JSONObject(albumstatistics);
                         JSONObject jsonNotice = new JSONObject(notice);
-                        JSONObject jsonUser = new JSONObject(user);
+//                        JSONObject jsonUser = new JSONObject(user);
 
 
                         /*20171031************************************************/
@@ -1416,9 +1424,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
 
                         /*user*/
-                        itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
-                        itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
-                        itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
+//                        itemAlbum.setUser_id(JsonUtility.GetInt(jsonUser, ProtocolKey.user_id));
+//                        itemAlbum.setUser_name(JsonUtility.GetString(jsonUser, ProtocolKey.name));
+//                        itemAlbum.setUser_picture(JsonUtility.GetString(jsonUser, ProtocolKey.picture));
 
                         itemAlbumList.add(itemAlbum);
 
@@ -1483,14 +1491,12 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             for (int i = 0; i < itemAlbumList.size(); i++) {
 
-                String picture = itemAlbumList.get(i).getUser_picture();
+//                String picture = itemAlbumList.get(i).getUser_picture();
+//                if (picture != null && !picture.equals("")) {
+//                    Picasso.with(getActivity().getApplicationContext()).invalidate(picture);
+//                }
+
                 String path_albumcover = itemAlbumList.get(i).getCover();
-
-                if (picture != null && !picture.equals("")) {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(picture);
-                }
-
-
                 if (path_albumcover != null && !path_albumcover.equals("")) {
                     Picasso.with(getActivity().getApplicationContext()).invalidate(path_albumcover);
                 }
@@ -1758,6 +1764,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
             getHotList();
 
             getNewJoinUserList();
+
+            itemAlbumList.clear();
+            reAlbumIdList.clear();
+            p20total = 0;
+            round = 0;
 
             getUpdateList(round + "," + count);
 

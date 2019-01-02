@@ -99,11 +99,11 @@ public class GuidePageActivity extends DraggerActivity {
         for (int i = 0; i < 3; i++) {
             View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.page_2_0_0_image, null);
 
-            ImageView guideImg = (ImageView)view.findViewById(R.id.guideImg);
+            ImageView guideImg = view.findViewById(R.id.guideImg);
 
-            TextView tvTitle = (TextView)view.findViewById(R.id.tvTitle);
+            TextView tvTitle = view.findViewById(R.id.tvTitle);
 
-            TextView tvDescription = (TextView)view.findViewById(R.id.tvDescription);
+            TextView tvDescription = view.findViewById(R.id.tvDescription);
 
             TextUtility.setBold(tvTitle, true);
 
@@ -114,10 +114,6 @@ public class GuidePageActivity extends DraggerActivity {
 
                     guideImg.setImageResource(R.drawable.bg200_guide01);
 
-//                    Picasso.with(getApplicationContext()).load(R.drawable.bg200_guide01)
-//                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-//                    .into(guideImg);
-
 
                     tvTitle.setText(R.string.pinpinbox_2_0_0_guide_page_0);
                     tvDescription.setText(R.string.pinpinbox_2_0_0_guide_page_1);
@@ -125,9 +121,6 @@ public class GuidePageActivity extends DraggerActivity {
                     break;
 
                 case 1:
-//                    Picasso.with(getApplicationContext()).load(R.drawable.bg200_guide02)
-//                            .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-//                            .into(guideImg);
 
                     guideImg.setImageResource(R.drawable.bg200_guide02);
                     tvTitle.setText(R.string.pinpinbox_2_0_0_guide_page_2);
@@ -135,9 +128,6 @@ public class GuidePageActivity extends DraggerActivity {
                     break;
 
                 case 2:
-//                    Picasso.with(getApplicationContext()).load(R.drawable.bg200_guide03)
-//                            .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-//                            .into(guideImg);
 
                     guideImg.setImageResource(R.drawable.bg200_guide03);
                     tvTitle.setText(R.string.pinpinbox_2_0_0_guide_page_4);

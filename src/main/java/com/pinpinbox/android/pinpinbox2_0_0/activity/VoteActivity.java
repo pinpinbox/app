@@ -167,7 +167,7 @@ public class VoteActivity extends DraggerActivity implements View.OnClickListene
 
         vHeader = LayoutInflater.from(this).inflate(R.layout.header_2_0_0_title, null);
 
-        TextView tvTitle = (TextView) vHeader.findViewById(R.id.tvTitle);
+        TextView tvTitle = vHeader.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.pinpinbox_2_0_0_title_entries);
 
         ViewControl.setMargins(tvTitle,

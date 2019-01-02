@@ -56,8 +56,8 @@
         </RelativeLayout>
 
 
-        <!--版型名稱-->
         <TextView
+            fontPath="fonts/OpenSans-Bold.ttf"
             android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="30dp"

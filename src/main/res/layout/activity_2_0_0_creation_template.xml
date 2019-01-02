@@ -46,13 +46,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <!--<com.pinpinbox.android.common.view.HorizontalListView-->
-        <!--android:id="@+id/tem_add_pic_hlistview"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:divider="@color/transparent"-->
-        <!--android:listSelector="@color/transparent" />-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvTemplate"

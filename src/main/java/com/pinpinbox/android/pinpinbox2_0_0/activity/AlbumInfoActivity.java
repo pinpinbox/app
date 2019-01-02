@@ -399,7 +399,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         moreImg = (ImageView) findViewById(R.id.moreImg);
 
 
-        TextUtility.setBold(tvAlbumName, tvAlbumAuthor, tvRead, tvEvent, tvVote, tvLikeCount, tvMessageCount, tvSponsorCount);
+        TextUtility.setBold(tvAlbumName, tvAlbumAuthor, tvEvent, tvLikeCount, tvMessageCount, tvSponsorCount);
 
 
 //        try {
@@ -429,12 +429,10 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         popSelectShare = new PopupCustom(mActivity);
         popSelectShare.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvShareFB = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
-        TextView tvShare = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShare);
+        TextView tvShareFB = popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
+        TextView tvShare = popSelectShare.getPopupView().findViewById(R.id.tvShare);
 
         TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvShareFB, true);
-        TextUtility.setBold(tvShare, true);
 
         View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);
 
@@ -2668,24 +2666,18 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         View v = popMore.getPopupView();
 
 
-        LinearLayout linEditContent = (LinearLayout) v.findViewById(R.id.linEditContent);
+        LinearLayout linEditContent = v.findViewById(R.id.linEditContent);
 
-        LinearLayout linEditWork = (LinearLayout) v.findViewById(R.id.linEditWork);
-        LinearLayout linEditInfo = (LinearLayout) v.findViewById(R.id.linEditInfo);
+        LinearLayout linEditWork = v.findViewById(R.id.linEditWork);
+        LinearLayout linEditInfo = v.findViewById(R.id.linEditInfo);
 
-        LinearLayout linCollect = (LinearLayout) v.findViewById(R.id.linCollect);
-        LinearLayout linShare = (LinearLayout) v.findViewById(R.id.linShare);
-        LinearLayout linReport = (LinearLayout) v.findViewById(R.id.linReport);
-
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvEditWork), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvEditInfo), true);
+        LinearLayout linCollect = v.findViewById(R.id.linCollect);
+        LinearLayout linShare = v.findViewById(R.id.linShare);
+        LinearLayout linReport = v.findViewById(R.id.linReport);
 
         TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvShare), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvReport), true);
 
-        TextView tvCollect = (TextView) v.findViewById(R.id.tvCollect);
-        TextUtility.setBold(tvCollect, true);
+        TextView tvCollect = v.findViewById(R.id.tvCollect);
 
         View vContent = v.findViewById(R.id.linBackground);
 
@@ -2718,7 +2710,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
                     tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_itemtype_collect_need_sponsor) + itemAlbum.getPoint() + "P)");
 
-                    TextView tvSponsorMore = (TextView) v.findViewById(R.id.tvSponsorMore);
+                    TextView tvSponsorMore = v.findViewById(R.id.tvSponsorMore);
                     tvSponsorMore.setVisibility(View.VISIBLE);
                     tvSponsorMore.setOnClickListener(new View.OnClickListener() {
 

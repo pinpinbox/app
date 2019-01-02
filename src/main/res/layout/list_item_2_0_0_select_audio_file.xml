@@ -23,7 +23,6 @@
 
             <TextView
                 android:id="@+id/tvFileName"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -36,7 +35,6 @@
 
             <TextView
                 android:id="@+id/tvTime"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
@@ -46,32 +44,6 @@
 
         </LinearLayout>
 
-
-        <!--<TextView-->
-        <!--android:id="@+id/tvFileName"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginLeft="@dimen/ppb200_padding_margin_first"-->
-        <!--android:layout_marginRight="@dimen/ppb200_padding_margin_first"-->
-        <!--android:layout_toStartOf="@+id/tvUpload"-->
-        <!--android:ellipsize="end"-->
-        <!--android:letterSpacing="0.1"-->
-        <!--android:maxLines="2"-->
-        <!--android:text="9999990.mp39999990.mp3"-->
-        <!--android:textColor="@color/pinpinbox_2_0_0_first_text"-->
-        <!--android:textSize="@dimen/ppb200_common_text_first"-->
-        <!--android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"-->
-        <!--fontPath="fonts/OpenSans-Bold.ttf"/>-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignStart="@+id/tvFileName"-->
-        <!--android:layout_below="@+id/tvFileName"-->
-        <!--android:text="00:00"-->
-        <!--android:textColor="@color/pinpinbox_2_0_0_secondary_text"-->
-        <!--android:textSize="@dimen/ppb200_common_text_third" />-->
 
 
         <TextView

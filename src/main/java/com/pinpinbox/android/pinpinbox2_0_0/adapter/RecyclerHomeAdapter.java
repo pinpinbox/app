@@ -17,19 +17,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 
 import java.util.List;
 
@@ -54,7 +48,6 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
     private Activity mActivity;
 
-    //    private ArrayList<HashMap<String, Object>> listData;
     private List<ItemAlbum> albumList;
 
 
@@ -119,42 +112,6 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
         }
 
 
-//        /*set username*/
-//        try {
-//            String strUsername = albumList.get(position).getUser_name();
-//            holder.tvUserName.setText(strUsername);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//             /*set user picture*/
-//        final String strPicture = albumList.get(position).getUser_picture();
-//        try {
-//            if (SystemUtility.Above_Equal_V5()) {
-//                holder.userImg.setTransitionName(strPicture);
-//            }
-//
-//            if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
-//                Picasso.with(mActivity.getApplicationContext())
-//                        .load(strPicture)
-//                        .config(Bitmap.Config.RGB_565)
-//                        .error(R.drawable.member_back_head)
-//                        .tag(mActivity.getApplicationContext())
-//                        .into(holder.userImg);
-//
-//
-//            } else {
-//                holder.userImg.setImageResource(R.drawable.member_back_head);
-//            }
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-
         /*set cover*/
         try {
             final String strCover = albumList.get(position).getCover();
@@ -195,11 +152,7 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
                 }
 
             }
-//            if (albumList.get(position).isExchange()) {
-//                holder.slotImg.setVisibility(View.VISIBLE);
-//            } else {
-//                holder.slotImg.setVisibility(View.GONE);
-//            }//歸類於slot
+
         } else {
             holder.linType.setVisibility(View.GONE);
         }
@@ -236,7 +189,6 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
          /*set viewed cound*/
             try {
-//            int intViewed = (int) listData.get(position).get(Key.viewed);
 
                 int intViewed = albumList.get(position).getViewed();
 
@@ -280,40 +232,40 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
 
         /*click user*/
-        holder.linUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-                FlurryUtil.onEvent(FlurryKey.home_click_item_user);
-
-
-                String author_id = albumList.get(position).getUser_id() + "";
-
-                if (author_id.equals(PPBApplication.getInstance().getId())) {
-
-                    ((MainActivity) mActivity).toMePage(false);
-
-                } else {
-
-                    ActivityIntent.toUser(
-                            mActivity,
-                            true,
-                            false,
-                            author_id,
-                            albumList.get(position).getUser_picture(),
-                            null,
-                            holder.userImg
-                    );
-
-                }
-
-
-            }
-        });
+//        holder.linUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (ClickUtils.ButtonContinuousClick()) {
+//                    return;
+//                }
+//
+//                FlurryUtil.onEvent(FlurryKey.home_click_item_user);
+//
+//
+//                String author_id = albumList.get(position).getUser_id() + "";
+//
+//                if (author_id.equals(PPBApplication.getInstance().getId())) {
+//
+//                    ((MainActivity) mActivity).toMePage(false);
+//
+//                } else {
+//
+//                    ActivityIntent.toUser(
+//                            mActivity,
+//                            true,
+//                            false,
+//                            author_id,
+//                            albumList.get(position).getUser_picture(),
+//                            null,
+//                            holder.userImg
+//                    );
+//
+//                }
+//
+//
+//            }
+//        });
 
 
     }
@@ -324,10 +276,10 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
         int position;
 
-        private ImageView userImg;
+
         private ImageView audioImg, videoImg, slotImg;
-        private TextView tvUserName, tvAlbumName, tvTime, tvViewed, tvLike, tvLocation;
-        private LinearLayout linLocation, linUser, linType, linShowOrHide;
+        private TextView tvAlbumName, tvTime, tvViewed, tvLike, tvLocation;
+        private LinearLayout linLocation, linType, linShowOrHide;
         private RoundCornerImageView coverImg;
         private RelativeLayout rItemBg;
 
@@ -338,25 +290,22 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
-            userImg = (ImageView) itemView.findViewById(R.id.userImg);
-            audioImg = (ImageView) itemView.findViewById(R.id.audioImg);
-            videoImg = (ImageView) itemView.findViewById(R.id.videoImg);
-            slotImg = (ImageView) itemView.findViewById(R.id.slotImg);
+            coverImg = itemView.findViewById(R.id.coverImg);
+            audioImg = itemView.findViewById(R.id.audioImg);
+            videoImg = itemView.findViewById(R.id.videoImg);
+            slotImg = itemView.findViewById(R.id.slotImg);
 
-            tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
-            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            tvViewed = (TextView) itemView.findViewById(R.id.tvViewed);
-            tvLike = (TextView) itemView.findViewById(R.id.tvLike);
-            tvLocation = (TextView) itemView.findViewById(R.id.tvLocation);
+            tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
+            tvTime = itemView.findViewById(R.id.tvTime);
+            tvViewed = itemView.findViewById(R.id.tvViewed);
+            tvLike = itemView.findViewById(R.id.tvLike);
+            tvLocation = itemView.findViewById(R.id.tvLocation);
 
-            linType = (LinearLayout) itemView.findViewById(R.id.linType);
-            linLocation = (LinearLayout) itemView.findViewById(R.id.linLocation);
-            linUser = (LinearLayout) itemView.findViewById(R.id.linUser);
-            linShowOrHide = (LinearLayout) itemView.findViewById(R.id.linShowOrHide);
+            linType = itemView.findViewById(R.id.linType);
+            linLocation = itemView.findViewById(R.id.linLocation);
+            linShowOrHide = itemView.findViewById(R.id.linShowOrHide);
 
-            rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
+            rItemBg = itemView.findViewById(R.id.rItemBg);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

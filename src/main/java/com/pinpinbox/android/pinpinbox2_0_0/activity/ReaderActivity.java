@@ -245,8 +245,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
         setSwipeBackEnable(false);
 
-//        getStatusControl().setStatusMode(StatusControl.DARK);
-
         try {
             MapsInitializer.initialize(this);
         } catch (Exception e) {
@@ -442,12 +440,12 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         popInfo.setPopup(R.layout.pop_2_0_0_readerinfo, R.style.pinpinbox_popupAnimation_bottom);
 
         View v = popInfo.getPopupView();
-        linBackground = (LinearLayout) v.findViewById(R.id.linBackground);
-        rMap = (RelativeLayout) v.findViewById(R.id.rMap);
-        closeImg = (ImageView) v.findViewById(R.id.closeImg);
-        tvAlbumName = (TextView) v.findViewById(R.id.tvAlbumName);
-        tvAlbumDescription = (TextView) v.findViewById(R.id.tvAlbumDescription);
-        tvAlbumUser = (TextView) v.findViewById(R.id.tvAlbumUser);
+        linBackground = v.findViewById(R.id.linBackground);
+        rMap = v.findViewById(R.id.rMap);
+        closeImg = v.findViewById(R.id.closeImg);
+        tvAlbumName = v.findViewById(R.id.tvAlbumName);
+        tvAlbumDescription = v.findViewById(R.id.tvAlbumDescription);
+        tvAlbumUser = v.findViewById(R.id.tvAlbumUser);
 
         try {
 
@@ -471,8 +469,8 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         popPageMap = new PopupCustom(mActivity);
         popPageMap.setPopup(R.layout.pop_2_0_0_map, R.style.pinpinbox_popupAnimation_bottom);
         View v = popPageMap.getPopupView();
-        tvPageLocation = (TextView) v.findViewById(R.id.tvPageLocation);
-        closeMapImg = (ImageView) v.findViewById(R.id.closeMapImg);
+        tvPageLocation = v.findViewById(R.id.tvPageLocation);
+        closeMapImg = v.findViewById(R.id.closeMapImg);
 
         try {
 
@@ -1304,7 +1302,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         /*end*/
         final TextView tvExchangeEnd = vPage.findViewById(R.id.tvExchangeEnd);
 
-        TextUtility.setBold(tvExchangeName, tvAddToExchangeList, tvChange, tvExchangeEnd);
+        TextUtility.setBold(tvExchangeName);
 
 
 
@@ -1561,30 +1559,26 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
 
         /*error*/
-        final SpinKitView loadingView = (SpinKitView) vPage.findViewById(R.id.loadingView);
-        final LinearLayout linTimeout = (LinearLayout) vPage.findViewById(R.id.linTimeout);
-        final TextView tvAgain = (TextView) vPage.findViewById(R.id.tvAgain);
+        final SpinKitView loadingView = vPage.findViewById(R.id.loadingView);
+        final LinearLayout linTimeout = vPage.findViewById(R.id.linTimeout);
+        final TextView tvAgain = vPage.findViewById(R.id.tvAgain);
 
 
         /*success*/
-        final TextView tvExchangeName = (TextView) vPage.findViewById(R.id.tvExchangeName);
-        final TextView tvExchangeDescription = (TextView) vPage.findViewById(R.id.tvExchangeDescription);
-        final RoundCornerImageView exchangeImg = (RoundCornerImageView) vPage.findViewById(R.id.exchangeImg);
+        final TextView tvExchangeName = vPage.findViewById(R.id.tvExchangeName);
+        final TextView tvExchangeDescription = vPage.findViewById(R.id.tvExchangeDescription);
+        final RoundCornerImageView exchangeImg = vPage.findViewById(R.id.exchangeImg);
 
         /*bottom*/
-        final TextView tvAddToExchangeList = (TextView) vPage.findViewById(R.id.tvAddToExchangeList);
-        final TextView tvChange = (TextView) vPage.findViewById(R.id.tvChange);
-        final RelativeLayout rAddToExchangeList = (RelativeLayout) vPage.findViewById(R.id.rAddToExchangeList);
+        final TextView tvAddToExchangeList = vPage.findViewById(R.id.tvAddToExchangeList);
+        final TextView tvChange = vPage.findViewById(R.id.tvChange);
+        final RelativeLayout rAddToExchangeList = vPage.findViewById(R.id.rAddToExchangeList);
 
 
         /*end*/
-        final TextView tvExchangeEnd = (TextView) vPage.findViewById(R.id.tvExchangeEnd);
+        final TextView tvExchangeEnd = vPage.findViewById(R.id.tvExchangeEnd);
 
         TextUtility.setBold(tvExchangeName, true);
-        TextUtility.setBold(tvAddToExchangeList, true);
-        TextUtility.setBold(tvChange, true);
-        TextUtility.setBold(tvExchangeEnd, true);
-
 
         protocol111 = new Protocol111_SlotPhotoUsefor(
                 mActivity,
@@ -2001,10 +1995,9 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
     private void isNoOwnShowCollectType(View parent) {
 
-        LinearLayout linCollect = (LinearLayout) parent.findViewById(R.id.linCollect);
+        LinearLayout linCollect = parent.findViewById(R.id.linCollect);
         linCollect.setVisibility(View.VISIBLE);
-        TextView tvCollect = (TextView) parent.findViewById(R.id.tvCollect);
-        TextUtility.setBold(tvCollect, true);
+        TextView tvCollect = parent.findViewById(R.id.tvCollect);
 
         if (itemAlbum.getPoint() > 0) {
 
@@ -2460,17 +2453,12 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         popMore.setPopup(R.layout.pop_2_0_0_albuminfo_more_in_reader, R.style.pinpinbox_popupAnimation_bottom);
 
 
-        LinearLayout linCollect = (LinearLayout) popMore.getPopupView().findViewById(R.id.linCollect);
-        LinearLayout linShare = (LinearLayout) popMore.getPopupView().findViewById(R.id.linShare);
-        LinearLayout linInfo = (LinearLayout) popMore.getPopupView().findViewById(R.id.linInfo);
+        LinearLayout linCollect = popMore.getPopupView().findViewById(R.id.linCollect);
+        LinearLayout linShare = popMore.getPopupView().findViewById(R.id.linShare);
+        LinearLayout linInfo = popMore.getPopupView().findViewById(R.id.linInfo);
 
-        TextView tvCollect = (TextView) popMore.getPopupView().findViewById(R.id.tvCollect);
-
-        TextUtility.setBold(tvCollect, true);
+        TextView tvCollect = popMore.getPopupView().findViewById(R.id.tvCollect);
         TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvShare), true);
-        TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvInfo), true);
-
 
         View vContent = popMore.getPopupView().findViewById(R.id.linBackground);
 
@@ -2586,12 +2574,11 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         popSelectShare = new PopupCustom(mActivity);
         popSelectShare.setPopup(R.layout.pop_2_0_0_select_share, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvShareFB = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
-        TextView tvShare = (TextView) popSelectShare.getPopupView().findViewById(R.id.tvShare);
+        TextView tvShareFB = popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
+        TextView tvShare = popSelectShare.getPopupView().findViewById(R.id.tvShare);
 
         TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvShareFB, true);
-        TextUtility.setBold(tvShare, true);
+
 
 
         View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);

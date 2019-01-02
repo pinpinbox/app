@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/tv1"
-                style="@style/ppb200_title_second"
+                style="@style/ppb200_title_third"
                 android:layout_gravity="left"
                 android:text="@string/pinpinbox_2_0_0_other_text_to_change_to" />
 

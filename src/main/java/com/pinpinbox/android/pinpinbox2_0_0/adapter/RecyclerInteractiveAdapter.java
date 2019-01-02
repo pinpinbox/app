@@ -79,7 +79,7 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
         ViewHolder mHolder = (ViewHolder) holder;
         mHolder.position = position;
 
-        TouchRange.let( mHolder.tvFollow,  mHolder.tvMessage)
+        TouchRange.let(mHolder.tvFollow, mHolder.tvMessage)
                 // easy to use, like css padding
                 .bounds()//default value is 8dp
 //                .bounds(24.0f) //left,top,right,bottom=24dp
@@ -89,21 +89,19 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
                 .change();
 
 
-
         String strPicture = itemUserList.get(position).getPicture();
         String strName = itemUserList.get(position).getName();
         int point = itemUserList.get(position).getPoint();
         boolean is_follow = itemUserList.get(position).isFollow();
 
-        if(point>0){
+        if (point > 0) {
             mHolder.tvPoint.setVisibility(View.VISIBLE);
             mHolder.tvPtext.setVisibility(View.VISIBLE);
             mHolder.tvPoint.setText(point + "");
-        }else {
+        } else {
             mHolder.tvPoint.setVisibility(View.GONE);
             mHolder.tvPtext.setVisibility(View.GONE);
         }
-
 
 
         if (SystemUtility.Above_Equal_V5()) {
@@ -122,21 +120,20 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
         }
 
 
-
-        if(itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())){
+        if (itemUserList.get(position).getUser_id().equals(PPBApplication.getInstance().getId())) {
 
             //me
 
             String me = strName + "(本人)";
             SpannableStringBuilder builder = new SpannableStringBuilder(me);
             ForegroundColorSpan secondgrey = new ForegroundColorSpan(Color.parseColor(ColorClass.GREY_SECOND));
-            builder.setSpan(secondgrey, strName.length() , me.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(secondgrey, strName.length(), me.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             mHolder.tvName.setText(builder);
 
             mHolder.tvMessage.setVisibility(View.GONE);
             mHolder.tvFollow.setVisibility(View.GONE);
-        }else {
+        } else {
 
             mHolder.tvName.setText(strName);
 
@@ -144,8 +141,6 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
             mHolder.tvMessage.setVisibility(View.VISIBLE);
             mHolder.tvFollow.setVisibility(View.VISIBLE);
         }
-
-
 
 
         mHolder.tvMessage.setOnClickListener(new View.OnClickListener() {
@@ -177,13 +172,13 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
             }
         });
 
-        if(is_follow){
+        if (is_follow) {
 
             mHolder.tvFollow.setBackgroundResource(R.drawable.click_2_0_0_second_grey_button_frame_white_radius);
             mHolder.tvFollow.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
             mHolder.tvFollow.setText(R.string.pinpinbox_2_0_0_button_follow_cancel);
 
-        }else {
+        } else {
 
             mHolder.tvFollow.setBackgroundResource(R.drawable.click_2_0_0_pink_button_radius);
             mHolder.tvFollow.setTextColor(Color.parseColor(ColorClass.WHITE)); //pinpinbox_2_0_0_first_pink
@@ -212,15 +207,15 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
-            userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            tvPoint = (TextView) itemView.findViewById(R.id.tvPoint);
-            tvPtext = (TextView)itemView.findViewById(R.id.tvPtext);
+            rBackground = itemView.findViewById(R.id.rBackground);
+            userImg = itemView.findViewById(R.id.userImg);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvPoint = itemView.findViewById(R.id.tvPoint);
+            tvPtext = itemView.findViewById(R.id.tvPtext);
 
 
-            tvMessage = (TextView)itemView.findViewById(R.id.tvMessage);
-            tvFollow = (TextView)itemView.findViewById(R.id.tvFollow);
+            tvMessage = itemView.findViewById(R.id.tvMessage);
+            tvFollow = itemView.findViewById(R.id.tvFollow);
 
             rBackground.setOnClickListener(this);
 

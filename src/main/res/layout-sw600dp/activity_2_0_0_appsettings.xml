@@ -41,10 +41,9 @@
 
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="@dimen/ppb200_padding_margin_big"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"/>
+
 
             <TextView
                 android:id="@+id/tvCleanCache"
@@ -57,9 +56,8 @@
                 android:text="@string/pinpinbox_2_0_0_itemtype_clear_downloaded_albums" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+              />
 
 
             <RelativeLayout
@@ -90,9 +88,8 @@
 
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+                />
 
 
             <RelativeLayout
@@ -123,16 +120,15 @@
 
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+                />
 
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="32dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"/>
+
+
 
             <TextView
                 android:id="@+id/tvNorm"
@@ -145,9 +141,8 @@
                 android:text="@string/pinpinbox_2_0_0_itemtype_platform_specification" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+                />
 
             <TextView
                 android:id="@+id/tvAboutUs"
@@ -160,16 +155,12 @@
                 android:text="@string/pinpinbox_2_0_0_itemtype_about_pinpinbox" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
-
+                style="@style/ppb200_divider_list"
+               />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="32dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+                android:layout_marginTop="@dimen/ppb200_padding_margin_big"/>
 
             <TextView
                 android:id="@+id/tvLogout"
@@ -183,9 +174,8 @@
                 android:textColor="@color/pinpinbox_2_0_0_first_pink" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinpinbox_2_0_0_divider" />
+                style="@style/ppb200_divider_list"
+                />
 
 
         </LinearLayout>

@@ -27,7 +27,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -305,22 +304,22 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
-            userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
+            coverImg = itemView.findViewById(R.id.coverImg);
+            userImg = itemView.findViewById(R.id.userImg);
 
-            voteImg = (ImageView)itemView.findViewById(R.id.voteImg);
+            voteImg =itemView.findViewById(R.id.voteImg);
 
-            tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
-            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
-            tvVoteCount = (TextView) itemView.findViewById(R.id.tvVoteCount);
-            tvAlbumId = (TextView) itemView.findViewById(R.id.tvAlbumId);
+            tvUserName = itemView.findViewById(R.id.tvUserName);
+            tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
+            tvVoteCount = itemView.findViewById(R.id.tvVoteCount);
+            tvAlbumId = itemView.findViewById(R.id.tvAlbumId);
 
 
-            linUser = (LinearLayout) itemView.findViewById(R.id.linUser);
+            linUser = itemView.findViewById(R.id.linUser);
 
-            rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
+            rItemBg = itemView.findViewById(R.id.rItemBg);
 
-            lbRanking = (LabelView)itemView.findViewById(R.id.lbRanking);
+            lbRanking =itemView.findViewById(R.id.lbRanking);
 
 
             itemView.setOnClickListener(this);

@@ -91,8 +91,8 @@ public class ChangePhoneActivity extends DraggerActivity implements View.OnClick
 
         TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
         TextUtility.setBold((TextView) findViewById(R.id.tv1), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tvSendPhone), true);
-        TextUtility.setBold(tvDone, true);
+
+
 
         tvCountry.setOnClickListener(this);
         tvSendPhone.setOnClickListener(this);
@@ -179,8 +179,6 @@ public class ChangePhoneActivity extends DraggerActivity implements View.OnClick
             setNoConnect();
             return;
         }
-//        requestSmsTask = new RequestSmsTask();
-//        requestSmsTask.execute();
 
 
         String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
@@ -246,8 +244,6 @@ public class ChangePhoneActivity extends DraggerActivity implements View.OnClick
             setNoConnect();
             return;
         }
-//        updateCellphoneTask = new UpdateCellphoneTask();
-//        updateCellphoneTask.execute();
 
         String strCountryNumber = tvCountry.getText().toString().substring(tvCountry.getText().toString().indexOf("+") + 1);
         String strCompletePhone = "+" + strCountryNumber + edPhone.getText().toString();

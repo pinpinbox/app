@@ -206,7 +206,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_toLeftOf="@+id/tvBuyP"
                         android:letterSpacing="0.1"
-                        android:padding="16sp"
+                        android:padding="16dp"
                         android:text="我正在參加贊助賽!請點進下方任一相本贊助我吧^^"
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
                         android:textSize="14sp"

@@ -189,7 +189,7 @@ public class FollowMeActivity extends DraggerActivity implements View.OnClickLis
             @Override
             public void onItemClick(int position, View v) {
 
-                if (ClickUtils.ButtonContinuousClick()) {//1秒內防止連續點擊
+                if (ClickUtils.ButtonContinuousClick()) {
                     return;
                 }
 

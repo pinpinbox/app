@@ -125,7 +125,6 @@ public class MyFollowActivity extends DraggerActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_0_0_follow);
 
-//        supportPostponeEnterTransition();
 
         if (!HttpUtility.isConnect(this)) {
             setNoConnect();
@@ -168,7 +167,7 @@ public class MyFollowActivity extends DraggerActivity implements View.OnClickLis
 
         viewHeader = LayoutInflater.from(this).inflate(R.layout.header_2_0_0_title, null);
 
-        TextView tvTitle = (TextView) viewHeader.findViewById(R.id.tvTitle);
+        TextView tvTitle = viewHeader.findViewById(R.id.tvTitle);
 
         TextUtility.setBold(tvTitle, true);
         tvTitle.setText(R.string.pinpinbox_2_0_0_title_myfollow);

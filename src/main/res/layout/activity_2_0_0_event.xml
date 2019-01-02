@@ -98,7 +98,6 @@
 
             <TextView
                 android:id="@+id/tvEvent"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -146,7 +145,6 @@
 
             <TextView
                 android:id="@+id/tvVote"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
@@ -154,8 +152,7 @@
                 android:letterSpacing="0.1"
                 android:text="@string/pinpinbox_2_0_0_other_text_voting_now"
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textSize="@dimen/ppb200_common_text_first"
-                android:textStyle="bold" />
+                android:textSize="@dimen/ppb200_common_text_first" />
 
             <ImageView
                 android:layout_width="@dimen/ppb200_common_button_small_height"

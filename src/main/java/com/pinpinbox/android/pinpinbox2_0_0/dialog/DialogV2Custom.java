@@ -17,7 +17,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
@@ -64,20 +63,18 @@ public class DialogV2Custom {
         mDialog.getWindow().setContentView(R.layout.dialog_2_0_0_custom);
 
 
-        tvLeftOrTop = (TextView) mDialog.findViewById(R.id.tvLeftOrTop);
-        tvCenter = (TextView) mDialog.findViewById(R.id.tvCenter);
-        tvRightOrBottom = (TextView) mDialog.findViewById(R.id.tvRightOrBottom);
-        tvMessage = (TextView) mDialog.findViewById(R.id.tvMessage);
+        tvLeftOrTop = mDialog.findViewById(R.id.tvLeftOrTop);
+        tvCenter = mDialog.findViewById(R.id.tvCenter);
+        tvRightOrBottom = mDialog.findViewById(R.id.tvRightOrBottom);
+        tvMessage = mDialog.findViewById(R.id.tvMessage);
 
         vDarkBg = mDialog.findViewById(R.id.vDarkBg);
-        bgImg = (ImageView) mDialog.findViewById(R.id.bgImg);
-        smallImg = (ImageView) mDialog.findViewById(R.id.smallImg);
+        bgImg = mDialog.findViewById(R.id.bgImg);
+        smallImg = mDialog.findViewById(R.id.smallImg);
 
-        rTopBackground = (RelativeLayout) mDialog.findViewById(R.id.rTopBackground);
-        linBottom = (LinearLayout) mDialog.findViewById(R.id.linBottom);
+        rTopBackground = mDialog.findViewById(R.id.rTopBackground);
+        linBottom = mDialog.findViewById(R.id.linBottom);
 
-
-        TextUtility.setBold(tvRightOrBottom, true);
 
     }
 

@@ -138,9 +138,9 @@ public class PopPicker {
         });
 
 
-        tvTitle = (TextView) vPopup.findViewById(R.id.tvTitle);
-        tvConfirm = (TextView) vPopup.findViewById(R.id.tvConfirm);
-        pickerView = (PickerView) vPopup.findViewById(R.id.picker);
+        tvTitle = vPopup.findViewById(R.id.tvTitle);
+        tvConfirm = vPopup.findViewById(R.id.tvConfirm);
+        pickerView = vPopup.findViewById(R.id.picker);
 
         TextUtility.setBold(tvTitle, true);
 

@@ -562,8 +562,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         refreshImg.setOnClickListener(this);
         albumSetImg.setOnClickListener(this);
 
-        TextUtility.setBold(tvCheck, true);
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -572,11 +570,10 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         /**/
         popCreateSort = new PopupCustom(mActivity);
         popCreateSort.setPopup(R.layout.pop_2_0_0_creation_sort, R.style.pinpinbox_popupAnimation_bottom);
-        gvSort = (EditDragGridView) popCreateSort.getPopupView().findViewById(R.id.gvSort);
-        TextView tvSortConfirm = (TextView) popCreateSort.getPopupView().findViewById(R.id.tvSortConfirm);
+        gvSort = popCreateSort.getPopupView().findViewById(R.id.gvSort);
+        TextView tvSortConfirm = popCreateSort.getPopupView().findViewById(R.id.tvSortConfirm);
         tvSortConfirm.setOnClickListener(this);
         TextUtility.setBold((TextView) popCreateSort.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvSortConfirm, true);
 
         popCreateSort.getPopupView().findViewById(R.id.linBackground).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -589,24 +586,16 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         /**/
         popCreationSet = new PopupCustom(mActivity);
         popCreationSet.setPopup(R.layout.pop_2_0_0_creation_set, R.style.pinpinbox_popupAnimation_bottom);
-        TextView tvSort = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSort);
-        TextView tvSetAudio = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSetAudio);
+        TextView tvSort = popCreationSet.getPopupView().findViewById(R.id.tvSort);
+        TextView tvSetAudio = popCreationSet.getPopupView().findViewById(R.id.tvSetAudio);
 
-        TextUtility.setBold(
-                tvSort,
-                tvSetAudio,
-                (TextView) popCreationSet.getPopupView().findViewById(R.id.tvTitle),
-                (TextView) popCreationSet.getPopupView().findViewById(R.id.tvPreview),
-                (TextView) popCreationSet.getPopupView().findViewById(R.id.tvPreviewAll),
-                (TextView) popCreationSet.getPopupView().findViewById(R.id.tv1),
-                (TextView) popCreationSet.getPopupView().findViewById(R.id.tv2)
-        );
+        TextUtility.setBold((TextView) popCreationSet.getPopupView().findViewById(R.id.tvTitle));
 
 
-        selectPreviewPage = (ImageView) popCreationSet.getPopupView().findViewById(R.id.selectPreviewPage);
-        selectPreviewAll = (ImageView) popCreationSet.getPopupView().findViewById(R.id.selectPreviewAll);
-        linPreviewPage = (LinearLayout) popCreationSet.getPopupView().findViewById(R.id.linPreviewPage);
-        linPreviewAll = (LinearLayout) popCreationSet.getPopupView().findViewById(R.id.linPreviewAll);
+        selectPreviewPage = popCreationSet.getPopupView().findViewById(R.id.selectPreviewPage);
+        selectPreviewAll = popCreationSet.getPopupView().findViewById(R.id.selectPreviewAll);
+        linPreviewPage = popCreationSet.getPopupView().findViewById(R.id.linPreviewPage);
+        linPreviewAll = popCreationSet.getPopupView().findViewById(R.id.linPreviewAll);
 
 
         View vContentSet = popCreationSet.getPopupView().findViewById(R.id.linBackground);
@@ -614,13 +603,13 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         tvSetAudio.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
         linPreviewPage.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
         linPreviewAll.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
-        ((RelativeLayout) popCreationSet.getPopupView().findViewById(R.id.r1)).setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
+        ( popCreationSet.getPopupView().findViewById(R.id.r1)).setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
 
 
-        tvSendPreview = (TextView) popCreationSet.getPopupView().findViewById(R.id.tvSendPreview);
+        tvSendPreview = popCreationSet.getPopupView().findViewById(R.id.tvSendPreview);
         tvSendPreview.setOnTouchListener(new ClickDragDismissListener(vContentSet, this));
 
-        edPreviewPageStart = (EditText) popCreationSet.getPopupView().findViewById(R.id.edPreviewPageStart);
+        edPreviewPageStart = popCreationSet.getPopupView().findViewById(R.id.edPreviewPageStart);
         edPreviewPageStart.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -644,19 +633,14 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         /**/
         popCreateAdd = new PopupCustom(mActivity);
         popCreateAdd.setPopup(R.layout.pop_2_0_0_creation_add, R.style.pinpinbox_popupAnimation_bottom);
-        LinearLayout linAddPhoto = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddPhoto);
-        LinearLayout linAddVideo = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddVideo);
-        LinearLayout linAddPdf = (LinearLayout) popCreateAdd.getPopupView().findViewById(R.id.linAddPdf);
+        LinearLayout linAddPhoto = popCreateAdd.getPopupView().findViewById(R.id.linAddPhoto);
+        LinearLayout linAddVideo = popCreateAdd.getPopupView().findViewById(R.id.linAddVideo);
+        LinearLayout linAddPdf = popCreateAdd.getPopupView().findViewById(R.id.linAddPdf);
 
-        tvSelect_Photo_or_Template = (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvSelect_Photo_or_Template);
-        photo_or_templateImg = (ImageView) popCreateAdd.getPopupView().findViewById(R.id.photo_or_templateImg);
+        tvSelect_Photo_or_Template = popCreateAdd.getPopupView().findViewById(R.id.tvSelect_Photo_or_Template);
+        photo_or_templateImg = popCreateAdd.getPopupView().findViewById(R.id.photo_or_templateImg);
 
-        TextUtility.setBold(
-                tvSelect_Photo_or_Template,
-                (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle),
-                (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvVideo),
-                (TextView) popCreateAdd.getPopupView().findViewById(R.id.tvPdf)
-        );
+        TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle));
 
         View vContentAdd = popCreateAdd.getPopupView().findViewById(R.id.linBackground);
 
@@ -689,9 +673,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         uploadSingularAudioLoading = popCreateAudio.getPopupView().findViewById(R.id.loadingView);
 
 
-        TextUtility.setBold(tvSelectAudioNone, tvSelectAudioPage, tvSelectAudioBackground, tvSelectAudioCustom,
-                (TextView) popCreateAudio.getPopupView().findViewById(R.id.tvTitle),
-                (TextView) popCreateAudio.getPopupView().findViewById(R.id.tvSave));
+        TextUtility.setBold((TextView) popCreateAudio.getPopupView().findViewById(R.id.tvTitle));
 
 
         linearLayoutManager = new ScrollLinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);
@@ -1213,7 +1195,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
                 TextView tvSelectAudioFile = popSelectAudioFile.getPopupView().findViewById(R.id.tvSelectAudioFile);
 
 
-                TextUtility.setBold(tvRecording, tvSelectAudioFile, (TextView) popSelectAudioFile.getPopupView().findViewById(R.id.tvTitle));
+                TextUtility.setBold((TextView) popSelectAudioFile.getPopupView().findViewById(R.id.tvTitle));
 
 
                 View vContents = popSelectAudioFile.getPopupView().findViewById(R.id.linBackground);

@@ -40,7 +40,6 @@
             android:layout_marginTop="@dimen/ppb200_padding_margin_first"/>
 
         <TextView
-            fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="獎項資訊已保存在\n首頁 > 選單 > 兌換清單"

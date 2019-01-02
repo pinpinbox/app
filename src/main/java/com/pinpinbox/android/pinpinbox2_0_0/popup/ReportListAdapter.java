@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemReport;
 
 import java.util.List;
@@ -49,15 +48,13 @@ public class ReportListAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_poplist, null);
-            holder.textView = (TextView)convertView.findViewById(R.id.textView);
+            holder.textView = convertView.findViewById(R.id.textView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         convertView.setBackgroundResource(R.drawable.click_2_0_0_list_item);
-
-        TextUtility.setBold(holder.textView);
 
         holder.textView.setText(itemReportList.get(position).getName());
 

@@ -479,22 +479,6 @@ public class AlbumSponsorListActivity extends DraggerActivity implements View.On
 
     }
 
-    public void changeUserFollow() {
-
-        boolean isFollow = itemUserList.get(clickPosition).isFollow();
-
-
-        if (isFollow) {
-            itemUserList.get(clickPosition).setFollow(false);
-        } else {
-            itemUserList.get(clickPosition).setFollow(true);
-        }
-
-        adapter.notifyItemChanged(clickPosition);
-
-
-    }
-
 
     @SuppressLint("StaticFieldLeak")
     private class AttentionTask extends AsyncTask<Void, Void, Object> {
@@ -573,9 +557,7 @@ public class AlbumSponsorListActivity extends DraggerActivity implements View.On
 
                 adapter.notifyItemChanged(clickPosition);
 
-                if (followstatus == 0) {
-
-                } else if (followstatus == 1) {
+                if (followstatus == 1) {
                     doFollowTask();
                 }
 

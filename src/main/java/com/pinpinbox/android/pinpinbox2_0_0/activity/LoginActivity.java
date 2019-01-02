@@ -419,7 +419,6 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
         fbData = getSharedPreferences(SharedPreferencesDataClass.fb_registrationData, Activity.MODE_PRIVATE);
         PPBApplication.getInstance().setSharedPreferences(getdata);
         PPBApplication.getInstance().setSharedPreferencesByFacebook(fbData);
-//        loading = new LoadingAnimation(this);
 
         rBackground = (RelativeLayout) findViewById(R.id.rBackground);
 
@@ -465,19 +464,19 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
     private void initViewLogin() {
 
-        frame = (FrameLayout) vLogin.findViewById(R.id.frame);
+        frame = vLogin.findViewById(R.id.frame);
 
-        tvLoginLogin = (TextView) vLogin.findViewById(R.id.tvLoginLogin);
-        tvLoginToRegister = (TextView) vLogin.findViewById(R.id.tvLoginToRegister);
-        tvLoginFacebook = (TextView) vLogin.findViewById(R.id.tvLoginFacebook);
-        tvAboutUs = (TextView) vLogin.findViewById(R.id.tvAboutUs);
-        tvLoginTitle = (TextView) vLogin.findViewById(R.id.tvLoginTitle);
-        tvLoginScanToRegister = (TextView) vLogin.findViewById(R.id.tvLoginScanToRegister);
-        tvLoginNorm = (TextView) vLogin.findViewById(R.id.tvLoginNorm);
+        tvLoginLogin = vLogin.findViewById(R.id.tvLoginLogin);
+        tvLoginToRegister = vLogin.findViewById(R.id.tvLoginToRegister);
+        tvLoginFacebook = vLogin.findViewById(R.id.tvLoginFacebook);
+        tvAboutUs = vLogin.findViewById(R.id.tvAboutUs);
+        tvLoginTitle = vLogin.findViewById(R.id.tvLoginTitle);
+        tvLoginScanToRegister = vLogin.findViewById(R.id.tvLoginScanToRegister);
+        tvLoginNorm = vLogin.findViewById(R.id.tvLoginNorm);
 
 
-        edLoginMail = (EditText) vLogin.findViewById(R.id.edLoginMail);
-        edLoginPassword = (EditText) vLogin.findViewById(R.id.edLoginPassword);
+        edLoginMail = vLogin.findViewById(R.id.edLoginMail);
+        edLoginPassword = vLogin.findViewById(R.id.edLoginPassword);
         edLoginPassword.setImeOptions(EditorInfo.IME_ACTION_SEND);
         edLoginPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -489,7 +488,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             }
         });
 
-        loginGetPasswordImg = (ImageView) vLogin.findViewById(R.id.loginGetPasswordImg);
+        loginGetPasswordImg = vLogin.findViewById(R.id.loginGetPasswordImg);
 
 
         if (scanIntent) {
@@ -515,40 +514,40 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
     }
 
     private void initViewRegister() {
-        tvRegisterTitle = (TextView) vRegister.findViewById(R.id.tvRegisterTitle);
-        tvRegisterNext = (TextView) vRegister.findViewById(R.id.tvRegisterNext);
-        tvRegCheckEmail = (TextView) vRegister.findViewById(R.id.tvRegCheckEmail);
-        tvRegPassword = (TextView) vRegister.findViewById(R.id.tvRegPassword);
-        tvRegPasswordCheck = (TextView) vRegister.findViewById(R.id.tvRegPasswordCheck);
+        tvRegisterTitle = vRegister.findViewById(R.id.tvRegisterTitle);
+        tvRegisterNext = vRegister.findViewById(R.id.tvRegisterNext);
+        tvRegCheckEmail = vRegister.findViewById(R.id.tvRegCheckEmail);
+        tvRegPassword = vRegister.findViewById(R.id.tvRegPassword);
+        tvRegPasswordCheck = vRegister.findViewById(R.id.tvRegPasswordCheck);
 
-        edRegNickname = (EditText) vRegister.findViewById(R.id.edRegNickname);
-        edRegMail = (EditText) vRegister.findViewById(R.id.edRegMail);
-        edRegPassword = (EditText) vRegister.findViewById(R.id.edRegPassword);
-        edRegPasswordCheck = (EditText) vRegister.findViewById(R.id.edRegPasswordCheck);
+        edRegNickname = vRegister.findViewById(R.id.edRegNickname);
+        edRegMail = vRegister.findViewById(R.id.edRegMail);
+        edRegPassword = vRegister.findViewById(R.id.edRegPassword);
+        edRegPasswordCheck = vRegister.findViewById(R.id.edRegPasswordCheck);
 
-        linRegisterBack = (LinearLayout) vRegister.findViewById(R.id.linRegisterBack);
+        linRegisterBack = vRegister.findViewById(R.id.linRegisterBack);
 
-        rRegNickname = (RelativeLayout) vRegister.findViewById(R.id.rRegNickname);
-        rRegMail = (RelativeLayout) vRegister.findViewById(R.id.rRegMail);
-        rRegPassword = (RelativeLayout) vRegister.findViewById(R.id.rRegPassword);
-        rRegPasswordCheck = (RelativeLayout) vRegister.findViewById(R.id.rRegPasswordCheck);
+        rRegNickname = vRegister.findViewById(R.id.rRegNickname);
+        rRegMail = vRegister.findViewById(R.id.rRegMail);
+        rRegPassword = vRegister.findViewById(R.id.rRegPassword);
+        rRegPasswordCheck = vRegister.findViewById(R.id.rRegPasswordCheck);
 
     }
 
     private void initViewVerificationCode() {
-        linVerBack = (LinearLayout) vVerificationCode.findViewById(R.id.linVerBack);
+        linVerBack = vVerificationCode.findViewById(R.id.linVerBack);
 
-        tvVerTitle = (TextView) vVerificationCode.findViewById(R.id.tvVerTitle);
-        tvVerCountry = (TextView) vVerificationCode.findViewById(R.id.tvVerCountry);
-        tvVerSendPhone = (TextView) vVerificationCode.findViewById(R.id.tvVerSendPhone);
-        tvVerFinish = (TextView) vVerificationCode.findViewById(R.id.tvVerFinish);
-        tvVerTime = (TextView) vVerificationCode.findViewById(R.id.tvVerTime);
-        tvVerNewsletter = (TextView) vVerificationCode.findViewById(R.id.tvVerNewsletter);
+        tvVerTitle = vVerificationCode.findViewById(R.id.tvVerTitle);
+        tvVerCountry = vVerificationCode.findViewById(R.id.tvVerCountry);
+        tvVerSendPhone = vVerificationCode.findViewById(R.id.tvVerSendPhone);
+        tvVerFinish = vVerificationCode.findViewById(R.id.tvVerFinish);
+        tvVerTime = vVerificationCode.findViewById(R.id.tvVerTime);
+        tvVerNewsletter = vVerificationCode.findViewById(R.id.tvVerNewsletter);
 
-        edVerPhone = (EditText) vVerificationCode.findViewById(R.id.edVerPhone);
-        edVerCode = (EditText) vVerificationCode.findViewById(R.id.edVerCode);
+        edVerPhone = vVerificationCode.findViewById(R.id.edVerPhone);
+        edVerCode = vVerificationCode.findViewById(R.id.edVerCode);
 
-        rVerCode = (RelativeLayout) vVerificationCode.findViewById(R.id.rVerCode);
+        rVerCode = vVerificationCode.findViewById(R.id.rVerCode);
 
         verSelectNewsletterImg = vVerificationCode.findViewById(R.id.verSelectNewsletterImg);
 
@@ -558,16 +557,16 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
     }
 
     private void initViewGetPassword() {
-        linPwdBack = (LinearLayout) vGetPassword.findViewById(R.id.linPwdBack);
+        linPwdBack = vGetPassword.findViewById(R.id.linPwdBack);
 
-        tvPwdTitle = (TextView) vGetPassword.findViewById(R.id.tvPwdTitle);
-        tvPwdCountry = (TextView) vGetPassword.findViewById(R.id.tvPwdCountry);
-        tvPwdSendPhone = (TextView) vGetPassword.findViewById(R.id.tvPwdSendPhone);
+        tvPwdTitle = vGetPassword.findViewById(R.id.tvPwdTitle);
+        tvPwdCountry = vGetPassword.findViewById(R.id.tvPwdCountry);
+        tvPwdSendPhone = vGetPassword.findViewById(R.id.tvPwdSendPhone);
 
-        edPwdPhone = (EditText) vGetPassword.findViewById(R.id.edPwdPhone);
-        edPwdMail = (EditText) vGetPassword.findViewById(R.id.edPwdMail);
+        edPwdPhone = vGetPassword.findViewById(R.id.edPwdPhone);
+        edPwdMail = vGetPassword.findViewById(R.id.edPwdMail);
 
-        rPwdMail = (RelativeLayout) vGetPassword.findViewById(R.id.rPwdMail);
+        rPwdMail = vGetPassword.findViewById(R.id.rPwdMail);
 
     }
 

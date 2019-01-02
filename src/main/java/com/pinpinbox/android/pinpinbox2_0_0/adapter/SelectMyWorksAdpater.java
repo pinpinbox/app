@@ -1,12 +1,10 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,7 +12,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -55,9 +52,9 @@ public class SelectMyWorksAdpater extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_contribute, null);
-            holder.rContributionstatus = (RelativeLayout) convertView.findViewById(R.id.rContributionstatus);
-            holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
-            holder.coverImg = (RoundCornerImageView) convertView.findViewById(R.id.coverImg);
+            holder.rContributionstatus = convertView.findViewById(R.id.rContributionstatus);
+            holder.tvName = convertView.findViewById(R.id.tvName);
+            holder.coverImg = convertView.findViewById(R.id.coverImg);
             convertView.setTag(holder);
 
         } else {

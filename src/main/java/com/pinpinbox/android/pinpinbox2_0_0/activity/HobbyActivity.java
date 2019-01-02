@@ -140,18 +140,16 @@ public class HobbyActivity extends DraggerActivity implements View.OnClickListen
         gvHobby.addHeaderView(vHeader, null, false);
 
 
-        TextView tvTitle = (TextView) vHeader.findViewById(R.id.tvTitle);
+        TextView tvTitle = vHeader.findViewById(R.id.tvTitle);
         tvTitle.setTextSize(24);
 
-        TextView tvBelowTitleText = (TextView) vHeader.findViewById(R.id.tvBelowTitleText);
+        TextView tvBelowTitleText = vHeader.findViewById(R.id.tvBelowTitleText);
         tvBelowTitleText.setVisibility(View.VISIBLE);
 
 
         tvTitle.setText(R.string.pinpinbox_2_0_0_title_select_hobby);
         tvBelowTitleText.setText(R.string.pinpinbox_2_0_0_other_text_hobby_select_count);
 
-
-        TextUtility.setBold(tvConfirm, true);
         TextUtility.setBold(tvTitle, true);
 
         tvConfirm.setOnClickListener(this);

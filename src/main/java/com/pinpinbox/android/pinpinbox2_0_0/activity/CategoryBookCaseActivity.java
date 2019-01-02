@@ -170,7 +170,7 @@ public class CategoryBookCaseActivity extends DraggerActivity implements View.On
         indicator = (CircleIndicator) findViewById(R.id.indicator);
         frameUser = (FrameLayout) findViewById(R.id.frameUser);
 
-        TextUtility.setBold(tvTitle, tvBannerDestination, tvButtonText);
+        TextUtility.setBold(tvTitle);
 
 
         linUser.setOnClickListener(this);

@@ -412,6 +412,8 @@
     <string name="pinpinbox_2_0_0_itemtype_recording">錄音</string>
     <string name="pinpinbox_2_0_0_itemtype_select_file">選擇檔案</string>
     <string name="pinpinbox_2_0_0_itemtype_category">分類</string>
+    <string name="pinpinbox_2_0_0_itemtype_open">開啟</string>
+    <string name="pinpinbox_2_0_0_itemtype_close">關閉</string>
 
 
     <!--特殊-->
@@ -474,7 +476,7 @@
     <string name="pinpinbox_2_0_0_title_follow">熱門關注</string>
     <string name="pinpinbox_2_0_0_title_recommend">推薦作品</string>
     <string name="pinpinbox_2_0_0_title_newjoin">新加入</string>
-
+    <string name="pinpinbox_2_0_0_title_feedback">贊助回饋</string>
 
     <string name="pinpinbox_2_0_0_title_feature_area">專區精選</string>
     <string name="pinpinbox_2_0_0_title_feature_recommend">推薦</string>
@@ -520,6 +522,7 @@
     <string name="pinpinbox_2_0_0_input_hint_board_express">有什麼想表達的嗎?</string>
     <string name="pinpinbox_2_0_0_input_hint_link_name">連結名稱</string>
     <string name="pinpinbox_2_0_0_input_hint_link_url">網址</string>
+    <string name="pinpinbox_2_0_0_input_hint_feedback_description">回饋說明</string>
 
 
     <string name="pinpinbox_2_0_0_other_message_confirm_buy">確定購買</string>

@@ -83,14 +83,6 @@ public class AppSettingsActivity extends DraggerActivity implements View.OnClick
 
         TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
 
-        TextUtility.setBold(tvLogout, true);
-        TextUtility.setBold(tvCleanCache, true);
-        TextUtility.setBold(tvAudioSound, true);
-        TextUtility.setBold(tvCategoryVideoAutoplay, true);
-        TextUtility.setBold(tvNorm, true);
-        TextUtility.setBold(tvAboutUs, true);
-
-
     }
 
     private void clean() {
@@ -282,7 +274,6 @@ public class AppSettingsActivity extends DraggerActivity implements View.OnClick
         Recycle.IMG((ImageView) findViewById(R.id.bgImg));
 
         System.gc();
-        MyLog.Set("d", this.getClass(), "onDestroy");
         super.onDestroy();
     }
 

@@ -139,8 +139,8 @@ public class PopupList {
         });
 
 
-        tvTitle = (TextView)vPopup.findViewById(R.id.tvTitle);
-        listView = (ListView)vPopup.findViewById(R.id.listView);
+        tvTitle =vPopup.findViewById(R.id.tvTitle);
+        listView = vPopup.findViewById(R.id.listView);
 
         TextUtility.setBold(tvTitle, true);
 

@@ -17,8 +17,8 @@
         <ImageView
             android:id="@+id/backImg"
             style="@style/ppb200_action_bar_icon"
-            android:src="@drawable/ic200_arrow_left_dark"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic200_arrow_left_dark" />
 
         <TextView
             android:id="@+id/tvActionBarTitle"
@@ -46,19 +46,16 @@
 
         <TextView
             android:id="@+id/tvTabUnfinished"
-            fontPath="fonts/OpenSans-Bold.ttf"
+            style="@style/ppb200_tab_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/click_2_0_0_default"
             android:gravity="center"
-            android:letterSpacing="0.1"
             android:paddingLeft="@dimen/ppb200_padding_margin_second"
             android:paddingRight="@dimen/ppb200_padding_margin_second"
             android:text="@string/pinpinbox_2_0_0_itemtype_exchange_unfinished"
-            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-            android:textSize="@dimen/ppb200_common_text_first"
-            android:textStyle="bold" />
+            android:textSize="@dimen/ppb200_common_text_first" />
 
         <View
             android:layout_width="0.5dp"
@@ -70,19 +67,16 @@
 
         <TextView
             android:id="@+id/tvTabDone"
-            fontPath="fonts/OpenSans-Bold.ttf"
+            style="@style/ppb200_tab_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/click_2_0_0_default"
             android:gravity="center"
-            android:letterSpacing="0.1"
             android:paddingLeft="@dimen/ppb200_padding_margin_second"
             android:paddingRight="@dimen/ppb200_padding_margin_second"
             android:text="@string/pinpinbox_2_0_0_itemtype_exchange_done"
-            android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-            android:textSize="@dimen/ppb200_common_text_first"
-            android:textStyle="bold" />
+            android:textSize="@dimen/ppb200_common_text_first" />
 
 
     </LinearLayout>

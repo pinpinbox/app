@@ -185,8 +185,6 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
         TextUtility.setBold((TextView) findViewById(R.id.tv6), true);
         TextUtility.setBold((TextView) findViewById(R.id.tv7), true);
         TextUtility.setBold((TextView) findViewById(R.id.tv8), true);
-        TextUtility.setBold(tvConfirm, true);
-
 
         if (getData.getBoolean(Key.is_FB_Login, false)) {
             findViewById(R.id.linPassword).setVisibility(View.GONE);
@@ -347,11 +345,11 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
 
         TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
 
-        TextView tvDateConfirm = (TextView) v.findViewById(R.id.tvDateConfirm);
+        TextView tvDateConfirm = v.findViewById(R.id.tvDateConfirm);
 
-        PickerView pkYear = (PickerView) v.findViewById(R.id.pkYear);
-        PickerView pkMonth = (PickerView) v.findViewById(R.id.pkMonth);
-        PickerView pkDay = (PickerView) v.findViewById(R.id.pkDay);
+        PickerView pkYear = v.findViewById(R.id.pkYear);
+        PickerView pkMonth = v.findViewById(R.id.pkMonth);
+        PickerView pkDay = v.findViewById(R.id.pkDay);
 
         pkYear.setTextSize(DensityUtility.sp2px(mActivity.getApplicationContext(), 20));
         pkYear.setMarginAlpha(2.8f);

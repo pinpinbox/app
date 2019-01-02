@@ -44,7 +44,7 @@ public class DialogHandselPoint{
         window.setContentView(R.layout.dialog_2_0_0_handsel_point);
 
 
-        rClose = (RelativeLayout) mDialog.findViewById(R.id.close);
+        rClose = mDialog.findViewById(R.id.close);
         rClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,11 +52,11 @@ public class DialogHandselPoint{
             }
         });
 
-        tvTitle = (TextView) mDialog.findViewById(R.id.tvTitle);
-        tvDescription = (TextView) mDialog.findViewById(R.id.tvDescription);
-        tvRestriction = (TextView)mDialog.findViewById(R.id.tvRestriction);
-        tvLink = (TextView) mDialog.findViewById(R.id.tvLink);
-        img = (ImageView)mDialog.findViewById(R.id.img);
+        tvTitle = mDialog.findViewById(R.id.tvTitle);
+        tvDescription = mDialog.findViewById(R.id.tvDescription);
+        tvRestriction =mDialog.findViewById(R.id.tvRestriction);
+        tvLink = mDialog.findViewById(R.id.tvLink);
+        img =mDialog.findViewById(R.id.img);
 
         TextUtility.setBold(tvTitle, true);
 

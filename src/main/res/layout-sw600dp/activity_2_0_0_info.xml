@@ -349,7 +349,6 @@
 
                     <TextView
                         android:id="@+id/tvVote"
-                        fontPath="fonts/OpenSans-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/ppb200_common_button_height"
                         android:layout_gravity="center_horizontal"
@@ -361,8 +360,7 @@
                         android:paddingRight="@dimen/ppb200_padding_margin_first"
                         android:text="@string/pinpinbox_2_0_0_button_voting_for_this_work"
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
-                        android:textSize="@dimen/ppb200_common_text_first"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/ppb200_common_text_first" />
 
 
                 </LinearLayout>

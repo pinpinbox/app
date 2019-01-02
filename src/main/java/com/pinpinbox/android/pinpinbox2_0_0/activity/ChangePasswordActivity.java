@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -81,12 +82,12 @@ public class ChangePasswordActivity extends DraggerActivity implements View.OnCl
         tvConfirm = (TextView) findViewById(R.id.tvConfirm);
         backImg = (ImageView) findViewById(R.id.backImg);
 
-        TextUtility.setBold((TextView) findViewById(R.id.tv1), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv2), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv3), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvConfirm, true);
-
+        TextUtility.setBold(
+                (TextView) findViewById(R.id.tv1),
+                (TextView) findViewById(R.id.tv2),
+                (TextView) findViewById(R.id.tv3),
+                (TextView) findViewById(R.id.tvTitle)
+        );
 
         tvConfirm.setOnClickListener(this);
         backImg.setOnClickListener(this);
@@ -268,6 +269,7 @@ public class ChangePasswordActivity extends DraggerActivity implements View.OnCl
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     public class UpDatePasswordTask extends AsyncTask<Void, Void, Object> {
 
         private int p22Result = -1;

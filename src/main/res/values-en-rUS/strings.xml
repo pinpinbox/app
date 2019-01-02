@@ -400,6 +400,8 @@
     <string name="pinpinbox_2_0_0_itemtype_recording">Recording</string>
     <string name="pinpinbox_2_0_0_itemtype_select_file">Select file</string>
     <string name="pinpinbox_2_0_0_itemtype_category">Cat</string>
+    <string name="pinpinbox_2_0_0_itemtype_open">Open</string>
+    <string name="pinpinbox_2_0_0_itemtype_close">Close</string>
 
     <!--特殊-->
     <string name="pinpinbox_2_0_0_itemtype_visible_page_before">First</string>
@@ -462,6 +464,7 @@
     <string name="pinpinbox_2_0_0_title_follow">Popular</string>
     <string name="pinpinbox_2_0_0_title_recommend">Recommend</string>
     <string name="pinpinbox_2_0_0_title_newjoin">New join</string>
+    <string name="pinpinbox_2_0_0_title_feedback">Feedback</string>
 
     <string name="pinpinbox_2_0_0_title_feature_area">Feature</string>
     <string name="pinpinbox_2_0_0_title_feature_recommend">Recommend</string>
@@ -506,7 +509,7 @@
     <string name="pinpinbox_2_0_0_input_hint_board_express">Say something.</string>
     <string name="pinpinbox_2_0_0_input_hint_link_name">Link name</string>
     <string name="pinpinbox_2_0_0_input_hint_link_url">URL</string>
-
+    <string name="pinpinbox_2_0_0_input_hint_feedback_description">description</string>
 
     <string name="pinpinbox_2_0_0_other_message_confirm_buy">Are you sure to buy&#160;</string>
     <string name="pinpinbox_2_0_0_other_message_confirm_sponsor">Are you sure to sponsor&#160;</string>
