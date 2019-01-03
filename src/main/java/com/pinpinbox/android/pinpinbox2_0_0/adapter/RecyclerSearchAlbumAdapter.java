@@ -93,7 +93,6 @@ private ArrayList<ItemAlbum> albumList;
         ImageUtility.setImage(mActivity, holder.coverImg, albumList.get(position).getCover());
 
         /*set album name*/
-        TextUtility.setBold(holder.tvAlbumName);
         holder.tvAlbumName.setText(albumList.get(position).getName());
 
         /*set user name*/

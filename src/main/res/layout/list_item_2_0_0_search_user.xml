@@ -28,7 +28,6 @@
 
         <TextView
             android:id="@+id/tvName"
-            fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="96dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/ppb200_padding_margin_second"
@@ -38,8 +37,7 @@
             android:singleLine="true"
             android:text=""
             android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_small"
-            android:textStyle="bold" />
+            android:textSize="@dimen/ppb200_common_text_small" />
 
         <TextView
             android:id="@+id/tvOwn"

@@ -15,13 +15,11 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.TransformationControl;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.OnDetailClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -141,7 +139,6 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
         /*set album name*/
         try {
             String strAlbumName = (String) listData.get(position).get("albumname");
-            TextUtility.setBold(holder.tvAlbumName);
             holder.tvAlbumName.setText(strAlbumName);
         } catch (Exception e) {
             e.printStackTrace();

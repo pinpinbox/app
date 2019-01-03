@@ -169,7 +169,6 @@ public class MyFollowActivity extends DraggerActivity implements View.OnClickLis
 
         TextView tvTitle = viewHeader.findViewById(R.id.tvTitle);
 
-        TextUtility.setBold(tvTitle, true);
         tvTitle.setText(R.string.pinpinbox_2_0_0_title_myfollow);
 
 

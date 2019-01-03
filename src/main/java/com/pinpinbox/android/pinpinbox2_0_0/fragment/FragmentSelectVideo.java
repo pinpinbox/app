@@ -34,7 +34,6 @@ import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersGridView;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.LocalVideoAdapter;
@@ -150,17 +149,13 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
         v.setOnTouchListener(this);
 
 
-        gvVideo = (StickyGridHeadersGridView) v.findViewById(R.id.gvVideo);
-        tvStartUpLoad = (TextView) v.findViewById(R.id.tvStartUpLoad);
-        tvProgressrate = (TextView) v.findViewById(R.id.tvProgressrate);
-        tvAlbumCount = (TextView) v.findViewById(R.id.tvAlbumCount);
-        backImg = (ImageView) v.findViewById(R.id.backImg);
-        cameraImg = (ImageView) v.findViewById(R.id.cameraImg);
-        progress = (ProgressBar) v.findViewById(R.id.progress);
-
-        TextUtility.setBold(tvStartUpLoad, true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
-
+        gvVideo =  v.findViewById(R.id.gvVideo);
+        tvStartUpLoad =  v.findViewById(R.id.tvStartUpLoad);
+        tvProgressrate =  v.findViewById(R.id.tvProgressrate);
+        tvAlbumCount =  v.findViewById(R.id.tvAlbumCount);
+        backImg =  v.findViewById(R.id.backImg);
+        cameraImg =  v.findViewById(R.id.cameraImg);
+        progress =  v.findViewById(R.id.progress);
 
         return v;
     }

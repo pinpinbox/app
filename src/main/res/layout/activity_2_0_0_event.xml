@@ -129,6 +129,7 @@
             android:id="@+id/tvContribute"
             style="@style/ppb200_Button_main_common_radius"
             android:layout_centerInParent="true"
+            android:visibility="gone"
             android:text="@string/pinpinbox_2_0_0_event_contributors" />
 
 
@@ -141,6 +142,7 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/click_2_0_0_default"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView

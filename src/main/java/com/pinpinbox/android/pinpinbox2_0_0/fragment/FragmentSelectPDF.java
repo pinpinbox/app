@@ -28,7 +28,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.BitmapUtility;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerPdfFileAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
@@ -199,8 +198,6 @@ public class FragmentSelectPDF extends Fragment implements View.OnClickListener 
         pdfView = vContent.findViewById(R.id.pdfView);
 
         (vContent.findViewById(R.id.backImg)).setOnClickListener(this);
-
-        TextUtility.setBold(tvStartUpLoad, true);
 
         return vContent;
     }

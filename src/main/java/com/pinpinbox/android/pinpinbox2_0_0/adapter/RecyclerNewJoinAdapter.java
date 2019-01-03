@@ -72,8 +72,6 @@ public class RecyclerNewJoinAdapter extends RecyclerView.Adapter {
         String strPicture = itemUserList.get(position).getPicture();
         String strName = itemUserList.get(position).getName();
 
-        TextUtility.setBold(holder.tvName);
-
         holder.tvName.setText(strName);
 
         if (SystemUtility.Above_Equal_V5()) {

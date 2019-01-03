@@ -10,13 +10,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -28,7 +25,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.richpath.RichPathView;
 import com.zhy.m.permission.MPermissions;
 import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
@@ -47,11 +43,6 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     private View vRPeditProfile, vRPworkManage, vRPmyFollow, vRPrecent, vRPbutPoint, vRPexchangeList, vRPsettings;
     private TextView tvLearnNow;
 
-    private RichPathView svgMenu;
-
-
-    private TextView reset;
-    private RelativeLayout r1, r2, r3, r4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,8 +60,6 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         initView(v);
 
         setRPlist(v);
-
-        setBold(v);
 
         setClick(v);
 
@@ -105,29 +94,16 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
     }
 
-    private void setBold(View v) {
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvToEditProfile), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvToWorkManage), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvToMyFollow), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvToRecent), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvToBuyPoint), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvToExchangeList), true);
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvSettings), true);
-
-        TextUtility.setBold(tvLearnNow, true);
-
-    }
 
     private void setClick(View v) {
 
-        ((LinearLayout) v.findViewById(R.id.linToEditProfile)).setOnClickListener(this);
-        ((LinearLayout) v.findViewById(R.id.linToWorkManage)).setOnClickListener(this);
-        ((LinearLayout) v.findViewById(R.id.linToMyFollow)).setOnClickListener(this);
-        ((LinearLayout) v.findViewById(R.id.linToRecent)).setOnClickListener(this);
-        ((LinearLayout) v.findViewById(R.id.linToBuyPoint)).setOnClickListener(this);
-        ((LinearLayout) v.findViewById(R.id.linToExchangeList)).setOnClickListener(this);
-        ((LinearLayout) v.findViewById(R.id.linSettings)).setOnClickListener(this);
+        ( v.findViewById(R.id.linToEditProfile)).setOnClickListener(this);
+        ( v.findViewById(R.id.linToWorkManage)).setOnClickListener(this);
+        ( v.findViewById(R.id.linToMyFollow)).setOnClickListener(this);
+        ( v.findViewById(R.id.linToRecent)).setOnClickListener(this);
+        ( v.findViewById(R.id.linToBuyPoint)).setOnClickListener(this);
+        ( v.findViewById(R.id.linToExchangeList)).setOnClickListener(this);
+        ( v.findViewById(R.id.linSettings)).setOnClickListener(this);
 
         tvLearnNow.setOnClickListener(this);
 
@@ -138,151 +114,6 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         init();
-
-
-//        final RichPath menuTop = svgMenu.findRichPathByName("top");
-//        final RichPath menuCenter = svgMenu.findRichPathByName("center");
-//        final RichPath menuBottom = svgMenu.findRichPathByName("bottom");
-//
-//
-//        menuTop.setPivotToCenter(true);
-//        menuCenter.setPivotToCenter(true);
-//        menuBottom.setPivotToCenter(true);
-//
-//
-//        r1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                RichPathAnimator
-//                        .animate(menuTop)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .translationX(0, 5, -5, 5, -5, 0)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//
-//                        .andAnimate(menuCenter)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .translationX(0, 5, -5, 5, -5, 0)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//                        .startDelay(200)
-//
-//                        .andAnimate(menuBottom)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .translationX(0, 5, -5, 5, -5, 0)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//                        .startDelay(400)
-//
-//
-//                        .start();
-//
-//
-//            }
-//        });
-//
-//
-//        r2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                RichPathAnimator
-//                        .animate(menuTop)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .translationY(0, 8, 0)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//
-//                        .andAnimate(menuCenter)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//
-//
-//                        .andAnimate(menuBottom)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .translationY(0, -8, 0)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//
-//
-//                        .start();
-//
-//
-//            }
-//        });
-//
-//        r3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//
-//                RichPathAnimator
-//                        .animate(menuTop)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .scaleX(0.2f, 1f)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//
-//                        .andAnimate(menuCenter)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .scaleX(0.2f, 1f)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//                        .startDelay(200)
-//
-//
-//                        .andAnimate(menuBottom)
-//                        .interpolator(new DecelerateInterpolator())
-//                        .scaleX(0.2f, 1f)
-//                        .fillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey), ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_first_grey))
-//                        .duration(300)
-//                        .startDelay(400)
-//
-//                        .start();
-//
-//
-//            }
-//        });
-//
-//        r4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//
-//
-//            }
-//        });
-//
-//
-//        reset.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                menuTop.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
-//                menuCenter.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
-//                menuBottom.setFillColor(ContextCompat.getColor(getActivity(), R.color.pinpinbox_2_0_0_second_grey));
-//
-//                menuTop.setScaleX(1f);
-//                menuCenter.setScaleX(1f);
-//                menuBottom.setScaleX(1f);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//            }
-//        });
-
 
     }
 

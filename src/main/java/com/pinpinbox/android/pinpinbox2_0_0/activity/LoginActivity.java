@@ -572,19 +572,19 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
     private void setTextBold() {
 
-        /*login*/
-        TextUtility.setBold(tvLoginTitle, tvLoginLogin, tvLoginToRegister, tvLoginFacebook, tvAboutUs);
-
-
-        /*register*/
-        TextUtility.setBold(tvRegisterTitle, tvRegisterNext, tvRegPassword, tvRegPasswordCheck);
-
-
-        /*verification code*/
-        TextUtility.setBold(tvVerTitle, tvVerSendPhone, tvVerFinish);
-
-        /*get password*/
-        TextUtility.setBold(tvPwdTitle, tvPwdSendPhone);
+//        /*login*/
+//        TextUtility.setBold(tvLoginTitle, tvLoginLogin, tvLoginToRegister, tvLoginFacebook, tvAboutUs);
+//
+//
+//        /*register*/
+//        TextUtility.setBold(tvRegisterTitle, tvRegisterNext, tvRegPassword, tvRegPasswordCheck);
+//
+//
+//        /*verification code*/
+//        TextUtility.setBold(tvVerTitle, tvVerSendPhone, tvVerFinish);
+//
+//        /*get password*/
+//        TextUtility.setBold(tvPwdTitle, tvPwdSendPhone);
 
     }
 
@@ -670,7 +670,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
                     tvRegCheckEmail.setText(R.string.pinpinbox_2_0_0_button_examination);
                     tvRegCheckEmail.setTextColor(Color.parseColor(ColorClass.WHITE));
                     isCheckedEmail = false;
-                    TextUtility.setBold(tvRegCheckEmail, false);
+
                 }
 
                 if (isEmail(s.toString())) {
@@ -2340,7 +2340,6 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
             if (p52Result == 1) {
 
-                TextUtility.setBold(tvRegCheckEmail, true);
                 tvRegCheckEmail.setBackgroundResource(0);
                 tvRegCheckEmail.setClickable(false);
                 tvRegCheckEmail.setText("OK");

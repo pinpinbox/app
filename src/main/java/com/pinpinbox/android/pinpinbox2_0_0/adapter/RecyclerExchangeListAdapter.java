@@ -77,8 +77,6 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
         mHolder.position = position;
 
         mHolder.tvExchangeName.setText(exchangeList.get(position).getName());
-        TextUtility.setBold(mHolder.tvExchangeName, true);
-
 
         if (isShowTime) {
 

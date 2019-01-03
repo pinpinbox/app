@@ -8,14 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.FileUtility;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
-import com.pinpinbox.android.Utility.FileUtility;
-import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.IntentControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -80,8 +79,6 @@ public class AppSettingsActivity extends DraggerActivity implements View.OnClick
         tvLogout.setOnClickListener(this);
         backImg.setOnClickListener(this);
 
-
-        TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
 
     }
 

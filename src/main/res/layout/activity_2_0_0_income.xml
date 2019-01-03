@@ -27,7 +27,6 @@
 
     <TextView
         android:id="@+id/tvBelowTitleText"
-        fontPath="fonts/OpenSans-Bold.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
@@ -69,7 +68,6 @@
 
 
             <TextView
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvAccumulation"
@@ -87,7 +85,6 @@
 
             <TextView
                 android:id="@+id/tvCountAccumulation"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvAccumulation"
@@ -127,7 +124,6 @@
 
 
             <TextView
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tvUnsettlement"
@@ -143,7 +139,6 @@
 
             <TextView
                 android:id="@+id/tvCountUnsettlement"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvUnsettlement"
@@ -183,7 +178,6 @@
 
             <TextView
                 android:id="@+id/tvCountWithdraw"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvWithdraw"

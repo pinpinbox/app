@@ -234,13 +234,11 @@ public class AlbumGroupActivity extends DraggerActivity implements View.OnClickL
         popChangeCooperation.setPopup(R.layout.pop_2_0_0_change_cooperation, R.style.pinpinbox_popupAnimation_bottom);
         View vPop = popChangeCooperation.getPopupView();
 
-        TextUtility.setBold((TextView)vPop.findViewById(R.id.tvTitle),true);
-
-        linPopGuide = (LinearLayout)vPop.findViewById(R.id.linPopGuide);
-        ImageView guideImg = (ImageView)vPop.findViewById(R.id.guideImg);
-        TextView tvApprover = (TextView)vPop.findViewById(R.id.tvApprover);
-        TextView tvEditor = (TextView)vPop.findViewById(R.id.tvEditor);
-        TextView tvViewer = (TextView)vPop.findViewById(R.id.tvViewer);
+        linPopGuide = vPop.findViewById(R.id.linPopGuide);
+        ImageView guideImg = vPop.findViewById(R.id.guideImg);
+        TextView tvApprover = vPop.findViewById(R.id.tvApprover);
+        TextView tvEditor = vPop.findViewById(R.id.tvEditor);
+        TextView tvViewer = vPop.findViewById(R.id.tvViewer);
 
         if(!strMyIdentity.equals("admin")){
             tvApprover.setVisibility(View.GONE);

@@ -18,7 +18,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
@@ -184,7 +183,7 @@ public class AlbumSponsorListActivity extends DraggerActivity implements View.On
 
         TextView tvAcTitile = (TextView) findViewById(R.id.tvActionBarTitle);
         tvAcTitile.setText(R.string.pinpinbox_2_0_0_title_who_sponsor_this_work);
-        TextUtility.setBold(tvAcTitile, true);
+
 
     }
 

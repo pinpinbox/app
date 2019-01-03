@@ -105,7 +105,6 @@ public class RecyclerHomeAdapter extends RecyclerView.Adapter {
 
         /*set album name*/
         try {
-            TextUtility.setBold(holder.tvAlbumName, true);
             holder.tvAlbumName.setText(albumList.get(position).getName());
         } catch (Exception e) {
             e.printStackTrace();

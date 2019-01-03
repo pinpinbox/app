@@ -111,8 +111,6 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
         /*set album name*/
         try {
 
-            TextUtility.setBold(holder.tvAlbumName, true);
-
             String strAlbumName = albumList.get(position).getName();
 
             holder.tvAlbumName.setText(strAlbumName);

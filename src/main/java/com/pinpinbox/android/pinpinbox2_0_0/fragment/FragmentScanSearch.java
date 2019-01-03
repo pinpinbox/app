@@ -95,8 +95,7 @@ public class FragmentScanSearch extends Fragment implements SurfaceHolder.Callba
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.lay_2_0_0_scan_search, container, false);
         CameraManager.init(getActivity());
-        viewfinderView = (ViewfinderView) v
-                .findViewById(R.id.viewfinder_view);
+        viewfinderView = v.findViewById(R.id.viewfinder_view);
         hasSurface = false;
         inactivityTimer = new InactivityTimer(getActivity());
 
@@ -104,8 +103,7 @@ public class FragmentScanSearch extends Fragment implements SurfaceHolder.Callba
     }
 
     private void setSurfaceView() {
-        surfaceView = (SurfaceView) v
-                .findViewById(R.id.preview_view);
+        surfaceView = v.findViewById(R.id.preview_view);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         if (hasSurface) {
             initCamera(surfaceHolder);

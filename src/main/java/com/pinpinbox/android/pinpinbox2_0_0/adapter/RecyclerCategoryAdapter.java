@@ -68,8 +68,6 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter {
 
         ImageUtility.setCommonImage(mActivity, holder.categoryImg, itemAlbumCategoryList.get(position).getImage_360x360());
 
-        TextUtility.setBold(holder.tvCategoryName, true);
-
         holder.tvCategoryName.setText(itemAlbumCategoryList.get(position).getName());
 
     }

@@ -117,8 +117,6 @@ public class SelectMyWorksActivity extends DraggerActivity implements View.OnCli
         backImg = (ImageView) findViewById(R.id.backImg);
         gridView = (GridView) findViewById(R.id.gridView);
         tvCreate = (TextView) findViewById(R.id.tvCreate);
-
-        TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
         
         backImg.setOnClickListener(this);
         tvCreate.setOnClickListener(this);

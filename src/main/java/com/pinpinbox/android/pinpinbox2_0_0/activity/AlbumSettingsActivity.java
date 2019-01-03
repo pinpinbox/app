@@ -32,7 +32,6 @@ import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerAlbumSettingsAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBarCodeAdapter;
@@ -368,15 +367,15 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
 
     private void setBold() {
 
-        TextUtility.setBold(
-                (TextView) findViewById(R.id.tv1),
-                (TextView) findViewById(R.id.tv2),
-                (TextView) findViewById(R.id.tv3),
-                (TextView) findViewById(R.id.tv4),
-                (TextView) findViewById(R.id.tvPoint),
-                (TextView) findViewById(R.id.tvAdvanced),
-                (TextView) findViewById(R.id.tvSponsorCountVisibility),
-                (TextView) findViewById(R.id.tvReward));
+//        TextUtility.setBold(
+//                (TextView) findViewById(R.id.tv1),
+//                (TextView) findViewById(R.id.tv2),
+//                (TextView) findViewById(R.id.tv3),
+//                (TextView) findViewById(R.id.tv4),
+//                (TextView) findViewById(R.id.tvPoint),
+//                (TextView) findViewById(R.id.tvAdvanced),
+//                (TextView) findViewById(R.id.tvSponsorCountVisibility),
+//                (TextView) findViewById(R.id.tvReward));
 
     }
 

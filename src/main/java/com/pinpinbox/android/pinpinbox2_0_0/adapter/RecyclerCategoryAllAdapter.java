@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -75,7 +74,6 @@ public class RecyclerCategoryAllAdapter extends RecyclerView.Adapter {
         /*set album name*/
         try {
             holder.tvAlbumName.setText(albumList.get(position).getName());
-            TextUtility.setBold(holder.tvAlbumName, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

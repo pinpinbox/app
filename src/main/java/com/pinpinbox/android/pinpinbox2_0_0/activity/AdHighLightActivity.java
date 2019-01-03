@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -54,11 +53,9 @@ public class AdHighLightActivity extends FragmentActivity implements View.OnClic
 
         vDarkBg = findViewById(R.id.vDarkBg);
 
-        bannerImg = (ImageView) findViewById(R.id.bannerImg);
+        bannerImg = findViewById(R.id.bannerImg);
 
-        tvClose = (TextView) findViewById(R.id.tvClose);
-
-        TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
+        tvClose = findViewById(R.id.tvClose);
 
         tvClose.setOnClickListener(this);
 

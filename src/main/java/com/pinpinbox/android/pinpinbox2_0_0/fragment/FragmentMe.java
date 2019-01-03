@@ -40,7 +40,6 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
@@ -102,7 +101,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by vmage on 2017/3/24.
  */
-public class FragmentMe extends Fragment implements View.OnClickListener{
+public class FragmentMe extends Fragment implements View.OnClickListener {
 
     private LoadingAnimation loading;
     private ExStaggeredGridLayoutManager manager;
@@ -111,7 +110,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
 
     private File fileCover;
 
-//    private PopupCustom popMenu;
+    //    private PopupCustom popMenu;
     private PopBoard board;
 
     private GetCreativeTask getCreativeTask;
@@ -204,7 +203,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
 
                 FragmentMe fragmentMe = (FragmentMe) ((MainActivity) activityList.get(i)).getFragment(FragmentMe.class.getSimpleName());
 
-                if(fragmentMe.isGetData()){
+                if (fragmentMe.isGetData()) {
                     (
                             (FragmentMe) ((MainActivity) activityList.get(i)).getFragment(FragmentMe.class.getSimpleName())
                     ).doRefresh(false);
@@ -236,33 +235,30 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
         View v = inflater.inflate(R.layout.fragment_2_0_0_me, container, false);
 
         rBackground = ((MainActivity) getActivity()).getBackground();
-        rFragmentBackground = (RelativeLayout) v.findViewById(R.id.rFragmentBackground);
-        rBackgroundParallax = (RelativeLayout) v.findViewById(R.id.rBackgroundParallax);
-        rCreativeName = (RelativeLayout) v.findViewById(R.id.rCreativeName);
+        rFragmentBackground = v.findViewById(R.id.rFragmentBackground);
+        rBackgroundParallax = v.findViewById(R.id.rBackgroundParallax);
+        rCreativeName = v.findViewById(R.id.rCreativeName);
 
-//        mOnScrollListener.setFloatToolBar(v.findViewById(R.id.rrr), v.findViewById(R.id.vvv));
+        messageImg = v.findViewById(R.id.messageImg);
+        aboutImg = v.findViewById(R.id.aboutImg);
+        shareImg = v.findViewById(R.id.shareImg);
+        incomeImg = v.findViewById(R.id.incomeImg);
 
+        tvCreativeName = v.findViewById(R.id.tvCreativeName);
+        tvUploadBanner = v.findViewById(R.id.tvUploadBanner);
 
-        messageImg = (ImageView) v.findViewById(R.id.messageImg);
-        aboutImg = (ImageView) v.findViewById(R.id.aboutImg);
-        shareImg = (ImageView) v.findViewById(R.id.shareImg);
-        incomeImg = (ImageView) v.findViewById(R.id.incomeImg);
-
-        tvCreativeName = (TextView) v.findViewById(R.id.tvCreativeName);
-        tvUploadBanner = (TextView) v.findViewById(R.id.tvUploadBanner);
-
-        bannerImg = (ImageView) v.findViewById(R.id.bannerImg);
-        rvAuthor = (RecyclerView) v.findViewById(R.id.rvAuthor);
-        pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
+        bannerImg = v.findViewById(R.id.bannerImg);
+        rvAuthor = v.findViewById(R.id.rvAuthor);
+        pbLoadMore = v.findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
 
 
-            rvAuthor.addItemDecoration(new SpacesItemDecoration(16, true));
+        rvAuthor.addItemDecoration(new SpacesItemDecoration(16, true));
 
         rvAuthor.setItemAnimator(new DefaultItemAnimator());
         rvAuthor.addOnScrollListener(mOnScrollListener);
 
-        pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.pinPinBoxRefreshLayout);
+        pinPinBoxRefreshLayout = v.findViewById(R.id.pinPinBoxRefreshLayout);
         pinPinBoxRefreshLayout.setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
             @Override
             public void onRefresh() {
@@ -282,46 +278,36 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
         });
 
         //20171002
-        SmoothProgressBar pbRefresh = (SmoothProgressBar) v.findViewById(R.id.pbRefresh);
+        SmoothProgressBar pbRefresh = v.findViewById(R.id.pbRefresh);
         pbRefresh.progressiveStop();
         pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);
         pinPinBoxRefreshLayout.setUserBgViewScale(rBackgroundParallax);
 
 
         viewHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_2_0_0_user, null);
-        userImg = (RoundCornerImageView) viewHeader.findViewById(R.id.userImg);
+        userImg = viewHeader.findViewById(R.id.userImg);
 
-        tvGuide = (TextView) viewHeader.findViewById(R.id.tvGuide);
-        tvName = (TextView) viewHeader.findViewById(R.id.tvName);
+        tvGuide = viewHeader.findViewById(R.id.tvGuide);
+        tvName = viewHeader.findViewById(R.id.tvName);
 
-        tvFollow = (TextView) viewHeader.findViewById(R.id.tvFollow);
-        tvViewed = (TextView) viewHeader.findViewById(R.id.tvViewed);
-        tvSponsor = (TextView) viewHeader.findViewById(R.id.tvSponsor);
+        tvFollow = viewHeader.findViewById(R.id.tvFollow);
+        tvViewed = viewHeader.findViewById(R.id.tvViewed);
+        tvSponsor = viewHeader.findViewById(R.id.tvSponsor);
 
+        linLink = viewHeader.findViewById(R.id.linLink);
 
-        TextUtility.setBold(tvName, true);
-        TextUtility.setBold(tvCreativeName, true);
-        TextUtility.setBold(tvFollow, true);
-        TextUtility.setBold(tvViewed, true);
-        TextUtility.setBold(tvSponsor, true);
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvAlbumsTitle), true);
-
-
-        linLink = (LinearLayout) viewHeader.findViewById(R.id.linLink);
-
-        webImg = (ImageView) viewHeader.findViewById(R.id.webImg);
-        facebookImg = (ImageView) viewHeader.findViewById(R.id.facebookImg);
-        googleImg = (ImageView) viewHeader.findViewById(R.id.googleImg);
-        instagramImg = (ImageView) viewHeader.findViewById(R.id.instagramImg);
-        linkedinImg = (ImageView) viewHeader.findViewById(R.id.linkedinImg);
-        pinterestImg = (ImageView) viewHeader.findViewById(R.id.pinterestImg);
-        twitterImg = (ImageView) viewHeader.findViewById(R.id.twitterImg);
-        youtubeImg = (ImageView) viewHeader.findViewById(R.id.youtubeImg);
+        webImg = viewHeader.findViewById(R.id.webImg);
+        facebookImg = viewHeader.findViewById(R.id.facebookImg);
+        googleImg = viewHeader.findViewById(R.id.googleImg);
+        instagramImg = viewHeader.findViewById(R.id.instagramImg);
+        linkedinImg = viewHeader.findViewById(R.id.linkedinImg);
+        pinterestImg = viewHeader.findViewById(R.id.pinterestImg);
+        twitterImg = viewHeader.findViewById(R.id.twitterImg);
+        youtubeImg = viewHeader.findViewById(R.id.youtubeImg);
 
 
-        linSponsorList = (LinearLayout) viewHeader.findViewById(R.id.linSponsorList);
-        linFollowMe = (LinearLayout) viewHeader.findViewById(R.id.linFollowMe);
-
+        linSponsorList = viewHeader.findViewById(R.id.linSponsorList);
+        linFollowMe = viewHeader.findViewById(R.id.linFollowMe);
 
 
         webImg.setOnClickListener(this);
@@ -1114,9 +1100,6 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
                 manager.setScrollEnabled(true);
 
 
-
-
-
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -1140,7 +1123,6 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
                     round = round + defaultCount;
 
                 }
-
 
 
                 isGetData = true;
@@ -1386,7 +1368,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
         return this.albumList;
     }
 
-    public boolean isGetData(){
+    public boolean isGetData() {
         return this.isGetData;
     }
 
@@ -1616,8 +1598,6 @@ public class FragmentMe extends Fragment implements View.OnClickListener{
 
 
     }
-
-
 
 
     @Override

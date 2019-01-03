@@ -32,7 +32,6 @@ import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.PickerView;
@@ -175,16 +174,16 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
         selectNewsletterImg.setOnClickListener(this);
 
 
-        TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv0), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv1), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv2), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv3), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv4), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv5), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv6), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv7), true);
-        TextUtility.setBold((TextView) findViewById(R.id.tv8), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tvTitle), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv0), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv1), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv2), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv3), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv4), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv5), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv6), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv7), true);
+//        TextUtility.setBold((TextView) findViewById(R.id.tv8), true);
 
         if (getData.getBoolean(Key.is_FB_Login, false)) {
             findViewById(R.id.linPassword).setVisibility(View.GONE);
@@ -343,7 +342,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
         popBirthday.setPopup(R.layout.pop_2_0_0_date, R.style.pinpinbox_popupAnimation_bottom);
         View v = popBirthday.getPopupView();
 
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
+//        TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
 
         TextView tvDateConfirm = v.findViewById(R.id.tvDateConfirm);
 

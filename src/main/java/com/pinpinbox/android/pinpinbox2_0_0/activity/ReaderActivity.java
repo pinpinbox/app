@@ -458,8 +458,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-        TextUtility.setBold(tvAlbumName, true);
-
 
         closeImg.setOnClickListener(this);
     }
@@ -1078,8 +1076,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     edAddress = vPage.findViewById(R.id.edAddress);
 
 
-                    TextUtility.setBold(tvTitle, true);
-
 
                     edPoint.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -1301,9 +1297,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
         /*end*/
         final TextView tvExchangeEnd = vPage.findViewById(R.id.tvExchangeEnd);
-
-        TextUtility.setBold(tvExchangeName);
-
 
 
         if (protocol108HashMap == null) {
@@ -1577,8 +1570,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
         /*end*/
         final TextView tvExchangeEnd = vPage.findViewById(R.id.tvExchangeEnd);
-
-        TextUtility.setBold(tvExchangeName, true);
 
         protocol111 = new Protocol111_SlotPhotoUsefor(
                 mActivity,
@@ -2458,7 +2449,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         LinearLayout linInfo = popMore.getPopupView().findViewById(R.id.linInfo);
 
         TextView tvCollect = popMore.getPopupView().findViewById(R.id.tvCollect);
-        TextUtility.setBold((TextView) popMore.getPopupView().findViewById(R.id.tvTitle), true);
 
         View vContent = popMore.getPopupView().findViewById(R.id.linBackground);
 
@@ -2576,9 +2566,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
         TextView tvShareFB = popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
         TextView tvShare = popSelectShare.getPopupView().findViewById(R.id.tvShare);
-
-        TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
-
 
 
         View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);

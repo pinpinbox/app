@@ -11,20 +11,18 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pinpinbox.android.SampleTest.CreateAlbum.TemplateListAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.SampleTest.CreateAlbum.TemplateListAdapter;
+import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemTemplate;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
-import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -32,7 +30,8 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemTemplate;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -118,9 +117,6 @@ public class TemListActivity extends DraggerActivity implements View.OnClickList
         backImg = (ImageView) findViewById(R.id.backImg);
         tvTitle = (TextView) findViewById(R.id.tvActionBarTitle);
         gvTemplate = (GridView) findViewById(R.id.gvTemplate);
-
-        TextUtility.setBold(tvTitle, true);
-
         backImg.setOnClickListener(this);
 
 

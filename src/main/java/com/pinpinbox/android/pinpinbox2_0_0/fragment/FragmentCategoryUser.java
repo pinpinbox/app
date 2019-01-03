@@ -13,7 +13,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CategoryBookCaseActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCategoryUserLargeAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
@@ -61,9 +60,6 @@ public class FragmentCategoryUser extends Fragment implements View.OnClickListen
         rvUser =  v.findViewById(R.id.rvUser);
         tvClose = v.findViewById(R.id.tvClose);
         tvTitle = v.findViewById(R.id.tvTitle);
-
-        TextUtility.setBold(tvTitle, true);
-
 
         tvClose.setOnClickListener(this);
 

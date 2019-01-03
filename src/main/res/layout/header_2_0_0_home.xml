@@ -92,8 +92,7 @@
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_itemtype_new"
                         android:textColor="@color/pinpinbox_2_0_0_first_text"
-                        android:textSize="@dimen/ppb200_common_text_first"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/ppb200_common_text_first" />
 
 
                 </LinearLayout>
@@ -123,8 +122,7 @@
                         android:letterSpacing="0.1"
                         android:text="@string/pinpinbox_2_0_0_itemtype_follow"
                         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
-                        android:textSize="@dimen/ppb200_common_text_first"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/ppb200_common_text_first" />
 
 
                 </LinearLayout>

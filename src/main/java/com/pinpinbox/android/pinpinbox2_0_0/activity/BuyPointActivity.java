@@ -150,9 +150,6 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
         tvSum = vfooter.findViewById(R.id.tvSum);
         tvConfirm = vfooter.findViewById(R.id.tvConfirm);
 
-        TextUtility.setBold((TextView) vHeader.findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvSum, true);
-
 
         gvPoint.addHeaderView(vHeader, null, false);
         gvPoint.addFooterView(vfooter, null, false);

@@ -573,7 +573,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         gvSort = popCreateSort.getPopupView().findViewById(R.id.gvSort);
         TextView tvSortConfirm = popCreateSort.getPopupView().findViewById(R.id.tvSortConfirm);
         tvSortConfirm.setOnClickListener(this);
-        TextUtility.setBold((TextView) popCreateSort.getPopupView().findViewById(R.id.tvTitle), true);
 
         popCreateSort.getPopupView().findViewById(R.id.linBackground).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -589,7 +588,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         TextView tvSort = popCreationSet.getPopupView().findViewById(R.id.tvSort);
         TextView tvSetAudio = popCreationSet.getPopupView().findViewById(R.id.tvSetAudio);
 
-        TextUtility.setBold((TextView) popCreationSet.getPopupView().findViewById(R.id.tvTitle));
 
 
         selectPreviewPage = popCreationSet.getPopupView().findViewById(R.id.selectPreviewPage);
@@ -640,7 +638,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         tvSelect_Photo_or_Template = popCreateAdd.getPopupView().findViewById(R.id.tvSelect_Photo_or_Template);
         photo_or_templateImg = popCreateAdd.getPopupView().findViewById(R.id.photo_or_templateImg);
 
-        TextUtility.setBold((TextView) popCreateAdd.getPopupView().findViewById(R.id.tvTitle));
 
         View vContentAdd = popCreateAdd.getPopupView().findViewById(R.id.linBackground);
 
@@ -671,9 +668,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         tvAudioTarget = popCreateAudio.getPopupView().findViewById(R.id.tvAudioTarget);
 
         uploadSingularAudioLoading = popCreateAudio.getPopupView().findViewById(R.id.loadingView);
-
-
-        TextUtility.setBold((TextView) popCreateAudio.getPopupView().findViewById(R.id.tvTitle));
 
 
         linearLayoutManager = new ScrollLinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false);

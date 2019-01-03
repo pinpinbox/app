@@ -23,9 +23,7 @@
     </style>
 
 
-
-
-    <style name="ppb200_dialog_bg" >
+    <style name="ppb200_dialog_bg">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:alpha">1</item>
@@ -33,8 +31,7 @@
     </style>
 
 
-
-    <style name="ppb200_common_detaillist_image" >
+    <style name="ppb200_common_detaillist_image">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
         <item name="android:scaleType">centerCrop</item>
@@ -133,7 +130,6 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_userarea_creativename</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
@@ -167,7 +163,6 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_staggeredgrid_album_name</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
         <item name="android:maxLines">3</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
@@ -207,7 +202,6 @@
         <item name="android:textSize">@dimen/ppb200_common_text_small</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
 
@@ -219,7 +213,6 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_first_size</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
@@ -230,7 +223,6 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_second_size</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
@@ -241,7 +233,6 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_third_size</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
@@ -254,7 +245,6 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_third_size</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
@@ -266,7 +256,6 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_detail_name</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
@@ -278,7 +267,6 @@
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_worksname</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
@@ -300,7 +288,6 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_second_size</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
@@ -462,7 +449,6 @@
     <style name="ppb200_action_bar_tab" parent="android:TextAppearance.Widget.TextView">
         <item name="android:paddingLeft">@dimen/ppb200_padding_margin_second</item>
         <item name="android:paddingRight">@dimen/ppb200_padding_margin_second</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">@dimen/ppb200_common_text_third</item>
@@ -472,6 +458,12 @@
         <item name="android:background">@drawable/click_2_0_0_default</item>
         <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
     </style>
+
+
+    <style name="ppb200_other_bold_text" parent="android:TextAppearance.Widget.TextView">
+        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    </style>
+
 
 
     <style name="ppb200_edittext_icon">
@@ -500,12 +492,6 @@
         <item name="fontPath">fonts/NotoSans-Regular.ttf</item>
     </style>
 
-
-    <!-- Base application theme. -->
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-    <!--<item name="android:listDivider">@drawable/staggered_divider</item>-->
-    <!--</style>-->
 
 
     <style name="pinpinbox_popupAnimation_bottom" parent="android:Animation">

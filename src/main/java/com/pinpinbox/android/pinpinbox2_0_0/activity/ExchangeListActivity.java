@@ -17,12 +17,11 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ResultCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
@@ -84,7 +83,6 @@ public class ExchangeListActivity extends DraggerActivity implements View.OnClic
         tvTabUnfinished.setOnClickListener(this);
         tvTabDone.setOnClickListener(this);
 
-        TextUtility.setBold(tvActionBarTitle, tvTabUnfinished, tvTabDone);
         ViewControl.AlphaTo1(tvActionBarTitle);
 
     }

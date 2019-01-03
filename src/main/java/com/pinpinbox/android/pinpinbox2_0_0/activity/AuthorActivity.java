@@ -33,7 +33,6 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
@@ -342,8 +341,8 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
 
         /*********************************************************************************************************/
 
-        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvAlbumsTitle), true);
-        TextUtility.setBold(tvName, tvCreativeName, tvFollow, tvViewed, tvSponsor);
+//        TextUtility.setBold((TextView) viewHeader.findViewById(R.id.tvAlbumsTitle), true);
+//        TextUtility.setBold(tvName, tvCreativeName, tvFollow, tvViewed, tvSponsor);
 
         linLink = viewHeader.findViewById(R.id.linLink);
 

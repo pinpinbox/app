@@ -18,7 +18,6 @@ import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
@@ -195,7 +194,6 @@ public class CategoryAllActivity extends DraggerActivity implements View.OnClick
         rvCategory = (RecyclerView) findViewById(R.id.rvCategory);
         backImg = (ImageView) findViewById(R.id.backImg);
         tvActionBarTitle = (TextView) findViewById(R.id.tvActionBarTitle);
-        TextUtility.setBold(tvActionBarTitle, true);
 
 
         pbLoadMore = (SmoothProgressBar) findViewById(R.id.pbLoadMore);

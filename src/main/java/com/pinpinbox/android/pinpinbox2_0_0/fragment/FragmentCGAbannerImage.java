@@ -68,7 +68,7 @@ public class FragmentCGAbannerImage extends Fragment implements View.OnClickList
         View v = inflater.inflate(R.layout.fragment_2_0_0_cga_banner_image, container, false);
 
 
-        imageImg = (ImageView)v.findViewById(R.id.imageImg);
+        imageImg = v.findViewById(R.id.imageImg);
 
 
         return v;

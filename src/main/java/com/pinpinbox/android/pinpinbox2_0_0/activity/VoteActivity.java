@@ -19,7 +19,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
@@ -175,8 +174,6 @@ public class VoteActivity extends DraggerActivity implements View.OnClickListene
                 DensityUtility.dip2px(getApplicationContext(), 134),
                 0,
                 DensityUtility.dip2px(getApplicationContext(), 32));
-
-        TextUtility.setBold(tvTitle, true);
 
 
         backImg.setOnClickListener(this);

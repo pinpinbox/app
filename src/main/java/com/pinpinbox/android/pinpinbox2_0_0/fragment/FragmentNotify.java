@@ -21,7 +21,6 @@ import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
@@ -152,27 +151,23 @@ public class FragmentNotify extends Fragment {
         View v = inflater.inflate(R.layout.fragment_2_0_0_notify, container, false);
 
         viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_notify, null);
-//        refreshImg = (ImageView) viewHeader.findViewById(R.id.refreshImg);
-        TextView tvTitle = (TextView) viewHeader.findViewById(R.id.tvTitle);
-        TextUtility.setBold(tvTitle, true);
 
-
-        pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
+        pbLoadMore = v.findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
 
 
-        tvGuide = (TextView) v.findViewById(R.id.tvGuide);
-        rvNotify = (RecyclerView) v.findViewById(R.id.rvNotify);
+        tvGuide = v.findViewById(R.id.tvGuide);
+        rvNotify = v.findViewById(R.id.rvNotify);
         rvNotify.setItemAnimator(new DefaultItemAnimator());
         rvNotify.addOnScrollListener(mOnScrollListener);
 
 
-        pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) v.findViewById(R.id.pinPinBoxRefreshLayout);
+        pinPinBoxRefreshLayout = v.findViewById(R.id.pinPinBoxRefreshLayout);
 
         setRefreshListener();
 
         //20171002
-        SmoothProgressBar pbRefresh = (SmoothProgressBar) v.findViewById(R.id.pbRefresh);
+        SmoothProgressBar pbRefresh = v.findViewById(R.id.pbRefresh);
         pbRefresh.progressiveStop();
         pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);
 
@@ -207,12 +202,6 @@ public class FragmentNotify extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-//        init();
-//
-//        setRecycler();
-//
-//        doGetPushQueue();
 
     }
 
@@ -261,10 +250,8 @@ public class FragmentNotify extends Fragment {
     private void setUpdateHeader() {
         boolean update = getdata.getBoolean(Key.update, false);
         if (update) {
-//                View vHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_update, null);
 
-
-            RelativeLayout rGoUpdateApp = (RelativeLayout) viewHeader.findViewById(R.id.rGoUpdateApp);
+            RelativeLayout rGoUpdateApp = viewHeader.findViewById(R.id.rGoUpdateApp);
 
             rGoUpdateApp.setVisibility(View.VISIBLE);
 

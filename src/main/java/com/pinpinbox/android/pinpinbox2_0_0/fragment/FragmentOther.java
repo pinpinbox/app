@@ -460,10 +460,6 @@ public class FragmentOther extends Fragment implements OnDetailClickListener, Cl
         TextView tvShareFB = popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
         TextView tvShare = popSelectShare.getPopupView().findViewById(R.id.tvShare);
 
-        TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvShareFB, true);
-        TextUtility.setBold(tvShare, true);
-
         View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);
 
         tvShareFB.setOnTouchListener(new ClickDragDismissListener(vContents, this));

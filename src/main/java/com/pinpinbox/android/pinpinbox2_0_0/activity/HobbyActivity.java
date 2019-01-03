@@ -150,8 +150,6 @@ public class HobbyActivity extends DraggerActivity implements View.OnClickListen
         tvTitle.setText(R.string.pinpinbox_2_0_0_title_select_hobby);
         tvBelowTitleText.setText(R.string.pinpinbox_2_0_0_other_text_hobby_select_count);
 
-        TextUtility.setBold(tvTitle, true);
-
         tvConfirm.setOnClickListener(this);
         backImg.setOnClickListener(this);
 

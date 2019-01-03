@@ -399,8 +399,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         moreImg = (ImageView) findViewById(R.id.moreImg);
 
 
-        TextUtility.setBold(tvAlbumName, tvAlbumAuthor, tvEvent, tvLikeCount, tvMessageCount, tvSponsorCount);
-
 
 //        try {
 //            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
@@ -2675,7 +2673,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         LinearLayout linShare = v.findViewById(R.id.linShare);
         LinearLayout linReport = v.findViewById(R.id.linReport);
 
-        TextUtility.setBold((TextView) v.findViewById(R.id.tvTitle), true);
 
         TextView tvCollect = v.findViewById(R.id.tvCollect);
 

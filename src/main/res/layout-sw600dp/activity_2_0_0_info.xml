@@ -82,7 +82,6 @@
 
                         <TextView
                             android:id="@+id/tvLikeCount"
-                            fontPath="fonts/OpenSans-Bold.ttf"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -90,7 +89,7 @@
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            />
 
                         <ImageView
                             android:layout_width="14dp"
@@ -112,7 +111,7 @@
 
                         <TextView
                             android:id="@+id/tvMessageCount"
-                            fontPath="fonts/OpenSans-Bold.ttf"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -120,7 +119,7 @@
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                          />
 
                         <ImageView
                             android:layout_width="14dp"
@@ -143,7 +142,7 @@
 
                         <TextView
                             android:id="@+id/tvSponsorCount"
-                            fontPath="fonts/OpenSans-Bold.ttf"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -151,7 +150,7 @@
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                          />
 
                         <ImageView
                             android:layout_width="14dp"
@@ -336,7 +335,6 @@
 
                     <TextView
                         android:id="@+id/tvEvent"
-                        fontPath="fonts/OpenSans-Bold.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -345,7 +343,7 @@
                         android:text=""
                         android:textColor="@color/pinpinbox_2_0_0_first_main"
                         android:textSize="@dimen/ppb200_common_text_first"
-                        android:textStyle="bold" />
+                       />
 
                     <TextView
                         android:id="@+id/tvVote"
@@ -463,7 +461,6 @@
 
         <TextView
             android:id="@+id/tvAuthor"
-            fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_third"

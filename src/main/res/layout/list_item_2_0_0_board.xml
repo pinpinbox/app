@@ -31,6 +31,7 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/ppb200_other_bold_text"
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,8 +40,6 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/pinpinbox_2_0_0_first_text"
-                android:textStyle="bold"
-                fontPath="fonts/OpenSans-Bold.ttf"
                 android:textSize="@dimen/ppb200_common_text_third" />
 
 

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -56,8 +55,6 @@ public class RecyclerSelectAlbumAdapter extends RecyclerView.Adapter {
         ViewHolder mHolder = (ViewHolder) holder;
         mHolder.position = position;
 
-
-        TextUtility.setBold(mHolder.tvAlbumName);
         mHolder.tvAlbumName.setText(itemAlbumList.get(position).getName());
 
 

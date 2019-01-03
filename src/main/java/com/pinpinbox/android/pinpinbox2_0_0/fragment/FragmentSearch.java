@@ -25,7 +25,6 @@ import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
@@ -141,9 +140,6 @@ public class FragmentSearch extends Fragment{
         tvSearchUserTitle = vHeader.findViewById(R.id.tvSearchUserTitle);
         tvSearchAlbumTitle = vHeader.findViewById(R.id.tvSearchAlbumTitle);
         tvGuideNoUser = vHeader.findViewById(R.id.tvGuideNoUser);
-
-
-        TextUtility.setBold(tvSearchUserTitle, tvSearchAlbumTitle);
 
         return v;
     }

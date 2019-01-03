@@ -134,7 +134,6 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
     }
 
     private void setEventJoinCount(ViewHolder holder, int position) {
-        TextUtility.setBold(holder.tvVoteCount, true);
         holder.tvVoteCount.setText(itemAlbumList.get(position).getEvent_join() + "");
     }
 
@@ -164,8 +163,6 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     private void setAlbumName(ViewHolder holder, int position) {
         try {
-            TextUtility.setBold(holder.tvAlbumName, true);
-
             String strAlbumName = itemAlbumList.get(position).getName();
             holder.tvAlbumName.setText(strAlbumName);
         } catch (Exception e) {

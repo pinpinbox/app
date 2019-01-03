@@ -71,7 +71,8 @@ public class ProtocolKey {
     public static String contribution = "contribution";
     public static String categoryarea_style = "categoryarea_style";
     public static String category_id = "category_id";
-
+    public static String contribute_endtime = "contribute_endtime";
+    public static String contribute_starttime = "contribute_starttime";
 
     //d
     public static String data = "data";
@@ -257,6 +258,8 @@ public class ProtocolKey {
     public static String video = "video";
     public static String vote_left = "vote_left";
     public static String videotext = "videotext";
+    public static String vote_endtime = "vote_endtime";
+    public static String vote_starttime = "vote_starttime";
 
     //w
     public static String web = "web";

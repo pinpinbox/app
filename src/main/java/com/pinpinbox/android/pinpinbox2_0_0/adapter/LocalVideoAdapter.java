@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v4.util.LruCache;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersSimpleAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import java.util.List;
@@ -130,14 +129,12 @@ public class LocalVideoAdapter extends BaseAdapter implements
         if (convertView == null) {
             mHeaderHolder = new HeaderViewHolder();
             convertView = mInflater.inflate(R.layout.list_item_2_0_0_header_date, parent, false);
-            mHeaderHolder.mTextView = (TextView) convertView
-                    .findViewById(R.id.tvDate);
+            mHeaderHolder.mTextView = convertView.findViewById(R.id.tvDate);
             convertView.setTag(mHeaderHolder);
         } else {
             mHeaderHolder = (HeaderViewHolder) convertView.getTag();
         }
-        TextPaint tp = mHeaderHolder.mTextView.getPaint();
-        tp.setFakeBoldText(true);
+
         mHeaderHolder.mTextView.setText(hasHeaderIdList.get(position).getTime());
 
         return convertView;

@@ -30,28 +30,25 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.Utility.Gradient.ScrimUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.HeaderSpanSizeLookup;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerUserAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -59,8 +56,10 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewVisibility;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
+import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ChangeTypeListener;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerUserAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -174,8 +173,6 @@ public class TypeFacebookFriendActivity extends Activity implements View.OnClick
         tvBottom = findViewById(R.id.tvBottom);
 
 
-        TextUtility.setBold(tvContents, true);
-
 
         tvConfirm.setOnClickListener(this);
         tvBottom.setOnClickListener(this);
@@ -198,8 +195,6 @@ public class TypeFacebookFriendActivity extends Activity implements View.OnClick
         rvFacebookFriends.setLayoutManager(manager);
 
         View vHeader = LayoutInflater.from(this).inflate(R.layout.header_2_0_0_title_no_actionbar, null);
-
-        TextUtility.setBold((TextView) vHeader.findViewById(R.id.tvTitle), true);
 
 
         RecyclerViewUtils.setHeaderView(rvFacebookFriends, vHeader);

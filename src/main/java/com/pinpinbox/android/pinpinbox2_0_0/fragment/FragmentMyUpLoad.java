@@ -500,9 +500,6 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
         TextView tvShareFB = popSelectShare.getPopupView().findViewById(R.id.tvShareFB);
         TextView tvShare = popSelectShare.getPopupView().findViewById(R.id.tvShare);
 
-        TextUtility.setBold((TextView) popSelectShare.getPopupView().findViewById(R.id.tvTitle), true);
-        TextUtility.setBold(tvShareFB, true);
-        TextUtility.setBold(tvShare, true);
 
         View vContents = popSelectShare.getPopupView().findViewById(R.id.linBackground);
 
@@ -1763,10 +1760,6 @@ public class FragmentMyUpLoad extends Fragment implements OnDetailClickListener,
 
             TextView tvEditAlbum = popEdit.getPopupView().findViewById(R.id.tvEditAlbum);
             TextView tvEditAlbumInfo = popEdit.getPopupView().findViewById(R.id.tvEditAlbumInfo);
-
-            TextUtility.setBold(tvEditAlbum, true);
-            TextUtility.setBold(tvEditAlbumInfo, true);
-            TextUtility.setBold((TextView) popEdit.getPopupView().findViewById(R.id.tvTitle), true);
 
             View vContent = popEdit.getPopupView().findViewById(R.id.linBackground);
 

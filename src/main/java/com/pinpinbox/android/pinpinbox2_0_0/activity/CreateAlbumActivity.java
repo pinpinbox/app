@@ -8,13 +8,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextPaint;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -63,7 +59,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by vmage on 2017/1/17.
  */
-public class CreateAlbumActivity extends DraggerActivity implements SmartTabLayout.TabProvider {
+public class CreateAlbumActivity extends DraggerActivity {
 
     private Activity mActivity;
     private NoConnect noConnect;
@@ -167,7 +163,7 @@ public class CreateAlbumActivity extends DraggerActivity implements SmartTabLayo
         rBackground = (RelativeLayout) findViewById(R.id.rBackground);
         rActionBar = (RelativeLayout) findViewById(R.id.rActionBar);
 
-        viewPagerTab.setCustomTabView(this);
+
         viewPager.setOffscreenPageLimit(4);
     }
 
@@ -184,41 +180,7 @@ public class CreateAlbumActivity extends DraggerActivity implements SmartTabLayo
         viewPagerTab.setViewPager(viewPager);
     }
 
-    public void getFragment() {
 
-        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
-
-        Fragment fragment = null;
-
-        for (int i = 0; i < fragmentList.size(); i++) {
-
-            fragment = fragmentList.get(i);
-            String strFragmentName = fragment.getClass().getSimpleName();
-
-            if (strFragmentName.equals(FragmentTemOwn2.class.getSimpleName())) {
-                fragmentTemOwn2 = (FragmentTemOwn2) fragment;
-            }
-
-            if (strFragmentName.equals(FragmentTemHot2.class.getSimpleName())) {
-                fragmentTemHot2 = (FragmentTemHot2) fragment;
-            }
-
-            if (strFragmentName.equals(FragmentTemFree2.class.getSimpleName())) {
-                fragmentTemFree2 = (FragmentTemFree2) fragment;
-            }
-
-            if (strFragmentName.equals(FragmentTemSponsored2.class.getSimpleName())) {
-                fragmentTemSponsored2 = (FragmentTemSponsored2) fragment;
-            }
-
-
-            MyLog.Set("d", getClass(), "strFragmentName => " + strFragmentName);
-
-
-        }
-
-
-    }
 
     private void setPageListener() {
 
@@ -321,38 +283,7 @@ public class CreateAlbumActivity extends DraggerActivity implements SmartTabLayo
         popupList.show(rBackground);
     }
 
-    public void refreshFragment() {
 
-        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
-
-        for (int i = 0; i < fragmentList.size(); i++) {
-
-            Fragment fragment = fragmentList.get(i);
-
-
-            String strFragmentName = fragment.getClass().getSimpleName();
-
-            switch (strFragmentName) {
-
-                case "FragmentTemHot2":
-                    ((FragmentTemHot2) fragment).doRefresh(false);
-                    break;
-
-                case "FragmentTemFree2":
-                    ((FragmentTemFree2) fragment).doRefresh(false);
-                    break;
-
-                case "FragmentTemSponsored2":
-                    ((FragmentTemSponsored2) fragment).doRefresh(false);
-                    break;
-
-                case "FragmentTemOwn2":
-                    ((FragmentTemOwn2) fragment).doRefresh(false);
-                    break;
-            }
-
-        }
-    }
 
     private void connectInstability() {
 
@@ -408,7 +339,6 @@ public class CreateAlbumActivity extends DraggerActivity implements SmartTabLayo
 
                 case R.id.rActionBar:
 
-                    getFragment();
 
                     int intPage = viewPager.getCurrentItem();
 
@@ -535,46 +465,7 @@ public class CreateAlbumActivity extends DraggerActivity implements SmartTabLayo
         }
     }
 
-    @Override
-    public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
 
-        LayoutInflater inflater = LayoutInflater.from(container.getContext());
-        View vTab = inflater.inflate(R.layout.tab_text, container, false);
-
-        TextView tvTab = (TextView) vTab.findViewById(R.id.tvTab);
-
-        switch (position) {
-            case 0:
-                tvTab.setText("已取得");
-                tvTab.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-
-                TextPaint tp = tvTab.getPaint();
-                tp.setFakeBoldText(true);
-
-                tabs.add(position, tvTab);
-                break;
-            case 1:
-                tvTab.setText("熱 門");
-                tabs.add(position, tvTab);
-                break;
-            case 2:
-                tvTab.setText("免 費");
-                tabs.add(position, tvTab);
-                break;
-
-            case 3:
-                tvTab.setText("贊 助");
-                tabs.add(position, tvTab);
-                break;
-
-
-            default:
-                throw new IllegalStateException("Invalid position: " + position);
-        }
-
-
-        return vTab;
-    }
 
 
     @Override

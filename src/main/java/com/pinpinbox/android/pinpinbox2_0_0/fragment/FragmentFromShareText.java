@@ -110,10 +110,10 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
     private void pageMyType() {
 
         tvTabMy.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-        TextUtility.setBold(tvTabMy, true);
+
 
         tvTabShare.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-        TextUtility.setBold(tvTabShare, false);
+
 
     }
 
@@ -121,10 +121,10 @@ public class FragmentFromShareText extends Fragment implements View.OnClickListe
 
 
         tvTabMy.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-        TextUtility.setBold(tvTabMy, false);
+
 
         tvTabShare.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-        TextUtility.setBold(tvTabShare, true);
+
 
 
     }

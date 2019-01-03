@@ -102,8 +102,6 @@ public class MyCollectActivity extends DraggerActivity implements View.OnClickLi
 
         /*default*/
         tabs.get(0).setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-        TextUtility.setBold(tabs.get(0), true);
-
 
         viewPager.setOffscreenPageLimit(4);
 

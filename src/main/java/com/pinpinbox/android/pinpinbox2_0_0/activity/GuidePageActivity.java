@@ -105,8 +105,6 @@ public class GuidePageActivity extends DraggerActivity {
 
             TextView tvDescription = view.findViewById(R.id.tvDescription);
 
-            TextUtility.setBold(tvTitle, true);
-
 
             switch (i){
 

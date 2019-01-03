@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersSimpleAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 
@@ -123,14 +122,11 @@ public class LocalPhotoAdapter extends BaseAdapter implements
         if (convertView == null) {
             mHeaderHolder = new HeaderViewHolder();
             convertView = mInflater.inflate(R.layout.list_item_2_0_0_header_date, parent, false);
-            mHeaderHolder.mTextView = (TextView) convertView
-                    .findViewById(R.id.tvDate);
+            mHeaderHolder.mTextView = convertView.findViewById(R.id.tvDate);
             convertView.setTag(mHeaderHolder);
         } else {
             mHeaderHolder = (HeaderViewHolder) convertView.getTag();
         }
-
-        TextUtility.setBold(mHeaderHolder.mTextView, true);
 
         mHeaderHolder.mTextView.setText(hasHeaderIdList.get(position).getTime());
 

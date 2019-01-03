@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/tvBannerName"
         style="@style/ppb200_title_second"
-        android:text="钉上你的创作计划"
+        android:text=""
         android:layout_marginBottom="@dimen/ppb200_padding_margin_first"/>
 
 

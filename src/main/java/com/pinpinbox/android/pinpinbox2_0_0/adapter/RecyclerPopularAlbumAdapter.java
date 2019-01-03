@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -17,12 +16,9 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -107,8 +103,6 @@ public interface OnRecyclerViewListener {
 
         /*set album name*/
         try {
-
-            TextUtility.setBold(holder.tvAlbumName, true);
 
             String strAlbumName = albumList.get(position).getName();
 

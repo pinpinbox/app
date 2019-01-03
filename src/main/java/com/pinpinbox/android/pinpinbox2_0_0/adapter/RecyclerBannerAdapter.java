@@ -21,7 +21,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.AdHighLightActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -103,8 +102,6 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
         }
 
         holder.position = position;
-
-        TextUtility.setBold(holder.tvBannerName);
 
         holder.tvBannerName.setText(itemHomeBannerList.get(position).getName());
 

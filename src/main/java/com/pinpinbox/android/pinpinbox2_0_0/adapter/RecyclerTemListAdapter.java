@@ -89,8 +89,6 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
                     .tag(mActivity.getApplicationContext())
                     .into(holder.coverImg);
 
-            TextPaint tp = holder.tvTemName.getPaint();
-            tp.setFakeBoldText(true);
             holder.tvTemName.setText(strTemName);
 
 

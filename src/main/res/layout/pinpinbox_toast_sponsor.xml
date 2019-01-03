@@ -48,19 +48,6 @@
                 android:textSize="@dimen/ppb200_common_text_first"
                 android:textStyle="bold" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tvMessage"-->
-                <!--android:layout_marginTop="4dp"-->
-                <!--fontPath="fonts/OpenSans-Bold.ttf"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:ellipsize="end"-->
-                <!--android:letterSpacing="0.1"-->
-                <!--android:maxLines="2"-->
-                <!--android:text="@string/pinpinbox_2_0_0_toast_message_thank_by_sponsor"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/ppb200_common_text_first"-->
-                <!--android:textStyle="bold" />-->
 
 
         </LinearLayout>

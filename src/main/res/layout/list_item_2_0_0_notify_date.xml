@@ -40,7 +40,7 @@
 
 
         <TextView
-            fontPath="fonts/OpenSans-Bold.ttf"
+            style="@style/ppb200_other_bold_text"
             android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,7 +50,6 @@
             android:gravity="bottom"
             android:letterSpacing="0.1"
             android:text=""
-            android:textStyle="bold"
             android:textColor="@color/pinpinbox_2_0_0_first_text"
             android:textSize="@dimen/ppb200_common_text_first" />
 

@@ -86,7 +86,7 @@
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
                             android:textSize="@dimen/ppb200_common_text_first"
-                            android:textStyle="bold" />
+                             />
 
                         <ImageView
                             android:layout_width="14dp"
@@ -117,7 +117,7 @@
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
                             android:textSize="@dimen/ppb200_common_text_first"
-                            android:textStyle="bold" />
+                             />
 
                         <ImageView
                             android:layout_width="14dp"
@@ -149,7 +149,7 @@
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_first_text"
                             android:textSize="@dimen/ppb200_common_text_first"
-                            android:textStyle="bold" />
+                             />
 
                         <ImageView
                             android:layout_width="14dp"
@@ -343,7 +343,7 @@
                         android:text=""
                         android:textColor="@color/pinpinbox_2_0_0_first_main"
                         android:textSize="@dimen/ppb200_common_text_first"
-                        android:textStyle="bold" />
+                         />
 
                     <TextView
                         android:id="@+id/tvVote"

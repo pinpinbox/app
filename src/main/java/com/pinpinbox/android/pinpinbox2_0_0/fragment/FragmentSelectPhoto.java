@@ -51,7 +51,6 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.OkHttpClientManager;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersGridView;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationTemplate2Activity;
@@ -193,17 +192,16 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
         View v = inflater.inflate(R.layout.fragment_2_0_0_select_photo, container, false);
         v.setOnTouchListener(this);
 
-        rBackground = (RelativeLayout) v.findViewById(R.id.rBackground);
-        rBottom = (RelativeLayout) v.findViewById(R.id.rBottom);
-        gvPhoto = (StickyGridHeadersGridView) v.findViewById(R.id.gvPhoto);
-        tvAlbumCount = (TextView) v.findViewById(R.id.tvAlbumCount);
-        tvSelectCount = (TextView) v.findViewById(R.id.tvSelectCount);
-        tvStartUpLoad = (TextView) v.findViewById(R.id.tvStartUpLoad);
-        backImg = (ImageView) v.findViewById(R.id.backImg);
-        cameraImg = (ImageView) v.findViewById(R.id.cameraImg);
-        sizeImg = (ImageView) v.findViewById(R.id.sizeImg);
+        rBackground = v.findViewById(R.id.rBackground);
+        rBottom = v.findViewById(R.id.rBottom);
+        gvPhoto = v.findViewById(R.id.gvPhoto);
+        tvAlbumCount = v.findViewById(R.id.tvAlbumCount);
+        tvSelectCount = v.findViewById(R.id.tvSelectCount);
+        tvStartUpLoad = v.findViewById(R.id.tvStartUpLoad);
+        backImg = v.findViewById(R.id.backImg);
+        cameraImg = v.findViewById(R.id.cameraImg);
+        sizeImg = v.findViewById(R.id.sizeImg);
 
-        TextUtility.setBold(tvStartUpLoad, true);
 
         return v;
     }
@@ -998,12 +996,9 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
         final PopupCustom p = new PopupCustom(getActivity());
         p.setPopup(R.layout.pop_2_0_0_select_photo_size, R.style.pinpinbox_popupAnimation_bottom);
 
-        TextView tvGeneral = (TextView) p.getPopupView().findViewById(R.id.tvGeneral);
-        TextView tvOriginal = (TextView) p.getPopupView().findViewById(R.id.tvOriginal);
+        TextView tvGeneral = p.getPopupView().findViewById(R.id.tvGeneral);
+        TextView tvOriginal = p.getPopupView().findViewById(R.id.tvOriginal);
 
-        TextUtility.setBold(tvGeneral, true);
-        TextUtility.setBold(tvOriginal, true);
-        TextUtility.setBold((TextView) p.getPopupView().findViewById(R.id.tvTitle), true);
 
         /*一般上傳*/
         tvGeneral.setOnClickListener(new View.OnClickListener() {
@@ -1197,22 +1192,19 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
     private void dispatchTakePictureIntent() {
 
 
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (createMode == 0) {
 
             try {
 
-                FileUtility.createCamDir(getActivity(),id);
+                FileUtility.createCamDir(getActivity(), id);
 
                 camFile = FileUtility.createCamFile(getActivity(), id);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
 
 
             if (SystemUtility.getSystemVersion() >= Build.VERSION_CODES.N) {

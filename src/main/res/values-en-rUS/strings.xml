@@ -254,6 +254,8 @@
     <string name="pinpinbox_2_0_0_toast_message_can_not_send_continuous">Can not be sent continuously</string>
     <string name="pinpinbox_2_0_0_toast_message_text_is_not_fill_in">Can not send blank message</string>
     <string name="pinpinbox_2_0_0_toast_message_event_is_finish">The event has ended</string>
+    <string name="pinpinbox_2_0_0_toast_message_vote_is_finish">Voting has ended</string>
+    <string name="pinpinbox_2_0_0_toast_message_contribute_is_finish">Contribute has ended</string>
     <string name="pinpinbox_2_0_0_toast_message_album_is_saving">Saving..</string>
     <string name="pinpinbox_2_0_0_toast_message_select_category_first">Choose category first</string>
     <string name="pinpinbox_2_0_0_toast_message_thank_by_sponsor">Thank you for your sponsorship</string>

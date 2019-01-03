@@ -25,6 +25,7 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
+import com.pinpinbox.android.Utility.TimeUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
@@ -49,7 +50,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.SocketTimeoutException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -69,6 +73,7 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
     private String TAG = TagClass.TagEventActivity;
     private String id, token;
     private String url, event_id, image, strName, strTitle, strPrefixText, strSpecialUrl;
+    private String voteStarttime, voteEndtime, contributeEndtime, contributeStarttime;
     private String p17Result, p17Message;
 
     private int contribution = 0;
@@ -78,6 +83,12 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
     private static final int DoGetEvent = 0;
     private static final int DoGetMyCollect = 1;
 
+    private long curt = 0;
+    private long cbst = 0;
+    private long cbnt = 0;
+    private long votest = 0;
+    private long votent = 0;
+
     private ArrayList<String> eventTemplateList;
     private ArrayList<HashMap<String, Object>> canContributeList;
 
@@ -86,10 +97,6 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
     private TextView tvName, tvTitle, tvEvent, tvContribute, tvExit, tvPopularity, tvExchange;
     private LinearLayout linVote;
     private RelativeLayout rDetail;
-
-//    public void setCanCreate(boolean canCreate) {
-//        this.canCreate = canCreate;
-//    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,10 +150,6 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
         tvExchange = (TextView) findViewById(R.id.tvExchange);
 
         eventImg = (ImageView) findViewById(R.id.eventImg);
-
-        TextUtility.setBold(tvName, true);
-
-
 
         tvEvent.setOnClickListener(this);
         tvContribute.setOnClickListener(this);
@@ -270,23 +273,26 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
 
             for (int i = 0; i < count; i++) {
 
-                boolean contributionstatus = (boolean) canContributeList.get(i).get("contributionstatus");
-
-                if (contributionstatus) {
-
-                    tvContribute.setText(R.string.pinpinbox_2_0_0_button_contribute_or_cancel);
-
-                    if (strSpecialUrl != null && !strSpecialUrl.equals("") && !strSpecialUrl.equals("null")) {
-                        tvExchange.setVisibility(View.VISIBLE);
+                try {
+                    boolean contributionstatus = (boolean) canContributeList.get(i).get("contributionstatus");
+                    if (contributionstatus) {
+                        tvContribute.setText(R.string.pinpinbox_2_0_0_button_contribute_or_cancel);
+                        if (strSpecialUrl != null && !strSpecialUrl.equals("") && !strSpecialUrl.equals("null")) {
+                            tvExchange.setVisibility(View.VISIBLE);
+                        }
+                        break;
+                    } else {
+                        tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
+                        tvExchange.setVisibility(View.GONE);
                     }
-
-                    break;
-                } else {
+                } catch (Exception e) {
+                    e.printStackTrace();
                     tvContribute.setText(R.string.pinpinbox_2_0_0_event_contributors);
                     tvExchange.setVisibility(View.GONE);
+                    break;
                 }
-
             }
+
 
         } else {
 
@@ -505,6 +511,11 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
                         intPopularity = JsonUtility.GetInt(jsonEvent, ProtocolKey.popularity);
                         contribution = JsonUtility.GetInt(jsonEvent, ProtocolKey.contribution);
                         strPrefixText = JsonUtility.GetString(jsonEvent, ProtocolKey.prefix_text);
+                        contributeStarttime = JsonUtility.GetString(jsonEvent, ProtocolKey.contribute_starttime);
+                        contributeEndtime = JsonUtility.GetString(jsonEvent, ProtocolKey.contribute_endtime);
+                        voteStarttime = JsonUtility.GetString(jsonEvent, ProtocolKey.vote_starttime);
+                        voteEndtime = JsonUtility.GetString(jsonEvent, ProtocolKey.vote_endtime);
+
 
                         JSONObject jsonSpecial = new JSONObject(special);
                         strSpecialUrl = JsonUtility.GetString(jsonSpecial, ProtocolKey.url);
@@ -574,12 +585,43 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
                 }
 
 
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date curDate = new Date(System.currentTimeMillis());
+                String currentTime = df.format(curDate);
+
+                try {
+                    curt = TimeUtility.dateToStamp(currentTime);
+
+                    cbst = TimeUtility.dateToStamp(contributeStarttime);
+                    cbnt = TimeUtility.dateToStamp(contributeEndtime);
+
+                    votest = TimeUtility.dateToStamp(voteStarttime);
+                    votent = TimeUtility.dateToStamp(voteEndtime);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if (curt >= cbst && curt < cbnt) {
+                    tvContribute.setVisibility(View.VISIBLE);
+                } else {
+                    tvContribute.setVisibility(View.GONE);
+                }
+
+                if (curt >= votest && curt < votent) {
+                    linVote.setVisibility(View.VISIBLE);
+                } else {
+                    linVote.setVisibility(View.GONE);
+                }
+
+
                 if (p76Result == 1) {
                     doGetMyCollect();
                 } else if (p76Result == 2) {
                     tvContribute.setBackgroundResource(R.drawable.click_2_0_0_second_grey_button_frame_white_radius);
                     tvContribute.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                     tvContribute.setText(R.string.pinpinbox_2_0_0_toast_message_event_is_finish);
+                    tvContribute.setVisibility(View.VISIBLE);
                     tvContribute.setClickable(false);
                 }
 
@@ -596,21 +638,6 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
                 DialogV2Custom.BuildUnKnow(mActivity, this.getClass().getSimpleName());
             }
         }
-
-//        private void viewAnimStart() {
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//
-//                    ViewPropertyAnimator alphaTo1 = findViewById(R.id.scrollView).animate();
-//                    alphaTo1.setDuration(400)
-//                            .alpha(1)
-//                            .start();
-//
-//                }
-//            }, 200);
-//        }
-
 
     }
 
@@ -679,17 +706,32 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
                 } else if (p76Result == 1) {
 
 
-                    FlurryUtil.onEvent(FlurryKey.event_select_choose_own_work);
-                    Bundle bundle = new Bundle();
-                    bundle.putStringArrayList("templates", eventTemplateList);
-                    bundle.putString("event_id", event_id);
-                    bundle.putInt("contribution", contribution);
-                    bundle.putString(Key.prefix_text, strPrefixText);
-                    bundle.putString(Key.special, strSpecialUrl);
-                    Intent intent = new Intent(mActivity, SelectMyWorksActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    ActivityAnim.StartAnim(mActivity);
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date curDate = new Date(System.currentTimeMillis());
+                    String currentTime = df.format(curDate);
+
+                    try {
+                        curt = TimeUtility.dateToStamp(currentTime);
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (curt >= cbst && curt < cbnt) {
+                        Bundle bundle = new Bundle();
+                        bundle.putStringArrayList("templates", eventTemplateList);
+                        bundle.putString("event_id", event_id);
+                        bundle.putInt("contribution", contribution);
+                        bundle.putString(Key.prefix_text, strPrefixText);
+                        bundle.putString(Key.special, strSpecialUrl);
+                        Intent intent = new Intent(mActivity, SelectMyWorksActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        ActivityAnim.StartAnim(mActivity);
+                    } else {
+                        PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_contribute_is_finish);
+                    }
+
 
 
                 }
@@ -709,7 +751,25 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
 
             case R.id.linVote:
 
-                toVote();
+
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date curDate = new Date(System.currentTimeMillis());
+                String currentTime = df.format(curDate);
+
+                try {
+                    curt = TimeUtility.dateToStamp(currentTime);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                if (curt >= votest && curt < votent) {
+                    toVote();
+                } else {
+                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_vote_is_finish);
+                }
+
+
 
                 break;
 
@@ -739,7 +799,7 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
 
 
     @Override
-    public void onResume(){
+    public void onResume() {
 
         GAControl.sendViewName("活動頁面");
 

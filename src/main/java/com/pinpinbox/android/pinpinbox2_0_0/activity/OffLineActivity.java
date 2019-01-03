@@ -11,24 +11,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.pinpinbox.android.Views.recyclerview.RecyclerViewUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerOffLineAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerOffLineAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 
 import org.json.JSONObject;
 
@@ -120,14 +119,14 @@ public class OffLineActivity extends DraggerActivity implements View.OnClickList
 
         vHeader = LayoutInflater.from(getApplicationContext()).inflate(R.layout.header_2_0_0_title, null);
 
-        TextView tvTitle = (TextView)vHeader.findViewById(R.id.tvTitle);
+        TextView tvTitle = vHeader.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.pinpinbox_2_0_0_title_offline_review);
 
         if(SystemUtility.Above_Equal_V5()){
             tvTitle.setLetterSpacing(0.1f);
         }
 
-        TextUtility.setBold(tvTitle, true);
+
         ViewControl.setMargins(tvTitle,
                 DensityUtility.dip2px(getApplicationContext(), 12),
                 DensityUtility.dip2px(getApplicationContext(), 92),

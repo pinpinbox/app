@@ -13,7 +13,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
@@ -121,7 +120,7 @@ public class ExchangeInfoActivity extends DraggerActivity implements View.OnClic
         tvContactTitle = (TextView) findViewById(R.id.tvContactTitle);
         tvRegisterPhone = (TextView) findViewById(R.id.tvRegisterPhone);
 
-        TextUtility.setBold(tvExchangeTime, tvName, tvContactTitle, tvRegisterPhone);
+//        TextUtility.setBold(tvExchangeTime, tvName, tvContactTitle, tvRegisterPhone);
 
         tvRegisterPhone.setOnClickListener(this);
         backImg.setOnClickListener(this);

@@ -39,7 +39,6 @@ import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
@@ -359,14 +358,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         linHobby.setOnClickListener(this);
         linFollow.setOnClickListener(this);
 
-
-        TextUtility.setBold(
-                (TextView) viewHeader.findViewById(R.id.tvNewsFeed),
-                (TextView) viewHeader.findViewById(R.id.tvRecommendUser),
-                (TextView) viewHeader.findViewById(R.id.tvFeatureArea),
-                (TextView) viewHeader.findViewById(R.id.tvHot),
-                (TextView) viewHeader.findViewById(R.id.tvRecommend)
-        );
 
     }
 
@@ -1459,22 +1450,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                 tvNew.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
                 vHobby.setVisibility(View.VISIBLE);
-                TextUtility.setBold(tvNew, true);
 
                 tvFollow.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 vFollow.setVisibility(View.INVISIBLE);
-                TextUtility.setBold(tvFollow, false);
 
 
             } else if (rank.equals("follow")) {
 
                 tvNew.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
                 vHobby.setVisibility(View.INVISIBLE);
-                TextUtility.setBold(tvNew, false);
 
                 tvFollow.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
                 vFollow.setVisibility(View.VISIBLE);
-                TextUtility.setBold(tvFollow, true);
 
             }
 
