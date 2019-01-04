@@ -31,7 +31,6 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/ppb200_other_bold_text"
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

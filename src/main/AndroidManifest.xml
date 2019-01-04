@@ -722,10 +722,10 @@
         <activity
             android:name=".pinpinbox2_0_0.activity.AdHighLightActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
+
             android:theme="@style/ppb200_common_transparent"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
+        <!--android:screenOrientation="portrait"  8.0以上會crash-->
 
         <activity
             android:name=".pinpinbox2_0_0.activity.CategoryAllActivity"
