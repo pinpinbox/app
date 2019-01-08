@@ -395,6 +395,19 @@
         <item name="android:background">@drawable/click_2_0_0_facebook_login</item>
     </style>
 
+    <style name="ppb200_Button_black_alpha_small_circle_edge" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/ppb200_common_button_small_height</item>
+        <item name="android:paddingLeft">@dimen/ppb200_padding_margin_first</item>
+        <item name="android:paddingRight">@dimen/ppb200_padding_margin_first</item>
+        <item name="android:textSize">@dimen/ppb200_common_text_second</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/border_2_0_0_other_balck_alpha_small_circle_edge
+        </item>
+    </style>
+
 
     <style name="ppb200_EditText">
         <item name="android:background">@drawable/border_2_0_0_grey_third_radius</item>

@@ -114,6 +114,7 @@
     <string name="pinpinbox_2_0_0_button_select_file">選擇檔案</string>
     <string name="pinpinbox_2_0_0_button_select">選擇</string>
     <string name="pinpinbox_2_0_0_button_send_text">傳送</string>
+    <string name="pinpinbox_2_0_0_button_more_album_for_user">更多他/她的作品</string>
 
 
 
@@ -479,10 +480,10 @@
     <string name="pinpinbox_2_0_0_title_recommend">推薦作品</string>
     <string name="pinpinbox_2_0_0_title_newjoin">新加入</string>
     <string name="pinpinbox_2_0_0_title_feedback">贊助回饋</string>
-
     <string name="pinpinbox_2_0_0_title_feature_area">專區精選</string>
     <string name="pinpinbox_2_0_0_title_feature_recommend">推薦</string>
     <string name="pinpinbox_2_0_0_title_feature_hot">熱門</string>
+    <string name="pinpinbox_2_0_0_title_creator">創作人</string>
 
 
     <string name="pinpinbox_2_0_0_guide_cooperation">跟其他創作人合作也是一種樂趣</string>
@@ -590,8 +591,9 @@
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_2">瀏覽 :\n ▪ 下載作品</string>
     <string name="pinpinbox_2_0_0_other_text_change_cooperation_3">(除了管理者，以上三個權限皆不能在編輯器內操作移除項目、作品設定)</string>
     <string name="pinpinbox_2_0_0_other_text_times_views">次瀏覽</string>
-    <string name="pinpinbox_2_0_0_other_text_times_likes">個讚</string>
+    <string name="pinpinbox_2_0_0_other_text_times_likes">人釘過</string>
     <string name="pinpinbox_2_0_0_other_text_times_message">則留言</string>
+    <string name="pinpinbox_2_0_0_other_text_times_sponsors">次贊助</string>
     <string name="pinpinbox_2_0_0_other_text_links">連結</string>
     <string name="pinpinbox_2_0_0_other_text_current_point0">還有</string>
     <string name="pinpinbox_2_0_0_other_text_current_point1">P點可使用</string>
@@ -645,6 +647,7 @@
     <string name="pinpinbox_2_0_0_other_text_has_gotten">已被贊助</string>
     <string name="pinpinbox_2_0_0_other_text_sponsors_times">次</string>
     <string name="pinpinbox_2_0_0_other_text_search_own">自己</string>
+    <string name="pinpinbox_2_0_0_other_text_enter_to_watch">進入觀看</string>
 
 
     <string name="crop__saving">相片儲存中</string>

@@ -13,9 +13,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -33,7 +30,6 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.SampleTest.ScaleTouhListener;
 import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
@@ -60,7 +56,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.AnimationSuspensionTouch;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.LinkText;
@@ -112,6 +107,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     private PopupCustom popSelectShare, popMore;
     private PopBoard board;
     private ItemAlbum itemAlbum;
+    private List<ItemReport> itemReportList;
 
     private ShareTask shareTask;
     private CheckShareTask checkShareTask;
@@ -126,33 +122,22 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     private Protocol13_BuyAlbum protocol13;
     private Protocol100_Vote protocol100;
 
-//    private GyroscopeObserver gyroscopeObserver;
+    private RelativeLayout rSponsor, rLike, rMessage;
+    private LinearLayout linLocation, linEvent, linType;
 
-    private RelativeLayout rLocation;
-    private LinearLayout linEvent, linType, linAuthor, linDetail, linLike, linMessage, linSponsor;
-
-    private TextView tvAlbumName, tvAlbumAuthor, tvViewedCount, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvSponsorCount, tvVote;
-    private TextView tvRead;
+    private TextView tvAlbumName, tvAlbumAuthor, tvMore, tvViewedCount, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvSponsorCount, tvVote;
     private RoundCornerImageView coverImg;
     private ImageView backImg, messageImg, likeImg, moreImg;
     private ImageView signalVideoImg, signalSlotImg, signalAudioImg;
     private RoundCornerImageView userImg;
-//    private View vGradient;
-
-
-    private List<ItemReport> itemReportList;
-
 
     private String id, token, album_id;
-    private String myDir;
     private String p23Result, p23Message;
-    private String p68Result, p68Message;
     private String p69Result, p69Message;
     private String p70Result, p70Message;
     private String p83Result, p83Message;
-    private String p90Message = "";
+
     private String coverUrl;
-    private String strReportSelect;
 
     private String event, event_id, strEventName, strEventUrl;
     private String strJsonPhoto;
@@ -160,9 +145,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     private int report_id = -1;
 
-    private int p90Result = -1;
-    private int round = 0, count = 0;
-    private int loadCount = 0;
     private int intVoteCount;
     private int userP;
 
@@ -187,7 +169,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2_0_0_info);
+        setContentView(R.layout.test_activity_info);
 
         getStatusControl().setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
 
@@ -198,11 +180,17 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
             return;
         }
 
-
         setShareElementAnim();
 
         setScrollControl();
 
+
+//        (SystemUtility.getActivity(MainActivity.class.getSimpleName())).getWindow().getDecorView();
+//
+//        /*獲取較低解析度*/
+//        Bitmap bitmap = BitmapUtility.createBlurViewBitmap((SystemUtility.getActivity(MainActivity.class.getSimpleName())).getWindow().getDecorView());
+//
+//        ((ImageView)findViewById(R.id.mmm)).setImageBitmap(bitmap);
 
 
     }
@@ -302,15 +290,11 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     private void setScrollControl() {
 
-        linDetail = (LinearLayout) findViewById(R.id.linDetail);
-
-        linAuthor = (LinearLayout) findViewById(R.id.linAuthor);
-
-        DismissScrollView dismissScrollView = (DismissScrollView)findViewById(R.id.dismissScrollView);
+        DismissScrollView dismissScrollView = (DismissScrollView) findViewById(R.id.dismissScrollView);
 
         dismissScrollView.setvTouchRange(findViewById(R.id.linContents));
 
-        dismissScrollView.setViewsAlpha(findViewById(R.id.linAlpha), linDetail, linAuthor);
+        dismissScrollView.setViewsAlpha(findViewById(R.id.linAlpha), findViewById(R.id.tvEnter));
 
         dismissScrollView.setActivity(this);
 
@@ -321,23 +305,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
             }
         });
 
-
-//        ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.parallaxScrollView);
-//
-//        parallaxScrollView.setScrollDismissTouchRangeView(findViewById(R.id.linContents));
-//
-//        parallaxScrollView.setAlphaView(findViewById(R.id.linAlpha), linDetail, linAuthor);
-//
-//        parallaxScrollView.setActivity(this);
-//
-//        parallaxScrollView.setCloseActivityListener(new ParallaxScrollView.CloseActivityListener() {
-//            @Override
-//            public void close() {
-//
-//                back();
-//
-//            }
-//        });
     }
 
     private void getBundleAlbum_id() {
@@ -360,27 +327,26 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
-        myDir = PPBApplication.getInstance().getMyDir();
-
 
         itemReportList = new ArrayList<>();
 
-        rLocation = (RelativeLayout) findViewById(R.id.rLocation);
-
-        linEvent = (LinearLayout) findViewById(R.id.linEvent);
+        linLocation = (LinearLayout) findViewById(R.id.linLocation);
         linType = (LinearLayout) findViewById(R.id.linType);
+        linEvent = (LinearLayout) findViewById(R.id.linEvent);
 
-        linLike = (LinearLayout) findViewById(R.id.linLike);
-        linMessage = (LinearLayout) findViewById(R.id.linMessage);
-        linSponsor = (LinearLayout) findViewById(R.id.linSponsor);
+
+        rLike = (RelativeLayout) findViewById(R.id.rLike);
+        rMessage = (RelativeLayout) findViewById(R.id.rMessage);
+
+        rSponsor = (RelativeLayout) findViewById(R.id.rSponsor);
 
 
         tvAlbumName = (TextView) findViewById(R.id.tvName);
         tvAlbumAuthor = (TextView) findViewById(R.id.tvAuthor);
         tvAlbumDescription = (TextView) findViewById(R.id.tvDescription);
+        tvMore = (TextView)findViewById(R.id.tvMore);
 
         tvLocation = (TextView) findViewById(R.id.tvLocation);
-        tvRead = (TextView) findViewById(R.id.tvRead);
         tvEvent = (TextView) findViewById(R.id.tvEvent);
         tvVote = (TextView) findViewById(R.id.tvVote);
         tvMessageCount = (TextView) findViewById(R.id.tvMessageCount);
@@ -397,24 +363,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         messageImg = (ImageView) findViewById(R.id.messageImg);
         likeImg = (ImageView) findViewById(R.id.likeImg);
         moreImg = (ImageView) findViewById(R.id.moreImg);
-
-
-
-//        try {
-//            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
-//
-//                if (rDetail != null) {
-//                    rDetail.setBackground(
-//                            ScrimUtil.makeCubicGradientScrimDrawable(
-//                                    Color.parseColor(ColorClass.BLACK_ALPHA),
-//                                    8, //渐变层数
-//                                    Gravity.BOTTOM)); //起始方向
-//
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
 
         backImg.setOnClickListener(this);
@@ -558,15 +506,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 }
             });
 
-            popupList.setDissmissWorks(new PopupCustom.DissmissWorks() {
-                @Override
-                public void excute() {
-
-                    AnimationSuspensionTouch.reset(linAuthor);
-
-                }
-            });
-
         }
 
 
@@ -576,9 +515,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     }
 
     private void showReport() {
-
-
-        AnimationSuspensionTouch.pressed(linAuthor);
 
         popupList.show((RelativeLayout) findViewById(R.id.rBackground));
 
@@ -624,7 +560,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         if (!isTeach) {
 
 
-            if(mActivity == null){
+            if (mActivity == null) {
 
                 backCheck();
 
@@ -643,11 +579,11 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
             }
 
 
-            TextView tv1 =  mDialog.findViewById(R.id.tv1);
-            TextView tv2 =  mDialog.findViewById(R.id.tv2);
-            TextView tv3 =  mDialog.findViewById(R.id.tv3);
-            TextView tv4 =  mDialog.findViewById(R.id.tv4);
-            TextView tv5 =  mDialog.findViewById(R.id.tv5);
+            TextView tv1 = mDialog.findViewById(R.id.tv1);
+            TextView tv2 = mDialog.findViewById(R.id.tv2);
+            TextView tv3 = mDialog.findViewById(R.id.tv3);
+            TextView tv4 = mDialog.findViewById(R.id.tv4);
+            TextView tv5 = mDialog.findViewById(R.id.tv5);
 
 
             TextUtility.setBold(tv1, tv2, tv3, tv4, tv5);
@@ -1142,11 +1078,113 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 /*作品名稱*/
                 tvAlbumName.setText(itemAlbum.getName().trim());
 
+
+                /*地址*/
+                if (itemAlbum.getLocation() == null || itemAlbum.getLocation().equals("")) {
+                    linLocation.setVisibility(View.GONE);
+                    itemAlbum.setLocation("");
+                } else {
+                    linLocation.setVisibility(View.VISIBLE);
+                    tvLocation.setText(itemAlbum.getLocation());
+                }
+
+
+                /*作品內容*/
+                try {
+                    if (itemAlbum.isVideo()) {
+                        signalVideoImg.setVisibility(View.VISIBLE);
+                    } else {
+                        signalVideoImg.setVisibility(View.GONE);
+                    }
+
+                    if (itemAlbum.isExchange()) {
+                        signalSlotImg.setVisibility(View.VISIBLE);
+                    } else {
+                        signalSlotImg.setVisibility(View.GONE);
+                    }
+
+                    if (itemAlbum.isSlot()) {
+                        signalSlotImg.setVisibility(View.VISIBLE);
+                    } else {
+                        signalSlotImg.setVisibility(View.GONE);
+                    }
+
+                    if (itemAlbum.isAudio()) {
+                        signalAudioImg.setVisibility(View.VISIBLE);
+                    } else {
+                        signalAudioImg.setVisibility(View.GONE);
+                    }
+
+                    if (!itemAlbum.isVideo() && !itemAlbum.isExchange() && !itemAlbum.isSlot() && !itemAlbum.isAudio()) {
+                        linType.setVisibility(View.GONE);
+                    } else {
+                        linType.setVisibility(View.VISIBLE);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                /*作品介紹*/
+                if (itemAlbum.getDescription().equals("")) {
+                    tvAlbumDescription.setVisibility(View.GONE);
+                } else {
+                    LinkText.set(mActivity, tvAlbumDescription, LinkText.defaultColor, LinkText.defaultColorOfHighlightedLink, itemAlbum.getDescription());
+                }
+
+
+                /*瀏覽數*/
+                tvViewedCount.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
+
+                /*釘數*/
+                tvLikeCount.setText(itemAlbum.getLikes() + "");
+
+                /*留言數*/
+                tvMessageCount.setText(itemAlbum.getMessageboard() + "");
+
+                /*贊助數*/
+                if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
+                    rSponsor.setVisibility(View.VISIBLE);
+                    tvSponsorCount.setText(itemAlbum.getSponsorCount() + "");
+                } else {
+                    rSponsor.setVisibility(View.GONE);
+                }
+
+
+                /*是否讚過*/
+                if (itemAlbum.is_likes()) {
+                    likeImg.setImageResource(R.drawable.ic200_ding_pink);
+                } else {
+                    likeImg.setImageResource(R.drawable.ic200_ding_dark);
+                }
+
+
+                /*封面*/
+                if (coverUrl.equals("")) {
+                    coverUrl = getCover;
+                    if (coverUrl != null && !coverUrl.equals("") && !coverUrl.equals("null")) {
+                        Picasso.with(mActivity.getApplicationContext())
+                                .load(coverUrl)
+                                .config(Bitmap.Config.RGB_565)
+                                .error(R.drawable.bg_2_0_0_no_image)
+                                .tag(mActivity.getApplicationContext())
+                                .into(coverImg);
+
+                    } else {
+                        coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
+                    }
+
+                }
+
+
+
                 /*作者*/
                 if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
-                    linAuthor.setVisibility(View.GONE);
+
+
                 } else {
-                    linAuthor.setVisibility(View.VISIBLE);
+
                     tvAlbumAuthor.setText(itemAlbum.getUser_name());
 
                     strPicture = itemAlbum.getUser_picture();
@@ -1173,134 +1211,29 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
 
 
-
-                /*作品介紹*/
-                if (itemAlbum.getDescription().equals("")) {
-                    tvAlbumDescription.setVisibility(View.GONE);
-                } else {
-                    LinkText.set(mActivity, tvAlbumDescription, LinkText.defaultColor, LinkText.defaultColorOfHighlightedLink, itemAlbum.getDescription());
-                }
-
-
-                try {
-                    /*瀏覽數*/
-                    if (itemAlbum.getViewed() > 9999) {
-                        String strViewed = StringUtil.ThousandToK(itemAlbum.getViewed());
-                        tvViewedCount.setText(strViewed + "K" + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
-                    } else {
-
-                        tvViewedCount.setText(itemAlbum.getViewed() + getResources().getString(R.string.pinpinbox_2_0_0_other_text_times_views));
-
-                    }
-                    /*讚數*/
-                    if (itemAlbum.getLikes() > 9999) {
-                        String strLikes = StringUtil.ThousandToK(itemAlbum.getLikes());
-                        tvLikeCount.setText(strLikes + "K");
-                    } else if (itemAlbum.getLikes() < 0) {
-                        tvLikeCount.setText(0 + "");
-                    } else {
-                        tvLikeCount.setText(itemAlbum.getLikes() + "");
-                    }
-
-                    /*留言數*/
-                    if (itemAlbum.getMessageboard() > 9999) {
-                        String strMessageboard = StringUtil.ThousandToK(itemAlbum.getMessageboard());
-                        tvMessageCount.setText(strMessageboard + "K");
-                    } else if (itemAlbum.getMessageboard() < 0) {
-                        tvMessageCount.setText(0 + "");
-                    } else {
-                        tvMessageCount.setText(itemAlbum.getMessageboard() + "");
-                    }
-
-
-                    /*贊助數*/
-                    if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
-                        linSponsor.setVisibility(View.VISIBLE);
-                        if (itemAlbum.getSponsorCount() > 9999) {
-                            String strSponsorCount = StringUtil.ThousandToK(itemAlbum.getSponsorCount());
-                            tvSponsorCount.setText(strSponsorCount + "K");
-                        } else if (itemAlbum.getSponsorCount() < 0) {
-                            tvSponsorCount.setText(0 + "");
-                        } else {
-                            tvSponsorCount.setText(itemAlbum.getSponsorCount() + "");
-                        }
-                    } else {
-                        linSponsor.setVisibility(View.GONE);
-                    }
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-                /*是否讚過*/
-                if (itemAlbum.is_likes()) {
-
-                    likeImg.setImageResource(R.drawable.ic200_ding_pink);
-
-                } else {
-                    likeImg.setImageResource(R.drawable.ic200_ding_dark);
-                }
-
-
-                /*地址*/
-                if (itemAlbum.getLocation() == null || itemAlbum.getLocation().equals("")) {
-                    rLocation.setVisibility(View.GONE);
-                    itemAlbum.setLocation("");
-                } else {
-                    rLocation.setVisibility(View.VISIBLE);
-                    tvLocation.setText(itemAlbum.getLocation());
-                }
-
-
-                /*封面*/
-                if (coverUrl.equals("")) {
-                    coverUrl = getCover;
-                    if (coverUrl != null && !coverUrl.equals("") && !coverUrl.equals("null")) {
-                        Picasso.with(mActivity.getApplicationContext())
-                                .load(coverUrl)
-                                .config(Bitmap.Config.RGB_565)
-                                .error(R.drawable.bg_2_0_0_no_image)
-                                .tag(mActivity.getApplicationContext())
-                                .into(coverImg);
-
-                    } else {
-                        coverImg.setImageResource(R.drawable.bg_2_0_0_no_image);
-                    }
-
-                }
-
-
-                /*是否是自己的*/
-                if (id.equals(itemAlbum.getUser_id() + "")) {
-                    tvAlbumAuthor.setClickable(false);
-                }
-
                 /*活動相關*/
                 if (event.equals("") || event == null || event.equals("null")) {
+
                     linEvent.setVisibility(View.GONE);
 
                 } else {
 
-
                     linEvent.setVisibility(View.VISIBLE);
-                    /*活動名稱*/
                     tvEvent.setText(strEventName);
 
                     if (bVotestatus) {
                         tvVote.setText(R.string.pinpinbox_2_0_0_other_text_voted);
                         tvVote.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                        tvVote.setBackgroundResource(R.drawable.click_2_0_0_second_grey_button_frame_white_radius);
                     } else {
                         tvVote.setText(R.string.pinpinbox_2_0_0_button_voting_for_this_work);
                         tvVote.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
+                        tvVote.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
                     }
 
 
                     if (SystemUtility.checkActivityExist(EventActivity.class.getSimpleName())) {
-
                         linEvent.setVisibility(View.GONE);
-
                     }
 
 
@@ -1316,50 +1249,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-                try {
-                    /*2016.09.14新增*/
-                    if (itemAlbum.isVideo()) {
-                        signalVideoImg.setVisibility(View.VISIBLE);
-                    } else {
-                        signalVideoImg.setVisibility(View.GONE);
-                    }
-
-                    if (itemAlbum.isExchange()) {
-                        signalSlotImg.setVisibility(View.VISIBLE);
-                    } else {
-                        signalSlotImg.setVisibility(View.GONE);
-                    }
-
-                    if (itemAlbum.isSlot()) {
-                        signalSlotImg.setVisibility(View.VISIBLE);
-                    } else {
-                        signalSlotImg.setVisibility(View.GONE);
-                    }
-
-                    if (itemAlbum.isAudio()) {
-                        signalAudioImg.setVisibility(View.VISIBLE);
-                    } else {
-                        signalAudioImg.setVisibility(View.GONE);
-                    }
-
-
-                    if (!itemAlbum.isVideo() && !itemAlbum.isExchange() && !itemAlbum.isSlot() && !itemAlbum.isAudio()) {
-                        linType.setVisibility(View.INVISIBLE);//要佔據畫面 不可用gone
-                    } else {
-                        linType.setVisibility(View.VISIBLE);
-                    }
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
                 ViewControl.AlphaTo1(findViewById(R.id.linAlpha), 200);
-
-                if (linDetail != null) {
-                    ViewControl.AlphaTo1(linDetail, 200);
-                }
 
                 mHandler.postDelayed(new Runnable() {
                     @Override
@@ -1386,39 +1276,10 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                     }
                 }, 200);
 
-
-                linAuthor.setOnTouchListener(new ScaleTouhListener(new ScaleTouhListener.TouchCallBack() {
-                    @Override
-                    public void Touch(View v) {
-
-                    }
-
-                    @Override
-                    public void Up(View v) {
-
-                        if (ClickUtils.ButtonContinuousClick()) {
-                            return;
-                        }
-
-                        FlurryUtil.onEvent(FlurryKey.albuminfo_click_user);
-
-                        if (isReturn) {
-                            back();
-                        } else {
-
-                            toAuthor();
-
-                        }
-                    }
-                }));
-
-
-                linLike.setOnClickListener(AlbumInfoActivity.this);
-                linMessage.setOnClickListener(AlbumInfoActivity.this);
-                linSponsor.setOnClickListener(AlbumInfoActivity.this);
-
-
-                tvRead.setOnClickListener(AlbumInfoActivity.this);
+                tvMore.setOnClickListener(AlbumInfoActivity.this);
+                rLike.setOnClickListener(AlbumInfoActivity.this);
+                rMessage.setOnClickListener(AlbumInfoActivity.this);
+                rSponsor.setOnClickListener(AlbumInfoActivity.this);
                 linEvent.setOnClickListener(AlbumInfoActivity.this);
                 coverImg.setOnClickListener(AlbumInfoActivity.this);
                 messageImg.setOnClickListener(AlbumInfoActivity.this);
@@ -1461,6 +1322,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CheckShareTask extends AsyncTask<Void, Void, Object> {
 
         private int p84Result = -1;
@@ -1548,6 +1410,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class ShareTask extends AsyncTask<Void, Void, Object> {
 
         private String restriction;
@@ -1720,6 +1583,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetPointTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -1805,6 +1669,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class FirstCollectAlbumTask extends AsyncTask<Void, Void, Object> {
 
         private String restriction;
@@ -1991,6 +1856,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetReportTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -2070,6 +1936,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SendReportTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -2138,6 +2005,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SendLikeTask extends AsyncTask<String, Integer, Integer> {
 
         private String p92Message = "";
@@ -2206,6 +2074,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DeleteLikeTask extends AsyncTask<String, Integer, Integer> {
 
         private String p93Message = "";
@@ -2290,26 +2159,18 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
         switch (view.getId()) {
 
-            case R.id.tvRead:
-                FlurryUtil.onEvent(FlurryKey.albuminfo_click_read);
-                readAlbum();
-                break;
-
             case R.id.coverImg:
-                FlurryUtil.onEvent(FlurryKey.albuminfo_click_coverImg);
                 readAlbum();
                 break;
 
-            case R.id.linAuthor:
+            case R.id.tvMore:
 
                 FlurryUtil.onEvent(FlurryKey.albuminfo_click_user);
 
                 if (isReturn) {
                     back();
                 } else {
-
                     toAuthor();
-
                 }
 
                 break;
@@ -2323,7 +2184,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 break;
 
             case R.id.messageImg:
-
 
                 FlurryUtil.onEvent(FlurryKey.albuminfo_click_board);
 
@@ -2374,7 +2234,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                     PinPinToast.ShowToast(mActivity, R.string.pinpinbox_2_0_0_other_text_voted);
                 } else {
 
-
                     DialogV2Custom d = new DialogV2Custom(mActivity);
                     d.setStyle(DialogStyleClass.CHECK);
                     d.setMessage(getResources().getString(R.string.pinpinbox_2_0_0_other_text_vote_for) + itemAlbum.getName() + "]?");
@@ -2391,11 +2250,11 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 break;
 
 
-            case R.id.linLike:
+            case R.id.rLike:
                 ActivityIntent.toLikesList(mActivity, album_id);
                 break;
 
-            case R.id.linMessage:
+            case R.id.rMessage:
                 if (board == null) {
                     board = new PopBoard(mActivity, PopBoard.TypeAlbum, album_id, (RelativeLayout) findViewById(R.id.rBackground), false);
                     board.setTvCount(tvMessageCount);
@@ -2405,7 +2264,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 }
                 break;
 
-            case R.id.linSponsor:
+            case R.id.rSponsor:
                 ActivityIntent.toAlbumSponsorList(mActivity, album_id);
                 break;
 
@@ -2593,66 +2452,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     /*click*/
     private void toAuthor() {
 
-        Bundle bundle = new Bundle();
-        bundle.putString(Key.author_id, itemAlbum.getUser_id() + "");
-        bundle.putString(Key.picture, itemAlbum.getUser_picture());
-        bundle.putString(Key.name, itemAlbum.getUser_name());
-
-        if (SystemUtility.Above_Equal_V5()) {
-
-
-            bundle.putBoolean(Key.shareElement, true);
-            bundle.putBoolean(Key.from_album_info, true);
-
-            userImg.setTransitionName(itemAlbum.getUser_picture());
-
-
-            Pair<View, String> pImg = Pair.create(findViewById(R.id.userImg), itemAlbum.getUser_picture());
-            Pair<View, String> pBg = Pair.create(findViewById(R.id.linAuthor), linAuthor.getTransitionName());
-//            Pair<View, String> pName = Pair.create(findViewById(R.id.tvAuthor), tvAlbumAuthor.getTransitionName());
-
-
-            ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, pImg, pBg);
-
-
-            Intent intent = new Intent(mActivity, AuthorActivity.class).putExtras(bundle);
-            intent.putExtras(bundle);
-
-
-            ActivityCompat.startActivity(mActivity, intent, compat.toBundle());
-
-            /*無效果*/
-//            ActivityOptionsCompat option1 = ActivityOptionsCompat.
-//                    makeSceneTransitionAnimation(mActivity,
-//                            userImg,
-//                            ViewCompat.getTransitionName(userImg));
-//
-//
-//            ActivityOptionsCompat option2 = ActivityOptionsCompat.
-//                    makeSceneTransitionAnimation(mActivity,
-//                            linAuthor,
-//                            ViewCompat.getTransitionName(linAuthor));
-//
-//            ActivityOptionsCompat option3 = ActivityOptionsCompat.
-//                    makeSceneTransitionAnimation(mActivity,
-//                            tvAlbumAuthor,
-//                            ViewCompat.getTransitionName(tvAlbumAuthor));
-//
-//            option2.update(option1);
-//            option3.update(option2);
-//
-//            startActivity(intent, option3.toBundle());
-
-        } else {
-
-            bundle.putBoolean(Key.shareElement, false);
-
-            Intent intent = new Intent(mActivity, AuthorActivity.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            ActivityAnim.StartAnim(mActivity);
-
-        }
+        ActivityIntent.toUser(mActivity, true, false, itemAlbum.getUser_id() + "", itemAlbum.getUser_picture(), itemAlbum.getUser_name(), userImg);
 
     }
 
@@ -2818,6 +2618,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
                         tvVote.setText(R.string.pinpinbox_2_0_0_other_text_voted);
                         tvVote.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+                        tvVote.setBackgroundResource(R.drawable.click_2_0_0_second_grey_button_frame_white_radius);
 
                     }
 
@@ -2875,13 +2676,12 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
 
         GAControl.sendViewName("作品資訊頁");
 
         super.onResume();
     }
-
 
     @Override
     public void onDestroy() {

@@ -13,24 +13,8 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingBottom="128dp"
-        android:scrollbars="none"
-        >
+        android:scrollbars="none">
 
-
-    <!--<com.pinpinbox.android.Views.parallaxscroll.views.ParallaxScrollView-->
-        <!--android:id="@+id/parallaxScrollView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:clipToPadding="false"-->
-        <!--android:paddingBottom="128dp"-->
-        <!--android:scrollbars="none"-->
-        <!--app:alpha_factor="1.0"-->
-        <!--app:parallax_factor="1.9">-->
-
-        <!--parallax_factor - 對於ScrollView和ListView，第一個視圖的視差因子-->
-        <!--inner_parallax_factor - 僅對於ScrollView - 每個視圖和視圖之間的視差因子-->
-        <!--parallax_views_num - 僅對於ScrollView - 視差視圖的數量-->
-        <!--circular_parallax - 僅用於ListView - 是否所有列表都是視差的-->
 
         <LinearLayout
             android:id="@+id/linContents"
