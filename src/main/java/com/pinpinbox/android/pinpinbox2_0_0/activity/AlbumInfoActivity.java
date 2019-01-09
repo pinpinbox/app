@@ -169,7 +169,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_activity_info);
+        setContentView(R.layout.activity_2_0_0_info);
 
         getStatusControl().setStatusColor(Color.parseColor(ColorClass.TRANSPARENT));
 
@@ -2714,7 +2714,11 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         Recycle.IMG(messageImg);
         Recycle.IMG(likeImg);
         Recycle.IMG(moreImg);
-        Recycle.IMG((ImageView) findViewById(R.id.imageView13));
+
+        Recycle.IMG((ImageView) findViewById(R.id.likeItemImg));
+        Recycle.IMG((ImageView) findViewById(R.id.messageItemImg));
+        Recycle.IMG((ImageView) findViewById(R.id.sponsorItemImg));
+
 
 
         cancelTask(shareTask);

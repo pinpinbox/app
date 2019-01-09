@@ -15,7 +15,8 @@
 
         <TextView
             android:id="@+id/tvName"
-            style="@style/ppb200_title_second"
+            style="@style/ppb200_title_third"
+            android:gravity="left"
             android:maxWidth="192dp"
             android:text="" />
 
