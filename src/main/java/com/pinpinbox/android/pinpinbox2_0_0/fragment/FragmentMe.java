@@ -863,7 +863,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
     }
 
     private void toCheckPermission(int type) {
-        switch (checkPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        switch (checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             case SUCCESS:
 
                 switch (type) {
@@ -879,7 +879,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
 
                 break;
             case REFUSE:
-                MPermissions.requestPermissions(FragmentMe.this, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
+                MPermissions.requestPermissions(FragmentMe.this, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
         }
     }
@@ -1341,7 +1341,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
     @PermissionDenied(REQUEST_CODE_SDCARD)
     public void requestSdcardFailed() {
 
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
             MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
 

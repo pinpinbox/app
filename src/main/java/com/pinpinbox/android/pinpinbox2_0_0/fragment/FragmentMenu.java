@@ -173,7 +173,7 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     @PermissionDenied(REQUEST_CODE_SDCARD)
     public void requestSdcardFailed() {
 
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
             MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
 
@@ -196,14 +196,14 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
     }
 
     private void toCheckPermission() {
-        switch (checkPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        switch (checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             case SUCCESS:
 
                 ActivityIntent.toWorkManage(getActivity());
 
                 break;
             case REFUSE:
-                MPermissions.requestPermissions(FragmentMenu.this, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
+                MPermissions.requestPermissions(FragmentMenu.this, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
         }
     }

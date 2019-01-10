@@ -1654,7 +1654,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
 
         /*20170915將權限判斷移至選項前*/
-        switch (checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        switch (checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
             case SUCCESS:
 
@@ -1669,7 +1669,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
                 break;
             case REFUSE:
 
-                MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
+                MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
 
         }
@@ -5480,7 +5480,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
     @PermissionDenied(REQUEST_CODE_SDCARD)
     public void requestSdcardFailed() {
 
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
             MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
 

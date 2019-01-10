@@ -1085,7 +1085,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
 
             case R.id.profileImg:
 
-                switch (checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                switch (checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
                     case SUCCESS:
 
@@ -1093,7 +1093,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
 
                         break;
                     case REFUSE:
-                        MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
+                        MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                         break;
 
                 }
@@ -1187,7 +1187,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
     @PermissionDenied(REQUEST_CODE_SDCARD)
     public void requestSdcardFailed() {
 
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
             MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
 
