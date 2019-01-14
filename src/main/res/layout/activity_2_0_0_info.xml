@@ -112,6 +112,7 @@
                             android:ellipsize="end"
                             android:letterSpacing="0.1"
                             android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"
+                            android:layout_marginLeft="@dimen/ppb200_padding_margin_small"
                             android:maxLines="2"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
