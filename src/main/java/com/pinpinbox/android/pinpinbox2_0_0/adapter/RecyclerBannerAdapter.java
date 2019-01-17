@@ -12,8 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -28,6 +32,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.RoundTransform;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.CardAdapterHelper;
 
 import org.json.JSONArray;
@@ -64,6 +69,7 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
     private Fragment fragment;
 
+    private int w, h;
 
     public RecyclerBannerAdapter(Activity mActivity, List<ItemHomeBanner> itemHomeBannerList, Fragment fragment) {
 
@@ -83,6 +89,10 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
         gifList = new ArrayList<>();
 
+        w = ScreenUtils.getScreenWidth() - SizeUtils.dp2px(32);
+
+        h = (w*540)/960;
+
     }
 
     @Override
@@ -99,6 +109,13 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
         if(PPBApplication.getInstance().isPhone()) {
             mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
+
+            holder.bannerImg.setLayoutParams(new LinearLayout.LayoutParams(w, h));
+
+            holder.tvBannerName.setLayoutParams(new LinearLayout.LayoutParams(w, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            ViewControl.setMargins(holder.tvBannerName, 0,0,0,SizeUtils.dp2px(16));
+
         }
 
         holder.position = position;
