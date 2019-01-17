@@ -45,6 +45,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemReport;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.CollectionProcess;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -102,10 +103,12 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     private Activity mActivity;
     private Handler mHandler;
+    private CollectionProcess.Builder builder;
 
     private PopupList popupList;
     private PopupCustom popSelectShare, popMore;
     private PopBoard board;
+
     private ItemAlbum itemAlbum;
     private List<ItemReport> itemReportList;
 
@@ -116,18 +119,16 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
     private FirstCollectAlbumTask firstCollectAlbumTask;
     private GetReportTask getReportTask;
     private SendReportTask sendReportTask;
-    private GetPointTask getPointTask;
     private SendLikeTask sendLikeTask;
     private DeleteLikeTask deleteLikeTask;
-    private Protocol13_BuyAlbum protocol13;
     private Protocol100_Vote protocol100;
 
     private RelativeLayout rSponsor, rLike, rMessage;
-    private LinearLayout linLocation, linEvent, linType;
+    private LinearLayout linLocation, linEvent, linType, linCollectButton;
 
-    private TextView tvAlbumName, tvAlbumAuthor, tvMore, tvViewedCount, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvSponsorCount, tvVote;
+    private TextView tvAlbumName, tvAlbumAuthor, tvMore, tvViewedCount, tvLocation, tvEvent, tvAlbumDescription, tvMessageCount, tvLikeCount, tvSponsorCount, tvVote, tvCollectButton;
     private RoundCornerImageView coverImg;
-    private ImageView backImg, messageImg, likeImg, moreImg;
+    private ImageView backImg, messageImg, likeImg, moreImg, collectButtonImg;
     private ImageView signalVideoImg, signalSlotImg, signalAudioImg;
     private RoundCornerImageView userImg;
 
@@ -333,6 +334,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         linLocation = (LinearLayout) findViewById(R.id.linLocation);
         linType = (LinearLayout) findViewById(R.id.linType);
         linEvent = (LinearLayout) findViewById(R.id.linEvent);
+        linCollectButton = (LinearLayout)findViewById(R.id.linCollectButton);
 
 
         rLike = (RelativeLayout) findViewById(R.id.rLike);
@@ -345,6 +347,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         tvAlbumAuthor = (TextView) findViewById(R.id.tvAuthor);
         tvAlbumDescription = (TextView) findViewById(R.id.tvDescription);
         tvMore = (TextView)findViewById(R.id.tvMore);
+        tvCollectButton = (TextView)findViewById(R.id.tvCollectButton);
 
         tvLocation = (TextView) findViewById(R.id.tvLocation);
         tvEvent = (TextView) findViewById(R.id.tvEvent);
@@ -363,6 +366,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         messageImg = (ImageView) findViewById(R.id.messageImg);
         likeImg = (ImageView) findViewById(R.id.likeImg);
         moreImg = (ImageView) findViewById(R.id.moreImg);
+        collectButtonImg = (ImageView)findViewById(R.id.collectButtonImg);
 
 
         backImg.setOnClickListener(this);
@@ -424,58 +428,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
             MyLog.Set("e", getClass(), "-----------------***********************-------------------");
         }
-
-    }
-
-    private void checkBuyPoint() {
-
-        final DialogV2Custom d = new DialogV2Custom(mActivity);
-        d.getrTopBackground().setBackgroundResource(R.drawable.border_2_0_0_dialog_check);
-        d.getBgImg().setImageResource(R.drawable.icon_2_0_0_dialog_pinpin);
-        d.getLinBottom().setOrientation(LinearLayout.HORIZONTAL);
-        d.getTvCenter().setVisibility(View.GONE);
-
-        d.getTvMessage().setText(R.string.pinpinbox_2_0_0_dialog_message_point_insufficient);
-
-
-        ViewControl.setMargins(d.getTvLeftOrTop(), 0, 0, DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0);
-        ViewControl.setMargins(d.getTvRightOrBottom(), DensityUtility.dip2px(mActivity.getApplicationContext(), 8), 0, 0, 0);
-
-        d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_go_buy_point);
-        d.getTvRightOrBottom().setTextColor(Color.parseColor(ColorClass.WHITE));
-        d.getTvRightOrBottom().setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
-
-        d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_be_later);
-        d.getTvLeftOrTop().setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-        d.getTvLeftOrTop().setBackgroundResource(R.drawable.click_2_0_0_default);
-
-        d.getDarkBg().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                d.dismiss();
-            }
-        });
-
-        d.getTvRightOrBottom().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(mActivity, BuyPointActivity.class);
-                mActivity.startActivity(intent);
-                ActivityAnim.StartAnim(mActivity);
-
-
-            }
-        });
-
-        d.getTvLeftOrTop().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                d.dismiss();
-            }
-        });
-
-        d.show();
 
     }
 
@@ -617,7 +569,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
     }
 
-
     private class CloseClick implements View.OnClickListener {
 
         private Dialog dialog;
@@ -652,10 +603,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                         doCheckShare();
                         break;
 
-                    case DoingTypeClass.DoCollectAlbum:
-                        doCollectAlbum();
-                        break;
-
                     case DoCollectTask:
                         doCollectTask();
                         break;
@@ -667,11 +614,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                     case DoSendReport:
                         doSendReport();
                         break;
-
-                    case DoGetPoint:
-                        doGetPoint();
-                        break;
-
 
                     case DoingTypeClass.DoSendLike:
                         doSendLike();
@@ -724,70 +666,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     }
 
-    private void doCollectAlbum() {
-
-        if (!HttpUtility.isConnect(this)) {
-            setNoConnect();
-            return;
-        }
-
-        protocol13 = new Protocol13_BuyAlbum(
-                mActivity,
-                id,
-                token,
-                album_id,
-                "google",
-                itemAlbum.getPoint() + "",
-                "",
-                new Protocol13_BuyAlbum.TaskCallBack() {
-                    @Override
-                    public void Prepare() {
-                        doingType = DoingTypeClass.DoCollectAlbum;
-                        startLoading();
-                    }
-
-                    @Override
-                    public void Post() {
-                        dissmissLoading();
-                    }
-
-                    @Override
-                    public void Success() {
-                        itemAlbum.setOwn(true);
-
-
-                        if (itemAlbum.getPoint() == 0) {
-
-                            PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
-
-                            doCollectTask();
-
-                        } else {
-
-                            PinPinToast.showSponsorToast(
-                                    mActivity.getApplicationContext(),
-                                    itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
-                                    itemAlbum.getUser_picture()
-                            );
-
-                            doCollectTask();
-
-                        }
-                    }
-
-                    @Override
-                    public void IsOwnAlbum() {
-
-                    }
-
-                    @Override
-                    public void TimeOut() {
-                        doCollectAlbum();
-                    }
-                });
-
-    }
-
     private void doCollectTask() {
 
         if (!HttpUtility.isConnect(this)) {
@@ -822,18 +700,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         sendReportTask = new SendReportTask();
         sendReportTask.execute();
 
-
-    }
-
-    private void doGetPoint() {
-
-        if (!HttpUtility.isConnect(this)) {
-            setNoConnect();
-            return;
-        }
-
-        getPointTask = new GetPointTask();
-        getPointTask.execute();
 
     }
 
@@ -1178,35 +1044,49 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 }
 
 
-
-                /*作者*/
+                /*作者 收藏按鈕*/
                 if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
 
+                    linCollectButton.setVisibility(View.GONE);
+
+                    tvMore.setVisibility(View.GONE);
 
                 } else {
 
-                    tvAlbumAuthor.setText(itemAlbum.getUser_name());
-
-                    strPicture = itemAlbum.getUser_picture();
-
-                    try {
-                        if (SystemUtility.Above_Equal_V5()) {
-                            userImg.setTransitionName(strPicture);
+                    if(itemAlbum.isOwn()){
+                       setButtonIsCollected();
+                    }else {
+                        if(itemAlbum.getPoint()==0){
+                            setButtonCollect();
+                        }else {
+                            setButtonSponsor();
                         }
-                        if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
-                            Picasso.with(mActivity.getApplicationContext())
-                                    .load(strPicture)
-                                    .config(Bitmap.Config.RGB_565)
-                                    .error(R.drawable.member_back_head)
-                                    .tag(mActivity.getApplicationContext())
-                                    .into(userImg);
-                        } else {
-                            userImg.setImageResource(R.drawable.member_back_head);
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                    linCollectButton.setVisibility(View.VISIBLE);
+
+                }
+
+                tvAlbumAuthor.setText(itemAlbum.getUser_name());
+
+                strPicture = itemAlbum.getUser_picture();
+
+                try {
+                    if (SystemUtility.Above_Equal_V5()) {
+                        userImg.setTransitionName(strPicture);
+                    }
+                    if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
+                        Picasso.with(mActivity.getApplicationContext())
+                                .load(strPicture)
+                                .config(Bitmap.Config.RGB_565)
+                                .error(R.drawable.member_back_head)
+                                .tag(mActivity.getApplicationContext())
+                                .into(userImg);
+                    } else {
+                        userImg.setImageResource(R.drawable.member_back_head);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
 
@@ -1249,6 +1129,9 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 }
 
 
+
+
+
                 ViewControl.AlphaTo1(findViewById(R.id.linAlpha), 200);
 
                 mHandler.postDelayed(new Runnable() {
@@ -1276,6 +1159,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                     }
                 }, 200);
 
+
                 tvMore.setOnClickListener(AlbumInfoActivity.this);
                 rLike.setOnClickListener(AlbumInfoActivity.this);
                 rMessage.setOnClickListener(AlbumInfoActivity.this);
@@ -1286,6 +1170,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 likeImg.setOnClickListener(AlbumInfoActivity.this);
                 moreImg.setOnClickListener(AlbumInfoActivity.this);
                 tvVote.setOnClickListener(AlbumInfoActivity.this);
+                linCollectButton.setOnClickListener(AlbumInfoActivity.this);
 
 
             } else if (p08Result == 0) {
@@ -1575,92 +1460,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
                 connectInstability();
 
-            } else {
-                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
-            }
-
-
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class GetPointTask extends AsyncTask<Void, Void, Object> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoGetPoint;
-            startLoading();
-
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P23_GetUserPoints, SetMapByProtocol.setParam23_getuserpoints(id, token, "google"), null);
-
-                MyLog.Set("d", getClass(), "p23strJson => " + strJson);
-
-            } catch (SocketTimeoutException timeout) {
-                p23Result = Key.timeout;
-            } catch (Exception e) {
-
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p23Result = jsonObject.getString("result");
-                    if (p23Result.equals("1")) {
-
-                        String userPoint = jsonObject.getString("data");
-
-                        userP = StringIntMethod.StringToInt(userPoint);
-
-                    } else if (p23Result.equals("0")) {
-                        p23Message = jsonObject.getString(Key.message);
-                    } else {
-                        p23Result = "";
-                    }
-                } catch (Exception e) {
-                    p23Result = "";
-                    e.printStackTrace();
-                }
-
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-
-            dissmissLoading();
-
-            if (p23Result.equals("1")) {
-
-                if (userP < itemAlbum.getPoint()) {
-                    MyLog.Set("d", getClass(), "P點不足 前去買點");
-                    checkBuyPoint();
-                } else {
-                    MyLog.Set("d", getClass(), "P點足夠 進行購買");
-
-                    doCollectAlbum();
-
-                }
-
-
-            } else if (p23Result.equals("0")) {
-
-                DialogV2Custom.BuildError(mActivity, p23Message);
-
-            } else if (p23Result.equals(Key.timeout)) {
-                connectInstability();
             } else {
                 DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
             }
@@ -2199,7 +1998,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
                 }
 
-
                 break;
 
             case R.id.likeImg:
@@ -2223,6 +2021,18 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
             case R.id.moreImg:
 
                 showMore();
+
+                break;
+
+            case R.id.linCollectButton:
+
+                if (!itemAlbum.isOwn()) {
+
+                    FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
+
+                    collectAlbum();
+
+                }
 
                 break;
 
@@ -2271,7 +2081,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
 
     }
-
 
     @Override
     public void OnClick(View v) {
@@ -2339,16 +2148,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
                 break;
 
-            case R.id.linCollect:
-
-                if (!itemAlbum.isOwn()) {
-                    popMore.dismiss();
-                    FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
-
-                    collectAlbum();
-                }
-
-                break;
 
             case R.id.linShare:
                 popMore.dismiss();
@@ -2380,7 +2179,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     }
 
-
     @Override
     public void OnDismiss() {
 
@@ -2395,33 +2193,44 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     }
 
-
     /*click*/
     private void collectAlbum() {
 
-        if (itemAlbum.getPoint() == 0) {
-            doCollectAlbum();
-        } else {
+         builder = new CollectionProcess.Builder()
+                .with(mActivity)
+                .setUserId(id)
+                .setToken(token)
+                .setAlbumId(album_id)
+                .setPlatform("google")
+                .setAlbumPoint(itemAlbum.getPoint())
+                .setParam("")
+                .setRespondListener(new CollectionProcess.RespondListener() {
+                    @Override
+                    public void onSuccess() {
 
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    final DialogV2Custom d = new DialogV2Custom(mActivity);
-                    d.setStyle(DialogStyleClass.CHECK);
-                    d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + itemAlbum.getPoint() + "P?");
-                    CheckExecute checkExecute = new CheckExecute() {
-                        @Override
-                        public void DoCheck() {
-                            d.dismiss();
-                            doGetPoint();
+                        setOwn(true);
+
+                        if (itemAlbum.getPoint() == 0) {
+
+                            PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
+
+                            doCollectTask();
+
+                        } else {
+
+                            PinPinToast.showSponsorToast(
+                                    mActivity.getApplicationContext(),
+                                    itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
+                                    itemAlbum.getUser_picture()
+                            );
+
+                            doCollectTask();
+
                         }
-                    };
-                    d.setCheckExecute(checkExecute);
-                    d.show();
-                }
-            }, 500);
+                    }
+                })
+                .run();
 
-        }
     }
 
     /*click*/
@@ -2469,26 +2278,20 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         LinearLayout linEditWork = v.findViewById(R.id.linEditWork);
         LinearLayout linEditInfo = v.findViewById(R.id.linEditInfo);
 
-        LinearLayout linCollect = v.findViewById(R.id.linCollect);
         LinearLayout linShare = v.findViewById(R.id.linShare);
         LinearLayout linReport = v.findViewById(R.id.linReport);
 
-
-        TextView tvCollect = v.findViewById(R.id.tvCollect);
 
         View vContent = v.findViewById(R.id.linBackground);
 
         linEditWork.setOnTouchListener(new ClickDragDismissListener(vContent, this));
         linEditInfo.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-        linCollect.setOnTouchListener(new ClickDragDismissListener(vContent, this));
         linShare.setOnTouchListener(new ClickDragDismissListener(vContent, this));
         linReport.setOnTouchListener(new ClickDragDismissListener(vContent, this));
-
 
         if (id.equals(itemAlbum.getUser_id() + "")) {
 
             linReport.setVisibility(View.GONE);
-            linCollect.setVisibility(View.GONE);
             linEditContent.setVisibility(View.VISIBLE);
 
         } else {
@@ -2496,47 +2299,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
             linEditContent.setVisibility(View.GONE);
             linReport.setVisibility(View.VISIBLE);
 
-            linCollect.setVisibility(View.VISIBLE);
-            if (itemAlbum.isOwn()) {
-                tvCollect.setText(R.string.pinpinbox_2_0_0_itemtype_collected);
-                tvCollect.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
-                linCollect.setClickable(false);
-            } else {
-                tvCollect.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
-                if (itemAlbum.getPoint() > 0) {
-
-                    tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_itemtype_collect_need_sponsor) + itemAlbum.getPoint() + "P)");
-
-                    TextView tvSponsorMore = v.findViewById(R.id.tvSponsorMore);
-                    tvSponsorMore.setVisibility(View.VISIBLE);
-                    tvSponsorMore.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View view) {
-                            popMore.dismiss();
-
-
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    DialogV2Custom d = new DialogV2Custom(mActivity);
-                                    d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point);
-                                    d.setStyle(DialogStyleClass.CHECK);
-                                    d.getTvRightOrBottom().setVisibility(View.GONE);
-                                    d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_i_know);
-                                    d.show();
-                                }
-                            }, 500);
-
-                        }
-                    });
-
-                } else {
-                    tvCollect.setText(R.string.pinpinbox_2_0_0_itemtype_collect);
-                }
-
-
-            }
         }
 
 
@@ -2638,7 +2400,47 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
     public void setOwn(boolean own) {
         this.itemAlbum.setOwn(own);
+        setButtonIsCollected();
     }
+
+
+
+    private void setButtonIsCollected(){
+
+        linCollectButton.setBackgroundResource(R.drawable.border_2_0_0_white_frame_grey_second_radius);
+        collectButtonImg.setImageResource(R.drawable.ic200_collect_light);
+        tvCollectButton.setTextColor(Color.parseColor(ColorClass.GREY_SECOND));
+        tvCollectButton.setText(R.string.pinpinbox_2_0_0_button_collected);
+
+        linCollectButton.setClickable(false);
+
+    }
+
+    private void setButtonCollect(){
+
+        linCollectButton.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
+        collectButtonImg.setImageResource(R.drawable.ic200_collect_white);
+        tvCollectButton.setTextColor(Color.parseColor(ColorClass.WHITE));
+        tvCollectButton.setText(R.string.pinpinbox_2_0_0_button_collect);
+
+        linCollectButton.setClickable(true);
+
+    }
+
+    private void setButtonSponsor(){
+
+        linCollectButton.setBackgroundResource(R.drawable.click_2_0_0_main_button_radius);
+        collectButtonImg.setImageResource(R.drawable.ic200_collect_white);
+        tvCollectButton.setTextColor(Color.parseColor(ColorClass.WHITE));
+        tvCollectButton.setText(itemAlbum.getPoint() + "P");
+
+        linCollectButton.setClickable(true);
+
+    }
+
+
+
+
 
     public void setIsLike() {
         int count = StringIntMethod.StringToInt(tvLikeCount.getText().toString());
@@ -2720,7 +2522,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         Recycle.IMG((ImageView) findViewById(R.id.sponsorItemImg));
 
 
-
         cancelTask(shareTask);
         cancelTask(checkShareTask);
 
@@ -2728,11 +2529,14 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         cancelTask(firstCollectAlbumTask);
         cancelTask(getReportTask);
         cancelTask(sendReportTask);
-        cancelTask(getPointTask);
 
         cancelTask(sendLikeTask);
         cancelTask(deleteLikeTask);
-        cancelTask(protocol13);
+
+        if(builder!=null) {
+            builder.clear();
+        }
+        builder = null;
 
 
         if (coverUrl != null && !coverUrl.equals("") && !coverUrl.equals("null")) {

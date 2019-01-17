@@ -109,10 +109,10 @@
                             android:id="@+id/tvLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/ppb200_padding_margin_small"
                             android:ellipsize="end"
                             android:letterSpacing="0.1"
                             android:lineSpacingExtra="@dimen/ppb200_lineSpacingExtra_second"
-                            android:layout_marginLeft="@dimen/ppb200_padding_margin_small"
                             android:maxLines="2"
                             android:text=""
                             android:textColor="@color/pinpinbox_2_0_0_secondary_text"
@@ -429,8 +429,8 @@
 
                     <TextView
                         android:id="@+id/tvVote"
-                        android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                         style="@style/ppb200_Button_main_common_bottom_radius"
+                        android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                         android:text="@string/pinpinbox_2_0_0_button_voting_for_this_work" />
 
 
@@ -481,6 +481,42 @@
                 android:id="@+id/moreImg"
                 style="@style/ppb200_action_bar_icon"
                 android:src="@drawable/ic200_more_dark" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linCollectButton"
+            android:layout_width="@dimen/ppb200_common_button_width"
+            android:layout_height="@dimen/ppb200_common_button_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:background="@drawable/click_2_0_0_main_button_radius"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+
+            <ImageView
+                android:id="@+id/collectButtonImg"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic200_collect_white" />
+
+
+            <TextView
+                android:id="@+id/tvCollectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
+                android:letterSpacing="0.1"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/ppb200_common_text_first" />
 
 
         </LinearLayout>

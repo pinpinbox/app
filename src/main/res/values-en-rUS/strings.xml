@@ -109,6 +109,7 @@
     <string name="pinpinbox_2_0_0_button_select">Select</string>
     <string name="pinpinbox_2_0_0_button_send_text">Send</string>
     <string name="pinpinbox_2_0_0_button_more_album_for_user">More</string>
+    <string name="pinpinbox_2_0_0_button_collected">Collected</string>
 
     <string name="pinpinbox_2_0_0_event_info">Details</string>
     <string name="pinpinbox_2_0_0_event_contributors">Submit</string>

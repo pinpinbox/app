@@ -82,6 +82,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.CollectionProcess;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.GiftAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
@@ -152,11 +153,11 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
     private GoogleMap mapAlbum, mapPhoto;
     private PopupCustom popInfo, popPageMap, popMore, popSelectShare;
     private PopBoard board;
+    private CollectionProcess.Builder builder;
 
     private GetAlbumInfoTask getAlbumInfoTask;
     //    private CollectAlbumTask collectAlbumTask;
     private FirstCollectAlbumTask firstCollectAlbumTask;
-    private GetPointTask getPointTask;
     private SendContributeTask sendContributeTask;
     private CheckShareTask checkShareTask;
     private ShareTask shareTask;
@@ -188,14 +189,14 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
     private String id, token;
     private String event_id = "";
     private String strRecent = "[]";
-    private String comfirmPoint = "0";
+
     private String event;
     private String strSpecialUrl;
 
+    private int comfirmPoint = 0;
     private int doingType;
     private int lastPosition = 0;
     private int photoTotalCount = 0;
-    private int userPoint = 0;
     private int startPage = 0;
     private int startPhotoID = -1;
 
@@ -286,32 +287,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         /*設置activity list*/
         SystemUtility.SysApplication.getInstance().addActivity(this);
 
-//        /*設置facebook api*/
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        callbackManager = CallbackManager.Factory.create();
-//
-//
-//        /*設置facebook share api*/
-//        shareDialog = new ShareDialog(this);
-//        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-//
-//            @Override
-//            public void onSuccess(Sharer.Result result) {
-//                doShareTask();
-//                MyLog.Set("d", mActivity.getClass(), "shareDialog => onSuccess");
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//                MyLog.Set("d", mActivity.getClass(), "shareDialog => onCancel");
-//            }
-//
-//            @Override
-//            public void onError(FacebookException error) {
-//                MyLog.Set("d", mActivity.getClass(), "shareDialog => onError");
-//            }
-//        });
-
     }
 
     private void getBundle() {
@@ -365,25 +340,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         svDescription.setVerticalFadingEdgeEnabled(true);
         svDescription.setFadingEdgeLength(32);
 
-
-//        try {
-//            if (SystemUtility.getSystemVersion() >= SystemUtility.V4_4) {
-//
-//                if (linDescription != null) {
-//
-//                    linDescription.setBackground(
-//                            ScrimUtil.makeCubicGradientScrimDrawable(
-//                                    Color.parseColor("#cc000000"), //颜色
-//                                    16, //渐变层数
-//                                    Gravity.BOTTOM)); //起始方向
-//
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             private int progress;
@@ -409,7 +365,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     mediaPlayer.seekTo(progress);
 
                     if (!mediaPlayer.isPlaying()) {
-                        soundEnable = true; //設為true 將不受音笑開關的預設值
+                        soundEnable = true; //設為true 將不受音效開關的預設值
                         mediaPlayer.start();
                         voiceImg.setImageResource(R.drawable.ic200_audio_play_white);
                     }
@@ -880,56 +836,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
         ImageView centerImg = vPage.findViewById(R.id.centerImg);
 
-        /*移置adapter執行*/
-//        final View vType = vPage.findViewById(R.id.vType);
-
         final LinearLayout linExchange = vPage.findViewById(R.id.linExchange);
-
-        /*移置adapter執行*/
-//        final ImageView refreshImg = (ImageView) vPage.findViewById(R.id.refreshImg);
-//        refreshImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//                if (ClickUtils.ButtonContinuousClick()) {
-//                    return;
-//                }
-//
-//
-//                final PinchImageView picImg = (PinchImageView) vPage.findViewById(R.id.photoImg);
-//
-//                String url = photoContentsList.get(position).getImage_url();
-//
-//                if (url != null && !url.equals("") && !url.equals("null") && !url.isEmpty()) {
-//
-//                    Picasso.with(getApplicationContext())
-//                            .load(url)
-//                            .config(Bitmap.Config.RGB_565)
-//                            .error(R.drawable.bg_2_0_0_no_image)
-//                            .tag(mActivity.getApplicationContext())
-//                            .into(picImg, new Callback() {
-//                                @Override
-//                                public void onSuccess() {
-//                                    refreshImg.setVisibility(View.GONE);
-//                                }
-//
-//                                @Override
-//                                public void onError() {
-//                                    MyLog.Set("d", ReaderActivity.class, "new Callback => onError");
-//                                    refreshImg.setVisibility(View.VISIBLE);
-//                                }
-//                            });
-//
-//                } else {
-//
-//                    PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_photo_does_not_exist);
-//
-//                }
-//
-//
-//            }
-//        });
 
         try {
 
@@ -938,7 +845,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
             switch (usefor) {
 
                 case "image":
-
 
                     break;
 
@@ -982,7 +888,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                         }
 
                     }
-
 
                     break;
 
@@ -1069,13 +974,10 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     TextView tvSponsorCount = vPage.findViewById(R.id.tvSponsorCount);
                     TextView tvSponsorDescription = vPage.findViewById(R.id.tvSponsorDescription);
 
-
                     edPoint = vPage.findViewById(R.id.edPoint);
                     edUserName = vPage.findViewById(R.id.edUserName);
                     edPhone = vPage.findViewById(R.id.edPhone);
                     edAddress = vPage.findViewById(R.id.edAddress);
-
-
 
                     edPoint.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -1097,8 +999,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                         }
                     });
-
-
 
                     if (itemAlbum.getPoint() == 0) {
                         tvCurrentPoint.setVisibility(View.GONE);
@@ -1126,7 +1026,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                             tvClick.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    checkToCollectAlbum(itemAlbum.getPoint() + "");
+                                    collectAlbum(itemAlbum.getPoint());
                                 }
                             });
 
@@ -1253,7 +1153,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                                 }
 
-                                checkToCollectAlbum(edPoint.getText().toString());
+                                collectAlbum(StringIntMethod.StringToInt(edPoint.getText().toString()));
 
                             }
                         });
@@ -2008,7 +1908,9 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     vpReader.setCurrentItem(photoContentsList.size());
 
                 } else {
-                    doCollectAlbum();
+
+                    collectAlbum(itemAlbum.getPoint());
+
                 }
 
             }
@@ -2044,7 +1946,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
             View v = vpReader.findViewById(position);
 
-            PinchImageView photoImg = (PinchImageView) v.findViewById(R.id.photoImg);
+            PinchImageView photoImg = v.findViewById(R.id.photoImg);
 
             photoImg.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2178,7 +2080,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                 if (mPosition < photoContentsList.size()) {
 
                     try {
-                        PinchImageView mPhotoImg = (PinchImageView) (vpReader.findViewById(mPosition)).findViewById(R.id.photoImg);
+                        PinchImageView mPhotoImg = (vpReader.findViewById(mPosition)).findViewById(R.id.photoImg);
                         mPhotoImg.reset();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -2187,7 +2089,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                 if (nPosition >= 0) {
                     try {
-                        PinchImageView nPhotoImg = (PinchImageView) (vpReader.findViewById(nPosition)).findViewById(R.id.photoImg);
+                        PinchImageView nPhotoImg =  (vpReader.findViewById(nPosition)).findViewById(R.id.photoImg);
                         nPhotoImg.reset();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -2456,29 +2358,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         linShare.setOnTouchListener(new ClickDragDismissListener(vContent, this));
         linInfo.setOnTouchListener(new ClickDragDismissListener(vContent, this));
 
-//        linCollect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                popMore.getPopupWindow().dismiss();
-//                checkToCollectAlbum(itemAlbum.getPoint() + "");
-//            }
-//        });
-//
-//        linShare.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                popMore.getPopupWindow().dismiss();
-//                share();
-//            }
-//        });
-//
-//        linInfo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                popMore.getPopupWindow().dismiss();
-//                popInfo.show((RelativeLayout) findViewById(R.id.rBackground));
-//            }
-//        });
 
         if (itemAlbum.getUser_id() == StringIntMethod.StringToInt(id)) {
 
@@ -2497,10 +2376,9 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                 tvCollect.setTextColor(Color.parseColor(ColorClass.GREY_FIRST));
                 if (itemAlbum.getPoint() > 0) {
 
-
                     tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_itemtype_collect_need_sponsor) + itemAlbum.getPoint() + "P)");
 
-                    TextView tvSponsorMore = (TextView) popMore.getPopupView().findViewById(R.id.tvSponsorMore);
+                    TextView tvSponsorMore = popMore.getPopupView().findViewById(R.id.tvSponsorMore);
                     tvSponsorMore.setVisibility(View.VISIBLE);
                     tvSponsorMore.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -2513,9 +2391,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                 } else {
 
-
                     tvCollect.setText(R.string.pinpinbox_2_0_0_itemtype_collect);
-
 
                 }
             }
@@ -2525,13 +2401,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
     }
 
     private void share() {
-
-//        boolean bShareToFB = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.share_to_fb, false);
-//        if (bShareToFB) {
-//            systemShare();
-//        } else {
-//            doCheckShare();
-//        }
 
         doCheckShare();
 
@@ -2582,7 +2451,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
     private void taskShare() {
         if (ShareDialog.canShow(ShareLinkContent.class)) {
 
-
             String shareUrl = "";
 
             if (event.equals("") || event == null || event.equals("null")) {
@@ -2615,30 +2483,90 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
     }
 
-    public void checkToCollectAlbum(String point) {
+    public void collectAlbum(int point) {
 
         comfirmPoint = point;
 
         MyLog.Set("d", getClass(), "comfirmPoint => " + comfirmPoint);
 
-        if (point.equals("0")) {
-            doCollectAlbum();
-        } else {
+        String param = "";
 
-            final DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + "(" + point + "P) ?");
-            CheckExecute checkExecute = new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    d.dismiss();
-                    doGetPoint();
-                }
-            };
-            d.setCheckExecute(checkExecute);
-            d.show();
+        if (itemAlbum.isReward_after_collect()) {
+
+            try {
+
+                JSONObject obj = new JSONObject();
+                obj.put(ProtocolKey.recipient, edUserName.getText().toString());
+                obj.put(ProtocolKey.recipient_tel, edPhone.getText().toString());
+                obj.put(ProtocolKey.recipient_address, edAddress.getText().toString());
+
+                param = obj.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }
+
+
+        builder = new CollectionProcess.Builder()
+                .with(mActivity)
+                .setUserId(id)
+                .setToken(token)
+                .setAlbumId(album_id)
+                .setPlatform("google")
+                .setAlbumPoint(comfirmPoint)
+                .setParam(param)
+                .setRespondListener(new CollectionProcess.RespondListener() {
+                    @Override
+                    public void onSuccess() {
+
+                        itemAlbum.setOwn(true);
+
+                        if (itemAlbum.getPoint() > 0) {
+
+                            PinPinToast.showSponsorToast(
+                                    mActivity.getApplicationContext(),
+                                    itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
+                                    itemAlbum.getUser_picture()
+                            );
+
+                            //重新計算P點
+                            int userPoint = StringIntMethod.StringToInt(PPBApplication.getInstance().getData().getString(Key.point,"0"));
+                            PPBApplication.getInstance().getData().edit().putString(Key.point, StringIntMethod.IntToString(userPoint - comfirmPoint)).commit();
+
+                        } else {
+                            PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
+                        }
+
+                        FlurryUtil.onEvent(FlurryKey.reader_collect_success);
+
+                        List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
+                        for (Activity ac : activityList) {
+                            if (ac.getClass().getSimpleName().equals(AlbumInfoActivity.class.getSimpleName())) {
+                                ((AlbumInfoActivity) ac).setOwn(true);
+                                break;
+                            }
+                        }
+
+                        doGetAlbumInfo();
+
+                        if (itemAlbum.getPoint() == 0) {
+
+                            doFirstCollectTask();
+
+                        } else {
+
+                            doFirstCollectTask();
+
+                        }
+
+                    }
+                })
+                .run();
+
+
     }
 
     private void checkBuyPoint() {
@@ -2750,16 +2678,8 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                         doGetAlbumInfo();
                         break;
 
-                    case DoingTypeClass.DoCollectAlbum:
-                        doCollectAlbum();
-                        break;
-
                     case DoingTypeClass.DoFirstCollectTask:
                         doFirstCollectTask();
-                        break;
-
-                    case DoingTypeClass.DoGetPoint:
-                        doGetPoint();
                         break;
 
                     case DoingTypeClass.DoSendContribute:
@@ -2790,132 +2710,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
         getAlbumInfoTask = new GetAlbumInfoTask();
         getAlbumInfoTask.execute();
-
-    }
-
-    private void doGetPoint() {
-
-        if (!HttpUtility.isConnect(this)) {
-            setNoConnect();
-            return;
-        }
-
-        getPointTask = new GetPointTask();
-        getPointTask.execute();
-
-    }
-
-    private void doCollectAlbum() {
-
-        if (!HttpUtility.isConnect(this)) {
-            setNoConnect();
-            return;
-        }
-
-        String param = "";
-
-        if (itemAlbum.isReward_after_collect()) {
-
-            try {
-
-                JSONObject obj = new JSONObject();
-                obj.put(ProtocolKey.recipient, edUserName.getText().toString());
-                obj.put(ProtocolKey.recipient_tel, edPhone.getText().toString());
-                obj.put(ProtocolKey.recipient_address, edAddress.getText().toString());
-
-                param = obj.toString();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-        }
-
-
-        protocol13 = new Protocol13_BuyAlbum(
-                mActivity,
-                id,
-                token,
-                album_id,
-                "google",
-                comfirmPoint,
-                param,
-                new Protocol13_BuyAlbum.TaskCallBack() {
-                    @Override
-                    public void Prepare() {
-                        doingType = DoingTypeClass.DoCollectAlbum;
-                        startLoading();
-                    }
-
-                    @Override
-                    public void Post() {
-                        dissmissLoading();
-                    }
-
-                    @Override
-                    public void Success() {
-                        dissmissLoading();
-
-                        itemAlbum.setOwn(true);
-
-                        if (itemAlbum.getPoint() > 0) {
-
-                            PinPinToast.showSponsorToast(
-                                    mActivity.getApplicationContext(),
-                                    itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_toast_message_thank_by_sponsor),
-                                    itemAlbum.getUser_picture()
-                            );
-
-
-                            //需要在其他地方立即顯示
-                            PPBApplication.getInstance().getData().edit().putString(Key.point, (userPoint - StringIntMethod.StringToInt(comfirmPoint)) + "").commit();
-
-
-                        } else {
-                            PinPinToast.showSuccessToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_added_to_collect);
-                        }
-
-                        FlurryUtil.onEvent(FlurryKey.reader_collect_success);
-
-                        List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-                        for (Activity ac : activityList) {
-                            if (ac.getClass().getSimpleName().equals(AlbumInfoActivity.class.getSimpleName())) {
-                                ((AlbumInfoActivity) ac).setOwn(true);
-                                break;
-                            }
-                        }
-
-
-                        //如果不是從抽獎兌換頁執行 則再獲取photo_id
-//                        if(startPhotoID==-1){
-//                            startPhotoID = photoContentsList.get(vpReader.getCurrentItem()).getPhoto_id();
-//                        }
-
-
-                        doGetAlbumInfo();
-
-                        if (itemAlbum.getPoint() == 0) {
-
-                            doFirstCollectTask();
-
-                        } else {
-
-                            doFirstCollectTask();
-
-                        }
-                    }
-
-                    @Override
-                    public void IsOwnAlbum() {
-
-                    }
-
-                    @Override
-                    public void TimeOut() {
-                        doCollectAlbum();
-                    }
-                });
 
     }
 
@@ -3498,86 +3292,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
             }
 
         }
-    }
-
-    private class GetPointTask extends AsyncTask<Void, Void, Object> {
-
-        private String p23Message = "";
-
-        private int p23Result = -1;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            doingType = DoingTypeClass.DoGetPoint;
-            startLoading();
-
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-
-            String strJson = "";
-
-            try {
-                strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P23_GetUserPoints, SetMapByProtocol.setParam23_getuserpoints(id, token, "google"), null);
-
-                MyLog.Set("d", getClass(), "p23strJson => " + strJson);
-
-            } catch (SocketTimeoutException timeout) {
-                p23Result = Key.TIMEOUT;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (strJson != null && !strJson.equals("")) {
-                try {
-                    JSONObject jsonObject = new JSONObject(strJson);
-                    p23Result = JsonUtility.GetInt(jsonObject, ProtocolKey.result);
-                    if (p23Result == 1) {
-
-                        userPoint = JsonUtility.GetInt(jsonObject, ProtocolKey.data);
-
-                    } else if (p23Result == 0) {
-                        p23Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-                    }
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-                }
-
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-
-            dissmissLoading();
-
-            if (p23Result == 1) {
-
-                if (userPoint < itemAlbum.getPoint()) {
-                    MyLog.Set("d", this.getClass(), "P點不足 前去買點");
-                    checkBuyPoint();
-                } else {
-                    MyLog.Set("d", this.getClass(), "P點足夠 進行購買");
-                    doCollectAlbum();
-                }
-
-            } else if (p23Result == 0) {
-
-                DialogV2Custom.BuildError(mActivity, p23Message);
-
-            } else if (p23Result == Key.TIMEOUT) {
-                connectInstability();
-            } else {
-                DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
-            }
-        }
-
     }
 
     private class FirstCollectAlbumTask extends AsyncTask<Void, Void, Object> {
@@ -4392,7 +4106,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                 if (!itemAlbum.isOwn()) {
                     popMore.dismiss();
-                    checkToCollectAlbum(itemAlbum.getPoint() + "");
+                    collectAlbum(itemAlbum.getPoint());
                 }
 
                 break;
@@ -4700,7 +4414,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         cancelTask(sendLikeTask);
         cancelTask(deleteLikeTask);
         cancelTask(getAlbumInfoTask);
-        cancelTask(getPointTask);
         cancelTask(firstCollectAlbumTask);
         cancelTask(sendContributeTask);
         cancelTask(checkShareTask);
@@ -4720,6 +4433,11 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
             }
 
         }
+
+        if(builder!=null) {
+            builder.clear();
+        }
+        builder = null;
 
         if (mediaPlayer != null) {
             mediaPlayer.reset();
