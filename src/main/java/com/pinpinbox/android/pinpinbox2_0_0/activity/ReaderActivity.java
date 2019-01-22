@@ -68,7 +68,6 @@ import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.MapUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.ControlSizeScrollView;
 import com.pinpinbox.android.Views.ControllableViewPager;
@@ -117,7 +116,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol108_GetPhotoUsefor;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol109_InsertBookmark;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol111_SlotPhotoUsefor;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13_BuyAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Picasso;
@@ -163,7 +161,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
     private ShareTask shareTask;
     private SendLikeTask sendLikeTask;
     private DeleteLikeTask deleteLikeTask;
-    private Protocol13_BuyAlbum protocol13;
     private Protocol108_GetPhotoUsefor protocol108;
     private Protocol109_InsertBookmark protocol109;
     private Protocol111_SlotPhotoUsefor protocol111;
@@ -2378,17 +2375,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                     tvCollect.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_itemtype_collect_need_sponsor) + itemAlbum.getPoint() + "P)");
 
-                    TextView tvSponsorMore = popMore.getPopupView().findViewById(R.id.tvSponsorMore);
-                    tvSponsorMore.setVisibility(View.VISIBLE);
-                    tvSponsorMore.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            popMore.getPopupWindow().dismiss();
-                            vpReader.setCurrentItem(photoContentsList.size() - 1);
-                        }
-                    });
-
-
                 } else {
 
                     tvCollect.setText(R.string.pinpinbox_2_0_0_itemtype_collect);
@@ -2579,9 +2565,9 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         d.setCheckExecute(new CheckExecute() {
             @Override
             public void DoCheck() {
-                Intent intent = new Intent(mActivity, BuyPointActivity.class);
-                mActivity.startActivity(intent);
-                ActivityAnim.StartAnim(mActivity);
+
+                ActivityIntent.toBuyPoint(mActivity);
+
             }
         });
         d.show();
@@ -2864,11 +2850,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                         /*event*/
                         event = JsonUtility.GetString(jsonData, ProtocolKey.event);
 
-
-
-
-
-
                         /*photo detail*/
                         try {
                             JSONArray jsonArray = new JSONArray(JsonUtility.GetString(jsonData, ProtocolKey.photo));
@@ -2986,7 +2967,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                         setPage(0);
                         setPageDetail(0);
-//                        setPageLink(0);
                         setPageDescription(0);
                         setPageLocation(0);
                         setPhotoMode(0);
@@ -4106,7 +4086,17 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
                 if (!itemAlbum.isOwn()) {
                     popMore.dismiss();
-                    collectAlbum(itemAlbum.getPoint());
+
+                    if (itemAlbum.getPoint() > 0) {
+
+                        vpReader.setCurrentItem(photoContentsList.size());
+
+                    } else {
+
+                        collectAlbum(itemAlbum.getPoint());
+
+                    }
+
                 }
 
                 break;
@@ -4418,7 +4408,6 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         cancelTask(sendContributeTask);
         cancelTask(checkShareTask);
         cancelTask(shareTask);
-        cancelTask(protocol13);
         cancelTask(protocol109);
         cancelTask(protocol111);
 

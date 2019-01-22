@@ -30,7 +30,6 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.Utility.DensityUtility;
 import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.ImageUtility;
@@ -76,7 +75,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.TouchRange.TouchRange;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol100_Vote;
-import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol13_BuyAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupList;
@@ -855,6 +853,9 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                         itemAlbum.setPoint(JsonUtility.GetInt(jsonAlbum, ProtocolKey.point));
                         itemAlbum.setCount_photo(JsonUtility.GetInt(jsonAlbum, ProtocolKey.count_photo));
                         itemAlbum.setIs_likes(JsonUtility.GetBoolean(jsonAlbum, ProtocolKey.is_likes));
+                        itemAlbum.setDisplay_num_of_collect(JsonUtility.GetBoolean(jsonAlbum, ProtocolKey.display_num_of_collect));
+                        itemAlbum.setReward_after_collect(JsonUtility.GetBoolean(jsonAlbum, ProtocolKey.reward_after_collect));
+                        itemAlbum.setReward_description(JsonUtility.GetString(jsonAlbum, ProtocolKey.reward_description));
 
                         String usefor = JsonUtility.GetString(jsonAlbum, ProtocolKey.usefor);
                         JSONObject jsonUsefor = new JSONObject(usefor);
@@ -2030,7 +2031,23 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
                     FlurryUtil.onEvent(FlurryKey.albuminfo_click_collect);
 
-                    collectAlbum();
+
+                    if(itemAlbum.isReward_after_collect()){
+
+                        DialogV2Custom d = new DialogV2Custom(mActivity);
+                        d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_fill_out_the_contact_info);
+                        d.setStyle(DialogStyleClass.CHECK);
+                        d.getTvRightOrBottom().setVisibility(View.GONE);
+                        d.getTvLeftOrTop().setText(R.string.pinpinbox_2_0_0_dialog_i_know);
+                        d.show();
+
+                    }else {
+
+                        collectAlbum();
+
+                    }
+
+
 
                 }
 
@@ -2224,9 +2241,12 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                                     itemAlbum.getUser_picture()
                             );
 
-                            doCollectTask();
+
 
                         }
+
+                        doCollectTask();
+
                     }
                 })
                 .run();

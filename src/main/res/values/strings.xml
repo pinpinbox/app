@@ -207,6 +207,8 @@
     <string name="pinpinbox_2_0_0_dialog_message_update_error_restart_app">上傳檔案出現異常，建議重新啟動APP</string>
     <string name="pinpinbox_2_0_0_dialog_message_grade_is_viewer_can_not_edit_content_and_go_to_cooperation_manage">你在當前作品的權限為瀏覽者無法編輯內容，要前往共用管理嗎?</string>
     <string name="pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point">點選「進入觀看」並前往最後一頁可進行贊助額度設定</string>
+    <string name="pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_fill_out_the_contact_info">贊助此作品須填寫連絡資訊，請點擊「進入觀看」並前往最後一頁填寫後即可贊助</string>
+
     <string name="pinpinbox_2_0_0_dialog_message_remove_from_followlist">將會從關注清單內移除此創作人，確定不再關注?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_recording">確定刪除本頁錄音檔?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_description">確定刪除本頁敘述?</string>

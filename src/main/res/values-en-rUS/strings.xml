@@ -197,6 +197,8 @@
     <string name="pinpinbox_2_0_0_dialog_message_update_error_restart_app">Upload error, suggest you restart app.</string>
     <string name="pinpinbox_2_0_0_dialog_message_grade_is_viewer_can_not_edit_content_and_go_to_cooperation_manage">Your current status in this work is Viewer, so you can\'t edit content. Want to go to management(Shared)?</string>
     <string name="pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point">Click「Read」and go to the last page to set up P points.</string>
+    <string name="pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_fill_out_the_contact_info">To sponsor this work, you need to fill in the contact info. Please click "Read" and go to the last page to complete the step.</string>
+
     <string name="pinpinbox_2_0_0_dialog_message_remove_from_followlist">Your selected will remove the creator from the follow list, are you sure to unfollow?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_recording">Delete audio from this page?</string>
     <string name="pinpinbox_2_0_0_dialog_message_check_delete_description">Delete this page description?</string>

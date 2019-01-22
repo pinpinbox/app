@@ -39,22 +39,6 @@
                 style="@style/ppb200_pop_item"
                 android:text="@string/pinpinbox_2_0_0_itemtype_collect" />
 
-            <TextView
-                android:id="@+id/tvSponsorMore"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/ppb200_padding_margin_second"
-                android:background="@drawable/click_2_0_0_main_button_radius"
-                android:gravity="center"
-                android:letterSpacing="0.1"
-                android:paddingLeft="@dimen/ppb200_padding_margin_second"
-                android:paddingRight="@dimen/ppb200_padding_margin_second"
-                android:text="@string/pinpinbox_2_0_0_button_sponsor_more"
-                android:textColor="@color/white"
-                android:textSize="@dimen/ppb200_common_text_second"
-                android:visibility="gone" />
-
 
         </LinearLayout>
 
