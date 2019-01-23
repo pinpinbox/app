@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-import com.ctrlplusz.anytextview.AnyTextView;
-
 /**
  * A {@link TextView} that re-sizes its text to be no larger than the width of the view.
  *
@@ -14,7 +12,7 @@ import com.ctrlplusz.anytextview.AnyTextView;
  * @attr ref R.styleable.AutofitTextView_minTextSize
  * @attr ref R.styleable.AutofitTextView_precision
  */
-public class AutofitTextView extends AnyTextView implements AutofitHelper.OnTextSizeChangeListener {
+public class AutofitTextView extends TextView implements AutofitHelper.OnTextSizeChangeListener {
 
     private AutofitHelper mHelper;
 
