@@ -10,6 +10,7 @@
         android:text="" />
 
     <TextView
+        style="@style/ppb200_other_bold_text"
         android:id="@+id/tvBelowTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,8 +22,7 @@
         android:textColor="@color/pinpinbox_2_0_0_secondary_text"
         android:textSize="@dimen/ppb200_common_text_second"
         android:visibility="gone"
-        android:text=""
-        fontPath="fonts/OpenSans-Bold.ttf"/>
+        android:text="" />
 
 
 </RelativeLayout>
