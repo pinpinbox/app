@@ -50,7 +50,7 @@ public class HobbyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
-        convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_hobby, null);
+        convertView =mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_hobby, null);
 
         RoundCornerImageView hobbyImg = convertView.findViewById(R.id.hobbyImg);
         TextView tvName = convertView.findViewById(R.id.tvName);

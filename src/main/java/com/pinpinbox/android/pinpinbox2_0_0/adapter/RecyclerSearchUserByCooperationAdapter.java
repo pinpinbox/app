@@ -4,16 +4,15 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ChangeTypeListener;
 import com.squareup.picasso.Picasso;
 
@@ -43,19 +42,14 @@ public class RecyclerSearchUserByCooperationAdapter extends RecyclerView.Adapter
 
     }
 
-
     private Activity mActivity;
 
     private List<ItemUser> itemUserList;
 
-
     public RecyclerSearchUserByCooperationAdapter(Activity activity, List<ItemUser> itemUserList) {
         this.mActivity = activity;
         this.itemUserList = itemUserList;
-
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -65,7 +59,7 @@ public class RecyclerSearchUserByCooperationAdapter extends RecyclerView.Adapter
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_cooperation_user, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_cooperation_user, null);
         return new ViewHolder(view);
     }
 
@@ -126,14 +120,11 @@ public class RecyclerSearchUserByCooperationAdapter extends RecyclerView.Adapter
             super(itemView);
 
 
-            linBackground = (LinearLayout) itemView.findViewById(R.id.linBackground);
+            linBackground = itemView.findViewById(R.id.linBackground);
 
-            //20171102 無法點擊 所以取消點擊效果
-//            linBackground.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
-
-            userImg = (RoundedImageView) itemView.findViewById(R.id.userImg);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            tvInvite = (TextView) itemView.findViewById(R.id.tvInvite);
+            userImg = itemView.findViewById(R.id.userImg);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvInvite = itemView.findViewById(R.id.tvInvite);
 
             linBackground.setOnClickListener(this);
             linBackground.setOnLongClickListener(this);

@@ -63,7 +63,7 @@ public class PhotoPageAdapter extends PagerAdapter {
         MyLog.Set("d", PhotoPageAdapter.class, "destroyItem position => " + position);
 
 
-        PinchImageView picImg = (PinchImageView) ((View) object).findViewById(R.id.photoImg);
+        PinchImageView picImg = ((View) object).findViewById(R.id.photoImg);
         picImg.reset();
         picImg.setImageBitmap(null);
         view.removeView((View) object);
@@ -95,9 +95,9 @@ public class PhotoPageAdapter extends PagerAdapter {
 
     private void setImageContents(View vPage, int position) {
 
-        final PinchImageView picImg = (PinchImageView) vPage.findViewById(R.id.photoImg);
+        final PinchImageView picImg = vPage.findViewById(R.id.photoImg);
 
-        final ImageView refreshImg = (ImageView) vPage.findViewById(R.id.refreshImg);
+        final ImageView refreshImg = vPage.findViewById(R.id.refreshImg);
 
         if (picImg != null) {
 
@@ -187,7 +187,7 @@ public class PhotoPageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
 
-        View vPage = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.page_2_0_0_photo, null);
+        View vPage = mActivity.getLayoutInflater().inflate(R.layout.page_2_0_0_photo, null);
 
         vPage.setId(position);
 

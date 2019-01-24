@@ -42,8 +42,6 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
 
     private Activity mActivity;
 
-//    private ArrayList<HashMap<String, Object>> listData;
-
     private List<ItemAlbum> albumList;
 
     public RecyclerAuthorAdapter(Activity activity, List<ItemAlbum> albumList) {
@@ -61,7 +59,7 @@ public class RecyclerAuthorAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_author, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_author, null);
         return new ViewHolder(view);
     }
 

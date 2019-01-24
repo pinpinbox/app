@@ -1,14 +1,13 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPoint;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPoint;
 
 import java.util.List;
 
@@ -44,9 +43,9 @@ public class PointAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
-         convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_point, null);
+         convertView = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_point, null);
 
-        TextView tvPoint = (TextView)convertView.findViewById(R.id.tvPoint);
+        TextView tvPoint = convertView.findViewById(R.id.tvPoint);
 
         tvPoint.setText(itemPointList.get(position).getObtain() + " P");
 

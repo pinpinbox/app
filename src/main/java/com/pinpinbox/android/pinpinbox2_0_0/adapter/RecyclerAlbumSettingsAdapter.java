@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -58,7 +57,8 @@ public class RecyclerAlbumSettingsAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_albumsettings, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_albumsettings, null);
+
         return new ViewHolder(view);
     }
 
@@ -98,7 +98,7 @@ public class RecyclerAlbumSettingsAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            tvName = (TextView)itemView.findViewById(R.id.tvName);
+            tvName = itemView.findViewById(R.id.tvName);
 
             tvName.setOnClickListener(this);
             tvName.setOnLongClickListener(this);

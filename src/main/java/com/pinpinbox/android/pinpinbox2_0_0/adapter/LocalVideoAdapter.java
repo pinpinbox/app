@@ -39,7 +39,7 @@ public class LocalVideoAdapter extends BaseAdapter implements
 
     public LocalVideoAdapter(Activity mActivity, List<GridItem> hasHeaderIdList,
                              GridView mGridView, LruCache<String, Bitmap> lruCache) {
-        mInflater = LayoutInflater.from(mActivity);
+        mInflater = mActivity.getLayoutInflater();
         this.mActivity = mActivity;
         this.mGridView = mGridView;
         this.hasHeaderIdList = hasHeaderIdList;
@@ -72,8 +72,8 @@ public class LocalVideoAdapter extends BaseAdapter implements
         if (convertView == null) {
             mViewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.list_item_2_0_0_video, parent, false);
-            mViewHolder.mImageView = (ImageView) convertView.findViewById(R.id.image);
-            mViewHolder.tvDuration = (TextView) convertView.findViewById(R.id.tvDuration);
+            mViewHolder.mImageView = convertView.findViewById(R.id.image);
+            mViewHolder.tvDuration = convertView.findViewById(R.id.tvDuration);
             mViewHolder.vSelect = convertView.findViewById(R.id.vSelect);
             convertView.setTag(mViewHolder);
 

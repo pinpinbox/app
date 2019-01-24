@@ -8,12 +8,10 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
@@ -97,7 +95,7 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_2_0_0_home_banner, parent, false);
+        View itemView = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_home_banner, parent, false);
         if(PPBApplication.getInstance().isPhone()) {
             mCardAdapterHelper.onCreateViewHolder(parent, itemView);
         }
@@ -247,7 +245,6 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
                     .load(R.drawable.bg_2_0_0_no_image)
                     .apply(opts)
                     .into(holder.bannerImg);
-
 
         }
 

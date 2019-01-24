@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.squareup.picasso.Picasso;
 
@@ -44,8 +43,6 @@ public class RecyclerReaderAdapter extends RecyclerView.Adapter {
     public RecyclerReaderAdapter(Activity activity, List<ItemPhoto> itemPhotoList) {
         this.mActivity = activity;
         this.itemPhotoList = itemPhotoList;
-
-
     }
 
 
@@ -57,18 +54,15 @@ public class RecyclerReaderAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_reader, null);
+        View v = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_reader, null);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder vHolder, final int position) {
 
-
         ViewHolder holder = (ViewHolder) vHolder;
         holder.position = position;
-
-
 
         String url = itemPhotoList.get(position).getImage_url_thumbnail();
 
@@ -130,7 +124,6 @@ public class RecyclerReaderAdapter extends RecyclerView.Adapter {
 
                 break;
 
-
         }
 
 
@@ -145,7 +138,6 @@ public class RecyclerReaderAdapter extends RecyclerView.Adapter {
             holder.vDark.setVisibility(View.VISIBLE);
 
         }
-
 
     }
 
@@ -165,9 +157,9 @@ public class RecyclerReaderAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
-            photoImg = (ImageView) itemView.findViewById(R.id.photoImg);
-            useforImg = (ImageView) itemView.findViewById(R.id.useforImg);
+            rBackground = itemView.findViewById(R.id.rBackground);
+            photoImg = itemView.findViewById(R.id.photoImg);
+            useforImg = itemView.findViewById(R.id.useforImg);
             vDark = itemView.findViewById(R.id.vDark);
 
 

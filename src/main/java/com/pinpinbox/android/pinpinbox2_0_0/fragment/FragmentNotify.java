@@ -150,7 +150,7 @@ public class FragmentNotify extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_2_0_0_notify, container, false);
 
-        viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_notify, null);
+        viewHeader = getActivity().getLayoutInflater().inflate(R.layout.header_2_0_0_notify, null);
 
         pbLoadMore = v.findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();

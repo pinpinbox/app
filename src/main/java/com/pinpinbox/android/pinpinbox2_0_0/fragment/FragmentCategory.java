@@ -87,7 +87,7 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
         initView(v);
 
-        initHeaderView(v);
+        initHeaderView();
 
         return v;
     }
@@ -118,9 +118,9 @@ public class FragmentCategory extends Fragment implements View.OnClickListener {
 
     }
 
-    private void initHeaderView(View v) {
+    private void initHeaderView() {
 
-        viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_category, null);
+        viewHeader = getActivity().getLayoutInflater().inflate(R.layout.header_2_0_0_category, null);
 
         cgBannerImg = viewHeader.findViewById(R.id.cgBannerImg);
 

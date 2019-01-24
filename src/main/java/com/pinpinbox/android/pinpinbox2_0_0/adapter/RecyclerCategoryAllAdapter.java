@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -47,8 +46,6 @@ public class RecyclerCategoryAllAdapter extends RecyclerView.Adapter {
     public RecyclerCategoryAllAdapter(Activity activity, List<ItemAlbum> albumList) {
         this.mActivity = activity;
         this.albumList = albumList;
-
-
     }
 
 
@@ -60,7 +57,7 @@ public class RecyclerCategoryAllAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_category_all, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_category_all, null);
         return new ViewHolder(view);
     }
 
@@ -116,9 +113,9 @@ public class RecyclerCategoryAllAdapter extends RecyclerView.Adapter {
                 holder.slotImg.setVisibility(View.VISIBLE);
             } else {
 
-                if(albumList.get(position).isExchange()){
+                if (albumList.get(position).isExchange()) {
                     holder.slotImg.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     holder.slotImg.setVisibility(View.GONE);
                 }
 
@@ -233,22 +230,22 @@ public class RecyclerCategoryAllAdapter extends RecyclerView.Adapter {
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-            rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
+            rItemBg = itemView.findViewById(R.id.rItemBg);
 
-            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
-            userImg = (RoundedImageView) itemView.findViewById(R.id.userImg);
+            coverImg = itemView.findViewById(R.id.coverImg);
+            userImg = itemView.findViewById(R.id.userImg);
 
-            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
-            tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
-            tvViewed = (TextView) itemView.findViewById(R.id.tvViewed);
-            tvLike = (TextView) itemView.findViewById(R.id.tvLike);
+            tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
+            tvUserName = itemView.findViewById(R.id.tvUserName);
+            tvViewed = itemView.findViewById(R.id.tvViewed);
+            tvLike = itemView.findViewById(R.id.tvLike);
 
-            linType = (LinearLayout) itemView.findViewById(R.id.linType);
-            linUser = (LinearLayout) itemView.findViewById(R.id.linUser);
+            linType = itemView.findViewById(R.id.linType);
+            linUser = itemView.findViewById(R.id.linUser);
 
-            audioImg = (ImageView) itemView.findViewById(R.id.audioImg);
-            videoImg = (ImageView) itemView.findViewById(R.id.videoImg);
-            slotImg = (ImageView) itemView.findViewById(R.id.slotImg);
+            audioImg = itemView.findViewById(R.id.audioImg);
+            videoImg = itemView.findViewById(R.id.videoImg);
+            slotImg = itemView.findViewById(R.id.slotImg);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

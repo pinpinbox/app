@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -47,8 +46,6 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
         this.mActivity = activity;
         this.listData = listData;
         this.isOwn = isOwn;
-
-
     }
 
 
@@ -63,10 +60,10 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
          View view = null;
 
         if(isOwn){
-             view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_temlistown, null);
+             view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_temlistown, null);
             return new ViewHolderOwn(view);
         }else {
-             view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_temlist, null);
+             view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_temlist, null);
             return new ViewHolder(view);
         }
     }
@@ -90,8 +87,6 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
                     .into(holder.coverImg);
 
             holder.tvTemName.setText(strTemName);
-
-
 
         }else {
 
@@ -127,8 +122,6 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
                 holder.rOwn.setVisibility(View.GONE);
             }
 
-
-
         }
 
 
@@ -150,11 +143,11 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-            tvTemName = (TextView)itemView.findViewById(R.id.tvTemName);
-            tvDownloadCount = (TextView)itemView.findViewById(R.id.tvDownloadCount);
-            tvOwn = (TextView)itemView.findViewById(R.id.tvOwn);
-            coverImg = (RoundedImageView)itemView.findViewById(R.id.coverImg);
-            rOwn = (RelativeLayout)itemView.findViewById(R.id.rOwn);
+            tvTemName = itemView.findViewById(R.id.tvTemName);
+            tvDownloadCount = itemView.findViewById(R.id.tvDownloadCount);
+            tvOwn = itemView.findViewById(R.id.tvOwn);
+            coverImg = itemView.findViewById(R.id.coverImg);
+            rOwn = itemView.findViewById(R.id.rOwn);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -194,8 +187,8 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
             super(itemView);
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
-            tvTemName = (TextView)itemView.findViewById(R.id.tvTemName);
-            coverImg = (RoundedImageView)itemView.findViewById(R.id.coverImg);
+            tvTemName = itemView.findViewById(R.id.tvTemName);
+            coverImg = itemView.findViewById(R.id.coverImg);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
 

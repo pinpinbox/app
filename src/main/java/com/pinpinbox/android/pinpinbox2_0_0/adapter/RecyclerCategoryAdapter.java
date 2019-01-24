@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbumCategory;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 
@@ -39,11 +37,8 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter {
 
 
     public RecyclerCategoryAdapter(Activity activity, List<ItemAlbumCategory> albumCategoryList) {
-
         this.mActivity = activity;
-
         this.itemAlbumCategoryList = albumCategoryList;
-
     }
 
     @Override
@@ -53,8 +48,7 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_category, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_category, null);
         return new ViewHolder(view);
     }
 

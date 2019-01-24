@@ -5,18 +5,17 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Views.CircleView.RoundedImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.Views.CircleView.RoundedImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.GroupSetListener;
 import com.squareup.picasso.Picasso;
 
@@ -68,7 +67,7 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_cooperation_group, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_cooperation_group, null);
         return new ViewHolder(view);
 
     }
@@ -163,14 +162,14 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
             super(itemView);
 
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
+            rBackground = itemView.findViewById(R.id.rBackground);
 
             rBackground.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-            userImg = (RoundedImageView) itemView.findViewById(R.id.userImg);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            tvIdentity = (TextView) itemView.findViewById(R.id.tvIdentity);
-            deleteImg = (ImageView) itemView.findViewById(R.id.deleteImg);
+            userImg = itemView.findViewById(R.id.userImg);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvIdentity = itemView.findViewById(R.id.tvIdentity);
+            deleteImg = itemView.findViewById(R.id.deleteImg);
 
         }
 

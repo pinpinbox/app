@@ -34,7 +34,7 @@ public class RecyclerFeatureAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_home_feature, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_home_feature, null);
         return new ViewHolder(view);
     }
 

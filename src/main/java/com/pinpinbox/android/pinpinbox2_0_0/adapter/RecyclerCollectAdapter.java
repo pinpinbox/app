@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +50,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
     }
 
 
-    public RecyclerCollectAdapter recyclerCollectAdapter = this;
+    private RecyclerCollectAdapter recyclerCollectAdapter;
 
     private Activity mActivity;
 
@@ -72,7 +71,6 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
 
         recyclerCollectAdapter = this;
 
-
     }
 
     @Override
@@ -83,7 +81,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_collect, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_collect, null);
         return new ViewHolder(view);
     }
 
@@ -99,7 +97,6 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
             } else {
                 mp.put("detail_is_open", false);
             }
-
 
             listData.remove(position);
 
@@ -399,27 +396,27 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
-            rDetail = (RelativeLayout) itemView.findViewById(R.id.rDetail);
-            rWarn = (RelativeLayout) itemView.findViewById(R.id.rWarn);
+            rBackground = itemView.findViewById(R.id.rBackground);
+            rDetail = itemView.findViewById(R.id.rDetail);
+            rWarn = itemView.findViewById(R.id.rWarn);
 
-            detaillistImg = (RoundCornerImageView) itemView.findViewById(R.id.detaillistImg);
-            userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
-            detailImg = (ImageView) itemView.findViewById(R.id.detailImg);
-            downloadImg = (ImageView) itemView.findViewById(R.id.downloadImg);
-            smallprivacyImg = (ImageView) itemView.findViewById(R.id.smallprivacyImg);
+            detaillistImg = itemView.findViewById(R.id.detaillistImg);
+            userImg = itemView.findViewById(R.id.userImg);
+            detailImg = itemView.findViewById(R.id.detailImg);
+            downloadImg = itemView.findViewById(R.id.downloadImg);
+            smallprivacyImg = itemView.findViewById(R.id.smallprivacyImg);
 
-            tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            tvCooperationCount = (TextView) itemView.findViewById(R.id.tvCooperationCount);
-            tvLoadType = (TextView) itemView.findViewById(R.id.tvLoadType);
+            tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
+            tvTime = itemView.findViewById(R.id.tvTime);
+            tvCooperationCount = itemView.findViewById(R.id.tvCooperationCount);
+            tvLoadType = itemView.findViewById(R.id.tvLoadType);
 
 
-            linEdit = (LinearLayout) itemView.findViewById(R.id.linEdit);
-            linCooperation = (LinearLayout) itemView.findViewById(R.id.linCooperation);
-            linShare = (LinearLayout) itemView.findViewById(R.id.linShare);
-            linDelete = (LinearLayout) itemView.findViewById(R.id.linDelete);
-            linCooperationCount = (LinearLayout) itemView.findViewById(R.id.linCooperationCount);
+            linEdit = itemView.findViewById(R.id.linEdit);
+            linCooperation = itemView.findViewById(R.id.linCooperation);
+            linShare = itemView.findViewById(R.id.linShare);
+            linDelete = itemView.findViewById(R.id.linDelete);
+            linCooperationCount = itemView.findViewById(R.id.linCooperationCount);
 
 
             rBackground.setOnClickListener(this);

@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -53,8 +52,6 @@ public class RecyclerBarCodeAdapter extends RecyclerView.Adapter {
     public RecyclerBarCodeAdapter(Activity activity, List<String> albumindexList) {
         this.mActivity = activity;
         this.albumindexList = albumindexList;
-
-
     }
 
 
@@ -66,7 +63,7 @@ public class RecyclerBarCodeAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_barcode, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_barcode, null);
         return new ViewHolder(view);
     }
 
@@ -97,14 +94,13 @@ public class RecyclerBarCodeAdapter extends RecyclerView.Adapter {
         int position;
 
         private ImageView deleteImg;
-        private TextView tvNumber, tvBarCode;
+        private TextView tvBarCode;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvBarCode = (TextView)itemView.findViewById(R.id.tvBarCode);
-            tvNumber = (TextView)itemView.findViewById(R.id.tvNumber);
-            deleteImg = (ImageView)itemView.findViewById(R.id.deleteImg);
+            tvBarCode = itemView.findViewById(R.id.tvBarCode);
+            deleteImg = itemView.findViewById(R.id.deleteImg);
 
 
         }

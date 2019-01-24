@@ -30,7 +30,7 @@ public class LocalPhotoAdapter extends BaseAdapter implements
     private RequestOptions opts;
 
     public LocalPhotoAdapter(Activity mActivity, List<GridItem> hasHeaderIdList) {
-        mInflater = LayoutInflater.from(mActivity);
+        mInflater = mActivity.getLayoutInflater();
         this.mActivity = mActivity;
         this.hasHeaderIdList = hasHeaderIdList;
 
@@ -63,7 +63,7 @@ public class LocalPhotoAdapter extends BaseAdapter implements
         if (convertView == null) {
             mViewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.list_item_2_0_0_select_photo, parent, false);
-            mViewHolder.mImageView = (ImageView) convertView.findViewById(R.id.image);
+            mViewHolder.mImageView = convertView.findViewById(R.id.image);
             mViewHolder.vSelect = convertView.findViewById(R.id.vSelect);
             convertView.setTag(mViewHolder);
 
@@ -82,17 +82,6 @@ public class LocalPhotoAdapter extends BaseAdapter implements
                     .load(file)
                     .apply(opts)
                     .into(mViewHolder.mImageView);
-
-
-
-
-
-
-
-
-
-
-
 
 
 

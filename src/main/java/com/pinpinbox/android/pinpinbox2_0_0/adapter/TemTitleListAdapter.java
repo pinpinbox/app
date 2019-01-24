@@ -45,8 +45,8 @@ public class TemTitleListAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mActivity).inflate(R.layout.list_item_2_0_0_template_title_list, null);
-            holder.tvSub = (TextView) convertView.findViewById(R.id.item_subselect);
+            convertView = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_template_title_list, null);
+            holder.tvSub = convertView.findViewById(R.id.item_subselect);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

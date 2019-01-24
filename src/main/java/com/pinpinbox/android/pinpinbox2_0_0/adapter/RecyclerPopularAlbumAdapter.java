@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -65,7 +64,7 @@ public interface OnRecyclerViewListener {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_popular_album, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_popular_album, null);
         return new ViewHolder(view);
     }
 
@@ -182,17 +181,17 @@ private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClick
     public ViewHolder(final View itemView) {
         super(itemView);
 
-        coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
+        coverImg = itemView.findViewById(R.id.coverImg);
 
-        audioImg = (ImageView) itemView.findViewById(R.id.audioImg);
-        videoImg = (ImageView) itemView.findViewById(R.id.videoImg);
-        slotImg = (ImageView) itemView.findViewById(R.id.slotImg);
+        audioImg = itemView.findViewById(R.id.audioImg);
+        videoImg = itemView.findViewById(R.id.videoImg);
+        slotImg = itemView.findViewById(R.id.slotImg);
 
-        tvAlbumName = (TextView) itemView.findViewById(R.id.tvAlbumName);
+        tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
 
-        linType = (LinearLayout) itemView.findViewById(R.id.linType);
-        rItemBg = (RelativeLayout) itemView.findViewById(R.id.rItemBg);
-        rClickArea = (RelativeLayout) itemView.findViewById(R.id.rClickArea);
+        linType = itemView.findViewById(R.id.linType);
+        rItemBg = itemView.findViewById(R.id.rItemBg);
+        rClickArea = itemView.findViewById(R.id.rClickArea);
 
         rClickArea.setOnClickListener(this);
         rClickArea.setOnLongClickListener(this);

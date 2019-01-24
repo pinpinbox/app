@@ -127,7 +127,7 @@ public class BannerPageAdapter extends PagerAdapter {
 
         View v = viewList.get(position);
 
-        final ImageView img = (ImageView) v.findViewById(R.id.bannerImg);
+        final ImageView img = v.findViewById(R.id.bannerImg);
 
 //        final RoundCornerImageView gifImg = (RoundCornerImageView)v.findViewById(R.id.gifImg);
 

@@ -77,7 +77,7 @@ public class FragmentTemSponsored2 extends Fragment {
     private RecyclerView rvTemList;
     private SmoothProgressBar pbLoadMore;
     private PtrClassicFrameLayout swipeRefreshLayout;
-    private View vHeader;
+    private View viewHeader;
     private ImageView refreshImg;
     private TextView tvGuide;
 
@@ -120,10 +120,10 @@ public class FragmentTemSponsored2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_2_0_0_temlist, container, false);
-        tvGuide = (TextView)v.findViewById(R.id.tvGuide);
+        tvGuide = v.findViewById(R.id.tvGuide);
         tvGuide.setText(R.string.pinpinbox_2_0_0_no_template);
-        rvTemList = (RecyclerView) v.findViewById(R.id.rvTemList);
-        pbLoadMore = (SmoothProgressBar) v.findViewById(R.id.pbLoadMore);
+        rvTemList = v.findViewById(R.id.rvTemList);
+        pbLoadMore =  v.findViewById(R.id.pbLoadMore);
         pbLoadMore.progressiveStop();
 
         rvTemList.setItemAnimator(new DefaultItemAnimator());
@@ -135,12 +135,12 @@ public class FragmentTemSponsored2 extends Fragment {
         rvTemList.addOnScrollListener(mOnScrollListener);
         rvTemList.setHasFixedSize(true);
 
-        swipeRefreshLayout = (PtrClassicFrameLayout) v.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = v.findViewById(R.id.swipeRefreshLayout);
 
         setRefreshListener();
 
-        vHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_124dp, null);
-        refreshImg = (ImageView) vHeader.findViewById(R.id.refreshImg);
+        viewHeader = getActivity().getLayoutInflater().inflate(R.layout.header_2_0_0_124dp, null);
+        refreshImg =  viewHeader.findViewById(R.id.refreshImg);
         return v;
     }
 
@@ -306,7 +306,7 @@ public class FragmentTemSponsored2 extends Fragment {
         rvTemList.setLayoutManager(manager);
 
 
-        RecyclerViewUtils.setHeaderView(rvTemList, vHeader);
+        RecyclerViewUtils.setHeaderView(rvTemList, viewHeader);
 
         adapter.setOnRecyclerViewListener(new RecyclerTemListAdapter.OnRecyclerViewListener() {
             @Override
@@ -598,7 +598,7 @@ public class FragmentTemSponsored2 extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        refreshImg = (ImageView) vHeader.findViewById(R.id.refreshImg);
+                        refreshImg = viewHeader.findViewById(R.id.refreshImg);
                         ViewControl.reset(refreshImg);
                         mExplosionField.clear();
                     }

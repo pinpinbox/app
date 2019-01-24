@@ -60,8 +60,8 @@ public class GalleryAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_gallery, null);
-            holder.img = (ImageView) convertView.findViewById(R.id.img);
+            convertView = mActivity.getLayoutInflater().inflate(R.layout.list_item_gallery, null);
+            holder.img = convertView.findViewById(R.id.img);
 //            holder.audioImg = (ImageView) convertView.findViewById(R.id.audioImg);
 //            holder.videoImg = (ImageView) convertView.findViewById(R.id.videoImg);
 //            holder.exchangeImg = (ImageView) convertView.findViewById(R.id.exchangeImg);

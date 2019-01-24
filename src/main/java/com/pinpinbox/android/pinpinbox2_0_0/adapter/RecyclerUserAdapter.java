@@ -4,16 +4,15 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ChangeTypeListener;
 import com.squareup.picasso.Picasso;
 
@@ -52,8 +51,6 @@ public class RecyclerUserAdapter extends RecyclerView.Adapter  {
     public RecyclerUserAdapter(Activity activity, List<ItemUser> itemUserList) {
         this.mActivity = activity;
         this.itemUserList = itemUserList;
-
-
     }
 
 
@@ -65,7 +62,7 @@ public class RecyclerUserAdapter extends RecyclerView.Adapter  {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_user, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_user, null);
         return new ViewHolder(view);
     }
 
@@ -130,13 +127,13 @@ public class RecyclerUserAdapter extends RecyclerView.Adapter  {
             super(itemView);
 
 
-            linBackground = (LinearLayout)itemView.findViewById(R.id.linBackground);
+            linBackground = itemView.findViewById(R.id.linBackground);
 
             linBackground.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
-            userImg = (RoundedImageView)itemView.findViewById(R.id.userImg);
-            tvName = (TextView)itemView.findViewById(R.id.tvName);
-            tvFollow = (TextView)itemView.findViewById(R.id.tvFollow);
+            userImg = itemView.findViewById(R.id.userImg);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvFollow = itemView.findViewById(R.id.tvFollow);
 
             linBackground.setOnClickListener(this);
             linBackground.setOnLongClickListener(this);

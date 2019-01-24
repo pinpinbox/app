@@ -69,7 +69,7 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_sponsor, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_sponsor, null);
         return new RecyclerInteractiveAdapter.ViewHolder(view);
     }
 

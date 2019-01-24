@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -57,7 +56,7 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_select_audio_file, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_select_audio_file, null);
         return new RecyclerAudioFileAdapter.ViewHolder(view);
     }
 
@@ -111,11 +110,11 @@ public class RecyclerAudioFileAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
+            rBackground = itemView.findViewById(R.id.rBackground);
 
-            tvFileName = (TextView) itemView.findViewById(R.id.tvFileName);
-            tvUpload = (TextView) itemView.findViewById(R.id.tvUpload);
-            tvTime = (TextView)itemView.findViewById(R.id.tvTime);
+            tvFileName = itemView.findViewById(R.id.tvFileName);
+            tvUpload = itemView.findViewById(R.id.tvUpload);
+            tvTime = itemView.findViewById(R.id.tvTime);
             rBackground.setOnClickListener(this);
 
         }

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -113,26 +112,26 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
 
         switch (viewType) {
             case TYPE_DATE:
-                view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_notify_date, null);
+                view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_notify_date, null);
                 break;
             case TYPE_USER:
-                view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_notify_user, null);
+                view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_notify_user, null);
                 break;
 
             case TYPE_ALBUMQUEUE:
-                view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_notify_album, null);
+                view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_notify_album, null);
                 break;
 
             case TYPE_ALBUMCOOPERATION:
-                view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_notify_user, null);
+                view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_notify_user, null);
                 break;
 
             case TYPE_ALBUMMESSAGEBOARD:
-                view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_notify_album, null);
+                view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_notify_album, null);
                 break;
 
             case TYPE_SYSTEM:
-                view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_notify_system, null);
+                view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_notify_system, null);
                 break;
             default:
                 view = null;
@@ -287,11 +286,11 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
             super(itemView);
 
 
-            rBackground = (RelativeLayout)itemView.findViewById(R.id.rBackground);
-            messageTypeImg = (ImageView) itemView.findViewById(R.id.messageTypeImg);
-            tvMessage = (TextView) itemView.findViewById(R.id.tvMessage);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            tvMessageTypeText = (TextView) itemView.findViewById(R.id.tvMessageTypeText);
+            rBackground = itemView.findViewById(R.id.rBackground);
+            messageTypeImg = itemView.findViewById(R.id.messageTypeImg);
+            tvMessage = itemView.findViewById(R.id.tvMessage);
+            tvTime = itemView.findViewById(R.id.tvTime);
+            tvMessageTypeText = itemView.findViewById(R.id.tvMessageTypeText);
 
 
             rBackground.setOnClickListener(this);
@@ -333,13 +332,12 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
         public ViewUserHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
-            userImg = (RoundCornerImageView) itemView.findViewById(R.id.userImg);
-            messageTypeImg = (ImageView) itemView.findViewById(R.id.messageTypeImg);
-            tvMessage = (TextView) itemView.findViewById(R.id.tvMessage);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            tvMessageTypeText = (TextView) itemView.findViewById(R.id.tvMessageTypeText);
-
+            rBackground = itemView.findViewById(R.id.rBackground);
+            userImg = itemView.findViewById(R.id.userImg);
+            messageTypeImg = itemView.findViewById(R.id.messageTypeImg);
+            tvMessage = itemView.findViewById(R.id.tvMessage);
+            tvTime = itemView.findViewById(R.id.tvTime);
+            tvMessageTypeText = itemView.findViewById(R.id.tvMessageTypeText);
 
             rBackground.setOnClickListener(this);
             rBackground.setOnLongClickListener(this);
@@ -379,12 +377,12 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
         public ViewAlbumHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout) itemView.findViewById(R.id.rBackground);
-            coverImg = (RoundCornerImageView) itemView.findViewById(R.id.coverImg);
-            messageTypeImg = (ImageView) itemView.findViewById(R.id.messageTypeImg);
-            tvMessage = (TextView) itemView.findViewById(R.id.tvMessage);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            tvMessageTypeText = (TextView) itemView.findViewById(R.id.tvMessageTypeText);
+            rBackground = itemView.findViewById(R.id.rBackground);
+            coverImg = itemView.findViewById(R.id.coverImg);
+            messageTypeImg = itemView.findViewById(R.id.messageTypeImg);
+            tvMessage = itemView.findViewById(R.id.tvMessage);
+            tvTime = itemView.findViewById(R.id.tvTime);
+            tvMessageTypeText = itemView.findViewById(R.id.tvMessageTypeText);
 
 
             rBackground.setOnClickListener(this);
@@ -419,8 +417,8 @@ public class RecyclerNotifyAdapter extends RecyclerView.Adapter {
 
         public ViewDateHolder(View itemView) {
             super(itemView);
-            tvDate = (TextView) itemView.findViewById(R.id.tvDate);
-            pointImg = (RoundedImageView) itemView.findViewById(R.id.pointImg);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            pointImg = itemView.findViewById(R.id.pointImg);
         }
     }
 

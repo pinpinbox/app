@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,7 +15,6 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
@@ -66,7 +64,7 @@ public class RecyclerExploreAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_explore, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_explore, null);
         return new RecyclerExploreAdapter.ViewHolder(view);
     }
 

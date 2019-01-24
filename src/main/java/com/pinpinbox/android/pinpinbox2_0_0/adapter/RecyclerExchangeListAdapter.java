@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,12 +12,10 @@ import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
-
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemExchange;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.List;
 
@@ -64,7 +61,7 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_exchange, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_exchange, null);
         return new RecyclerExchangeListAdapter.ViewHolder(view);
 
 
@@ -100,15 +97,14 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
 //                    mHolder.tvExchangeTime.setText("剩餘時間:" + day + "天" + hour  + "小時" + min + "分");
 
 
-                    if (min < 0 || hour < 0 || day < 0 || l < 0){
+                    if (min < 0 || hour < 0 || day < 0 || l < 0) {
                         mHolder.tvExchangeTime.setText(R.string.pinpinbox_2_0_0_time_expired);
-                    }else {
+                    } else {
                         mHolder.tvExchangeTime.setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_time_limit) + ":"
                                 + day + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_day)
                                 + hour + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_hour)
                                 + min + mActivity.getResources().getString(R.string.pinpinbox_2_0_0_time_min));
                     }
-
 
 
                     mHolder.tvExchangeTime.setTextColor(Color.parseColor(ColorClass.PINK_FRIST));
@@ -120,7 +116,6 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
                 }
 
             }
-
 
             mHolder.tvExchangeTime.setVisibility(View.VISIBLE);
 
@@ -165,9 +160,9 @@ public class RecyclerExchangeListAdapter extends RecyclerView.Adapter {
 
             itemView.setBackgroundResource(R.drawable.click_2_0_0_list_item);
 
-            detaillistImg = (RoundCornerImageView) itemView.findViewById(R.id.detaillistImg);
-            tvExchangeName = (TextView) itemView.findViewById(R.id.tvExchangeName);
-            tvExchangeTime = (TextView) itemView.findViewById(R.id.tvExchangeTime);
+            detaillistImg = itemView.findViewById(R.id.detaillistImg);
+            tvExchangeName = itemView.findViewById(R.id.tvExchangeName);
+            tvExchangeTime = itemView.findViewById(R.id.tvExchangeTime);
 
 
             itemView.setOnClickListener(this);

@@ -51,7 +51,7 @@ public class SelectMyWorksAdpater extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_contribute, null);
+            convertView = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_contribute, null);
             holder.rContributionstatus = convertView.findViewById(R.id.rContributionstatus);
             holder.tvName = convertView.findViewById(R.id.tvName);
             holder.coverImg = convertView.findViewById(R.id.coverImg);

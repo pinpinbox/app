@@ -3,15 +3,14 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Views.CircleView.RoundedImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -55,7 +54,7 @@ public class RecyclerOffLineAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_recent, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_recent, null);
         return new ViewHolder(view);
     }
 
@@ -98,10 +97,10 @@ public class RecyclerOffLineAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            rBackground = (RelativeLayout)itemView.findViewById(R.id.rBackground);
-            coverImg = (RoundedImageView)itemView.findViewById(R.id.coverImg);
-            tvAlbumName = (TextView)itemView.findViewById(R.id.tvAlbumName);
-            tvUserName = (TextView)itemView.findViewById(R.id.tvUserName);
+            rBackground = itemView.findViewById(R.id.rBackground);
+            coverImg = itemView.findViewById(R.id.coverImg);
+            tvAlbumName = itemView.findViewById(R.id.tvAlbumName);
+            tvUserName = itemView.findViewById(R.id.tvUserName);
 
             rBackground.setOnClickListener(this);
             rBackground.setOnLongClickListener(this);

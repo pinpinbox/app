@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,7 +18,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.SampleTest.ScaleTouhListener;
 import com.pinpinbox.android.Utility.ImageUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
@@ -82,7 +80,7 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_vote2, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_vote2, null);
         return new ViewHolder(view);
     }
 
@@ -267,19 +265,15 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
 
         boolean isHas_Voted = itemAlbumList.get(position).isHas_voted();
 
-
         if (isHas_Voted) {
 
-
             holder.voteImg.setVisibility(View.INVISIBLE);
-
 
         } else {
 
             holder.voteImg.setVisibility(View.VISIBLE);
 
         }
-
 
     }
 
@@ -298,7 +292,6 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
 
-
             itemView.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 
             coverImg = itemView.findViewById(R.id.coverImg);
@@ -311,17 +304,14 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
             tvVoteCount = itemView.findViewById(R.id.tvVoteCount);
             tvAlbumId = itemView.findViewById(R.id.tvAlbumId);
 
-
             linUser = itemView.findViewById(R.id.linUser);
 
             rItemBg = itemView.findViewById(R.id.rItemBg);
 
             lbRanking =itemView.findViewById(R.id.lbRanking);
 
-
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
-
 
         }
 

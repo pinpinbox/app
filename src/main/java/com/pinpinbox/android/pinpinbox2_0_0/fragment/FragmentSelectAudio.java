@@ -74,9 +74,9 @@ public class FragmentSelectAudio extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_2_0_0_select_audio, container, false);
 
-        rvAudioFile = (RecyclerView) v.findViewById(R.id.rvAudioFile);
-        seekBar = (SeekBar) v.findViewById(R.id.seekBar);
-        controlImg = (ImageView) v.findViewById(R.id.controlImg);
+        rvAudioFile = v.findViewById(R.id.rvAudioFile);
+        seekBar = v.findViewById(R.id.seekBar);
+        controlImg = v.findViewById(R.id.controlImg);
 
         (v.findViewById(R.id.backImg)).setOnClickListener(this);
         controlImg.setOnClickListener(this);

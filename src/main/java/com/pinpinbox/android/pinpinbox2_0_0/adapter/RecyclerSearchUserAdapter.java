@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
@@ -46,8 +45,6 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
     public RecyclerSearchUserAdapter(Activity activity,List<ItemUser> itemUserList) {
         this.mActivity = activity;
         this.itemUserList = itemUserList;
-
-
     }
 
 
@@ -58,8 +55,7 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_search_user, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_search_user, null);
         return new ViewHolder(view);
     }
 

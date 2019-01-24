@@ -343,7 +343,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     private void initHeaderView() {
 
-        viewHeader = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.header_2_0_0_home, null);
+        viewHeader = getActivity().getLayoutInflater().inflate(R.layout.header_2_0_0_home, null);
+
         linHobby = viewHeader.findViewById(R.id.linHobby);
         linFollow = viewHeader.findViewById(R.id.linFollow);
         rvBanner = viewHeader.findViewById(R.id.rvBanner);

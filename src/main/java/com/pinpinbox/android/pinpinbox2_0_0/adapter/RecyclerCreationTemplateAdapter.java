@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -54,7 +53,7 @@ public class RecyclerCreationTemplateAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_creation_template, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_creation_template, null);
         return new ViewHolder(view);
     }
 
@@ -90,8 +89,6 @@ public class RecyclerCreationTemplateAdapter extends RecyclerView.Adapter {
 
         }
 
-
-
     }
 
 
@@ -109,7 +106,7 @@ public class RecyclerCreationTemplateAdapter extends RecyclerView.Adapter {
 
 
             vBorder = itemView.findViewById(R.id.vBorder);
-            templateImg = (ImageView)itemView.findViewById(R.id.templateImg);
+            templateImg = itemView.findViewById(R.id.templateImg);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

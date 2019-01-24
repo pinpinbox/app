@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -56,7 +55,7 @@ public class RecyclerTagUserAdapter extends RecyclerView.Adapter  {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mActivity.getApplicationContext()).inflate(R.layout.list_item_2_0_0_user_tag, null);
+        View view = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_user_tag, null);
         return new ViewHolder(view);
     }
 
@@ -106,9 +105,9 @@ public class RecyclerTagUserAdapter extends RecyclerView.Adapter  {
             super(itemView);
 
 
-            linBackground = (LinearLayout)itemView.findViewById(R.id.linBackground);
-            userImg = (RoundedImageView)itemView.findViewById(R.id.userImg);
-            tvName = (TextView)itemView.findViewById(R.id.tvName);
+            linBackground = itemView.findViewById(R.id.linBackground);
+            userImg = itemView.findViewById(R.id.userImg);
+            tvName = itemView.findViewById(R.id.tvName);
 
             linBackground.setBackgroundResource(R.drawable.click_2_0_0_staggeredgrid_item);
 

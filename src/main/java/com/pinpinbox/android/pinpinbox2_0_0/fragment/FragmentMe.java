@@ -283,8 +283,8 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
         pinPinBoxRefreshLayout.setRefreshView(v.findViewById(R.id.vRefreshAnim), pbRefresh);
         pinPinBoxRefreshLayout.setUserBgViewScale(rBackgroundParallax);
 
+        viewHeader = getActivity().getLayoutInflater().inflate(R.layout.header_2_0_0_user, null);
 
-        viewHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_2_0_0_user, null);
         userImg = viewHeader.findViewById(R.id.userImg);
 
         tvGuide = viewHeader.findViewById(R.id.tvGuide);

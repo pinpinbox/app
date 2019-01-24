@@ -66,7 +66,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 /**
  * Created by kevin9594 on 2017/3/4.
  */
-public class FragmentSearch extends Fragment{
+public class FragmentSearch extends Fragment {
 
 
     private NoConnect noConnect;
@@ -82,20 +82,16 @@ public class FragmentSearch extends Fragment{
     private RecyclerSearchAlbumAdapter albumAdapter;
 
 
+    private List<ItemUser> itemUserList;
 
-    private List<ItemUser>itemUserList;
-
-    private ArrayList<ItemAlbum>  searchAlbumList;
-
+    private ArrayList<ItemAlbum> searchAlbumList;
 
     private String id, token;
     private String strSearch = "";
 
-    private static final int REQUEST_CODE_CAMERA = 104;
     private int doingType;
 
-
-    private View vHeader;
+    private View viewHeader;
     private RecyclerView rvSearch;
     private EditText edSearch;
 
@@ -125,21 +121,19 @@ public class FragmentSearch extends Fragment{
 
         tvGuideNoAlbum = v.findViewById(R.id.tvGuideNoAlbum);
 
-        if(getActivity()!=null){
-            FragmentHome fragmentHome = (FragmentHome) (((MainActivity)getActivity()).getFragment(FragmentHome.class.getSimpleName()));
-            if(fragmentHome !=null){
+        if (getActivity() != null) {
+            FragmentHome fragmentHome = (FragmentHome) (((MainActivity) getActivity()).getFragment(FragmentHome.class.getSimpleName()));
+            if (fragmentHome != null) {
                 pbRefresh = fragmentHome.getPbRefresh();
                 edSearch = fragmentHome.getEdSearch();
             }
         }
 
-
-
-        vHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_2_0_0_search, null);
-        rvUser = vHeader.findViewById(R.id.rvUser);
-        tvSearchUserTitle = vHeader.findViewById(R.id.tvSearchUserTitle);
-        tvSearchAlbumTitle = vHeader.findViewById(R.id.tvSearchAlbumTitle);
-        tvGuideNoUser = vHeader.findViewById(R.id.tvGuideNoUser);
+        viewHeader = getActivity().getLayoutInflater().inflate(R.layout.header_2_0_0_search, null);
+        rvUser = viewHeader.findViewById(R.id.rvUser);
+        tvSearchUserTitle = viewHeader.findViewById(R.id.tvSearchUserTitle);
+        tvSearchAlbumTitle = viewHeader.findViewById(R.id.tvSearchAlbumTitle);
+        tvGuideNoUser = viewHeader.findViewById(R.id.tvGuideNoUser);
 
         return v;
     }
@@ -153,7 +147,6 @@ public class FragmentSearch extends Fragment{
         setUserRecycler();
         setAlbumRecycler();
         setSearch();
-
 
     }
 
@@ -184,11 +177,9 @@ public class FragmentSearch extends Fragment{
                     return;
                 }
 
-
-                if(itemUserList==null || itemUserList.size()<1){
+                if (itemUserList == null || itemUserList.size() < 1) {
                     return;
                 }
-
 
                 String strSearch = edSearch.getText().toString();
 
@@ -198,11 +189,11 @@ public class FragmentSearch extends Fragment{
                     FlurryUtil.onEvent(FlurryKey.search_success_user_to_select);
                 }
 
-                if(itemUserList.get(position).getUser_id().equals(id)){
+                if (itemUserList.get(position).getUser_id().equals(id)) {
 
-                    ((MainActivity)getActivity()).toMePage(false);
+                    ((MainActivity) getActivity()).toMePage(false);
 
-                }else {
+                } else {
 
                     ActivityIntent.toUser(
                             getActivity(),
@@ -216,7 +207,6 @@ public class FragmentSearch extends Fragment{
 
                 }
 
-
             }
 
             @Override
@@ -229,8 +219,7 @@ public class FragmentSearch extends Fragment{
 
     private void setAlbumRecycler() {
 
-
-            rvSearch.addItemDecoration(new SpacesItemDecoration(16, true));
+        rvSearch.addItemDecoration(new SpacesItemDecoration(16, true));
 
         albumAdapter = new RecyclerSearchAlbumAdapter(getActivity(), searchAlbumList);
         rvSearch.setAdapter(albumAdapter);
@@ -258,7 +247,7 @@ public class FragmentSearch extends Fragment{
         manager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) rvSearch.getAdapter(), manager.getSpanCount()));
         rvSearch.setLayoutManager(manager);
 
-        RecyclerViewUtils.setHeaderView(rvSearch, vHeader);
+        RecyclerViewUtils.setHeaderView(rvSearch, viewHeader);
 
         albumAdapter.setOnRecyclerViewListener(new RecyclerSearchAlbumAdapter.OnRecyclerViewListener() {
             @Override
@@ -268,7 +257,7 @@ public class FragmentSearch extends Fragment{
                     return;
                 }
 
-                if(searchAlbumList==null || searchAlbumList.size()<1){
+                if (searchAlbumList == null || searchAlbumList.size() < 1) {
                     return;
                 }
 
@@ -313,7 +302,7 @@ public class FragmentSearch extends Fragment{
     }
 
 
-    public void setOnFinish(){
+    public void setOnFinish() {
         if (edSearch.getText().toString().equals(strSearch)) {
 
             MyLog.Set("d", FragmentSearch.class, "字串沒變更");
@@ -329,14 +318,13 @@ public class FragmentSearch extends Fragment{
         }
     }
 
-    public void setAfterTextChanged(Editable s){
+    public void setAfterTextChanged(Editable s) {
 
         if (s.toString().equals("")) {
 
             if (countDownTimer != null) {
                 countDownTimer.cancel();
             }
-
 
 
         } else {
@@ -347,7 +335,6 @@ public class FragmentSearch extends Fragment{
 
                 MyLog.Set("d", FragmentSearch.class, "重新倒數");
             }
-
 
 
         }
@@ -367,7 +354,7 @@ public class FragmentSearch extends Fragment{
                 MyLog.Set("d", FragmentSearch.class, "timer => finish()");
                 countDownTimer.cancel();
 
-               setOnFinish();
+                setOnFinish();
 
 
             }
@@ -427,7 +414,6 @@ public class FragmentSearch extends Fragment{
     private void setSearchAlbumData() {
 
 
-
         if (searchAlbumList.size() < 1) {
             tvGuideNoAlbum.setVisibility(View.VISIBLE);
         } else {
@@ -453,7 +439,7 @@ public class FragmentSearch extends Fragment{
 
             rvSearch.smoothScrollToPosition(0);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -494,7 +480,6 @@ public class FragmentSearch extends Fragment{
 
         DialogV2Custom.BuildTimeOut(getActivity(), connectInstability);
     }
-
 
 
     private void doSearchUser() {
@@ -615,7 +600,7 @@ public class FragmentSearch extends Fragment{
                 setSearchUserData();
 
                 //20171113
-                if(rvSearch.getAlpha()==0f){
+                if (rvSearch.getAlpha() == 0f) {
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -628,7 +613,6 @@ public class FragmentSearch extends Fragment{
                     }, 200);
 
                 }
-
 
 
             } else if (p41Result == 0) {
@@ -654,9 +638,8 @@ public class FragmentSearch extends Fragment{
             super.onPreExecute();
             doingType = DoingTypeClass.DoSearchAlbumList;
 
-                   /*執行搜尋前全部移除*/
+            /*執行搜尋前全部移除*/
             albumAdapter.notifyItemRangeRemoved(0, searchAlbumList.size());
-
 
 
             if (searchAlbumList.size() > 0) {
@@ -723,11 +706,11 @@ public class FragmentSearch extends Fragment{
                                 itemAlbum.setCover_width(PPBApplication.getInstance().getStaggeredWidth());
                                 itemAlbum.setCover_height(image_height);
                                 itemAlbum.setCover_hex(JsonUtility.GetString(jsonAlbum, ProtocolKey.cover_hex));
-                                if(width>height){
+                                if (width > height) {
                                     itemAlbum.setImage_orientation(ItemAlbum.LANDSCAPE);
-                                }else if(height>width){
+                                } else if (height > width) {
                                     itemAlbum.setImage_orientation(ItemAlbum.PORTRAIT);
-                                }else {
+                                } else {
                                     itemAlbum.setImage_orientation(0);
                                 }
 
@@ -790,7 +773,6 @@ public class FragmentSearch extends Fragment{
         }
 
     }
-
 
 
     @Override
