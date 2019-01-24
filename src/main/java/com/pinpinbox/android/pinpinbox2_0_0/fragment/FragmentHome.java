@@ -437,7 +437,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     // 此处为得到焦点时的处理内容
                     MyLog.Set("e", FragmentHome.this.getClass(), "監聽輸入框");
 
-                    if(mOnScrollListener.isUpScrolling()){
+                    if (mOnScrollListener.isUpScrolling()) {
                         return;
                     }
 
@@ -687,41 +687,65 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                         ActivityIntent.toEvent(getActivity(), event_id);
 
+                        return;
+
+                    }
+
+
+                    if (url == null || url.equals("")) {
+
+                        PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_null_intent);
+
                     } else {
 
-                        if (url == null || url.equals("")) {
+                        Uri uri = Uri.parse(url);
 
-                            PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_null_intent);
+                        String lastPath = uri.getLastPathSegment();
+
+                        if (lastPath.equals("point")) {
+
+                            ActivityIntent.toBuyPoint(getActivity());
 
                         } else {
 
-                            Uri uri = Uri.parse(url);
 
-                            String lastPath = uri.getLastPathSegment();
-
-                            if (lastPath.equals("point")) {
-
-                                ActivityIntent.toBuyPoint(getActivity());
-
-                            } else {
-
-
-                                String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
-                                if (categoryareaId != null && !categoryareaId.equals("")) {
-                                    ActivityIntent.toFeature(getActivity(), StringIntMethod.StringToInt(categoryareaId));
-                                } else {
-                                    bundle.putString("url", url);
-                                    intent.putExtras(bundle);
-                                    intent.setClass(getActivity(), WebViewActivity.class);
-                                    getActivity().startActivity(intent);
-                                    ActivityAnim.StartAnim(getActivity());
-                                }
-
+                            album_id = uri.getQueryParameter(Key.album_id);
+                            if (album_id != null && !album_id.equals("")) {
+                                ActivityIntent.toAlbumInfo(getActivity(), false, album_id, null, 0, 0, 0, null);
+                                return;
                             }
+
+
+                            user_id = uri.getQueryParameter(Key.user_id);
+                            if (user_id != null && !user_id.equals("")) {
+                                ActivityIntent.toUser(getActivity(), false, false, user_id, null, null, null);
+                                return;
+                            }
+
+                            event_id = uri.getQueryParameter(Key.event_id);
+                            if (event_id != null && !event_id.equals("")) {
+                                ActivityIntent.toEvent(getActivity(), event_id);
+                                return;
+                            }
+
+
+                            String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
+                            if (categoryareaId != null && !categoryareaId.equals("")) {
+                                ActivityIntent.toFeature(getActivity(), StringIntMethod.StringToInt(categoryareaId));
+                                return;
+                            }
+
+                            bundle.putString("url", url);
+                            intent.putExtras(bundle);
+                            intent.setClass(getActivity(), WebViewActivity.class);
+                            getActivity().startActivity(intent);
+                            ActivityAnim.StartAnim(getActivity());
+
 
                         }
 
                     }
+
 
                 }
 
@@ -753,9 +777,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     return;
                 }
 
-                if(itemRecommendList.get(position).getUser_id().equals(id)){
-                    ((MainActivity)getActivity()).toMePage(false);
-                }else {
+                if (itemRecommendList.get(position).getUser_id().equals(id)) {
+                    ((MainActivity) getActivity()).toMePage(false);
+                } else {
                     ActivityIntent.toUser(
                             getActivity(),
                             false,
@@ -766,9 +790,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                             v.findViewById(R.id.userImg)
                     );
                 }
-
-
-
 
 
             }
@@ -797,9 +818,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     return;
                 }
 
-                if(itemHotList.get(position).getUser_id().equals(id)){
-                    ((MainActivity)getActivity()).toMePage(false);
-                }else {
+                if (itemHotList.get(position).getUser_id().equals(id)) {
+                    ((MainActivity) getActivity()).toMePage(false);
+                } else {
                     ActivityIntent.toUser(
                             getActivity(),
                             false,
@@ -810,7 +831,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                             v.findViewById(R.id.userImg)
                     );
                 }
-
 
 
             }
@@ -1237,7 +1257,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     int minHeight = DensityUtility.dip2px(getActivity().getApplicationContext(), 72);
 
 
-
                     for (int i = 0; i < jsonArrayCount; i++) {
 
                         JSONObject object = (JSONObject) p20JsonArray.get(i);
@@ -1534,7 +1553,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         return this.edSearch;
     }
 
-    public boolean isSearch(){
+    public boolean isSearch() {
         return isSearch;
     }
 
@@ -1852,7 +1871,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
 
         /*專區精選- 推薦*/
-        try{
+        try {
 
             if (p86Result == 1) {
                 featureRecommendAdapter.notifyDataSetChanged();
@@ -2090,7 +2109,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             case R.id.linCategory:
 
-                if(mOnScrollListener.isUpScrolling()){
+                if (mOnScrollListener.isUpScrolling()) {
                     return;
                 }
 
@@ -2099,7 +2118,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     inputMethodManager.hideSoftInputFromWindow(edSearch.getWindowToken(), 0);
                     hideSearch();
                 }
-
 
 
                 if (fragmentCategory == null || fragmentCategory.isHidden()) {
