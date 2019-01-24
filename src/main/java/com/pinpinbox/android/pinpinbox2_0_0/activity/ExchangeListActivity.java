@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,8 +33,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol107_GetBookmarkList;
 
 import java.io.Serializable;
 import java.util.List;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by vmage on 2018/2/1.
@@ -236,12 +233,6 @@ public class ExchangeListActivity extends DraggerActivity implements View.OnClic
         }
 
     }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

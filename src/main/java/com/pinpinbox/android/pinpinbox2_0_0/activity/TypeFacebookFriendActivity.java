@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -71,8 +70,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by kevin9594 on 2017/3/18.
@@ -677,11 +674,6 @@ public class TypeFacebookFriendActivity extends Activity implements View.OnClick
 
 
 
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

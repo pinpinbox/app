@@ -11,17 +11,18 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerMargin.SwipeBackActivityHelper;
 import com.pinpinbox.android.Views.DraggerActivity.NoDragger.NoDraggerLayout;
 import com.pinpinbox.android.Views.DraggerActivity.SwipeBackActivityInterface;
 import com.pinpinbox.android.Views.DraggerActivity.SwipeBackLayout;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.NoConnect;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StatusControl;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 
 public abstract class DraggerActivity extends FragmentActivity implements SwipeBackActivityInterface {
 
@@ -196,7 +197,7 @@ public abstract class DraggerActivity extends FragmentActivity implements SwipeB
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
 

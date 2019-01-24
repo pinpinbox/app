@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -92,7 +91,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by kevin9594 on 2016/12/26.
@@ -2476,10 +2474,6 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         itemAlbum.setIs_likes(false);
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 
     @Override
     public void onBackPressed() {

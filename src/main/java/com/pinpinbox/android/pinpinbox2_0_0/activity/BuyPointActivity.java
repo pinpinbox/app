@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -21,7 +20,6 @@ import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.PointAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPoint;
@@ -57,7 +55,6 @@ import java.util.List;
 import java.util.Map;
 
 import in.srain.cube.views.GridViewWithHeaderAndFooter;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by vmage on 2017/3/7.
@@ -1122,10 +1119,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
         }
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

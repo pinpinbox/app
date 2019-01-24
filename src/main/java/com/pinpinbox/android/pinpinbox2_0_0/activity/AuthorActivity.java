@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -86,7 +85,7 @@ import java.util.List;
 import java.util.Map;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 /**
  * Created by kevin9594 on 2016/12/28.
@@ -1848,10 +1847,6 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
 
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 
     @Override
     public void onBackPressed() {

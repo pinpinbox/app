@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
@@ -21,8 +20,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 
 import java.util.List;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by vmage on 2015/12/21.
@@ -229,18 +226,6 @@ public class WebViewActivity extends DraggerActivity {
 
         }
     }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
-//    @Override
-//    public void onBackPressed() {
-//        finish();
-//        ActivityAnim.FinishAnim(mActivity);
-//    }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

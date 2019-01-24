@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,19 +14,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.GalleryAdapter;
-import com.pinpinbox.android.SampleTest.ReadAlbum.PageAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
-import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
+import com.pinpinbox.android.SampleTest.ReadAlbum.PageAdapter;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Views.ControllableViewPager;
 import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.MyGallery;
 import com.pinpinbox.android.Views.PinchImageView;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.GalleryAdapter;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
+import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemPhoto;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.squareup.picasso.Picasso;
@@ -38,8 +37,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by vmage on 2016/4/11.
@@ -423,11 +420,6 @@ public class OfflineReadActivity extends DraggerActivity {
             ActivityAnim.FinishAnim(mActivity);
 
         }
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

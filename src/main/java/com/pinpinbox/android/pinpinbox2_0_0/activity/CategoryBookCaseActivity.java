@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -67,7 +66,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import me.relex.circleindicator.CircleIndicator;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by vmage on 2017/11/17.
@@ -1051,11 +1049,6 @@ public class CategoryBookCaseActivity extends DraggerActivity implements View.On
 
         back();
 
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

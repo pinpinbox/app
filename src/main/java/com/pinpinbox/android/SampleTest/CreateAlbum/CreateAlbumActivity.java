@@ -49,8 +49,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
 /**
  * Created by kevin9594 on 2016/4/17
  */
@@ -667,12 +665,6 @@ public class CreateAlbumActivity extends DraggerActivity {
 
         }
     }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
 
     @Override
     public void onBackPressed() {

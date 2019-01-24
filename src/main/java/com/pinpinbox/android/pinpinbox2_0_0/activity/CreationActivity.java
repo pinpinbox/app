@@ -135,7 +135,7 @@ import java.util.regex.Pattern;
 import uk.breedrapps.vimeoextractor.OnVimeoExtractionListener;
 import uk.breedrapps.vimeoextractor.VimeoExtractor;
 import uk.breedrapps.vimeoextractor.VimeoVideo;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 /**
  * Created by vmage on 2017/3/8.
@@ -5323,12 +5323,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
     public void showPopCreateAudio() {
 
         popCreateAudio.show(rBackground);
-    }
 
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

@@ -40,7 +40,7 @@
 
     </style>
 
-    <style name="ppb200_common_detaillist_name" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_common_detaillist_name" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
@@ -52,7 +52,7 @@
     </style>
 
 
-    <style name="ppb200_notify_message" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_notify_message" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
@@ -63,7 +63,7 @@
         <item name="android:textSize">@dimen/ppb200_common_text_third</item>
     </style>
 
-    <style name="ppb200_notify_message_type_text" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_notify_message_type_text" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:letterSpacing">0.1</item>
@@ -72,7 +72,7 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="ppb200_notify_message_time" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_notify_message_time" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:letterSpacing">0.1</item>
@@ -89,7 +89,7 @@
     </style>
 
 
-    <style name="ppb200_guide_no_data" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_guide_no_data" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxWidth">360dp</item>
@@ -122,14 +122,15 @@
         <item name="android:background">@color/pinpinbox_2_0_0_divider</item>
     </style>
 
-    <style name="ppb200_userarea_creativename" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_userarea_creativename" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_userarea_creativename</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -141,7 +142,7 @@
     </style>
 
 
-    <style name="ppb200_home_feature_description" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_home_feature_description" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
@@ -154,7 +155,7 @@
 
 
     <!--staggered-->
-    <style name="ppb200_staggered_album_name" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_staggered_album_name" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
@@ -191,19 +192,20 @@
     </style>
 
 
-    <style name="ppb200_tab_text" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_tab_text" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_secondary_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_common_text_small</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="ppb200_title_first" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_title_first" parent="android:Widget.TextView">
         <item name="android:layout_marginLeft">@dimen/ppb200_title_margin_left</item>
         <item name="android:layout_marginRight">@dimen/ppb200_title_margin_left</item>
         <item name="android:layout_width">wrap_content</item>
@@ -212,22 +214,24 @@
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_first_size</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="ppb200_title_second" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_title_second" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_second_size</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="ppb200_title_third" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_title_third" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
@@ -235,48 +239,52 @@
         <item name="android:textSize">@dimen/ppb200_title_third_size</item>
         <item name="android:gravity">center</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_second</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="ppb200_title_in_actionbar" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_title_in_actionbar" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/ppb200_action_bar_icon_height</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_third_size</item>
         <item name="android:gravity">center</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="ppb200_detail_name" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_detail_name" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_detail_name</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="ppb200_work_name" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_work_name" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_worksname</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="ppb200_detail_description" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_detail_description" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
@@ -286,18 +294,19 @@
 
     </style>
 
-    <style name="ppb200_title_pop_second" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_title_pop_second" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:letterSpacing">0.1</item>
         <item name="android:textSize">@dimen/ppb200_title_second_size</item>
         <item name="android:lineSpacingExtra">@dimen/ppb200_lineSpacingExtra_first</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="ppb200_pop_item" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_pop_item" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/ppb200_common_list_item_height</item>
         <item name="android:textColor">@color/pinpinbox_2_0_0_first_text</item>
@@ -324,7 +333,7 @@
     <!--</style>-->
 
 
-    <style name="ppb200_Button_main_common_bottom_radius" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_main_common_bottom_radius" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_height</item>
         <item name="android:textSize">@dimen/ppb200_common_text_first</item>
@@ -335,7 +344,7 @@
     </style>
 
 
-    <style name="ppb200_Button_main_common_radius" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_main_common_radius" parent="android:Widget.TextView">
         <item name="android:layout_width">@dimen/ppb200_common_button_width</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_height</item>
         <item name="android:textSize">@dimen/ppb200_common_text_first</item>
@@ -345,7 +354,7 @@
         <item name="android:background">@drawable/click_2_0_0_main_button_radius</item>
     </style>
 
-    <style name="ppb200_Button_main_small_radius" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_main_small_radius" parent="android:Widget.TextView">
         <item name="android:layout_width">@dimen/ppb200_common_button_small_width</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_small_height</item>
         <item name="android:textSize">@dimen/ppb200_common_text_second</item>
@@ -355,7 +364,7 @@
         <item name="android:background">@drawable/click_2_0_0_main_button_radius</item>
     </style>
 
-    <style name="ppb200_Button_grey_common_radius" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_grey_common_radius" parent="android:Widget.TextView">
         <item name="android:layout_width">@dimen/ppb200_common_button_width</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_height</item>
         <item name="android:textSize">@dimen/ppb200_common_text_first</item>
@@ -365,7 +374,7 @@
         <item name="android:background">@drawable/click_2_0_0_grey_third_radius</item>
     </style>
 
-    <style name="ppb200_Button_grey_small_radius" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_grey_small_radius" parent="android:Widget.TextView">
         <item name="android:layout_width">@dimen/ppb200_common_button_small_width</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_small_height</item>
         <item name="android:textSize">@dimen/ppb200_common_text_second</item>
@@ -375,7 +384,7 @@
         <item name="android:background">@drawable/click_2_0_0_grey_third_radius</item>
     </style>
 
-    <style name="ppb200_Button_grey_mini_radius" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_grey_mini_radius" parent="android:Widget.TextView">
         <item name="android:layout_width">@dimen/ppb200_common_button_mini_width</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_mini_height</item>
         <item name="android:textSize">@dimen/ppb200_common_text_small</item>
@@ -385,7 +394,7 @@
         <item name="android:background">@drawable/click_2_0_0_grey_third_radius</item>
     </style>
 
-    <style name="ppb200_Button_facebook_common_radius" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_facebook_common_radius" parent="android:Widget.TextView">
         <item name="android:layout_width">@dimen/ppb200_common_button_width</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_height</item>
         <item name="android:textSize">@dimen/ppb200_common_text_first</item>
@@ -395,7 +404,7 @@
         <item name="android:background">@drawable/click_2_0_0_facebook_login</item>
     </style>
 
-    <style name="ppb200_Button_black_alpha_small_circle_edge" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_Button_black_alpha_small_circle_edge" parent="android:Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/ppb200_common_button_small_height</item>
         <item name="android:paddingLeft">@dimen/ppb200_padding_margin_first</item>
@@ -464,7 +473,7 @@
     </style>
 
 
-    <style name="ppb200_action_bar_tab" parent="android:TextAppearance.Widget.TextView">
+    <style name="ppb200_action_bar_tab" parent="android:Widget.TextView">
         <item name="android:paddingLeft">@dimen/ppb200_padding_margin_second</item>
         <item name="android:paddingRight">@dimen/ppb200_padding_margin_second</item>
         <item name="android:layout_width">wrap_content</item>
@@ -474,13 +483,15 @@
         <item name="android:letterSpacing">0.1</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/click_2_0_0_default</item>
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="ppb200_other_bold_text" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+    <style name="ppb200_other_bold_text" parent="android:Widget.TextView">
+        <item name="fontPath">fonts/GenJyuuGothicL-Bold.ttf</item>
+        <item name="android:fontFamily">@font/genjyuugothic_l_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -503,12 +514,6 @@
         <item name="android:layout_height">@dimen/ppb200_common_list_item_height</item>
         <item name="android:layout_marginLeft">2dp</item>
         <item name="android:padding">14dp</item>
-    </style>
-
-
-    <style name="TextAppearance.FontPath" parent="android:TextAppearance">
-        <!-- Custom Attr-->
-        <item name="fontPath">fonts/NotoSans-Regular.ttf</item>
     </style>
 
 

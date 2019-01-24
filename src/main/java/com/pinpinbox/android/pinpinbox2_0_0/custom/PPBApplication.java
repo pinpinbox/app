@@ -15,13 +15,14 @@ import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 
 /**
  * Created by vmage on 2015/10/27
  */
 public class PPBApplication extends MultiDexApplication {
-
 
 
     public static final int PHONE = 10001;
@@ -97,11 +98,11 @@ public class PPBApplication extends MultiDexApplication {
         return "PinPinBox" + getId() + "/";
     }
 
-    public boolean isPhone(){
+    public boolean isPhone() {
 
-        if(!SystemUtility.isTablet(this)){
+        if (!SystemUtility.isTablet(this)) {
             return true;
-        }else {
+        } else {
             return false;
         }
 
@@ -128,12 +129,19 @@ public class PPBApplication extends MultiDexApplication {
     }
 
     private void setFont() {
-        /*2016.09.25*/
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/NotoSans-Regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
+        ViewPump.init(
+                ViewPump.builder()
+                        .addInterceptor(
+                                new CalligraphyInterceptor(
+                                        new CalligraphyConfig.Builder()
+                                                .setDefaultFontPath("fonts/GenJyuuGothicL-Regular.ttf")
+                                                .setFontAttrId(R.attr.fontPath)
+                                                .build()
+                                )
+                        ).build()
         );
+
+
     }
 
     private void setFlurryAgent() {

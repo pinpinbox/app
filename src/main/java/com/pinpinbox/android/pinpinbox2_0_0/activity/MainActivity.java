@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -78,8 +77,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by kevin9594 on 2016/12/17.
@@ -268,7 +265,6 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
         });
 
     }
-
 
     private void checkMainExist() {
 
@@ -1778,11 +1774,6 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
         MyLog.Set("d", getClass(), "resultCode => " + resultCode);
 
 
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

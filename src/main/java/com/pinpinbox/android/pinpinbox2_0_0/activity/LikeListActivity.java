@@ -1,7 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,7 +54,6 @@ import java.util.List;
 import java.util.Map;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LikeListActivity extends DraggerActivity implements View.OnClickListener, RecyclerInteractiveAdapter.OnUserInterativeListener {
 
@@ -803,11 +801,6 @@ public class LikeListActivity extends DraggerActivity implements View.OnClickLis
         board = new PopBoard(mActivity, PopBoard.TypeUser, itemUserList.get(position).getUser_id(), (RelativeLayout) findViewById(R.id.rBackground), true);
         board.setSecondTitle(itemUserList.get(position).getName());
 
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override
