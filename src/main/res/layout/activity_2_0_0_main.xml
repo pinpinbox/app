@@ -154,6 +154,7 @@
                             <TextView
                                 android:id="@+id/tvTabNotify"
                                 style="@style/ppb200_tab_text"
+                                android:singleLine="true"
                                 android:text="@string/pinpinbox_2_0_0_tab_notify" />
 
 

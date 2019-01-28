@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/ppb200_padding_margin_first"
             android:layout_marginRight="@dimen/ppb200_padding_margin_first"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <!--facebook-->
