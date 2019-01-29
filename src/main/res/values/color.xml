@@ -59,7 +59,7 @@
 
     <color name="pinpinbox_2_0_0_toast_normal">@color/pinpinbox_2_0_0_hint_grey</color>
     <color name="pinpinbox_2_0_0_toast_success">@color/pinpinbox_2_0_0_second_main</color>
-    <color name="pinpinbox_2_0_0_toast_error">@color/pinpinbox_2_0_0_third_pink</color>
+    <color name="pinpinbox_2_0_0_toast_error">@color/pinpinbox_2_0_0_second_pink</color>
 
     <color name="pinpinbox_2_0_0_logo">#3b9ca8</color>
 
