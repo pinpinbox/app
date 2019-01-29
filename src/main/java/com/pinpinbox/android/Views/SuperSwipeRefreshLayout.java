@@ -124,7 +124,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
 
     private boolean isProgressEnable = true;
 
-    private int canScrollRefreshDistance = 24;
+    private int canScrollRefreshDistance = 96;
 
     /**
      * 下拉时，超过距离之后，弹回来的动画监听器
@@ -300,9 +300,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
          */
 //        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
 
-//        //my custom 20171101
         mTouchSlop = mTouchSlop + canScrollRefreshDistance;
-
 
         mMediumAnimationDuration = getResources().getInteger(
                 android.R.integer.config_mediumAnimTime);
@@ -777,7 +775,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                 final float y = getMotionEventY(ev, mActivePointerId);
 
 
-
                 if (y == -1) {
                     return false;
                 }
@@ -888,7 +885,9 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                     return false;
                 }
 
-                final float y = MotionEventCompat.getY(ev, pointerIndex);
+                float y = MotionEventCompat.getY(ev, pointerIndex);
+
+                y = y - (float) canScrollRefreshDistance;
 
 
                 final float overscrollTop = (y - mInitialMotionY) * DRAG_RATE;
