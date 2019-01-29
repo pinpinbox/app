@@ -57,7 +57,7 @@
     <color name="pinpinbox_2_0_0_list_item_click">@color/pinpinbox_2_0_0_third_main</color>
 
 
-    <color name="pinpinbox_2_0_0_toast_normal">@color/pinpinbox_2_0_0_second_grey</color>
+    <color name="pinpinbox_2_0_0_toast_normal">@color/pinpinbox_2_0_0_hint_grey</color>
     <color name="pinpinbox_2_0_0_toast_success">@color/pinpinbox_2_0_0_second_main</color>
     <color name="pinpinbox_2_0_0_toast_error">@color/pinpinbox_2_0_0_third_pink</color>
 
