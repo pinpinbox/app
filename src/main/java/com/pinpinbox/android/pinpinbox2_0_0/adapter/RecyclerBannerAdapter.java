@@ -69,6 +69,8 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
     private int w, h;
 
+    private LinearLayout.LayoutParams imgLayoutParams, textlayoutParams;
+
     public RecyclerBannerAdapter(Activity mActivity, List<ItemHomeBanner> itemHomeBannerList, Fragment fragment) {
 
         this.mActivity = mActivity;
@@ -91,6 +93,10 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
         h = (w*540)/960;
 
+        imgLayoutParams = new LinearLayout.LayoutParams(w,h);
+
+        textlayoutParams = new LinearLayout.LayoutParams(w, ViewGroup.LayoutParams.WRAP_CONTENT);
+
     }
 
     @Override
@@ -108,11 +114,13 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
         if(PPBApplication.getInstance().isPhone()) {
             mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
 
-            holder.bannerImg.setLayoutParams(new LinearLayout.LayoutParams(w, h));
+            holder.bannerImg.setLayoutParams(imgLayoutParams);
 
-            holder.tvBannerName.setLayoutParams(new LinearLayout.LayoutParams(w, ViewGroup.LayoutParams.WRAP_CONTENT));
+            holder.tvBannerName.setLayoutParams(textlayoutParams);
 
             ViewControl.setMargins(holder.tvBannerName, 0,0,0,SizeUtils.dp2px(16));
+
+            holder.bannerImg.setBackgroundResource(R.drawable.image_background_2_0_0_banner);
 
         }
 

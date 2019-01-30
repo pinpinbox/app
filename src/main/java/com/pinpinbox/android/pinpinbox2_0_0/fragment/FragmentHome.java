@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.pinpinbox.android.BuildConfig;
@@ -1793,6 +1794,12 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
             postData();
 
             checkNewletter();
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, rvBanner.getHeight());
+            layoutParams.bottomMargin = SizeUtils.dp2px(32);
+
+            rvBanner.setLayoutParams(layoutParams);
+
 
 
         }
