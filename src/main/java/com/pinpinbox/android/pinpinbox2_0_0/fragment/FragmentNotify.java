@@ -639,7 +639,7 @@ public class FragmentNotify extends Fragment {
             for (int i = 0; i < count; i++) {
                 if (!((String) p87arrayList.get(i).get(MapKey.type)).equals("date")) {
                     String strImage = (String) p87arrayList.get(i).get("image");
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(strImage);
+                    Picasso.get().invalidate(strImage);
                 }
 
             }

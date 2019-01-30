@@ -278,7 +278,7 @@ public class TemplateOwn extends Fragment {
             for (int i = 0; i < p36arraylist.size(); i++) {
                 String url = (String) p36arraylist.get(i).get("image");
                 if (url != null && !url.equals("null") && !url.equals("") && getActivity() != null) {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(url);
+                    Picasso.get().invalidate(url);
                 }
             }
             System.gc();

@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -63,7 +62,7 @@ public class RecyclerFeatureAdapter extends RecyclerView.Adapter {
                 holder.userImg.setTransitionName(strPicture);
             }
             if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
-                Picasso.with(mActivity.getApplicationContext())
+                Picasso.get()
                         .load(strPicture)
                         .config(Bitmap.Config.RGB_565)
                         .error(R.drawable.member_back_head)

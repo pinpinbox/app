@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -73,7 +72,7 @@ public class PhotoPageAdapter extends PagerAdapter {
             String url = itemPhotoList.get(position).getImage_url();
 
             if (url != null && !url.equals("") && !url.equals("null")) {
-                Picasso.with(mActivity).invalidate(url);
+                Picasso.get().invalidate(url);
             }
         }
 
@@ -132,7 +131,7 @@ public class PhotoPageAdapter extends PagerAdapter {
 
                     if (url != null && !url.equals("") && !url.equals("null") && !url.isEmpty()) {
 
-                        Picasso.with(mActivity.getApplicationContext())
+                        Picasso.get()
                                 .load(url)
                                 .config(Bitmap.Config.RGB_565)
                                 .error(R.drawable.bg_2_0_0_no_image)
@@ -144,7 +143,7 @@ public class PhotoPageAdapter extends PagerAdapter {
                                     }
 
                                     @Override
-                                    public void onError() {
+                                    public void onError(Exception e) {
                                         refreshImg.setVisibility(View.VISIBLE);
                                     }
                                 });
@@ -162,7 +161,7 @@ public class PhotoPageAdapter extends PagerAdapter {
 
         } else {
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(url)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
@@ -174,7 +173,7 @@ public class PhotoPageAdapter extends PagerAdapter {
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
                             refreshImg.setVisibility(View.VISIBLE);
                         }
                     });

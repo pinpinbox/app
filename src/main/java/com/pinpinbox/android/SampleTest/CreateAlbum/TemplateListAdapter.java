@@ -82,7 +82,7 @@ public class TemplateListAdapter extends BaseAdapter {
 
 
             final ViewHolder finalHolder = holder;
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(image)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
@@ -94,7 +94,7 @@ public class TemplateListAdapter extends BaseAdapter {
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                         }
                     });

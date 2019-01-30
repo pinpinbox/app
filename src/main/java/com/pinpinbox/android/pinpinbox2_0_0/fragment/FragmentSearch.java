@@ -449,7 +449,7 @@ public class FragmentSearch extends Fragment {
         if (itemUserList != null && itemUserList.size() > 0) {
             for (int i = 0; i < itemUserList.size(); i++) {
                 String strPicture = itemUserList.get(i).getPicture();
-                Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
+                Picasso.get().invalidate(strPicture);
             }
             itemUserList.clear();
         }
@@ -457,7 +457,7 @@ public class FragmentSearch extends Fragment {
         if (searchAlbumList != null && searchAlbumList.size() > 0) {
             for (int i = 0; i < searchAlbumList.size(); i++) {
                 String cover = searchAlbumList.get(i).getCover();
-                Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
+                Picasso.get().invalidate(cover);
             }
             searchAlbumList.clear();
         }
@@ -526,7 +526,7 @@ public class FragmentSearch extends Fragment {
             if (itemUserList.size() > 0) {
                 for (int i = 0; i < itemUserList.size(); i++) {
                     String strPicture = itemUserList.get(i).getPicture();
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
+                    Picasso.get().invalidate(strPicture);
                 }
                 itemUserList.clear();
             }
@@ -645,7 +645,7 @@ public class FragmentSearch extends Fragment {
             if (searchAlbumList.size() > 0) {
                 for (int i = 0; i < searchAlbumList.size(); i++) {
                     String cover = searchAlbumList.get(i).getCover();
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
+                    Picasso.get().invalidate(cover);
                 }
                 searchAlbumList.clear();
             }
@@ -783,14 +783,14 @@ public class FragmentSearch extends Fragment {
             if (itemUserList.size() > 0) {
                 for (int i = 0; i < itemUserList.size(); i++) {
                     String strPicture = itemUserList.get(i).getPicture();
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(strPicture);
+                    Picasso.get().invalidate(strPicture);
                 }
             }
 
             if (searchAlbumList.size() > 0) {
                 for (int i = 0; i < searchAlbumList.size(); i++) {
                     String cover = searchAlbumList.get(i).getCover();
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(cover);
+                    Picasso.get().invalidate(cover);
                 }
             }
 

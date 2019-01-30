@@ -1,6 +1,5 @@
 package com.pinpinbox.android.pinpinbox2_0_0.custom.widget;
 
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -180,15 +179,15 @@ public class PinPinToast {
 
         View view = LayoutInflater.from(context).inflate(R.layout.pinpinbox_toast_sponsor, null);
 
-        TextView tvMessage = (TextView) view.findViewById(R.id.tvMessage);
+        TextView tvMessage =  view.findViewById(R.id.tvMessage);
         tvMessage.setText(message);
 
-        RoundCornerImageView userImg = (RoundCornerImageView)view.findViewById(R.id.userImg);
+        RoundCornerImageView userImg = view.findViewById(R.id.userImg);
 
         if (pictureUrl == null || pictureUrl.equals("")) {
             userImg.setImageResource(R.drawable.member_back_head);
         } else {
-            Picasso.with(context)
+            Picasso.get()
                     .load(pictureUrl)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)

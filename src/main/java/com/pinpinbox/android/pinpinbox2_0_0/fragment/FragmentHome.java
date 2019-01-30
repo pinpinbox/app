@@ -1505,7 +1505,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                 String path_albumcover = itemAlbumList.get(i).getCover();
                 if (path_albumcover != null && !path_albumcover.equals("")) {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(path_albumcover);
+                    Picasso.get().invalidate(path_albumcover);
                 }
 
             }
@@ -1519,7 +1519,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                 String image = itemHomeBannerList.get(i).getImage();
                 if (image != null && !image.equals("")) {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(image);
+                    Picasso.get().invalidate(image);
                 }
             }
 
@@ -1532,7 +1532,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                 String picture = itemNewJoinList.get(i).getPicture();
                 if (picture != null && !picture.equals("")) {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(picture);
+                    Picasso.get().invalidate(picture);
                 }
             }
 

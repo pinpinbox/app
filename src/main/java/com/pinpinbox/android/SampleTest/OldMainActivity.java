@@ -495,7 +495,7 @@ public class OldMainActivity extends FragmentActivity {
                         int bgColor = Color.parseColor(ColorClass.MAIN_THIRD);
 
                         try {
-                            Bitmap bitmap = Picasso.with(getApplicationContext())
+                            Bitmap bitmap = Picasso.get()
                                     .load(R.drawable.test_banner)
                                     .config(Bitmap.Config.RGB_565)
                                     .resize(50, 50)

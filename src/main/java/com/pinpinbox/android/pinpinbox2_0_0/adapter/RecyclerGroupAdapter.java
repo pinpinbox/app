@@ -83,7 +83,7 @@ public class RecyclerGroupAdapter extends RecyclerView.Adapter {
         String url = itemUserList.get(position).getPicture();
 
         if (url != null && !url.equals("")) {
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(url)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)

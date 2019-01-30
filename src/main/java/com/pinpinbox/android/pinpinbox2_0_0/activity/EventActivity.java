@@ -554,7 +554,7 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
 
                 if (image != null && !image.equals("") && !image.isEmpty()) {
 
-                    Picasso.with(mActivity.getApplicationContext())
+                    Picasso.get()
                             .load(image)
                             .config(Bitmap.Config.RGB_565)
                             .error(R.drawable.bg_2_0_0_no_image)
@@ -566,7 +566,7 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
                                 }
 
                                 @Override
-                                public void onError() {
+                                public void onError(Exception e) {
 
                                     ViewControl.AlphaTo1(findViewById(R.id.scrollView));
                                 }
@@ -818,7 +818,7 @@ public class EventActivity extends DraggerActivity implements View.OnClickListen
 
         if (image != null && !image.equals("null") && !image.equals("")) {
 
-            Picasso.with(mActivity.getApplicationContext()).invalidate(image);
+            Picasso.get().invalidate(image);
 
         }
 

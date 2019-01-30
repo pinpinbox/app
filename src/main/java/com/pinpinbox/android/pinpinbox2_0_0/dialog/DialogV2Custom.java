@@ -156,7 +156,7 @@ public class DialogV2Custom {
 
         smallImg.setVisibility(View.VISIBLE);
 
-        Picasso.with(mActivity.getApplicationContext())
+        Picasso.get()
                 .load(new File(path))
                 .config(Bitmap.Config.RGB_565)
                 .resize(120, 120)
@@ -170,7 +170,7 @@ public class DialogV2Custom {
 
         smallImg.setVisibility(View.VISIBLE);
 
-        Picasso.with(mActivity.getApplicationContext())
+        Picasso.get()
                 .load(url)
                 .config(Bitmap.Config.RGB_565)
                 .resize(120, 120)

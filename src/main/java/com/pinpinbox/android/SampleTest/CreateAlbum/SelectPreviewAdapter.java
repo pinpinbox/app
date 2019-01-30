@@ -65,7 +65,7 @@ public class SelectPreviewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(mActivity)
+        Picasso.get()
                 .load((String) listData.get(position).get("image_url_thumbnail"))
                 .config(Bitmap.Config.RGB_565)
                 .resize(120,180)

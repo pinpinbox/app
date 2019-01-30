@@ -224,7 +224,7 @@ public class PopBoard {
                 int count = itemBoardList.size();
                 if (count > 0) {
                     for (int i = 0; i < count; i++) {
-                        Picasso.with(mActivity.getApplicationContext()).invalidate(itemBoardList.get(i).getPicture());
+                        Picasso.get().invalidate(itemBoardList.get(i).getPicture());
                     }
                 }
                 /*恢復背景*/
@@ -528,7 +528,7 @@ public class PopBoard {
         /*設定頭像*/
         String profilepic = PPBApplication.getInstance().getData().getString(Key.profilepic, "");
         if (!profilepic.equals("")) {
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(profilepic)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)
@@ -767,7 +767,7 @@ public class PopBoard {
 
             for (int i = 0; i < itemUserList.size(); i++) {
                 String strPicture = itemUserList.get(i).getPicture();
-                Picasso.with(mActivity.getApplicationContext()).invalidate(strPicture);
+                Picasso.get().invalidate(strPicture);
             }
             itemUserList.clear();
         }

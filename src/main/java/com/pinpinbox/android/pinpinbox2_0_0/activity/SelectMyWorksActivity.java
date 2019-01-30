@@ -134,7 +134,7 @@ public class SelectMyWorksActivity extends DraggerActivity implements View.OnCli
                 d.getTvTitle().setText(name);
 
                 if (cover != null && !cover.equals("") && !cover.equals("null")) {
-                    Picasso.with(mActivity.getApplicationContext())
+                    Picasso.get()
                             .load(cover)
                             .config(Bitmap.Config.RGB_565)
                             .error(R.drawable.bg_2_0_0_no_image)
@@ -222,7 +222,7 @@ public class SelectMyWorksActivity extends DraggerActivity implements View.OnCli
 
 
         for (int i = 0; i < count; i++) {
-            Picasso.with(mActivity.getApplicationContext()).invalidate(canContributeAlbumList.get(i).getCover());
+            Picasso.get().invalidate(canContributeAlbumList.get(i).getCover());
         }
 
     }

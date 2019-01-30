@@ -445,7 +445,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
             if (strPicture == null || strPicture.equals("")) {
                 userImg.setImageResource(R.drawable.member_back_head);
             } else {
-                Picasso.with(getApplicationContext())
+                Picasso.get()
                         .load(strPicture)
                         .config(Bitmap.Config.RGB_565)
                         .error(R.drawable.member_back_head)
@@ -458,7 +458,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
         if (strCover == null || strCover.equals("") || strCover.equals("null")) {
             bannerImg.setImageResource(R.drawable.bg200_user_default);
         } else {
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(strCover)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg200_user_default)
@@ -471,7 +471,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                         }
                     });
@@ -678,7 +678,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
 
 
         if (!strPicture.equals("")) {
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(strPicture)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)
@@ -698,7 +698,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                             MyLog.Set("d", AuthorActivity.class, "onError strPicture => " + strPicture);
 
@@ -780,14 +780,14 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
         int count = albumList.size();
 
         for (int i = 0; i < count; i++) {
-            Picasso.with(mActivity.getApplicationContext()).invalidate(albumList.get(i).getCover());
+            Picasso.get().invalidate(albumList.get(i).getCover());
         }
 
         if (itemUser != null && itemUser.getPicture() != null && !itemUser.getPicture().equals("")) {
             try {
-//                Picasso.with(mActivity.getApplicationContext()).invalidate(itemUser.getPicture());
+//                Picasso.get().invalidate(itemUser.getPicture());
 
-                Picasso.with(mActivity.getApplicationContext()).invalidate(strPicture);
+                Picasso.get().invalidate(strPicture);
 
             } catch (Exception e) {
                 e.printStackTrace();

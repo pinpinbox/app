@@ -89,7 +89,7 @@ public class FragmentCGAbannerImage extends Fragment implements View.OnClickList
 
         if(imageUrl!=null && !imageUrl.equals("null") && !imageUrl.equals("")){
 
-            Picasso.with(getActivity().getApplicationContext())
+            Picasso.get()
                     .load(imageUrl)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)

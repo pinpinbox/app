@@ -173,7 +173,7 @@ public class RecentAlbumActivity extends DraggerActivity implements View.OnClick
 
             String cover = itemAlbumList.get(i).getCover();
 
-            Picasso.with(mActivity.getApplicationContext()).invalidate(cover);
+            Picasso.get().invalidate(cover);
 
         }
 

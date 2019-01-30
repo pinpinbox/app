@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -121,7 +120,7 @@ public class GalleryAdapter extends BaseAdapter {
         File file = fileList.get(position);
 
 
-        Picasso.with(mActivity.getApplicationContext())
+        Picasso.get()
                 .load(file)
                 .config(Bitmap.Config.RGB_565)
                 .fit()
@@ -160,7 +159,7 @@ public class GalleryAdapter extends BaseAdapter {
         if (wh > 4000000) {
 
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(file)
                     .config(Bitmap.Config.RGB_565)
                     .resize(w / 15, h / 15)
@@ -173,7 +172,7 @@ public class GalleryAdapter extends BaseAdapter {
         } else if (wh < 4000000 && wh > 500000) {
 
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(file)
                     .config(Bitmap.Config.RGB_565)
                     .resize(w / 12, h / 12)
@@ -184,7 +183,7 @@ public class GalleryAdapter extends BaseAdapter {
         } else if (wh < 500000 && wh > 250000) {
 
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(file)
                     .config(Bitmap.Config.RGB_565)
                     .resize(w / 9, h / 9)
@@ -195,7 +194,7 @@ public class GalleryAdapter extends BaseAdapter {
         } else if (wh < 250000 && wh > 0) {
 
             try {
-                Picasso.with(mActivity.getApplicationContext())
+                Picasso.get()
                         .load(file)
                         .config(Bitmap.Config.RGB_565)
                         .resize(w / 6, h / 6)

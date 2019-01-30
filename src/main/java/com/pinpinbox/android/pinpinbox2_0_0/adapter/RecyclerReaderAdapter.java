@@ -74,7 +74,7 @@ public class RecyclerReaderAdapter extends RecyclerView.Adapter {
 //                holder.photoImg.setBackgroundColor(Color.parseColor(ColorClass.BLACK));
 
 
-                Picasso.with(mActivity.getApplicationContext())
+                Picasso.get()
                         .load(R.drawable.bg200_preview_small)
                         .config(Bitmap.Config.RGB_565)
                         .tag(mActivity.getApplicationContext())
@@ -82,7 +82,7 @@ public class RecyclerReaderAdapter extends RecyclerView.Adapter {
 
 
             }else {
-                Picasso.with(mActivity.getApplicationContext())
+                Picasso.get()
                         .load(url)
                         .config(Bitmap.Config.RGB_565)
                         .error(R.drawable.bg_2_0_0_no_image)

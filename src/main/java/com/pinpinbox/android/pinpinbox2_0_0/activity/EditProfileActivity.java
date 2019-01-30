@@ -227,7 +227,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
         String profilepic = getData.getString(Key.profilepic, "");
 
         if (profilepic != null && !profilepic.equals("") && !profilepic.equals("null")) {
-            Picasso.with(mActivity.getApplicationContext()).
+            Picasso.get().
                     load(profilepic).
                     config(Bitmap.Config.RGB_565).
                     tag(mActivity.getApplicationContext()).
@@ -1253,7 +1253,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
                     Bundle extras = data.getExtras();
                     if (extras != null) {
 
-                        Picasso.with(mActivity.getApplicationContext())
+                        Picasso.get()
                                 .load(filePicture)
                                 .config(Bitmap.Config.RGB_565)
                                 .resize(160, 160)
@@ -1287,7 +1287,7 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
         cancelTask(profileTask);
 
         if (filePicture != null) {
-            Picasso.with(mActivity.getApplicationContext()).invalidate(filePicture);
+            Picasso.get().invalidate(filePicture);
         }
         profileImg.setImageBitmap(null);
         profileImg.setImageDrawable(null);

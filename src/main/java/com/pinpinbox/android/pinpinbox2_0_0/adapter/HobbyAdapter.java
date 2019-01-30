@@ -2,7 +2,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -63,7 +62,7 @@ public class HobbyAdapter extends BaseAdapter {
 
         if (image_url != null && !image_url.equals("") && !image_url.equals("null")) {
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(image_url)
                     .config(Bitmap.Config.RGB_565)
                     .fit()

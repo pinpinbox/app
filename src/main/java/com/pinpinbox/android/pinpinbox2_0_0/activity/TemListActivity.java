@@ -597,7 +597,7 @@ public class TemListActivity extends DraggerActivity implements View.OnClickList
 
             for (int i = 0; i < array; i++) {
 
-                Picasso.with(mActivity.getApplicationContext()).invalidate(templateList.get(i).getImage());
+                Picasso.get().invalidate(templateList.get(i).getImage());
 
             }
         }

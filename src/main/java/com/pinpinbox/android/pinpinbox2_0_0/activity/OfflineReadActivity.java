@@ -404,7 +404,7 @@ public class OfflineReadActivity extends DraggerActivity {
 
             for (int i = 0; i < picList.size(); i++) {
                 viewList.clear();
-                Picasso.with(mActivity).invalidate(fileList.get(i));
+                Picasso.get().invalidate(fileList.get(i));
             }
             System.gc();
 

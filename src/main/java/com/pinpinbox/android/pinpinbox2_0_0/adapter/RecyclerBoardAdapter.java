@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -92,7 +91,7 @@ public class RecyclerBoardAdapter extends RecyclerView.Adapter {
 
         String url = itemBoardList.get(position).getPicture();
         if (url != null && !url.equals("")) {
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(url)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)

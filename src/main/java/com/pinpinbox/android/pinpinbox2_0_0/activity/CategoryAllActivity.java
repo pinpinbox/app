@@ -417,8 +417,8 @@ public class CategoryAllActivity extends DraggerActivity implements View.OnClick
 
                 String picture = albumList.get(i).getUser_picture();
 
-                Picasso.with(getApplicationContext()).invalidate(cover);
-                Picasso.with(getApplicationContext()).invalidate(picture);
+                Picasso.get().invalidate(cover);
+                Picasso.get().invalidate(picture);
 
             }
 

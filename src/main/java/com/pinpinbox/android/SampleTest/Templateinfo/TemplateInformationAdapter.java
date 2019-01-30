@@ -85,7 +85,7 @@ public class TemplateInformationAdapter extends BaseAdapter {
 
                 String url = (String) listdata.get(position).get("url");
 
-                Picasso.with(mActivity.getApplicationContext())
+                Picasso.get()
                         .load(url)
                         .config(Bitmap.Config.RGB_565)
                         .error(R.drawable.bg_2_0_0_no_image)

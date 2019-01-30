@@ -79,7 +79,7 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
             String strCover = (String)listData.get(position).get(Key.image);
             String strTemName = (String)listData.get(position).get(Key.name);
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(strCover)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
@@ -99,7 +99,7 @@ public class RecyclerTemListAdapter extends RecyclerView.Adapter {
             boolean isOwn = (boolean)listData.get(position).get(Key.own);
 
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(strCover)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)

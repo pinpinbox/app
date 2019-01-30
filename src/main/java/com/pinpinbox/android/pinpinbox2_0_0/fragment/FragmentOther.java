@@ -26,30 +26,29 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.pinpinbox.android.R;
+import com.pinpinbox.android.Utility.FileUtility;
+import com.pinpinbox.android.Utility.FlurryUtil;
+import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.JsonUtility;
+import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
+import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
+import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollectActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ReaderActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCollectAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickDragDismissListener;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
-import com.pinpinbox.android.Utility.FileUtility;
-import com.pinpinbox.android.Utility.FlurryUtil;
-import com.pinpinbox.android.Utility.HttpUtility;
-import com.pinpinbox.android.Utility.JsonUtility;
-import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
-import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
-import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
-import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.MyCollectActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerCollectAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.IndexSheet;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.FlurryKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -425,8 +424,8 @@ public class FragmentOther extends Fragment implements OnDetailClickListener, Cl
 
         if (p17arraylist != null && p17arraylist.size() > 0) {
             for (int i = 0; i < p17arraylist.size(); i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate((String) p17arraylist.get(i).get("albumcover"));
-                Picasso.with(getActivity().getApplicationContext()).invalidate((String) p17arraylist.get(i).get("picture"));
+                Picasso.get().invalidate((String) p17arraylist.get(i).get("albumcover"));
+                Picasso.get().invalidate((String) p17arraylist.get(i).get("picture"));
             }
             System.gc();
         }

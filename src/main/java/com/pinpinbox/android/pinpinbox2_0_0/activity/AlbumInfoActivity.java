@@ -248,7 +248,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
 
         if (ImageUtility.isImageExist(coverUrl)) {
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(coverUrl)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
@@ -268,7 +268,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                             MyLog.Set("d", AlbumInfoActivity.class, "onError coverurl => " + coverUrl);
 
@@ -1029,7 +1029,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                 if (coverUrl.equals("")) {
                     coverUrl = getCover;
                     if (coverUrl != null && !coverUrl.equals("") && !coverUrl.equals("null")) {
-                        Picasso.with(mActivity.getApplicationContext())
+                        Picasso.get()
                                 .load(coverUrl)
                                 .config(Bitmap.Config.RGB_565)
                                 .error(R.drawable.bg_2_0_0_no_image)
@@ -1074,7 +1074,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
                         userImg.setTransitionName(strPicture);
                     }
                     if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
-                        Picasso.with(mActivity.getApplicationContext())
+                        Picasso.get()
                                 .load(strPicture)
                                 .config(Bitmap.Config.RGB_565)
                                 .error(R.drawable.member_back_head)
@@ -2555,7 +2555,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
         if (coverUrl != null && !coverUrl.equals("") && !coverUrl.equals("null")) {
 
-            Picasso.with(getApplicationContext()).invalidate(coverUrl);
+            Picasso.get().invalidate(coverUrl);
             coverImg.setImageBitmap(null);
             coverImg.setImageDrawable(null);
         } else {
@@ -2564,7 +2564,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
 
         if (strPicture != null && !strPicture.equals("") && !strPicture.equals("null")) {
 
-            Picasso.with(getApplicationContext()).invalidate(strPicture);
+            Picasso.get().invalidate(strPicture);
             userImg.setImageBitmap(null);
             userImg.setImageDrawable(null);
         } else {

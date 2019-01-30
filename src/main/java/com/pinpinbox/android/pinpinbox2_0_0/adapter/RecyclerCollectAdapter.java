@@ -186,7 +186,7 @@ public class RecyclerCollectAdapter extends RecyclerView.Adapter {
                 holder.userImg.setImageResource(R.drawable.member_back_head);
             } else {
                 try {
-                    Picasso.with(mActivity.getApplicationContext())
+                    Picasso.get()
                             .load(strPicture)
                             .config(Bitmap.Config.RGB_565)
                             .error(R.drawable.member_back_head)

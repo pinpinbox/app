@@ -70,9 +70,8 @@ public class AdHighLightActivity extends FragmentActivity implements View.OnClic
             bannerImg.setTransitionName(strBannerUrl);
         }
 
-
         if (!strBannerUrl.equals("")) {
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(strBannerUrl)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
@@ -93,8 +92,9 @@ public class AdHighLightActivity extends FragmentActivity implements View.OnClic
 
                         }
 
+
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                             MyLog.Set("d", AdHighLightActivity.class, "onError strBannerUrl => " + strBannerUrl);
 
@@ -180,7 +180,7 @@ public class AdHighLightActivity extends FragmentActivity implements View.OnClic
     public void onDestroy() {
 
         if(strBannerUrl!=null && !strBannerUrl.equals("") && !strBannerUrl.equals("")) {
-            Picasso.with(getApplicationContext()).invalidate(strBannerUrl);
+            Picasso.get().invalidate(strBannerUrl);
             bannerImg.setImageBitmap(null);
             bannerImg.setImageDrawable(null);
         }

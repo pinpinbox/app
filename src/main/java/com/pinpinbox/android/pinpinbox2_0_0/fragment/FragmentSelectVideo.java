@@ -505,7 +505,7 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
             int count = nonHeaderIdList.size();
             for (int i = 0; i < count; i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(nonHeaderIdList.get(i).getPath());
+                Picasso.get().invalidate(nonHeaderIdList.get(i).getPath());
             }
             System.gc();
         }
@@ -820,7 +820,7 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
             int count = nonHeaderIdList.size();
             for (int i = 0; i < count; i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(nonHeaderIdList.get(i).getPath());
+                Picasso.get().invalidate(nonHeaderIdList.get(i).getPath());
             }
             System.gc();
         }
@@ -1197,7 +1197,7 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
             int count = nonHeaderIdList.size();
             for (int i = 0; i < count; i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(nonHeaderIdList.get(i).getPath());
+                Picasso.get().invalidate(nonHeaderIdList.get(i).getPath());
             }
             nonHeaderIdList.clear();
             nonHeaderIdList = null;

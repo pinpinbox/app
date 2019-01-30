@@ -1478,7 +1478,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     private void showContents(ItemExchange itemExchange) {
 
 
-                        Picasso.with(mActivity.getApplicationContext())
+                        Picasso.get()
                                 .load(itemExchange.getImage())
                                 .config(Bitmap.Config.RGB_565)
                                 .error(R.drawable.bg_2_0_0_no_image)
@@ -4455,11 +4455,11 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
             String url = photoContentsList.get(i).getImage_url();
 
-            Picasso.with(getApplicationContext()).invalidate(url);
+            Picasso.get().invalidate(url);
 
 
             String urlthum = photoContentsList.get(i).getImage_url_thumbnail();
-            Picasso.with(getApplicationContext()).invalidate(urlthum);
+            Picasso.get().invalidate(urlthum);
 
 
             if (photoContentsList.get(i).getVideoView() != null) {

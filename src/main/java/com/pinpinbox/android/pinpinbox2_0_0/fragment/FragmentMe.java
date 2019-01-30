@@ -436,7 +436,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
     private void setdata() {
 
         if (!itemUser.getPicture().equals("")) {
-            Picasso.with(getActivity().getApplicationContext())
+            Picasso.get()
                     .load(itemUser.getPicture())
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)
@@ -451,7 +451,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
         if (strCover == null || strCover.equals("") || strCover.equals("null")) {
             bannerImg.setImageResource(R.drawable.bg200_user_default);
         } else {
-            Picasso.with(getActivity().getApplicationContext())
+            Picasso.get()
                     .load(strCover)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg200_user_default)
@@ -468,7 +468,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                         }
                     });
@@ -844,7 +844,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
             int count = albumList.size();
 
             for (int i = 0; i < count; i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(albumList.get(i).getCover());
+                Picasso.get().invalidate(albumList.get(i).getCover());
             }
 
         }
@@ -853,7 +853,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
 
             if (itemUser.getPicture() != null && !itemUser.getPicture().equals("")) {
                 try {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(itemUser.getPicture());
+                    Picasso.get().invalidate(itemUser.getPicture());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1471,7 +1471,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
                             if (cover == null || cover.equals("") || cover.equals("null")) {
                                 bannerImg.setImageResource(R.drawable.bg200_user_default);
                             } else {
-                                Picasso.with(getActivity().getApplicationContext())
+                                Picasso.get()
                                         .load(cover)
                                         .config(Bitmap.Config.RGB_565)
                                         .error(R.drawable.bg200_user_default)

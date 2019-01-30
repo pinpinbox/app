@@ -1220,7 +1220,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
 
 
             try {
-                bigTemplateBmp = Picasso.with(mActivity)
+                bigTemplateBmp = Picasso.get()
                         .load(picUrl)
                         .config(Bitmap.Config.RGB_565)
                         .resize(intControlAreaWidth, intControlAreaHeight)
@@ -1331,7 +1331,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         }
 
         for (int i = 0; i < bottomList.size(); i++) {
-            Picasso.with(mActivity.getApplicationContext()).invalidate((String) bottomList.get(i).get("image_url_thumbnail"));
+            Picasso.get().invalidate((String) bottomList.get(i).get("image_url_thumbnail"));
         }
 
         recycleBitmaps();
@@ -1339,7 +1339,7 @@ public class CreationTemplate2Activity extends NoDraggerActivity {
         clearChangeBitmap();
 
         try {
-            Picasso.with(mActivity).invalidate(picUrl);
+            Picasso.get().invalidate(picUrl);
         } catch (Exception e) {
             e.printStackTrace();
         }

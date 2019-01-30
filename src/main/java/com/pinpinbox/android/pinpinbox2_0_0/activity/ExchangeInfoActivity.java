@@ -174,7 +174,7 @@ public class ExchangeInfoActivity extends DraggerActivity implements View.OnClic
 
         if (ImageUtility.isImageExist(itemExchange.getImage())) {
 
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(itemExchange.getImage())
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)
@@ -190,7 +190,7 @@ public class ExchangeInfoActivity extends DraggerActivity implements View.OnClic
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                             supportStartPostponedEnterTransition();
 

@@ -69,7 +69,7 @@ public class RecyclerCreationTemplateAdapter extends RecyclerView.Adapter {
         if (url == null || url.equals("") || url.equals("null")) {
             holder.templateImg.setImageResource(R.drawable.bg_2_0_0_no_image);
         } else {
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(url)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)

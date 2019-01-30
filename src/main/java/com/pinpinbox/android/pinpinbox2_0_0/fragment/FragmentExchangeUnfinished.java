@@ -167,7 +167,7 @@ public class FragmentExchangeUnfinished extends Fragment {
 
         if(itemExchangeList!=null && itemExchangeList.size()>0){
             for (int i = 0; i < itemExchangeList.size(); i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate(itemExchangeList.get(i).getImage());
+                Picasso.get().invalidate(itemExchangeList.get(i).getImage());
             }
         }
     }

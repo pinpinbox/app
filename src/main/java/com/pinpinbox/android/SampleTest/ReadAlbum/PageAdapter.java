@@ -51,7 +51,7 @@ public class PageAdapter extends PagerAdapter {
         piv.setImageBitmap(null);
 
         view.removeView((View) object);
-        Picasso.with(mActivity.getApplicationContext()).invalidate(pathlist.get(position));
+        Picasso.get().invalidate(pathlist.get(position));
 
 
     }
@@ -88,7 +88,7 @@ public class PageAdapter extends PagerAdapter {
 
                 if(wh>2400000){
                     MyLog.Set("d", PagerAdapter.class,"resize =>2");
-                    Picasso.with(mActivity.getApplicationContext())
+                    Picasso.get()
                             .load(pathlist.get(position))
                             .config(Bitmap.Config.RGB_565)
                             .resize(bmpw / 2, bmph / 2)
@@ -98,7 +98,7 @@ public class PageAdapter extends PagerAdapter {
                             .into(picImg);
                 }else {
                     MyLog.Set("d", PagerAdapter.class,"resize =>1");
-                    Picasso.with(mActivity.getApplicationContext())
+                    Picasso.get()
                             .load(pathlist.get(position))
                             .config(Bitmap.Config.RGB_565)
                             .resize(bmpw, bmph)

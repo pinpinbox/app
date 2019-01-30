@@ -63,7 +63,7 @@ public class TestPageAdapter extends PagerAdapter implements YouTubePlayer.OnIni
 //            youTubeView.setVisibility(View.INVISIBLE);
             frameLayout.setVisibility(View.GONE);
             pageImg.setVisibility(View.VISIBLE);
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(itemCategoryBannerList.get(position).getImageUrl())
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)

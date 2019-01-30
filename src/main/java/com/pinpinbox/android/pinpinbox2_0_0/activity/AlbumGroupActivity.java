@@ -398,7 +398,7 @@ public class AlbumGroupActivity extends DraggerActivity implements View.OnClickL
             searchAdapter.notifyItemRangeRemoved(0, count);
 
             for (int i = 0; i < count; i++) {
-                Picasso.with(mActivity.getApplicationContext()).invalidate(searchUserList.get(i).getPicture());
+                Picasso.get().invalidate(searchUserList.get(i).getPicture());
             }
             System.gc();
         }
@@ -410,14 +410,14 @@ public class AlbumGroupActivity extends DraggerActivity implements View.OnClickL
         int count = searchUserList.size();
         if(count>0) {
             for (int i = 0; i < count; i++) {
-                Picasso.with(mActivity.getApplicationContext()).invalidate(searchUserList.get(i).getPicture());
+                Picasso.get().invalidate(searchUserList.get(i).getPicture());
             }
         }
 
         int count2 = groupUserList.size();
         if(count2>0) {
             for (int i = 0; i < count2; i++) {
-                Picasso.with(mActivity.getApplicationContext()).invalidate(groupUserList.get(i).getPicture());
+                Picasso.get().invalidate(groupUserList.get(i).getPicture());
             }
         }
 

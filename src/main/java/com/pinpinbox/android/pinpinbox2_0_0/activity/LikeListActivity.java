@@ -460,7 +460,7 @@ public class LikeListActivity extends DraggerActivity implements View.OnClickLis
             int count = itemUserList.size();
 
             for (int i = 0; i < count; i++) {
-                Picasso.with(mActivity.getApplicationContext()).invalidate(itemUserList.get(i).getPicture());
+                Picasso.get().invalidate(itemUserList.get(i).getPicture());
             }
 
             System.gc();

@@ -158,7 +158,7 @@ public class AlbumDownLoad {
                         //2016.06.09 clean cover
 
                         if (strCover != null && !strCover.equals("")) {
-                            Picasso.with(mActivity.getApplicationContext()).invalidate(strCover);
+                            Picasso.get().invalidate(strCover);
                             System.gc();
                         }
 
@@ -288,7 +288,7 @@ public class AlbumDownLoad {
 
         if (strCover != null && !strCover.equals("")) {
 
-//            Picasso.with(mActivity.getApplicationContext())
+//            Picasso.get()
 //                    .load(strCover)
 //                    .config(Bitmap.Config.RGB_565)
 //                    .error(R.drawable.no_image)
@@ -299,7 +299,7 @@ public class AlbumDownLoad {
                 @Override
                 public void run() {
                     try {
-                        downBackGroundBmp = Picasso.with(mActivity.getApplicationContext())
+                        downBackGroundBmp = Picasso.get()
                                 .load(strCover)
                                 .config(Bitmap.Config.RGB_565)
                                 .error(R.drawable.bg_2_0_0_no_image)

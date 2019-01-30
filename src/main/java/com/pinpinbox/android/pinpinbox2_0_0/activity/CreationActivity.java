@@ -2247,7 +2247,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
         if (jsonArray.length() != 0) {
 
-            Picasso.with(mActivity)
+            Picasso.get()
                     .load(picUrl)
                     .config(Bitmap.Config.RGB_565)
                     .into(target);
@@ -2265,7 +2265,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         }
 
         @Override
-        public void onBitmapFailed(Drawable errorDrawable) {
+        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
             MyLog.Set("d", mActivity.getClass(), "onBitmapFailed");
             PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_can_not_load_photo_try_again);
         }
@@ -2720,8 +2720,8 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
                 String url = (String) photoList.get(i).get("image_url_operate");
                 String bigurl = (String) photoList.get(i).get("image_url_thumbnail");
-                Picasso.with(getApplicationContext()).invalidate(url);
-                Picasso.with(getApplicationContext()).invalidate(bigurl);
+                Picasso.get().invalidate(url);
+                Picasso.get().invalidate(bigurl);
 
             }
 
@@ -5695,7 +5695,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
         adapter = null;
 
-        Picasso.with(this).cancelRequest(target);
+        Picasso.get().cancelRequest(target);
 
 
         if (fragmentSelectPhoto != null && fragmentSelectPhoto.isAdded()) {

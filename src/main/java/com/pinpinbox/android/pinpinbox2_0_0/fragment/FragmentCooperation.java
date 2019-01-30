@@ -31,7 +31,6 @@ import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
-import com.pinpinbox.android.Utility.TextUtility;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
@@ -420,8 +419,8 @@ public class FragmentCooperation extends Fragment implements OnDetailClickListen
 
         if (p17arraylist != null && p17arraylist.size() > 0) {
             for (int i = 0; i < p17arraylist.size(); i++) {
-                Picasso.with(getActivity().getApplicationContext()).invalidate((String) p17arraylist.get(i).get("albumcover"));
-                Picasso.with(getActivity().getApplicationContext()).invalidate((String) p17arraylist.get(i).get(Key.picture));
+                Picasso.get().invalidate((String) p17arraylist.get(i).get("albumcover"));
+                Picasso.get().invalidate((String) p17arraylist.get(i).get(Key.picture));
             }
             System.gc();
         }

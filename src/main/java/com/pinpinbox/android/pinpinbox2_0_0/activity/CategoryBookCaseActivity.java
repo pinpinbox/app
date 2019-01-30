@@ -781,7 +781,7 @@ public class CategoryBookCaseActivity extends DraggerActivity implements View.On
         String picture = cgaUserList.get(position).getPicture();
 
         if (picture != null && !picture.equals("null") && !picture.equals("")) {
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(cgaUserList.get(position).getPicture())
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)
@@ -973,7 +973,7 @@ public class CategoryBookCaseActivity extends DraggerActivity implements View.On
 
             for (int i = 0; i < userList.size(); i++) {
 
-                Picasso.with(getApplicationContext()).invalidate(userList.get(i).getPicture());
+                Picasso.get().invalidate(userList.get(i).getPicture());
 
             }
 
@@ -990,7 +990,7 @@ public class CategoryBookCaseActivity extends DraggerActivity implements View.On
 
                 for (int j = 0; j < albumList.size(); j++) {
 
-                    Picasso.with(getApplicationContext()).invalidate(albumList.get(j).getCover());
+                    Picasso.get().invalidate(albumList.get(j).getCover());
 
                 }
             }

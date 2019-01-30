@@ -585,7 +585,7 @@ public class HobbyActivity extends DraggerActivity implements View.OnClickListen
         int count = itemHobbyList.size();
         for (int i = 0; i < count; i++) {
             String url = itemHobbyList.get(i).getImage_url();
-            Picasso.with(getApplicationContext()).invalidate(url);
+            Picasso.get().invalidate(url);
         }
         adapter = null;
 

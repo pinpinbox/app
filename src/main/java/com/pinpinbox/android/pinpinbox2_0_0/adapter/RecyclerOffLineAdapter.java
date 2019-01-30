@@ -70,7 +70,7 @@ public class RecyclerOffLineAdapter extends RecyclerView.Adapter {
 
         String cover  = itemAlbumList.get(position).getCover();
         if(cover!=null&& !cover.equals("") && !cover.equals("null")) {
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(new File(cover))
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)

@@ -274,21 +274,21 @@ public class TemplateInfoActivity extends DraggerActivity {
         if (picList != null && picList.size() > 0) {
             for (int i = 0; i < picList.size(); i++) {
                 String url = picList.get(i);
-                Picasso.with(mActivity.getApplicationContext()).invalidate(url);
+                Picasso.get().invalidate(url);
             }
         }
 
         if (otherList != null && otherList.size() > 0) {
             for (int i = 0; i < otherList.size(); i++) {
                 String image = (String) otherList.get(i).get("image");
-                Picasso.with(mActivity.getApplicationContext()).invalidate(image);
+                Picasso.get().invalidate(image);
             }
         }
 
         if (sampleList != null && sampleList.size() > 0) {
             for (int i = 0; i < sampleList.size(); i++) {
                 String cover = (String) sampleList.get(i).get("cover");
-                Picasso.with(mActivity.getApplicationContext()).invalidate(cover);
+                Picasso.get().invalidate(cover);
             }
         }
         System.gc();
@@ -1328,21 +1328,21 @@ public class TemplateInfoActivity extends DraggerActivity {
         if (picList != null && picList.size() > 0) {
             for (int i = 0; i < picList.size(); i++) {
                 String url = picList.get(i);
-                Picasso.with(mActivity.getApplicationContext()).invalidate(url);
+                Picasso.get().invalidate(url);
             }
         }
 
         if (otherList != null && otherList.size() > 0) {
             for (int i = 0; i < otherList.size(); i++) {
                 String image = (String) otherList.get(i).get("image");
-                Picasso.with(mActivity.getApplicationContext()).invalidate(image);
+                Picasso.get().invalidate(image);
             }
         }
 
         if (sampleList != null && sampleList.size() > 0) {
             for (int i = 0; i < sampleList.size(); i++) {
                 String cover = (String) sampleList.get(i).get("cover");
-                Picasso.with(mActivity.getApplicationContext()).invalidate(cover);
+                Picasso.get().invalidate(cover);
             }
         }
         System.gc();

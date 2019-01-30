@@ -586,8 +586,8 @@ public class VoteActivity extends DraggerActivity implements View.OnClickListene
             int count = itemAlbumList.size();
 
             for (int i = 0; i < count; i++) {
-                Picasso.with(mActivity.getApplicationContext()).invalidate(itemAlbumList.get(i).getCover());
-                Picasso.with(mActivity.getApplicationContext()).invalidate(itemAlbumList.get(i).getUser_picture());
+                Picasso.get().invalidate(itemAlbumList.get(i).getCover());
+                Picasso.get().invalidate(itemAlbumList.get(i).getUser_picture());
             }
 
             System.gc();

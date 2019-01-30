@@ -3,7 +3,6 @@ package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -77,7 +76,7 @@ public class RecyclerSearchUserAdapter  extends RecyclerView.Adapter {
         if (strPicture == null || strPicture.equals("")) {
             holder.userImg.setImageResource(R.drawable.member_back_head);
         } else {
-                Picasso.with(mActivity.getApplicationContext())
+                Picasso.get()
                         .load(strPicture)
                         .config(Bitmap.Config.RGB_565)
                         .error(R.drawable.member_back_head)

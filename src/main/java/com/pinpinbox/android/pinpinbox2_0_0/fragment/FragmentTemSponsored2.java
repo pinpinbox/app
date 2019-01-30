@@ -54,14 +54,13 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
-import tyrantgit.explosionfield.ExplosionField;
+
 
 /**
  * Created by vmage on 2017/1/18.
  */
 public class FragmentTemSponsored2 extends Fragment {
 
-    private ExplosionField mExplosionField;
     private NoConnect noConnect;
 
     private TemplateListTask templateListTask;
@@ -185,9 +184,6 @@ public class FragmentTemSponsored2 extends Fragment {
     }
 
     private void init() {
-
-        mExplosionField = ExplosionField.attach2Window(getActivity());
-
 
         id = PPBApplication.getInstance().getId();
         token = PPBApplication.getInstance().getToken();
@@ -366,7 +362,7 @@ public class FragmentTemSponsored2 extends Fragment {
             for (int i = 0; i < p36arraylist.size(); i++) {
                 String url = (String) p36arraylist.get(i).get(MapKey.image);
                 if (url != null && !url.equals("null") && !url.equals("") && getActivity() != null) {
-                    Picasso.with(getActivity().getApplicationContext()).invalidate(url);
+                    Picasso.get().invalidate(url);
                 }
             }
             System.gc();
@@ -587,7 +583,6 @@ public class FragmentTemSponsored2 extends Fragment {
 
             if (doAnim) {
 
-                mExplosionField.explode(refreshImg);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -600,7 +595,6 @@ public class FragmentTemSponsored2 extends Fragment {
                     public void run() {
                         refreshImg = viewHeader.findViewById(R.id.refreshImg);
                         ViewControl.reset(refreshImg);
-                        mExplosionField.clear();
                     }
                 }, 1000);
             }

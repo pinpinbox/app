@@ -70,7 +70,7 @@ public class RecyclerCategoryUserLargeAdapter extends RecyclerView.Adapter{
         if (strPicture == null || strPicture.equals("")) {
             holder.userImg.setImageResource(R.drawable.member_back_head);
         } else {
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(strPicture)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)

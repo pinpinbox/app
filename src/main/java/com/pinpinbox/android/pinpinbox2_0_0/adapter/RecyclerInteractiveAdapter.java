@@ -7,19 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pinpinbox.android.R;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.TouchRange.TouchRange;
 import com.squareup.picasso.Picasso;
 
@@ -111,7 +110,7 @@ public class RecyclerInteractiveAdapter extends RecyclerView.Adapter {
         if (strPicture == null || strPicture.equals("")) {
             mHolder.userImg.setImageResource(R.drawable.member_back_head);
         } else {
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(strPicture)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.member_back_head)

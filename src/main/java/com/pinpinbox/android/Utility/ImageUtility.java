@@ -43,7 +43,7 @@ public class ImageUtility {
 
         if (isImageExist(imageUrl)) {
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(imageUrl)
                     .config(Bitmap.Config.RGB_565)
                     .priority(Picasso.Priority.HIGH)
@@ -58,7 +58,7 @@ public class ImageUtility {
                         }
 
                         @Override
-                        public void onError() {
+                        public void onError(Exception e) {
 
                         }
                     });
@@ -78,7 +78,7 @@ public class ImageUtility {
 
         if (isImageExist(imageUrl)) {
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(imageUrl)
                     .config(Bitmap.Config.RGB_565)
                     .priority(Picasso.Priority.HIGH)
@@ -102,7 +102,7 @@ public class ImageUtility {
 
         if (isImageExist(imageUrl)) {
 
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(imageUrl)
                     .config(Bitmap.Config.RGB_565)
                     .priority(Picasso.Priority.HIGH)
@@ -125,7 +125,7 @@ public class ImageUtility {
         if (isFileExist(file)) {
 
             //fit 調整圖片大小至view邊寬
-            Picasso.with(mActivity.getApplicationContext())
+            Picasso.get()
                     .load(file)
                     .config(Bitmap.Config.RGB_565)
                     .error(R.drawable.bg_2_0_0_no_image)

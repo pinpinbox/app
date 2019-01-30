@@ -727,7 +727,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
         if (photoList != null && photoList.size() > 0) {
             for (int i = 0; i < photoList.size(); i++) {
-                Picasso.with(this).invalidate(photoList.get(i).getPath());
+                Picasso.get().invalidate(photoList.get(i).getPath());
             }
 
         }
