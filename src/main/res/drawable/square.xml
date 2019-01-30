@@ -8,5 +8,5 @@
         android:right="10dp"
         android:top="5dp" />
 
-    <solid android:color="@color/material_blue" />
+    <solid android:color="@color/com_facebook_blue" />
 </shape>

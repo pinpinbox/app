@@ -156,7 +156,6 @@ dependencies {
     implementation 'in.srain.cube:grid-view-with-header-footer:1.0.12'
     implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
-    implementation 'ch.halcyon:squareprogressbar:1.6.0'
     implementation 'com.github.florent37:picassopalette:2.0.0'
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     implementation 'com.orhanobut:logger:1.15'
@@ -166,8 +165,7 @@ dependencies {
     implementation 'io.github.inflationx:calligraphy3:3.0.0'
     implementation 'io.github.inflationx:viewpump:1.0.0'
 
-    implementation 'com.github.rubengees:EasyHeaderFooterAdapter:1.0.4@aar'
-    implementation 'com.cjj.materialrefeshlayout:library:1.3.0'
+
     implementation 'in.srain.cube:ultra-ptr:1.0.11'
     implementation 'com.squareup.okhttp3:okhttp:3.0.0-RC1'
     implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'

@@ -802,6 +802,9 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" />
 
+        <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorAppsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"/>
 
     </application>
 

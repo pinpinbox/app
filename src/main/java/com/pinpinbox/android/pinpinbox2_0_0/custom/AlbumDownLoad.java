@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
@@ -16,8 +14,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.pinpinbox.android.R;
@@ -50,9 +46,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import ch.halcyon.squareprogressbar.SquareProgressBar;
-import ch.halcyon.squareprogressbar.utils.PercentStyle;
 
 
 /**
@@ -87,7 +80,7 @@ public class AlbumDownLoad {
     //    private ImageView coverImg;
 //    private ImageView downloadActionImg;
 //    private ProgressBar downloadProgressBar;
-    private SquareProgressBar squareProgressBar;
+//    private SquareProgressBar squareProgressBar;
 
     private String TAG = AlbumDownLoad.class.getSimpleName();
     private String album_id;
@@ -105,7 +98,7 @@ public class AlbumDownLoad {
     private Handler progressbarkHandler = new Handler() {
         public void handleMessage(Message msg) {
 
-            squareProgressBar.setProgress(getProgressInt(bean, 100));
+//            squareProgressBar.setProgress(getProgressInt(bean, 100));
 
 //            squareProgressBar.setProgress(getProgressInt(bean, downloadProgressBar.getMax()));
 
@@ -266,18 +259,18 @@ public class AlbumDownLoad {
 //        coverImg = (ImageView) crdlg.findViewById(R.id.coverImg);
 //        downloadActionImg = (ImageView) crdlg.findViewById(R.id.downloadBtnAction);
 
-        squareProgressBar = (SquareProgressBar) crdlg.findViewById(R.id.squareProgressBar);
-        squareProgressBar.setProgress(100);
-        squareProgressBar.setColor("#009688");
-        squareProgressBar.setWidth(12);
-        squareProgressBar.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-        squareProgressBar.getImageView().setLayoutParams(new RelativeLayout.LayoutParams(dm.widthPixels, dm.heightPixels));
-        squareProgressBar.setImageGrayscale(true);//畫面恢暗
-        squareProgressBar.showProgress(true);//顯示數字進度
-        PercentStyle percentStyle = new PercentStyle(Paint.Align.CENTER, 150, true);
-        percentStyle.setTextColor(Color.parseColor("#009688"));
-        squareProgressBar.setPercentStyle(percentStyle);
-        squareProgressBar.drawOutline(true);
+//        squareProgressBar = (SquareProgressBar) crdlg.findViewById(R.id.squareProgressBar);
+//        squareProgressBar.setProgress(100);
+//        squareProgressBar.setColor("#009688");
+//        squareProgressBar.setWidth(12);
+//        squareProgressBar.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+//        squareProgressBar.getImageView().setLayoutParams(new RelativeLayout.LayoutParams(dm.widthPixels, dm.heightPixels));
+//        squareProgressBar.setImageGrayscale(true);//畫面恢暗
+//        squareProgressBar.showProgress(true);//顯示數字進度
+//        PercentStyle percentStyle = new PercentStyle(Paint.Align.CENTER, 150, true);
+//        percentStyle.setTextColor(Color.parseColor("#009688"));
+//        squareProgressBar.setPercentStyle(percentStyle);
+//        squareProgressBar.drawOutline(true);
 
 
 //        downloadProgressBar = (ProgressBar) crdlg.findViewById(R.id.downloadProgressBar);
@@ -310,7 +303,7 @@ public class AlbumDownLoad {
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                squareProgressBar.setImageBitmap(downBackGroundBmp);
+//                                squareProgressBar.setImageBitmap(downBackGroundBmp);
 
                             }
                         });
