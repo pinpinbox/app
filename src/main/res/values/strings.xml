@@ -53,7 +53,7 @@
     <string name="pinpinbox_2_0_0_button_actopen">當前隱私權為開啟</string>
     <string name="pinpinbox_2_0_0_button_actclose">當前隱私權為關閉</string>
     <string name="pinpinbox_2_0_0_button_follow">關注</string>
-    <string name="pinpinbox_2_0_0_button_follow_cancel">關注中</string>
+    <string name="pinpinbox_2_0_0_button_follow_cancel">取消關注</string>
     <string name="pinpinbox_2_0_0_button_exit">離開</string>
     <string name="pinpinbox_2_0_0_button_collect">收藏</string>
     <string name="pinpinbox_2_0_0_button_sponsor">贊助</string>
