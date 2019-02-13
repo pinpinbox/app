@@ -36,10 +36,10 @@ import android.widget.Toast;
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
+import com.pinpinbox.android.Utility.OkHttpClientManager;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.ExchangeListActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.LoginActivity;
-import com.pinpinbox.android.pinpinbox2_0_0.activity.OffLineActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.TypeFacebookFriendActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
@@ -357,12 +357,36 @@ public class OldMainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                Bundle b = new Bundle();
-                b.putBoolean(Key.exitAPP, true);
 
-                Intent intent = new Intent(OldMainActivity.this, OffLineActivity.class);
-                intent.putExtras(b);
-                startActivity(intent);
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+
+//                            try{
+//                            MyLog.Set("e",OldMainActivity.class, OkHttpClientManager.getAsString("https://www.youtube.com/watch?v=8-UpgGVtdbw"));
+//                            }catch (Exception e){
+//                                e.printStackTrace();
+//                            }
+
+
+                            try{
+                                MyLog.Set("json",OldMainActivity.class, OkHttpClientManager.getAsString("https://www.googleapis.com/youtube/v3/videos?id=8-UpgGVtdbw&key=AIzaSyCta64_vT9ZB43rGLB4Hhtf2hErNFojh0M&part=snippet"));
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }).start();
+
+
+
+
+
+
+
+
 
             }
         });

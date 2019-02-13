@@ -24,6 +24,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -701,21 +702,25 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
                         Uri uri = Uri.parse(url);
 
-                        String lastPath = uri.getLastPathSegment();
+                        String scheme = uri.getScheme();
+                        String authority = uri.getAuthority();
 
-                        if (lastPath.equals("point")) {
 
-                            ActivityIntent.toBuyPoint(getActivity());
+                        MyLog.Set("e", FragmentHome.class, "scheme + authority => " + scheme + authority);
 
-                        } else {
+                        if (scheme != null && authority != null && (scheme + "://" + authority).equals(BuildConfig.initAPI)) {
 
+                            String lastPath = uri.getLastPathSegment();
+                            if (lastPath != null && lastPath.equals("point")) {
+                                ActivityIntent.toBuyPoint(getActivity());
+                                return;
+                            }
 
                             album_id = uri.getQueryParameter(Key.album_id);
                             if (album_id != null && !album_id.equals("")) {
                                 ActivityIntent.toAlbumInfo(getActivity(), false, album_id, null, 0, 0, 0, null);
                                 return;
                             }
-
 
                             user_id = uri.getQueryParameter(Key.user_id);
                             if (user_id != null && !user_id.equals("")) {
@@ -728,7 +733,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                                 ActivityIntent.toEvent(getActivity(), event_id);
                                 return;
                             }
-
 
                             String categoryareaId = uri.getQueryParameter(Key.categoryarea_id);
                             if (categoryareaId != null && !categoryareaId.equals("")) {
@@ -743,10 +747,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                             ActivityAnim.StartAnim(getActivity());
 
 
+                        } else {
+
+                            bundle.putString("url", url);
+                            intent.putExtras(bundle);
+                            intent.setClass(getActivity(), WebViewActivity.class);
+                            getActivity().startActivity(intent);
+                            ActivityAnim.StartAnim(getActivity());
+
                         }
 
-                    }
 
+                    }
 
                 }
 
@@ -1795,11 +1807,24 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             checkNewletter();
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, rvBanner.getHeight());
-            layoutParams.bottomMargin = SizeUtils.dp2px(32);
+            final ViewTreeObserver vto = rvBanner.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                public void onGlobalLayout() {
+                    rvBanner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    int height = rvBanner.getMeasuredHeight();
 
-            rvBanner.setLayoutParams(layoutParams);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+                    layoutParams.bottomMargin = SizeUtils.dp2px(32);
 
+                    rvBanner.setLayoutParams(layoutParams);
+
+                }
+            });
+
+//            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, rvBanner.getHeight());
+//            layoutParams.bottomMargin = SizeUtils.dp2px(32);
+//
+//            rvBanner.setLayoutParams(layoutParams);
 
 
         }

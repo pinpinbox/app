@@ -162,7 +162,7 @@ public class CollectionProcess {
 
             d.setStyle(DialogStyleClass.CHECK);
 
-            d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + "(" + albumPoint + "P) ?" + "\n" +
+            d.getTvMessage().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_message_confirm_sponsor) + albumPoint + "P(NTD" + albumPoint/2 + ")?" + "\n" +
             mActivity.getResources().getString(R.string.pinpinbox_2_0_0_dialog_message_click_read_and_go_to_last_page_can_set_point));
 
             CheckExecute checkExecute = new CheckExecute() {

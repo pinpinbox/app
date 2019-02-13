@@ -40,20 +40,15 @@
             />
 
         <TextView
+            style="@style/ppb200_title_third"
             android:id="@+id/tvTitle"
-            fontPath="fonts/OpenSans-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ppb200_common_icon_side"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/ppb200_common_icon_side"
             android:layout_marginRight="@dimen/ppb200_common_icon_side"
             android:ellipsize="end"
-            android:gravity="center"
-            android:letterSpacing="0.1"
-            android:maxLines="2"
-            android:textColor="@color/pinpinbox_2_0_0_first_text"
-            android:textSize="@dimen/ppb200_common_text_second"
-            android:textStyle="bold" />
+            />
 
 
     </RelativeLayout>
