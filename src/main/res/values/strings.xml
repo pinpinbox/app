@@ -650,6 +650,11 @@
     <string name="pinpinbox_2_0_0_other_text_sponsors_times">次</string>
     <string name="pinpinbox_2_0_0_other_text_search_own">自己</string>
     <string name="pinpinbox_2_0_0_other_text_enter_to_watch">進入觀看</string>
+    <string name="pinpinbox_2_0_0_other_text_recipient">收件人</string>
+    <string name="pinpinbox_2_0_0_other_text_contact_number">連絡電話</string>
+    <string name="pinpinbox_2_0_0_other_text_address">寄送地址</string>
+    <string name="pinpinbox_2_0_0_other_message_to_creative_partA">給</string>
+    <string name="pinpinbox_2_0_0_other_message_to_creative_partB">的留言(非必填)</string>
 
 
     <string name="crop__saving">相片儲存中</string>

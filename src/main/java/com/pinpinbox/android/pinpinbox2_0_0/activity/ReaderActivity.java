@@ -176,7 +176,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
     private LinearLayout linDescription;
     private WarpLinearLayout linLink;
     private TextView tvPageDescription, tvPage, tvCurrentPoint;
-    private EditText edPoint, edUserName, edPhone, edAddress;
+    private EditText edPoint, edUserName, edPhone, edAddress, edMessageToCreative;
     private ImageView backImg, autoplayImg, voiceImg, locationImg, messageImg, likeImg, moreImg;
     private SeekBar seekBar;
     private ControlSizeScrollView svDescription;
@@ -969,11 +969,13 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     TextView tvClick = vPage.findViewById(R.id.tvClick);
                     TextView tvSponsorCount = vPage.findViewById(R.id.tvSponsorCount);
                     TextView tvSponsorDescription = vPage.findViewById(R.id.tvSponsorDescription);
+                    TextView tvMessageToCreative = vPage.findViewById(R.id.tvMessageToCreative);
 
                     edPoint = vPage.findViewById(R.id.edPoint);
                     edUserName = vPage.findViewById(R.id.edUserName);
                     edPhone = vPage.findViewById(R.id.edPhone);
                     edAddress = vPage.findViewById(R.id.edAddress);
+                    edMessageToCreative = vPage.findViewById(R.id.edMessageToCreative);
 
                     edPoint.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -1065,6 +1067,8 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
 
                             tvTitle.setText(R.string.pinpinbox_2_0_0_dialog_message_sponsor_and_buy);
+
+                            tvMessageToCreative.setText(getResources().getString(R.string.pinpinbox_2_0_0_other_message_to_creative_partA) + itemAlbum.getUser_name() + getResources().getString(R.string.pinpinbox_2_0_0_other_message_to_creative_partB));
 
 
                             linSponsorData.setVisibility(View.VISIBLE);
@@ -2484,6 +2488,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                 obj.put(ProtocolKey.recipient, edUserName.getText().toString());
                 obj.put(ProtocolKey.recipient_tel, edPhone.getText().toString());
                 obj.put(ProtocolKey.recipient_address, edAddress.getText().toString());
+//                obj.put(ProtocolKey.XXXXXXX, edMessageToCreative.getText().toString());
 
                 param = obj.toString();
 

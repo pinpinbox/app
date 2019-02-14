@@ -429,7 +429,6 @@
                 android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                 android:textSize="@dimen/ppb200_common_text_third" />
 
-
             <!--P點輸入-->
             <LinearLayout
                 android:id="@+id/linSponsor"
@@ -469,7 +468,6 @@
 
             </LinearLayout>
 
-
             <!--已贊助次數-->
             <TextView
                 android:id="@+id/tvSponsorCount"
@@ -483,9 +481,6 @@
                 android:visibility="gone" />
 
 
-
-
-
             <LinearLayout
                 android:id="@+id/linSponsorData"
                 android:layout_width="match_parent"
@@ -494,9 +489,7 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-
                 <View style="@style/ppb200_divider_list" />
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -508,13 +501,12 @@
                     android:textColor="@color/pinpinbox_2_0_0_secondary_text"
                     android:textSize="@dimen/ppb200_common_text_small" />
 
-
                 <!--收件-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.1"
-                    android:text="收件人"
+                    android:text="@string/pinpinbox_2_0_0_other_text_recipient"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="@dimen/ppb200_common_text_small" />
 
@@ -528,14 +520,13 @@
                     android:paddingLeft="@dimen/ppb200_padding_margin_second"
                     android:paddingRight="@dimen/ppb200_padding_margin_second" />
 
-
                 <!--連絡電話-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                     android:letterSpacing="0.1"
-                    android:text="連絡電話"
+                    android:text="@string/pinpinbox_2_0_0_other_text_contact_number"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="@dimen/ppb200_common_text_small" />
 
@@ -550,14 +541,13 @@
                     android:paddingLeft="@dimen/ppb200_padding_margin_second"
                     android:paddingRight="@dimen/ppb200_padding_margin_second" />
 
-
                 <!--寄送地址-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
                     android:letterSpacing="0.1"
-                    android:text="寄送地址"
+                    android:text="@string/pinpinbox_2_0_0_other_text_address"
                     android:textColor="@color/pinpinbox_2_0_0_first_text"
                     android:textSize="@dimen/ppb200_common_text_small" />
 
@@ -571,10 +561,32 @@
                     android:paddingLeft="@dimen/ppb200_padding_margin_second"
                     android:paddingRight="@dimen/ppb200_padding_margin_second" />
 
+                <!--留言-->
+                <TextView
+                    android:id="@+id/tvMessageToCreative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+                    android:letterSpacing="0.1"
+                    android:text=""
+                    android:textColor="@color/pinpinbox_2_0_0_first_text"
+                    android:textSize="@dimen/ppb200_common_text_small" />
+
+                <EditText
+                    android:id="@+id/edMessageToCreative"
+                    style="@style/ppb200_EditText_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ppb200_padding_margin_third"
+                    android:letterSpacing="0.1"
+                    android:paddingLeft="@dimen/ppb200_padding_margin_second"
+                    android:paddingRight="@dimen/ppb200_padding_margin_second" />
+
+
 
                 <TextView
                     android:id="@+id/tvSponsorDescription"
-                    fontPath="fonts/OpenSans-Bold.ttf"
+                    fontPath="fonts/GenJyuuGothicL-Bold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
