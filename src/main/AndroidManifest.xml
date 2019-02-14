@@ -81,8 +81,6 @@
         android:name="android.permission.READ_PHONE_STATE"
         android:required="false" />
 
-    <!-- //通訊錄 -->
-    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
 
     //相機
     <uses-permission
@@ -95,15 +93,17 @@
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
-    //閃光
-    <uses-permission
-        android:name="android.permission.FLASHLIGHT"
-        android:required="false" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    //接收簡訊
-    <uses-permission
-        android:name="android.permission.RECEIVE_SMS"
-        android:required="false" />
+
+    <!--//閃光-->
+    <!--<uses-permission-->
+        <!--android:name="android.permission.FLASHLIGHT"-->
+        <!--android:required="false" />-->
+    <!--<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />-->
+
+    <!--//接收簡訊-->
+    <!--<uses-permission-->
+        <!--android:name="android.permission.RECEIVE_SMS"-->
+        <!--android:required="false" />-->
 
     <uses-feature
         android:name="android.telephony"
