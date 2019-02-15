@@ -210,6 +210,7 @@ public class ProtocolKey {
     public static String recipient = "recipient";
     public static String recipient_tel = "recipient_tel";
     public static String recipient_address = "recipient_address";
+    public static String recipient_text = "recipient_text";
 
     //s
     public static String selfdescription = "selfdescription";

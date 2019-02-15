@@ -2488,7 +2488,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                 obj.put(ProtocolKey.recipient, edUserName.getText().toString());
                 obj.put(ProtocolKey.recipient_tel, edPhone.getText().toString());
                 obj.put(ProtocolKey.recipient_address, edAddress.getText().toString());
-//                obj.put(ProtocolKey.XXXXXXX, edMessageToCreative.getText().toString());
+                obj.put(ProtocolKey.recipient_text, edMessageToCreative.getText().toString());
 
                 param = obj.toString();
 
