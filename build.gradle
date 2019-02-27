@@ -6,8 +6,8 @@ android {
         applicationId "com.pinpinbox.android"
         minSdkVersion 18
         targetSdkVersion 27
-        versionCode 164
-        versionName "2.7.40"
+        versionCode 165
+        versionName "2.7.41"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
 

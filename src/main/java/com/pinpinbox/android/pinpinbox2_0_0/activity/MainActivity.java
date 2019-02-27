@@ -207,7 +207,7 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
         testbuttonImg = (ImageView) findViewById(R.id.testbutton);
 
 
-        if(BuildConfig.FLAVOR.equals("platformvmage5_private")){
+        if (BuildConfig.FLAVOR.equals("platformvmage5_private")) {
             testSet();
         } else if (BuildConfig.FLAVOR.equals("w3_private")) {
             testSet();
@@ -397,14 +397,13 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
 
             Fragment fragment = fragmentList.get(i);
 
-            if(fragment.getClass()!=null){
+            if (fragment != null && fragment.getClass() != null) {
                 if (fragment.getClass().getSimpleName().equals(fragmentName)) {
                     getFragment = fragment;
                     MyLog.Set("d", getClass(), "fragmentName => " + fragmentName);
                     break;
                 }
             }
-
 
 
         }
@@ -439,7 +438,6 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
 
 
                     case 1://search
-
 
 
                         homeNormal();
@@ -1706,8 +1704,6 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
                 if (viewPager.getCurrentItem() == 0) {
 
 
-
-
                     ((FragmentHome) getFragment(FragmentHome.class.getSimpleName())).scrollToTop();
                     return;
                 }
@@ -1792,25 +1788,22 @@ public class MainActivity extends DraggerActivity implements View.OnClickListene
 
         FragmentCategory fragmentCategory = (FragmentCategory) getFragment(FragmentCategory.class.getSimpleName());
 
-        if(fragmentHome!=null && fragmentHome.isSearch()){
+        if (fragmentHome != null && fragmentHome.isSearch()) {
             fragmentHome.hideSearch();
             return;
         }
 
 
-        if(fragmentHome!=null && fragmentCategory!=null && !fragmentCategory.isHidden()){
+        if (fragmentHome != null && fragmentCategory != null && !fragmentCategory.isHidden()) {
             fragmentHome.hideCategory();
             return;
         }
 
 
-
-
-        if(viewPager.getCurrentItem()!=0){
-            viewPager.setCurrentItem(0,false);
+        if (viewPager.getCurrentItem() != 0) {
+            viewPager.setCurrentItem(0, false);
             return;
         }
-
 
 
         List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
