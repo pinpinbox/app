@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -1061,6 +1062,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     private class GetCreativeTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -1089,9 +1091,9 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
 
                 setdata();
 
-                ViewControl.AlphaTo1((LinearLayout) viewHeader.findViewById(R.id.linContents));
+                ViewControl.AlphaTo1(viewHeader.findViewById(R.id.linContents));
 
-                ViewControl.AlphaTo1((LinearLayout) viewHeader.findViewById(R.id.linData));
+                ViewControl.AlphaTo1(viewHeader.findViewById(R.id.linData));
 
                 ViewControl.AlphaTo1(tvName);
 
@@ -1140,6 +1142,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class MoreDataTask extends AsyncTask<Void, Void, Object> {
         @Override
         protected void onPreExecute() {
@@ -1206,6 +1209,7 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class RefreshTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -1319,8 +1323,6 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-//                toCollect();
 
                 switch (afterCheckPermissionType) {
 
@@ -1522,7 +1524,6 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
 
             case R.id.aboutImg:
                 Bundle bundle = new Bundle();
-//                bundle.putString(Key.url, UrlClass.shareUserUrl + itemUser.getUser_id() + "&appview=true");
 
                 bundle.putString(Key.url, itemUser.getInfo_url());
                 bundle.putString(Key.title, itemUser.getName());
