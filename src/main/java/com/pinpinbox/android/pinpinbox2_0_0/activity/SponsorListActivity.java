@@ -347,7 +347,6 @@ public class SponsorListActivity extends DraggerActivity implements View.OnClick
                     @Override
                     public void Post(int doingType) {
 
-
                         if (itemUserList.size() > 0) {
                             tvGuide.setVisibility(View.GONE);
                         } else {

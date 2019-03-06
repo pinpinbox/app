@@ -77,6 +77,7 @@ public class AlbumSponsorListActivity extends DraggerActivity implements View.On
     private SuperSwipeRefreshLayout pinPinBoxRefreshLayout;
     private SmoothProgressBar pbLoadMore;
     private ImageView backImg;
+    private TextView tvGuide;
 
     private String album_id;
 
@@ -166,6 +167,8 @@ public class AlbumSponsorListActivity extends DraggerActivity implements View.On
         rvUser = (RecyclerView) findViewById(R.id.rvUser);
         pinPinBoxRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.pinPinBoxRefreshLayout);
         backImg = (ImageView) findViewById(R.id.backImg);
+        tvGuide = (TextView) findViewById(R.id.tvGuide);
+        tvGuide.setText(R.string.pinpinbox_2_0_0_guide_sponsor_empty);
 
 
         pbLoadMore = (SmoothProgressBar) findViewById(R.id.pbLoadMore);
@@ -367,6 +370,12 @@ public class AlbumSponsorListActivity extends DraggerActivity implements View.On
                     @Override
                     public void Post(int doingType) {
 
+                        if (itemUserList.size() > 0) {
+                            tvGuide.setVisibility(View.GONE);
+                        } else {
+                            tvGuide.setVisibility(View.VISIBLE);
+                        }
+
                         switch (doingType) {
 
                             case DoingTypeClass.DoDefault:
@@ -496,13 +505,13 @@ public class AlbumSponsorListActivity extends DraggerActivity implements View.On
         @Override
         protected Object doInBackground(Void... params) {
 
-            Map<String, String> data = new HashMap<String, String>();
+            Map<String, String> data = new HashMap<>();
             data.put(Key.id, PPBApplication.getInstance().getId());
             data.put(Key.token, PPBApplication.getInstance().getToken());
             data.put("authorid", itemUserList.get(clickPosition).getUser_id());
             String sign = IndexSheet.encodePPB(data);
 
-            Map<String, String> sendData = new HashMap<String, String>();
+            Map<String, String> sendData = new HashMap<>();
             sendData.put(Key.id, PPBApplication.getInstance().getId());
             sendData.put(Key.token, PPBApplication.getInstance().getToken());
             sendData.put("authorid", itemUserList.get(clickPosition).getUser_id());
