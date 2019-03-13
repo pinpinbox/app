@@ -313,17 +313,21 @@ public class Protocol102_GetCategoryArea extends AsyncTask<Void, Void, Object> {
 
                     JSONArray creativeArray = new JSONArray(bannerTypeData);
 
-                    for (int j = 0; j < creativeArray.length(); j++) {
+                    if(creativeArray!=null && creativeArray.length()!=0) {
 
-                        JSONObject jsonCreative = (JSONObject) creativeArray.get(j);
+                        for (int j = 0; j < creativeArray.length(); j++) {
 
-                        ItemUser itemUser = new ItemUser();
+                            JSONObject jsonCreative = (JSONObject) creativeArray.get(j);
 
-                        itemUser.setName(JsonUtility.GetString(jsonCreative, ProtocolKey.name));
-                        itemUser.setPicture(JsonUtility.GetString(jsonCreative, ProtocolKey.picture));
-                        itemUser.setUser_id(JsonUtility.GetString(jsonCreative, ProtocolKey.user_id));
+                            ItemUser itemUser = new ItemUser();
 
-                        cgaUserList.add(itemUser);
+                            itemUser.setName(JsonUtility.GetString(jsonCreative, ProtocolKey.name));
+                            itemUser.setPicture(JsonUtility.GetString(jsonCreative, ProtocolKey.picture));
+                            itemUser.setUser_id(JsonUtility.GetString(jsonCreative, ProtocolKey.user_id));
+
+                            cgaUserList.add(itemUser);
+
+                        }
 
                     }
 
