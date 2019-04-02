@@ -193,49 +193,57 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
                                 //判斷第一頁
                                 if (position == 0) {
 
-                                    //判斷是否是活動
-                                    String event_id = itemHomeBannerList.get(position).getEvent_id();
 
-                                    if (!event_id.equals("")) {
+                                    if(itemHomeBannerList.size()>0) {
 
-                                        //判斷image是否曾經顯示過
-                                        boolean isUrlExist = false;
-                                        String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
-                                        try {
-                                            JSONArray bannerArray = new JSONArray(bannerList);
-                                            for (int i = 0; i < bannerArray.length(); i++) {
-                                                String strOldImageUrl = (String) bannerArray.get(i);
-                                                if (strOldImageUrl.equals(imageUrl)) {
-                                                    isUrlExist = true;
-                                                    break;
+                                        //判斷是否是活動
+                                        String event_id = itemHomeBannerList.get(position).getEvent_id();
+
+                                        if (!event_id.equals("")) {
+
+                                            //判斷image是否曾經顯示過
+                                            boolean isUrlExist = false;
+                                            String bannerList = PPBApplication.getInstance().getData().getString(Key.oldbannerUrlList, "[]");
+                                            try {
+                                                JSONArray bannerArray = new JSONArray(bannerList);
+                                                for (int i = 0; i < bannerArray.length(); i++) {
+                                                    String strOldImageUrl = (String) bannerArray.get(i);
+                                                    if (strOldImageUrl.equals(imageUrl)) {
+                                                        isUrlExist = true;
+                                                        break;
+                                                    }
                                                 }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
                                             }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
 
-                                        if (!isUrlExist) {
+                                            if (!isUrlExist) {
 
-                                            MyLog.Set("e", BannerPageAdapter.class, "活動還沒顯示過");
+                                                MyLog.Set("e", BannerPageAdapter.class, "活動還沒顯示過");
 
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString(Key.image, itemHomeBannerList.get(position).getImage());
-                                            bundle.putString(Key.event_id, itemHomeBannerList.get(position).getEvent_id());
-                                            Intent intent = new Intent(mActivity, AdHighLightActivity.class).putExtras(bundle);
+                                                Bundle bundle = new Bundle();
+                                                bundle.putString(Key.image, itemHomeBannerList.get(position).getImage());
+                                                bundle.putString(Key.event_id, itemHomeBannerList.get(position).getEvent_id());
+                                                Intent intent = new Intent(mActivity, AdHighLightActivity.class).putExtras(bundle);
 
-                                            ActivityOptionsCompat options = ActivityOptionsCompat.
-                                                    makeSceneTransitionAnimation(mActivity,
-                                                            holder.bannerImg,
-                                                            ViewCompat.getTransitionName(holder.bannerImg));
+                                                ActivityOptionsCompat options = ActivityOptionsCompat.
+                                                        makeSceneTransitionAnimation(mActivity,
+                                                                holder.bannerImg,
+                                                                ViewCompat.getTransitionName(holder.bannerImg));
 
-                                            fragment.startActivityForResult(intent, RequestCodeClass.CloseHighLight, options.toBundle());
+                                                fragment.startActivityForResult(intent, RequestCodeClass.CloseHighLight, options.toBundle());
 
-                                        } else {
-                                            MyLog.Set("e", BannerPageAdapter.class, "活動已顯示過");
+                                            } else {
+                                                MyLog.Set("e", BannerPageAdapter.class, "活動已顯示過");
+                                            }
+
+
                                         }
 
 
                                     }
+
+
 
 
                                 }

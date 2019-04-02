@@ -52,7 +52,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.activity.WebViewActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerBannerAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerFeatureAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerHomeAdapter;
-import com.pinpinbox.android.pinpinbox2_0_0.adapter.RecyclerNewJoinAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemAlbum;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemHomeBanner;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.ItemUser;
@@ -125,13 +124,14 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
     private JSONArray p20JsonArray;
 
     private RecyclerHomeAdapter recyclerHomeAdapter;
-    private RecyclerNewJoinAdapter newJoinAdapter;
+//    private RecyclerNewJoinAdapter newJoinAdapter;
     private RecyclerBannerAdapter bannerAdapter;
     private RecyclerFeatureAdapter featureRecommendAdapter, featureHotAdapter;
 
+//    itemNewJoinList
     private List<ItemAlbum> itemAlbumList;
     private List<ItemHomeBanner> itemHomeBannerList;
-    private List<ItemUser> itemNewJoinList, itemRecommendList, itemHotList;
+    private List<ItemUser> itemRecommendList, itemHotList;
     private List<String> reAlbumIdList;
 
     private String id, token;
@@ -157,9 +157,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
     private boolean isSearch = false;
     private boolean isGetData = false;
 
-
+//    rvRecommendUser
     private SpeedRecyclerView rvBanner;
-    private RecyclerView rvHome, rvRecommendUser, rvRecommend, rvHot;
+    private RecyclerView rvHome, rvRecommend, rvHot;
     private SmoothProgressBar pbLoadMore, pbRefresh;
     private View viewHeader;
 
@@ -210,7 +210,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         setBannerRecycler();
         setRecommendRecycler();
         setHotRecycler();
-        setNewJoinRecycler();
+//        setNewJoinRecycler();
         setRecycler();
 
         doGetAllData();
@@ -352,7 +352,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         rvBanner = viewHeader.findViewById(R.id.rvBanner);
         rvRecommend = viewHeader.findViewById(R.id.rvRecommend);
         rvHot = viewHeader.findViewById(R.id.rvHot);
-        rvRecommendUser = viewHeader.findViewById(R.id.rvRecommendUser);
+//        rvRecommendUser = viewHeader.findViewById(R.id.rvRecommendUser);
         tvNew = viewHeader.findViewById(R.id.tvNew);
         tvFollow = viewHeader.findViewById(R.id.tvFollow);
         vHobby = viewHeader.findViewById(R.id.vHobby);
@@ -425,7 +425,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         itemHotList = new ArrayList<>();
 
         //新加入
-        itemNewJoinList = new ArrayList<>();
+//        itemNewJoinList = new ArrayList<>();
 
     }
 
@@ -857,50 +857,50 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-    private void setNewJoinRecycler() {
-
-        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvRecommendUser.setLayoutManager(layoutManager);
-        newJoinAdapter = new RecyclerNewJoinAdapter(getActivity(), itemNewJoinList);
-        rvRecommendUser.setAdapter(newJoinAdapter);
-
-        newJoinAdapter.setOnRecyclerViewListener(new RecyclerNewJoinAdapter.OnRecyclerViewListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-
-                if (ClickUtils.ButtonContinuousClick()) {
-                    return;
-                }
-
-
-                if (itemNewJoinList.get(position).getUser_id().equals(id)) {
-
-                    ((MainActivity) getActivity()).toMePage(false);
-
-                    return;
-                }
-
-
-                ActivityIntent.toUser(
-                        getActivity(),
-                        true,
-                        false,
-                        itemNewJoinList.get(position).getUser_id(),
-                        itemNewJoinList.get(position).getPicture(),
-                        itemNewJoinList.get(position).getName(),
-                        v.findViewById(R.id.userImg)
-                );
-
-            }
-
-            @Override
-            public boolean onItemLongClick(int position, View v) {
-                return false;
-            }
-        });
-
-    }
+//    private void setNewJoinRecycler() {
+//
+//        ExLinearLayoutManager layoutManager = new ExLinearLayoutManager(getActivity());
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        rvRecommendUser.setLayoutManager(layoutManager);
+//        newJoinAdapter = new RecyclerNewJoinAdapter(getActivity(), itemNewJoinList);
+//        rvRecommendUser.setAdapter(newJoinAdapter);
+//
+//        newJoinAdapter.setOnRecyclerViewListener(new RecyclerNewJoinAdapter.OnRecyclerViewListener() {
+//            @Override
+//            public void onItemClick(int position, View v) {
+//
+//                if (ClickUtils.ButtonContinuousClick()) {
+//                    return;
+//                }
+//
+//
+//                if (itemNewJoinList.get(position).getUser_id().equals(id)) {
+//
+//                    ((MainActivity) getActivity()).toMePage(false);
+//
+//                    return;
+//                }
+//
+//
+//                ActivityIntent.toUser(
+//                        getActivity(),
+//                        true,
+//                        false,
+//                        itemNewJoinList.get(position).getUser_id(),
+//                        itemNewJoinList.get(position).getPicture(),
+//                        itemNewJoinList.get(position).getName(),
+//                        v.findViewById(R.id.userImg)
+//                );
+//
+//            }
+//
+//            @Override
+//            public boolean onItemLongClick(int position, View v) {
+//                return false;
+//            }
+//        });
+//
+//    }
 
     private void setRecycler() {
 
@@ -1172,59 +1172,59 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
     }
 
-    private void getNewJoinUserList() {
-
-        String strJson = "";
-
-        try {
-            strJson = HttpUtility.uploadSubmit(true, Url.P116_GetNewJoinList,
-                    SetMapByProtocol.setParam116_getnewjoinlist(id, token, "0,6"), null);
-            Logger.json(strJson);
-        } catch (SocketTimeoutException timeout) {
-            p116Result = ResultType.TIMEOUT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (strJson != null && !strJson.equals("")) {
-            try {
-                JSONObject jsonObject = new JSONObject(strJson);
-                p116Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
-                if (p116Result.equals(ResultType.SYSTEM_OK)) {
-
-                    String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
-                    JSONArray jsonArray = new JSONArray(strData);
-                    itemNewJoinList.clear();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject j = (JSONObject) jsonArray.get(i);
-
-                        String user = JsonUtility.GetString(j, ProtocolKey.user);
-                        JSONObject object = new JSONObject(user);
-
-                        ItemUser itemUser = new ItemUser();
-                        itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
-                        itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
-                        itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
-                        itemNewJoinList.add(itemUser);
-
-                    }
-
-
-                } else {
-
-                    p116Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
-
-                }
-
-            } catch (Exception e) {
-
-                e.printStackTrace();
-
-            }
-        }
-
-
-    }
+//    private void getNewJoinUserList() {
+//
+//        String strJson = "";
+//
+//        try {
+//            strJson = HttpUtility.uploadSubmit(true, Url.P116_GetNewJoinList,
+//                    SetMapByProtocol.setParam116_getnewjoinlist(id, token, "0,6"), null);
+//            Logger.json(strJson);
+//        } catch (SocketTimeoutException timeout) {
+//            p116Result = ResultType.TIMEOUT;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        if (strJson != null && !strJson.equals("")) {
+//            try {
+//                JSONObject jsonObject = new JSONObject(strJson);
+//                p116Result = JsonUtility.GetString(jsonObject, ProtocolKey.result);
+//                if (p116Result.equals(ResultType.SYSTEM_OK)) {
+//
+//                    String strData = JsonUtility.GetString(jsonObject, ProtocolKey.data);
+//                    JSONArray jsonArray = new JSONArray(strData);
+//                    itemNewJoinList.clear();
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        JSONObject j = (JSONObject) jsonArray.get(i);
+//
+//                        String user = JsonUtility.GetString(j, ProtocolKey.user);
+//                        JSONObject object = new JSONObject(user);
+//
+//                        ItemUser itemUser = new ItemUser();
+//                        itemUser.setName(JsonUtility.GetString(object, ProtocolKey.name));
+//                        itemUser.setPicture(JsonUtility.GetString(object, ProtocolKey.picture));
+//                        itemUser.setUser_id(JsonUtility.GetString(object, ProtocolKey.user_id));
+//                        itemNewJoinList.add(itemUser);
+//
+//                    }
+//
+//
+//                } else {
+//
+//                    p116Message = JsonUtility.GetString(jsonObject, ProtocolKey.message);
+//
+//                }
+//
+//            } catch (Exception e) {
+//
+//                e.printStackTrace();
+//
+//            }
+//        }
+//
+//
+//    }
 
     private void getUpdateList(String limit) {
 
@@ -1539,17 +1539,17 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         }
 
 
-        if (itemNewJoinList != null && itemNewJoinList.size() > 0) {
-
-            for (int i = 0; i < itemNewJoinList.size(); i++) {
-
-                String picture = itemNewJoinList.get(i).getPicture();
-                if (picture != null && !picture.equals("")) {
-                    Picasso.get().invalidate(picture);
-                }
-            }
-
-        }
+//        if (itemNewJoinList != null && itemNewJoinList.size() > 0) {
+//
+//            for (int i = 0; i < itemNewJoinList.size(); i++) {
+//
+//                String picture = itemNewJoinList.get(i).getPicture();
+//                if (picture != null && !picture.equals("")) {
+//                    Picasso.get().invalidate(picture);
+//                }
+//            }
+//
+//        }
 
 
         MyLog.Set("d", getClass(), "cleanPicasso");
@@ -1638,7 +1638,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         itemHomeBannerList.clear();
         itemRecommendList.clear();
         itemHotList.clear();
-        itemNewJoinList.clear();
+//        itemNewJoinList.clear();
         itemAlbumList.clear();
         reAlbumIdList.clear();
 
@@ -1648,7 +1648,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
         bannerAdapter.notifyDataSetChanged();
         featureRecommendAdapter.notifyDataSetChanged();
         featureHotAdapter.notifyDataSetChanged();
-        newJoinAdapter.notifyDataSetChanged();
+//        newJoinAdapter.notifyDataSetChanged();
         recyclerHomeAdapter.notifyDataSetChanged();
 
         refreshTask = new RefreshTask();
@@ -1738,7 +1738,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             getHotList();
 
-            getNewJoinUserList();
+//            getNewJoinUserList();
 
             getUpdateList(round + "," + count);
 
@@ -1783,7 +1783,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
             getHotList();
 
-            getNewJoinUserList();
+//            getNewJoinUserList();
 
             itemAlbumList.clear();
             reAlbumIdList.clear();
@@ -1966,42 +1966,42 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
 
 
-        /*新加入*/
-        try {
-
-            switch (p116Result) {
-
-                case ResultType.SYSTEM_OK:
-                    newJoinAdapter.notifyDataSetChanged();
-                    break;
-
-                case ResultType.TOKEN_ERROR:
-                    PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
-                    IntentControl.toLogin(getActivity(), id);
-                    return;
-
-                case ResultType.USER_ERROR:
-                    DialogV2Custom.BuildError(getActivity(), p116Message);
-                    return;
-
-                case ResultType.SYSTEM_ERROR:
-                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass() + " => " + ResultType.SYSTEM_ERROR);
-                    return;
-
-                case ResultType.TIMEOUT:
-                    connectInstability();
-                    return;
-
-                case "":
-                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
-                    return;
-
-            }
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
+        /*新加入用戶*/
+//        try {
+//
+//            switch (p116Result) {
+//
+//                case ResultType.SYSTEM_OK:
+//                    newJoinAdapter.notifyDataSetChanged();
+//                    break;
+//
+//                case ResultType.TOKEN_ERROR:
+//                    PinPinToast.showErrorToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_token_error_to_login);
+//                    IntentControl.toLogin(getActivity(), id);
+//                    return;
+//
+//                case ResultType.USER_ERROR:
+//                    DialogV2Custom.BuildError(getActivity(), p116Message);
+//                    return;
+//
+//                case ResultType.SYSTEM_ERROR:
+//                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass() + " => " + ResultType.SYSTEM_ERROR);
+//                    return;
+//
+//                case ResultType.TIMEOUT:
+//                    connectInstability();
+//                    return;
+//
+//                case "":
+//                    DialogV2Custom.BuildUnKnow(getActivity(), getActivity().getClass().getSimpleName() + " => " + this.getClass().getSimpleName());
+//                    return;
+//
+//            }
+//        } catch (Exception e) {
+//
+//            e.printStackTrace();
+//
+//        }
 
 
 

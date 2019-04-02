@@ -27,23 +27,24 @@
 
     <!-- android:smallScreens="true" -->
 
+
+    <!--<uses-permission-->
+        <!--android:name="android.permission.RECEIVE_SMS" />-->
+
+
     <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
+
+
     //AWSSNS
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.google.android.c2dm.permission.REGISTER" />
-    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
-
 
     <permission
         android:name="${applicationId}.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     //googlemap
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        android:required="false" />
-
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         android:required="false" />
@@ -137,7 +138,6 @@
         <service android:name=".pinpinbox2_0_0.service.RegistraAWSService">
             <intent-filter>
                 <category android:name="com.pinpinbox.android" />
-                <!-- <action android:name="${project.rootDir}.pinpinbox2_0_0.service.RegistraAWSService"/> -->
             </intent-filter>
         </service>
 
@@ -233,12 +233,6 @@
             android:screenOrientation="portrait"
 
             android:windowSoftInputMode="adjustPan|stateHidden">
-
-            <!-- <intent-filter > -->
-            <!-- <action android:name="android.intent.action.SEND" /> -->
-            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            <!-- <data android:mimeType="*/*" /> -->
-            <!-- </intent-filter > -->
 
         </activity>
         <activity
@@ -652,10 +646,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
-        <!-- <activity -->
-        <!-- android:name="com.jmolsmobile.landscapevideocapture.VideoCaptureActivity" -->
-        <!-- android:screenOrientation="sensor" > -->
-        <!-- </activity> -->
 
         <activity
             android:name=".pinpinbox2_0_0.activity.VoteActivity"
@@ -776,9 +766,10 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" />
 
-        <activity android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorAppsActivity"
+        <activity
+            android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorAppsActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.NoActionBar"/>
+            android:theme="@android:style/Theme.Holo.NoActionBar" />
 
     </application>
 
