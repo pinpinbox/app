@@ -72,9 +72,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol33_AlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol34_GetAlbumSettings;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol96_InsertAlbumIndex;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol97_DeleteAlbumIndex;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -134,9 +132,6 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
     private int intCategoryarea_id, intCategory_id, intPoint;
     private int barCodeItem;
     private static final int REQUEST_CODE_CAMERA = 104;
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
 
     private boolean isCreative = false;
     private boolean isContribute = false; //是否投稿模式
@@ -353,7 +348,7 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(!s.toString().equals("") && StringIntMethod.StringToInt(s.toString()) > 50000){
+                if (!s.toString().equals("") && StringIntMethod.StringToInt(s.toString()) > 50000) {
                     edPoint.setText(50000 + "");
                 }
 
@@ -601,12 +596,10 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
             }
 
 
-
-            if(StringIntMethod.StringToInt(p) >50000){
+            if (StringIntMethod.StringToInt(p) > 50000) {
                 PinPinToast.showErrorToast(mActivity, R.string.pinpinbox_2_0_0_toast_message_max_is_50000p);
                 return;
             }
-
 
 
             jsonObject.put(ProtocolKey.point, p);
@@ -1658,34 +1651,6 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
         }
 
 
-//        private void checkClose(){
-//
-//            List<Activity> activityList = SystemUtility.SysApplication.getInstance().getmList();
-//
-//            Activity acE = null, acS = null;
-//
-//            for (int i = 0; i < activityList.size(); i++) {
-//
-//                String strClassName = activityList.get(i).getClass().getSimpleName();
-//
-//                if (strClassName.equals(EventActivity.class.getSimpleName())){
-//                    acE = activityList.get(i);
-//                }
-//
-//                if (strClassName.equals(SelectMyWorksActivity.class.getSimpleName())){
-//                    acS = activityList.get(i);
-//                }
-//
-//                if(acE==null && acS ==null){
-//
-//
-//                    break;
-//                }
-//
-//            }
-//
-//        }
-
     }
 
     private void closeCreation() {
@@ -1698,7 +1663,7 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
 
             if (strClassName.equals(CreationActivity.class.getSimpleName())
                     || strClassName.equals(EventActivity.class.getSimpleName()) || strClassName.equals(SelectMyWorksActivity.class.getSimpleName())
-                    ) {
+            ) {
 
                 activityList.get(i).finish();
 
@@ -1711,70 +1676,8 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
     }
 
 
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-            doingType = REFUSE;
-
-//            }else {
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @PermissionGrant(REQUEST_CODE_CAMERA)
-    public void requestCameraSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toScan();
-            }
-        }, 500);
 
 
-    }
-
-    @PermissionDenied(REQUEST_CODE_CAMERA)
-    public void requestCameraFailed() {
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.CAMERA)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(mActivity);
-                }
-            });
-            d.show();
-
-        } else {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
 
     @Override
     public void onClick(View view) {
@@ -1789,20 +1692,16 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
 
                 if (albumindexList != null && albumindexList.size() < 20) {
 
-
-                    switch (checkPermission(mActivity, Manifest.permission.CAMERA)) {
-
-                        case SUCCESS:
-                            toScan();
-                            break;
-                        case REFUSE:
-
-                            MPermissions.requestPermissions(mActivity, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-                            break;
-
-
-                    }
-
+                    commonCheckPermission(
+                            Manifest.permission.CAMERA,
+                            REQUEST_CODE_CAMERA,
+                            R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera,
+                            new CheckPermissionCallBack() {
+                                @Override
+                                public void success() {
+                                    toScan();
+                                }
+                            });
 
                 } else {
 
