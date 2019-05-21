@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -149,6 +150,7 @@ public class ExchangeInfoActivity extends DraggerActivity implements View.OnClic
 
     }
 
+    @SuppressLint("NewApi")
     private void setData() {
 
 

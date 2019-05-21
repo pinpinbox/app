@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -63,7 +64,6 @@ public class BeginActivity extends DraggerActivity {//02
     private boolean fromAwsMessage = false;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +80,6 @@ public class BeginActivity extends DraggerActivity {//02
         doLoad();
 
     }
-
 
 
     private void getBundle() {
@@ -160,6 +159,7 @@ public class BeginActivity extends DraggerActivity {//02
         MyLog.Set("d", getClass(), "token => " + token);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class LoadTask extends AsyncTask<Void, Void, Object> {
 
         @Override
@@ -172,10 +172,10 @@ public class BeginActivity extends DraggerActivity {//02
         @Override
         protected Void doInBackground(Void... params) {
             p02Result = protocol02();
-            if (p02Result!=null && p02Result.equals("1")) {
+            if (p02Result != null && p02Result.equals("1")) {
                 protocol28();
                 protocol23();
-            }else {
+            } else {
                 p02Result = "";
             }
             return null;
@@ -220,7 +220,7 @@ public class BeginActivity extends DraggerActivity {//02
                 } else if (p28Result.equals("0")) {
                     DialogV2Custom.BuildError(mActivity, p28Message);
                 } else {
-                   DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
+                    DialogV2Custom.BuildUnKnow(mActivity, getClass().getSimpleName());
                 }//p28Result.equals("1")
 
             } else if (p02Result.equals(Key.timeout)) {
@@ -325,7 +325,7 @@ public class BeginActivity extends DraggerActivity {//02
                     MyLog.Set("d", mActivity.getClass(), "phoneCountry = " + phoneCountry);
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
 
 
@@ -333,7 +333,7 @@ public class BeginActivity extends DraggerActivity {//02
                     phoneNumber = cellphone.substring(cellphone.lastIndexOf(",") + 1);
                     MyLog.Set("d", mActivity.getClass(), "phoneNumber = " + phoneNumber);
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
 
                 String hobby = object.getString("hobby");
@@ -380,11 +380,10 @@ public class BeginActivity extends DraggerActivity {//02
 
                 editor.putBoolean(Key.creative, bCreative);
 
-                editor.commit();
+                editor.apply();
 
                 //20171103
                 HobbyManager.SaveHobbyList(hobby);
-
 
 
             }
@@ -406,7 +405,7 @@ public class BeginActivity extends DraggerActivity {//02
             p23Result = jsonObject.getString(ProtocolKey.result);
             if (p23Result.equals("1")) {
                 strPoints = jsonObject.getString(ProtocolKey.data);
-                getdata.edit().putString(ProtocolKey.point, strPoints).commit();
+                getdata.edit().putString(ProtocolKey.point, strPoints).apply();
             } else if (p23Result.equals("0")) {
                 p23Message = jsonObject.getString(ProtocolKey.message);
             } else {
@@ -425,14 +424,13 @@ public class BeginActivity extends DraggerActivity {//02
     }
 
 
-
     @Override
     protected void onRestart() {
         super.onRestart();
         if (!HttpUtility.isConnect(this)) {
 
             if (noConnect == null) {
-               noConnect = new NoConnect(this);
+                noConnect = new NoConnect(this);
             }
         }
     }

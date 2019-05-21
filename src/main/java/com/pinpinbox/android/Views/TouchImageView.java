@@ -8,6 +8,7 @@
 
 package com.pinpinbox.android.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import com.pinpinbox.android.R;
 
 
+@SuppressLint("AppCompatCustomView")
 public class TouchImageView extends ImageView {
 
     Context mContext;
@@ -219,7 +221,7 @@ public class TouchImageView extends ImageView {
 				Config.ARGB_8888); // 背景图片
 		Canvas canvas = new Canvas(bitmap); // 新建画布
 		canvas.drawBitmap(gintama, matrix, null); // 画图�?
-		canvas.save(Canvas.ALL_SAVE_FLAG); // 保存画布
+		canvas.save(); // 保存画布
 		canvas.restore();
 		return bitmap;
 	}

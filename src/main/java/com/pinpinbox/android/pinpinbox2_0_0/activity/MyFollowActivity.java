@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -235,6 +236,7 @@ public class MyFollowActivity extends DraggerActivity implements View.OnClickLis
         RecyclerViewUtils.setHeaderView(rvFollow, viewHeader);
 
         adapter.setOnRecyclerViewListener(new RecyclerMyFollowAdapter.OnRecyclerViewListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onItemClick(int position, View v) {
 

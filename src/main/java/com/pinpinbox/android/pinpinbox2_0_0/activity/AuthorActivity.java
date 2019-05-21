@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -175,6 +176,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
     private void scheduleStartPostponedTransition(final View sharedElement) {
         sharedElement.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
+                    @SuppressLint("NewApi")
                     @Override
                     public boolean onPreDraw() {
                         sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
@@ -608,6 +610,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
         RecyclerViewUtils.setHeaderView(rvAuthor, viewHeader);
 
         authorAdapter.setOnRecyclerViewListener(new RecyclerAuthorAdapter.OnRecyclerViewListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onItemClick(int position, View v) {
 
@@ -670,6 +673,7 @@ public class AuthorActivity extends DraggerActivity implements View.OnClickListe
 
     }
 
+    @SuppressLint("NewApi")
     private void setShareElementAnim() {
 
         if (SystemUtility.Above_Equal_V5()) {

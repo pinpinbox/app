@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -99,6 +100,7 @@ public class OffLineActivity extends DraggerActivity implements View.OnClickList
 
     }
 
+    @SuppressLint("NewApi")
     private void init() {
 
         mActivity = this;

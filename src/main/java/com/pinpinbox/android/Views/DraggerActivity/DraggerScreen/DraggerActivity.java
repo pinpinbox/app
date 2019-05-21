@@ -7,6 +7,7 @@ package com.pinpinbox.android.Views.DraggerActivity.DraggerScreen;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -170,6 +171,11 @@ public abstract class DraggerActivity extends FragmentActivity implements SwipeB
     private CheckPermissionCallBack callBack;
     private int message;
     private String permission;
+    private boolean closeActivity = false;
+
+    public void setCloseActivity(boolean closeActivity){
+        this.closeActivity = closeActivity;
+    }
 
 
     public interface CheckPermissionCallBack{
@@ -228,6 +234,27 @@ public abstract class DraggerActivity extends FragmentActivity implements SwipeB
                         }
                     });
                     d.show();
+
+                    if(closeActivity){
+
+                        d.getmDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialogInterface) {
+                                finish();
+                            }
+                        });
+
+                    }
+
+                }
+
+                if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, permission)){
+
+                    if(closeActivity){
+
+                        finish();
+
+                    }
 
                 }
 

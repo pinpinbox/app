@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -14,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -42,6 +40,7 @@ import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.StringUtil;
 import com.pinpinbox.android.Utility.SystemUtility;
 import com.pinpinbox.android.Views.CircleView.RoundCornerImageView;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
@@ -60,9 +59,9 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.GAControl;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.LoadingAnimation;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
@@ -76,7 +75,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SpacesItemDecoration;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StaggeredHeight;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.libs.crop.Crop;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
@@ -84,9 +82,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol101_SetUserCover;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopBoard;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -863,26 +858,30 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
         System.gc();
     }
 
-    private void toCheckPermission(int type) {
-        switch (checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            case SUCCESS:
+    private void toCheckPermission(final int type) {
 
-                switch (type) {
 
-                    case toSelectPhoto:
-                        toPhotos();
-                        break;
+        ((MainActivity)getActivity()).commonCheckPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                RequestCodeClass.REQUEST_CODE_SDCARD,
+                R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard,
+                new DraggerActivity.CheckPermissionCallBack() {
+                    @Override
+                    public void success() {
+                        switch (type) {
 
-                    case toWorkManager:
-                        toCollect();
-                        break;
-                }
+                            case toSelectPhoto:
+                                toPhotos();
+                                break;
 
-                break;
-            case REFUSE:
-                MPermissions.requestPermissions(FragmentMe.this, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                break;
-        }
+                            case toWorkManager:
+                                toCollect();
+                                break;
+
+                        }
+                    }
+                });
+
     }
 
     private void toSponsorList() {
@@ -1285,86 +1284,6 @@ public class FragmentMe extends Fragment implements View.OnClickListener {
         }
 
     }
-
-
-    private static final int REQUEST_CODE_SDCARD = 105;
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-            doingType = REFUSE;
-//            }else {
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-    @PermissionGrant(REQUEST_CODE_SDCARD)
-    public void requestSdcardSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                switch (afterCheckPermissionType) {
-
-                    case toSelectPhoto:
-                        toPhotos();
-                        break;
-
-                    case toWorkManager:
-                        toCollect();
-                        break;
-                }
-
-            }
-        }, 500);
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_SDCARD)
-    public void requestSdcardFailed() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(getActivity());
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(getActivity());
-                }
-            });
-            d.show();
-
-        } else {
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
-
 
     public List<ItemAlbum> getAlbumList() {
         return this.albumList;

@@ -1,6 +1,7 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -57,6 +58,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
@@ -77,8 +79,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol98_BusinessSubUserFast
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopPicker;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -157,9 +157,6 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
     private int p28Result = -1;
     private String p28Message = "";
-
-    private static final int REQUEST_CODE_CAMERA = 104;
-    private static final int REQUEST_CODE_SMS = 105;
 
     private int doingType;
     private int hobbys = 0;
@@ -1476,27 +1473,16 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
     private void checkCameraPermission() {
 
-        switch (checkPermission(mActivity, Manifest.permission.CAMERA)) {
-            case SUCCESS:
-                toScan();
-                break;
-            case REFUSE:
-                MPermissions.requestPermissions(LoginActivity.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-                break;
-        }
-
-    }
-
-    private void checkSMSPermission(){
-
-        switch (checkPermission(mActivity, Manifest.permission.RECEIVE_SMS)) {
-            case SUCCESS:
-                doRequestSms();
-                break;
-            case REFUSE:
-                MPermissions.requestPermissions(LoginActivity.this, REQUEST_CODE_SMS, Manifest.permission.RECEIVE_SMS);
-                break;
-        }
+        commonCheckPermission(
+                Manifest.permission.CAMERA,
+                RequestCodeClass.REQUEST_CODE_CAMERA,
+                R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera,
+                new CheckPermissionCallBack() {
+                    @Override
+                    public void success() {
+                        toScan();
+                    }
+                });
 
     }
 
@@ -1747,6 +1733,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             startLoading();
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected Object doInBackground(Void... params) {
 
@@ -2060,6 +2047,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected Void doInBackground(Void... params) {
 
@@ -2286,6 +2274,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             startLoading();
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected Object doInBackground(Void... params) {
 
@@ -2371,6 +2360,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             startLoading();
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected Object doInBackground(Void... params) {
             String strJson = "";
@@ -2473,6 +2463,7 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
             startLoading();
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected Object doInBackground(Void... params) {
 
@@ -2797,119 +2788,6 @@ public class LoginActivity extends DraggerActivity implements View.OnClickListen
 //        public void onLocationChanged(Location location) {
 //        }
 //    };
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-            doingType = REFUSE;
-
-//            }else {
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-    @PermissionGrant(REQUEST_CODE_CAMERA)
-    public void requestCameraSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toScan();
-            }
-        }, 500);
-
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_CAMERA)
-    public void requestCameraFailed() {
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.CAMERA)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(mActivity);
-                }
-            });
-            d.show();
-
-        } else {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
-
-
-//    @PermissionGrant(REQUEST_CODE_SMS)
-//    public void requestSMSSuccess() {
-//
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                doRequestSms();
-//            }
-//        }, 500);
-//
-//    }
-//
-//    @PermissionDenied(REQUEST_CODE_SMS)
-//    public void requestSMSFailed() {
-//
-//        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.RECEIVE_SMS)) {
-//
-//            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-//
-//            DialogV2Custom d = new DialogV2Custom(mActivity);
-//            d.setStyle(DialogStyleClass.CHECK);
-//            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-//            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sms);
-//            d.setCheckExecute(new CheckExecute() {
-//                @Override
-//                public void DoCheck() {
-//                    SystemUtility.getAppDetailSettingIntent(mActivity);
-//                }
-//            });
-//            d.show();
-//
-//        } else {
-//            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-//
-//        }
-//    }
-
-
-
-
-
-
 
 
     @Override

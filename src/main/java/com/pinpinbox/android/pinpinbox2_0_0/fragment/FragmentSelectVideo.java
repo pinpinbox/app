@@ -34,8 +34,10 @@ import com.pinpinbox.android.Utility.FileUtility;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersGridView;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
+import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.adapter.LocalVideoAdapter;
 import com.pinpinbox.android.pinpinbox2_0_0.bean.GridItem;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
@@ -45,6 +47,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -60,9 +63,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.coreprogress.helper.ProgressHel
 import com.pinpinbox.android.pinpinbox2_0_0.libs.coreprogress.listener.impl.UIProgressListener;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -119,7 +119,6 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
     private String strSendPath;
     private String p80Result, p80Message;
 
-    private static final int REQUEST_CODE_CAMERA = 105;
     private int doingType;
     private int intMaxCount;
     private int intAlbumCount;
@@ -149,13 +148,13 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
         v.setOnTouchListener(this);
 
 
-        gvVideo =  v.findViewById(R.id.gvVideo);
-        tvStartUpLoad =  v.findViewById(R.id.tvStartUpLoad);
-        tvProgressrate =  v.findViewById(R.id.tvProgressrate);
-        tvAlbumCount =  v.findViewById(R.id.tvAlbumCount);
-        backImg =  v.findViewById(R.id.backImg);
-        cameraImg =  v.findViewById(R.id.cameraImg);
-        progress =  v.findViewById(R.id.progress);
+        gvVideo = v.findViewById(R.id.gvVideo);
+        tvStartUpLoad = v.findViewById(R.id.tvStartUpLoad);
+        tvProgressrate = v.findViewById(R.id.tvProgressrate);
+        tvAlbumCount = v.findViewById(R.id.tvAlbumCount);
+        backImg = v.findViewById(R.id.backImg);
+        cameraImg = v.findViewById(R.id.cameraImg);
+        progress = v.findViewById(R.id.progress);
 
         return v;
     }
@@ -370,11 +369,11 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
                         String strDuration = formatter.format(duration);
                         item.setDuration(strDuration);
 
-                       /*id*/
+                        /*id*/
                         long id = cursor.getLong(cursor.getColumnIndexOrThrow(projection[0]));
                         item.setMedia_id((int) id);
 
-                          /*縮圖*/
+                        /*縮圖*/
 //                        Cursor thumbCursor = getActivity().getContentResolver().query(
 //                                MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI,
 //                                thumProjection,
@@ -501,7 +500,6 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
     private void startUploadCheck() {
 
 
-
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
             int count = nonHeaderIdList.size();
             for (int i = 0; i < count; i++) {
@@ -521,7 +519,7 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
         tvStartUpLoad.setBackgroundResource(0);
         tvStartUpLoad.setClickable(false);
 
-        if(loading!=null){
+        if (loading != null) {
             loading.dismiss();
         }
         loading.show();
@@ -548,7 +546,7 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
             client.newCall(request).enqueue(callback);
         } catch (Exception e) {
 
-            if(loading!=null){
+            if (loading != null) {
                 loading.dismiss();
             }
 
@@ -588,7 +586,7 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
 
     private void resetAll() {
 
-              /*重置選擇狀態*/
+        /*重置選擇狀態*/
         int size = nonHeaderIdList.size();
         for (int i = 0; i < size; i++) {
             nonHeaderIdList.get(i).setSelect(false);
@@ -964,22 +962,17 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
             case R.id.cameraImg:
 
 
-                switch (checkPermission(getActivity(), Manifest.permission.CAMERA)){
+                ((CreationActivity) getActivity()).commonCheckPermission(
+                        Manifest.permission.CAMERA,
+                        RequestCodeClass.REQUEST_CODE_CAMERA,
+                        R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera,
+                        new DraggerActivity.CheckPermissionCallBack() {
+                            @Override
+                            public void success() {
+                                dispatchTakeVideoIntent();
+                            }
+                        });
 
-                    case SUCCESS:
-                        dispatchTakeVideoIntent();
-                        break;
-                    case REFUSE:
-
-                        MPermissions.requestPermissions(FragmentSelectVideo.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-                        break;
-
-//                    case REFUSE_NO_ASK:
-//
-//                        PinPinToast.ShowToast(getActivity(), R.string.pinpinbox_2_0_0_toast_message_open_permission_camera);
-//                        SystemUtility.getAppDetailSettingIntent(getActivity());
-//                        break;
-                }
 
                 break;
 
@@ -1040,8 +1033,8 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
                                         item.setThumbnailsPath(null);
 
                                         /*id*/
-                                        item.setMedia_id((int)cursor.getLong(cursor.getColumnIndexOrThrow(columns[0])));
-                                        
+                                        item.setMedia_id((int) cursor.getLong(cursor.getColumnIndexOrThrow(columns[0])));
+
                                         /*原路徑*/
                                         item.setPath(picPath);
 
@@ -1051,18 +1044,18 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
                                             intSelectCount++;
                                             item.setSelect(true);
                                             strSendPath = picPath;
-                                        }else {
+                                        } else {
                                             item.setSelect(false);
                                             MyLog.Set("d", FragmentSelectPhoto.class, "項目已滿");
                                         }
 
 //                                        item.setSelect(false);
-                                        
-                                         /*日期*/
+
+                                        /*日期*/
                                         long dateTime = cursor.getLong(cursor.getColumnIndexOrThrow(columns[2]));
                                         String mTime = paserTimeToYMD(dateTime, "yyyy / MM");
                                         item.setTime(mTime);
-                                        
+
                                         /*時間*/
                                         Long dataDuration = cursor.getLong(cursor.getColumnIndex(columns[4]));
                                         String strDuration = formatter.format(dataDuration);
@@ -1095,87 +1088,13 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
 
         }
 
-
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    private int checkPermission(Activity ac, String permission){
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        }else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-                doingType = REFUSE;
-
-//            }else {
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-    @PermissionGrant(REQUEST_CODE_CAMERA)
-    public void requestCameraSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                dispatchTakeVideoIntent();
-            }
-        },500);
-
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_CAMERA)
-    public void requestCameraFailed() {
-
-        if(!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),  Manifest.permission.CAMERA)){
-
-            MyLog.Set("d" , getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(getActivity());
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(getActivity());
-                }
-            });
-            d.show();
-
-        }else {
-
-            MyLog.Set("d" , getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-
-    }
-
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         return true;
     }
-
 
     @Override
     public void onPause() {
@@ -1183,16 +1102,13 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
         super.onPause();
     }
 
-
     @Override
     public void onDestroy() {
-
 
         if (getAlbumContentTask != null && !getAlbumContentTask.isCancelled()) {
             getAlbumContentTask.cancel(true);
         }
         getAlbumContentTask = null;
-
 
         if (nonHeaderIdList != null && nonHeaderIdList.size() > 0) {
             int count = nonHeaderIdList.size();
@@ -1205,10 +1121,8 @@ public class FragmentSelectVideo extends Fragment implements View.OnClickListene
 
         lruCache.evictAll();
 
-
         Recycle.IMG(backImg);
         Recycle.IMG(cameraImg);
-
 
         System.gc();
 

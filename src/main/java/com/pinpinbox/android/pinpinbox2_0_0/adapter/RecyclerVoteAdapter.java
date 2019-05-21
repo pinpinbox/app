@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -233,6 +234,7 @@ public class RecyclerVoteAdapter extends RecyclerView.Adapter {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setVoteClick(final ViewHolder holder, final int position) {
 
 

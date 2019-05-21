@@ -281,6 +281,7 @@ public class ChangePasswordActivity extends DraggerActivity implements View.OnCl
            startLoading();
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected Object doInBackground(Void... params) {
 

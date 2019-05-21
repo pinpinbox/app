@@ -1240,6 +1240,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                         showContents(itemExchange);
 
                         tvChange.setOnClickListener(new View.OnClickListener() {
+                            @SuppressLint("NewApi")
                             @Override
                             public void onClick(View vv) {
                                 if (ClickUtils.ButtonContinuousClick_1s()) {
@@ -1527,6 +1528,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
                     private void canExchange(final ItemExchange itemExchange) {
 
                         tvChange.setOnClickListener(new View.OnClickListener() {
+                            @SuppressLint("NewApi")
                             @Override
                             public void onClick(View v) {
                                 if (ClickUtils.ButtonContinuousClick_1s()) {
@@ -2417,6 +2419,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         mActivity.startActivity(Intent.createChooser(intent, mActivity.getTitle()));
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void selectShareMode() {
 
         popSelectShare = new PopupCustom(mActivity);
@@ -2766,6 +2769,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         deleteLikeTask.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetAlbumInfoTask extends AsyncTask<Void, Void, Object> {
 
         private int p08Result = -1;
@@ -3202,6 +3206,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
 
         }
 
+        @SuppressLint("NewApi")
         private void saveToRecent() {
 
             try {
@@ -3278,6 +3283,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class FirstCollectAlbumTask extends AsyncTask<Void, Void, Object> {
 
         private String restriction;
@@ -3465,6 +3471,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SendContributeTask extends AsyncTask<Void, Void, Object> {
 
         private String p73Message = "";
@@ -3552,6 +3559,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CheckShareTask extends AsyncTask<Void, Void, Object> {
 
         private int p84Result = -1;
@@ -3638,6 +3646,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class ShareTask extends AsyncTask<Void, Void, Object> {
 
         private String p83Message = "";
@@ -3803,6 +3812,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SendLikeTask extends AsyncTask<String, Integer, Integer> {
 
         private String p92Message = "";
@@ -3883,6 +3893,7 @@ public class ReaderActivity extends DraggerActivity implements View.OnClickListe
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DeleteLikeTask extends AsyncTask<String, Integer, Integer> {
 
         private String p93Message = "";

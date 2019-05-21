@@ -41,6 +41,7 @@ import com.pinpinbox.android.Utility.FlurryUtil;
 import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.SuperSwipeRefreshLayout;
 import com.pinpinbox.android.Views.recyclerview.EndlessRecyclerOnScrollListener;
 import com.pinpinbox.android.Views.recyclerview.ExStaggeredGridLayoutManager;
@@ -89,9 +90,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.ResultType;
 import com.pinpinbox.android.pinpinbox2_0_0.protocol.Url;
 import com.squareup.picasso.Picasso;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -2124,16 +2122,16 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
                     hideSearch();
                 } else {
 
-                    switch (checkPermission(getActivity(), Manifest.permission.CAMERA)) {
-
-                        case SUCCESS:
-                            ((MainActivity) getActivity()).toScan();
-                            break;
-                        case REFUSE:
-                            MPermissions.requestPermissions(FragmentHome.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-                            break;
-
-                    }
+                    ((MainActivity)getActivity()).commonCheckPermission(
+                            Manifest.permission.CAMERA,
+                            RequestCodeClass.REQUEST_CODE_CAMERA,
+                            R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera,
+                            new DraggerActivity.CheckPermissionCallBack() {
+                                @Override
+                                public void success() {
+                                    ((MainActivity) getActivity()).toScan();
+                                }
+                            });
 
                 }
 
@@ -2221,80 +2219,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
     public void onPullEnable(boolean enable) {
 
     }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-    private static final int REQUEST_CODE_CAMERA = 104;
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-
-            MyLog.Set("d", getClass(), "已授權");
-
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-
-            doingType = REFUSE;
-
-        }
-        return doingType;
-
-    }
-
-    @PermissionGrant(REQUEST_CODE_CAMERA)
-    public void requestCameraSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ((MainActivity) getActivity()).toScan();
-            }
-        }, 500);
-
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_CAMERA)
-    public void requestCameraFailed() {
-
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(getActivity());
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(getActivity());
-                }
-            });
-            d.show();
-
-        } else {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-
-
-    }
-
 
     /*進畫面 比Resume先執行*/
     @Override

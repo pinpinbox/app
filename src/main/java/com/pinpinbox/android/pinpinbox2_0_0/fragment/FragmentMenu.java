@@ -14,20 +14,19 @@ import android.widget.TextView;
 
 import com.pinpinbox.android.R;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.MainActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.ClickUtils;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.PPBApplication;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.manager.RedPointManager;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.UrlClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityIntent;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +118,6 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
     private void init() {
 
-
     }
 
     private void removeRedPoint(View vRedPoint) {
@@ -128,84 +126,19 @@ public class FragmentMenu extends Fragment implements View.OnClickListener {
 
     }
 
-
-    private static final int REQUEST_CODE_SDCARD = 105;
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = -9999;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-            doingType = REFUSE;
-
-        }
-        return doingType;
-
-    }
-
-    @PermissionGrant(REQUEST_CODE_SDCARD)
-    public void requestSdcardSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                ActivityIntent.toWorkManage(getActivity());
-
-            }
-        }, 500);
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_SDCARD)
-    public void requestSdcardFailed() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(getActivity());
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(getActivity());
-                }
-            });
-            d.show();
-
-        } else {
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
-
     private void toCheckPermission() {
-        switch (checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            case SUCCESS:
 
-                ActivityIntent.toWorkManage(getActivity());
+        ((MainActivity)getActivity()).commonCheckPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                RequestCodeClass.REQUEST_CODE_SDCARD,
+                R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard,
+                new DraggerActivity.CheckPermissionCallBack() {
+                    @Override
+                    public void success() {
+                        ActivityIntent.toWorkManage(getActivity());
+                    }
+                });
 
-                break;
-            case REFUSE:
-                MPermissions.requestPermissions(FragmentMenu.this, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                break;
-        }
     }
 
     private void checkHideMenuRP() {

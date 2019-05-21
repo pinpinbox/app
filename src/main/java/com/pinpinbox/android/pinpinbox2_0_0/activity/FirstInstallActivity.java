@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -175,6 +176,7 @@ public class FirstInstallActivity extends DraggerActivity {
         private String p88Message = "";
 
 
+        @SuppressLint("HandlerLeak")
         public Handler mHandler = new Handler() {
 
 

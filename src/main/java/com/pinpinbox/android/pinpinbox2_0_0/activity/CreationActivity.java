@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -23,7 +22,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Process;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,6 +75,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
@@ -114,9 +113,6 @@ import com.pinpinbox.android.util.CheckExternalStorage;
 import com.skyfishjy.library.RippleBackground;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -228,9 +224,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
     private int sendPreviewCount;
 
-
-    private static final int REQUEST_CODE_SDCARD = 105;
-    private static final int REQUEST_CODE_RECORD = 106;
     private static final int UpLoad_OK = 111;
     private static final int ACTION_REQUEST_FEATHER = 100;
     private static final int CreationFast = 0;//快速
@@ -1057,6 +1050,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         videoUrl = (String) photoList.get(thisPosition).get("video_url");
 
         try{
+            assert videoUrl != null;
             String url = StringUtil.checkYoutubeId(videoUrl);
             if(url == null || url.equals("null")){
 
@@ -1225,27 +1219,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    private void checkRecorder() {
 
-        switch (checkPermission(mActivity, Manifest.permission.RECORD_AUDIO)) {
-            case SUCCESS:
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        record();
-                    }
-                }, 200);
-
-
-                break;
-            case REFUSE:
-                MPermissions.requestPermissions(mActivity, REQUEST_CODE_RECORD, Manifest.permission.RECORD_AUDIO);
-                break;
-
-        }
-
-    }
 
     private void record() {
 
@@ -1651,28 +1625,16 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
     /*開啟SD權限*/
     private void SDpermissionEnable() {
 
-
-
-        /*20170915將權限判斷移至選項前*/
-        switch (checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            case SUCCESS:
-
-                new Handler().postDelayed(new Runnable() {
+        commonCheckPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                RequestCodeClass.REQUEST_CODE_SDCARD,
+                R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard,
+                new CheckPermissionCallBack() {
                     @Override
-                    public void run() {
+                    public void success() {
                         checkCreateMode();
                     }
-                }, 300);
-
-
-                break;
-            case REFUSE:
-
-                MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                break;
-
-        }
+                });
 
 
     }
@@ -1925,7 +1887,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
     private boolean checkMyPhoto(int position) {
 
-
         if (identity.equals("admin")) {
             return true;
         } else {
@@ -1938,14 +1899,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         }
 
 
-    }
-
-    private int[] getViewXY(View view) {
-        int[] location = new int[2];
-//        view.getLocationInWindow(location); //获取在当前窗口内的绝对坐标
-        view.getLocationOnScreen(location);//获取在整个屏幕内的绝对坐标
-        //location [0]--->x坐标,location [1]--->y坐标
-        return location;
     }
 
 
@@ -1993,7 +1946,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         bundle.putString(Key.album_id, album_id);
         bundle.putInt(Key.create_mode, createMode);
 
-        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
         if (fragmentSelectPhoto == null) {
             fragmentSelectPhoto = new FragmentSelectPhoto();
             fragmentSelectPhoto.setArguments(bundle);
@@ -2009,7 +1962,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         Bundle bundle = new Bundle();
         bundle.putString(Key.album_id, album_id);
 
-        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
         if (fragmentSelectPDF == null) {
             fragmentSelectPDF = new FragmentSelectPDF();
             fragmentSelectPDF.setArguments(bundle);
@@ -2080,6 +2033,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void setCount() {
         tvPicCount.setText(jsonArray.length() + "/" + intUserGrade);
     }
@@ -2142,8 +2096,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
                         if (!text.equals("") || !url.equals("")) {
                             isVisible = true;
                             break;
-                        } else {
-                            isVisible = false;
                         }
 
                     }
@@ -4545,6 +4497,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
             return null;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
@@ -4567,11 +4520,11 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
                     String newP = StringIntMethod.IntToString(rp + p);
 
                     /*儲存data*/
-                    getdata.edit().putString("point", newP).commit();
+                    getdata.edit().putString("point", newP).apply();
 
-                    getdata.edit().putBoolean(TaskKeyClass.create_free_album, true).commit();
+                    getdata.edit().putBoolean(TaskKeyClass.create_free_album, true).apply();
 
-                    getdata.edit().putBoolean("datachange", true).commit();
+                    getdata.edit().putBoolean("datachange", true).apply();
                 } else {
 //                    d.getTvDescription().setText();
                 }
@@ -4605,7 +4558,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
             } else if (p83Result.equals("2")) {
 
-                getdata.edit().putBoolean(TaskKeyClass.create_free_album, true).commit();
+                getdata.edit().putBoolean(TaskKeyClass.create_free_album, true).apply();
                 sendWork();
 
             } else if (p83Result.equals("0")) {
@@ -4734,7 +4687,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
         private String location;
 
-        public LocationTask(String location) {
+        private LocationTask(String location) {
             this.location = location;
         }
 
@@ -4836,7 +4789,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
         private String hyperlink;
 
-        public SendHyperlinkTask(String hyperlink) {
+        private SendHyperlinkTask(String hyperlink) {
             this.hyperlink = hyperlink;
         }
 
@@ -5157,7 +5110,7 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
         bundle.putInt(Key.buttonType, buttonType);
 
 
-        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
         if (fragmentSelectAudio == null) {
             fragmentSelectAudio = new FragmentSelectAudio();
             fragmentSelectAudio.setArguments(bundle);
@@ -5242,8 +5195,16 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
                 popSelectAudioFile.dismiss();
 
-                checkRecorder();
-
+                commonCheckPermission(
+                        Manifest.permission.RECORD_AUDIO,
+                        RequestCodeClass.REQUEST_CODE_RECORD,
+                        R.string.pinpinbox_2_0_0_dialog_message_open_permission_record,
+                        new CheckPermissionCallBack() {
+                            @Override
+                            public void success() {
+                                record();
+                            }
+                        });
 
                 break;
 
@@ -5428,112 +5389,6 @@ public class CreationActivity extends DraggerActivity implements View.OnClickLis
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-            doingType = REFUSE;
-//            }else {
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-
-    @PermissionGrant(REQUEST_CODE_SDCARD)
-    public void requestSdcardSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                checkCreateMode();
-
-            }
-        }, 500);
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_SDCARD)
-    public void requestSdcardFailed() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(mActivity);
-                }
-            });
-            d.show();
-
-        } else {
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
-
-
-    @PermissionGrant(REQUEST_CODE_RECORD)
-    public void requestRecordSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                record();
-            }
-        }, 300);//500
-    }
-
-
-    @PermissionDenied(REQUEST_CODE_RECORD)
-    public void requestRecordFailed() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.RECORD_AUDIO)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_record);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(mActivity);
-                }
-            });
-            d.show();
-
-        } else {
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
 
     @Override
     public void onLocationChanged(Location location) {

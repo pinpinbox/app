@@ -200,6 +200,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         doGetAlbumInfo();
     }
 
+    @SuppressLint("NewApi")
     private void setShareElementAnim() {
 
         coverUrl = getIntent().getExtras().getString(Key.cover, "");
@@ -930,7 +931,7 @@ public class AlbumInfoActivity extends DraggerActivity implements View.OnClickLi
         }
 
 
-        @SuppressLint("ClickableViewAccessibility")
+        @SuppressLint({"ClickableViewAccessibility", "NewApi"})
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);

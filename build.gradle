@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.pinpinbox.android"
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 176
         versionName "2.7.54"
         multiDexEnabled true
@@ -136,8 +136,9 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.android.support:appcompat-v7:23.2.0'
-    implementation 'com.android.support:recyclerview-v7:23.2.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 
 
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
@@ -179,7 +180,7 @@ dependencies {
     implementation 'com.zzhoujay.richtext:richtext:2.5.4'
     implementation 'jp.wasabeef:richeditor-android:1.2.2'
     implementation 'com.dailymotion.dailymotion-sdk-android:sdk:0.1.12'
-    implementation 'com.android.support:design:24.2.1'
+    implementation 'com.android.support:design:28.0.0'
     annotationProcessor 'com.zhy:mpermission-compiler:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
     implementation "me.leolin:ShortcutBadger:1.1.18@aar"
@@ -199,7 +200,7 @@ dependencies {
 
     implementation "com.localytics.android:library:4.0.1"
 
-    implementation 'com.github.ybq:Android-SpinKit:1.1.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
 
 
     //pdf

@@ -61,7 +61,7 @@ public class AppSettingsActivity extends DraggerActivity implements View.OnClick
 
         tvCleanCache = (TextView) findViewById(R.id.tvCleanCache);
         tvAudioSound = (TextView) findViewById(R.id.tvAudioSound);
-        tvCategoryVideoAutoplay = (TextView) findViewById(R.id.tvCategoryVideoAutoplay);;
+        tvCategoryVideoAutoplay = (TextView) findViewById(R.id.tvCategoryVideoAutoplay);
         tvNorm = (TextView) findViewById(R.id.tvNorm);
         tvAboutUs = (TextView) findViewById(R.id.tvAboutUs);
         tvLogout = (TextView) findViewById(R.id.tvLogout);
@@ -86,7 +86,7 @@ public class AppSettingsActivity extends DraggerActivity implements View.OnClick
 
         File file = new File(DirClass.sdPath);
 
-        String allfilespath[] = file.list();
+        String[] allfilespath = file.list();
 
         if (allfilespath != null && allfilespath.length > 0) {
 
@@ -145,7 +145,7 @@ public class AppSettingsActivity extends DraggerActivity implements View.OnClick
             audioSoundImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
         }
 
-        PPBApplication.getInstance().getData().edit().putBoolean(Key.soundEnable, soundEnable).commit();
+        PPBApplication.getInstance().getData().edit().putBoolean(Key.soundEnable, soundEnable).apply();
 
 
     }
@@ -175,7 +175,7 @@ public class AppSettingsActivity extends DraggerActivity implements View.OnClick
             categoryVideoAutoplayImg.setImageResource(R.drawable.border_2_0_0_click_default_radius);
         }
 
-        PPBApplication.getInstance().getData().edit().putBoolean(Key.videoAutoplayEnable, videoAutoplayEnable).commit();
+        PPBApplication.getInstance().getData().edit().putBoolean(Key.videoAutoplayEnable, videoAutoplayEnable).apply();
 
     }
 

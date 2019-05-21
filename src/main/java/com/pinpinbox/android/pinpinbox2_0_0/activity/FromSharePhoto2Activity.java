@@ -4,17 +4,14 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +42,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
@@ -61,9 +59,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentFromShareText;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.squareup.picasso.Picasso;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -74,6 +69,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass.REQUEST_CODE_SDCARD;
 
 /**
  * Created by kevin9594 on 2017/5/13.
@@ -102,7 +99,6 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
     private String newAlbum_id;
     private String p58Message = "";
 
-    private static final int REQUEST_CODE_SDCARD = 105;
     private static final int COMMON_SIZE_UPLOAD = 1;
     private static final int ORIGINAL_SIZE_UPLOAD = 2;
     private int p58Result = -1;
@@ -134,7 +130,6 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
         checkID();
 
     }
-
 
     private void checkID() {
 
@@ -254,7 +249,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
         MyLog.Set("e", this.getClass(), "intent.toString() => " + intent.toString());
 
-        if (intent != null && intent.getType().equals("text/plain")) {
+        if (intent.getType().equals("text/plain")) {
 
             String url = intent.getStringExtra(Intent.EXTRA_TEXT);
 
@@ -268,27 +263,23 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
         } else {
 
 
-            switch (checkPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            setCloseActivity(true);
 
-                case SUCCESS:
-                    new Handler().postDelayed(new Runnable() {
+            commonCheckPermission(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    REQUEST_CODE_SDCARD,
+                    R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard,
+                    new CheckPermissionCallBack() {
                         @Override
-                        public void run() {
+                        public void success() {
                             fromSelectPhoto();
                         }
-                    }, 200);
-                    break;
-                case REFUSE:
-                    MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.READ_EXTERNAL_STORAGE);
-                    break;
-
-            }
+                    });
 
         }
 
 
     }
-
 
     private void showFromShareText(String text){
 
@@ -304,8 +295,6 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
                 .add(R.id.frame, fragmentFromShareText).commit();
 
     }
-
-
 
     private void fromSelectPhoto() {
 
@@ -439,6 +428,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void setCount() {
         tvCount.setText(selectCount + "/" + intMaxCount);
     }
@@ -465,6 +455,7 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
     }
 
+    @SuppressLint("HandlerLeak")
     private void setHandler() {
         /*防止crash 遺失銀幕長寬*/
         DensityUtility.setScreen(this);
@@ -843,7 +834,6 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
 
     }
 
-    /*protocol58*/
     @SuppressLint("StaticFieldLeak")
     private class UpLoadTask extends AsyncTask<Void, Void, Object> {
 
@@ -1169,76 +1159,6 @@ public class FromSharePhoto2Activity extends DraggerActivity implements View.OnC
                 }
 
                 break;
-        }
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-            doingType = REFUSE;
-
-        }
-        return doingType;
-
-    }
-
-
-    @PermissionGrant(REQUEST_CODE_SDCARD)
-    public void requestSdcardSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                fromSelectPhoto();
-            }
-        }, 500);
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_SDCARD)
-    public void requestSdcardFailed() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(mActivity);
-                }
-            });
-            d.show();
-            d.getmDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                    finish();
-                }
-            });
-
-        } else {
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-            finish();
         }
     }
 

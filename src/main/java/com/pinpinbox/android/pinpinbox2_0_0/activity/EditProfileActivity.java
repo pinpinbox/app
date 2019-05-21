@@ -42,6 +42,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ColorClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -51,7 +52,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ProtocolKey;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.SetMapByProtocol;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.StringIntMethod;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogHandselPoint;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.fragment.FragmentMe;
@@ -60,9 +60,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol21_UpdateUser;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.squareup.picasso.Picasso;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
 
 import org.json.JSONObject;
 
@@ -108,9 +105,6 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
     private static final int PHOTO_GRAPH = 1;
     private static final int PHOTO_FILES = 2;
     private static final String IMAGE_UNSPECIFIED = "image/*";
-    private static final int REQUEST_CODE_SDCARD = 105;
-    private static final int SUCCESS = 100;
-    private static final int REFUSE = 101;
 
     private boolean isChangePic = false;
 
@@ -1083,18 +1077,16 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
 
             case R.id.profileImg:
 
-                switch (checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                    case SUCCESS:
-
-                        toCamera();
-
-                        break;
-                    case REFUSE:
-                        MPermissions.requestPermissions(mActivity, REQUEST_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                        break;
-
-                }
+                commonCheckPermission(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        RequestCodeClass.REQUEST_CODE_SDCARD,
+                        R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard,
+                        new CheckPermissionCallBack() {
+                            @Override
+                            public void success() {
+                                toCamera();
+                            }
+                        });
 
 
                 break;
@@ -1143,69 +1135,6 @@ public class EditProfileActivity extends DraggerActivity implements View.OnClick
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-            doingType = REFUSE;
-//            }else {
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-
-    @PermissionGrant(REQUEST_CODE_SDCARD)
-    public void requestSdcardSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toCamera();
-            }
-        }, 500);
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_SDCARD)
-    public void requestSdcardFailed() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sdcard);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(mActivity);
-                }
-            });
-            d.show();
-
-        } else {
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
 
     @Override
     public void onBackPressed() {

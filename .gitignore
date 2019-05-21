@@ -1,3 +1,13 @@
+#*.a   # 忽略所有 .a 结尾的文件
+#!lib.a# 但 lib.a 除外
+#/abc # 僅忽略项目根目錄下的 abc 文件，不包括 xxx/abc
+#build/# 忽略 build/ 目錄下的所有文件
+#doc/*.txt # 會忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+
+#git rm -r --cached .
+#git add .
+#git commit -m "update .gitignore"
+
 /build
 
 /src/main/java/com/pinpinbox/android/pinpinbox2_0_0/custom/KeysForSKD.java

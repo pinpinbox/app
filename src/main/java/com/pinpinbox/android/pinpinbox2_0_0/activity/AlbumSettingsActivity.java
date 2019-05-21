@@ -45,6 +45,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ActivityAnim;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.HashMapKeyControl;
@@ -131,7 +132,6 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
     private static final int RefreshSecondCategoryPaging = 1;
     private int intCategoryarea_id, intCategory_id, intPoint;
     private int barCodeItem;
-    private static final int REQUEST_CODE_CAMERA = 104;
 
     private boolean isCreative = false;
     private boolean isContribute = false; //是否投稿模式
@@ -1694,7 +1694,7 @@ public class AlbumSettingsActivity extends DraggerActivity implements View.OnCli
 
                     commonCheckPermission(
                             Manifest.permission.CAMERA,
-                            REQUEST_CODE_CAMERA,
+                            RequestCodeClass.REQUEST_CODE_CAMERA,
                             R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera,
                             new CheckPermissionCallBack() {
                                 @Override

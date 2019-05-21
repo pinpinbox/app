@@ -1,15 +1,11 @@
 package com.pinpinbox.android.pinpinbox2_0_0.activity;
 
-import android.Manifest;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -18,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
-import com.pinpinbox.android.pinpinbox2_0_0.dialog.CheckExecute;
 import com.pinpinbox.android.pinpinbox2_0_0.dialog.DialogV2Custom;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol112_RequestSmsPwdForUpdateCellphone;
 import com.pinpinbox.android.pinpinbox2_0_0.model.Protocol53_UpdateCellphone;
@@ -38,9 +32,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.PinPinToast;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Recycle;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,13 +163,8 @@ public class ChangePhoneActivity extends DraggerActivity implements View.OnClick
         ConnectInstability connectInstability = new ConnectInstability() {
             @Override
             public void DoingAgain() {
-                switch (doingType) {
-
-                    case DoingTypeClass.DoRequestSms:
-                        doRequestSms();
-                        break;
-
-
+                if (doingType == DoingTypeClass.DoRequestSms) {
+                    doRequestSms();
                 }
             }
         };
@@ -301,82 +288,6 @@ public class ChangePhoneActivity extends DraggerActivity implements View.OnClick
 
     }
 
-
-    @PermissionGrant(REQUEST_CODE_SMS)
-    public void requestSMSSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doRequestSms();
-            }
-        }, 500);
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_SMS)
-    public void requestSMSFailed() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.RECEIVE_SMS)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(mActivity);
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_sms);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(mActivity);
-                }
-            });
-            d.show();
-
-        } else {
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            doingType = SUCCESS;
-        } else {
-            doingType = REFUSE;
-
-        }
-        return doingType;
-
-    }
-
-    private void checkSMSPermission(){
-
-        switch (checkPermission(mActivity, Manifest.permission.RECEIVE_SMS)) {
-            case SUCCESS:
-                doRequestSms();
-                break;
-            case REFUSE:
-                MPermissions.requestPermissions(ChangePhoneActivity.this, REQUEST_CODE_SMS, Manifest.permission.RECEIVE_SMS);
-                break;
-        }
-
-    }
-
-
     @Override
     public void onClick(View view) {
 
@@ -420,9 +331,6 @@ public class ChangePhoneActivity extends DraggerActivity implements View.OnClick
                     return;
                 }
 
-//                if (isCanSendAgain) {
-//                    checkSMSPermission();
-//                }
 
                 if (isCanSendAgain) {
                     doRequestSms();

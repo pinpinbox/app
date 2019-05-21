@@ -16,6 +16,7 @@
 
 package com.pinpinbox.android.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -340,6 +341,7 @@ public class ResideLayout extends ViewGroup {
         mPostedRunnables.clear();
     }
 
+    @SuppressLint("Range")
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -866,7 +868,7 @@ public class ResideLayout extends ViewGroup {
     protected boolean drawChild(@NonNull Canvas canvas, @NonNull View child, long drawingTime) {
         final LayoutParams lp = (LayoutParams) child.getLayoutParams();
         boolean result;
-        final int save = canvas.save(Canvas.ALL_SAVE_FLAG);
+        final int save =  canvas.save();
 
         // py => 前面的view高度位置變化　
         // default => getHeight()/2

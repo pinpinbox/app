@@ -90,6 +90,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
     public static boolean hasITEM = false;
 
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -218,7 +219,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
 
                             point = JsonUtility.GetString(jsonObject, Key.data);
 
-                            PPBApplication.getInstance().getData().edit().putString(Key.point, point).commit();
+                            PPBApplication.getInstance().getData().edit().putString(Key.point, point).apply();
 
                         } else if (p23Result == 0) {
                             p23Message = jsonObject.getString(Key.message);
@@ -348,7 +349,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
                             Log.i("Buy item", "Fail to buy it! " + result.getMessage());
                             //目前有出現之錯誤
                             //信用卡號遭拒
-                            PPBApplication.getInstance().getData().edit().putString("LastErrorOrderId", order_id).commit();
+                            PPBApplication.getInstance().getData().edit().putString("LastErrorOrderId", order_id).apply();
                         }
                     }
 
@@ -842,7 +843,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
                 e.printStackTrace();
             }
 
-            if (dataSignature != null && !dataSignature.equals("")) {
+            if (!dataSignature.equals("")) {
                 try {
                     strJson = HttpUtility.uploadSubmit(true, ProtocolsClass.P30_Finishpurchased, SetMapByProtocol.setParam30_Finishpurchased(id, token, "google", order_id, dataSignature), null);
                     MyLog.Set("d", getClass(), "p30strJson => " + strJson);
@@ -882,7 +883,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
             if (p30Result == 1) {
 
                 order_id = "";
-                PPBApplication.getInstance().getData().edit().remove("LastErrorOrderId").commit();
+                PPBApplication.getInstance().getData().edit().remove("LastErrorOrderId").apply();
 
                 Boolean bFirstBuyPoint = PPBApplication.getInstance().getData().getBoolean(TaskKeyClass.firsttime_buy_point, false);
                 if (bFirstBuyPoint) {
@@ -973,6 +974,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
             return null;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(Object result) {
             super.onPostExecute(result);
@@ -984,22 +986,22 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
 
                 if (reward.equals("point")) {
                     d.getTvDescription().setText(mActivity.getResources().getString(R.string.pinpinbox_2_0_0_other_text_task_get_point) + reward_value + "P!");
-                    /**獲取當前使用者P點*/
+                    /*獲取當前使用者P點*/
                     String point = PPBApplication.getInstance().getData().getString(Key.point, "");
                     int p = StringIntMethod.StringToInt(point);
 
-                    /**任務獲得P點轉換型態*/
+                    /*任務獲得P點轉換型態*/
                     int rp = StringIntMethod.StringToInt(reward_value);
 
-                    /**加總*/
+                    /*加總*/
                     String newP = StringIntMethod.IntToString(rp + p);
 
-                    /**儲存data*/
-                    PPBApplication.getInstance().getData().edit().putString(Key.point, newP).commit();
+                    /*儲存data*/
+                    PPBApplication.getInstance().getData().edit().putString(Key.point, newP).apply();
 
-                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.firsttime_buy_point, true).commit();
+                    PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.firsttime_buy_point, true).apply();
 
-                    PPBApplication.getInstance().getData().edit().putBoolean("datachange", true).commit();
+                    PPBApplication.getInstance().getData().edit().putBoolean("datachange", true).apply();
 
                 } else {
 //                    d.getTvDescription().setText();
@@ -1032,7 +1034,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
 
             } else if (p83Result == 2) {
 
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.firsttime_buy_point, true).commit();
+                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.firsttime_buy_point, true).apply();
 
                 doWork();
 
@@ -1040,7 +1042,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
 
                 MyLog.Set("d", getClass(), "p83Message" + p83Message);
 
-                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.firsttime_buy_point, true).commit();
+                PPBApplication.getInstance().getData().edit().putBoolean(TaskKeyClass.firsttime_buy_point, true).apply();
 
                 doWork();
 
@@ -1087,7 +1089,7 @@ public class BuyPointActivity extends DraggerActivity implements View.OnClickLis
 
                         String lastOrderId = PPBApplication.getInstance().getData().getString("LastErrorOrderId", "");
 
-                        if (lastOrderId != null && !lastOrderId.equals("")) {
+                        if (!lastOrderId.equals("")) {
 
                             MyLog.Set("e", getClass(), "reCall order_id");
 

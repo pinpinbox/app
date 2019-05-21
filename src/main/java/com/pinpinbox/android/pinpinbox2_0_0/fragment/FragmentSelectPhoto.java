@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,7 +18,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -51,6 +49,7 @@ import com.pinpinbox.android.Utility.HttpUtility;
 import com.pinpinbox.android.Utility.JsonUtility;
 import com.pinpinbox.android.Utility.OkHttpClientManager;
 import com.pinpinbox.android.Utility.SystemUtility;
+import com.pinpinbox.android.Views.DraggerActivity.DraggerScreen.DraggerActivity;
 import com.pinpinbox.android.Views.StickyGridViewHeader.StickyGridHeadersGridView;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationActivity;
 import com.pinpinbox.android.pinpinbox2_0_0.activity.CreationTemplate2Activity;
@@ -67,6 +66,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DialogStyleClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DirClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.DoingTypeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.ProtocolsClass;
+import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.RequestCodeClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.SharedPreferencesDataClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.stringClass.TaskKeyClass;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
@@ -87,9 +87,7 @@ import com.pinpinbox.android.pinpinbox2_0_0.libs.spotlight.Spotlight;
 import com.pinpinbox.android.pinpinbox2_0_0.listener.ConnectInstability;
 import com.pinpinbox.android.pinpinbox2_0_0.popup.PopupCustom;
 import com.pinpinbox.android.util.CheckExternalStorage;
-import com.zhy.m.permission.MPermissions;
-import com.zhy.m.permission.PermissionDenied;
-import com.zhy.m.permission.PermissionGrant;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -146,7 +144,6 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
     private String p58Message = "";
     private String strSinglePhotoPath = "";
 
-    private static final int REQUEST_CODE_CAMERA = 104;
     private int p58Result = -1;
     private int intSelectCount;
     private int intMaxCount;
@@ -690,6 +687,7 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
 
     }
 
+    @SuppressLint("HandlerLeak")
     private void setHandler() {
 
         if (handlerText == null) {
@@ -1217,7 +1215,7 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
 
             intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
 
-            fragment.startActivityForResult(intent, REQUEST_CODE_CAMERA);
+            fragment.startActivityForResult(intent, RequestCodeClass.REQUEST_CODE_CAMERA);
         } else {
             fragment.startActivityForResult(intent, 1);
         }
@@ -1894,7 +1892,7 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
 
             switch (requestCode) {
 
-                case REQUEST_CODE_CAMERA://快速建立照相返回
+                case RequestCodeClass.REQUEST_CODE_CAMERA://快速建立照相返回
 
                     isFromPPBCamera = true;
 
@@ -2012,75 +2010,6 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        MPermissions.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private final int SUCCESS = 0;
-    private final int REFUSE = -1;
-
-    private int checkPermission(Activity ac, String permission) {
-
-        int doingType = 0;
-
-        if (ActivityCompat.checkSelfPermission(ac, permission) == PackageManager.PERMISSION_GRANTED) {
-            //已授權
-            doingType = SUCCESS;
-        } else {
-            //未授權 判斷是否彈出詢問框 true => 彈出
-//            if(ActivityCompat.shouldShowRequestPermissionRationale(ac, permission)){
-            doingType = REFUSE;
-
-//            }else {
-//                doingType = REFUSE_NO_ASK;
-//            }
-        }
-        return doingType;
-
-    }
-
-    @PermissionGrant(REQUEST_CODE_CAMERA)
-    public void requestCameraSuccess() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                dispatchTakePictureIntent();
-            }
-        }, 500);
-
-
-    }
-
-    @PermissionDenied(REQUEST_CODE_CAMERA)
-    public void requestCameraFailed() {
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> false");
-
-            DialogV2Custom d = new DialogV2Custom(getActivity());
-            d.setStyle(DialogStyleClass.CHECK);
-            d.getTvRightOrBottom().setText(R.string.pinpinbox_2_0_0_dialog_setting);
-            d.setMessage(R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera);
-            d.setCheckExecute(new CheckExecute() {
-                @Override
-                public void DoCheck() {
-                    SystemUtility.getAppDetailSettingIntent(getActivity());
-                }
-            });
-            d.show();
-
-        } else {
-
-            MyLog.Set("d", getClass(), "shouldShowRequestPermissionRationale =======> true");
-
-        }
-    }
-
-    @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         return true;
     }
@@ -2097,14 +2026,17 @@ public class FragmentSelectPhoto extends Fragment implements View.OnTouchListene
 
             case R.id.cameraImg:
 
-                switch (checkPermission(getActivity(), Manifest.permission.CAMERA)) {
-                    case SUCCESS:
-                        dispatchTakePictureIntent();
-                        break;
-                    case REFUSE:
-                        MPermissions.requestPermissions(FragmentSelectPhoto.this, REQUEST_CODE_CAMERA, Manifest.permission.CAMERA);
-                        break;
-                }
+
+                ((CreationActivity)getActivity()).commonCheckPermission(
+                        Manifest.permission.CAMERA,
+                        RequestCodeClass.REQUEST_CODE_CAMERA,
+                        R.string.pinpinbox_2_0_0_dialog_message_open_permission_camera,
+                        new DraggerActivity.CheckPermissionCallBack() {
+                            @Override
+                            public void success() {
+                                dispatchTakePictureIntent();
+                            }
+                        });
 
 
                 break;
