@@ -8,7 +8,63 @@
 #git add .
 #git commit -m "update .gitignore"
 
+*.iml
+.gradle
+.idea
+/local.properties
+.DS_Store
 /build
+/captures
+.externalNativeBuild
+
+#for mac
+/_mac
+/codestyles
+/androidStudioFirstRun.xml
+/colors.scheme.xml
+/debugger.xml
+/find.xml
+/ide.general.xml
+/studioFlags.xml
+/ui.lnf.xml
+/vcs.xml
+
+# Log Files
+*.log
+
+# Keystore files
+# Uncomment the following line if you do not want to check your keystore files in.
+#*.jks
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Freeline
+freeline.py
+freeline/
+freeline_project_description.json
+
+# built application files
+*.apk
+*.ap_
+
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+
+# generated files
+bin/
+gen/
+
+# Intellij project files
+*.ipr
+*.iws
 
 /src/main/java/com/pinpinbox/android/pinpinbox2_0_0/custom/KeysForSKD.java
+/src/main/res/values/strings.xml
+/src/main/res/values/google_maps_api.xml
 
