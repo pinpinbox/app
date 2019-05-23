@@ -3,6 +3,7 @@
     android:layout_width="328dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/ppb200_padding_margin_first"
+    android:layout_marginEnd="@dimen/ppb200_padding_margin_second"
     android:orientation="vertical">
 
 

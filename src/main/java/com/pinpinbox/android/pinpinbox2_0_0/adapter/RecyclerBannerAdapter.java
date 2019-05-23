@@ -1,5 +1,6 @@
 package com.pinpinbox.android.pinpinbox2_0_0.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,7 +32,6 @@ import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.Key;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.MyLog;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.RoundTransform;
 import com.pinpinbox.android.pinpinbox2_0_0.custom.widget.ViewControl;
-import com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.CardAdapterHelper;
 
 import org.json.JSONArray;
 
@@ -57,7 +57,7 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
 
     private Activity mActivity;
 
-    private CardAdapterHelper mCardAdapterHelper = new CardAdapterHelper();
+//    private CardAdapterHelper mCardAdapterHelper = new CardAdapterHelper();
 
     private List<ItemHomeBanner> itemHomeBannerList;
 
@@ -77,8 +77,8 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
         this.itemHomeBannerList = itemHomeBannerList;
         this.fragment = fragment;
 
-        mCardAdapterHelper.setShowLeftCardWidth(8);
-        mCardAdapterHelper.setPagePadding(4);//兩邊
+//        mCardAdapterHelper.setShowLeftCardWidth(8);
+//        mCardAdapterHelper.setPagePadding(4);//兩邊
 
 
         opts = new RequestOptions()
@@ -102,17 +102,18 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter<RecyclerBannerAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mActivity.getLayoutInflater().inflate(R.layout.list_item_2_0_0_home_banner, parent, false);
-        if(PPBApplication.getInstance().isPhone()) {
-            mCardAdapterHelper.onCreateViewHolder(parent, itemView);
-        }
+//        if(PPBApplication.getInstance().isPhone()) {
+//            mCardAdapterHelper.onCreateViewHolder(parent, itemView);
+//        }
         return new ViewHolder(itemView);
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         if(PPBApplication.getInstance().isPhone()) {
-            mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
+//            mCardAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
 
             holder.bannerImg.setLayoutParams(imgLayoutParams);
 

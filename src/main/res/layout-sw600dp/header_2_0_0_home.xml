@@ -11,10 +11,13 @@
         android:orientation="vertical">
 
         <!--banner-->
-        <com.pinpinbox.android.pinpinbox2_0_0.libs.GalleryRecyclerView.SpeedRecyclerView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/rvBanner"
             android:layout_width="match_parent"
             android:layout_height="238dp"
+            android:paddingStart="@dimen/ppb200_padding_margin_first"
+            android:paddingEnd="0dp"
+            android:clipToPadding="false"
             android:layout_marginBottom="@dimen/ppb200_padding_margin_big" />
 
         <!--專區精選 32修正為24-->

@@ -156,7 +156,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
     private boolean isGetData = false;
 
 //    rvRecommendUser
-    private SpeedRecyclerView rvBanner;
+    private RecyclerView rvBanner;
     private RecyclerView rvHome, rvRecommend, rvHot;
     private SmoothProgressBar pbLoadMore, pbRefresh;
     private View viewHeader;
@@ -630,13 +630,13 @@ public class FragmentHome extends Fragment implements View.OnClickListener, Supe
 
         rvBanner.setAdapter(bannerAdapter);
 
-        if (PPBApplication.getInstance().isPhone()) {
-
-            CardScaleHelper mCardScaleHelper = new CardScaleHelper();
-
-            mCardScaleHelper.attachToRecyclerView(rvBanner);
-
-        }
+//        if (PPBApplication.getInstance().isPhone()) {
+//
+//            CardScaleHelper mCardScaleHelper = new CardScaleHelper();
+//
+//            mCardScaleHelper.attachToRecyclerView(rvBanner);
+//
+//        }
 
         bannerAdapter.setOnRecyclerViewListener(new RecyclerBannerAdapter.OnRecyclerViewListener() {
             @Override
