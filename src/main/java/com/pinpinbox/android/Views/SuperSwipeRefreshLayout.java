@@ -44,7 +44,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
  * Created by kevin9594 on 2017/4/22.
  */
 public class SuperSwipeRefreshLayout extends ViewGroup {
-    private static final String LOG_TAG = "CustomeSwipeRefreshLayout";
+    private static final String LOG_TAG = "SwipeRefreshLayout";
     private static final int HEADER_VIEW_HEIGHT = 50;// HeaderView height (dp)
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
